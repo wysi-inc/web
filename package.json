@@ -21,6 +21,7 @@
     "fastify": "^4.23.2",
     "mongoose": "^7.5.0",
     "mysql-commands": "^1.1.9",
+    "node-fetch": "^3.3.2",
     "osu-api-extended": "^2.7.67"
   }
 }

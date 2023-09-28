@@ -1,13 +1,21 @@
-import { fastify as f } from "fastify"
-import mino from "beatsify"
-import badges from "./constants/badges.js"
-import "dotenv/config"
-import mysql from "mysql-commands"
-import { v2, auth } from "osu-api-extended"
-import cors from "@fastify/cors"
-import cache from "./constants/cache.js"
+import { fastify as f } from "fastify";
+import cors from "@fastify/cors";
+import mino from "beatsify";
+import { v2, auth } from "osu-api-extended";
+import mysql from "mysql-commands";
+import fetch from "node-fetch";
+import badges from "./constants/badges.js";
+import cache from "./constants/cache.js";
+import "dotenv/config";
 
 (async () => {
+    const fastify = f({ logger: true });
+    fastify.register(cors, {
+        origin: "*",
+        methods: ['POST', 'GET', 'OPTIONS'],
+        allowedHeaders: ['Content-Type'],
+    })
+
     const database = mysql.createConnection({
         host: process.env.DATABASE_HOST,
         user: process.env.DATABASE_USER,
@@ -17,8 +25,6 @@ import cache from "./constants/cache.js"
 
     console.log("Connected to the database");
 
-    const fastify = f();
-    fastify.register(cors)
     await auth.login(process.env.CLIENT_ID, process.env.CLIENT_SECRET, ['public'])
 
     console.log("Logged into Application")
@@ -27,11 +33,14 @@ import cache from "./constants/cache.js"
         await auth.login(process.env.CLIENT_ID, process.env.CLIENT_SECRET, ['public'])
     }, 1000 * 60 * 60 * 24)
 
-    fastify.get('/', async (req, res) => {msg: 'server is up'});
+    fastify.get('/', async (req, res) => 'server is up 2');
 
-    fastify.post('/proxy', async (req, res) => await (await fetch(req.body.url)).json());
+    fastify.get('/test', async (req, res) => 'server is up 3');
 
-    fastify.post('/getMedals', async (req, res) => await (await fetch(`https://osekai.net/medals/api/medals.php`, { method: "POST" })).json());
+    //deprecated for security reasons
+    //fastify.post('/proxy', async (req, res) => await (await fetch(req.body.url)).json());
+
+    fastify.post('/getMedals', async (req, res) => await (await fetch(`https://osekai.net/medals/api/medals.php`)).json());
 
     fastify.post('/userQuery', async (req, res) => await v2.site.search({
         mode: 'user',
@@ -40,7 +49,7 @@ import cache from "./constants/cache.js"
     })
     );
 
-    fastify.post('/user', async (req, res) => {
+    fastify.post('/user', async (req) => {
         const user_id = req.body.id;
         const mode = req.body.mode;
         const data = mode === 'default' ? await v2.user.details(user_id) : await v2.user.details(user_id, mode);
@@ -58,26 +67,37 @@ import cache from "./constants/cache.js"
         // developers
         // translators
         for (let badge of ["developer", "translator"]) if (badges[badge].includes(data.id)) data.customBadges[badge] = true;
-
         return data;
     });
 
-    fastify.post('/users', async (req, res) => {
-        const mode = req.body.mode;
-        const type = req.body.type;
-        const page = req.body.page;
-        const object = {
+    fastify.post('/users', async (req) =>
+        await v2.site.ranking.details(req.body.mode, req.body.type, {
             cursor: {
-                page: page,
+                page: req.body.page,
             },
             filter: 'all',
-        };
-        return await v2.site.ranking.details(mode, type, object);
-    });
+        })
+    );
 
-    fastify.post('/beatmapset', async (req, res) => await mino.v2.set(req.body.setId));
+    fastify.post('/userbeatmaps', async (req) =>
+        await v2.user.beatmaps.category(req.body.id, req.body.type, {
+            limit: req.body.limit,
+            offset: req.body.offset
+        })
+    );
 
-    fastify.post('/beatmapsets', async (req, res) => await mino.v2.search({
+    fastify.post('/userscores', async (req) =>
+        await v2.scores.user.category(req.body.id, req.body.type, {
+            include_fails: true,
+            mode: req.body.mode,
+            limit: req.body.limit,
+            offset: req.body.offset,
+        })
+    )
+
+    fastify.post('/beatmapset', async (req) => await mino.v2.set(req.body.setId));
+
+    fastify.post('/beatmapsets', async (req) => await mino.v2.search({
         query: req.body.query,
         filter: req.body.filter,
         mode: req.body.mode,
@@ -87,6 +107,11 @@ import cache from "./constants/cache.js"
         sort: req.body.sort,
     })
     )
+
+    fastify.post('/beatmapscores', async (req) => await v2.scores.beatmap(req.body.id, {
+        mode: req.body.mode,
+        type: 'global',
+    }))
 
     async function updateUser(userId, username, userRanks, countryRank, mode) {
         const c = await database.select("ranks", {
@@ -112,9 +137,8 @@ import cache from "./constants/cache.js"
             updateOnDuplicate: true
         })
 
-        for(let i = userRanks.length - 1; i >= 0; i--){
+        for (let i = userRanks.length - 1; i >= 0; i--) {
             time.setDate(time.getDate() - 1)
-            console.log(time)
             const check = c.filter(v => v.time == time.getTime() / 1000)[0]
             if (check) continue;
             delete cache[userId];
