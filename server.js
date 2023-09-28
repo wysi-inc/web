@@ -33,16 +33,16 @@ import "dotenv/config";
         await auth.login(process.env.CLIENT_ID, process.env.CLIENT_SECRET, ['public'])
     }, 1000 * 60 * 60 * 24)
 
-    fastify.get('/', async (req, res) => 'server is up 2');
+    fastify.get('/', async () => 'server is up 2');
 
-    fastify.get('/test', async (req, res) => 'server is up 3');
+    fastify.get('/test', async () => 'server is up 3');
 
     //deprecated for security reasons
     //fastify.post('/proxy', async (req, res) => await (await fetch(req.body.url)).json());
 
-    fastify.post('/getMedals', async (req, res) => await (await fetch(`https://osekai.net/medals/api/medals.php`)).json());
+    fastify.post('/getMedals', async () => await (await fetch(`https://osekai.net/medals/api/medals.php`)).json());
 
-    fastify.post('/userQuery', async (req, res) => await v2.site.search({
+    fastify.post('/userQuery', async (req) => await v2.site.search({
         mode: 'user',
         query: req.body.username,
         page: 0
@@ -71,19 +71,27 @@ import "dotenv/config";
     });
 
     fastify.post('/users', async (req) =>
-        await v2.site.ranking.details(req.body.mode, req.body.type, {
-            cursor: {
-                page: req.body.page,
-            },
-            filter: 'all',
-        })
+        await v2.site.ranking.details(
+            req.body.mode,
+            req.body.type,
+            {
+                cursor: {
+                    page: req.body.page,
+                },
+                filter: 'all',
+            }
+        )
     );
 
     fastify.post('/userbeatmaps', async (req) =>
-        await v2.user.beatmaps.category(req.body.id, req.body.type, {
-            limit: req.body.limit,
-            offset: req.body.offset
-        })
+        await v2.user.beatmaps.category(
+            req.body.id,
+            req.body.type,
+            {
+                limit: req.body.limit,
+                offset: req.body.offset
+            }
+        )
     );
 
     fastify.post('/userscores', async (req) =>
