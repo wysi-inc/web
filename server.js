@@ -96,7 +96,7 @@ import "dotenv/config";
 
     fastify.post('/userscores', async (req) =>
         await v2.scores.user.category(req.body.id, req.body.type, {
-            include_fails: true,
+            include_fails: false,
             mode: req.body.mode,
             limit: req.body.limit,
             offset: req.body.offset,
