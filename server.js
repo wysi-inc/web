@@ -1,9 +1,9 @@
 import { fastify as f } from "fastify";
-import fastifySession from '@fastify/session';
-import fastifyCookie from '@fastify/cookie';
 import cors from "@fastify/cors";
-import mino from "beatsify";
+import session from '@fastify/session';
+import cookie from '@fastify/cookie';
 import { v2, auth } from "osu-api-extended";
+import mino from "beatsify";
 import mysql from "mysql-commands";
 import fetch from "node-fetch";
 import badges from "./constants/badges.js";
@@ -12,19 +12,22 @@ import "dotenv/config";
 
 (async () => {
     const fastify = f({ logger: true });
+
     fastify.register(cors, {
-        origin: "https://wysi727.com",
-        methods: ['POST', 'GET', 'OPTIONS'],
-        allowedHeaders: ['Content-Type'],
+        methods: ['GET', 'POST'],
+        origin: 'https://wysi727.com',
         credentials: true,
+        allowedHeaders: ['Content-Type', 'Authorization']
     });
-    fastify.register(fastifyCookie);
-    fastify.register(fastifySession, {
+
+    fastify.register(cookie);
+    fastify.register(session, {
+        cookieName: 'cookiezi',
         secret: process.env.CLIENT_SECRET,
-        cookieName: 'wysi-login',
         cookie: {
-            expires: 1000 * 60 * 60 * 24 * 30,
+            secure: true,
         },
+        expires: 1000 * 60 * 60 * 24 * 30,
     });
 
     const database = mysql.createConnection({
@@ -44,39 +47,21 @@ import "dotenv/config";
 
     fastify.get('/', async () => 'Server is up');
 
-    fastify.post('/login', async (req) => {
-        try {
-            const user = await getOwnData(await validateCode(req.body.code));
-            if (!user.authentication) {
-                await req.session.set('user', { id: user.id });
-                const checkUser = req.session.get('user');
-                console.log(`User in session: ${JSON.stringify(checkUser)}`);
-            }
-            return user;
-        } catch (err) {
-            console.error('Error during login:', err);
-            return { error: 'Internal Server Error' };
-        }
+    fastify.post('/login', async (req, res) => {
+        const user = await getOwnData(await validateCode(req.body.code));
+        if (user.authentication) return user;
+        req.session.set('user', user.id);
+        return user;
     });
 
     fastify.post('/logout', async (req) => {
-        try {
-            await req.session.destroy();
-            return { message: 'Logged out successfully' };
-        } catch (err) {
-            console.error('Error during logout:', err);
-            return { error: 'Internal Server Error' };
-        }
+        req.session.destroy();
+        return { message: 'Logged out successfully' };
     });
 
     fastify.post('/isLogged', async (req) => {
-        try {
-            const user = req.session.get('user');
-            return { logged: Boolean(user), user };
-        } catch (err) {
-            console.error('Error checking logged status:', err);
-            return { error: 'Internal Server Error' };
-        }
+
+        return { logged: Boolean(req.session.get('user')) || false, user: req.session.get('user') }
     });
 
     fastify.post('/getMedals', async () => await (await fetch('https://osekai.net/medals/api/medals.php')).json());
