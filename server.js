@@ -1,4 +1,6 @@
 import { fastify as f } from "fastify";
+import fastifySession from '@fastify/session';
+import fastifyCookie from '@fastify/cookie';
 import cors from "@fastify/cors";
 import mino from "beatsify";
 import { v2, auth } from "osu-api-extended";
@@ -11,10 +13,19 @@ import "dotenv/config";
 (async () => {
     const fastify = f({ logger: true });
     fastify.register(cors, {
-        origin: "*",
+        origin: "https://wysi727.com",
         methods: ['POST', 'GET', 'OPTIONS'],
         allowedHeaders: ['Content-Type'],
-    })
+        credentials: true,
+    });
+    fastify.register(fastifyCookie);
+    fastify.register(fastifySession, {
+        secret: process.env.CLIENT_SECRET,
+        cookieName: 'wysi-login',
+        cookie: {
+            expires: 1000 * 60 * 60 * 24 * 30,
+        },
+    });
 
     const database = mysql.createConnection({
         host: process.env.DATABASE_HOST,
@@ -22,25 +33,53 @@ import "dotenv/config";
         password: process.env.DATABASE_PASSWORD,
         database: process.env.DATABASE_NAME
     })
-
     console.log("Connected to the database");
 
     await auth.login(process.env.CLIENT_ID, process.env.CLIENT_SECRET, ['public'])
-
     console.log("Logged into Application")
 
     setInterval(async () => {
         await auth.login(process.env.CLIENT_ID, process.env.CLIENT_SECRET, ['public'])
     }, 1000 * 60 * 60 * 24)
 
-    fastify.get('/', async () => 'server is up 2');
+    fastify.get('/', async () => 'Server is up');
 
-    fastify.get('/test', async () => 'server is up 3');
+    fastify.post('/login', async (req) => {
+        try {
+            const user = await getOwnData(await validateCode(req.body.code));
+            if (!user.authentication) {
+                await req.session.set('user', { id: user.id });
+                const checkUser = req.session.get('user');
+                console.log(`User in session: ${JSON.stringify(checkUser)}`);
+            }
+            return user;
+        } catch (err) {
+            console.error('Error during login:', err);
+            return { error: 'Internal Server Error' };
+        }
+    });
 
-    //deprecated for security reasons
-    //fastify.post('/proxy', async (req, res) => await (await fetch(req.body.url)).json());
+    fastify.post('/logout', async (req) => {
+        try {
+            await req.session.destroy();
+            return { message: 'Logged out successfully' };
+        } catch (err) {
+            console.error('Error during logout:', err);
+            return { error: 'Internal Server Error' };
+        }
+    });
 
-    fastify.post('/getMedals', async () => await (await fetch(`https://osekai.net/medals/api/medals.php`)).json());
+    fastify.post('/isLogged', async (req) => {
+        try {
+            const user = req.session.get('user');
+            return { logged: Boolean(user), user };
+        } catch (err) {
+            console.error('Error checking logged status:', err);
+            return { error: 'Internal Server Error' };
+        }
+    });
+
+    fastify.post('/getMedals', async () => await (await fetch('https://osekai.net/medals/api/medals.php')).json());
 
     fastify.post('/userQuery', async (req) => await v2.site.search({
         mode: 'user',
@@ -120,6 +159,27 @@ import "dotenv/config";
         mode: req.body.mode,
         type: 'global',
     }))
+
+    async function validateCode(code) {
+        const d = await (await fetch("https://osu.ppy.sh/oauth/token", {
+            method: "POST", headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/x-www-form-urlencoded"
+            }, body: `client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&code=${code}&grant_type=${'authorization_code'}&redirect_uri=${process.env.CLIENT_REDIRECT}`,
+        })).json();
+        return d.access_token;
+    }
+
+    async function getOwnData(token) {
+        return await (await fetch("https://osu.ppy.sh/api/v2/me/osu", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+        })).json();
+    }
 
     async function updateUser(userId, username, userRanks, countryRank, mode) {
         const c = await database.select("ranks", {
