@@ -5,7 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "author": "M4rti21",
   "license": "LGPL-3.0-or-later",
@@ -19,5 +20,8 @@
     "mysql-commands": "^1.1.9",
     "node-fetch": "^3.3.2",
     "osu-api-extended": "^2.7.67"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
