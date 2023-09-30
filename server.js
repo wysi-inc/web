@@ -10,6 +10,8 @@ import badges from "./constants/badges.js";
 import cache from "./constants/cache.js";
 import "dotenv/config";
 
+import jwt from "jsonwebtoken"
+
 (async () => {
   const fastify = f({ logger: true });
 
@@ -54,8 +56,15 @@ import "dotenv/config";
   fastify.post("/login", async (req, res) => {
     const user = await getOwnData(await validateCode(req.body.code));
     if (user.authentication) return user;
+
+    const jwtUser = {
+      id: user.id,
+      name: user.username,
+      pfp: user.avatar_url
+    };
+
     req.session.set("user", user.id);
-    return user;
+    return { user, jwtUser: jwt.sign(jwtUser, process.env.CLIENT_SECRET)};
   });
 
   fastify.post("/logout", async (req) => {
@@ -181,11 +190,9 @@ import "dotenv/config";
           Accept: "application/json",
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `client_id=${process.env.CLIENT_ID}&client_secret=${
-          process.env.CLIENT_SECRET
-        }&code=${code}&grant_type=${"authorization_code"}&redirect_uri=${
-          process.env.CLIENT_REDIRECT
-        }`,
+        body: `client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET
+          }&code=${code}&grant_type=${"authorization_code"}&redirect_uri=${process.env.CLIENT_REDIRECT
+          }`,
       })
     ).json();
     return d.access_token;
