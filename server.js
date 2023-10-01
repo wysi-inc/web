@@ -56,15 +56,13 @@ import jwt from "jsonwebtoken"
   fastify.post("/login", async (req, res) => {
     const user = await getOwnData(await validateCode(req.body.code));
     if (user.authentication) return user;
-
     const jwtUser = {
       id: user.id,
       name: user.username,
       pfp: user.avatar_url
     };
-
     req.session.set("user", user.id);
-    return { user, jwtUser: jwt.sign(jwtUser, process.env.CLIENT_SECRET)};
+    return { user, jwtUser: jwt.sign(jwtUser, process.env.CLIENT_SECRET) };
   });
 
   fastify.post("/logout", async (req) => {
@@ -73,27 +71,19 @@ import jwt from "jsonwebtoken"
   });
 
   fastify.post("/isLogged", async (req) => {
+    if (!Boolean(req.session.get("user"))) return { logged: false };
+    const user = await v2.user.details(req.session.get("user"));
     return {
-      logged: Boolean(req.session.get("user")) || false,
-      user: req.session.get("user"),
+      logged: true,
+      jwtUser: jwt.sign({ id: user.id, name: user.username, pfp: user.avatar_url }, process.env.CLIENT_SECRET),
     };
   });
 
-  fastify.post(
-    "/getMedals",
-    async () =>
-      await (await fetch("https://osekai.net/medals/api/medals.php")).json()
-  );
+  fastify.post("/getMedals", async () =>
+    await (await fetch("https://osekai.net/medals/api/medals.php")).json());
 
-  fastify.post(
-    "/userQuery",
-    async (req) =>
-      await v2.site.search({
-        mode: "user",
-        query: req.body.username,
-        page: 0,
-      })
-  );
+  fastify.post("/userQuery", async (req) =>
+    await v2.site.search({ mode: "user", query: req.body.username, page: 0, }));
 
   fastify.post("/user", async (req) => {
     const user_id = req.body.id;
@@ -126,21 +116,20 @@ import jwt from "jsonwebtoken"
     return data;
   });
 
-  fastify.post(
-    "/users",
-    async (req) =>
-      await v2.site.ranking.details(req.body.mode, req.body.type, {
-        cursor: {
-          page: req.body.page,
-        },
-        filter: "all",
-      })
+  fastify.post("/users", async (req) =>
+    await v2.site.ranking.details(req.body.mode, req.body.type, {
+      cursor: {
+        page: req.body.page,
+      },
+      filter: "all",
+    })
   );
 
-  fastify.post(
-    "/userbeatmaps",
-    async (req) =>
-      await v2.user.beatmaps.category(req.body.id, req.body.type, {
+  fastify.post("/userbeatmaps", async (req) =>
+    await v2.user.beatmaps.category(
+      req.body.id,
+      req.body.type,
+      {
         limit: req.body.limit,
         offset: req.body.offset,
       })
@@ -159,28 +148,19 @@ import jwt from "jsonwebtoken"
 
   fastify.post("/beatmapset", async (req) => await mino.v2.set(req.body.setId));
 
-  fastify.post(
-    "/beatmapsets",
-    async (req) =>
-      await mino.v2.search({
-        query: req.body.query,
-        filter: req.body.filter,
-        mode: req.body.mode,
-        ranked: req.body.status,
-        limit: req.body.limit,
-        offset: req.body.offset,
-        sort: req.body.sort,
-      })
+  fastify.post("/beatmapsets", async (req) =>
+    await mino.v2.search({
+      query: req.body.query,
+      filter: req.body.filter,
+      mode: req.body.mode,
+      ranked: req.body.status,
+      limit: req.body.limit,
+      offset: req.body.offset,
+      sort: req.body.sort,
+    })
   );
 
-  fastify.post(
-    "/beatmapscores",
-    async (req) =>
-      await v2.scores.beatmap(req.body.id, {
-        mode: req.body.mode,
-        type: "global",
-      })
-  );
+  fastify.post("/beatmapscores", async (req) => await v2.scores.beatmap(req.body.id, { mode: req.body.mode, type: "global", }));
 
   async function validateCode(code) {
     const d = await (
