@@ -1,8 +1,8 @@
-create user 'example'@'localhost' identified by 'password';
+create user 'wysi'@'localhost' identified by 'password';
 
 create or replace database wysi;
 
-GRANT ALL PRIVILEGES ON wysi.* TO 'example'@'localhost';
+GRANT ALL PRIVILEGES ON wysi.* TO 'wysi'@'localhost';
 
 use wysi;
 
