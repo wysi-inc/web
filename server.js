@@ -17,7 +17,7 @@ import jwt from "jsonwebtoken"
 
   fastify.register(cors, {
     methods: ["GET", "POST"],
-    origin: "https://wysi727.com",
+    origin: process.env.ORIGIN,
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
   });
@@ -27,7 +27,7 @@ import jwt from "jsonwebtoken"
     cookieName: "cookiezi",
     secret: process.env.CLIENT_SECRET,
     cookie: {
-      secure: false,
+      secure: process.env.SECURE_COOKIE,
     },
     expires: 1000 * 60 * 60 * 24 * 30,
   });
