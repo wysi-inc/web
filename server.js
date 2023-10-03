@@ -53,11 +53,12 @@ import jwt from "jsonwebtoken";
 
   fastify.get("/", async () => "Server is up");
 
-  fastify.post("/login", async (req, res) => {
+  fastify.post("/login", async (req) => {
     const user = await getOwnData(await validateCode(req.body.code));
     if (user.authentication) return user;
     const jwtUser = {
       id: user.id,
+      ip: req.ip
     };
     return {
       user,
@@ -72,28 +73,22 @@ import jwt from "jsonwebtoken";
     return { message: "Logged out successfully" };
   });
 
-  fastify.post("/isLogged", async (req, res) => {
-    try {
-      const { token } = req.body;
-      jwt.verify(token, process.env.CLIENT_SECRET);
-
-      const dUser = jwt.decode(token);
-
-      // look for updated user details
-      const user = await v2.user.details(dUser.id);
-      return {
-        logged: true,
-        user: {
-          name: user.username,
-          pfp: user.avatar_url,
-          id: user.id,
-        },
-      };
-    } catch (err) {
-      return {
-        logged: false,
-      };
-    }
+  fastify.post("/isLogged", async (req) => {
+    const { token } = req.body;
+    jwt.verify(token, process.env.CLIENT_SECRET);
+    const dUser = jwt.decode(token);
+    // if IPs dont match
+    if (dUser.ip !== req.ip) return { logged: false, };
+    // look for updated user details
+    const user = await v2.user.details(dUser.id);
+    return {
+      logged: true,
+      user: {
+        name: user.username,
+        pfp: user.avatar_url,
+        id: user.id,
+      },
+    };
   });
 
   fastify.get(
@@ -202,11 +197,9 @@ import jwt from "jsonwebtoken";
           Accept: "application/json",
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `client_id=${process.env.CLIENT_ID}&client_secret=${
-          process.env.CLIENT_SECRET
-        }&code=${code}&grant_type=${"authorization_code"}&redirect_uri=${
-          process.env.CLIENT_REDIRECT
-        }`,
+        body: `client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET
+          }&code=${code}&grant_type=${"authorization_code"}&redirect_uri=${process.env.CLIENT_REDIRECT
+          }`,
       })
     ).json();
     return d.access_token;
