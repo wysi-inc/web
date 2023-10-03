@@ -79,7 +79,7 @@ import jwt from "jsonwebtoken"
     };
   });
 
-  fastify.post("/getMedals", async () =>
+  fastify.get("/getMedals", async () =>
     await (await fetch("https://osekai.net/medals/api/medals.php")).json());
 
   fastify.post("/userQuery", async (req) =>
@@ -93,7 +93,6 @@ import jwt from "jsonwebtoken"
         ? await v2.user.details(user_id)
         : await v2.user.details(user_id, mode);
     if (data.error === null) return data;
-
     data.db_info = await updateUser(
       data.id,
       data.username,
