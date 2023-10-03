@@ -16,10 +16,10 @@ import jwt from "jsonwebtoken";
   const fastify = f({ logger: true });
 
   fastify.register(cors, {
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     origin: process.env.ORIGIN,
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization", "x-token"],
   });
 
   fastify.register(cookie);
