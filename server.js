@@ -10,7 +10,7 @@ import badges from "./constants/badges.js";
 import cache from "./constants/cache.js";
 import "dotenv/config";
 
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
 (async () => {
   const fastify = f({ logger: true });
@@ -58,11 +58,13 @@ import jwt from "jsonwebtoken"
     if (user.authentication) return user;
     const jwtUser = {
       id: user.id,
-      name: user.username,
-      pfp: user.avatar_url
     };
-    req.session.set("user", user.id);
-    return { user, jwtUser: jwt.sign(jwtUser, process.env.CLIENT_SECRET) };
+    return {
+      user,
+      jwtUser: jwt.sign(jwtUser, process.env.CLIENT_SECRET, {
+        expiresIn: "7d",
+      }),
+    };
   });
 
   fastify.post("/logout", async (req) => {
@@ -70,20 +72,41 @@ import jwt from "jsonwebtoken"
     return { message: "Logged out successfully" };
   });
 
-  fastify.post("/isLogged", async (req) => {
-    if (!Boolean(req.session.get("user"))) return { logged: false };
-    const user = await v2.user.details(req.session.get("user"));
-    return {
-      logged: true,
-      jwtUser: jwt.sign({ id: user.id, name: user.username, pfp: user.avatar_url }, process.env.CLIENT_SECRET),
-    };
+  fastify.post("/isLogged", async (req, res) => {
+    try {
+      const { token } = req.body;
+      jwt.verify(token, process.env.CLIENT_SECRET);
+
+      const dUser = jwt.decode(token);
+
+      // look for updated user details
+      const user = await v2.user.details(dUser.id);
+      return {
+        logged: true,
+        user: {
+          name: user.username,
+          pfp: user.avatar_url,
+          id: user.id,
+        },
+      };
+    } catch (err) {
+      return {
+        logged: false,
+      };
+    }
   });
 
-  fastify.get("/getMedals", async () =>
-    await (await fetch("https://osekai.net/medals/api/medals.php")).json());
+  fastify.get(
+    "/getMedals",
+    async () =>
+      await (await fetch("https://osekai.net/medals/api/medals.php")).json()
+  );
 
-  fastify.post("/userQuery", async (req) =>
-    await v2.site.search({ mode: "user", query: req.body.username, page: 0, }));
+  fastify.post(
+    "/userQuery",
+    async (req) =>
+      await v2.site.search({ mode: "user", query: req.body.username, page: 0 })
+  );
 
   fastify.post("/user", async (req) => {
     const user_id = req.body.id;
@@ -115,20 +138,21 @@ import jwt from "jsonwebtoken"
     return data;
   });
 
-  fastify.post("/users", async (req) =>
-    await v2.site.ranking.details(req.body.mode, req.body.type, {
-      cursor: {
-        page: req.body.page,
-      },
-      filter: "all",
-    })
+  fastify.post(
+    "/users",
+    async (req) =>
+      await v2.site.ranking.details(req.body.mode, req.body.type, {
+        cursor: {
+          page: req.body.page,
+        },
+        filter: "all",
+      })
   );
 
-  fastify.post("/userbeatmaps", async (req) =>
-    await v2.user.beatmaps.category(
-      req.body.id,
-      req.body.type,
-      {
+  fastify.post(
+    "/userbeatmaps",
+    async (req) =>
+      await v2.user.beatmaps.category(req.body.id, req.body.type, {
         limit: req.body.limit,
         offset: req.body.offset,
       })
@@ -147,19 +171,28 @@ import jwt from "jsonwebtoken"
 
   fastify.post("/beatmapset", async (req) => await mino.v2.set(req.body.setId));
 
-  fastify.post("/beatmapsets", async (req) =>
-    await mino.v2.search({
-      query: req.body.query,
-      filter: req.body.filter,
-      mode: req.body.mode,
-      ranked: req.body.status,
-      limit: req.body.limit,
-      offset: req.body.offset,
-      sort: req.body.sort,
-    })
+  fastify.post(
+    "/beatmapsets",
+    async (req) =>
+      await mino.v2.search({
+        query: req.body.query,
+        filter: req.body.filter,
+        mode: req.body.mode,
+        ranked: req.body.status,
+        limit: req.body.limit,
+        offset: req.body.offset,
+        sort: req.body.sort,
+      })
   );
 
-  fastify.post("/beatmapscores", async (req) => await v2.scores.beatmap(req.body.id, { mode: req.body.mode, type: "global", }));
+  fastify.post(
+    "/beatmapscores",
+    async (req) =>
+      await v2.scores.beatmap(req.body.id, {
+        mode: req.body.mode,
+        type: "global",
+      })
+  );
 
   async function validateCode(code) {
     const d = await (
@@ -169,9 +202,11 @@ import jwt from "jsonwebtoken"
           Accept: "application/json",
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET
-          }&code=${code}&grant_type=${"authorization_code"}&redirect_uri=${process.env.CLIENT_REDIRECT
-          }`,
+        body: `client_id=${process.env.CLIENT_ID}&client_secret=${
+          process.env.CLIENT_SECRET
+        }&code=${code}&grant_type=${"authorization_code"}&redirect_uri=${
+          process.env.CLIENT_REDIRECT
+        }`,
       })
     ).json();
     return d.access_token;
