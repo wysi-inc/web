@@ -58,7 +58,7 @@ import jwt from "jsonwebtoken";
     if (user.authentication) return user;
     const jwtUser = {
       id: user.id,
-      ip: req.ip
+      ip: req.ip,
     };
     return {
       user,
@@ -78,7 +78,7 @@ import jwt from "jsonwebtoken";
     jwt.verify(token, process.env.CLIENT_SECRET);
     const dUser = jwt.decode(token);
     // if IPs dont match
-    if (dUser.ip !== req.ip) return { logged: false, };
+    if (dUser.ip !== req.ip) return { logged: false };
     // look for updated user details
     const user = await v2.user.details(dUser.id);
     return {
@@ -197,9 +197,11 @@ import jwt from "jsonwebtoken";
           Accept: "application/json",
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET
-          }&code=${code}&grant_type=${"authorization_code"}&redirect_uri=${process.env.CLIENT_REDIRECT
-          }`,
+        body: `client_id=${process.env.CLIENT_ID}&client_secret=${
+          process.env.CLIENT_SECRET
+        }&code=${code}&grant_type=${"authorization_code"}&redirect_uri=${
+          process.env.CLIENT_REDIRECT
+        }`,
       })
     ).json();
     return d.access_token;
