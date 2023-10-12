@@ -4,11 +4,12 @@ import session from "@fastify/session";
 import cookie from "@fastify/cookie";
 import { v2, auth } from "osu-api-extended";
 import mino from "beatsify";
-import mysql from "mysql-commands";
 import fetch from "node-fetch";
 import badges from "./constants/badges.js";
 import cache from "./constants/cache.js";
+import mongoose from "mongoose";
 import "dotenv/config";
+import User from "./user.js";
 
 import jwt from "jsonwebtoken";
 
@@ -32,13 +33,15 @@ import jwt from "jsonwebtoken";
     expires: 1000 * 60 * 60 * 24 * 30,
   });
 
-  const database = mysql.createConnection({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME,
+  const uri = `mongodb://${process.env.DATABASE_USER && ':'}${process.env.DATABASE_PASSWORD && '@'}${process.env.DATABASE_HOST}`;
+  mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }).then(() => {
+    console.log("Connected to the database");
+  }).catch((error) => {
+    console.error("Error connecting to the database:", error);
   });
-  console.log("Connected to the database");
 
   await auth.login(process.env.CLIENT_ID, process.env.CLIENT_SECRET, [
     "public",
@@ -91,16 +94,12 @@ import jwt from "jsonwebtoken";
     };
   });
 
-  fastify.get(
-    "/getMedals",
-    async () =>
-      await (await fetch("https://osekai.net/medals/api/medals.php")).json()
+  fastify.get("/getMedals", async () =>
+    await (await fetch("https://osekai.net/medals/api/medals.php")).json()
   );
 
-  fastify.post(
-    "/userQuery",
-    async (req) =>
-      await v2.site.search({ mode: "user", query: req.body.username, page: 0 })
+  fastify.post("/userQuery", async (req) =>
+    await v2.site.search({ mode: "user", query: req.body.username, page: 0 })
   );
 
   fastify.post("/user", async (req) => {
@@ -133,60 +132,50 @@ import jwt from "jsonwebtoken";
     return data;
   });
 
-  fastify.post(
-    "/users",
-    async (req) =>
-      await v2.site.ranking.details(req.body.mode, req.body.type, {
-        cursor: {
-          page: req.body.page,
-        },
-        filter: "all",
-      })
+  fastify.post("/users", async (req) =>
+    await v2.site.ranking.details(req.body.mode, req.body.type, {
+      cursor: {
+        page: req.body.page,
+      },
+      filter: "all",
+    })
   );
 
-  fastify.post(
-    "/userbeatmaps",
-    async (req) =>
-      await v2.user.beatmaps.category(req.body.id, req.body.type, {
-        limit: req.body.limit,
-        offset: req.body.offset,
-      })
+  fastify.post("/userbeatmaps", async (req) =>
+    await v2.user.beatmaps.category(req.body.id, req.body.type, {
+      limit: req.body.limit,
+      offset: req.body.offset,
+    })
   );
 
-  fastify.post(
-    "/userscores",
-    async (req) =>
-      await v2.scores.user.category(req.body.id, req.body.type, {
-        include_fails: false,
-        mode: req.body.mode,
-        limit: req.body.limit,
-        offset: req.body.offset,
-      })
+  fastify.post("/userscores", async (req) =>
+    await v2.scores.user.category(req.body.id, req.body.type, {
+      include_fails: false,
+      mode: req.body.mode,
+      limit: req.body.limit,
+      offset: req.body.offset,
+    })
   );
 
   fastify.post("/beatmapset", async (req) => await mino.v2.set(req.body.setId));
 
-  fastify.post(
-    "/beatmapsets",
-    async (req) =>
-      await mino.v2.search({
-        query: req.body.query,
-        filter: req.body.filter,
-        mode: req.body.mode,
-        ranked: req.body.status,
-        limit: req.body.limit,
-        offset: req.body.offset,
-        sort: req.body.sort,
-      })
+  fastify.post("/beatmapsets", async (req) =>
+    await mino.v2.search({
+      query: req.body.query,
+      filter: req.body.filter,
+      mode: req.body.mode,
+      ranked: req.body.status,
+      limit: req.body.limit,
+      offset: req.body.offset,
+      sort: req.body.sort,
+    })
   );
 
-  fastify.post(
-    "/beatmapscores",
-    async (req) =>
-      await v2.scores.beatmap(req.body.id, {
-        mode: req.body.mode,
-        type: "global",
-      })
+  fastify.post("/beatmapscores", async (req) =>
+    await v2.scores.beatmap(req.body.id, {
+      mode: req.body.mode,
+      type: "global",
+    })
   );
 
   async function validateCode(code) {
@@ -197,11 +186,9 @@ import jwt from "jsonwebtoken";
           Accept: "application/json",
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `client_id=${process.env.CLIENT_ID}&client_secret=${
-          process.env.CLIENT_SECRET
-        }&code=${code}&grant_type=${"authorization_code"}&redirect_uri=${
-          process.env.CLIENT_REDIRECT
-        }`,
+        body: `client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET
+          }&code=${code}&grant_type=${"authorization_code"}&redirect_uri=${process.env.CLIENT_REDIRECT
+          }`,
       })
     ).json();
     return d.access_token;
@@ -221,79 +208,113 @@ import jwt from "jsonwebtoken";
   }
 
   async function updateUser(userId, username, userRanks, countryRank, mode) {
-    const c = await database.select("ranks", {
-      values: ["time"],
-      condition: `id = ${userId} AND ${mode} IS NOT NULL AND type = "global"`,
-    });
-
     const response = {
       global_rank: [],
       country_rank: [],
     };
 
-    const time = new Date();
-    time.setHours(0, 0, 0, 0);
+    if (!countryRank) return response;
 
-    await database.insert("ranks", {
-      object: {
-        id: userId,
-        time: time.getTime() / 1000,
-        [mode]: countryRank,
-        type: "country",
-      },
-      updateOnDuplicate: true,
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+    const objectRanks = userRanks.map((number, index) => {
+      const date = new Date(currentDate);
+      date.setDate(date.getDate() - (userRanks.length - 1 - index));
+      return { rank: number, date };
     });
-
-    for (let i = userRanks.length - 1; i >= 0; i--) {
-      time.setDate(time.getDate() - 1);
-      const check = c.filter((v) => v.time == time.getTime() / 1000)[0];
-      if (check) continue;
-      delete cache[userId];
-      await database.insert("ranks", {
-        //TODO: multi insert
-        object: {
-          id: userId,
-          time: time.getTime() / 1000,
-          [mode]: userRanks[i],
-          type: "global",
-        },
-        updateOnDuplicate: true,
-      });
+    const currentCountryRank = {
+      date: currentDate,
+      rank: countryRank
     }
 
-    if (cache[userId]) return cache[userId];
+    // const c = await database.select("ranks", {
+    //   values: ["time"],
+    //   condition: `id = ${userId} AND ${mode} IS NOT NULL AND type = "global"`,
+    // });
 
-    await database.insert("users", {
-      object: {
-        id: userId,
+    // const time = new Date();
+    // time.setHours(0, 0, 0, 0);
+
+    // await database.insert("ranks", {
+    //   object: {
+    //     id: userId,
+    //     time: time.getTime() / 1000,
+    //     [mode]: countryRank,
+    //     type: "country",
+    //   },
+    //   updateOnDuplicate: true,
+    // });
+
+    // for (let i = userRanks.length - 1; i >= 0; i--) {
+    //   time.setDate(time.getDate() - 1);
+    //   const check = c.filter((v) => v.time == time.getTime() / 1000)[0];
+    //   if (check) continue;
+    //   delete cache[userId];
+    //   await database.insert("ranks", {
+    //     //TODO: multi insert
+    //     object: {
+    //       id: userId,
+    //       time: time.getTime() / 1000,
+    //       [mode]: userRanks[i],
+    //       type: "global",
+    //     },
+    //     updateOnDuplicate: true,
+    //   });
+    // }
+
+    // if (cache[userId]) return cache[userId];
+
+    // await database.insert("users", {
+    //   object: {
+    //     id: userId,
+    //     username: username,
+    //   },
+    //   updateOnDuplicate: true,
+    // });
+
+    // const ranks = await database.request(`
+    //         SELECT r.time, r.${mode}, r.type
+    //         FROM ranks r
+    //         JOIN users u
+    //         ON r.id = u.id
+    //         WHERE r.id = ${userId}
+    //         AND r.${mode} IS NOT NULL
+    //     `);
+
+    // const globalRanks = ranks.filter((v) => v.type == "global");
+    // const countryRanks = ranks.filter((v) => v.type == "country");
+
+    // response.global_rank = globalRanks.map((v) => ({
+    //   rank: v[mode],
+    //   time: v.time,
+    // }));
+    // response.country_rank = countryRanks.map((v) => ({
+    //   rank: v[mode],
+    //   time: v.time,
+    // }));
+
+    // cache[userId] = response;
+
+    if (await User.exists({ userId: userId })) {
+      const user = await User.findOne({ userId: userId });
+      user.username = username;
+      await user.save();
+      return response;
+
+    }
+    const userOsu = new User(
+      {
+        userId: userId,
         username: username,
-      },
-      updateOnDuplicate: true,
-    });
-
-    const ranks = await database.request(`
-            SELECT r.time, r.${mode}, r.type
-            FROM ranks r
-            JOIN users u
-            ON r.id = u.id
-            WHERE r.id = ${userId}
-            AND r.${mode} IS NOT NULL
-        `);
-
-    const globalRanks = ranks.filter((v) => v.type == "global");
-    const countryRanks = ranks.filter((v) => v.type == "country");
-
-    response.global_rank = globalRanks.map((v) => ({
-      rank: v[mode],
-      time: v.time,
-    }));
-    response.country_rank = countryRanks.map((v) => ({
-      rank: v[mode],
-      time: v.time,
-    }));
-
-    cache[userId] = response;
-
+        modes: {
+          [mode]: {
+            rankHistory: objectRanks,
+            countryRankHistory: [currentCountryRank]
+          }
+        }
+      }
+    )
+    await userOsu.save();
     return response;
   }
 
