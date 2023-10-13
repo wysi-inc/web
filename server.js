@@ -33,7 +33,7 @@ import jwt from "jsonwebtoken";
     expires: 1000 * 60 * 60 * 24 * 30,
   });
 
-  const uri = `mongodb://${process.env.DATABASE_USER && ':'}${process.env.DATABASE_PASSWORD && '@'}${process.env.DATABASE_HOST}`;
+  const uri = `mongodb://${process.env.DATABASE_USER && ':'}${process.env.DATABASE_PASSWORD && '@'}${process.env.DATABASE_HOST}/${process.env.DATABASE_NAME}`;
   mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
