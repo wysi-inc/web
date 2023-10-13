@@ -212,20 +212,18 @@ import jwt from "jsonwebtoken";
       global_rank: [],
       country_rank: [],
     };
-
     if (!countryRank) return response;
-
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0);
-    const objectRanks = userRanks.map((number, index) => {
+    const newGlobal = userRanks.map((number, index) => {
       const date = new Date(currentDate);
       date.setDate(date.getDate() - (userRanks.length - 1 - index));
       return { rank: number, date };
     });
-    const currentCountryRank = {
+    const newCountry = [{
       date: currentDate,
       rank: countryRank
-    }
+    }];
 
     // const c = await database.select("ranks", {
     //   values: ["time"],
@@ -298,24 +296,36 @@ import jwt from "jsonwebtoken";
     if (await User.exists({ userId: userId })) {
       const user = await User.findOne({ userId: userId });
       user.username = username;
+      user.modes[mode].globalRankHistory = addRanks(user.modes[mode].globalRankHistory, newGlobal);
+      user.modes[mode].countryRankHistory = addRanks(user.modes[mode].countryRankHistory, newCountry);
+      response.global_rank = user.modes[mode].globalRankHistory;
+      response.country_rank = user.modes[mode].countryRankHistory;
       await user.save();
       return response;
-
     }
-    const userOsu = new User(
-      {
-        userId: userId,
-        username: username,
-        modes: {
-          [mode]: {
-            rankHistory: objectRanks,
-            countryRankHistory: [currentCountryRank]
-          }
+    const userOsu = new User({
+      userId: userId,
+      username: username,
+      modes: {
+        [mode]: {
+          globalRankHistory: newGlobal,
+          countryRankHistory: newCountry
         }
       }
-    )
+    })
     await userOsu.save();
+    response.global_rank = newGlobal;
+    response.country_rank = newCountry;
     return response;
+  }
+
+  function addRanks(r_old, r_new) {
+    const r_final = [...r_old];
+    for (const r of r_new) {
+      const exists = r_final.some(o => o.date.getTime() === r.date.getTime());
+      if (!exists) r_final.push(r);
+    }
+    return r_final;
   }
 
   fastify.listen({ host: "0.0.0.0", port: process.env.PORT });

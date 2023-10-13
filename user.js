@@ -9,7 +9,12 @@ const rankSchema = new Schema({
         type: Number,
         required: true
     }
-});
+}, { _id : false });
+
+const modeSchama = new Schema({
+    globalRankHistory: [rankSchema],
+    countryRankHistory: [rankSchema]
+}, { _id : false });
 
 const userSchema = new Schema({
     userId: {
@@ -27,22 +32,10 @@ const userSchema = new Schema({
         code: String,
     },
     modes: {
-        osu: {
-            rankHistory: [rankSchema],
-            countryRankHistory: [rankSchema]
-        },
-        taiko: {
-            rankHistory: [rankSchema],
-            countryRankHistory: [rankSchema]
-        },
-        fruits: {
-            rankHistory: [rankSchema],
-            countryRankHistory: [rankSchema]
-        },
-        mania: {
-            rankHistory: [rankSchema],
-            countryRankHistory: [rankSchema]
-        }
+        osu: modeSchama,
+        taiko: modeSchama,
+        fruits: modeSchama,
+        mania: modeSchama,
     },
     skin: Number,
     setup: {
