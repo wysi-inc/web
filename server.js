@@ -32,16 +32,17 @@ import jwt from "jsonwebtoken";
     },
     expires: 1000 * 60 * 60 * 24 * 30,
   });
+  
+  console.log(process.env.DATABASE_URI);
+  
 
-  const uri = `mongodb://${process.env.DATABASE_USER && ':'}${process.env.DATABASE_PASSWORD && '@'}${process.env.DATABASE_HOST}/${process.env.DATABASE_NAME}`;
-  mongoose.connect(uri, {
+  mongoose.connect(process.env.DATABASE_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-  }).then(() => {
-    console.log("Connected to the database");
-  }).catch((error) => {
-    console.error("Error connecting to the database:", error);
   });
+  const db = mongoose.connection;
+  db.on('error', () => console.error("Error connecting to the database"));
+  db.once('open', () => console.log("Connected to the database"));
 
   await auth.login(process.env.CLIENT_ID, process.env.CLIENT_SECRET, [
     "public",
