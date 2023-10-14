@@ -12,6 +12,7 @@ import "dotenv/config";
 import User from "./user.js";
 
 import jwt from "jsonwebtoken";
+import verifyToken from "./middlewares/verifyToken.js";
 
 (async () => {
   const fastify = f({ logger: true });
@@ -32,9 +33,9 @@ import jwt from "jsonwebtoken";
     },
     expires: 1000 * 60 * 60 * 24 * 30,
   });
-  
+
   console.log(process.env.DATABASE_URI);
-  
+
 
   mongoose.connect(process.env.DATABASE_URI, {
     useNewUrlParser: true,
@@ -132,6 +133,18 @@ import jwt from "jsonwebtoken";
       if (badges[badge].includes(data.id)) data.customBadges[badge] = true;
     return data;
   });
+
+
+  fastify.put('/setup', async (req) => {
+    if(!verifyToken(req)) return {ok: false};
+
+
+    // TODO: pisha guarda er setah en la mongola esa
+
+    return {
+      ok: true
+    }
+  })
 
   fastify.post("/users", async (req) =>
     await v2.site.ranking.details(req.body.mode, req.body.type, {
