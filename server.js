@@ -9,7 +9,8 @@ import badges from "./constants/badges.js";
 import cache from "./constants/cache.js";
 import mongoose from "mongoose";
 import "dotenv/config";
-import User from "./user.js";
+import User from "./models/User.js";
+import Setup from "./models/Setup.js"
 
 import jwt from "jsonwebtoken";
 import verifyToken from "./middlewares/verifyToken.js";
@@ -112,13 +113,16 @@ import verifyToken from "./middlewares/verifyToken.js";
         ? await v2.user.details(user_id)
         : await v2.user.details(user_id, mode);
     if (data.error === null) return data;
-    data.db_info = await updateUser(
-      data.id,
-      data.username,
-      data.rank_history?.data,
-      data.statistics.country_rank,
-      data.rank_history?.mode
-    );
+    data.db_info = {
+      ranks: await updateUser(
+        data.id,
+        data.username,
+        data.rank_history?.data,
+        data.statistics.country_rank,
+        data.rank_history?.mode
+      ),
+      setup: await getSetup(user_id)
+    };
 
     // catalans
     data.customBadges = {};
@@ -136,10 +140,12 @@ import verifyToken from "./middlewares/verifyToken.js";
 
 
   fastify.put('/setup', async (req) => {
-    if(!verifyToken(req)) return {ok: false};
+    const id = verifyToken(req);
+    console.log(id);
+    if (!id) return { ok: false };
 
-
-    // TODO: pisha guarda er setah en la mongola esa
+    const { setup } = req.body;
+    updateSetup(id, setup);
 
     return {
       ok: true
@@ -227,42 +233,76 @@ import verifyToken from "./middlewares/verifyToken.js";
       country_rank: [],
     };
     if (!countryRank) return response;
-    const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0);
-    const newGlobal = userRanks.map((number, index) => {
-      const date = new Date(currentDate);
-      date.setDate(date.getDate() - (userRanks.length - 1 - index));
-      return { rank: number, date };
-    });
-    const newCountry = [{
-      date: currentDate,
-      rank: countryRank
-    }];
+    try {
+      const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0);
+      const newGlobal = userRanks.map((number, index) => {
+        const date = new Date(currentDate);
+        date.setDate(date.getDate() - (userRanks.length - 1 - index));
+        return { rank: number, date };
+      });
+      const newCountry = [{
+        date: currentDate,
+        rank: countryRank
+      }];
 
-    if (await User.exists({ userId: userId })) {
-      const user = await User.findOne({ userId: userId });
-      user.username = username;
-      user.modes[mode].globalRankHistory = addRanks(user.modes[mode].globalRankHistory, newGlobal);
-      user.modes[mode].countryRankHistory = addRanks(user.modes[mode].countryRankHistory, newCountry);
-      response.global_rank = user.modes[mode].globalRankHistory;
-      response.country_rank = user.modes[mode].countryRankHistory;
-      await user.save();
-      return response;
-    }
-    const userOsu = new User({
-      userId: userId,
-      username: username,
-      modes: {
-        [mode]: {
-          globalRankHistory: newGlobal,
-          countryRankHistory: newCountry
-        }
+      if (await User.exists({ userId })) {
+        const user = await User.findOne({ userId });
+        user.username = username;
+        user.modes[mode].globalRankHistory = addRanks(user.modes[mode].globalRankHistory, newGlobal);
+        user.modes[mode].countryRankHistory = addRanks(user.modes[mode].countryRankHistory, newCountry);
+        response.global_rank = user.modes[mode].globalRankHistory;
+        response.country_rank = user.modes[mode].countryRankHistory;
+        await user.save();
+      } else {
+        const userOsu = new User({
+          userId: userId,
+          username: username,
+          modes: {
+            [mode]: {
+              globalRankHistory: newGlobal,
+              countryRankHistory: newCountry
+            }
+          }
+        })
+        await userOsu.save();
+        response.global_rank = newGlobal;
+        response.country_rank = newCountry;
       }
-    })
-    await userOsu.save();
-    response.global_rank = newGlobal;
-    response.country_rank = newCountry;
+    } catch (err) {}
     return response;
+  }
+
+
+  async function updateSetup(userId, setup) {
+    console.log(setup);
+    let res = { ok: false };
+    try {
+      if (await Setup.exists({ userId })) {
+        const setupDB = await Setup.findOne({ userId });
+        setupDB.keyboard = setup.keyboard;
+        setupDB.tablet = setup.tablet;
+        await setupDB.save();
+        res = { ok: true };
+      } else {
+        const setupDB = new Setup({
+          userId,
+          ...setup
+        });
+        await setupDB.save();
+        res = { ok: true };
+      }
+    } catch (err) {
+      res = { ok: false };
+    }
+    return res;
+  }
+
+  async function getSetup(userId) {
+    if (await Setup.exists({ userId })) {
+      return await Setup.findOne({ userId });
+    }
+    return null;
   }
 
   function addRanks(r_old, r_new) {

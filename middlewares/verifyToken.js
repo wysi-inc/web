@@ -1,16 +1,17 @@
 import jwt from "jsonwebtoken";
 
 const verifyToken = (req) => {
-    const token = req.headers['x-token'];
-
-    let result = true;
+    let id = null;
     try {
+        const token = req.headers['x-token'];
         jwt.verify(token, process.env.CLIENT_SECRET);
+        const t = jwt.decode(token);
+        if (req.ip !== t.ip) id = null;
+        else id = t.id;
     } catch (error) {
-        result = false;
+        id = null;
     }
-
-    return result;
+    return id;
 }
 
 export default verifyToken;
