@@ -23,7 +23,7 @@ export default class Server {
 
   routes() {
     this.app.get("/", (req, res) => {
-      return res.type("text/plain").send("Server is running 🚀");
+      return res.send({msg: "Server is running 🚀"});
     });
 
     this.app.use("/", routes);
