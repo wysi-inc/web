@@ -57,7 +57,7 @@ export const updateUser = async (
       response.global_rank = newGlobal;
       response.country_rank = newCountry;
     }
-  } catch (err) {}
+  } catch (err) { }
   return response;
 };
 
@@ -68,6 +68,7 @@ export const updateSetup = async (userId, setup) => {
       const setupDB = await Setup.findOne({ userId });
       setupDB.keyboard = setup.keyboard;
       setupDB.tablet = setup.tablet;
+      setupDB.mouse = setup.mouse;
       await setupDB.save();
       res = { ok: true };
     } else {
@@ -85,10 +86,14 @@ export const updateSetup = async (userId, setup) => {
 };
 
 export const getSetup = async (userId) => {
-  if (await Setup.exists({ userId })) {
-    return await Setup.findOne({ userId });
+  try {
+    if (await Setup.exists({ userId })) {
+      return await Setup.findOne({ userId });
+    }
+    return null;
+  } catch (err) {
+    return null;
   }
-  return null;
 };
 
 function addRanks(r_old, r_new) {
