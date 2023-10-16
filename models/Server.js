@@ -30,6 +30,7 @@ export default class Server {
   }
 
   database() {
+    console.log(process.env.DATABASE_URI);
     mongoose.connect(process.env.DATABASE_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
