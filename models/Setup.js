@@ -58,7 +58,6 @@ const setupSchema = new Schema({
     storage: String,
     mohterboard: String,
     case: String,
-    other: String,
   },
 });
 

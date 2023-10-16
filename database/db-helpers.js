@@ -69,6 +69,7 @@ export const updateSetup = async (userId, setup) => {
       setupDB.keyboard = setup.keyboard;
       setupDB.tablet = setup.tablet;
       setupDB.mouse = setup.mouse;
+      setupDB.computer = setup.computer;
       await setupDB.save();
       res = { ok: true };
     } else {
