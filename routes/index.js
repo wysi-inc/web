@@ -44,4 +44,6 @@ router.post("/beatmapsets", beatmapsets);
 
 router.post("/beatmapscores", beatmapscores);
 
+// router.post("/langProgress", getLangProgress);
+
 export default router;
