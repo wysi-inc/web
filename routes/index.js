@@ -14,6 +14,7 @@ import {
   beatmapset,
   beatmapsets,
 } from "../controllers/beatmap.js";
+import { getLangProgress } from "../controllers/langs.js";
 import verifyToken from "../middlewares/verifyToken.js";
 
 const router = Router();
@@ -44,6 +45,6 @@ router.post("/beatmapsets", beatmapsets);
 
 router.post("/beatmapscores", beatmapscores);
 
-// router.post("/langProgress", getLangProgress);
+router.get("/langProgress", getLangProgress);
 
 export default router;
