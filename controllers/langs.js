@@ -8,8 +8,9 @@ export const getLangProgress = async (req, res) => {
             }
         });
         const data = await response.json();
+        if (!data?.data) return res.json({ ok: false });
         const languages = data.data.map(lang => ({ id: lang.data.language.id, name: lang.data.language.name, progress: lang.data.translationProgress }));
-        languages.push({id: 'en', name: 'English', progress: 100});
+        languages.push({ id: 'en', name: 'English', progress: 100 });
         return res.json({ ok: true, languages });
     } catch (err) {
         console.error(err);
