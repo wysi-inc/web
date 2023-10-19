@@ -1,9 +1,3 @@
-// `https://api.crowdin.com/api/v2/projects/621252/languages/${code}/progress`, {
-//                 headers: {
-//                     "Content-Type": "application/json",
-//                     "Authorization": "Bearer Process.env.crowdinurl"
-//                 },
-
 export const getLangProgress = async (req, res) => {
     try {
         const url = `https://api.crowdin.com/api/v2/projects/${process.env.CROWDIN_ID}/languages/progress`;
