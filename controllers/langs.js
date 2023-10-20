@@ -1,6 +1,6 @@
 export const getLangProgress = async (req, res) => {
     try {
-        const url = `https://api.crowdin.com/api/v2/projects/${process.env.CROWDIN_ID}/languages/progress`;
+        const url = `https://api.crowdin.com/api/v2/projects/${process.env.CROWDIN_ID}/languages/progress?limit=200`;
         const response = await fetch(url, {
             headers: {
                 "Content-Type": "application/json",
@@ -9,7 +9,9 @@ export const getLangProgress = async (req, res) => {
         });
         const data = await response.json();
         if (!data?.data) return res.json({ ok: false });
-        const languages = data.data.map(lang => ({ id: lang.data.language.id, name: lang.data.language.name, progress: lang.data.translationProgress }));
+        const languages = data.data.map(lang => {
+            return { id: lang.data.language.id, name: lang.data.language.name, progress: lang.data.translationProgress, approval: lang.data.approvalProgress }
+        });
         languages.push({ id: 'en', name: 'English', progress: 100 });
         return res.json({ ok: true, languages });
     } catch (err) {
