@@ -56,7 +56,7 @@ const setupSchema = new Schema({
     ram: String,
     psu: String,
     storage: String,
-    mohterboard: String,
+    motherboard: String,
     case: String,
   },
 });
