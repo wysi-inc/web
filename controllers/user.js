@@ -3,24 +3,13 @@ import { v2 } from "osu-api-extended";
 import { updateUser, getSetup, updateSetup } from "../database/db-helpers.js";
 import badges from "../constants/badges.js";
 
-// Query for user information by username
-export const userQuery = async (req, res) => {
-  const ans = await v2.site.search({
-    mode: "user",
-    query: req.body.username,
-    page: 0,
-  });
-  return res.json(ans);
-};
+// Fetch user data, update database information
+export const user = async (req, res) => {
+  const { id, mode } = req.body;
 
-// Fetch and post user data, update database information
-export const userPost = async (req, res) => {
-  const user_id = req.body.id;
-  const mode = req.body.mode;
-  const data =
-    mode === "default"
-      ? await v2.user.details(user_id)
-      : await v2.user.details(user_id, mode);
+  let data;
+  if (!mode) data = await v2.user.details(id);
+  else data = await v2.user.details(id, mode);
 
   // Check for errors in the data and proceed accordingly
   if (data.error === null) return data;
@@ -34,7 +23,7 @@ export const userPost = async (req, res) => {
       data.statistics.country_rank,
       data.rank_history?.mode
     ),
-    setup: await getSetup(user_id),
+    setup: await getSetup(data.id),
   };
 
   // Add custom badges based on specific conditions
@@ -56,8 +45,31 @@ export const userPost = async (req, res) => {
   return res.json(data);
 };
 
+// Query for user information by username
+export const userSearch = async (req, res) => {
+  const { username } = req.body;
+  const ans = await v2.site.search({
+    mode: "user",
+    query: username,
+    page: 0,
+  });
+  return res.json(ans);
+};
+
+// Query for user rankings based on mode and type
+export const userList = async (req, res) => {
+  const { type, mode, page } = req.body;
+  const ans = await v2.site.ranking.details(mode, type, {
+    cursor: {
+      page: page,
+    },
+    filter: "all",
+  });
+  return res.json(ans);
+};
+
 // Update user setup information
-export const setup = async (req, res) => {
+export const userSetup = async (req, res) => {
   const id = req.id;
 
   // Check for user authentication
@@ -71,33 +83,30 @@ export const setup = async (req, res) => {
   return res.json({ ok: true });
 };
 
-// Query for user rankings based on mode and type
-export const users = async (req, res) => {
-  const ans = await v2.site.ranking.details(req.body.mode, req.body.type, {
-    cursor: {
-      page: req.body.page,
-    },
-    filter: "all",
-  });
-  return res.json(ans);
-};
-
 // Query for user beatmaps based on user ID and type
 export const userBeatmaps = async (req, res) => {
-  const ans = await v2.user.beatmaps.category(req.body.id, req.body.type, {
-    limit: req.body.limit,
-    offset: req.body.offset,
+  const { id, type, limit, offset } = req.body;
+  const ans = await v2.user.beatmaps.category(id, type, {
+    limit: limit,
+    offset: offset,
   });
   return res.json(ans);
 };
 
 // Query for user scores based on user ID, type, mode, limit, and offset
 export const userScores = async (req, res) => {
-  const ans = await v2.scores.user.category(req.body.id, req.body.type, {
+  const { id, type, mode, limit, offset } = req.body;
+  const ans = await v2.scores.user.category(id, type, {
     include_fails: false,
-    mode: req.body.mode,
-    limit: req.body.limit,
-    offset: req.body.offset,
+    mode: mode,
+    limit: limit,
+    offset: offset,
   });
+  return res.json(ans);
+};
+
+export const userMostPlayed = async (req, res) => {
+  const { id, limit, offset } = req.body;
+  const ans = await v2.user.beatmaps.most_played(id, { limit, offset });
   return res.json(ans);
 };

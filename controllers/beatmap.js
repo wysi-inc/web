@@ -20,6 +20,7 @@ export const beatmapsets = async (req, res) => {
     sort: req.body.sort,
   });
   // return search results as JSON
+  console.log(ans);
   return res.json(ans);
 };
 
