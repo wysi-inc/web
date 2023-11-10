@@ -35,20 +35,18 @@ const setupSchema = new Schema({
     name: String,
     dpi: Number,
   },
-  mousepad: {
-    name: String,
-    size: {
-      with: Number,
-      height: Number,
-    },
-  },
-  headphones: {
-    name: String,
-  },
-  monitor: {
-    name: String,
-    hz: Number,
-    size: Number,
+  peripherals: {
+    monitor: String,
+    headphones: String,
+    microphone: String,
+    tablet: String,
+    mouse: String,
+    keyboard: String,
+    keypad: String,
+    mousepad: String,
+    chair: String,
+    camera: String,
+    audio: String,
   },
   computer: {
     cpu: String,

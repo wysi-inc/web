@@ -3,13 +3,7 @@ import User from "../models/User.js";
 import Setup from "../models/Setup.js";
 
 // Function to update a user's rank and rank history.
-export const updateUser = async (
-  userId,
-  username,
-  userRanks,
-  countryRank,
-  mode
-) => {
+export const updateUser = async (userId, username, userRanks, countryRank, mode) => {
   // Initialize a response object to store updated ranks.
   const response = {
     global_rank: [],
@@ -72,7 +66,7 @@ export const updateUser = async (
       response.country_rank = newCountry;
     }
   } catch (err) {
-    // Handle any potential errors silently.
+    // Handle any potential errors.
   }
   // Return the response object with updated rank information.
   return response;
@@ -82,16 +76,16 @@ export const updateUser = async (
 export const updateSetup = async (userId, setup) => {
   // Initialize a response object with a default "ok" property set to false.
   let res = { ok: false };
-
   try {
     // Check if the setup information for the user already exists in the database.
     if (await Setup.exists({ userId })) {
       // If it exists, update the existing setup data.
       const setupDB = await Setup.findOne({ userId });
-      setupDB.keyboard = setup.keyboard;
-      setupDB.tablet = setup.tablet;
-      setupDB.mouse = setup.mouse;
-      setupDB.computer = setup.computer;
+      setupDB.keyboard = setup?.keyboard;
+      setupDB.tablet = setup?.tablet;
+      setupDB.mouse = setup?.mouse;
+      setupDB.peripherals = setup?.peripherals;
+      setupDB.computer = setup?.computer;
       await setupDB.save();
       // Set the "ok" property in the response object to true to indicate success.
       res = { ok: true };
@@ -106,7 +100,8 @@ export const updateSetup = async (userId, setup) => {
       res = { ok: true };
     }
   } catch (err) {
-    // Handle any potential errors silently and set "ok" to false in the response object.
+    console.error(err);
+    // Handle any potential errors and set "ok" to false in the response object.
     res = { ok: false };
   }
   // Return the response object indicating whether the operation was successful.
@@ -144,4 +139,3 @@ function addRanks(r_old, r_new) {
   // Return the merged rank history.
   return r_final;
 }
-
