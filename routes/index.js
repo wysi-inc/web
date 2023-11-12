@@ -10,15 +10,14 @@ import {
   userSearch,
   userSetup,
 } from "../controllers/user.js";
-import {
-  beatmapscores,
-  beatmapset,
-  beatmapsets,
-} from "../controllers/beatmap.js";
+import { beatmapscores, beatmapset } from "../controllers/beatmap.js";
 import { getLangProgress } from "../controllers/langs.js";
 import verifyToken from "../middlewares/verifyToken.js";
+import { test } from "../testing/test.js";
 
 const router = Router();
+//--testing--//
+//router.get("/testing", test);
 
 //---website---//
 router.post("/login", login);
@@ -47,8 +46,6 @@ router.post("/user/mostplayed", userMostPlayed);
 //---beatmapsets---//
 
 router.post("/beatmapset", beatmapset);
-
-router.post("/beatmapet/search", beatmapsets);
 
 router.post("/beatmap/scores", beatmapscores);
 

@@ -3,7 +3,13 @@ import User from "../models/User.js";
 import Setup from "../models/Setup.js";
 
 // Function to update a user's rank and rank history.
-export const updateUser = async (userId, username, userRanks, countryRank, mode) => {
+export const updateUser = async (
+  userId,
+  username,
+  userRanks,
+  countryRank,
+  mode
+) => {
   // Initialize a response object to store updated ranks.
   const response = {
     global_rank: [],
@@ -26,17 +32,25 @@ export const updateUser = async (userId, username, userRanks, countryRank, mode)
     });
 
     // Create an array for the new country rank.
-    const newCountry = [
-      {
-        date: currentDate,
-        rank: countryRank,
-      },
-    ];
+    const newCountry = [{ date: currentDate, rank: countryRank }];
 
-    // Check if the user with the given userId already exists in the database.
-    if (await User.exists({ userId })) {
+    let user = await User.findOne({ userId });
+    if (!user) {
+      // If the user doesn't exist, create a new user entry.
+      user = new User({
+        userId: userId,
+        username: username,
+        modes: {
+          [mode]: {
+            globalRankHistory: newGlobal,
+            countryRankHistory: newCountry,
+          },
+        },
+      });
+      response.global_rank = newGlobal;
+      response.country_rank = newCountry;
+    } else {
       // If the user exists, update their data.
-      const user = await User.findOne({ userId });
       user.username = username;
       user.modes[mode].globalRankHistory = addRanks(
         user.modes[mode].globalRankHistory,
@@ -48,94 +62,63 @@ export const updateUser = async (userId, username, userRanks, countryRank, mode)
       );
       response.global_rank = user.modes[mode].globalRankHistory;
       response.country_rank = user.modes[mode].countryRankHistory;
-      await user.save();
-    } else {
-      // If the user doesn't exist, create a new user entry.
-      const userOsu = new User({
-        userId: userId,
-        username: username,
-        modes: {
-          [mode]: {
-            globalRankHistory: newGlobal,
-            countryRankHistory: newCountry,
-          },
-        },
-      });
-      await userOsu.save();
-      response.global_rank = newGlobal;
-      response.country_rank = newCountry;
     }
+    await user.save();
   } catch (err) {
     // Handle any potential errors.
+  } finally {
+    // Return the response object with updated rank information.
+    return response;
   }
-  // Return the response object with updated rank information.
-  return response;
 };
 
 // Function to update a user's setup information.
 export const updateSetup = async (userId, setup) => {
   // Initialize a response object with a default "ok" property set to false.
-  let res = { ok: false };
   try {
     // Check if the setup information for the user already exists in the database.
-    if (await Setup.exists({ userId })) {
-      // If it exists, update the existing setup data.
-      const setupDB = await Setup.findOne({ userId });
-      setupDB.keyboard = setup?.keyboard;
-      setupDB.tablet = setup?.tablet;
-      setupDB.mouse = setup?.mouse;
-      setupDB.peripherals = setup?.peripherals;
-      setupDB.computer = setup?.computer;
-      await setupDB.save();
-      // Set the "ok" property in the response object to true to indicate success.
-      res = { ok: true };
+    let setupDB = await Setup.findOne({ userId });
+    if (!setupDB) {
+      setupDB = new Setup({ userId, ...setup });
     } else {
-      // If the setup information doesn't exist, create a new setup record for the user.
-      const setupDB = new Setup({
-        userId,
-        ...setup,
-      });
-      await setupDB.save();
-      // Set the "ok" property in the response object to true to indicate success.
-      res = { ok: true };
+      Object.assign(setupDB, { userId, ...setup });
     }
+    await setupDB.save();
+    // Set the "ok" property in the response object to true to indicate success.
+    return { ok: true };
   } catch (err) {
     console.error(err);
     // Handle any potential errors and set "ok" to false in the response object.
-    res = { ok: false };
+    return { ok: false };
   }
-  // Return the response object indicating whether the operation was successful.
-  return res;
 };
 
 // Function to retrieve a user's setup information from the database.
 export const getSetup = async (userId) => {
   try {
-    // Check if the setup information for the user exists in the database.
-    if (await Setup.exists({ userId })) {
-      // If it exists, return the setup data.
-      return await Setup.findOne({ userId });
-    }
-    // If not found, return null.
-    return null;
+    return await Setup.findOne({ userId });
   } catch (err) {
     // Handle any potential errors and return null.
+    console.error(err);
     return null;
   }
 };
 
 // Helper function to merge and update rank history.
 function addRanks(r_old, r_new) {
-  // Create a copy of the old rank history.
-  const r_final = [...r_old];
+  // Create a map of the old rank history with the date as the key.
+  const rankMap = new Map(r_old.map(entry => [entry.date.getTime(), entry]));
 
-  // Iterate through the new ranks and update the existing entries or add new ones.
+  // Iterate through the new ranks and update the existing old entries or add new ones.
   for (const r of r_new) {
-    const exists = r_final.find((o) => o.date.getTime() === r.date.getTime());
-    if (exists) exists.rank = r.rank;
-    else r_final.push(r);
+    const existingEntry = rankMap.get(r.date.getTime());
+    if (existingEntry) {
+      existingEntry.rank = r.rank;
+    } else {
+      rankMap.set(r.date.getTime(), { date: r.date, rank: r.rank });
+    }
   }
 
   // Return the merged rank history.
-  return r_final;
+  return Array.from(rankMap.values());
 }

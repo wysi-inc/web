@@ -23,7 +23,7 @@ export default class Server {
 
   routes() {
     this.app.get("/", (req, res) => {
-      return res.send({msg: "Server is running 🚀"});
+      return res.send({ msg: "Server is running 🚀" });
     });
 
     this.app.use("/", routes);
@@ -40,21 +40,21 @@ export default class Server {
   }
 
   async osuApi() {
-    await auth.login(process.env.CLIENT_ID, process.env.CLIENT_SECRET, [
-      "public",
-    ]);
+    this.login();
     console.log("Logged into Application");
 
-    setInterval(async () => {
-      await auth.login(process.env.CLIENT_ID, process.env.CLIENT_SECRET, [
-        "public",
-      ]);
-    }, 1000 * 60 * 60 * 24);
+    setInterval(() => this.login(), 1000 * 60 * 60 * 24);
   }
 
   listen() {
     this.app.listen(this.port, () => {
       console.log(`Server running on port ${this.port}`);
     });
+  }
+
+  async login() {
+    await auth.login(process.env.CLIENT_ID, process.env.CLIENT_SECRET, [
+      "public",
+    ]);
   }
 }
