@@ -42,10 +42,11 @@ export default class Server {
 
     this.mysqldb = mysql
       .createPool({
-        host: "127.0.0.1",
-        user: "ies",
-        password: "super3",
-        database: "wysi",
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DATABASE,
       })
       .promise();
   }
@@ -75,40 +76,45 @@ export default class Server {
       this.getMedals();
     });
   }
-  
+
   async getMedals() {
     const result = await fetch("https://osekai.net/medals/api/medals.php");
     const medals = await result.json();
     const query = [
       "REPLACE INTO medals SET",
-      "medal_id=?, name=?, link=?, description=?, restriction=?, grouping=?, instructions=?, solution_found=?, solution=?, mods=?, locked=?, video=?, date=?, pack_id=?, first_achieved_date=?, first_achieved_by=?, mode_order=?, ordering=?, rarity=?"
+      "medal_id=?, name=?, link=?,",
+      "description=?, restriction=?,",
+      "category=?, instructions=?,",
+      "solution_found=?, solution=?,",
+      "mods=?, locked=?, video=?,",
+      "date=?, pack_id=?, first_achieved_date=?,",
+      "first_achieved_by=?, mode_order=?,",
+      "ordering=?, rarity=?"
     ]
     const sql = query.join(" ") + ";";
-    for (const medal of medals) {
-      this.mysqldb.query(
-        sql, 
-        [
-          parseInt(medal.MedalID),
-          medal.Name,
-          medal.Link,
-          medal.Description,
-          medal.Restriction,
-          medal.Grouping,
-          medal.Instructions,
-          Boolean(medal.SolutionFound),
-          medal.Solution,
-          medal.Mods,
-          Boolean(medal.Locked),
-          medal.Video,
-          new Date(medal.Date),
-          medal.PackId,
-          new Date(medal.FirstAchievedDate),
-          medal.FirstAchievedBy,
-          parseInt(medal.ModeOrder),
-          parseInt(medal.Ordering),
-          parseFloat(medal.Rarity),
-        ]
-      );
+    for (const m of medals) {
+      const val = [
+        parseInt(m.MedalID),
+        m.Name,
+        m.Link,
+        m.Description,
+        m.Restriction,
+        m.Grouping,
+        m.Instructions,
+        Boolean(m.SolutionFound),
+        m.Solution,
+        m.Mods,
+        Boolean(m.Locked),
+        m.Video,
+        new Date(m.Date),
+        m.PackId,
+        new Date(m.FirstAchievedDate),
+        m.FirstAchievedBy,
+        parseInt(m.ModeOrder),
+        parseInt(m.Ordering),
+        parseFloat(m.Rarity)
+      ];
+      this.mysqldb.query(sql, val);
     }
   }
 }
