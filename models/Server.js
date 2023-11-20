@@ -80,18 +80,16 @@ export default class Server {
   async getMedals() {
     const result = await fetch("https://osekai.net/medals/api/medals.php");
     const medals = await result.json();
-    const query = [
-      "REPLACE INTO medals SET",
-      "medal_id=?, name=?, link=?,",
-      "description=?, restriction=?,",
-      "category=?, instructions=?,",
-      "solution_found=?, solution=?,",
-      "mods=?, locked=?, video=?,",
-      "date=?, pack_id=?, first_achieved_date=?,",
-      "first_achieved_by=?, mode_order=?,",
-      "ordering=?, rarity=?"
-    ]
-    const sql = query.join(" ") + ";";
+    const sql = `
+      REPLACE INTO medals SET
+      medal_id=?, name=?, link=?,
+      description=?, restriction=?,
+      category=?, instructions=?,
+      solution_found=?, solution=?,
+      mods=?, locked=?, video=?,
+      date=?, pack_id=?, first_achieved_date=?,
+      first_achieved_by=?, mode_order=?,
+      ordering=?, rarity=?`;
     for (const m of medals) {
       const val = [
         parseInt(m.MedalID),
@@ -112,7 +110,7 @@ export default class Server {
         m.FirstAchievedBy,
         parseInt(m.ModeOrder),
         parseInt(m.Ordering),
-        parseFloat(m.Rarity)
+        parseFloat(m.Rarity),
       ];
       this.mysqldb.query(sql, val);
     }

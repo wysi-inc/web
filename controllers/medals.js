@@ -25,12 +25,13 @@ export const getMedals = async (req, res) => {
         'rarity', rarity
       )) AS medals
       FROM medals
-      GROUP BY category;`
+      GROUP BY category
+      ORDER BY ordering;`
     );
     ans.forEach(a => a.medals = JSON.parse(a.medals));
-    return res.json(ans);
+    return res.status(200).json(ans);
   } catch (err) {
     console.error(err);
-    return res.json({error: true});
+    return res.status(500).json({error: "sql error"});
   }
 };
