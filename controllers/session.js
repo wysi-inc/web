@@ -37,20 +37,12 @@ export const logout = async (req, res) => {
 // Check if a user is logged in
 export const isLogged = async (req, res) => {
   const { token } = req.body;
-
-  // Verify the JWT using the client secret
-  jwt.verify(token, process.env.CLIENT_SECRET);
-
-  // Decode the user information from the JWT
   const dUser = jwt.decode(token);
 
-  // Check if the IP in the token matches the current request's IP
   if (dUser.ip !== req.ip) return { logged: false };
 
-  // Look up updated user details using the osu-api-extended library
   const user = await v2.user.details(dUser.id);
-
-  // Return logged-in status and user information
+  
   return res.json({
     logged: true,
     user: {

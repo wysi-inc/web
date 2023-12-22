@@ -24,7 +24,7 @@ router.post("/login", login);
 
 router.post("/logout", logout);
 
-router.post("/isLogged", isLogged);
+router.post("/isLogged", verifyToken, isLogged);
 
 //---user---//
 router.get("/medals", getMedals);
