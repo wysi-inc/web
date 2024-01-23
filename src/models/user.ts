@@ -51,7 +51,7 @@ const setup = new mongoose.Schema({
         motherboard: String,
         case: String,
     }
-});
+})
 
 
 const rank = new mongoose.Schema({
@@ -65,7 +65,7 @@ const rank = new mongoose.Schema({
     }
 })
 
-const mode = new mongoose.Schema({
+const modeRanks = new mongoose.Schema({
     global_ranks: [rank],
     country_ranks: [rank],
 })
@@ -86,10 +86,10 @@ const userSchema = new mongoose.Schema({
         code: String,
     },
     modes: {
-        osu: mode,
-        taiko: mode,
-        fruits: mode,
-        mania: mode,
+        osu: modeRanks,
+        taiko: modeRanks,
+        fruits: modeRanks,
+        mania: modeRanks,
     },
     skins: [String],
     setup: setup,
@@ -100,6 +100,10 @@ userSchema.methods.toJSON = function () {
     return user;
 };
 
+export type Rank = mongoose.InferSchemaType<typeof rank>;
+export type ModeRanks = mongoose.InferSchemaType<typeof modeRanks>;
+export type Mode = "osu" | "taiko" | "fruits" | "mania";
+export type Setup = mongoose.InferSchemaType<typeof setup>;
 export type User = mongoose.InferSchemaType<typeof userSchema>;
 export const User = mongoose.model('User', userSchema);
 
