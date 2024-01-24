@@ -59,19 +59,13 @@ const app = new Elysia()
     return 'Unauthorized'
   }
 
-  console.log(profile);
-
-  return `Hello ${profile.username}`
+  return `Hello ${profile.name}`
 })
-.get('/login/:code', async ({ jwt, cookie, setCookie, params, request }) => login(jwt, cookie, setCookie, params, request))
-.get("/logout", ({ setCookie }) => {
-  setCookie('auth', '', {
-    httpOnly: true,
-    maxAge: 0,
-  })
-  return "Logged out"
-})
-.get("/is_logged_in", () => "Is Logged In Page")
+.group("/web", (_) => _ 
+  .get('/login', async ({ jwt, cookie, setCookie, params }) => login(jwt, cookie, setCookie, params))
+  .get("/logout", () => "Logout Page")
+  .get("/is_logged_in", () => "Is Logged In Page")
+)
 .group("/users", (_) => _ 
   .get("/", () => "Users Page")
   .get("/search/:query", (req) => searchUser(req.params.query))
