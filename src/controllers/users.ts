@@ -2,6 +2,7 @@ import { v2 } from "osu-api-extended";
 import { Mode, ModeRanks, Rank, User } from "../models/user";
 import { response as v2User } from "osu-api-extended/dist/types/v2_user_details";
 import { response as v2UserList } from "osu-api-extended/dist/types/v2_site_ranking_details";
+import mongoose from "mongoose";
 
 export type UserResponse = v2User & { db_info: ModeRanks };
 
@@ -21,7 +22,10 @@ export async function getUser(id: number | string, mode: Mode = "osu"): Promise<
 }
 
 async function updateUser(user_id: number, username: string, global_ranks: number[], country_rank: number, mode: Mode = "osu"): Promise<ModeRanks> {
-    let res: ModeRanks = { global_ranks: [] as any, country_ranks: [] as any };
+    let res: ModeRanks = { 
+        global_ranks: new mongoose.Types.DocumentArray([]), 
+        country_ranks: new mongoose.Types.DocumentArray([])
+    };
     if (!country_rank) return res;
     const today: Date = new Date()
     today.setHours(0, 0, 0, 0);
@@ -33,20 +37,25 @@ async function updateUser(user_id: number, username: string, global_ranks: numbe
     if (user) {
         user.username = username;
         if (!user.modes) user.modes = {};
-        if (!user.modes[mode]) user.modes[mode] = {global_ranks: [] as any, country_ranks: [] as any};
-        (user.modes[mode] as any).global_ranks = filter_ranks((user.modes[mode] as any).global_ranks, new_global_ranks);
-        (user.modes[mode] as any).country_ranks = filter_ranks((user.modes[mode] as any).country_ranks, new_country_ranks);
-        res = user.modes[mode] as any; 
+        if (!user.modes[mode]) user.modes[mode] = res;
+        user.modes[mode]!.global_ranks = new mongoose.Types.DocumentArray(
+           filter_ranks(user.modes[mode]!.global_ranks, new_global_ranks)
+        );
+        user.modes[mode]!.country_ranks = new mongoose.Types.DocumentArray(
+            filter_ranks(user.modes[mode]!.country_ranks, new_country_ranks)
+        );
+        res = user.modes[mode]!; 
     } else {
+        res.global_ranks.push(new_global_ranks);
+        res.country_ranks.push(new_country_ranks);
         user = new User({
             user_id,
             username,
             modes: {[mode]: {
-                global_ranks: new_global_ranks,
-                country_ranks: new_country_ranks
+                global_ranks: res.global_ranks,
+                country_ranks: res.country_ranks, 
             }}
         });
-        res = user.modes?.[mode] as any; 
     }
     user.save();
     return res;

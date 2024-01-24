@@ -4,7 +4,7 @@ export function getMedals(): Promise<Medal[]> {
     return Medal.find();
 }
 
-export async function updateMedals(): void {
+export async function updateMedals(): Promise<void> {
     const result = await fetch("https://osekai.net/medals/api/medals.php");
     const new_medals = await result.json();
     for (const m of new_medals) {
@@ -15,7 +15,7 @@ export async function updateMedals(): void {
             medal.description = m.Description;
             medal.category = m.Category;
             medal.mode_order = parseInt(m.ModeOrder) || 0;
-            medal.order = parseInt(m.Order) || 0;
+            medal.ordering = parseInt(m.Order) || 0;
             medal.rarity = parseInt(m.Rarity) || 0;
         } else {
             medal = new Medal({
@@ -25,7 +25,7 @@ export async function updateMedals(): void {
                 description: m.Description,
                 category: m.Category,
                 mode_order: parseInt(m.ModeOrder) || 0,
-                order: parseInt(m.Order) || 0,
+                ordering: parseInt(m.Order) || 0,
                 rarity: parseInt(m.Rarity) || 0,
             });
         }
