@@ -1,4 +1,4 @@
-export async function login(jwt, cookie, setCookie, params, request) {
+export async function login(jwt, setCookie, params, request) {
     const { code } = params;
     const user = await getOwnData(await validateCode(code));
     if (user.authentication) return "Unauthorized";
@@ -13,6 +13,11 @@ export async function login(jwt, cookie, setCookie, params, request) {
         maxAge: 7 * 86400,
     })
     return `Sign in as ${user.username}`
+}
+
+export function logout(setCookie) {
+    setCookie('auth', '', { httpOnly: true, maxAge: 0 })
+    return "Logged out"
 }
 
 async function getOwnData(token: string) {
