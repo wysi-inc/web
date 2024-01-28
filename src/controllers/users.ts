@@ -1,18 +1,36 @@
-import Elysia from "elysia";
 import { v2 } from "osu-api-extended";
 import { Mode, ModeRanks, Rank, User } from "../models/user";
 import { response as v2User } from "osu-api-extended/dist/types/v2_user_details";
 import { response as v2UserList } from "osu-api-extended/dist/types/v2_site_ranking_details";
 import mongoose from "mongoose";
-import { ElysiaTypeOptions } from "elysia/dist/type-system";
 
 export type UserResponse = v2User & { db_info: ModeRanks };
+
+export async function searchUser(req: any) {
+    const { query } = req;
+    return await v2.site.search({
+        mode: "user",
+        query,
+        page: 0,
+    });
+}
+
+export async function getUserList(req: any) {
+    const { mode, type, page } = req.params;
+    const res: v2UserList = await v2.site.ranking.details(
+        mode, type, {
+            cursor: { page },
+            filter: "all",
+        } as any
+    );
+    return res;
+}
 
 export async function getUser(req: any): Promise<UserResponse | null> {
     const { id, mode } = req.query;
     const user: v2User = await v2.user.details(id, mode);
     if (!user) return null;
-    const new_user: UserResponse = {
+    return {
         ...user, db_info: await updateUser(
             user.id,
             user.username,
@@ -21,7 +39,6 @@ export async function getUser(req: any): Promise<UserResponse | null> {
             user.rank_history.mode as Mode
         )
     };
-    return new_user;
 }
 
 async function updateUser(user_id: number, username: string, global_ranks: number[], country_rank: number, mode: Mode = "osu"): Promise<ModeRanks> {
@@ -66,28 +83,31 @@ async function updateUser(user_id: number, username: string, global_ranks: numbe
     return res;
 }
 
+export async function getUserBeatmaps(req: any) {
+    const { id, type, limit, offset } = req.params;
+    return await v2.user.beatmaps.category(id, type, {
+        limit: limit,
+        offset: offset,
+    });
+}
+
+export async function getUserScores(req: any) {
+    const { id, type, mode, limit, offset } = req.body;
+    return await v2.scores.user.category(id, type, {
+        include_fails: false,
+        mode: mode,
+        limit: limit,
+        offset: offset,
+    });
+}
+
+export async function getUserMostPlayed(req: any) {
+    const { id, limit, offset } = req.params;
+    return await v2.user.beatmaps.most_played(id, { limit, offset });
+}
+
 function filter_ranks(olds: Rank[], news: Rank[]): Rank[] {
     return news.filter(new_rank => !olds.find(
         old_rank => old_rank.date === new_rank.date
     ));
-}
-
-export async function searchUser(req: any) {
-    const { query } = req;
-    return await v2.site.search({
-        mode: "user",
-        query,
-        page: 0,
-    });
-}
-
-export async function getUsers(req: any) {
-    const { mode, type, page } = req.params;
-    const res: v2UserList = await v2.site.ranking.details(
-        mode, type, {
-            cursor: { page },
-            filter: "all",
-        } as any
-    );
-    return res;
 }
