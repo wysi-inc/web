@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 export type UserResponse = v2User & { db_info: ModeRanks };
 
 export async function searchUser(req: any) {
-    const { query } = req;
+    const { query } = req.params;
     return await v2.site.search({
         mode: "user",
         query,
@@ -92,7 +92,8 @@ export async function getUserBeatmaps(req: any) {
 }
 
 export async function getUserScores(req: any) {
-    const { id, type, mode, limit, offset } = req.body;
+    console.log("getUserScores");
+    const { id, type, mode, limit, offset } = req.params;
     return await v2.scores.user.category(id, type, {
         include_fails: false,
         mode: mode,

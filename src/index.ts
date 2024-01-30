@@ -8,6 +8,7 @@ import { getUser, getUserBeatmaps, getUserList, getUserMostPlayed, getUserScores
 import { getMedals, updateMedals } from "./controllers/medals";
 import { getBeatmap, getBeatmapScores } from "./controllers/beatmaps";
 import { login, logout } from "./controllers/web";
+import { id_number } from "./validations/validations";
 
 const mongo_uri: string = process.env.MONGO_URI as any;
 const osu_id: number = process.env.OSU_ID as any;
@@ -31,22 +32,22 @@ connect();
 setInterval(() => connect(), 1000 * 60 * 60 * 23);
 
 const app = new Elysia()
-    .onRequest(({ request }) => console.log(request, request.method, request.url))
+    .onRequest(({ request }) => console.log(request.method, request.url))
     .use(cors())
     .use(jwt({
         name: "jwt",
-        secret: "test",
+        secret: osu_secret,
     }))
     .use(cookie())
     .get("/", () => "Bon dia i bon' hora!")
-//    .get('/profile', async ({ jwt, set, cookie: { auth } }) => {
-//        const profile = await jwt.verify(auth)
-//        if (!profile) {
-//            set.status = 401
-//            return 'Unauthorized'
-//        }
-//        return `Hello ${profile.username}`
-//    })
+    //    .get('/profile', async ({ jwt, set, cookie: { auth } }) => {
+    //        const profile = await jwt.verify(auth)
+    //        if (!profile) {
+    //            set.status = 401
+    //            return 'Unauthorized'
+    //        }
+    //        return `Hello ${profile.username}`
+    //    })
     .get("/login/:code", async ({ jwt, setCookie, params, request }) => await login(jwt, setCookie, params, request))
     .get("/logout", ({ setCookie }) => logout(setCookie))
     .get("/is_logged_in", () => "Is Logged In Page")
@@ -54,10 +55,10 @@ const app = new Elysia()
         .get("/search/:query", (req) => searchUser(req))
         .get("/:id", (req) => getUser(req))
         .get("/:id/:mode", (req) => getUser(req))
-        .get("/:id/beatmaps", (req) => getUserBeatmaps(req))
-        .get("/:id/scores", (req) => getUserBeatmaps(req))
-        .get("/:id/scores/:mode", (req) => getUserScores(req))
-        .get("/:id/mostplayed", (req) => getUserMostPlayed(req))
+        .get("/:id/beatmaps", (req) => getUserBeatmaps(req), id_number)
+        .get("/:id/scores", (req) => getUserBeatmaps(req), id_number)
+        .get("/:id/scores/:mode", (req) => getUserScores(req), id_number)
+        .get("/:id/mostplayed", (req) => getUserMostPlayed(req), id_number)
     )
     .group("/rankings", (_) => _
         .get("/", (req) => getUserList(req))
@@ -65,12 +66,14 @@ const app = new Elysia()
     )
     .group("/beatmaps", (_) => _
         .get("/", () => "Beatmaps Page")
-        .get("/:id", (req) => getBeatmap(req))
-        .get("/:id/scores/:mode", (req) => getBeatmapScores(req))
+        .get("/:id", (req) => getBeatmap(req), id_number)
+        .get("/:id/scores/:mode", (req) => getBeatmapScores(req), id_number)
     )
     .get("medals", () => getMedals())
-    .onError(({ code }) => {
+    .onError(({ code, error }) => {
         switch (code) {
+            case 'VALIDATION':
+                return error.message;
             case 'NOT_FOUND':
                 return 'Route not found';
             case 'INTERNAL_SERVER_ERROR':
