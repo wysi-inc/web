@@ -1,5 +1,5 @@
 import { v2 } from "osu-api-extended";
-import { Mode, ModeRanks, Rank, User } from "../models/user";
+import { Mode, ModeRanks, Rank, Setup, User } from "../models/user";
 import { response as v2User } from "osu-api-extended/dist/types/v2_user_details";
 import { response as v2UserList } from "osu-api-extended/dist/types/v2_site_ranking_details";
 import mongoose from "mongoose";
@@ -15,15 +15,14 @@ export async function searchUser(req: any) {
     });
 }
 
-export async function getUserList(req: any) {
-    const { mode, type, page } = req.params;
-    const res: v2UserList = await v2.site.ranking.details(
-        mode, type, {
+export async function getUserList(req: any): Promise<v2UserList> {
+    const { mode, category, page } = req.params;
+    return await v2.site.ranking.details(
+        mode, category, {
             cursor: { page },
             filter: "all",
         } as any
     );
-    return res;
 }
 
 export async function getUser(req: any): Promise<UserResponse | null> {
@@ -106,6 +105,18 @@ export async function getUserMostPlayed(req: any) {
     const { id, limit, offset } = req.params;
     return await v2.user.beatmaps.most_played(id, { limit, offset });
 }
+
+export async function updateUserSetup(user_id: number, setup: Setup) {
+    try {
+        let user = await User.findOne({ user_id });
+        if (!user) return { ok: false };
+        user.setup = setup;
+        await user.save();
+    } catch (err) {
+        console.error(err);
+        return { ok: false };
+    }
+};
 
 function filter_ranks(olds: Rank[], news: Rank[]): Rank[] {
     return news.filter(new_rank => !olds.find(

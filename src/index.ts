@@ -4,11 +4,10 @@ import { cookie } from '@elysiajs/cookie'
 import { jwt } from '@elysiajs/jwt'
 import * as mongoose from 'mongoose';
 import { auth } from "osu-api-extended";
-import { getUser, getUserBeatmaps, getUserList, getUserMostPlayed, getUserScores, searchUser } from "./controllers/users";
+import { getUser, getUserBeatmaps, getUserList, getUserMostPlayed, getUserScores, searchUser, updateUserSetup } from "./controllers/users";
 import { getMedals, updateMedals } from "./controllers/medals";
 import { getBeatmap, getBeatmapScores } from "./controllers/beatmaps";
 import { login, logout } from "./controllers/web";
-import { id_number } from "./validations/validations";
 
 const mongo_uri: string = process.env.MONGO_URI as any;
 const osu_id: number = process.env.OSU_ID as any;
@@ -27,7 +26,6 @@ function connect(): void {
     updateMedals();
 }
 
-
 connect();
 setInterval(() => connect(), 1000 * 60 * 60 * 23);
 
@@ -40,34 +38,49 @@ const app = new Elysia()
     }))
     .use(cookie())
     .get("/", () => "Bon dia i bon' hora!")
-    //    .get('/profile', async ({ jwt, set, cookie: { auth } }) => {
-    //        const profile = await jwt.verify(auth)
-    //        if (!profile) {
-    //            set.status = 401
-    //            return 'Unauthorized'
-    //        }
-    //        return `Hello ${profile.username}`
-    //    })
+    .get('/profile', async ({ jwt, set, cookie: { auth } }) => {
+        const profile = await jwt.verify(auth);
+        if (!profile) {
+            set.status = 401;
+            return 'Unauthorized';
+        }
+        return `Hello ${profile.username}`;
+    })
     .get("/login/:code", async ({ jwt, setCookie, params, request }) => await login(jwt, setCookie, params, request))
     .get("/logout", ({ setCookie }) => logout(setCookie))
-    .get("/is_logged_in", () => "Is Logged In Page")
+    .get("/is_logged_in", async ({ jwt, set, cookie: { auth } }) => {
+        const profile = await jwt.verify(auth);
+        if (!profile) {
+            set.status = 401;
+            return 'Unauthorized';
+        }
+        return getUser({ params: { id: profile.id } });
+    })
     .group("/users", (_) => _
-        .get("/search/:query", (req) => searchUser(req))
         .get("/:id", (req) => getUser(req))
         .get("/:id/:mode", (req) => getUser(req))
-        .get("/:id/beatmaps", (req) => getUserBeatmaps(req), id_number)
-        .get("/:id/scores", (req) => getUserBeatmaps(req), id_number)
-        .get("/:id/scores/:mode", (req) => getUserScores(req), id_number)
-        .get("/:id/mostplayed", (req) => getUserMostPlayed(req), id_number)
+        .get("/:id/beatmaps", (req) => getUserBeatmaps(req))
+        .get("/:id/scores", (req) => getUserBeatmaps(req))
+        .get("/:id/scores/:mode", (req) => getUserScores(req))
+        .get("/:id/mostplayed", (req) => getUserMostPlayed(req))
+        .post("/setup", async ({ jwt, set, cookie: { auth }, request }) => {
+            if (!request.body) return;
+            if (!request.body["setup"]) return;
+            const profile = await jwt.verify(auth);
+            if (!profile) {
+                set.status = 401;
+                return 'Unauthorized';
+            }
+            return await updateUserSetup(profile.id as any, request.body["setup"]);
+        })
     )
     .group("/rankings", (_) => _
-        .get("/", (req) => getUserList(req))
-        .get("/:mode/:category", () => "Rankings Page")
+        .get("/search/:query", (req) => searchUser(req))
+        .get("/list/:mode/:category/:page", (req) => getUserList(req))
     )
     .group("/beatmaps", (_) => _
-        .get("/", () => "Beatmaps Page")
-        .get("/:id", (req) => getBeatmap(req), id_number)
-        .get("/:id/scores/:mode", (req) => getBeatmapScores(req), id_number)
+        .get("/:id", (req) => getBeatmap(req))
+        .get("/:id/scores/:mode", (req) => getBeatmapScores(req))
     )
     .get("medals", () => getMedals())
     .onError(({ code, error }) => {

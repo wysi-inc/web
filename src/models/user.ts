@@ -95,7 +95,7 @@ const userSchema = new mongoose.Schema({
     setup: setup,
 });
 
-userSchema.methods.toJSON = function () {
+userSchema.methods.toJSON = function() {
     const { __v, _id, ...user } = this.toObject();
     return user;
 };
@@ -106,4 +106,3 @@ export type Mode = "osu" | "taiko" | "fruits" | "mania";
 export type Setup = mongoose.InferSchemaType<typeof setup>;
 export type User = mongoose.InferSchemaType<typeof userSchema>;
 export const User = mongoose.model('User', userSchema);
-

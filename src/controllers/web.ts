@@ -3,7 +3,6 @@ export async function login(jwt, setCookie, params, request) {
     const user = await getOwnData(await validateCode(code));
     if (user.authentication) return "Unauthorized";
     const jwtUser = {
-        ip: request.ip,
         id: user.id,
         username: user.username,
         avatar: user.avatar_url,
@@ -21,20 +20,20 @@ export function logout(setCookie) {
 }
 
 async function getOwnData(token: string) {
-  return await (
-    await fetch("https://osu.ppy.sh/api/v2/me/osu", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-  ).json();
+    return await (
+        await fetch("https://osu.ppy.sh/api/v2/me/osu", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        })
+    ).json();
 }
 
 async function validateCode(code: string) {
-    return (await(await fetch("https://osu.ppy.sh/oauth/token", {
+    return (await (await fetch("https://osu.ppy.sh/oauth/token", {
         method: "POST", headers: {
             Accept: "application/json",
             "Content-Type": "application/x-www-form-urlencoded",
