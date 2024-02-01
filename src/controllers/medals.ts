@@ -1,7 +1,9 @@
 import { Medal } from "../models/medal";
 
-export function getMedals(): Promise<Medal[]> {
-    return Medal.find();
+export function getMedals(): Promise<any> {
+    const medalas = Medal.find();
+    // return an object containing a key for each medal category and an array of medals for each category
+    return Object.groupBy(medalas, ({ category }) => category);
 }
 
 export async function updateMedals(): Promise<void> {
