@@ -6,6 +6,9 @@
     "@types/bun": "latest",
     "typed-html": "^3.0.1"
   },
+  "scripts": {
+    "dev": "bun run index.tsx --watch"
+  },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },

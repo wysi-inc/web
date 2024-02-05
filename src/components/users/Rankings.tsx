@@ -40,39 +40,43 @@ const Rankings = async (props: Props) => {
             {category}
         </button>;
 
+    const tabs = () => (
+        <div class="flex justify-between">
+            <div class="tabs tabs-boxed bg-base-300" role="tablist">
+                {modeTab("osu")}
+                {modeTab("taiko")}
+                {modeTab("fruits")}
+                {modeTab("mania")}
+            </div>
+            <div class="flex flex-row gap-2">
+                {props.page > 3 &&
+                    <div class="tabs tabs-boxed bg-base-300" role="tablist">
+                        {pageTab(1)}
+                    </div>
+                }
+                <div class="tabs tabs-boxed bg-base-300" role="tablist">
+                    {pageTab(props.page - 2)}
+                    {pageTab(props.page - 1)}
+                    {pageTab(props.page)}
+                    {pageTab(props.page + 1)}
+                    {pageTab(props.page + 2)}
+                </div>
+                {props.page < 198 &&
+                    <div class="tabs tabs-boxed bg-base-300" role="tablist">
+                        {pageTab(200)}
+                    </div>
+                }
+            </div>
+            <div class="tabs tabs-boxed bg-base-300" role="flex justify-center tablist">
+                {categoryTab("performance")}
+                {categoryTab("score")}
+            </div>
+        </div>
+    );
+
     return (
         <div class="flex flex-col gap-4">
-            <div class="flex justify-between">
-                <div class="tabs tabs-boxed bg-base-300" role="tablist">
-                    {modeTab("osu")}
-                    {modeTab("taiko")}
-                    {modeTab("fruits")}
-                    {modeTab("mania")}
-                </div>
-                <div class="flex flex-row gap-2">
-                    {props.page > 3 &&
-                        <div class="tabs tabs-boxed bg-base-300" role="tablist">
-                            {pageTab(1)}
-                        </div>
-                    }
-                    <div class="tabs tabs-boxed bg-base-300" role="tablist">
-                        {pageTab(props.page - 2)}
-                        {pageTab(props.page - 1)}
-                        {pageTab(props.page)}
-                        {pageTab(props.page + 1)}
-                        {pageTab(props.page + 2)}
-                    </div>
-                    {props.page < 198 &&
-                        <div class="tabs tabs-boxed bg-base-300" role="tablist">
-                            {pageTab(200)}
-                        </div>
-                    }
-                </div>
-                <div class="tabs tabs-boxed bg-base-300" role="flex justify-center tablist">
-                    {categoryTab("performance")}
-                    {categoryTab("score")}
-                </div>
-            </div>
+            {tabs()}
             <div class="overflow-x-auto">
                 <table class="table">
                     <thead>
@@ -96,7 +100,6 @@ const Rankings = async (props: Props) => {
                                         <img src={`https://flagcdn.com/h40/${row.user.country.code.toLowerCase()}.jpg`}
                                             style="width: 32px; height: 24px;" class="rounded-sm" />
                                         <a href={`/users/1/osu`} class="flex flex-row items-center gap-2">
-                                            <img class="rounded-md" src={row.user.avatar_url} height={24} width={24} />
                                             {row.user.username}
                                         </a>
                                     </div>
@@ -106,14 +109,17 @@ const Rankings = async (props: Props) => {
                                 <td class="hidden lg:table-cell">{Number(((row.play_time || 0) / 60 / 60).toFixed()).toLocaleString()}h</td>
                                 <td class="hidden lg:table-cell">{row.play_count.toLocaleString()}</td>
                                 <td class="hidden md:table-cell">{row.ranked_score.toLocaleString()}</td>
-                                <td class="flex justify-end table-cell">
-                                    <OnlineDot size={24} online={row.user.is_online} />
+                                <td class="table-cell">
+                                    <div class="flex justify-center">
+                                        <OnlineDot size={24} online={row.user.is_online} />
+                                    </div>
                                 </td>
                             </tr>
                         )}
                     </tbody>
                 </table>
             </div>
+            {tabs()}
         </div>
     );
 }

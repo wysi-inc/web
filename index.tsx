@@ -8,6 +8,7 @@ import Beatmaps from "./src/components/beatmaps/Beatmaps";
 import UserPage from "./src/components/users/UserPage";
 import type { Mode } from "./src/types/osu";
 import BaseHtml from "./src/components/BaseHtml";
+import SearchResults from "./src/components/web/SearchResults";
 
 // const mongo_uri: string = process.env.MONGO_URI as any;
 const osu_id: number = process.env.OSU_ID as any;
@@ -26,7 +27,9 @@ setInterval(() => connect(), 1000 * 60 * 60 * 23);
 const app: any = new Elysia()
     .use(staticPlugin())
     .use(html())
+    .onRequest(({ request }) => console.log(request.method, request.url))
     .get("/", ({ html }) => html(<Home />))
+    .get("/search", ({ html, query }) => html(<SearchResults query={query.q}/>))
     .get("/rankings", ({ html }) => html(
         <BaseHtml>
             <Rankings mode="osu" page={1} category="performance" />
