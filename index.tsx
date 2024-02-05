@@ -10,6 +10,8 @@ import type { Mode } from "./src/types/osu";
 import BaseHtml from "./src/components/BaseHtml";
 import SearchResults from "./src/components/web/SearchResults";
 
+const port: number = process.env.PORT as any;
+
 // const mongo_uri: string = process.env.MONGO_URI as any;
 const osu_id: number = process.env.OSU_ID as any;
 const osu_secret: string = process.env.OSU_SECRET as any;
@@ -63,6 +65,6 @@ const app: any = new Elysia()
         <Beatmaps />
     ))
 
-app.listen(4000);
+app.listen(port);
 
 console.log("Server started at http://localhost:4000")
