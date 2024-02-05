@@ -1,15 +1,15 @@
-# Elysia with Bun runtime
+# wysi
 
-## Getting Started
-To get started with this template, simply paste this command into your terminal:
+To install dependencies:
+
 ```bash
-bun create elysia ./elysia-example
+bun install
 ```
 
-## Development
-To start the development server run:
+To run:
+
 ```bash
-bun run dev
+bun run index.ts
 ```
 
-Open http://localhost:3000/ with your browser to see the result.
+This project was created using `bun init` in bun v1.0.25. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.

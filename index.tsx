@@ -1,0 +1,65 @@
+import { Elysia } from "elysia";
+import { html } from "@elysiajs/html";
+import { staticPlugin } from '@elysiajs/static'
+import { auth } from "osu-api-extended";
+import Home from "./src/components/web/Home";
+import Rankings from "./src/components/users/Rankings";
+import Beatmaps from "./src/components/beatmaps/Beatmaps";
+import UserPage from "./src/components/users/UserPage";
+import type { Mode } from "./src/types/osu";
+import BaseHtml from "./src/components/BaseHtml";
+
+// const mongo_uri: string = process.env.MONGO_URI as any;
+const osu_id: number = process.env.OSU_ID as any;
+const osu_secret: string = process.env.OSU_SECRET as any;
+
+function connect(): void {
+    auth.login(osu_id, osu_secret, ["public"])
+        .then((res) => res?.expires_in ?
+            console.log("[ OK ] Connected to osu!API") :
+            console.log("[ EE ] Couldn't connect to osu!API\n", res)
+        ).catch((err) => console.log(err));
+}
+
+connect();
+setInterval(() => connect(), 1000 * 60 * 60 * 23);
+const app: any = new Elysia()
+    .use(staticPlugin())
+    .use(html())
+    .get("/", ({ html }) => html(<Home />))
+    .get("/rankings", ({ html }) => html(
+        <BaseHtml>
+            <Rankings mode="osu" page={1} category="performance" />
+        </BaseHtml>
+    ))
+    .post("/rankings", ({ html }) => html(
+        <Rankings mode="osu" page={1} category="performance" />
+    ))
+    .get("/rankings/:mode/:category/:page", ({ html, params }) => html(
+        <BaseHtml>
+            <Rankings mode={params.mode} category={params.category} page={Number(params.page)} />
+        </BaseHtml>
+    ))
+    .post("/rankings/:mode/:category/:page", ({ html, params }) => html(
+        <Rankings mode={params.mode} category={params.category} page={Number(params.page)} />
+    ))
+    .get("/users/:id/:mode", ({ html, params }) => html(
+        <BaseHtml>
+            <UserPage id={params.id} mode={params.mode as Mode} />
+        </BaseHtml>
+    ))
+    .post("/users/:id/:mode", ({ html, params }) => html(
+        <UserPage id={params.id} mode={params.mode as Mode} />
+    ))
+    .get("/beatmaps", ({ html }) => html(
+        <BaseHtml>
+            <Beatmaps />
+        </BaseHtml>
+    ))
+    .post("/beatmaps", ({ html }) => html(
+        <Beatmaps />
+    ))
+
+app.listen(4000);
+
+console.log("Server started at http://localhost:4000")
