@@ -9,6 +9,7 @@ import UserPage from "./src/components/users/UserPage";
 import type { Mode } from "./src/types/osu";
 import BaseHtml from "./src/components/BaseHtml";
 import SearchResults from "./src/components/web/SearchResults";
+import BeatmapsList from "./src/components/beatmaps/BeatmapsList";
 
 const port: number = process.env.PORT as any;
 
@@ -63,6 +64,9 @@ const app: any = new Elysia()
     ))
     .post("/beatmaps", ({ html }) => html(
         <Beatmaps />
+    ))
+    .post("/beatmaps/list", ({html, query}) => html(
+    <div></div>
     ))
 
 app.listen(port);

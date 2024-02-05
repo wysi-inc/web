@@ -6,9 +6,9 @@ const Beatmaps = () => {
                     <div class="flex flex-row items-center justify-between p-4 text-xl rounded-lg bg-custom-950">
                         <div>Beatmap Search:</div>
                         <div class="flex flex-row items-center gap-2">
-                            <div class="tooltip" data-tip="Clear">
-                                clear
-                            </div>
+                            <button hx-post="/beatmaps">
+                                Clear
+                            </button>
                             <div class="tooltip" data-tip="Copy">
                                 coppy
                             </div>
