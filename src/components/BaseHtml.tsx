@@ -6,6 +6,7 @@ const BaseHtml = ({ children }: any) => (
         <head>
             <title>wysi</title>
             <meta charset="UTF-8" />
+            <link rel="icon" href="/public/favicon.ico" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.1/dist/full.min.css" rel="stylesheet" type="text/css" />
             <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
@@ -16,7 +17,7 @@ const BaseHtml = ({ children }: any) => (
         <body class="bg-base-300">
             <Navbar />
             <div class="flex justify-center">
-                <main id="main" class="p-4 bg-base-200 shadow-lg" style="width: 1000px;">
+                <main id="main" class="p-4 bg-neutral shadow-lg" style="width: 1000px;">
                     {children}
                 </main>
             </div>

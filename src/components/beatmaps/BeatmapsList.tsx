@@ -18,6 +18,8 @@ const BeatmapsList = async (props: Props) => {
         </>);
     }
 
+    console.log(props.query);
+
     const title = props.query.title || "";
     let filters = [
         props.query.mapper ? `creator=${props.query.mapper}` : undefined,
@@ -27,8 +29,8 @@ const BeatmapsList = async (props: Props) => {
         props.query.stars_max ? `beatmaps.difficulty_rating<=${props.query.stars_max}` : undefined,
         props.query.length_min ? `beatmaps.total_length>=${props.query.length_min}` : undefined,
         props.query.length_max ? `beatmaps.total_length<=${props.query.length_max}` : undefined,
-        props.query.year_min ? `beatmaps.last_updated>=${new Date(props.query.year_min).getTime() / 1000}` : undefined,
-        props.query.year_max ? `beatmaps.last_updated<=${new Date(props.query.year_max).getTime() / 1000}` : undefined,
+        props.query.year_min ? `last_updated>=${new Date(props.query.year_min).getTime() / 1000}` : undefined,
+        props.query.year_max ? `last_updated<=${new Date(props.query.year_max).getTime() / 1000}` : undefined,
         props.query.ar_min ? `beatmaps.ar>=${props.query.ar_min}` : undefined,
         props.query.ar_max ? `beatmaps.ar<=${props.query.ar_max}` : undefined,
         props.query.cs_min ? `beatmaps.cs>=${props.query.cs_min}` : undefined,
@@ -40,6 +42,8 @@ const BeatmapsList = async (props: Props) => {
     ];
 
     filters = filters.filter((f) => f);
+
+    console.log(filters);
 
     let modes: Mode[] = (["osu", "taiko", "fruits", "mania"] as Mode[]).filter((mode) => props.query[`mode_${mode}`] === "on");
     const status = ["ranked", "approved", "qualified", "loved", "pending", "wip", "graveyard"].filter((status) => props.query[`status-${status}`] === "on");
@@ -66,6 +70,9 @@ const BeatmapsList = async (props: Props) => {
     const url = `https://catboy.best/api/v2/search?q=${title}[${filters.join(" AND ")}]&m=${mode_ids.join("&m=")}&status=${status.join("&status=")}&limit=${limit}&offset=${offset}`;
 
     const beatmaps: Beatmapset[] = await (await fetch(url)).json() as Beatmapset[];
+
+    console.log(beatmaps);
+
     return (<>
         {beatmaps.map((beatmapset) =>
             <BeatmapsetCard beatmapset={beatmapset} />
