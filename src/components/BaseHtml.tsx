@@ -22,7 +22,7 @@ const BaseHtml = ({ children }: any) => (
             </div>
             <Footer />
         </body>
-    </html >
+    </html>
 );
 
 export default BaseHtml;

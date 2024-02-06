@@ -10,6 +10,7 @@ import type { Mode } from "./src/types/osu";
 import BaseHtml from "./src/components/BaseHtml";
 import SearchResults from "./src/components/web/SearchResults";
 import BeatmapsList from "./src/components/beatmaps/BeatmapsList";
+import { which } from "bun";
 
 const port: number = process.env.PORT as any;
 
@@ -32,7 +33,7 @@ const app: any = new Elysia()
     .use(html())
     .onRequest(({ request }) => console.log(request.method, request.url))
     .get("/", ({ html }) => html(<Home />))
-    .get("/search", ({ html, query }) => html(<SearchResults query={query.q}/>))
+    .get("/search", ({ html, query }) => html(<SearchResults query={query.q} />))
     .get("/rankings", ({ html }) => html(
         <BaseHtml>
             <Rankings mode="osu" page={1} category="performance" />
@@ -65,10 +66,10 @@ const app: any = new Elysia()
     .post("/beatmaps", ({ html }) => html(
         <Beatmaps />
     ))
-    .post("/beatmaps/list", ({html, query}) => html(
-    <div></div>
+    .post("/beatmaps/list", ({ html, body }) => html(
+        <BeatmapsList title="" mode={[]} sort={[]} limit={0} filter={[]} offset={0} status={[]} />
     ))
 
 app.listen(port);
 
-console.log("Server started at http://localhost:4000")
+console.log(`Server started at http://localhost:${port}`)

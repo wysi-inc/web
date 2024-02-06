@@ -1,64 +1,66 @@
+import DoubleSlider from "./DoubleSlider";
+import Input from "./Input";
+
 const Beatmaps = () => {
-    return (
-        <div class="p-4">
-            <div class="rounded-lg bg-custom-950">
-                <div class="flex flex-col gap-4 p-4 rounded-lg drop-shadow-lg bg-custom-900">
-                    <div class="flex flex-row items-center justify-between p-4 text-xl rounded-lg bg-custom-950">
-                        <div>Beatmap Search:</div>
-                        <div class="flex flex-row items-center gap-2">
-                            <button hx-post="/beatmaps">
-                                Clear
-                            </button>
-                            <div class="tooltip" data-tip="Copy">
-                                coppy
-                            </div>
-                        </div>
+    return (<>
+        <div class="flex flex-col gap-4 p-4 rounded-lg drop-shadow-lg bg-custom-900">
+            <div class="flex flex-row items-center justify-between p-4 text-xl rounded-lg bg-custom-950">
+                <div>Beatmap Search:</div>
+                <div class="flex flex-row items-center gap-2">
+                    <button hx-post="/beatmaps">
+                        Clear
+                    </button>
+                    <div class="tooltip" data-tip="Copy">
+                        coppy
                     </div>
-                    <div class="grid grid-cols-4 gap-4 p-4 rounded-lg drop-shadow-lg bg-custom-950">
-                        <div class="col-span-4 md:col-span-2 lg:col-span-3">
-                            <div class="mb-2 text-center">Title:</div>
-                            title
-                        </div>
-                        <div class="col-span-4 md:col-span-2 lg:col-span-1">
-                            <div class="mb-2 text-center">Mapper:</div>
-                            mapper
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 gap-2 p-4 pb-6 rounded-lg md:grid-cols-2 bg-custom-950">
-                        <div class="flex flex-col gap-2">
-                            sliders
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            sliders
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-3 gap-3">
-                        <div class="flex flex-col col-span-3 gap-4 p-4 rounded-lg drop-shadow-lg md:col-span-1 bg-custom-950">
-                            <div>Mode:</div>
-                            <div class="flex flex-row flex-wrap gap-3" role="group">
-                                modes
-                            </div>
-                        </div>
-                        <div class="flex flex-col col-span-3 gap-4 p-4 rounded-lg drop-shadow-lg md:col-span-2 bg-custom-950">
-                            <div>Status:</div>
-                            <div class="flex flex-row flex-wrap items-center gap-3" role="group">
-                                status
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-4 p-4 rounded-lg drop-shadow-lg bg-custom-950">
-                        <div>Sort:</div>
-                        <div class="flex flex-row flex-wrap gap-3">
-                            sort
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 gap-4 p-4 rounded-lg lg:grid-cols-2 bg-custom-950">
-                    list
                 </div>
             </div>
+            <form class="flex flex-col gap-4" hx-post="/beatmaps/list"
+                hx-target="#beatmaps-results">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <Input name="Title" placeholder="Beatmap Title or Artist" />
+                    <Input name="Mapper" placeholder="Beatmap Mapper" />
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <DoubleSlider name="Stars" min={0} max={10} step={0.5} />
+                    <DoubleSlider name="BPM" min={0} max={300} step={5} />
+                    <DoubleSlider name="Length" min={0} max={600} step={30} />
+                    <DoubleSlider name="Year" min={2007} max={new Date().getFullYear()} step={30} />
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="label">
+                            <span class="label-text">Modes</span>
+                        </div>
+                        <div class="flex flex-row flex-wrap gap-2">
+                            <input class="btn" type="checkbox" name="mode-osu" aria-label="osu" />
+                            <input class="btn" type="checkbox" name="mode-taiko" aria-label="taiko" />
+                            <input class="btn" type="checkbox" name="mode-fruits" aria-label="fruits" />
+                            <input class="btn" type="checkbox" name="mode-mania" aria-label="mania" />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="label">
+                            <span class="label-text">Status</span>
+                        </div>
+                        <div class="flex flex-row flex-wrap gap-2">
+                            <input class="btn" type="checkbox" name="mode-ranked" aria-label="ranked" />
+                            <input class="btn" type="checkbox" name="mode-approved" aria-label="approved" />
+                            <input class="btn" type="checkbox" name="mode-qualified" aria-label="qualified" />
+                            <input class="btn" type="checkbox" name="mode-loved" aria-label="loved" />
+                            <input class="btn" type="checkbox" name="mode-pending" aria-label="pending" />
+                            <input class="btn" type="checkbox" name="mode-wip" aria-label="wip" />
+                            <input class="btn" type="checkbox" name="mode-graveyard" aria-label="graveyard" />
+                        </div>
+                    </div>
+                </div>
+                <button type="submit">Search</button>
+            </form>
         </div>
-    )
+        <div id="beatmaps-results">
+            list
+        </div>
+    </>)
 }
 
 export default Beatmaps;
