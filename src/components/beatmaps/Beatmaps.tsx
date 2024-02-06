@@ -44,13 +44,13 @@ const Beatmaps = () => {
                             <span class="label-text">Status</span>
                         </div>
                         <div class="flex flex-row flex-wrap gap-2">
-                            <input class="btn" type="checkbox" name="mode-ranked" aria-label="ranked" />
-                            <input class="btn" type="checkbox" name="mode-approved" aria-label="approved" />
-                            <input class="btn" type="checkbox" name="mode-qualified" aria-label="qualified" />
-                            <input class="btn" type="checkbox" name="mode-loved" aria-label="loved" />
-                            <input class="btn" type="checkbox" name="mode-pending" aria-label="pending" />
-                            <input class="btn" type="checkbox" name="mode-wip" aria-label="wip" />
-                            <input class="btn" type="checkbox" name="mode-graveyard" aria-label="graveyard" />
+                            <input class="btn" type="checkbox" name="status-ranked" aria-label="ranked" />
+                            <input class="btn" type="checkbox" name="status-approved" aria-label="approved" />
+                            <input class="btn" type="checkbox" name="status-qualified" aria-label="qualified" />
+                            <input class="btn" type="checkbox" name="status-loved" aria-label="loved" />
+                            <input class="btn" type="checkbox" name="status-pending" aria-label="pending" />
+                            <input class="btn" type="checkbox" name="status-wip" aria-label="wip" />
+                            <input class="btn" type="checkbox" name="status-graveyard" aria-label="graveyard" />
                         </div>
                     </div>
                 </div>

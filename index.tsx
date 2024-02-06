@@ -10,10 +10,8 @@ import type { Mode } from "./src/types/osu";
 import BaseHtml from "./src/components/BaseHtml";
 import SearchResults from "./src/components/web/SearchResults";
 import BeatmapsList from "./src/components/beatmaps/BeatmapsList";
-import { which } from "bun";
 
 const port: number = process.env.PORT as any;
-
 // const mongo_uri: string = process.env.MONGO_URI as any;
 const osu_id: number = process.env.OSU_ID as any;
 const osu_secret: string = process.env.OSU_SECRET as any;
@@ -28,6 +26,7 @@ function connect(): void {
 
 connect();
 setInterval(() => connect(), 1000 * 60 * 60 * 23);
+
 const app: any = new Elysia()
     .use(staticPlugin())
     .use(html())
@@ -67,7 +66,7 @@ const app: any = new Elysia()
         <Beatmaps />
     ))
     .post("/beatmaps/list", ({ html, body }) => html(
-        <BeatmapsList title="" mode={[]} sort={[]} limit={0} filter={[]} offset={0} status={[]} />
+        <BeatmapsList query={body} />
     ))
 
 app.listen(port);
