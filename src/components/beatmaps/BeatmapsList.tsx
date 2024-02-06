@@ -8,6 +8,16 @@ type Props = {
 
 const BeatmapsList = async (props: Props) => {
 
+    if (!props.query) {
+        const url = `https://catboy.best/api/v2/search?limit=50&offset=0`;
+        const beatmaps: Beatmapset[] = await (await fetch(url)).json() as Beatmapset[];
+        return (<>
+            {beatmaps.map((beatmapset) =>
+                <BeatmapsetCard beatmapset={beatmapset} />
+            )}
+        </>);
+    }
+
     const title = props.query.title || "";
     let filters = [
         props.query.mapper ? `creator=${props.query.mapper}` : undefined,

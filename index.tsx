@@ -31,7 +31,8 @@ const app: any = new Elysia()
     .use(staticPlugin())
     .use(html())
     .onRequest(({ request }) => console.log(request.method, request.url))
-    .get("/", ({ html }) => html(<Home />))
+    .get("/", ({ html }) => html(<BaseHtml><Home /></BaseHtml>))
+    .post("/", ({ html }) => html(<Home />))
     .get("/search", ({ html, query }) => html(<SearchResults query={query.q} />))
     .get("/rankings", ({ html }) => html(
         <BaseHtml>
@@ -57,13 +58,13 @@ const app: any = new Elysia()
     .post("/users/:id/:mode", ({ html, params }) => html(
         <UserPage id={params.id} mode={params.mode as Mode} />
     ))
-    .get("/beatmaps", ({ html }) => html(
+    .get("/beatmaps", ({ html, body }) => html(
         <BaseHtml>
-            <Beatmaps />
+            <Beatmaps query={body} />
         </BaseHtml>
     ))
     .post("/beatmaps", ({ html }) => html(
-        <Beatmaps />
+        <Beatmaps query={undefined} />
     ))
     .post("/beatmaps/list", ({ html, body }) => html(
         <BeatmapsList query={body} />
