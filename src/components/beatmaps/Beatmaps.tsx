@@ -17,10 +17,10 @@ const Beatmaps = (props: Props) => {
                 <Input name="Mapper" placeholder="Beatmap Mapper" />
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <DoubleSlider name="Stars" min={0} max={10} step={0.5} />
-                <DoubleSlider name="BPM" min={0} max={300} step={5} />
-                <DoubleSlider name="Length" min={0} max={600} step={30} />
-                <DoubleSlider name="Year" min={2007} max={new Date().getFullYear()} step={1} />
+                <DoubleSlider name="Stars" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
+                <DoubleSlider name="BPM" min={0} max={300} step={5} min_label="0" max_label="∞" />
+                <DoubleSlider name="Length" min={0} max={600} step={30} min_label="0s" max_label="∞" />
+                <DoubleSlider name="Year" min={2007} max={new Date().getFullYear()} step={1} min_label="2007" max_label="now" />
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
