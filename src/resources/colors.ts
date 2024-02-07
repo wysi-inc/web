@@ -21,7 +21,7 @@ export const colors = {
         x20: '#bbbbbb',
         xMiss: '#f87454',
     },
-    ranks: {
+    grades: {
         xh: '#f0f0f0',
         x: '#faf56a',
         sh: '#f8f4f4',

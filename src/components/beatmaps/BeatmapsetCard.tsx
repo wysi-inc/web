@@ -16,7 +16,7 @@ const BeatmapsetCard = (props: Props) => {
         <div class="rounded-lg flex flex-row bg-base-100 shadow-lg">
             <div class="bg-base-300 flex flex-col grow rounded-lg shadow-lg">
                 <div class="rounded-lg overflow-hidden grow flex flex-col shadow-lg" style={`background-image: url(${coverImg}); background-size: cover;`}>
-                    <div class="flex gap-4 p-4 flex-row grow" style="backdrop-filter: blur(10px); background-color: rgba(0, 0, 0, 0.6);">
+                    <div class="flex gap-4 p-4 flex-row grow" style="backdrop-filter: blur(8px); background-color: rgba(0, 0, 0, 0.8);">
                         <img src={listImg} onerror="this.src='/public/img/fallback.png'" alt="cover" class="rounded-lg" style="heigth: 80px; width: 60px; object-fit: cover;" />
                         <div class="flex flex-col grow">
                             <div class="truncate w-72 text-lg">{beatmapset.title}</div>

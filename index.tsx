@@ -58,6 +58,14 @@ const app: any = new Elysia()
     .post("/users/:id/:mode", ({ html, params }) => html(
         <UserPage id={params.id} mode={params.mode as Mode} />
     ))
+    .get("/users/:id/", ({ html, params }) => html(
+        <BaseHtml>
+            <UserPage id={params.id} mode={undefined} />
+        </BaseHtml>
+    ))
+    .post("/users/:id/", ({ html, params }) => html(
+        <UserPage id={params.id} mode={undefined} />
+    ))
     .get("/beatmaps", ({ html, body }) => html(
         <BaseHtml>
             <Beatmaps query={body} />

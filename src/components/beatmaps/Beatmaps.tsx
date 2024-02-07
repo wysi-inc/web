@@ -8,7 +8,7 @@ type Props = {
 
 const Beatmaps = (props: Props) => {
     return (<>
-        <form class="flex flex-col gap-4 p-4 mb-4 rounded-lg drop-shadow-lg bg-base-100" onsubmit=""
+        <form class="flex flex-col gap-4 p-4 rounded-lg drop-shadow-lg bg-base-100" onsubmit=""
             hx-post="/beatmaps/list"
             hx-trigger="change delay:500ms"
             hx-target="#beatmaps-results">
