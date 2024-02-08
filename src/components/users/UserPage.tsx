@@ -27,7 +27,7 @@ const UserPage = async (props: Props) => {
                 <button role="tab" class="tab">Replays Watched</button>
             </div>
         </div>
-        <UserScoresPanel id={user.id} mode={user.rank_history.mode as Mode} category={defaultCategory} offset={0} limit={5} />
+        <UserScoresPanel id={user.id} mode={user.rank_history.mode as Mode} category={defaultCategory} />
     </>);
 }
 

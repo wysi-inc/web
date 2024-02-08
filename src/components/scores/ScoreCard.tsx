@@ -42,6 +42,17 @@ const ScoreCard = async (props: Props) => {
         }
     }
 
+    function getRankLetter(rank: string): string {
+        switch (rank.toUpperCase()) {
+            case "XH":
+                return "X";
+            case "SH":
+                return "S";
+            default:
+                return rank.toUpperCase();
+        }
+    }
+
     return (
         <div class="grow rounded-lg flex flex-row bg-base-100 shadow-lg">
             <div class="bg-neutral flex flex-col grow rounded-lg shadow-lg">
@@ -54,11 +65,10 @@ const ScoreCard = async (props: Props) => {
                                     width: "120px",
                                     objectFit: "cover"
                                 }} />
-                            <div class="flex flex-col p-4 gap-4 justify-between grow">
+                            <div class="flex flex-col p-4 gap-2 justify-between grow">
                                 <div class="flex flex-col gap-1">
-                                    <div class="truncate w-72 text-lg">{beatmapset.title}</div>
-                                    <div class="truncate w-72 text-sm">by {beatmapset.artist}</div>
-                                    <div class="truncate w-72 text-xs">mapped by {beatmapset.creator}</div>
+                                    <p class="text-lg">{beatmapset.title}<span class="text-sm" style={{ color: "#999999" }}> by {beatmapset.artist}</span></p>
+                                    <p class="text-md">[{beatmap.version}]<span class="text-sm" style={{ color: "#999999" }}> by {beatmapset.creator}</span></p>
                                 </div>
                                 <div class="flex flex-row gap-2 items-center">
                                     <div class="badge"
@@ -77,10 +87,18 @@ const ScoreCard = async (props: Props) => {
                         <div class="flex flex-col gap-2 p-4 justify-between col-span-2 rounded-lg"
                             style={{ backgroundColor: "rgba(255,255,255, 0.1)" }}>
                             <div class="flex flex-row justify-between gap-4">
-                                <div class="flex flex-col gap-1 text-sm">
-                                    <div>{score.total_score.toLocaleString()}</div>
-                                    <div>{acc}%</div>
-                                    <div>{score.max_combo.toLocaleString()}x</div>
+                                <div class="flex flex-col gap-1">
+                                    <div><i class="fa-solid fa-flag-checkered" /> {score.total_score.toLocaleString()}</div>
+                                    <div class="text-sm flex flex-row gap-4">
+                                        <div><i class="fa-solid fa-fire" /> {score.max_combo.toLocaleString()}x</div>
+                                        <div><i class="fa-solid fa-bullseye" /> {acc}%</div>
+                                    </div>
+                                    <div class="flex flex-row gap-2 text-sm">
+                                        <span style={{ color: colors.judgements.x300 }}>{score.statistics?.great || 0}</span>
+                                        <span style={{ color: colors.judgements.x100 }}>{score.statistics?.ok || 0}</span>
+                                        <span style={{ color: colors.judgements.x50 }}>{score.statistics?.meh || 0}</span>
+                                        <span style={{ color: colors.judgements.xMiss }}>{score.statistics?.miss || 0}</span>
+                                    </div>
                                 </div>
                                 <div class="flex flex-col gap-1 text-end justify-between">
                                     <div style={{
@@ -89,7 +107,7 @@ const ScoreCard = async (props: Props) => {
                                         marginBottom: "-14px",
                                         color: (colors.grades as any)[score.rank.toLowerCase()]
                                     }}>
-                                        {score.rank}
+                                        {getRankLetter(score.rank)}
                                     </div>
                                     <div class="flex flex-row gap-2">
                                         <span>{Math.round(Number(score.pp))}pp</span>
@@ -97,14 +115,16 @@ const ScoreCard = async (props: Props) => {
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex flex-row flex-wrap justify-between gap-2">
+                            <div class="flex flex-row flex-wrap justify-between gap-2 items-end">
                                 <div class="flex flex-row gap-1">
                                     {score.mods.map((mod) =>
-                                        <img src={`/public/img/mods/${mod.acronym.toLowerCase()}.png`}
-                                            style={{ height: "24px" }} alt={mod.acronym} />
+                                        <div class="tooltip" data-tip={mod.acronym}>
+                                            <img src={`/public/img/mods/${mod.acronym.toLowerCase()}.png`}
+                                                style={{ height: "20px" }} alt={mod.acronym} />
+                                        </div>
                                     )}
                                 </div>
-                                <div class="ms-auto">{moment(new Date(score.ended_at)).fromNow()}</div>
+                                <div class="ms-auto text-sm">{moment(new Date(score.ended_at)).fromNow()}</div>
                             </div>
                         </div>
                     </div>

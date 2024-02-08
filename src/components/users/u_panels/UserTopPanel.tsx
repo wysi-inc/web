@@ -26,9 +26,13 @@ const UserTopPanel = (props: Props) => {
                     }}>
                     <div class="flex flex-col justify-center">
                         <div class="flex flex-col gap-4 items-center justify-between">
-                            <img src={user.avatar_url} class="rounded-lg h-52 w-52" />
+                            <img src={user.avatar_url} class="rounded-lg aspect-square" />
                             <div>joined {moment(user.join_date).fromNow()}</div>
-                            <progress class="progress progress-accent" value={user.statistics.level.progress} max="100" />
+                            <div class="flex flex-row gap-2 items-center">
+                                <span>{user.statistics.level.current}</span>
+                                <progress class="progress progress-accent" value={user.statistics.level.progress} max="100" />
+                                <span>{user.statistics.level.current + 1}</span>
+                            </div>
                         </div>
                     </div>
                     <div class="flex flex-row justify-between grow">
@@ -76,19 +80,21 @@ const UserTopPanel = (props: Props) => {
                         <div class="flex flex-col gap-4 justify-between">
                             <div class="text-sm flex flex-row gap-4 justify-between">
                                 <div class="flex flex-col gap-2 text-start">
-                                    <h2 class="flex gap-3 items-center"><i class="fa-solid fa-angles-up" /><span>Ranked Score:</span></h2>
-                                    <h2 class="flex gap-3 items-center"><i class="fa-solid fa-arrow-rotate-left" /><span>Play Count:</span></h2>
-                                    <h2 class="flex gap-3 items-center"><i class="fa-regular fa-clock" /><span>Play Time:</span></h2>
-                                    <h2 class="flex gap-3 items-center"><i class="fa-solid fa-keyboard" /><span>Total Hits:</span></h2>
-                                    <h2 class="flex gap-3 items-center"><i class="fa-solid fa-fire" /><span>Max Combo:</span></h2>
-                                    <h2 class="flex gap-3 items-center"><i class="fa-solid fa-eye" /><span>Replays Watched:</span></h2>
+                                    <h2 class="flex gap-3 items-center"><i class="fa-solid fa-angles-up w-4 text-center" /><span>Ranked Score:</span></h2>
+                                    <h2 class="flex gap-3 items-center"><i class="fa-solid fa-arrow-rotate-left w-4 text-center" /><span>Play Count:</span></h2>
+                                    <h2 class="flex gap-3 items-center"><i class="fa-regular fa-clock w-4 text-center" /><span>Play Time:</span></h2>
+                                    <h2 class="flex gap-3 items-center"><i class="fa-solid fa-fire w-4 text-center" /><span>Max Combo:</span></h2>
+                                    <h2 class="flex gap-3 items-center"><i class="fa-solid fa-keyboard w-4 text-center" /><span>Total Hits:</span></h2>
+                                    <h2 class="flex gap-3 items-center"><i class="fa-solid fa-calculator w-4 text-center" /><span>Hits x Play:</span></h2>
+                                    <h2 class="flex gap-3 items-center"><i class="fa-solid fa-eye w-4 text-center" /><span>Replays Watched:</span></h2>
                                 </div>
                                 <div class="flex flex-col gap-2 text-end">
                                     <h2>{user.statistics.ranked_score.toLocaleString()}</h2>
                                     <h2>{user.statistics.play_count.toLocaleString()}</h2>
                                     <h2>{Math.floor(user.statistics.play_time / 60 / 60).toLocaleString()}h</h2>
-                                    <h2>{user.statistics.total_hits.toLocaleString()}</h2>
                                     <h2>{user.statistics.maximum_combo.toLocaleString()}x</h2>
+                                    <h2>{user.statistics.total_hits.toLocaleString()}</h2>
+                                    <h2>{Math.round(user.statistics.total_hits / user.statistics.play_count).toLocaleString()}</h2>
                                     <h2>{user.statistics.replays_watched_by_others.toLocaleString()}</h2>
                                 </div>
                             </div>

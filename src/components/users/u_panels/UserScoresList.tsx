@@ -24,12 +24,16 @@ const UserScoresList = async (props: Props) => {
             <ScoreCard position={i + props.offset + 1} score={score} />
         )}
         {scores.length < props.limit ? null :
-            <button class="btn btn-success btn-sm flex flex-row gap-2 mx-auto" hx-swap="outerHTML"
-                hx-post={`/users/${props.id}/${props.mode}/scores/${props.category}/list?offset=${props.offset + props.limit}`}>
-                <i class="fa-solid fa-angle-down" />
-                <div>Load more</div>
-                <i class="fa-solid fa-angle-down" />
-            </button>
+            <div id="load-more-button" class="flex flex-col items-center gap-2">
+                <button class="btn btn-success btn-sm flex flex-row gap-2" hx-target="#load-more-button" hx-swap="outerHTML"
+                    hx-post={`/users/${props.id}/${props.mode}/scores/${props.category}/list?offset=${props.offset + props.limit}`}
+                    hx-indicator="#scores-loading" >
+                    <i class="fa-solid fa-angle-down" />
+                    <div>Load more</div>
+                    <i class="fa-solid fa-angle-down" />
+                </button>
+                <span id="scores-loading" class="htmx-indicator loading loading-spinner loading-md" />
+            </div>
         }
     </>)
 }

@@ -11,7 +11,7 @@ import BaseHtml from "./src/components/BaseHtml";
 import SearchResults from "./src/components/web/SearchResults";
 import BeatmapsList from "./src/components/beatmaps/BeatmapsList";
 import UserScoresPanel from "./src/components/users/u_panels/UserScoresPanel";
-import type { UserScores } from "./src/types/users";
+import type { ScoreCategory } from "./src/types/users";
 import UserScoresList from "./src/components/users/u_panels/UserScoresList";
 
 const port: number = process.env.PORT as any;
@@ -73,12 +73,12 @@ const app: any = new Elysia()
             <UserPage id={params.id} mode={undefined} />
         ))
         .post("/:id/:mode/scores/:category", ({ html, params, query }) => html(
-            <UserScoresPanel id={Number(params.id)} mode={params.mode as Mode} category={params.category as UserScores} />
+            <UserScoresPanel id={Number(params.id)} mode={params.mode as Mode} category={params.category as ScoreCategory} />
         ))
         .post("/:id/:mode/scores/:category/list", ({ html, params, query }) => html(
             <UserScoresList id={Number(params.id)}
                 mode={params.mode as Mode}
-                category={params.category as UserScores}
+                category={params.category as ScoreCategory}
                 offset={Number(query.offset)}
                 limit={20}
             />

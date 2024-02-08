@@ -1,17 +1,17 @@
 import type { Mode } from "@/src/types/osu";
-import type { UserScores } from "@/src/types/users";
+import type { ScoreCategory } from "@/src/types/users";
 import UserScoresList from "./UserScoresList";
 
 type Props = {
     id: number;
     mode: Mode;
-    category: UserScores;
+    category: ScoreCategory;
 }
 
 const UserScoresPanel = (props: Props) => {
 
     // disable hx-post if the category is the current one
-    const ButtonTab = (p: { category: UserScores }) => {
+    const ButtonTab = (p: { category: ScoreCategory}) => {
         const current = p.category === props.category;
         return (
             <button role="tab" class={`capitalize tab ${current && 'tab-active'}`}
