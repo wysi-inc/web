@@ -9,12 +9,12 @@ const BaseHtml = ({ children }: any) => (
             <link rel="icon" href="/public/favicon.ico" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.1/dist/full.min.css" rel="stylesheet" type="text/css" />
-            <script src="https://kit.fontawesome.com/d5ab19acce.js" crossorigin="anonymous"></script>
             <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script src="https://cdn.tailwindcss.com"></script>
             <script src="/public/js/tailwind-config.js"></script>
             <link rel="stylesheet" href="/public/css/main.css" type="text/css" />
+            <script src="https://kit.fontawesome.com/d5ab19acce.js" crossorigin="anonymous"></script>
         </head>
         <body class="bg-base-300">
             <Navbar />

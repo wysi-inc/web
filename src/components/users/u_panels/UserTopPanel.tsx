@@ -76,7 +76,7 @@ const UserTopPanel = (props: Props) => {
                         <div class="flex flex-col gap-4 justify-between">
                             <div class="text-sm flex flex-row gap-4 justify-between">
                                 <div class="flex flex-col gap-2 text-start">
-                                    <h2 class="flex gap-3 items-center"><i class="fa-solid fa-chevron-up" /><span>Ranked Score:</span></h2>
+                                    <h2 class="flex gap-3 items-center"><i class="fa-solid fa-angles-up" /><span>Ranked Score:</span></h2>
                                     <h2 class="flex gap-3 items-center"><i class="fa-solid fa-arrow-rotate-left" /><span>Play Count:</span></h2>
                                     <h2 class="flex gap-3 items-center"><i class="fa-regular fa-clock" /><span>Play Time:</span></h2>
                                     <h2 class="flex gap-3 items-center"><i class="fa-solid fa-keyboard" /><span>Total Hits:</span></h2>

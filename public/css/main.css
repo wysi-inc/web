@@ -3,9 +3,7 @@
     src: url("/public/css/fonts/GeistMonoNerdFont-SemiBold.otf") format("opentype");
 }
 
-*,
-*:before,
-*:after {
+* :not(i) {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
