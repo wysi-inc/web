@@ -3,6 +3,9 @@ import type { Mode } from "@/src/types/osu";
 import type { User } from "@/src/types/users";
 import UserTopPanel from "./u_panels/UserTopPanel";
 import UserScoresPanel from "./u_panels/UserScoresPanel";
+import UserMedalsPanel from "./u_panels/UserMedalsPanel";
+import UserHistoryPanel from "./u_panels/UserHistoryPanel";
+import UserBeatmapsPanel from "./u_panels/UserBeatmapsPanel";
 
 type Props = {
     id: string;
@@ -19,15 +22,10 @@ const UserPage = async (props: Props) => {
 
     return (<>
         <UserTopPanel user={user} />
-        <div class="rounded-lg bg-base-200 p-4">
-            <div role="tablist" class="tabs tabs-boxed bg-base-300">
-                <button role="tab" class="tab tab-active">Global Rank</button>
-                <button role="tab" class="tab">Country Rank</button>
-                <button role="tab" class="tab">Play Count</button>
-                <button role="tab" class="tab">Replays Watched</button>
-            </div>
-        </div>
+        <UserHistoryPanel user_id={user.id} username={user.username} mode={props.mode as Mode} />
         <UserScoresPanel id={user.id} mode={user.rank_history.mode as Mode} category={defaultCategory} />
+        <UserBeatmapsPanel id={user.id} category="favourite" />
+        <UserMedalsPanel user_medals={user.user_achievements} />
     </>);
 }
 

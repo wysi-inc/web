@@ -7,7 +7,7 @@ type Props = {
 }
 
 const Beatmaps = (props: Props) => {
-    return (<div class="rounded-lg bg-base-300">
+    return (<>
         <form class="flex flex-col gap-4 p-4 rounded-lg drop-shadow-lg bg-base-100" onsubmit=""
             hx-post="/beatmaps/list"
             hx-trigger="change delay:500ms"
@@ -51,10 +51,10 @@ const Beatmaps = (props: Props) => {
             </div>
         </form>
         <script src="/public/js/sliders.js"></script>
-        <div id="beatmaps-results" class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+        <div id="beatmaps-results" class="bg-base-100 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg">
             <BeatmapsList query={props.query} />
         </div>
-    </div>)
+    </>);
 }
 
 export default Beatmaps;

@@ -1,6 +1,6 @@
 import type { Mode } from "@/src/types/osu";
-import type { ScoreCategory } from "@/src/types/users";
-import UserScoresList from "./UserScoresList";
+import type { ScoreCategory } from "@/src/types/osu";
+import UserScoresList from "./u_components/UserScoresList";
 
 type Props = {
     id: number;
@@ -10,28 +10,38 @@ type Props = {
 
 const UserScoresPanel = (props: Props) => {
 
-    // disable hx-post if the category is the current one
-    const ButtonTab = (p: { category: ScoreCategory}) => {
+    const ButtonTab = (p: { category: ScoreCategory, title: string }) => {
         const current = p.category === props.category;
-        return (
-            <button role="tab" class={`capitalize tab ${current && 'tab-active'}`}
-                hx-post={`/users/${props.id}/${props.mode}/scores/${p.category}`}
-                hx-target="#scores-panel" hx-disable={current} hx-swap="outerHTML">
-                {p.category}
-            </button>
+        return (<>
+            <input type="radio" name="score-tabs" role="tab" class="tab text-nowrap" aria-label={p.title} checked={current}
+                hx-trigger="click once"
+                hx-post={`/users/${props.id}/${props.mode}/scores/${p.category}/list?offset=0`}
+                hx-target={`#scores-list-${p.category}`} hx-disable={current} />
+
+            <div role="tabpanel" class="tab-content pt-4">
+                <div id={`scores-list-${p.category}`} class="grid grid-cols-1 gap-4">
+                    {current &&
+                        <UserScoresList id={props.id} mode={props.mode} category={props.category} offset={0} limit={5} />
+                    }
+                </div>
+            </div>
+        </>
         );
     }
 
     return (
-        <div class="rounded-lg bg-base-200 flex flex-col gap-4 p-4" id="scores-panel">
-            <div role="tablist" class="tabs tabs-boxed bg-base-300">
-                <ButtonTab category="pinned" />
-                <ButtonTab category="best" />
-                <ButtonTab category="firsts" />
-                <ButtonTab category="recent" />
+        <div class="rounded-lg bg-base-100 p-4 flex-flex-col gap-4" id="scores-panel">
+            <div class="flex flex-row items-center gap-2">
+                <i class="fa-solid fa-flag-checkered" />
+                <div>
+                    Scores
+                </div>
             </div>
-            <div class="flex flex-col gap-4">
-                <UserScoresList id={props.id} mode={props.mode} category={props.category} offset={0} limit={5} />
+            <div role="tablist" class="tabs tabs-bordered grow">
+                <ButtonTab category="pinned" title="Pinned Scores" />
+                <ButtonTab category="best" title="Best Performance" />
+                <ButtonTab category="firsts" title="First Place Ranks" />
+                <ButtonTab category="recent" title="Recent Plays" />
             </div>
         </div>
 

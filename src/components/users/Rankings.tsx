@@ -1,8 +1,8 @@
 import { v2 } from "osu-api-extended";
 import type { response as v2UserList } from "osu-api-extended/dist/types/v2_site_ranking_details";
 import type { Category, Mode } from "../../types/osu";
-import OnlineDot from "./OnlineDot";
-import Pagination from "./Pagination";
+import OnlineDot from "./u_panels/u_components/OnlineDot";
+import Pagination from "./u_panels/u_components/Pagination";
 
 type Props = {
     mode: string;

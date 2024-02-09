@@ -31,7 +31,7 @@ const Pagination = (props: Props) => {
 
     return (
         <div class="flex justify-between">
-            <div class="tabs tabs-boxed bg-base-200" role="tablist">
+            <div class="tabs tabs-boxed bg-base-300" role="tablist">
                 {ModeTab("osu")}
                 {ModeTab("taiko")}
                 {ModeTab("fruits")}

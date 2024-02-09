@@ -54,7 +54,7 @@ const ScoreCard = async (props: Props) => {
     }
 
     return (
-        <div class="grow rounded-lg flex flex-row bg-base-100 shadow-lg">
+        <div class="grow rounded-lg flex flex-row bg-base-300 shadow-lg">
             <div class="bg-neutral flex flex-col grow rounded-lg shadow-lg">
                 <div class="rounded-lg shadow-lg" style={`background-image: url(${coverImg}); background-size: cover;`}>
                     <div class="grid grid-cols-5 grow rounded-lg" style="backdrop-filter: blur(8px); background-color: rgba(0, 0, 0, 0.8);">

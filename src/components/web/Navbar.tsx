@@ -2,7 +2,7 @@ import Search from "./Search";
 
 const Navbar = () => {
     return (
-        <nav class="navbar bg-base-100 shadow-lg">
+        <nav class="navbar bg-base-100 shadow-lg sticky top-0 z-50">
             <div class="navbar-start">
                 <div class="dropdown">
                     <button tabindex="0" role="button" class="btn btn-ghost btn-circle flex items-center justify-center">

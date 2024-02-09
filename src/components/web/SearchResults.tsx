@@ -1,5 +1,5 @@
 import { v2 } from "osu-api-extended";
-import OnlineDot from "../users/OnlineDot";
+import OnlineDot from "../users/u_panels/u_components/OnlineDot";
 
 type Props = {
     query: string | undefined;

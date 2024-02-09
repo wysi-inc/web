@@ -6,25 +6,33 @@ import Home from "./src/components/web/Home";
 import Rankings from "./src/components/users/Rankings";
 import Beatmaps from "./src/components/beatmaps/Beatmaps";
 import UserPage from "./src/components/users/UserPage";
-import type { Mode } from "./src/types/osu";
+import type { BeatmapCategory, Mode } from "./src/types/osu";
 import BaseHtml from "./src/components/BaseHtml";
 import SearchResults from "./src/components/web/SearchResults";
 import BeatmapsList from "./src/components/beatmaps/BeatmapsList";
-import UserScoresPanel from "./src/components/users/u_panels/UserScoresPanel";
-import type { ScoreCategory } from "./src/types/users";
-import UserScoresList from "./src/components/users/u_panels/UserScoresList";
+import type { ScoreCategory } from "./src/types/osu";
+import UserScoresList from "./src/components/users/u_panels/u_components/UserScoresList";
+import mongoose from "mongoose";
+import { updateMedals } from "./src/resources/db-medal";
+import UserBeatmapsList from "./src/components/users/u_panels/u_components/UserBeatmapsList";
 
 const port: number = process.env.PORT as any;
-// const mongo_uri: string = process.env.MONGO_URI as any;
+const mongo_uri: string = process.env.MONGO_URI as any;
 const osu_id: number = process.env.OSU_ID as any;
 const osu_secret: string = process.env.OSU_SECRET as any;
 
 function connect(): void {
+    mongoose.connect(mongo_uri)
+        .then(() => console.log("[ OK ] Connected to MongoDB"))
+        .catch((err) => console.log("[ EE ] Couldn't connect to MongoDB\n", err));
+
     auth.login(osu_id, osu_secret, ["public"])
         .then((res) => res?.expires_in ?
             console.log("[ OK ] Connected to osu!API") :
             console.log("[ EE ] Couldn't connect to osu!API\n", res)
         ).catch((err) => console.log(err));
+
+    updateMedals();
 }
 
 connect();
@@ -72,15 +80,19 @@ const app: any = new Elysia()
         .post("/:id/", ({ html, params }) => html(
             <UserPage id={params.id} mode={undefined} />
         ))
-        .post("/:id/:mode/scores/:category", ({ html, params, query }) => html(
-            <UserScoresPanel id={Number(params.id)} mode={params.mode as Mode} category={params.category as ScoreCategory} />
-        ))
         .post("/:id/:mode/scores/:category/list", ({ html, params, query }) => html(
             <UserScoresList id={Number(params.id)}
                 mode={params.mode as Mode}
                 category={params.category as ScoreCategory}
                 offset={Number(query.offset)}
                 limit={20}
+            />
+        ))
+        .post("/:id/:mode/beatmaps/:category/list", ({ html, params, query }) => html(
+            <UserBeatmapsList id={Number(params.id)}
+                category={params.category as BeatmapCategory}
+                offset={Number(query.offset)}
+                limit={10}
             />
         ))
     )
