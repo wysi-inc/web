@@ -1,13 +1,18 @@
-import type { Beatmap, Beatmapset } from "@/src/types/beatmaps";
-import DiffIcon from "./DiffIcon";
+import DiffIcon from "@/src/components/beatmaps/DiffIcon";
 import { colors } from "@/src/resources/colors";
+import type { Beatmap, Beatmapset } from "@/src/types/beatmaps";
 
 type Props = {
-    beatmapset: Beatmapset,
+    position: number;
+    plays: number;
+    beatmap: Beatmap;
+    beatmapset: Beatmapset;
 }
-const BeatmapsetCard = (props: Props) => {
+
+const MostCard = (props: Props) => {
 
     const beatmapset = props.beatmapset;
+    const beatmap = props.beatmap;
 
     const listImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/list.jpg?${beatmapset.id}`;
     const coverImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/cover@2x.jpg?${beatmapset.id}`;
@@ -30,21 +35,25 @@ const BeatmapsetCard = (props: Props) => {
                         </div>
                     </div>
                 </div>
-                <div class="p-2 flex flex-row gap-2">
-                    <div class="badge" style={`color: #000; background-color: ${colors.beatmap[beatmapset.status]}`}>{beatmapset.status}</div>
-                    {beatmapset.beatmaps.sort((a, b) =>
-                        a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int)
-                        .map((beatmap: Beatmap, i: number) => i < 9 &&
-                            <DiffIcon setId={beatmapset.id} diffId={beatmap.id}
-                                diff={beatmap.difficulty_rating} size={20}
-                                mode={beatmap.mode} name={beatmap.version} />)
-                    }
-                    {beatmapset.beatmaps.length > 9 &&
-                        <div class="badge badge-info">+{beatmapset.beatmaps.length - 9}</div>
-                    }
+                <div class="p-2 flex flex-row justify-between gap-2">
+                    <div class="flex flex-row gap-2">
+                        <div class="badge" style={`color: #000; background-color: ${colors.beatmap[beatmapset.status]}`}>
+                            {beatmapset.status}
+                        </div>
+                        <DiffIcon setId={beatmapset.id} diffId={beatmap.id}
+                            diff={beatmap.difficulty_rating} size={20}
+                            mode={beatmap.mode} name={beatmap.version} />
+                    </div>
+                    <div class="flex flex-row items-center gap-2">
+                        <i class="fa-solid fa-arrow-rotate-left" />
+                        <div>
+                            {props.plays}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="flex flex-col items-center justify-around p-2 gap-2">
+                <div>#{props.position}</div>
                 <a><i class="fa-solid fa-play fa-sm" /></a>
                 <a><i class="fa-solid fa-file-arrow-down fa-sm" /></a>
                 <a><i class="fa-solid fa-download fa-sm" /></a>
@@ -53,4 +62,4 @@ const BeatmapsetCard = (props: Props) => {
     )
 }
 
-export default BeatmapsetCard;
+export default MostCard;

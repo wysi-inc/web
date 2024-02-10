@@ -3,6 +3,7 @@ import DiffIcon from "../beatmaps/DiffIcon";
 import { colors } from "@/src/resources/colors";
 import { secondsToTime } from "@/src/resources/functions";
 import moment from "moment";
+import { tools } from "osu-api-extended";
 
 type Props = {
     position: number;
@@ -19,11 +20,19 @@ const ScoreCard = async (props: Props) => {
     const coverImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/cover@2x.jpg?${beatmapset.id}`;
 
     const acc = (score.accuracy * 100).toFixed(2);
+    const fc_acc = tools.accuracy({
+        "300": score.statistics.great + (score.statistics.miss || 0).toString() || "0",
+        "100": score.statistics.ok?.toString() || "0",
+        "50": score.statistics.meh?.toString() || "0",
+        "0": "0",
+        "geki": "0",
+        "katu": "0"
+    }, 'osu');
 
     let stats: any = {};
 
     if (score.mods.length > 0 || score.legacy_perfect === false) {
-        const url = `https://catboy.best/api/meta/${beatmap.id}?misses=0&acc=${acc}&mods=${score.mods_id}`;
+        const url = `https://catboy.best/api/meta/${beatmap.id}?misses=0&acc=${fc_acc}&mods=${score.mods_id}`;
         const res = await (await fetch(url)).json();
         stats.sr = res.difficulty.stars.toFixed(2);
         stats.bpm = res.map.bpm.toFixed(0);
@@ -31,7 +40,7 @@ const ScoreCard = async (props: Props) => {
         stats.cs = res.map.cs.toFixed(1);
         stats.od = res.map.od.toFixed(1);
         stats.hp = res.map.hp.toFixed(1);
-        stats.pp = Math.round(res?.pp[Number(acc)]?.pp);
+        stats.pp = Math.round(res?.pp[Number(fc_acc)]?.pp);
         if (stats.pp <= Number(score.pp) + 10) {
             stats.pp = null;
         }
@@ -153,9 +162,9 @@ const ScoreCard = async (props: Props) => {
             </div>
             <div class="flex flex-col items-center justify-around p-2 gap-2">
                 <div>#{props.position}</div>
-                <i class="fa-solid fa-play" />
-                <i class="fa-solid fa-file-arrow-down" />
-                <i class="fa-solid fa-download" />
+                <a><i class="fa-solid fa-play fa-sm" /></a>
+                <a><i class="fa-solid fa-file-arrow-down fa-sm" /></a>
+                <a><i class="fa-solid fa-download fa-sm" /></a>
             </div>
         </div>
     );

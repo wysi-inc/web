@@ -1,8 +1,14 @@
-type Props = {
-    user_id: number;
-    username: string;
+import type { RankHistory } from "@/src/types/users";
 
-    mode: string;
+type MonthRank = {
+    count: number;
+    start_date: string;
+}
+
+type Props = {
+    db_ranks: RankHistory
+    play_counts: MonthRank[]
+    replays_watched: MonthRank[]
 }
 
 const UserHistoryPanel = (props: Props) => {

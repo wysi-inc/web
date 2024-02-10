@@ -2,56 +2,147 @@ import * as mongoose from "mongoose";
 
 const setup = new mongoose.Schema({
     keyboard: {
-        name: String,
+        name: {
+            type: String,
+            required: true,
+        },
         layout: {
             type: String,
             enum: ["k2", "k3", "k4", "k60", "k75", "ktkl", "kfull", ""],
+            required: true,
         },
-        keys: [String],
+        keys: {
+            type: [String],
+            required: true,
+        },
     },
     tablet: {
-        name: String,
+        name: {
+            type: String,
+            required: true,
+        },
         area: {
-            w: Number,
-            h: Number,
+            w: {
+                type: Number,
+                required: true,
+            },
+            h: {
+                type: Number,
+                required: true,
+            },
         },
         position: {
-            x: Number,
-            y: Number,
-            r: Number,
+            x: {
+                type: Number,
+                required: true,
+            },
+            y: {
+                type: Number,
+                required: true,
+            },
+            z: {
+                type: Number,
+                required: true,
+            },
         },
         size: {
-            w: Number,
-            h: Number,
+            w: {
+                type: Number,
+                required: true,
+            },
+            h: {
+                type: Number,
+                required: true,
+            },
         },
     },
     mouse: {
-        name: String,
-        dpi: Number,
+        name: {
+            type: String,
+            required: true,
+        },
+        dpi: {
+            type: Number,
+            required: true,
+        },
     },
     peripherals: {
-        monitor: String,
-        headphones: String,
-        microphone: String,
-        tablet: String,
-        mouse: String,
-        keyboard: String,
-        keypad: String,
-        mousepad: String,
-        chair: String,
-        camera: String,
-        audio: String,
+        monitor: {
+            type: String,
+            required: true,
+        },
+        headphones: {
+            type: String,
+            required: true,
+        },
+        microphone: {
+            type: String,
+            required: true,
+        },
+        tablet: {
+            type: String,
+            required: true,
+        },
+        mouse: {
+            type: String,
+            required: true,
+        },
+        keyboard: {
+            type: String,
+            required: true,
+        },
+        keypad: {
+            type: String,
+            required: true,
+        },
+        mousepad: {
+            type: String,
+            required: true,
+        },
+        chair: {
+            type: String,
+            required: true,
+        },
+        camera: {
+            type: String,
+            required: true,
+        },
+        audio: {
+            type: String,
+            required: true,
+        },
     },
     computer: {
-        cpu: String,
-        gpu: String,
-        ram: String,
-        psu: String,
-        storage: String,
-        motherboard: String,
-        case: String,
+        cpu: {
+            type: String,
+            required: true,
+        },
+        gpu: {
+            type: String,
+            required: true,
+        },
+        ram: {
+            type: String,
+            required: true,
+        },
+        psu: {
+            type: String,
+            required: true,
+        },
+        storage: {
+            type: String,
+            required: true,
+        },
+        motherboard: {
+            type: String,
+            required: true,
+        },
+        case: {
+            type: String,
+            required: true,
+        },
     }
-})
+}, { _id: false })
 
 
 const rank = new mongoose.Schema({
@@ -63,12 +154,25 @@ const rank = new mongoose.Schema({
         type: Number,
         required: true,
     }
-})
+}, { _id: false })
 
 const modeRanks = new mongoose.Schema({
-    global_ranks: [rank],
-    country_ranks: [rank],
-})
+    global_ranks: {
+        type: [rank],
+        required: true,
+    },
+    country_ranks: {
+        type: [rank],
+        required: true,
+    },
+}, { _id: false })
+
+const modes = new mongoose.Schema({
+    osu: modeRanks,
+    taiko: modeRanks,
+    fruits: modeRanks,
+    mania: modeRanks,
+}, { _id: false })
 
 const userSchema = new mongoose.Schema({
     user_id: {
@@ -81,15 +185,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    language: {
-        name: String,
-        code: String,
-    },
     modes: {
-        osu: modeRanks,
-        taiko: modeRanks,
-        fruits: modeRanks,
-        mania: modeRanks,
+        type: modes,
+        required: true,
     },
     skins: [String],
     setup: setup,

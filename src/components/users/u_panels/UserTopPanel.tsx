@@ -30,7 +30,7 @@ const UserTopPanel = (props: Props) => {
                             <div>joined {moment(user.join_date).fromNow()}</div>
                             <div class="flex flex-row justify-between gap-2 items-center">
                                 <span>{user.statistics.level.current}</span>
-                                <progress class="progress progress-accent" value={user.statistics.level.progress} max="100" />
+                                <progress class="progress progress-accent w-32" value={user.statistics.level.progress} max="100" />
                                 <span>{user.statistics.level.current + 1}</span>
                             </div>
                         </div>
@@ -58,16 +58,16 @@ const UserTopPanel = (props: Props) => {
                                     class="h-5 w-7 rounded-sm" />
                             </div>
                             <div>
-                                <div class="text-sm">Performance</div>
+                                <div class="text-sm">Performance:</div>
                                 <h2 class="text-lg">{Math.round(user.statistics.pp).toLocaleString()}pp</h2>
                             </div>
                             <div>
-                                <div class="text-sm">Accuracy</div>
+                                <div class="text-sm">Accuracy:</div>
                                 <h2 class="text-lg">{(user.statistics.hit_accuracy).toFixed(2)}%</h2>
                             </div>
                             <div>
-                                <div class="text-sm">Medals</div>
-                                <h2 class="text-lg">{user.user_achievements.length}</h2>
+                                <div class="text-sm">Medals:</div>
+                                <h2 class="text-lg">{user.user_achievements.length} <i class="fa-solid fa-medal fa-xs" /></h2>
                             </div>
                         </div>
                         <div class="flex flex-col gap-4 justify-between">

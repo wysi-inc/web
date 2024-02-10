@@ -1,15 +1,6 @@
-import { User } from "../models/User";
+import { User, type Rank, type ModeRanks } from "../models/User";
 import type { Mode } from "../types/osu";
-
-type Rank = {
-    rank: number;
-    date: Date;
-};
-
-type RankHistory = {
-    global_rank_history: Rank[];
-    country_rank_history: Rank[];
-};
+import type { RankHistory } from "../types/users";
 
 export async function updateUser(user_id: number, username: string, global_ranks: number[], country_rank: number, mode: Mode): Promise<RankHistory> {
     const response: RankHistory = {
@@ -17,6 +8,7 @@ export async function updateUser(user_id: number, username: string, global_ranks
         country_rank_history: [],
     };
     if (!country_rank) return response;
+    console.log("Updating user")
     try {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -28,30 +20,40 @@ export async function updateUser(user_id: number, username: string, global_ranks
         const new_country = [{ date: today, rank: country_rank }];
         let user = await User.findOne({ user_id });
         if (!user) {
+            console.log("Creating new user")
             user = new User({
                 user_id,
                 username,
                 modes: {
                     [mode]: {
-                        global_rank_history: new_global,
-                        country_rank_history: new_country,
+                        global_ranks: new_global,
+                        country_ranks: new_country,
                     },
                 },
             });
             response.global_rank_history = new_global;
             response.country_rank_history = new_country;
         } else {
+            console.log("Updating existing user")
             user.username = username;
-            user.modes[mode].globalRankHistory = addRanks(
-                user.modes[mode].globalRankHistory,
-                new_global
-            );
-            user.modes[mode]?.country_ranks = addRanks(
-                user.modes[mode]?.country_ranks
-                new_country
-            );
-            response.global_rank_history = user.modes[mode].global_rank_history;
-            response.country_rank_history = user.modes[mode].country_rank_history;
+            if (!user.modes[mode]) {
+                console.log("Creating new mode")
+                user.modes[mode] = {
+                    global_ranks: new_global as any,
+                    country_ranks: new_country as any,
+                };
+                response.global_rank_history = new_global;
+                response.country_rank_history = new_country;
+                await user.save();
+                return response;
+            }
+            console.log("Updating existing mode")
+            const new_global_ranks = addRanks((user.modes[mode] as ModeRanks).global_ranks, new_global);
+            const new_country_ranks = addRanks((user.modes[mode] as ModeRanks).country_ranks, new_country);
+            (user.modes[mode] as ModeRanks).global_ranks = new_global_ranks as any;
+            (user.modes[mode] as ModeRanks).country_ranks = new_country_ranks as any;
+            response.global_rank_history = new_global_ranks;
+            response.country_rank_history = new_country_ranks;
         }
         await user.save();
     } catch (err) {
@@ -59,7 +61,7 @@ export async function updateUser(user_id: number, username: string, global_ranks
     } finally {
         return response;
     }
-};
+}
 
 function addRanks(r_old: Rank[], r_new: Rank[]) {
     const rankMap = new Map(r_old.map(entry => [entry.date.getTime(), entry]));

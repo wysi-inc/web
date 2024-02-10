@@ -15,6 +15,7 @@ import UserScoresList from "./src/components/users/u_panels/u_components/UserSco
 import mongoose from "mongoose";
 import { updateMedals } from "./src/resources/db-medal";
 import UserBeatmapsList from "./src/components/users/u_panels/u_components/UserBeatmapsList";
+import UserMostList from "./src/components/users/u_panels/u_components/UserMostList";
 
 const port: number = process.env.PORT as any;
 const mongo_uri: string = process.env.MONGO_URI as any;
@@ -38,7 +39,7 @@ function connect(): void {
 connect();
 setInterval(() => connect(), 1000 * 60 * 60 * 23);
 
-const app: any = new Elysia()
+const app = new Elysia()
     .use(staticPlugin())
     .use(html())
     .onRequest(({ request }) => console.log(request.method, request.url))
@@ -85,15 +86,18 @@ const app: any = new Elysia()
                 mode={params.mode as Mode}
                 category={params.category as ScoreCategory}
                 offset={Number(query.offset)}
-                limit={20}
+                limit={Number(query.limit)}
             />
         ))
         .post("/:id/:mode/beatmaps/:category/list", ({ html, params, query }) => html(
             <UserBeatmapsList id={Number(params.id)}
                 category={params.category as BeatmapCategory}
                 offset={Number(query.offset)}
-                limit={10}
+                limit={Number(query.limit)}
             />
+        ))
+        .post("/:id/:mode/most/list", ({ html, params, query }) => html(
+            <UserMostList id={Number(params.id)} offset={Number(query.offset)} limit={Number(query.limit)} />
         ))
     )
     .group("/beatmaps", (_) => _
@@ -108,8 +112,6 @@ const app: any = new Elysia()
         .post("/list", ({ html, body }) => html(
             <BeatmapsList query={body} />
         ))
-    )
+    ).listen(port);
 
-app.listen(port);
-
-console.log(`Server started at http://localhost:${port}`)
+console.log(`Server running in port ${app.server?.port}`)
