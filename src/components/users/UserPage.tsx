@@ -8,6 +8,7 @@ import UserHistoryPanel from "./u_panels/UserHistoryPanel";
 import UserBeatmapsPanel from "./u_panels/UserBeatmapsPanel";
 import { updateUser } from "@/src/resources/db-user";
 import UserMostPanel from "./u_panels/UserMostPanel";
+import UserSetupPanel from "./u_panels/UserSetupPanel";
 
 type Props = {
     id: string;
@@ -34,6 +35,7 @@ const UserPage = async (props: Props) => {
         <UserTopPanel user={user} />
         <UserHistoryPanel db_ranks={user.db_ranks} play_counts={user.monthly_playcounts} replays_watched={user.replays_watched_counts} />
         <UserScoresPanel id={user.id} mode={user.rank_history.mode as Mode} category={defaultCategory} />
+        <UserSetupPanel />
         <UserBeatmapsPanel id={user.id} category="favourite" />
         <UserMostPanel id={user.id} />
         <UserMedalsPanel user_medals={user.user_achievements} />

@@ -4,6 +4,7 @@ import { colors } from "@/src/resources/colors";
 import { secondsToTime } from "@/src/resources/functions";
 import moment from "moment";
 import { tools } from "osu-api-extended";
+import type { Mode } from "@/src/types/osu";
 
 type Props = {
     position: number;
@@ -21,13 +22,13 @@ const ScoreCard = async (props: Props) => {
 
     const acc = (score.accuracy * 100).toFixed(2);
     const fc_acc = tools.accuracy({
-        "300": score.statistics.great + (score.statistics.miss || 0).toString() || "0",
+        "300": (score.statistics.great + (score.statistics.miss || 0)).toString() || "0",
         "100": score.statistics.ok?.toString() || "0",
         "50": score.statistics.meh?.toString() || "0",
         "0": "0",
         "geki": "0",
         "katu": "0"
-    }, 'osu');
+    }, beatmap.mode as Mode);
 
     let stats: any = {};
 
@@ -68,7 +69,7 @@ const ScoreCard = async (props: Props) => {
                 <div class="rounded-lg shadow-lg" style={`background-image: url(${coverImg}); background-size: cover;`}>
                     <div class="grid grid-cols-5 grow rounded-lg" style="backdrop-filter: blur(8px); background-color: rgba(0, 0, 0, 0.8);">
                         <div class="flex flex-row col-span-3">
-                            <img src={listImg} onerror="this.src='/public/img/fallback.png'" alt="cover"
+                            <img src={listImg} onerror="this.src='/public/img/fallback.png'" alt="cover" loading="lazy"
                                 class="rounded-lg" style={{
                                     height: "100%",
                                     width: "120px",
@@ -129,7 +130,7 @@ const ScoreCard = async (props: Props) => {
                                     {score.mods.map((mod) =>
                                         <div class="tooltip" data-tip={mod.acronym}>
                                             <img src={`/public/img/mods/${mod.acronym.toLowerCase()}.png`}
-                                                style={{ height: "20px" }} alt={mod.acronym} />
+                                                style={{ height: "20px" }} alt={mod.acronym} loading="lazy" />
                                         </div>
                                     )}
                                 </div>

@@ -30,7 +30,7 @@ const UserScoresPanel = (props: Props) => {
     }
 
     return (
-        <div class="rounded-lg bg-base-100 p-4 flex-flex-col gap-4" id="scores-panel">
+        <div class="shadow-lg rounded-lg bg-base-100 p-4 flex-flex-col gap-4" id="scores-panel">
             <div class="flex flex-row items-center gap-2">
                 <i class="fa-solid fa-flag-checkered" />
                 <div>
