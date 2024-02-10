@@ -25,7 +25,7 @@ const UserMostList = async (props: Props) => {
         {plays.length < props.limit ? null :
             <>
                 <button class="btn btn-success btn-sm flex flex-row gap-2 col-span-full"
-                    hx-post={`/users/${props.id}/0/most/list?offset=${props.offset + props.limit}&limit=20`}
+                    hx-get={`/users/${props.id}/0/most/list?offset=${props.offset + props.limit}&limit=20`}
                     hx-swap="outerHTML">
                     <div>Load more</div>
                     <span class="htmx-indicator loading loading-spinner loading-md" />

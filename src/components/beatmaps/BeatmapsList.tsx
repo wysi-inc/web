@@ -1,5 +1,4 @@
 import type { Beatmapset } from "@/src/types/beatmaps";
-import type { Mode } from "@/src/types/osu";
 import BeatmapsetCard from "./BeatmapsetCard";
 
 type Props = {
@@ -41,29 +40,52 @@ const BeatmapsList = async (props: Props) => {
 
     filters = filters.filter((f) => f);
 
-    let modes: Mode[] = (["osu", "taiko", "fruits", "mania"] as Mode[]).filter((mode) => props.query[`mode_${mode}`] === "on");
-    const status = ["ranked", "approved", "qualified", "loved", "pending", "wip", "graveyard"].filter((status) => props.query[`status-${status}`] === "on");
-    let mode_ids: number[] = [];
-    if (modes.length > 1) mode_ids = [-1];
-    else mode_ids = modes.map((m: Mode) => {
-        switch (m) {
-            case "osu":
-                return 0;
-            case "taiko":
-                return 1
-            case "fruits":
-                return 2
-            case "mania":
-                return 3
-            default:
-                return -1;
-        }
-    });
+    const sort: any[] = [];
+
+    const modes: number[] = Object.entries(props.query).
+        filter(([key, value]) => key.startsWith("mode_") && value === "on")
+        .map(([key, _]) => {
+            switch (key.split("_")[1]) {
+                case "osu":
+                    return 0;
+                case "taiko":
+                    return 1
+                case "fruits":
+                    return 2
+                case "mania":
+                    return 3
+                default:
+                    return NaN;
+            }
+        });
+
+    const status: number[] = Object.entries(props.query)
+        .filter(([key, value]) => key.startsWith("status_") && value === "on")
+        .map(([key, _]) => {
+            switch (key.split("_")[1]) {
+                case "ranked":
+                    return 1;
+                case "approved":
+                    return 2
+                case "qualified":
+                    return 3
+                case "loved":
+                    return 4
+                case "pending":
+                    return 0;
+                case "wip":
+                    return -1;
+                case "graveyard":
+                    return -2;
+                default:
+                    return NaN;
+            }
+        });
 
     const limit = 50;
     const offset = props.query.offset || 0;
 
-    const url = `https://catboy.best/api/v2/search?q=${title}[${filters.join(" AND ")}]&m=${mode_ids.join("&m=")}&status=${status.join("&status=")}&limit=${limit}&offset=${offset}`;
+    const url = `https://catboy.best/api/v2/search?q=${title}${filters.length > 0 ? `[${filters.join(" AND ")}]` : ""}${sort.length > 0 ? `&sort=${sort.join("&sort=")}` : ""}&m=${modes.join("&m=")}&status=${status.join("&status=")}&limit=${limit}&offset=${offset}`;
 
     const beatmaps: Beatmapset[] = await (await fetch(url)).json() as Beatmapset[];
 

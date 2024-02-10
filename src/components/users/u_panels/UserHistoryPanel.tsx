@@ -49,73 +49,74 @@ const UserHistoryPanel = (props: Props) => {
 
     function get_rank_chart(id: string, ranks: Rank[]) {
         return `
-    const ${id} = document.getElementById('chart-${id}');
-    new Chart(${id}, {
-        type: 'line',
-        data: {
-            labels: [${ranks.map((r) => `'${moment(r.date).format('MMM DD YY')}'`).join(',')}],
-            datasets: [{
-                data: [${ranks.map((r) => r.rank).join(',')}],
-                fill: false,
-                borderColor: '${colors.ui.accent}',
-                tension: 0.1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    reverse: true,
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false
+            const ${id} = document.getElementById('chart-${id}');
+            new Chart(${id}, {
+                type: 'line',
+                data: {
+                    labels: [${ranks.map((r) => `'${moment(r.date).format('MMM DD YY')}'`).join(',')}],
+                    datasets: [{
+                        data: [${ranks.map((r) => r.rank).join(',')}],
+                        fill: false,
+                        borderColor: '${colors.ui.accent}',
+                        tension: 0.1
+                    }]
                 },
-            },
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: {
-                intersect: false,
-                mode: 'index',
-            },
-        }
-    });`
+                options: {
+                    scales: {
+                        y: {
+                            reverse: true,
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
+                    },
+                }
+            }
+        ); `
     };
 
 
     function get_counts_chart(id: string, ranks: MonthCount[]) {
         return `
-    const ${id} = document.getElementById('chart-${id}');
-    new Chart(${id}, {
-        type: 'line',
-        data: {
-            labels: [${ranks.map((r) => `'${moment(r.start_date).format('MMM DD YY')}'`).join(',')}],
-            datasets: [{
-                data: [${ranks.map((r) => r.count).join(',')}],
-                fill: false,
-                borderColor: '${colors.ui.accent}',
-                tension: 0.1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    reverse: false,
-                }
+        const ${id} = document.getElementById('chart-${id}');
+        new Chart(${id}, {
+            type: 'line',
+            data: {
+                labels: [${ranks.map((r) => `'${moment(r.start_date).format('MMM DD YY')}'`).join(',')}],
+                datasets: [{
+                    data: [${ranks.map((r) => r.count).join(',')}],
+                    fill: false,
+                    borderColor: '${colors.ui.accent}',
+                    tension: 0.1
+                }]
             },
-            plugins: {
-                legend: {
-                    display: false
+            options: {
+                scales: {
+                    y: {
+                        reverse: false,
+                    }
                 },
-            },
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: {
-                intersect: false,
-                mode: 'index',
-            },
-        }
-    });`
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+            }
+        }); `
     };
 
 

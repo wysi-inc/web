@@ -17,25 +17,23 @@ const SearchResults = async (props: Props) => {
     const users = res.user.data;
     const limit = 8;
 
-    return (
-        <div id="search-results">
-            {users.map((user, i) =>
-                i < limit &&
-                <div class="hover:bg-base-200 flex flex-row justify-between rounded-md p-2">
-                    <div class="flex flex-row gap-4">
-                        <img src={`https://flagcdn.com/h40/${user.country_code.toLowerCase()}.jpg`}
-                            style="width: 32px; height: 24px;" class="rounded-sm" />
-                        <a href={`/users/${user.id}`} class="flex flex-row items-center gap-2">
-                            {user.username}
-                        </a>
-                    </div>
-                    <div class="flex justify-center">
-                        <OnlineDot size={24} online={user.is_online} />
-                    </div>
+    return (<>
+        {users.map((user, i) =>
+            i < limit &&
+            <div class="hover:bg-base-200 flex flex-row justify-between rounded-md p-2">
+                <div class="flex flex-row gap-4">
+                    <img src={`https://flagcdn.com/h40/${user.country_code.toLowerCase()}.jpg`}
+                        style="width: 32px; height: 24px;" class="rounded-sm" />
+                    <a hx-get={`/users/${user.id}`} class="flex flex-row items-center gap-2" hx-target="#main">
+                        {user.username}
+                    </a>
                 </div>
-            )}
-        </div>
-    );
+                <div class="flex justify-center">
+                    <OnlineDot size={24} online={user.is_online} />
+                </div>
+            </div>
+        )}
+    </>);
 }
 
 

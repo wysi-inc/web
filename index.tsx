@@ -43,45 +43,30 @@ const app = new Elysia()
     .use(staticPlugin())
     .use(html())
     .onRequest(({ request }) => console.log(request.method, request.url))
-    .get("/", ({ html }) => html(<BaseHtml><Home /></BaseHtml>))
-    .post("/", ({ html }) => html(<Home />))
-    .get("/search", ({ html, query }) => html(<SearchResults query={query.q} />))
+    .onError(({ code, error, set }) => {
+        console.error(`Error ${code}`);
+        console.error(error);
+        set.status = 500;
+        return new Response(error.toString())
+    })
+    .get("/", ({ request, html }) => getPage(request, html, <Home />))
+    .post("/search", ({ html, body }) => html(<SearchResults query={(body as any).q} />))
     .group("/rankings", (_) => _
-        .get("/", ({ html }) => html(
-            <BaseHtml>
-                <Rankings mode="osu" page={1} category="performance" />
-            </BaseHtml>
-        ))
-        .post("/", ({ html }) => html(
+        .get("/", ({ request, html }) => getPage(request, html,
             <Rankings mode="osu" page={1} category="performance" />
         ))
-        .get("/:mode/:category/:page", ({ html, params }) => html(
-            <BaseHtml>
-                <Rankings mode={params.mode} category={params.category} page={Number(params.page)} />
-            </BaseHtml>
-        ))
-        .post("/:mode/:category/:page", ({ html, params }) => html(
+        .get("/:mode/:category/:page", ({ request, html, params }) => getPage(request, html,
             <Rankings mode={params.mode} category={params.category} page={Number(params.page)} />
         ))
     )
     .group("/users", (_) => _
-        .get("/:id/:mode", ({ html, params }) => html(
-            <BaseHtml>
-                <UserPage id={params.id} mode={params.mode as Mode} />
-            </BaseHtml>
-        ))
-        .post("/:id/:mode", ({ html, params }) => html(
+        .get("/:id/:mode", ({ request, html, params }) => getPage(request, html,
             <UserPage id={params.id} mode={params.mode as Mode} />
         ))
-        .get("/:id/", ({ html, params }) => html(
-            <BaseHtml>
-                <UserPage id={params.id} mode={undefined} />
-            </BaseHtml>
-        ))
-        .post("/:id/", ({ html, params }) => html(
+        .get("/:id/", ({ request, html, params }) => getPage(request, html,
             <UserPage id={params.id} mode={undefined} />
         ))
-        .post("/:id/:mode/scores/:category/list", ({ html, params, query }) => html(
+        .get("/:id/:mode/scores/:category/list", ({ request, html, params, query }) => htmxOnly(request, html,
             <UserScoresList id={Number(params.id)}
                 mode={params.mode as Mode}
                 category={params.category as ScoreCategory}
@@ -89,29 +74,40 @@ const app = new Elysia()
                 limit={Number(query.limit)}
             />
         ))
-        .post("/:id/:mode/beatmaps/:category/list", ({ html, params, query }) => html(
+        .get("/:id/:mode/beatmaps/:category/list", ({ request, html, params, query }) => htmxOnly(request, html,
             <UserBeatmapsList id={Number(params.id)}
                 category={params.category as BeatmapCategory}
                 offset={Number(query.offset)}
                 limit={Number(query.limit)}
             />
         ))
-        .post("/:id/:mode/most/list", ({ html, params, query }) => html(
+        .get("/:id/:mode/most/list", ({ request, html, params, query }) => htmxOnly(request, html,
             <UserMostList id={Number(params.id)} offset={Number(query.offset)} limit={Number(query.limit)} />
         ))
     )
     .group("/beatmaps", (_) => _
-        .get("/", ({ html, body }) => html(
-            <BaseHtml>
-                <Beatmaps query={body} />
-            </BaseHtml>
-        ))
-        .post("/", ({ html }) => html(
-            <Beatmaps query={undefined} />
+        .get("/", ({ request, html, body }) => getPage(request, html,
+            <Beatmaps query={body} />
         ))
         .post("/list", ({ html, body }) => html(
             <BeatmapsList query={body} />
         ))
     ).listen(port);
+
+function getPage(request: Request, html: any, children: JSX.Element): JSX.Element {
+    if (request.headers.has("hx-request")) {
+        return children;
+    }
+    return html(
+        <BaseHtml>{children}</BaseHtml>
+    );
+}
+
+function htmxOnly(request: Request, html: any, children: JSX.Element): JSX.Element {
+    if (!request.headers.has("hx-request")) {
+        return "wrong request";
+    }
+    return html(children);
+}
 
 console.log(`Server running in port ${app.server?.port}`)

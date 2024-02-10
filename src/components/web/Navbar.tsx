@@ -9,9 +9,9 @@ const Navbar = () => {
                         <i class="fa-solid fa-bars fa-lg" />
                     </button>
                     <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><a hx-target="#main" hx-push-url="true" hx-post="/" >Home</a></li>
-                        <li><a hx-target="#main" hx-push-url="true" hx-post="/rankings" >Rankings</a></li>
-                        <li><a hx-target="#main" hx-push-url="true" hx-post="/beatmaps" >Beatmaps</a></li>
+                        <li><a hx-target="#main" hx-push-url="true" hx-get="/" >Home</a></li>
+                        <li><a hx-target="#main" hx-push-url="true" hx-get="/rankings" >Rankings</a></li>
+                        <li><a hx-target="#main" hx-push-url="true" hx-get="/beatmaps" >Beatmaps</a></li>
                     </ul>
                 </div>
                 <a class="btn btn-ghost text-xl">wysi</a>
@@ -26,8 +26,9 @@ const Navbar = () => {
                 <a href="https://discord.gg/QYVxgS2934" target="_blank" class="btn btn-ghost btn-circle">
                     <i class="fa-brands fa-discord" />
                 </a>
-                <button class="btn btn-secondary">
+                <button class="btn btn-ghost">
                     login with osu!
+                    <i class="fa-solid fa-right-to-bracket" />
                 </button>
             </div>
         </nav>

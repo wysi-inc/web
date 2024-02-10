@@ -43,7 +43,7 @@ const Rankings = async (props: Props) => {
                                 <div class="flex flex-row gap-4">
                                     <img src={`https://flagcdn.com/h40/${row.user.country.code.toLowerCase()}.jpg`}
                                         style="width: 32px; height: 24px;" class="rounded-sm" />
-                                    <a href={`/users/${row.user.id}`} class="flex flex-row items-center gap-2">
+                                    <a hx-get={`/users/${row.user.id}`} class="flex flex-row items-center gap-2" hx-push-url="true" hx-target="#main">
                                         {row.user.username}
                                     </a>
                                 </div>
