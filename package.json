@@ -1,6 +1,6 @@
 {
   "name": "wysi",
-  "module": "index.ts",
+  "module": "index.tsx",
   "type": "module",
   "devDependencies": {
     "@types/bun": "latest",
