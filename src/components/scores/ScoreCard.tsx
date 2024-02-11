@@ -17,8 +17,7 @@ const ScoreCard = async (props: Props) => {
     const beatmap = score.beatmap;
     const beatmapset = score.beatmapset;
 
-    const listImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/list.jpg?${beatmapset.id}`;
-    const coverImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/cover@2x.jpg?${beatmapset.id}`;
+    const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
 
     const acc = (score.accuracy * 100).toFixed(2);
     const fc_acc = tools.accuracy({
@@ -68,22 +67,29 @@ const ScoreCard = async (props: Props) => {
     return (
         <div class="grow rounded-lg flex flex-row bg-base-300 shadow-lg">
             <div class="bg-neutral flex flex-col grow rounded-lg shadow-lg">
-                <div class="rounded-lg shadow-lg" style={`background-image: url(${coverImg}); background-size: cover;`}>
+                <div class="rounded-lg shadow-lg"
+                    style={{
+                        backgroundImage: `url(${cardImg})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                    }}>
                     <div class="grid grid-cols-5 grow rounded-lg" style="backdrop-filter: blur(8px); background-color: rgba(0, 0, 0, 0.8);">
                         <div class="flex flex-row col-span-3">
-                            <img src={listImg} onerror="this.src='/public/img/fallback.png'" alt="cover" loading="lazy"
-                                class="rounded-lg" style={{
+                            <img src={cardImg} onerror="this.src='/public/img/fallback.png'"
+                                class="rounded-lg" alt="cover" loading="lazy"
+                                style={{
                                     height: "100%",
-                                    width: "120px",
-                                    objectFit: "cover"
+                                    width: "100px",
+                                    objectFit: "cover",
+                                    objectPosition: "center"
                                 }} />
-                            <div class="flex flex-col p-4 gap-2 justify-between grow">
-                                <div class="flex flex-col gap-1">
-                                    <p class="text-lg">{beatmapset.title}<span class="text-sm" style={{ color: "#999999" }}> by {beatmapset.artist}</span></p>
-                                    <p class="text-md">[{beatmap.version}]<span class="text-sm" style={{ color: "#999999" }}> by {beatmapset.creator}</span></p>
+                            <div class="flex flex-col py-2 px-4 gap-1 justify-between grow">
+                                <div class="flex flex-col">
+                                    <span class="text-lg m-0 p-0">{beatmapset.title}<span class="text-sm" style={{ color: "#999999" }}> by {beatmapset.artist}</span></span>
+                                    <span class="text-md m-0 p-0">[{beatmap.version}]<span class="text-sm" style={{ color: "#999999" }}> by {beatmapset.creator}</span></span>
                                 </div>
                                 <div class="flex flex-row gap-2 items-center">
-                                    <div class="badge"
+                                    <div class="badge m-0"
                                         style={{
                                             color: "#000",
                                             backgroundColor: (colors.beatmap as any)[beatmapset.status]
@@ -96,11 +102,24 @@ const ScoreCard = async (props: Props) => {
                                 </div>
                             </div>
                         </div>
-                        <div class="flex flex-col gap-2 p-4 justify-between col-span-2 rounded-lg"
+                        <div class="flex flex-col gap-2 py-2 px-4 justify-between col-span-2 rounded-lg"
                             style={{ backgroundColor: "rgba(255,255,255, 0.1)" }}>
                             <div class="flex flex-row justify-between gap-4">
                                 <div class="flex flex-col gap-1">
-                                    <div><i class="fa-solid fa-flag-checkered" /> {score.total_score.toLocaleString()}</div>
+                                    <div class="flex flex-row gap-4 items-center">
+                                        <div class="flex flex-row gap-2 items-center">
+                                            <i class="fa-solid fa-flag-checkered" />
+                                            <span>{score.total_score.toLocaleString()}</span>
+                                        </div>
+                                        {stats?.pp ?
+                                            <div class="tooltip" data-tip={`${stats.pp}pp if FC`}>
+                                                <span class="text-gray-400">{Math.round(Number(score.pp))}pp</span>
+                                            </div> :
+                                            <div>
+                                                <span>{Math.round(Number(score.pp))}pp</span>
+                                            </div>
+                                        }
+                                    </div>
                                     <div class="text-sm flex flex-row gap-4">
                                         <div><i class="fa-solid fa-fire" /> {score.max_combo.toLocaleString()}x</div>
                                         <div><i class="fa-solid fa-bullseye" /> {acc}%</div>
@@ -121,22 +140,15 @@ const ScoreCard = async (props: Props) => {
                                     }}>
                                         {getRankLetter(score.rank)}
                                     </div>
-                                    <div class="flex flex-row gap-2">
-                                        <span>{Math.round(Number(score.pp))}pp</span>
-                                        {stats?.pp && <span style={{ color: "#999999" }}>({stats.pp}pp)</span>}
+                                    <div class="flex flex-row-reverse gap-1">
+                                        {score.mods.map((mod) =>
+                                            <div class="tooltip" data-tip={mod.acronym}>
+                                                <img src={`/public/img/mods/${mod.acronym.toLowerCase()}.png`}
+                                                    style={{ height: "20px" }} alt={mod.acronym} loading="lazy" />
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
-                            </div>
-                            <div class="flex flex-row flex-wrap justify-between gap-2 items-end">
-                                <div class="flex flex-row gap-1">
-                                    {score.mods.map((mod) =>
-                                        <div class="tooltip" data-tip={mod.acronym}>
-                                            <img src={`/public/img/mods/${mod.acronym.toLowerCase()}.png`}
-                                                style={{ height: "20px" }} alt={mod.acronym} loading="lazy" />
-                                        </div>
-                                    )}
-                                </div>
-                                <div class="ms-auto text-sm">{moment(new Date(score.ended_at)).fromNow()}</div>
                             </div>
                         </div>
                     </div>
@@ -161,6 +173,7 @@ const ScoreCard = async (props: Props) => {
                     <div>cs:{stats?.cs ? stats.cs : beatmap.cs}</div>
                     <div>od:{stats?.od ? stats.od : beatmap.accuracy}</div>
                     <div>hp:{stats?.hp ? stats.hp : beatmap.drain}</div>
+                    <div class="ms-auto text-sm">{moment(new Date(score.ended_at)).fromNow()}</div>
                 </div>
             </div>
             <div class="flex flex-col items-center justify-around p-2 gap-2">

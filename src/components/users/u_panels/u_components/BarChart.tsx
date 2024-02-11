@@ -12,18 +12,20 @@ const BarChart = (props: Props) => {
         <div class="flex flex-col gap-2">
             <div class="flex flex-row justify-around">
                 {props.labels.map((label, i) => (
-                    <div class="flex flex-col items-center">
-                        <h4 style={{ color: props.colors[i] }}>{label}</h4>
-                        <div>{props.data[i].toLocaleString()}</div>
-                    </div>
+                    props.data[i] === 0 ? null :
+                        <div class="flex flex-col items-center">
+                            <h4 style={{ color: props.colors[i] }}>{label}</h4>
+                            <div>{props.data[i].toLocaleString()}</div>
+                        </div>
                 ))}
             </div>
             <div class="flex flex-row h-2 rounded-lg overflow-hidden">
                 {props.data.map((d, i) => (
-                    <div class="h-full" style={{
-                        width: `${d / total * 100}%`,
-                        backgroundColor: props.colors[i]
-                    }} />
+                    d === 0 ? null :
+                        <div class="h-full" style={{
+                            width: `${d / total * 100}%`,
+                            backgroundColor: props.colors[i]
+                        }} />
                 ))}
             </div>
         </div>

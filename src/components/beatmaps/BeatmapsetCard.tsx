@@ -9,19 +9,27 @@ const BeatmapsetCard = (props: Props) => {
 
     const beatmapset = props.beatmapset;
 
-    const listImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/list.jpg?${beatmapset.id}`;
-    const coverImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/cover@2x.jpg?${beatmapset.id}`;
+    const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
 
     return (
         <div class="rounded-lg flex flex-row bg-base-300 shadow-lg">
             <div class="bg-neutral flex flex-col grow rounded-lg shadow-lg">
-                <div class="rounded-lg overflow-hidden grow flex flex-col shadow-lg" style={`background-image: url(${coverImg}); background-size: cover;`}>
+                <div class="rounded-lg overflow-hidden grow flex flex-col shadow-lg"
+                    style={{
+                        backgroundImage: `url(${cardImg})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundOrigin: "border-box",
+                        backgroundRepeat: "no-repeat",
+                    }}>
                     <div class="flex flex-row grow" style="backdrop-filter: blur(8px); background-color: rgba(0, 0, 0, 0.8);">
-                        <img src={listImg} onerror="this.src='/public/img/fallback.png'" alt="cover" loading="lazy"
-                            class="rounded-lg" style={{
+                        <img src={cardImg} onerror="this.src='/public/img/fallback.png'"
+                            class="rounded-lg" alt="cover" loading="lazy"
+                            style={{
                                 height: "100%",
                                 width: "100px",
-                                objectFit: "cover"
+                                objectFit: "cover",
+                                objectPosition: "center"
                             }} />
                         <div class="flex p-4 flex-col grow">
                             <div class="truncate w-72 text-lg">{beatmapset.title}</div>

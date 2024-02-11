@@ -49,14 +49,6 @@ const UserSummaryPanel = async (props: Props) => {
     const grade_counts: number[] = [score_grades.xh, score_grades.x, score_grades.sh, score_grades.s, score_grades.a, score_grades.b, score_grades.c, score_grades.d];
     const grade_colors: string[] = [colors.grades.xh, colors.grades.x, colors.grades.sh, colors.grades.s, colors.grades.a, colors.grades.b, colors.grades.c, colors.grades.d];
 
-    grade_counts.forEach((count, i) => {
-        if (count === 0) {
-            grade_counts.splice(i, 1);
-            grade_labels.splice(i, 1);
-            grade_colors.splice(i, 1);
-        }
-    });
-
     let score_hits = {
         x300: 0,
         x100: 0,
@@ -75,14 +67,6 @@ const UserSummaryPanel = async (props: Props) => {
     const hit_counts: number[] = [score_hits.x300, score_hits.x100, score_hits.x50, score_hits.xMiss];
     const hit_colors: string[] = [colors.judgements.x300, colors.judgements.x100, colors.judgements.x50, colors.judgements.xMiss];
 
-    hit_counts.forEach((count, i) => {
-        if (count === 0) {
-            hit_counts.splice(i, 1);
-            hit_labels.splice(i, 1);
-            hit_colors.splice(i, 1);
-        }
-    });
-
     const all_pp: number[] = scores.map(s => s.pp || 0);
 
     const max_pp = Math.round(Math.max(...all_pp));
@@ -91,13 +75,26 @@ const UserSummaryPanel = async (props: Props) => {
     const avg_pp = Math.round(all_pp.reduce((a, b) => a + b, 0) / all_pp.length);
     const avg_acc = (props.acc).toFixed(2);
     const avg_combo = Math.round(scores.map(s => s.max_combo).reduce((a, b) => a + b, 0) / scores.length);
-    const avg_length = Math.round(scores.map(s => s.beatmap.hit_length).reduce((a, b) => a + b, 0) / scores.length);
+
+    let avg_length = 0;
     const avg_bpm = Math.round(scores.map(s => {
         let bpm = s.beatmap.bpm;
-        if (s.mods.includes({ acronym: "DT" })) bpm *= 1.5;
-        if (s.mods.includes({ acronym: "HT" })) bpm *= 0.75;
+        let len = s.beatmap.total_length;
+        s.mods.forEach(m => {
+            if (m.acronym === "DT" || m.acronym === "NC") {
+                bpm *= 1.5;
+                len *= 2 / 3;
+            }
+
+            if (m.acronym === "HT") {
+                bpm *= 0.75;
+                len *= 4 / 3;
+            }
+        })
+        avg_length += len;
         return bpm;
     }).reduce((a, b) => a + b, 0) / scores.length);
+    avg_length = Math.round(avg_length / scores.length);
     const avg_grade = grade_labels[grade_counts.indexOf(Math.max(...grade_counts))];
 
     let modsCounter: { [key: string]: number } = {};
