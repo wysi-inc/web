@@ -91,7 +91,7 @@ const UserTopPanel = (props: Props) => {
                                 </div>
                             </div>
                             <BarChart labels={['XH', 'X', 'SH', 'S', 'A']}
-                                data={[user.statistics.grade_counts.s, user.statistics.grade_counts.sh, user.statistics.grade_counts.ss, user.statistics.grade_counts.ssh, user.statistics.grade_counts.a]}
+                                data={[user.statistics.grade_counts.ssh, user.statistics.grade_counts.ss, user.statistics.grade_counts.sh, user.statistics.grade_counts.s, user.statistics.grade_counts.a]}
                                 colors={[colors.grades.xh, colors.grades.x, colors.grades.sh, colors.grades.s, colors.grades.a]}
                             />
                         </div>
