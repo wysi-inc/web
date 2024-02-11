@@ -122,7 +122,7 @@ const ScoreCard = async (props: Props) => {
                                     </div>
                                     <div class="text-sm flex flex-row gap-4">
                                         <div><i class="fa-solid fa-fire" /> {score.max_combo.toLocaleString()}x</div>
-                                        <div><i class="fa-solid fa-bullseye" /> {acc}%</div>
+                                        <div><i class="fa-solid fa-crosshairs" /> {acc}%</div>
                                     </div>
                                     <div class="flex flex-row gap-2 text-sm">
                                         <span style={{ color: colors.judgements.x300 }}>{score.statistics?.great || 0}</span>

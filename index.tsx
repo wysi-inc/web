@@ -2,20 +2,20 @@ import { Elysia } from "elysia";
 import { html } from "@elysiajs/html";
 import { staticPlugin } from '@elysiajs/static'
 import { auth } from "osu-api-extended";
+import mongoose from "mongoose";
+import type { BeatmapCategory, Mode } from "./src/types/osu";
+import type { ScoreCategory } from "./src/types/osu";
 import Home from "./src/components/web/Home";
 import Rankings from "./src/components/users/Rankings";
 import Beatmaps from "./src/components/beatmaps/Beatmaps";
 import UserPage from "./src/components/users/UserPage";
-import type { BeatmapCategory, Mode } from "./src/types/osu";
 import BaseHtml from "./src/components/BaseHtml";
 import SearchResults from "./src/components/web/SearchResults";
 import BeatmapsList from "./src/components/beatmaps/BeatmapsList";
-import type { ScoreCategory } from "./src/types/osu";
 import UserScoresList from "./src/components/users/u_panels/u_components/UserScoresList";
-import mongoose from "mongoose";
-import { updateMedals } from "./src/resources/db-medal";
 import UserBeatmapsList from "./src/components/users/u_panels/u_components/UserBeatmapsList";
 import UserMostList from "./src/components/users/u_panels/u_components/UserMostList";
+import { updateMedals } from "./src/resources/db-medal";
 
 const port: number = process.env.PORT as any;
 const mongo_uri: string = process.env.MONGO_URI as any;
