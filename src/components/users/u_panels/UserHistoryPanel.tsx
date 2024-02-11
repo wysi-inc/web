@@ -2,6 +2,7 @@ import type { Rank } from "@/src/models/User";
 import { colors } from "@/src/resources/colors";
 import type { RankHistory } from "@/src/types/users";
 import moment from "moment";
+import { test } from "./test";
 
 type MonthCount = {
     count: number;
@@ -37,7 +38,7 @@ const UserHistoryPanel = (props: Props) => {
                 <input type="radio" name="history_tabs" role="tab" class="tab text-nowrap" aria-label="Replays Watched" />
                 <div role="tabpanel" class="tab-content pt-4 h-64"><canvas id="chart-replays" /></div>
             </div>
-            <script>
+            <script type="module">
                 {get_rank_chart('global', props.db_ranks.global_rank_history)}
                 {get_rank_chart('country', props.db_ranks.country_rank_history)}
                 {get_counts_chart('plays', props.play_counts)}
@@ -49,39 +50,39 @@ const UserHistoryPanel = (props: Props) => {
 
     function get_rank_chart(id: string, ranks: Rank[]) {
         return `
-            const ${id} = document.getElementById('chart-${id}');
-            new Chart(${id}, {
-                type: 'line',
-                data: {
-                    labels: [${ranks.map((r) => `'${moment(r.date).format('MMM DD YY')}'`).join(',')}],
-                    datasets: [{
-                        data: [${ranks.map((r) => r.rank).join(',')}],
-                        fill: false,
-                        borderColor: '${colors.ui.accent}',
-                        tension: 0.1
-                    }]
+        const ${id} = document.getElementById('chart-${id}');
+        new Chart(${id}, {
+            type: 'line',
+            data: {
+                labels: [${ranks.map((r) => `'${moment(r.date).format('MMM DD YY')}'`).join(',')}],
+                datasets: [{
+                    data: [${ranks.map((r) => r.rank).join(',')}],
+                    fill: false,
+                    borderColor: '${colors.ui.accent}',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        reverse: true,
+                    }
                 },
-                options: {
-                    scales: {
-                        y: {
-                            reverse: true,
-                        }
+                plugins: {
+                    legend: {
+                        display: false
                     },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                    },
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: {
-                        intersect: false,
-                        mode: 'index',
-                    },
-                }
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
             }
-        ); `
-    };
+        }
+        );
+        `};
 
 
     function get_counts_chart(id: string, ranks: MonthCount[]) {
@@ -116,9 +117,8 @@ const UserHistoryPanel = (props: Props) => {
                     mode: 'index',
                 },
             }
-        }); `
-    };
-
+        });
+        `};
 
 }
 

@@ -43,12 +43,6 @@ const app = new Elysia()
     .use(staticPlugin())
     .use(html())
     .onRequest(({ request }) => console.log(request.method, request.url))
-    .onError(({ code, error, set }) => {
-        console.error(`Error ${code}`);
-        console.error(error);
-        set.status = 500;
-        return new Response(error.toString())
-    })
     .get("/", ({ request, html }) => getPage(request, html, <Home />))
     .post("/search", ({ html, body }) => html(<SearchResults query={(body as any).q} />))
     .group("/rankings", (_) => _
@@ -92,7 +86,8 @@ const app = new Elysia()
         .post("/list", ({ html, body }) => html(
             <BeatmapsList query={body} />
         ))
-    ).listen(port);
+    )
+    .listen(port);
 
 function getPage(request: Request, html: any, children: JSX.Element): JSX.Element {
     if (request.headers.has("hx-request")) {

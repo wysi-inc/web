@@ -1,6 +1,7 @@
 import { colors } from "@/src/resources/colors";
 import type { User } from "@/src/types/users";
 import moment from "moment";
+import BarChart from "./u_components/BarChart";
 
 type Props = {
     user: User;
@@ -8,8 +9,6 @@ type Props = {
 const UserTopPanel = (props: Props) => {
 
     const { user } = props;
-
-    const total_ranks = user.statistics.grade_counts.s + user.statistics.grade_counts.sh + user.statistics.grade_counts.ss + user.statistics.grade_counts.ssh + user.statistics.grade_counts.a;
 
     return (
         <div class="rounded-lg bg-base-100 shadow-lg">
@@ -91,37 +90,10 @@ const UserTopPanel = (props: Props) => {
                                     <h2>{user.statistics.replays_watched_by_others.toLocaleString()}</h2>
                                 </div>
                             </div>
-                            <div class="flex flex-col gap-2">
-                                <div class="flex flex-row justify-around">
-                                    <div class="flex flex-col items-center">
-                                        <h4 style={{ color: colors.grades.xh }}>XH</h4>
-                                        <div>{user.statistics.grade_counts.ssh}</div>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <h4 style={{ color: colors.grades.x }}>X</h4>
-                                        <div>{user.statistics.grade_counts.ss}</div>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <h4 style={{ color: colors.grades.sh }}>SH</h4>
-                                        <div>{user.statistics.grade_counts.sh}</div>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <h4 style={{ color: colors.grades.s }}>S</h4>
-                                        <div>{user.statistics.grade_counts.s}</div>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <h4 style={{ color: colors.grades.a }}>A</h4>
-                                        <div>{user.statistics.grade_counts.a}</div>
-                                    </div>
-                                </div>
-                                <div class="flex flex-row h-2 rounded-lg overflow-hidden">
-                                    <div class="h-full" style={{ width: `${user.statistics.grade_counts.ssh / total_ranks * 100}%`, backgroundColor: colors.grades.xh }} />
-                                    <div class="h-full" style={{ width: `${user.statistics.grade_counts.ss / total_ranks * 100}%`, backgroundColor: colors.grades.x }} />
-                                    <div class="h-full" style={{ width: `${user.statistics.grade_counts.sh / total_ranks * 100}%`, backgroundColor: colors.grades.sh }} />
-                                    <div class="h-full" style={{ width: `${user.statistics.grade_counts.s / total_ranks * 100}%`, backgroundColor: colors.grades.s }} />
-                                    <div class="h-full" style={{ width: `${user.statistics.grade_counts.a / total_ranks * 100}%`, backgroundColor: colors.grades.a }} />
-                                </div>
-                            </div>
+                            <BarChart labels={['XH', 'X', 'SH', 'S', 'A']}
+                                data={[user.statistics.grade_counts.s, user.statistics.grade_counts.sh, user.statistics.grade_counts.ss, user.statistics.grade_counts.ssh, user.statistics.grade_counts.a]}
+                                colors={[colors.grades.xh, colors.grades.x, colors.grades.sh, colors.grades.s, colors.grades.a]}
+                            />
                         </div>
                     </div>
                 </div>
