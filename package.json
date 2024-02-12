@@ -7,7 +7,8 @@
     "typed-html": "^3.0.1"
   },
   "scripts": {
-    "dev": "bun run index.tsx --watch"
+    "dev": "bun run index.tsx --watch",
+    "css": "tailwindcss -i ./public/css/main_in.css -o ./public/css/main_out.css --watch"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
