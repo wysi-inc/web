@@ -19,7 +19,7 @@ const UserScoresList = async (props: Props) => {
         limit: String(props.limit)
     });
 
-    if (scores.length === 0) return <div>No scores found</div>;
+    if (!scores || scores.length === 0) return <div>No {props.category} scores found</div>;
 
     return (<>
         {scores.map((score, i) =>

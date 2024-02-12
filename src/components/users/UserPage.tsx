@@ -11,6 +11,7 @@ import UserMostPanel from "./u_panels/UserMostPanel";
 import UserSetupPanel from "./u_panels/UserSetupPanel";
 import UserSummaryPanel from "./u_panels/UserSummaryPanel";
 import UserSkinsPanel from "./u_panels/UserSkinsPanel";
+import { catalans } from "@/src/resources/constants";
 
 type Props = {
     id: string;
@@ -23,23 +24,30 @@ const UserPage = async (props: Props) => {
 
     if ("error" in user) return <div>User not found</div>;
 
+    const mode = user.rank_history?.mode as Mode || "osu";
+    const defaultCategory = user.scores_pinned_count > 0 ? "pinned" : "best";
+
     user.db_ranks = await updateUser(
         user.id,
         user.username,
-        user.rank_history.data,
-        user.statistics.country_rank,
-        user.rank_history.mode as Mode
+        user?.rank_history?.data || [],
+        user?.statistics?.country_rank,
+        mode
     );
 
-    const defaultCategory = user.scores_pinned_count > 0 ? "pinned" : "best";
+    if (catalans.includes(user.id)) {
+        console.log("Bon dia tu!");
+        user.country.code = "CAT";
+        user.country.name = "Catalunya";
+    }
 
     return (<>
         <UserTopPanel user={user} />
-        <UserSummaryPanel id={user.id} mode={user.rank_history.mode as Mode} acc={user.statistics.hit_accuracy} />
+        <UserSummaryPanel id={user.id} mode={mode} acc={user.statistics.hit_accuracy} />
         <UserSkinsPanel />
         <UserSetupPanel />
         <UserHistoryPanel db_ranks={user.db_ranks} play_counts={user.monthly_playcounts} replays_watched={user.replays_watched_counts} />
-        <UserScoresPanel id={user.id} mode={user.rank_history.mode as Mode} category={defaultCategory} />
+        <UserScoresPanel id={user.id} mode={mode} category={defaultCategory} />
         <UserBeatmapsPanel id={user.id} category="favourite" />
         <UserMostPanel id={user.id} />
         <UserMedalsPanel user_medals={user.user_achievements} />

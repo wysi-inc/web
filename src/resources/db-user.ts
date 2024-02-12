@@ -8,7 +8,6 @@ export async function updateUser(user_id: number, username: string, global_ranks
         country_rank_history: [],
     };
     if (!country_rank) return response;
-    console.log("Updating user")
     try {
         const today = new Date();
         today.setHours(0, 0, 0, 0);

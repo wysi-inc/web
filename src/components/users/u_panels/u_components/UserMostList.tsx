@@ -14,7 +14,7 @@ const UserMostList = async (props: Props) => {
         limit: props.limit
     });
 
-    if (plays.length === 0) return <div>No beatmaps found</div>;
+    if (plays.length === 0) return <div>No plays found</div>;
 
     return (<>
         {plays.map((play, i) =>

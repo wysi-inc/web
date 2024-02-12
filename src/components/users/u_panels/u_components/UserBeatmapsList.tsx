@@ -12,14 +12,12 @@ type Props = {
 
 const UserBeatmapsList = async (props: Props) => {
 
-    const res = await v2.user.beatmaps.category(props.id, props.category, {
+    const beatmaps: Beatmapset[] = await v2.user.beatmaps.category(props.id, props.category, {
         offset: props.offset,
         limit: props.limit
     }) as any;
 
-    if (res.length === 0) return <div>No beatmaps found</div>;
-
-    const beatmaps: Beatmapset[] = res;
+    if (!beatmaps || beatmaps.length === 0) return <div>No {props.category} beatmaps</div>;
 
     return (<>
         {beatmaps.map((beatmap) =>

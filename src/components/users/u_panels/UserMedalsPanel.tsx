@@ -91,17 +91,22 @@ const UserMedalsPanel = async (props: Props) => {
                         Recent Medals
                     </div>
                     <div class="flex flex-row gap-2 flex-wrap p-4 bg-base-300 rounded-lg">
-                        {recent_medals.map((m) =>
+                        {recent_medals.length > 0 ? recent_medals.map((m) =>
                             <MedalBadge medal={m} />
-                        )}
+                        ) :
+                            <div>No recent medals</div>
+                        }
                     </div>
                 </div>
                 <div class="rounded-lg bg-neutral shadow-lg">
                     <div class="p-1 px-2">
-                        Rarest Medal ({rarest_medal.rarity.toFixed(2)}%)
+                        Rarest Medal ({rarest_medal?.rarity?.toFixed(2)}%)
                     </div>
                     <div class="flex p-4 bg-base-300 rounded-lg justify-center items-center">
-                        <MedalBadge medal={rarest_medal} />
+                        {rarest_medal ?
+                            <MedalBadge medal={rarest_medal} /> :
+                            <div>???</div>
+                        }
                     </div>
                 </div>
             </div>

@@ -37,15 +37,16 @@ const Rankings = async (props: Props) => {
                 </thead>
                 <tbody>
                     {users.ranking.map((row, i) =>
-                        <tr class="hover:bg-base-100 hover:rounded-lg cursor-pointer">
+                        <tr class="hover:bg-base-100 hover:rounded-lg cursor-pointer"
+                            hx-get={`/users/${row.user.id}`} hx-push-url="true" hx-target="#main">
                             <th class="table-cell text-start">#{i + 1 + 50 * (props.page - 1)}</th>
                             <td class="table-cell">
                                 <div class="flex flex-row gap-4">
                                     <img src={`https://flagcdn.com/h40/${row.user.country.code.toLowerCase()}.jpg`}
                                         style="width: 32px; height: 24px;" class="rounded-sm" />
-                                    <a hx-get={`/users/${row.user.id}`} class="flex flex-row items-center gap-2" hx-push-url="true" hx-target="#main">
+                                    <span class="flex flex-row items-center gap-2">
                                         {row.user.username}
-                                    </a>
+                                    </span>
                                 </div>
                             </td>
                             <td class="hidden lg:table-cell">{Number(row.pp?.toFixed()).toLocaleString()}pp</td>

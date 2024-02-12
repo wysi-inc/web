@@ -47,14 +47,16 @@ const UserTopPanel = (props: Props) => {
                             </div>
                             <div class="flex flex-row gap-2 items-center">
                                 <i class="fa-solid fa-earth-americas fa-xl" />
-                                <h2 class="text-xl">#{user.statistics.global_rank.toLocaleString()}</h2>
+                                <h2 class="text-xl">#{user.statistics?.global_rank?.toLocaleString() || "-"}</h2>
                             </div>
                             <div class="flex flex-row gap-2 items-center">
-                                <img src={`/public/img/countries/${user.country_code.toLowerCase()}.svg`}
+                                <img src={`/public/img/countries/${user.country.code.toLowerCase()}.svg`}
                                     class="h-6 w-6" style="filter: invert(1);" />
-                                <h2 class="text-xl">#{user.statistics.country_rank.toLocaleString()}</h2>
-                                <img src={`https://flagcdn.com/h40/${user.country_code.toLowerCase()}.jpg`}
-                                    class="h-5 w-7 rounded-sm" />
+                                <h2 class="text-xl">#{user.statistics?.country_rank?.toLocaleString() || "-"}</h2>
+                                <div class="tooltip" data-tip={user.country.name}>
+                                    <img src={`https://flagcdn.com/h40/${user.country.code?.toLowerCase()}.jpg`}
+                                        class="h-5 w-7 rounded-sm" />
+                                </div>
                             </div>
                             <div>
                                 <div class="text-sm">Performance:</div>
@@ -86,7 +88,7 @@ const UserTopPanel = (props: Props) => {
                                     <h2>{Math.floor(user.statistics.play_time / 60 / 60).toLocaleString()}h</h2>
                                     <h2>{user.statistics.maximum_combo.toLocaleString()}x</h2>
                                     <h2>{user.statistics.total_hits.toLocaleString()}</h2>
-                                    <h2>{Math.round(user.statistics.total_hits / user.statistics.play_count).toLocaleString()}</h2>
+                                    <h2>{Math.round(user.statistics.total_hits / user.statistics.play_count || 0).toLocaleString()}</h2>
                                     <h2>{user.statistics.replays_watched_by_others.toLocaleString()}</h2>
                                 </div>
                             </div>
