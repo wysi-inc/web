@@ -38,7 +38,8 @@ const Rankings = async (props: Props) => {
                 <tbody>
                     {users.ranking.map((row, i) =>
                         <tr class="hover:bg-base-100 hover:rounded-lg cursor-pointer"
-                            hx-get={`/users/${row.user.id}`} hx-push-url="true" hx-target="#main">
+                            hx-get={`/users/${row.user.id}`} hx-push-url="true" hx-target="#main"
+                            hx-indicator="#page-loading">
                             <th class="table-cell text-start">#{i + 1 + 50 * (props.page - 1)}</th>
                             <td class="table-cell">
                                 <div class="flex flex-row gap-4">

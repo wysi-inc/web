@@ -3008,6 +3008,10 @@ details.collapse summary::-webkit-details-marker {
   aspect-ratio: 1 / 1;
 }
 
+.h-1 {
+  height: 0.25rem;
+}
+
 .h-2 {
   height: 0.5rem;
 }
@@ -3170,6 +3174,11 @@ details.collapse summary::-webkit-details-marker {
   border-radius: 0.125rem;
 }
 
+.bg-accent {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-a,oklch(var(--a)/var(--tw-bg-opacity)));
+}
+
 .bg-base-100 {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
@@ -3323,12 +3332,6 @@ details.collapse summary::-webkit-details-marker {
 }
 
 @font-face {
-  font-family: Geist;
-
-  src: url("/public/css/fonts/Geist-SemiBold.otf") format("opentype");
-}
-
-@font-face {
   font-family: Torus;
 
   src: url("/public/css/fonts/Torus-SemiBold.otf") format("opentype");
@@ -3339,6 +3342,25 @@ details.collapse summary::-webkit-details-marker {
   margin: 0;
   box-sizing: border-box;
   font-family: Torus;
+}
+
+.loading-indicator:not([style*="display: none"]) {
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-name: loading;
+  animation-delay: 0s;
+}
+
+@keyframes loading {
+  0% {
+    filter: opacity(0);
+  }
+
+  100% {
+    filter: opacity(1);
+  }
 }
 
 .hover\:rounded-lg:hover {
