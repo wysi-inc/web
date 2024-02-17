@@ -1,6 +1,6 @@
 const Footer = () => (
     <footer>
-        <p>© 2021 Next.js Blog</p>
+        <p>hellooo</p>
     </footer>
 );
 

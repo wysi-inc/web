@@ -4,6 +4,7 @@
   "type": "module",
   "devDependencies": {
     "@types/bun": "latest",
+    "daisyui": "latest",
     "typed-html": "^3.0.1"
   },
   "scripts": {

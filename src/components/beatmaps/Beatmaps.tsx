@@ -65,8 +65,8 @@ const Beatmaps = (props: Props) => {
             </div>
         </form>
         <script src="/public/js/sliders.js"></script>
-        <div id="beatmaps-results" class="bg-base-100 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg">
-            <BeatmapsList query={props.query} />
+        <div id="beatmaps-results" hx-trigger="load" hx-post="/beatmaps/list"
+            class="bg-base-100 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg">
         </div>
     </>);
 }

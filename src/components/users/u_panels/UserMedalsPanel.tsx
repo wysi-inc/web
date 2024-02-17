@@ -1,11 +1,6 @@
 import { Medal } from "@/src/models/Medal";
 import MedalBadge from "./u_components/Medal";
-import type { UserMedal } from "@/src/types/users";
-
-type ProfileMedal = {
-    achievement_id: number,
-    achieved_at: string
-}
+import type { ProfileMedal, UserMedal } from "@/src/types/medals";
 
 type Props = {
     user_medals: ProfileMedal[]
@@ -76,15 +71,7 @@ const UserMedalsPanel = async (props: Props) => {
     })[0];
 
     return (
-        <div class="p-4 bg-base-100 rounded-lg flex flex-col gap-4 shadow-lg">
-            <div class="flex flex-row items-center gap-2">
-                <a class="tooltip" data-tip="powered by osekai.net" href="https://osekai.net" target="_blank">
-                    <img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" />
-                </a>
-                <div>
-                    Medals
-                </div>
-            </div>
+        <div class="flex flex-col gap-4">
             <div class="flex flex-row gap-4">
                 <div class="rounded-lg bg-neutral shadow-lg grow">
                     <div class="p-1 px-2">

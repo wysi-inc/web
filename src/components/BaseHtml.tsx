@@ -13,10 +13,10 @@ const BaseHtml = ({ children }: any) => (
             <script src="/public/lib/chart.js" />
             <script src="https://kit.fontawesome.com/d5ab19acce.js" crossorigin="anonymous" />
         </head>
-        <body class="bg-base-300">
+        <body class="bg-base-300 flex flex-col items-center">
             <Navbar />
-            <div class="flex justify-center">
-                <main id="main" class="p-4 flex flex-col gap-4 bg-neutral shadow-lg" style="width: 1000px;">
+            <div class="flex justify-center items-center" style={{ maxWidth: "1000px" }}>
+                <main id="main" class="p-4 flex flex-col gap-4 bg-neutral shadow-lg grow">
                     {children}
                 </main>
             </div>

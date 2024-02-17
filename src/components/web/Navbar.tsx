@@ -2,7 +2,7 @@ import Search from "./Search";
 
 const Navbar = () => {
     return (
-        <div class="flex flex-col bg-base-100 shadow-lg sticky top-0 z-50">
+        <div class="flex flex-col bg-base-100 shadow-lg sticky top-0 z-50 w-full">
             <nav class="navbar">
                 <div class="navbar-start">
                     <div class="dropdown">

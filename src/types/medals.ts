@@ -1,3 +1,5 @@
+import type { Medal } from "../models/Medal";
+
 export type OsekaiMedal = {
     MedalID: number,
     Name: string,
@@ -11,3 +13,14 @@ export type OsekaiMedal = {
     AchievementDate: Date,
     Achieved: boolean,
 }
+
+export type UserMedal = Medal & {
+    achieved: boolean;
+    achieved_at: Date | null;
+}
+
+export type ProfileMedal = {
+    achievement_id: number,
+    achieved_at: string
+}
+

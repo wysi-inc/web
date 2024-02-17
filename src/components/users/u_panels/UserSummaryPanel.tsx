@@ -8,7 +8,6 @@ import { secondsToTime } from "@/src/resources/functions";
 type Props = {
     id: number;
     mode: Mode;
-    acc: number;
 }
 
 const UserSummaryPanel = async (props: Props) => {
@@ -73,13 +72,14 @@ const UserSummaryPanel = async (props: Props) => {
     const min_pp = Math.round(Math.min(...all_pp));
 
     const avg_pp = Math.round(all_pp.reduce((a, b) => a + b, 0) / all_pp.length);
-    const avg_acc = (props.acc).toFixed(2);
     const avg_combo = Math.round(scores.map(s => s.max_combo).reduce((a, b) => a + b, 0) / scores.length);
 
-    let avg_length = 0;
+    let avg_acc: number = 0;
+    let avg_length: number = 0;
     const avg_bpm = Math.round(scores.map(s => {
         let bpm = s.beatmap.bpm;
         let len = s.beatmap.total_length;
+        avg_acc += s.accuracy;
         s.mods.forEach(m => {
             if (m.acronym === "DT" || m.acronym === "NC") {
                 bpm *= 1.5;
@@ -95,6 +95,7 @@ const UserSummaryPanel = async (props: Props) => {
         return bpm;
     }).reduce((a, b) => a + b, 0) / scores.length);
     avg_length = Math.round(avg_length / scores.length);
+    avg_acc = avg_acc / scores.length;
     const avg_grade = grade_labels[grade_counts.indexOf(Math.max(...grade_counts))];
 
     let modsCounter: { [key: string]: number } = {};
@@ -119,48 +120,40 @@ const UserSummaryPanel = async (props: Props) => {
     const avg_mods = largestKey ? largestKey.split('-').map(String) : [];
 
     return (
-        <div class="shadow-lg rounded-lg bg-base-100 p-4 flex flex-col gap-4 justify-center">
-            <div class="flex flex-row items-center gap-2">
-                <i class="fa-solid fa-ranking-star" />
-                <div>
-                    Scores Summary
+        <div class="flex flex-col gap-4">
+            <div class="flex flex-col col-span-full bg-neutral rounded-lg">
+                <div class="p-2">Average Play:</div>
+                <div class="flex flex-row flex-wrap gap-4 items-center p-4 rounded-lg bg-base-300">
+                    <h3 class="text-xl" style={{ color: (colors.grades as any)[avg_grade.toLowerCase()] }}>{avg_grade}</h3>
+                    <div>{avg_pp}pp</div>
+                    <div><i class="fa-solid fa-bullseye fa-xs" /> {avg_acc.toFixed(2)}%</div>
+                    <div><i class="fa-solid fa-fire fa-xs" /> {avg_combo.toLocaleString()}x</div>
+                    <div><i class="fa-solid fa-stopwatch fa-xs" /> {secondsToTime(avg_length)}</div>
+                    <div><i class="fa-solid fa-music fa-xs" /> {avg_bpm}bpm</div>
+                    {avg_mods.map(m => (
+                        <div class="tooltip flex items-center justify-center" data-tip={m}>
+                            <img src={`/public/img/mods/${m.toLowerCase()}.png`} alt={m} class="h-5" />
+                        </div>
+                    ))}
                 </div>
             </div>
-            <div class="flex flex-col gap-4">
-                <div class="flex flex-col col-span-full bg-neutral rounded-lg">
-                    <div class="p-2">Average Play:</div>
-                    <div class="flex flex-row gap-4 items-center p-4 rounded-lg bg-base-300">
-                        <h3 class="text-xl" style={{ color: (colors.grades as any)[avg_grade.toLowerCase()] }}>{avg_grade}</h3>
-                        <div>{avg_pp}pp</div>
-                        <div><i class="fa-solid fa-bullseye fa-xs" /> {avg_acc}%</div>
-                        <div><i class="fa-solid fa-fire fa-xs" /> {avg_combo.toLocaleString()}x</div>
-                        <div><i class="fa-solid fa-stopwatch fa-xs" /> {secondsToTime(avg_length)}</div>
-                        <div><i class="fa-solid fa-music fa-xs" /> {avg_bpm}bpm</div>
-                        {avg_mods.map(m => (
-                            <div class="tooltip flex items-center justify-center" data-tip={m}>
-                                <img src={`/public/img/mods/${m.toLowerCase()}.png`} alt={m} class="h-5" />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                <div class="flex flex-row gap-2 p-4 rounded-lg bg-base-300">
-                    <h4>Max PP: {max_pp}pp</h4>
-                    <h4>Min PP: {min_pp}pp</h4>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg bg-base-300">
-                    <BarChart
-                        labels={grade_labels}
-                        data={grade_counts}
-                        colors={grade_colors}
-                    />
-                    <BarChart
-                        labels={hit_labels}
-                        data={hit_counts}
-                        colors={hit_colors}
-                    />
-                </div>
+            <div class="flex flex-row gap-2 p-4 rounded-lg bg-base-300">
+                <h4>Max PP: {max_pp}pp</h4>
+                <h4>Min PP: {min_pp}pp</h4>
             </div>
-        </div >
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg bg-base-300">
+                <BarChart
+                    labels={grade_labels}
+                    data={grade_counts}
+                    colors={grade_colors}
+                />
+                <BarChart
+                    labels={hit_labels}
+                    data={hit_counts}
+                    colors={hit_colors}
+                />
+            </div>
+        </div>
     );
 }
 

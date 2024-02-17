@@ -73,8 +73,8 @@ const ScoreCard = async (props: Props) => {
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                     }}>
-                    <div class="grid grid-cols-5 grow rounded-lg" style="backdrop-filter: blur(8px); background-color: rgba(0, 0, 0, 0.8);">
-                        <div class="flex flex-row col-span-3">
+                    <div class="grid grid-cols-1 lg:grid-cols-5 grow rounded-lg" style="backdrop-filter: blur(8px); background-color: rgba(0, 0, 0, 0.8);">
+                        <div class="flex flex-row lg:col-span-3">
                             <img src={cardImg} onerror="this.src='/public/img/fallback.png'"
                                 class="rounded-lg" alt="cover" loading="lazy"
                                 style={{
@@ -102,7 +102,7 @@ const ScoreCard = async (props: Props) => {
                                 </div>
                             </div>
                         </div>
-                        <div class="flex flex-col gap-2 py-2 px-4 justify-between col-span-2 rounded-lg"
+                        <div class="flex flex-col gap-2 py-2 px-4 justify-between lg:col-span-2 rounded-lg"
                             style={{ backgroundColor: "rgba(255,255,255, 0.1)" }}>
                             <div class="flex flex-row justify-between gap-4">
                                 <div class="flex flex-col gap-1">

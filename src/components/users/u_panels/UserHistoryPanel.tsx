@@ -17,18 +17,12 @@ type Props = {
 const UserHistoryPanel = (props: Props) => {
 
     return (
-        <div class="rounded-lg bg-base-100 p-4 flex flex-col gap-2 justify-center shadow-lg">
-            <div class="flex flex-row items-center gap-2">
-                <i class="fa-solid fa-chart-line" />
-                <div>
-                    History
-                </div>
-            </div>
+        <div>
             <div role="tablist" class="tabs tabs-bordered grow">
                 <input type="radio" name="history_tabs" role="tab" class="tab text-nowrap" aria-label="Global Rank" checked />
                 <div role="tabpanel" class="tab-content pt-4">
                     {props.db_ranks.global_rank_history.length > 0 ?
-                        <div class="h-64">
+                        <div class="h-64 w-full relative">
                             <canvas id="chart-global" />
                         </div> :
                         "No data found"
@@ -38,7 +32,7 @@ const UserHistoryPanel = (props: Props) => {
                 <input type="radio" name="history_tabs" role="tab" class="tab text-nowrap" aria-label="Country Rank" />
                 <div role="tabpanel" class="tab-content pt-4">
                     {props.db_ranks.country_rank_history.length > 0 ?
-                        <div class="h-64">
+                        <div class="h-64 w-full relative">
                             <canvas id="chart-country" />
                         </div> :
                         "No data found"
@@ -48,7 +42,7 @@ const UserHistoryPanel = (props: Props) => {
                 <input type="radio" name="history_tabs" role="tab" class="tab text-nowrap" aria-label="Play Count" />
                 <div role="tabpanel" class="tab-content pt-4">
                     {props.play_counts.length > 0 ?
-                        <div class="h-64">
+                        <div class="h-64 w-full relative">
                             <canvas id="chart-plays" />
                         </div> :
                         "No plays found"
@@ -58,7 +52,7 @@ const UserHistoryPanel = (props: Props) => {
                 <input type="radio" name="history_tabs" role="tab" class="tab text-nowrap" aria-label="Replays Watched" />
                 <div role="tabpanel" class="tab-content pt-4">
                     {props.replays_watched.length > 0 ?
-                        <div class="h-64">
+                        <div class="h-64 w-full relative">
                             <canvas id="chart-replays" />
                         </div> :
                         "No replays watched"
