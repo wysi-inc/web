@@ -72,7 +72,7 @@ const UserMedalsPanel = async (props: Props) => {
 
     return (
         <div class="flex flex-col gap-4">
-            <div class="flex flex-row gap-4">
+            <div class="flex flex-row flex-wrap gap-4">
                 <div class="rounded-lg bg-neutral shadow-lg grow">
                     <div class="p-1 px-2">
                         Recent Medals

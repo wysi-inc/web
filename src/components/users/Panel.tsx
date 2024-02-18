@@ -1,9 +1,10 @@
 type Props = {
-    icon: JSX.Element;
     title: string;
+    icon: JSX.Element;
     tooltip?: string;
-    content: JSX.Element;
-}
+    url?: string;
+    children: JSX.Element;
+};
 
 const Panel = (props: Props) => (
     <div class="min-h-28 shadow-lg rounded-lg bg-base-100 p-4 flex flex-col gap-4" id="scores-panel">
@@ -15,7 +16,7 @@ const Panel = (props: Props) => (
                 {props.title}
             </div>
         </div>
-        {props.content}
+        {props.children}
     </div>
 );
 

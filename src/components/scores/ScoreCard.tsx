@@ -153,7 +153,7 @@ const ScoreCard = async (props: Props) => {
                         </div>
                     </div>
                 </div>
-                <div class="py-2 px-4 flex flex-row gap-4 items-center">
+                <div class="py-2 px-4 flex flex-row flex-wrap gap-4 items-center">
                     <DiffIcon setId={beatmapset.id} diffId={score.beatmap.id}
                         diff={score.beatmap.difficulty_rating} size={20}
                         mode={score.beatmap.mode} name={score.beatmap.version} />

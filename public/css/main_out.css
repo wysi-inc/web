@@ -2949,14 +2949,6 @@ details.collapse summary::-webkit-details-marker {
   z-index: 1;
 }
 
-.col-span-2 {
-  grid-column: span 2 / span 2;
-}
-
-.col-span-3 {
-  grid-column: span 3 / span 3;
-}
-
 .col-span-full {
   grid-column: 1 / -1;
 }
@@ -2967,10 +2959,6 @@ details.collapse summary::-webkit-details-marker {
 
 .ms-auto {
   margin-inline-start: auto;
-}
-
-.mt-2 {
-  margin-top: 0.5rem;
 }
 
 .mt-3 {
@@ -3065,6 +3053,10 @@ details.collapse summary::-webkit-details-marker {
   width: 100%;
 }
 
+.w-screen {
+  width: 100vw;
+}
+
 .grow {
   flex-grow: 1;
 }
@@ -3079,10 +3071,6 @@ details.collapse summary::-webkit-details-marker {
 
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.grid-cols-5 {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .flex-row {

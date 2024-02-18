@@ -39,7 +39,7 @@ const UserPage = async (props: Props) => {
     return (<>
         <UserTopPanel user={user} />
         <Panel title="History" icon={<i class="fa-solid fa-chart-line" />}
-            content={<UserHistoryPanel db_ranks={user.db_ranks} play_counts={user.monthly_playcounts} replays_watched={user.replays_watched_counts} />} />
+            children={<UserHistoryPanel db_ranks={user.db_ranks} play_counts={user.monthly_playcounts} replays_watched={user.replays_watched_counts} />} />
         <LazyPanel title="Scores Summary" icon={<i class="fa-solid fa-ranking-star" />}
             url={`/user/${user.id}/${mode}/panels/scores_summary`} />
         <LazyPanel title="Skins (wip)" icon={<i class="fa-solid fa-palette" />}
@@ -51,10 +51,10 @@ const UserPage = async (props: Props) => {
         <LazyPanel title="Beatmaps" icon={<i class="fa-solid fa-screwdriver-wrench" />}
             url={`/user/${user.id}/${mode}/panels/beatmaps/favourite`} />
         <LazyPanel title="Most Played" icon={<i class="fa-solid fa-rotate-left" />}
-            url={`/user/${user.id}/${mode}/panels/most_played`} />
+            url={`/user/${user.id}/0/panels/most_played`} />
         <LazyPanel title="Medals" icon={<img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" />}
             tooltip="powered by osekai.net"
-            url={`/user/${user.id}/${mode}/panels/medals`}
+            url={`/user/${user.id}/0/panels/medals`}
             body={{ medals: user.user_achievements }}
         />
     </>);

@@ -88,12 +88,6 @@ const app = new Elysia()
         ))
     )
     .group("/user/:id/:mode/panels", (_) => _
-        .post("/skins", ({ request, html, params }) => getPage(request, html,
-            <UserSkinsPanel />
-        ))
-        .post("/setup", ({ request, html, params }) => getPage(request, html,
-            <UserSetupPanel />
-        ))
         .post("/scores_summary", ({ request, html, params }) => getPage(request, html,
             <UserSummaryPanel id={Number(params.id)} mode={params.mode as Mode} />
         ))
@@ -105,6 +99,12 @@ const app = new Elysia()
         ))
         .post("/most_played", ({ request, html, params }) => getPage(request, html,
             <UserMostPanel id={Number(params.id)} />
+        ))
+        .post("/skins", ({ request, html, params }) => getPage(request, html,
+            <UserSkinsPanel />
+        ))
+        .post("/setup", ({ request, html, params }) => getPage(request, html,
+            <UserSetupPanel />
         ))
         .post("/medals", ({ request, html, body }) => {
             const medals: ProfileMedal[] = (body as any)?.medals?.map((m: string) => JSON.parse(m) as ProfileMedal);
