@@ -6,7 +6,7 @@ type Props = {
 
 const UserMostPanel = (props: Props) => {
     return (
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <UserMostList id={props.id} offset={0} limit={6} />
         </div>
     );

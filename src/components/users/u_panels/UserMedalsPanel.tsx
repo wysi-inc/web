@@ -85,7 +85,7 @@ const UserMedalsPanel = async (props: Props) => {
                         }
                     </div>
                 </div>
-                <div class="rounded-lg bg-neutral shadow-lg">
+                <div class="rounded-lg bg-neutral shadow-lg grow">
                     <div class="p-1 px-2">
                         Rarest Medal ({rarest_medal?.rarity?.toFixed(2)}%)
                     </div>

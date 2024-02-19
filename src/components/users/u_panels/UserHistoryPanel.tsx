@@ -16,49 +16,28 @@ type Props = {
 
 const UserHistoryPanel = (props: Props) => {
 
-    return (
-        <div>
-            <div role="tablist" class="tabs tabs-bordered grow">
-                <input type="radio" name="history_tabs" role="tab" class="tab text-nowrap" aria-label="Global Rank" checked />
-                <div role="tabpanel" class="tab-content pt-4">
-                    {props.db_ranks.global_rank_history.length > 0 ?
-                        <div class="h-64 w-full relative">
-                            <canvas id="chart-global" />
-                        </div> :
-                        "No data found"
-                    }
-                </div>
-
-                <input type="radio" name="history_tabs" role="tab" class="tab text-nowrap" aria-label="Country Rank" />
-                <div role="tabpanel" class="tab-content pt-4">
-                    {props.db_ranks.country_rank_history.length > 0 ?
-                        <div class="h-64 w-full relative">
-                            <canvas id="chart-country" />
-                        </div> :
-                        "No data found"
-                    }
-                </div>
-
-                <input type="radio" name="history_tabs" role="tab" class="tab text-nowrap" aria-label="Play Count" />
-                <div role="tabpanel" class="tab-content pt-4">
-                    {props.play_counts.length > 0 ?
-                        <div class="h-64 w-full relative">
-                            <canvas id="chart-plays" />
-                        </div> :
-                        "No plays found"
-                    }
-                </div>
-
-                <input type="radio" name="history_tabs" role="tab" class="tab text-nowrap" aria-label="Replays Watched" />
-                <div role="tabpanel" class="tab-content pt-4">
-                    {props.replays_watched.length > 0 ?
-                        <div class="h-64 w-full relative">
-                            <canvas id="chart-replays" />
-                        </div> :
-                        "No replays watched"
-                    }
-                </div>
+    const Tab = (p: { type: string, title: string, col: string, check: boolean }) => {
+        return (<>
+            <input type="radio" name="history_tabs" role="tab" class={`tab text-nowrap ${p.col}`}
+                aria-label={p.title} checked={p.check} />
+            <div role="tabpanel" class="tab-content pt-4">
+                {props.db_ranks.global_rank_history.length > 0 ?
+                    <div class="h-64 w-full relative">
+                        <canvas id={`chart-${p.type}`} class="absolute" />
+                    </div> :
+                    "No data found"
+                }
             </div>
+        </>
+        );
+    }
+
+    return (
+        <div role="tablist" class="tabs tabs-bordered grid grid-cols-4">
+            <Tab type="global" title="Global Rank" col="col-start-1 col-end-1" check={true} />
+            <Tab type="country" title="Country Rank" col="col-start-2 col-end-2" check={false} />
+            <Tab type="plays" title="Play Count" col="col-start-3 col-end-3" check={false} />
+            <Tab type="replays" title="Replays Watched" col="col-start-4 col-end-4" check={false} />
             <script type="module">
                 {props.db_ranks.global_rank_history.length > 0 &&
                     get_rank_chart('global', props.db_ranks.global_rank_history)
@@ -73,7 +52,6 @@ const UserHistoryPanel = (props: Props) => {
                     get_counts_chart('replays', props.replays_watched)
                 }
             </script>
-
         </div>
     );
 

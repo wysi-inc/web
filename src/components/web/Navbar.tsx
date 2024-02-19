@@ -24,20 +24,22 @@ const Navbar = () => {
                             </a></li>
                         </ul>
                     </div>
-                    <a class="btn btn-ghost text-xl">wysi</a>
+                    <a class="hidden md:block btn btn-ghost text-xl">wysi</a>
                 </div>
                 <div class="navbar-center">
                     <Search />
                 </div>
                 <div class="navbar-end">
-                    <a href="https://github.com/wysi-inc" target="_blank" class="btn btn-ghost btn-circle">
+                    <a href="https://github.com/wysi-inc" target="_blank"
+                        class="hidden md:flex btn btn-ghost">
                         <i class="fa-brands fa-github fa-lg" />
                     </a>
-                    <a href="https://discord.gg/QYVxgS2934" target="_blank" class="btn btn-ghost btn-circle">
+                    <a href="https://discord.gg/QYVxgS2934" target="_blank"
+                        class="hidden md:flex btn btn-ghost">
                         <i class="fa-brands fa-discord" />
                     </a>
                     <button class="btn btn-ghost">
-                        login with osu!
+                        <span class="hidden md:inline">login with osu!</span>
                         <i class="fa-solid fa-right-to-bracket" />
                     </button>
                 </div>

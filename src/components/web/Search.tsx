@@ -3,7 +3,7 @@ const Search = () => {
     return (<>
         <button onclick="search_modal.showModal()" class="btn btn-wide bg-base-300">
             <i class="fa-solid fa-magnifying-glass" />
-            Search
+            <span>Search</span>
         </button>
         <dialog class="modal" id="search_modal">
             <form hx-get="" hx-trigger="submit" hx-target="#main" id="search_form"

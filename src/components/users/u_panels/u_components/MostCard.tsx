@@ -1,4 +1,5 @@
 import DiffIcon from "@/src/components/beatmaps/DiffIcon";
+import CardControls from "@/src/components/web/CardControls";
 import { colors } from "@/src/resources/colors";
 import type { Beatmap, Beatmapset } from "@/src/types/beatmaps";
 
@@ -28,10 +29,9 @@ const MostCard = (props: Props) => {
                                 width: "100px",
                                 objectFit: "cover"
                             }} />
-                        <div class="flex p-4 flex-col grow">
-                            <div class="truncate w-72 text-lg">{beatmapset.title}</div>
-                            <div class="truncate w-72 text-sm">by {beatmapset.artist}</div>
-                            <div class="truncate w-72 text-xs">mapped by {beatmapset.creator}</div>
+                        <div class="flex flex-col p-4">
+                            <span class="text-lg m-0 p-0">{beatmapset.title}<span class="text-sm text-gray-400"> by {beatmapset.artist}</span></span>
+                            <span class="text-md m-0 p-0">[{beatmap.version}]<span class="text-sm text-gray-400"> by {beatmapset.creator}</span></span>
                         </div>
                     </div>
                 </div>
@@ -44,20 +44,18 @@ const MostCard = (props: Props) => {
                             diff={beatmap.difficulty_rating} size={20}
                             mode={beatmap.mode} name={beatmap.version} />
                     </div>
-                    <div class="flex flex-row items-center gap-2">
-                        <i class="fa-solid fa-arrow-rotate-left" />
-                        <div>
-                            {props.plays}
+                    <div class="flex flex-row gap-2">
+                        <div>#{props.position}</div>
+                        <div class="flex flex-row items-center gap-2">
+                            <i class="fa-solid fa-arrow-rotate-left" />
+                            <div>
+                                {props.plays}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col items-center justify-around p-2 gap-2">
-                <div>#{props.position}</div>
-                <a><i class="fa-solid fa-play fa-sm" /></a>
-                <a><i class="fa-solid fa-file-arrow-down fa-sm" /></a>
-                <a><i class="fa-solid fa-download fa-sm" /></a>
-            </div>
+            <CardControls beatmap_id={beatmap.id} set_id={beatmapset.id} />
         </div>
     )
 }

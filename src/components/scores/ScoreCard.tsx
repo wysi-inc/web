@@ -5,6 +5,7 @@ import { secondsToTime } from "@/src/resources/functions";
 import moment from "moment";
 import { tools } from "osu-api-extended";
 import type { Mode } from "@/src/types/osu";
+import CardControls from "../web/CardControls";
 
 type Props = {
     position: number;
@@ -67,13 +68,13 @@ const ScoreCard = async (props: Props) => {
     return (
         <div class="grow rounded-lg flex flex-row bg-base-300 shadow-lg">
             <div class="bg-neutral flex flex-col grow rounded-lg shadow-lg">
-                <div class="rounded-lg shadow-lg"
+                <div class="grow rounded-lg shadow-lg"
                     style={{
                         backgroundImage: `url(${cardImg})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                     }}>
-                    <div class="grid grid-cols-1 lg:grid-cols-5 grow rounded-lg" style="backdrop-filter: blur(8px); background-color: rgba(0, 0, 0, 0.8);">
+                    <div class="h-full grid grid-cols-1 lg:grid-cols-5 rounded-lg" style="backdrop-filter: blur(8px); background-color: rgba(0, 0, 0, 0.8);">
                         <div class="flex flex-row lg:col-span-3">
                             <img src={cardImg} onerror="this.src='/public/img/fallback.png'"
                                 class="rounded-lg" alt="cover" loading="lazy"
@@ -85,8 +86,8 @@ const ScoreCard = async (props: Props) => {
                                 }} />
                             <div class="flex flex-col py-2 px-4 gap-1 justify-between grow">
                                 <div class="flex flex-col">
-                                    <span class="text-lg m-0 p-0">{beatmapset.title}<span class="text-sm" style={{ color: "#999999" }}> by {beatmapset.artist}</span></span>
-                                    <span class="text-md m-0 p-0">[{beatmap.version}]<span class="text-sm" style={{ color: "#999999" }}> by {beatmapset.creator}</span></span>
+                                    <span class="text-lg m-0 p-0">{beatmapset.title}<span class="text-sm text-gray-400"> by {beatmapset.artist}</span></span>
+                                    <span class="text-md m-0 p-0">[{beatmap.version}]<span class="text-sm text-gray-400"> by {beatmapset.creator}</span></span>
                                 </div>
                                 <div class="flex flex-row gap-2 items-center">
                                     <div class="badge m-0"
@@ -154,6 +155,7 @@ const ScoreCard = async (props: Props) => {
                     </div>
                 </div>
                 <div class="py-2 px-4 flex flex-row flex-wrap gap-4 items-center">
+                    <div>#{props.position}</div>
                     <DiffIcon setId={beatmapset.id} diffId={score.beatmap.id}
                         diff={score.beatmap.difficulty_rating} size={20}
                         mode={score.beatmap.mode} name={score.beatmap.version} />
@@ -176,12 +178,7 @@ const ScoreCard = async (props: Props) => {
                     <div class="ms-auto text-sm">{moment(new Date(score.ended_at)).fromNow()}</div>
                 </div>
             </div>
-            <div class="flex flex-col items-center justify-around p-2 gap-2">
-                <div>#{props.position}</div>
-                <a><i class="fa-solid fa-play fa-sm" /></a>
-                <a><i class="fa-solid fa-file-arrow-down fa-sm" /></a>
-                <a><i class="fa-solid fa-download fa-sm" /></a>
-            </div>
+            <CardControls beatmap_id={score.beatmap.id} set_id={beatmapset.id} />
         </div>
     );
 }
