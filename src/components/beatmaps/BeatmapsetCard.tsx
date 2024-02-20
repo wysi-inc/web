@@ -17,28 +17,27 @@ const BeatmapsetCard = (props: Props) => {
             <div class="bg-neutral flex flex-col grow rounded-lg shadow-lg">
                 <div class="rounded-lg overflow-hidden grow flex flex-col shadow-lg"
                     style={{
-                        backgroundImage: `url(${cardImg})`,
+                        background: `linear-gradient(#000000cc, #000000cc), url(${cardImg})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
-                        backgroundOrigin: "border-box",
-                        backgroundRepeat: "no-repeat",
+                        backgroundRepeat: "no-repeat"
                     }}>
-                    <div class="flex flex-row grow" style="backdrop-filter: blur(8px); background-color: rgba(0, 0, 0, 0.8);">
-                        <img src={cardImg} onerror="this.src='/public/img/fallback.png'"
-                            class="rounded-lg" alt="cover" loading="lazy"
+                    <div class="flex flex-row grow" style={{ backdropFilter: "blur(8px)" }}>
+                        <img src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
                             style={{
                                 height: "100%",
                                 width: "100px",
                                 objectFit: "cover",
                                 objectPosition: "center"
                             }} />
-                        <div class="flex flex-col p-4">
-                            <span class="text-lg m-0 p-0">{beatmapset.title}<span class="text-sm text-gray-400"> by {beatmapset.artist}</span></span>
-                            <span class="text-sm text-gray-400">mapped by {beatmapset.creator}</span>
+                        <div class="flex flex-col py-2 px-4 truncate">
+                            <p class="text-lg truncate">{beatmapset.title}</p>
+                            <p class="text-sm truncate text-gray-400"> by {beatmapset.artist}</p>
+                            <p class="text-sm truncate text-gray-400">mapped by {beatmapset.creator}</p>
                         </div>
                     </div>
                 </div>
-                <div class="p-2 flex flex-row gap-2">
+                <div class="p-2 flex flex-row gap-2 items-center">
                     <div class="badge" style={`color: #000; background-color: ${colors.beatmap[beatmapset.status]}`}>{beatmapset.status}</div>
                     {beatmapset.beatmaps.sort((a, b) =>
                         a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int)

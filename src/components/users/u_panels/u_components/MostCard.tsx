@@ -15,27 +15,34 @@ const MostCard = (props: Props) => {
     const beatmapset = props.beatmapset;
     const beatmap = props.beatmap;
 
-    const listImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/list.jpg?${beatmapset.id}`;
-    const coverImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/cover@2x.jpg?${beatmapset.id}`;
+    const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
 
     return (
         <div class="rounded-lg flex flex-row bg-base-300 shadow-lg">
             <div class="bg-neutral flex flex-col grow rounded-lg shadow-lg">
-                <div class="rounded-lg overflow-hidden grow flex flex-col shadow-lg" style={`background-image: url(${coverImg}); background-size: cover;`}>
-                    <div class="flex flex-row grow" style="backdrop-filter: blur(8px); background-color: rgba(0, 0, 0, 0.8);">
-                        <img src={listImg} onerror="this.src='/public/img/fallback.png'" alt="cover"
-                            class="rounded-lg" style={{
+                <div class="rounded-lg overflow-hidden grow flex flex-col shadow-lg"
+                    style={{
+                        background: `linear-gradient(#000000cc, #000000cc), url(${cardImg})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat"
+                    }}>
+                    <div class="flex flex-row grow" style={{ backdropFilter: "blur(8px)" }}>
+                        <img src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
+                            style={{
                                 height: "100%",
                                 width: "100px",
-                                objectFit: "cover"
+                                objectFit: "cover",
+                                objectPosition: "center"
                             }} />
-                        <div class="flex flex-col p-4">
-                            <span class="text-lg m-0 p-0">{beatmapset.title}<span class="text-sm text-gray-400"> by {beatmapset.artist}</span></span>
-                            <span class="text-md m-0 p-0">[{beatmap.version}]<span class="text-sm text-gray-400"> by {beatmapset.creator}</span></span>
+                        <div class="flex flex-col py-2 px-4 truncate">
+                            <p class="text-lg truncate">{beatmapset.title}</p>
+                            <p class="text-sm truncate text-gray-400"> by {beatmapset.artist}</p>
+                            <p class="text-sm truncate text-gray-400">mapped by {beatmapset.creator}</p>
                         </div>
                     </div>
                 </div>
-                <div class="p-2 flex flex-row justify-between gap-2">
+                <div class="p-2 flex flex-row justify-between items-center gap-2">
                     <div class="flex flex-row gap-2">
                         <div class="badge" style={`color: #000; background-color: ${colors.beatmap[beatmapset.status]}`}>
                             {beatmapset.status}
@@ -44,10 +51,10 @@ const MostCard = (props: Props) => {
                             diff={beatmap.difficulty_rating} size={20}
                             mode={beatmap.mode} name={beatmap.version} />
                     </div>
-                    <div class="flex flex-row gap-2">
+                    <div class="flex flex-row items-center gap-2">
                         <div>#{props.position}</div>
                         <div class="flex flex-row items-center gap-2">
-                            <i class="fa-solid fa-arrow-rotate-left" />
+                            <i class="fa-sm fa-solid fa-arrow-rotate-left" />
                             <div>
                                 {props.plays}
                             </div>

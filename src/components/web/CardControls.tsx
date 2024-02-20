@@ -12,9 +12,11 @@ const CardControls = (props: Props) => {
             <a class="btn btn-ghost btn-sm grow p-2" href={`osu://b/${props.beatmap_id}`}>
                 <i class="fa-solid fa-file-arrow-down fa-sm" />
             </a>
-            <a class="btn btn-ghost btn-sm grow p-2" href={`https://catboy.best/d/${props.set_id}`}>
-                <i class="fa-solid fa-download fa-sm" />
-            </a>
+            {
+                // <a class="btn btn-ghost btn-sm grow p-2" href={`https://catboy.best/d/${props.set_id}`}>
+                //     <i class="fa-solid fa-download fa-sm" />
+                // </a>
+            }
         </div>
     );
 }
