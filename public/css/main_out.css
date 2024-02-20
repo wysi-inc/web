@@ -749,13 +749,6 @@ html {
   pointer-events: none;
 }
 
-.btn-circle {
-  height: 3rem;
-  width: 3rem;
-  border-radius: 9999px;
-  padding: 0px;
-}
-
 :where(.btn:is(input[type="checkbox"])),
 :where(.btn:is(input[type="radio"])) {
   width: auto;
@@ -2576,30 +2569,9 @@ details.collapse summary::-webkit-details-marker {
   padding: 0px;
 }
 
-.btn-circle:where(.btn-xs) {
-  height: 1.5rem;
-  width: 1.5rem;
-  border-radius: 9999px;
-  padding: 0px;
-}
-
 .btn-circle:where(.btn-sm) {
   height: 2rem;
   width: 2rem;
-  border-radius: 9999px;
-  padding: 0px;
-}
-
-.btn-circle:where(.btn-md) {
-  height: 3rem;
-  width: 3rem;
-  border-radius: 9999px;
-  padding: 0px;
-}
-
-.btn-circle:where(.btn-lg) {
-  height: 4rem;
-  width: 4rem;
   border-radius: 9999px;
   padding: 0px;
 }
@@ -3402,10 +3374,6 @@ details.collapse summary::-webkit-details-marker {
 
   .md\:col-span-3 {
     grid-column: span 3 / span 3;
-  }
-
-  .md\:block {
-    display: block;
   }
 
   .md\:inline {
