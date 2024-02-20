@@ -3033,16 +3033,6 @@ details.collapse summary::-webkit-details-marker {
   aspect-ratio: 1 / 1;
 }
 
-.size-1 {
-  width: 0.25rem;
-  height: 0.25rem;
-}
-
-.size-2 {
-  width: 0.5rem;
-  height: 0.5rem;
-}
-
 .h-1 {
   height: 0.25rem;
 }
@@ -3099,16 +3089,8 @@ details.collapse summary::-webkit-details-marker {
   width: 1.75rem;
 }
 
-.w-72 {
-  width: 18rem;
-}
-
 .w-full {
   width: 100%;
-}
-
-.w-screen {
-  width: 100vw;
 }
 
 .grow {
@@ -3133,10 +3115,6 @@ details.collapse summary::-webkit-details-marker {
 
 .grid-cols-5 {
   grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-
-.grid-rows-2 {
-  grid-template-rows: repeat(2, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -3199,18 +3177,8 @@ details.collapse summary::-webkit-details-marker {
   overflow: hidden;
 }
 
-.truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .text-nowrap {
   text-wrap: nowrap;
-}
-
-.break-words {
-  overflow-wrap: break-word;
 }
 
 .rounded-box {
@@ -3289,22 +3257,8 @@ details.collapse summary::-webkit-details-marker {
   padding-bottom: 0.5rem;
 }
 
-.px-0 {
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
-.py-0 {
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
 .pt-4 {
   padding-top: 1rem;
-}
-
-.pt-0 {
-  padding-top: 0px;
 }
 
 .text-center {
@@ -3337,11 +3291,6 @@ details.collapse summary::-webkit-details-marker {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
 }
 
 .text-gray-400 {
@@ -3432,16 +3381,6 @@ details.collapse summary::-webkit-details-marker {
   }
 }
 
-@media (min-width: 768px) {
-  .md\:btn-wide {
-    width: 16rem;
-  }
-
-  .md\:btn-block {
-    width: 100%;
-  }
-}
-
 .hover\:rounded-lg:hover {
   border-radius: 0.5rem;
 }
@@ -3454,12 +3393,6 @@ details.collapse summary::-webkit-details-marker {
 .hover\:bg-base-200:hover {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
-}
-
-@media (min-width: 640px) {
-  .sm\:inline {
-    display: inline;
-  }
 }
 
 @media (min-width: 768px) {
@@ -3507,10 +3440,6 @@ details.collapse summary::-webkit-details-marker {
 
   .lg\:table-cell {
     display: table-cell;
-  }
-
-  .lg\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .lg\:grid-cols-5 {

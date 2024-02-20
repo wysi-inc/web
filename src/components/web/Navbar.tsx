@@ -6,7 +6,7 @@ const Navbar = () => {
             <nav class="navbar">
                 <div class="navbar-start">
                     <div class="dropdown">
-                        <button tabindex="0" role="button" class="btn btn-ghost btn-circle flex items-center justify-center">
+                        <button tabindex="0" role="button" class="btn btn-ghost flex items-center justify-center">
                             <i class="fa-solid fa-bars fa-lg" />
                         </button>
                         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
@@ -24,7 +24,7 @@ const Navbar = () => {
                             </a></li>
                         </ul>
                     </div>
-                    <a class="hidden md:block btn btn-ghost text-xl">wysi</a>
+                    <a class="hidden md:flex btn btn-ghost text-xl">wysi</a>
                 </div>
                 <div class="navbar-center">
                     <Search />
