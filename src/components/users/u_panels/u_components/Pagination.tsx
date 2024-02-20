@@ -8,7 +8,7 @@ type Props = {
 
 const Pagination = (props: Props) => {
     const ModeTab = (mode: Mode) =>
-        <button hx-post={`/rankings/${mode}/${props.category}/${props.page}`}
+        <button hx-get={`/rankings/${mode}/${props.category}/${props.page}`}
             hx-push-url="true" hx-swap="innerHTML" hx-target="#main"
             class={`tab ${props.mode == mode && "tab-active"}`} role="tab">
             {mode}
@@ -16,14 +16,14 @@ const Pagination = (props: Props) => {
 
     const PageTab = (page: number) =>
         page >= 1 && page <= 200 &&
-        <button hx-post={`/rankings/${props.mode}/${props.category}/${page}`}
+        <button hx-get={`/rankings/${props.mode}/${props.category}/${page}`}
             hx-push-url="true" hx-swap="innerHTML" hx-target="#main"
             class={`tab ${props.page == page && "tab-active"}`} role="tab">
             {page}
         </button>;
 
     const CategoryTab = (category: Category) =>
-        <button hx-post={`/rankings/${props.mode}/${category}/${props.page}`}
+        <button hx-get={`/rankings/${props.mode}/${category}/${props.page}`}
             hx-push-url="true" hx-swap="innerHTML" hx-target="#main"
             class={`tab ${props.category == category && "tab-active"}`} role="tab">
             {category}

@@ -57,7 +57,7 @@ const app = new Elysia()
         .get("/", ({ request, html }) => getPage(request, html,
             <Rankings mode="osu" page={1} category="performance" />
         ))
-        .post("/:mode/:category/:page", ({ request, html, params }) => getPage(request, html,
+        .get("/:mode/:category/:page", ({ request, html, params }) => getPage(request, html,
             <Rankings mode={params.mode} category={params.category} page={Number(params.page)} />
         ))
     )
