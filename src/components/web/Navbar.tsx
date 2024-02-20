@@ -5,10 +5,9 @@ const Navbar = () => {
         <div class="flex flex-col bg-base-100 shadow-lg sticky top-0 z-50 w-full">
             <nav class="navbar">
                 <div class="navbar-start">
-                    <div class="dropdown">
-                        <button tabindex="0" role="button" class="btn btn-ghost flex items-center justify-center">
-                            <i class="fa-solid fa-bars fa-lg" />
-                        </button>
+                    <div class="dropdown lg:hidden"> <button tabindex="0" role="button" class="btn btn-ghost flex items-center justify-center">
+                        <i class="fa-solid fa-bars fa-lg" />
+                    </button>
                         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                             <li><a hx-target="#main" hx-push-url="true" hx-indicator="#page-loading"
                                 hx-get="/">
@@ -24,7 +23,24 @@ const Navbar = () => {
                             </a></li>
                         </ul>
                     </div>
-                    <a class="hidden md:flex btn btn-ghost text-xl">wysi</a>
+                    <a class="hidden md:flex btn btn-ghost text-xl"
+                        hx-get="/" hx-target="#main" hx-push-url="true" hx-indicator="#page-loading">
+                        wysi
+                    </a>
+                    <div class="hidden lg:flex flex-row text-sm">
+                        <a hx-target="#main" hx-push-url="true" hx-indicator="#page-loading"
+                            hx-get="/" class="btn btn-ghost">
+                            Home
+                        </a>
+                        <a hx-target="#main" hx-push-url="true" hx-indicator="#page-loading"
+                            hx-get="/rankings" class="btn btn-ghost">
+                            Rankings
+                        </a>
+                        <a hx-target="#main" hx-push-url="true" hx-indicator="#page-loading"
+                            hx-get="/beatmaps" class="btn btn-ghost">
+                            Beatmaps
+                        </a>
+                    </div>
                 </div>
                 <div class="navbar-center">
                     <Search />

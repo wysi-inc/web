@@ -68,15 +68,15 @@ const ScoreCard = async (props: Props) => {
     return (
         <div class="grow rounded-lg flex flex-row bg-base-300 shadow-lg">
             <div class="bg-neutral flex flex-col grow rounded-lg shadow-lg">
-                <div class="rounded-lg overflow-hidden grow flex flex-col shadow-lg"
+                <div class="rounded-lg flex flex-col shadow-lg"
                     style={{
                         background: `linear-gradient(#000000cc, #000000cc), url(${cardImg})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat"
                     }}>
-                    <div class="grid grid-cols-1 lg:grid-cols-5 rounded-lg" style={{ backdropFilter: "blur(8px)" }}>
-                        <div class="flex flex-row lg:col-span-3">
+                    <div class="grid grid-cols-1 md:grid-cols-5 rounded-lg" style={{ backdropFilter: "blur(8px)" }}>
+                        <div class="flex flex-row md:col-span-3">
                             <img src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
                                 style={{
                                     height: "100%",
@@ -90,7 +90,7 @@ const ScoreCard = async (props: Props) => {
                                 <p class="text-sm truncate text-gray-400">mapped by {beatmapset.creator}</p>
                             </div>
                         </div>
-                        <div class="flex flex-col gap-2 py-2 px-4 justify-between lg:col-span-2 rounded-lg"
+                        <div class="flex flex-col gap-2 py-2 px-4 justify-between md:col-span-2 rounded-lg"
                             style={{ backgroundColor: "rgba(255,255,255, 0.1)" }}>
                             <div class="flex flex-row justify-between gap-4">
                                 <div class="flex flex-col gap-1">
@@ -152,7 +152,9 @@ const ScoreCard = async (props: Props) => {
                     <DiffIcon setId={beatmapset.id} diffId={score.beatmap.id}
                         diff={score.beatmap.difficulty_rating} size={20}
                         mode={score.beatmap.mode} name={score.beatmap.version} />
-                    <div>{new Date(beatmap.last_updated).getFullYear()}</div>
+                    <div class="tooltip" data-tip={moment(new Date(beatmap.last_updated)).format("DD/MM/YYYY")}>
+                        {new Date(beatmap.last_updated).getFullYear()}
+                    </div>
                     <div class="flex flex-row gap-1 items-center">
                         <i class="fa-solid fa-star fa-xs" />
                         <span>{stats?.sr ? stats.sr : beatmap.difficulty_rating}</span>

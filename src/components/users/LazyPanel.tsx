@@ -2,6 +2,7 @@ import Panel from "./Panel";
 
 type Props = {
     title: string;
+    code: string;
     tooltip?: string;
     icon: JSX.Element;
     url: string;
@@ -15,8 +16,8 @@ const LazyPanel = (props: Props) => {
     return (
         <Panel icon={props.icon} title={props.title} tooltip={props.tooltip} children={
             <span hx-post={props.url} hx-trigger="revealed" hx-swap="outerHTML"
-                hx-vals={body} hx-indicator={`#loading-${props.title.toLowerCase()}`}>
-                <span class="loading loading-spinner" id={`loading-${props.title.toLowerCase()}`} />
+                hx-vals={body} hx-indicator={`#loading-${props.code}`}>
+                <span class="loading loading-spinner" id={`loading-${props.code}`} />
             </span>
         } />
     );
