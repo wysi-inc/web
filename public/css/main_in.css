@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: Torus;
+    src: url("/public/css/fonts/Torus-SemiBold.otf") format("opentype");
+}
+
+* :not(i) {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Torus;
+}
+
+.loading-indicator:not([style*="display: none"]) {
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-name: loading;
+    animation-delay: 0s;
+}
+
+@keyframes loading {
+    0% {
+        filter: opacity(0);
+    }
+
+    100% {
+        filter: opacity(1);
+    }
+}
