@@ -159,18 +159,18 @@ const ScoreCard = async (props: Props) => {
                         <i class="fa-solid fa-star fa-xs" />
                         <span>{stats?.sr ? stats.sr : beatmap.difficulty_rating}</span>
                     </div>
-                    <div class="flex flex-row gap-1 items-center">
+                    <div class="hidden md:flex flex-row gap-1 items-center">
                         <i class="fa-solid fa-music fa-xs" />
                         <span>{stats?.bpm ? stats.bpm : beatmap.bpm}bpm</span>
                     </div>
-                    <div class="flex flex-row gap-1 items-center">
+                    <div class="hidden md:flex flex-row gap-1 items-center">
                         <i class="fa-solid fa-stopwatch fa-xs" />
                         <span>{secondsToTime(stats?.length ? stats.length : beatmap.total_length)}</span>
                     </div>
-                    <div>ar:{stats?.ar ? stats.ar : beatmap.ar}</div>
-                    <div>cs:{stats?.cs ? stats.cs : beatmap.cs}</div>
-                    <div>od:{stats?.od ? stats.od : beatmap.accuracy}</div>
-                    <div>hp:{stats?.hp ? stats.hp : beatmap.drain}</div>
+                    <div class="hidden md:block">ar:{stats?.ar ? stats.ar : beatmap.ar}</div>
+                    <div class="hidden md:block">cs:{stats?.cs ? stats.cs : beatmap.cs}</div>
+                    <div class="hidden md:block">od:{stats?.od ? stats.od : beatmap.accuracy}</div>
+                    <div class="hidden md:block">hp:{stats?.hp ? stats.hp : beatmap.drain}</div>
                     <div class="ms-auto">{moment(new Date(score.ended_at)).fromNow()}</div>
                     <div>#{props.position}</div>
                 </div>

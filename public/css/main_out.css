@@ -1296,33 +1296,6 @@ html {
   overflow: hidden;
 }
 
-.navbar {
-  display: flex;
-  align-items: center;
-  padding: var(--navbar-padding, 0.5rem);
-  min-height: 4rem;
-  width: 100%;
-}
-
-:where(.navbar > *:not(script, style)) {
-  display: inline-flex;
-  align-items: center;
-}
-
-.navbar-start {
-  width: 50%;
-  justify-content: flex-start;
-}
-
-.navbar-center {
-  flex-shrink: 0;
-}
-
-.navbar-end {
-  width: 50%;
-  justify-content: flex-end;
-}
-
 .progress {
   position: relative;
   width: 100%;
@@ -2981,6 +2954,14 @@ details.collapse summary::-webkit-details-marker {
   margin-top: 0.75rem;
 }
 
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.block {
+  display: block;
+}
+
 .flex {
   display: flex;
 }
@@ -3033,6 +3014,10 @@ details.collapse summary::-webkit-details-marker {
   height: 100%;
 }
 
+.h-8 {
+  height: 2rem;
+}
+
 .min-h-28 {
   min-height: 7rem;
 }
@@ -3063,6 +3048,18 @@ details.collapse summary::-webkit-details-marker {
 
 .w-full {
   width: 100%;
+}
+
+.w-40 {
+  width: 10rem;
+}
+
+.w-60 {
+  width: 15rem;
+}
+
+.w-8 {
+  width: 2rem;
 }
 
 .grow {
@@ -3111,6 +3108,14 @@ details.collapse summary::-webkit-details-marker {
 
 .items-center {
   align-items: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {
@@ -3373,6 +3378,10 @@ details.collapse summary::-webkit-details-marker {
     grid-column: span 3 / span 3;
   }
 
+  .md\:block {
+    display: block;
+  }
+
   .md\:inline {
     display: inline;
   }
@@ -3395,10 +3404,6 @@ details.collapse summary::-webkit-details-marker {
 }
 
 @media (min-width: 1024px) {
-  .lg\:block {
-    display: block;
-  }
-
   .lg\:flex {
     display: flex;
   }

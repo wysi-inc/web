@@ -20,7 +20,7 @@ const MostCard = (props: Props) => {
     return (
         <div class="rounded-lg flex flex-row bg-base-300 shadow-lg">
             <div class="bg-neutral flex flex-col grow rounded-lg shadow-lg">
-                <div class="rounded-lg overflow-hidden grow flex flex-col shadow-lg"
+                <div class="rounded-lg overflow-hidden flex flex-col shadow-lg"
                     style={{
                         background: `linear-gradient(#000000cc, #000000cc), url(${cardImg})`,
                         backgroundSize: "cover",
@@ -52,13 +52,13 @@ const MostCard = (props: Props) => {
                             mode={beatmap.mode} name={beatmap.version} />
                     </div>
                     <div class="flex flex-row items-center gap-2">
-                        <div>#{props.position}</div>
                         <div class="flex flex-row items-center gap-2">
                             <i class="fa-sm fa-solid fa-arrow-rotate-left" />
                             <div>
                                 {props.plays}
                             </div>
                         </div>
+                        <div>#{props.position}</div>
                     </div>
                 </div>
             </div>

@@ -13,16 +13,16 @@ const BeatmapsetCard = (props: Props) => {
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
 
     return (
-        <div class="rounded-lg flex flex-row bg-base-300 shadow-lg">
-            <div class="bg-neutral flex flex-col grow rounded-lg shadow-lg">
-                <div class="rounded-lg overflow-hidden grow flex flex-col shadow-lg"
+        <div class="flex flex-row bg-base-300 rounded-lg shadow-lg">
+            <div class="flex flex-col bg-neutral rounded-lg shadow-lg grow">
+                <div class="flex flex-col rounded-lg shadow-lg"
                     style={{
                         background: `linear-gradient(#000000cc, #000000cc), url(${cardImg})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat"
                     }}>
-                    <div class="flex flex-row grow" style={{ backdropFilter: "blur(8px)" }}>
+                    <div class="flex flex-row rounded-lg" style={{ backdropFilter: "blur(8px)" }}>
                         <img src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
                             style={{
                                 height: "100%",
@@ -37,7 +37,7 @@ const BeatmapsetCard = (props: Props) => {
                         </div>
                     </div>
                 </div>
-                <div class="p-2 flex flex-row gap-2 items-center">
+                <div class="flex flex-row p-2 gap-2 items-center">
                     <div class="badge" style={`color: #000; background-color: ${colors.beatmap[beatmapset.status]}`}>{beatmapset.status}</div>
                     {beatmapset.beatmaps.sort((a, b) =>
                         a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int)
