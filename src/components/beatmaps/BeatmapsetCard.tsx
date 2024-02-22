@@ -25,7 +25,6 @@ const BeatmapsetCard = (props: Props) => {
                     <div class="flex flex-row rounded-lg" style={{ backdropFilter: "blur(8px)" }}>
                         <img src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
                             style={{
-                                height: "100%",
                                 width: "100px",
                                 objectFit: "cover",
                                 objectPosition: "center"

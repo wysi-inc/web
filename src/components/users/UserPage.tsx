@@ -40,12 +40,12 @@ const UserPage = async (props: Props) => {
         <UserTopPanel user={user} />
         <Panel title="History" icon={<i class="fa-solid fa-chart-line" />}
             children={<UserHistoryPanel db_ranks={user.db_ranks} play_counts={user.monthly_playcounts} replays_watched={user.replays_watched_counts} />} />
-        <LazyPanel code="summary" title="Scores Summary" icon={<i class="fa-solid fa-ranking-star" />}
-            url={`/user/${user.id}/${mode}/panels/scores_summary`} />
         <LazyPanel code="skins" title="Skins (wip)" icon={<i class="fa-solid fa-palette" />}
             url={`/user/${user.id}/0/panels/skins`} />
         <LazyPanel code="setup" title="Setup (wip)" icon={<i class="fa-solid fa-computer" />}
             url={`/user/${user.id}/0/panels/setup`} />
+        <LazyPanel code="summary" title="Scores Summary" icon={<i class="fa-solid fa-ranking-star" />}
+            url={`/user/${user.id}/${mode}/panels/scores_summary`} />
         <LazyPanel code="scores" title="Scores" icon={<i class="fa-solid fa-flag-checkered" />}
             url={`/user/${user.id}/${mode}/panels/scores/${defaultCategory}`} />
         <LazyPanel code="beatmaps" title="Beatmaps" icon={<i class="fa-solid fa-screwdriver-wrench" />}

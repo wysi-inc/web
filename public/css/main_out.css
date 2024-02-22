@@ -2946,16 +2946,16 @@ details.collapse summary::-webkit-details-marker {
   margin: 0px;
 }
 
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
 .ms-auto {
   margin-inline-start: auto;
 }
 
 .mt-3 {
   margin-top: 0.75rem;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
 }
 
 .block {
@@ -3010,12 +3010,12 @@ details.collapse summary::-webkit-details-marker {
   height: 16rem;
 }
 
-.h-full {
-  height: 100%;
-}
-
 .h-8 {
   height: 2rem;
+}
+
+.h-full {
+  height: 100%;
 }
 
 .min-h-28 {
@@ -3046,20 +3046,12 @@ details.collapse summary::-webkit-details-marker {
   width: 1.75rem;
 }
 
-.w-full {
-  width: 100%;
-}
-
-.w-40 {
-  width: 10rem;
-}
-
-.w-60 {
-  width: 15rem;
-}
-
 .w-8 {
   width: 2rem;
+}
+
+.w-full {
+  width: 100%;
 }
 
 .grow {

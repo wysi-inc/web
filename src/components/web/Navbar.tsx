@@ -24,22 +24,22 @@ const Navbar = () => {
                             </a></li>
                         </ul>
                     </div>
-                    <a class="hidden md:flex btn btn-ghost text-xl"
+                    <a class="hidden md:flex gap-4 items-center btn btn-ghost px-2 text-xl"
                         hx-get="/" hx-target="#main" hx-push-url="true" hx-indicator="#page-loading">
-                        <img src="/public/wysi.svg" class="w-8 h-8 mr-2" alt="wysi" />
-                        wysi
+                        <img src="/public/wysi.svg" class="w-8 h-8 rounded-lg drop-shadow-lg shadow-lg" alt="wysi" />
+                        <span>wysi</span>
                     </a>
                     <div class="hidden lg:flex flex-row text-sm">
                         <a hx-target="#main" hx-push-url="true" hx-indicator="#page-loading"
-                            hx-get="/" class="btn btn-ghost">
+                            class="btn btn-ghost" hx-get="/">
                             Home
                         </a>
                         <a hx-target="#main" hx-push-url="true" hx-indicator="#page-loading"
-                            hx-get="/rankings" class="btn btn-ghost">
+                            class="btn btn-ghost" hx-get="/rankings">
                             Rankings
                         </a>
                         <a hx-target="#main" hx-push-url="true" hx-indicator="#page-loading"
-                            hx-get="/beatmaps" class="btn btn-ghost">
+                            class="btn btn-ghost" hx-get="/beatmaps">
                             Beatmaps
                         </a>
                     </div>

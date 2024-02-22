@@ -79,7 +79,6 @@ const ScoreCard = async (props: Props) => {
                         <div class="flex flex-row md:col-span-3">
                             <img src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
                                 style={{
-                                    height: "100%",
                                     width: "100px",
                                     objectFit: "cover",
                                     objectPosition: "center"
