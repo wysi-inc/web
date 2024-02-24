@@ -24,7 +24,7 @@ const Navbar = () => {
                             </a></li>
                         </ul>
                     </div>
-                    <a class="hidden md:flex gap-4 items-center btn btn-ghost px-2 text-xl"
+                    <a class="hidden sm:flex gap-4 items-center btn btn-ghost px-2 text-xl"
                         hx-get="/" hx-target="#main" hx-push-url="true" hx-indicator="#page-loading">
                         <img src="/public/wysi.svg" class="w-8 h-8 rounded-lg drop-shadow-lg shadow-lg" alt="wysi" />
                         <span>wysi</span>
@@ -57,7 +57,7 @@ const Navbar = () => {
                         <i class="fa-brands fa-discord" />
                     </a>
                     <button class="btn btn-ghost ">
-                        <span class="hidden md:inline">login with osu!</span>
+                        <span class="hidden lg:inline">login with osu!</span>
                         <i class="fa-solid fa-right-to-bracket" />
                     </button>
                 </div>

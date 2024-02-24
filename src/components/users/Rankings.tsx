@@ -27,11 +27,11 @@ const Rankings = async (props: Props) => {
                     <tr>
                         <th></th>
                         <th>User</th>
-                        <th>PP</th>
-                        <th>Accuracy</th>
-                        <th>Play Time</th>
-                        <th>Play Count</th>
-                        <th>Ranked Score</th>
+                        <th class="hidden sm:table-cell">PP</th>
+                        <th class="hidden sm:table-cell">Ranked Score</th>
+                        <th class="hidden md:table-cell">Accuracy</th>
+                        <th class="hidden md:table-cell">Play Time</th>
+                        <th class="hidden md:table-cell">Play Count</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -50,11 +50,11 @@ const Rankings = async (props: Props) => {
                                     </span>
                                 </div>
                             </td>
-                            <td class="hidden lg:table-cell">{Number(row.pp?.toFixed()).toLocaleString()}pp</td>
-                            <td class="hidden lg:table-cell">{row.hit_accuracy?.toFixed(2)}%</td>
-                            <td class="hidden lg:table-cell">{Number(((row.play_time || 0) / 60 / 60).toFixed()).toLocaleString()}h</td>
-                            <td class="hidden lg:table-cell">{row.play_count.toLocaleString()}</td>
-                            <td class="hidden md:table-cell">{row.ranked_score.toLocaleString()}</td>
+                            <td class="hidden sm:table-cell">{Number(row.pp?.toFixed()).toLocaleString()}pp</td>
+                            <td class="hidden sm:table-cell">{row.ranked_score.toLocaleString()}</td>
+                            <td class="hidden md:table-cell">{row.hit_accuracy?.toFixed(2)}%</td>
+                            <td class="hidden md:table-cell">{Number(((row.play_time || 0) / 60 / 60).toFixed()).toLocaleString()}h</td>
+                            <td class="hidden md:table-cell">{row.play_count.toLocaleString()}</td>
                             <td class="table-cell">
                                 <div class="flex justify-center">
                                     <OnlineDot size={24} online={row.user.is_online} />

@@ -31,13 +31,13 @@ const Pagination = (props: Props) => {
 
     return (
         <div class="flex justify-between">
-            <div class="tabs tabs-boxed bg-base-300" role="tablist">
+            <div class="hidden md:flex tabs tabs-boxed bg-base-300" role="tablist">
                 {ModeTab("osu")}
                 {ModeTab("taiko")}
                 {ModeTab("fruits")}
                 {ModeTab("mania")}
             </div>
-            <div class="flex flex-row gap-2">
+            <div class="flex flex-row justify-center grow gap-2">
                 {props.page > 3 &&
                     <div class="tabs tabs-boxed bg-base-300" role="tablist">
                         {PageTab(1)}
@@ -56,7 +56,7 @@ const Pagination = (props: Props) => {
                     </div>
                 }
             </div>
-            <div class="tabs tabs-boxed bg-base-300" role="flex justify-center tablist">
+            <div class="hidden md:flex tabs tabs-boxed bg-base-300" role="flex justify-center tablist">
                 {CategoryTab("performance")}
                 {CategoryTab("score")}
             </div>

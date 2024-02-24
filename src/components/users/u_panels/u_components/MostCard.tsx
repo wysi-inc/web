@@ -35,9 +35,9 @@ const MostCard = (props: Props) => {
                                 objectPosition: "center"
                             }} />
                         <div class="flex flex-col py-2 px-4 truncate">
-                            <p class="text-lg truncate">{beatmapset.title}</p>
-                            <p class="text-sm truncate text-gray-400"> by {beatmapset.artist}</p>
-                            <p class="text-sm truncate text-gray-400">mapped by {beatmapset.creator}</p>
+                            <p class="text-lg text-ellipsis truncate">{beatmapset.title}</p>
+                            <p class="text-sm text-ellipsis truncate text-gray-400"> by {beatmapset.artist}</p>
+                            <p class="text-sm text-ellipsis truncate text-gray-400">mapped by {beatmapset.creator}</p>
                         </div>
                     </div>
                 </div>

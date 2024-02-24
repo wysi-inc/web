@@ -104,7 +104,7 @@ const UserMedalsPanel = async (props: Props) => {
                             {key}
                         </div>
                         <div class="flex flex-row items-center gap-2">
-                            <progress class="progress progress-accent w-52" value={vals.count} max={vals.medals.length} />
+                            <progress class="hidden sm:inline-block progress progress-accent w-52" value={vals.count} max={vals.medals.length} />
                             <div>
                                 {vals.count} / {vals.medals.length}
                             </div>
