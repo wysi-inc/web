@@ -20,6 +20,7 @@ const Beatmaps = (props: Props) => {
                 <DoubleSlider name="Stars" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
                 <DoubleSlider name="BPM" min={0} max={300} step={5} min_label="0" max_label="∞" />
                 <div tabindex="0" class="collapse collapse-arrow bg-base-300 col-span-full">
+                    <input type="checkbox" />
                     <div class="collapse-title flex flex-row gap-2 items-center">
                         <i class="fa-solid fa-sliders" />
                         <div>

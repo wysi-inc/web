@@ -101,10 +101,10 @@ const app = new Elysia()
             <UserMostPanel id={Number(params.id)} />
         ))
         .post("/skins", ({ request, html, params }) => getPage(request, html,
-            <UserSkinsPanel />
+            <UserSkinsPanel id={Number(params.id)} />
         ))
         .post("/setup", ({ request, html, params }) => getPage(request, html,
-            <UserSetupPanel />
+            <UserSetupPanel id={Number(params.id)} />
         ))
         .post("/medals", ({ request, html, body }) => {
             const medals: ProfileMedal[] = (body as any)?.medals?.map((m: string) => JSON.parse(m) as ProfileMedal);
