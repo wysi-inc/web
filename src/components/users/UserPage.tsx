@@ -1,4 +1,5 @@
 import { v2 } from "osu-api-extended";
+import { getUser } from "@/src/db/db-user";
 import { updateUser } from "@/src/resources/db-user";
 import { catalans } from "@/src/resources/constants";
 import type { Mode } from "@/src/types/osu";
@@ -15,9 +16,9 @@ type Props = {
 
 const UserPage = async (props: Props) => {
 
-    const user: User = (await v2.user.details(props.id, props.mode) as User);
+    const user = await getUser(props.id, props.mode);
 
-    if ("error" in user) return <div>User not found</div>;
+    if (!user) return <div>User not found</div>;
 
     const mode = user.rank_history?.mode as Mode || "osu";
     const defaultCategory = user.scores_pinned_count > 0 ? "pinned" : "best";

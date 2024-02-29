@@ -24,6 +24,7 @@ import UserMostPanel from "./src/components/users/u_panels/UserMostPanel";
 import UserSummaryPanel from "./src/components/users/u_panels/UserSummaryPanel";
 import UserMedalsPanel from "./src/components/users/u_panels/UserMedalsPanel";
 import { updateMedals } from "./src/resources/db-medal";
+import { getUser, getRankings } from "./src/db/db-user";
 
 const port: number = process.env.PORT as any;
 const mongo_uri: string = process.env.MONGO_URI as any;
@@ -31,6 +32,7 @@ const osu_id: number = process.env.OSU_ID as any;
 const osu_secret: string = process.env.OSU_SECRET as any;
 
 function connect(): void {
+    console.log(mongo_uri);
     mongoose.connect(mongo_uri)
         .then(() => console.log("[ OK ] Connected to MongoDB"))
         .catch((err) => console.log("[ EE ] Couldn't connect to MongoDB\n", err));
@@ -121,6 +123,16 @@ const app = new Elysia()
             <BeatmapsList query={body} />
         ))
 
+    )
+    .group("/json", (_) => _
+        .get("/", req => ({msg: "test"})
+        )
+        .get("/user/:id", ({ request, params }) => 
+             getUser(params.id, undefined)
+        )
+        .get("/rankings", ({ request, params }) =>
+             getRankings("osu", "performance", 1)
+        )
     )
     .listen(port);
 
