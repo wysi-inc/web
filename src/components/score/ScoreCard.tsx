@@ -1,11 +1,11 @@
-import type { Score } from "@/src/types/users";
-import DiffIcon from "../beatmaps/DiffIcon";
-import { colors } from "@/src/resources/colors";
-import { secondsToTime } from "@/src/resources/functions";
 import moment from "moment";
 import { tools } from "osu-api-extended";
+import { colors } from "@/src/resources/colors";
+import { secondsToTime } from "@/src/resources/functions";
+import type { Score } from "@/src/types/users";
 import type { Mode } from "@/src/types/osu";
-import CardControls from "../web/CardControls";
+import DiffIcon from "@/src/components/beatmap/DiffIcon";
+import CardControls from "@/src/components/web/CardControls";
 
 type Props = {
     position: number;
@@ -30,11 +30,11 @@ const ScoreCard = async (props: Props) => {
         "katu": "0"
     }, beatmap.mode as Mode);
 
-    let stats: any = {};
+    let stats = {} as any;
 
     if (score.mods.length > 0 || score.legacy_perfect === false) {
         const url = `https://catboy.best/api/meta/${beatmap.id}?misses=0&acc=${fc_acc}&mods=${score.mods_id}`;
-        const res = await (await fetch(url)).json();
+        const res: any = await (await fetch(url)).json();
         if (res) {
             stats.sr = res?.difficulty?.stars?.toFixed(2);
             stats.bpm = res?.map?.bpm?.toFixed(0);

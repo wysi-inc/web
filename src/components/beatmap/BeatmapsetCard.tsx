@@ -1,6 +1,6 @@
+import { colors } from "@/src/resources/colors";
 import type { Beatmap, Beatmapset } from "@/src/types/beatmaps";
 import DiffIcon from "./DiffIcon";
-import { colors } from "@/src/resources/colors";
 import CardControls from "../web/CardControls";
 
 type Props = {

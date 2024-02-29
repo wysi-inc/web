@@ -1,9 +1,5 @@
-import { v2 } from "osu-api-extended";
-import { getUser } from "@/src/db/db-user";
-import { updateUser } from "@/src/resources/db-user";
-import { catalans } from "@/src/resources/constants";
+import { getUser } from "@/src/get/user";
 import type { Mode } from "@/src/types/osu";
-import type { User } from "@/src/types/users";
 import UserTopPanel from "./u_panels/UserTopPanel";
 import UserHistoryPanel from "./u_panels/UserHistoryPanel";
 import LazyPanel from "./LazyPanel";
@@ -11,7 +7,7 @@ import Panel from "./Panel";
 
 type Props = {
     id: string;
-    mode: Mode | undefined;
+    mode: Mode;
 }
 
 const UserPage = async (props: Props) => {
@@ -22,20 +18,6 @@ const UserPage = async (props: Props) => {
 
     const mode = user.rank_history?.mode as Mode || "osu";
     const defaultCategory = user.scores_pinned_count > 0 ? "pinned" : "best";
-
-    user.db_ranks = await updateUser(
-        user.id,
-        user.username,
-        user?.rank_history?.data || [],
-        user?.statistics?.country_rank,
-        mode
-    );
-
-    if (catalans.includes(user.id)) {
-        console.log("Bon dia tu!");
-        user.country.code = "CAT";
-        user.country.name = "Catalunya";
-    }
 
     return (<>
         <UserTopPanel user={user} />

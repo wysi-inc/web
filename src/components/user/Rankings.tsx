@@ -1,23 +1,17 @@
-import { v2 } from "osu-api-extended";
-import type { response as v2UserList } from "osu-api-extended/dist/types/v2_site_ranking_details";
-import type { Category, Mode } from "../../types/osu";
-import OnlineDot from "./u_panels/u_components/OnlineDot";
+import { getRankings } from "@/src/get/user";
+import type { Category, Mode } from "@/src/types/osu";
 import Pagination from "./u_panels/u_components/Pagination";
+import OnlineDot from "./u_panels/u_components/OnlineDot";
 
 type Props = {
-    mode: string;
-    category: string;
+    mode: Mode;
+    category: Category;
     page: number;
 }
 
 const Rankings = async (props: Props) => {
 
-    const users: v2UserList = await v2.site.ranking.details(
-        props.mode as Mode, props.category as Category, {
-            cursor: { page: props.page },
-            filter: "all",
-        } as any
-    );
+    const users = await getRankings(props.mode, props.category, props.page);
 
     return (
         <div class="flex flex-col gap-4">

@@ -1,30 +1,30 @@
 import { Elysia } from "elysia";
-import { html } from "@elysiajs/html";
 import { staticPlugin } from '@elysiajs/static'
+import { html } from "@elysiajs/html";
 import { auth } from "osu-api-extended";
 import mongoose from "mongoose";
-import type { BeatmapCategory, Mode } from "./src/types/osu";
-import type { ScoreCategory } from "./src/types/osu";
-import type { ProfileMedal } from "./src/types/medals";
-import Home from "./src/components/web/Home";
-import Rankings from "./src/components/users/Rankings";
-import Beatmaps from "./src/components/beatmaps/Beatmaps";
-import UserPage from "./src/components/users/UserPage";
-import BaseHtml from "./src/components/BaseHtml";
-import SearchResults from "./src/components/web/SearchResults";
-import BeatmapsList from "./src/components/beatmaps/BeatmapsList";
-import UserScoresList from "./src/components/users/u_panels/u_components/UserScoresList";
-import UserBeatmapsList from "./src/components/users/u_panels/u_components/UserBeatmapsList";
-import UserMostList from "./src/components/users/u_panels/u_components/UserMostList";
-import UserSkinsPanel from "./src/components/users/u_panels/UserSkinsPanel";
-import UserSetupPanel from "./src/components/users/u_panels/UserSetupPanel";
-import UserScoresPanel from "./src/components/users/u_panels/UserScoresPanel";
-import UserBeatmapsPanel from "./src/components/users/u_panels/UserBeatmapsPanel";
-import UserMostPanel from "./src/components/users/u_panels/UserMostPanel";
-import UserSummaryPanel from "./src/components/users/u_panels/UserSummaryPanel";
-import UserMedalsPanel from "./src/components/users/u_panels/UserMedalsPanel";
-import { updateMedals } from "./src/resources/db-medal";
-import { getUser, getRankings } from "./src/db/db-user";
+import type { BeatmapCategory, Category, Mode } from "@/src/types/osu";
+import type { ScoreCategory } from "@/src/types/osu";
+import type { ProfileMedal } from "@/src/types/medals";
+import Home from "@/src/components/web/Home";
+import Rankings from "@/src/components/user/Rankings";
+import Beatmaps from "@/src/components/beatmap/Beatmaps";
+import UserPage from "@/src/components/user/UserPage";
+import BaseHtml from "@/src/components/BaseHtml";
+import SearchResults from "@/src/components/web/SearchResults";
+import BeatmapsList from "@/src/components/beatmap/BeatmapsList";
+import UserScoresList from "@/src/components/user/u_panels/u_components/UserScoresList";
+import UserBeatmapsList from "@/src/components/user/u_panels/u_components/UserBeatmapsList";
+import UserMostList from "@/src/components/user/u_panels/u_components/UserMostList";
+import UserSkinsPanel from "@/src/components/user/u_panels/UserSkinsPanel";
+import UserSetupPanel from "@/src/components/user/u_panels/UserSetupPanel";
+import UserScoresPanel from "@/src/components/user/u_panels/UserScoresPanel";
+import UserBeatmapsPanel from "@/src/components/user/u_panels/UserBeatmapsPanel";
+import UserMostPanel from "@/src/components/user/u_panels/UserMostPanel";
+import UserSummaryPanel from "@/src/components/user/u_panels/UserSummaryPanel";
+import UserMedalsPanel from "@/src/components/user/u_panels/UserMedalsPanel";
+import { updateMedals } from "@/src/db/medals";
+import { getRankings, getUser } from "@/src/get/user";
 
 const port: number = process.env.PORT as any;
 const mongo_uri: string = process.env.MONGO_URI as any;
@@ -60,12 +60,12 @@ const app = new Elysia()
             <Rankings mode="osu" page={1} category="performance" />
         ))
         .get("/:mode/:category/:page", ({ request, html, params }) => getPage(request, html,
-            <Rankings mode={params.mode} category={params.category} page={Number(params.page)} />
+            <Rankings mode={params.mode as Mode} category={params.category as Category} page={Number(params.page)} />
         ))
     )
     .group("/users/:id", (_) => _
         .get("/", ({ request, html, params }) => getPage(request, html,
-            <UserPage id={params.id} mode={undefined} />
+            <UserPage id={params.id} mode={undefined as any} />
         ))
         .get("/:mode", ({ request, html, params }) => getPage(request, html,
             <UserPage id={params.id} mode={params.mode as Mode} />
@@ -125,13 +125,16 @@ const app = new Elysia()
 
     )
     .group("/json", (_) => _
-        .get("/", req => ({msg: "test"})
+        .get("/", () => ({ msg: "test" })
         )
-        .get("/user/:id", ({ request, params }) => 
-             getUser(params.id, undefined)
+        .get("/user/:id", ({ params }) =>
+            getUser(params.id, "osu")
         )
-        .get("/rankings", ({ request, params }) =>
-             getRankings("osu", "performance", 1)
+        .get("/rankings", () =>
+            getRankings("osu", "performance", 1)
+        )
+        .get("/rankings/:mode/:category/:page", ({ params }) =>
+            getRankings(params.mode as Mode, params.category as Category, Number(params.page))
         )
     )
     .listen(port);

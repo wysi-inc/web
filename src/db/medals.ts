@@ -4,7 +4,7 @@ import type { OsekaiMedal } from "../types/medals";
 export async function updateMedals() {
     try {
         const result = await fetch("https://osekai.net/medals/api/medals.php");
-        const new_medals: OsekaiMedal[] = await result.json();
+        const new_medals: OsekaiMedal[] = await result.json() as OsekaiMedal[];
         for (const m of new_medals) {
             let medal = await Medal.findOne({ medal_id: m.MedalID });
             if (medal) {

@@ -1,4 +1,4 @@
-import DiffIcon from "@/src/components/beatmaps/DiffIcon";
+import DiffIcon from "@/src/components/beatmap/DiffIcon";
 import CardControls from "@/src/components/web/CardControls";
 import { colors } from "@/src/resources/colors";
 import type { Beatmap, Beatmapset } from "@/src/types/beatmaps";

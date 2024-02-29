@@ -1,7 +1,7 @@
 import { v2 } from "osu-api-extended";
 import type { Mode, ScoreCategory } from "@/src/types/osu";
 import type { Score } from "@/src/types/users";
-import ScoreCard from "@/src/components/scores/ScoreCard";
+import ScoreCard from "@/src/components/score/ScoreCard";
 
 type Props = {
     id: number;

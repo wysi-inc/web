@@ -1,7 +1,7 @@
 import { v2 } from "osu-api-extended";
 import type { BeatmapCategory } from "@/src/types/osu";
-import BeatmapsetCard from "@/src/components/beatmaps/BeatmapsetCard";
 import type { Beatmapset } from "@/src/types/beatmaps";
+import BeatmapsetCard from "@/src/components/beatmap/BeatmapsetCard";
 
 type Props = {
     id: number;
