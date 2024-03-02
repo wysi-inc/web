@@ -73,13 +73,34 @@ const UserTopPanel = (props: Props) => {
                     <div class="grow flex flex-col gap-4 justify-between">
                         <div class="text-sm flex flex-row gap-4 justify-between">
                             <div class="flex flex-col gap-2 text-start">
-                                <h2 class="flex gap-3 items-center"><i class="fa-solid fa-angles-up w-4 text-center" /><span>Ranked Score:</span></h2>
-                                <h2 class="flex gap-3 items-center"><i class="fa-solid fa-arrow-rotate-left w-4 text-center" /><span>Play Count:</span></h2>
-                                <h2 class="flex gap-3 items-center"><i class="fa-regular fa-clock w-4 text-center" /><span>Play Time:</span></h2>
-                                <h2 class="flex gap-3 items-center"><i class="fa-solid fa-fire w-4 text-center" /><span>Max Combo:</span></h2>
-                                <h2 class="flex gap-3 items-center"><i class="fa-solid fa-keyboard w-4 text-center" /><span>Total Hits:</span></h2>
-                                <h2 class="flex gap-3 items-center"><i class="fa-solid fa-calculator w-4 text-center" /><span>Hits x Play:</span></h2>
-                                <h2 class="flex gap-3 items-center"><i class="fa-solid fa-eye w-4 text-center" /><span>Replays Watched:</span></h2>
+                                <h2 class="flex gap-3 items-center">
+                                    <i class="fa-solid fa-angles-up w-4 text-center" />
+                                    <span>Ranked Score:</span>
+                                </h2>
+                                <h2 class="flex gap-3 items-center">
+                                    <i class="fa-solid fa-arrow-rotate-left w-4 text-center" />
+                                    <span>Play Count:</span>
+                                </h2>
+                                <h2 class="flex gap-3 items-center">
+                                    <i class="fa-regular fa-clock w-4 text-center" />
+                                    <span>Play Time:</span>
+                                </h2>
+                                <h2 class="flex gap-3 items-center">
+                                    <i class="fa-solid fa-fire w-4 text-center" />
+                                    <span>Max Combo:</span>
+                                </h2>
+                                <h2 class="flex gap-3 items-center">
+                                    <i class="fa-solid fa-keyboard w-4 text-center" />
+                                    <span>Total Hits:</span>
+                                </h2>
+                                <h2 class="flex gap-3 items-center">
+                                    <i class="fa-solid fa-calculator w-4 text-center" />
+                                    <span>Hits x Play:</span>
+                                </h2>
+                                <h2 class="flex gap-3 items-center">
+                                    <i class="fa-solid fa-eye w-4 text-center" />
+                                    <span>Replays Watched:</span>
+                                </h2>
                             </div>
                             <div class="flex flex-col gap-2 text-end">
                                 <h2>{user.statistics.ranked_score.toLocaleString()}</h2>
@@ -92,8 +113,20 @@ const UserTopPanel = (props: Props) => {
                             </div>
                         </div>
                         <BarChart labels={['XH', 'X', 'SH', 'S', 'A']}
-                            data={[user.statistics.grade_counts.ssh, user.statistics.grade_counts.ss, user.statistics.grade_counts.sh, user.statistics.grade_counts.s, user.statistics.grade_counts.a]}
-                            colors={[colors.grades.xh, colors.grades.x, colors.grades.sh, colors.grades.s, colors.grades.a]}
+                            data={[
+                                user.statistics.grade_counts.ssh,
+                                user.statistics.grade_counts.ss,
+                                user.statistics.grade_counts.sh,
+                                user.statistics.grade_counts.s,
+                                user.statistics.grade_counts.a
+                            ]}
+                            colors={[
+                                colors.grades.xh,
+                                colors.grades.x,
+                                colors.grades.sh,
+                                colors.grades.s,
+                                colors.grades.a
+                            ]}
                         />
                     </div>
                 </div>

@@ -37,7 +37,7 @@ const UserPage = async (props: Props) => {
             url={`/users/${user.id}/0/panels/most_played`} />
         <LazyPanel code="medals" title="Medals" icon={<img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" />}
             tooltip="powered by osekai.net"
-            url={`/user/${user.id}/0/panels/medals`}
+            url={`/users/${user.id}/0/panels/medals`}
             body={{ medals: user.user_achievements }}
         />
     </>);
