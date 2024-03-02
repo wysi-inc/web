@@ -26,7 +26,7 @@ const UserBeatmapsList = async (props: Props) => {
         {beatmaps.length < props.limit ? null :
             <>
                 <button class="btn btn-success btn-sm flex flex-row gap-2 col-span-full"
-                    hx-post={`/users/${props.id}/0/beatmaps/${props.category}/list?offset=${props.offset + props.limit}&limit=20`}
+                    hx-post={`/users/${props.id}/0/beatmaps/lists/${props.category}?offset=${props.offset + props.limit}&limit=20`}
                     hx-swap="outerHTML">
                     <div>Load more</div>
                     <span class="htmx-indicator loading loading-spinner loading-md" />

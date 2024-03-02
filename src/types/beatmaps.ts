@@ -3,6 +3,40 @@ import type { Mode } from "./osu";
 export type BeatmapsetCategory = 'favourite' | 'graveyard' | 'ranked' | 'loved' | 'guest' | 'nominated' | 'pending';
 export type BeatmapsetStatus = "ranked" | "approved" | "qualified" | "loved" | "pending" | "wip" | "graveyard";
 
+export type BeatmapQuery = {
+    title?: string;
+    mapper?: string;
+    bpm_min?: string;
+    bpm_max?: string;
+    stars_min?: string;
+    stars_max?: string;
+    length_min?: string;
+    length_max?: string;
+    year_min?: string;
+    year_max?: string;
+    ar_min?: string;
+    ar_max?: string;
+    cs_min?: string;
+    cs_max?: string;
+    hp_min?: string;
+    hp_max?: string;
+    od_min?: string;
+    od_max?: string;
+    mode_osu?: string;
+    mode_taiko?: string;
+    mode_fruits?: string;
+    mode_mania?: string;
+    status_ranked?: string;
+    status_approved?: string;
+    status_qualified?: string;
+    status_loved?: string;
+    status_pending?: string;
+    status_wip?: string;
+    status_graveyard?: string;
+    offset?: string;
+}
+
+
 export type Beatmapset = {
     id: number;
     artist: string;

@@ -1,6 +1,6 @@
-import type { Beatmapset } from "../types/beatmaps";
+import type { BeatmapQuery, Beatmapset } from "../types/beatmaps";
 
-export async function getBeatmaps(query: any): Promise<Beatmapset[]> {
+export async function getBeatmaps(query: BeatmapQuery): Promise<Beatmapset[]> {
 
     const url = new URL("https://catboy.best/api/v2/search");
     url.searchParams.set("limit", "50");

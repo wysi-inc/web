@@ -1,4 +1,3 @@
-import BeatmapsList from "./BeatmapsList";
 import DoubleSlider from "./DoubleSlider";
 import Input from "./Input";
 

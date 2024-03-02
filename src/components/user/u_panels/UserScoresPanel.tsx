@@ -15,7 +15,7 @@ const UserScoresPanel = (props: Props) => {
         return (<>
             <input type="radio" name="score-tabs" role="tab" class={`tab text-nowrap ${p.col}`} aria-label={p.title} checked={current}
                 hx-trigger="click once"
-                hx-post={`/users/${props.id}/${props.mode}/scores/${p.category}/list?offset=0&limit=5`}
+                hx-post={`/users/${props.id}/${props.mode}/lists/scores/${p.category}?offset=0&limit=5`}
                 hx-target={`#scores-list-${p.category}`} hx-disable={current} />
             <div role="tabpanel" class="tab-content pt-4">
                 <div id={`scores-list-${p.category}`} class="grid grid-cols-1 gap-4 col-span-full">

@@ -1,8 +1,9 @@
+import type { BeatmapQuery } from "@/src/types/beatmaps";
 import BeatmapsetCard from "./BeatmapsetCard";
 import { getBeatmaps } from "@/src/get/beatmaps";
 
 type Props = {
-    query: any,
+    query: BeatmapQuery,
 }
 
 const BeatmapsList = async (props: Props) => {

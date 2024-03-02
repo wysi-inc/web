@@ -22,10 +22,10 @@ const DoubleSlider = (props: Props) => {
                     {props.max_label}
                 </span>
             </div>
-            <div class="w-full relative h-6">
-                <input type="range" class="absolute" name={name + "_min"} id={name + "_min"}
+            <div class="w-full">
+                <input type="range" class="range" name={name + "_min"} id={name + "_min"}
                     min={props.min} max={props.max} value={`${props.min}`} step={`${props.step}`} />
-                <input type="range" class="absolute" name={name + "_max"} id={name + "_max"}
+                <input type="range" class="range" name={name + "_max"} id={name + "_max"}
                     min={props.min} max={props.max} value={`${props.max}`} step={`${props.step}`} />
             </div>
         </div>

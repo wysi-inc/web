@@ -13,7 +13,7 @@ const UserBeatmapsPanel = (props: Props) => {
         return (<>
             <input type="radio" name="beatmaps-tabs" role="tab" class={`tab text-nowrap ${p.col}`} aria-label={p.title} checked={current}
                 hx-trigger="click once"
-                hx-post={`/users/${props.id}/0/beatmaps/${p.category}/list?offset=0&limit=6`}
+                hx-post={`/users/${props.id}/0/beatmaps/lists/${p.category}?offset=0&limit=6`}
                 hx-target={`#beatmaps-list-${p.category}`} hx-disable={current} />
 
             <div role="tabpanel" class="tab-content pt-4 col-span-full">

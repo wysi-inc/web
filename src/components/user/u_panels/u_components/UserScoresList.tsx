@@ -27,7 +27,7 @@ const UserScoresList = async (props: Props) => {
         )}
         {scores.length < props.limit ? null : <>
             <button class="btn btn-success btn-sm flex flex-row gap-2"
-                hx-post={`/users/${props.id}/${props.mode}/scores/${props.category}/list?offset=${props.offset + props.limit}&limit=20`}
+                hx-post={`/users/${props.id}/${props.mode}/lists/scores/${props.category}?offset=${props.offset + props.limit}&limit=20`}
                 hx-swap="outerHTML">
                 <div>Load more</div>
                 <span class="htmx-indicator loading loading-spinner loading-md" />
