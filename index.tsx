@@ -3,7 +3,6 @@ import { staticPlugin } from '@elysiajs/static'
 import { auth } from "osu-api-extended";
 import mongoose from "mongoose";
 import { updateMedals } from "./src/db/medals";
-
 import { baseRoutes } from "./src/routes/base";
 import { rankingRoutes } from "./src/routes/rankings";
 import { userRoutes } from "./src/routes/user";

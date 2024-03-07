@@ -1,3 +1,4 @@
+import HxA from "./HxA";
 import Search from "./Search";
 
 const Navbar = () => {
@@ -10,18 +11,21 @@ const Navbar = () => {
                             <i class="fa-solid fa-bars fa-lg" />
                         </button>
                         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a hx-target="#main" hx-push-url="true" hx-indicator="#page-loading"
-                                hx-get="/">
-                                Home
-                            </a></li>
-                            <li><a hx-target="#main" hx-push-url="true" hx-indicator="#page-loading"
-                                hx-get="/rankings">
-                                Rankings
-                            </a></li>
-                            <li><a hx-target="#main" hx-push-url="true" hx-indicator="#page-loading"
-                                hx-get="/beatmaps">
-                                Beatmaps
-                            </a></li>
+                            <li>
+                                <HxA url="/">
+                                    Home
+                                </HxA>
+                            </li>
+                            <li>
+                                <HxA url="/rankings">
+                                    Rankings
+                                </HxA>
+                            </li>
+                            <li>
+                                <HxA url="/beatmaps">
+                                    Beatmaps
+                                </HxA>
+                            </li>
                         </ul>
                     </div>
                     <a class="hidden sm:flex gap-4 items-center btn btn-ghost px-2 text-xl"

@@ -2,6 +2,7 @@ import { getRankings } from "@/src/get/user";
 import type { Category, Mode } from "@/src/types/osu";
 import Pagination from "./u_panels/u_components/Pagination";
 import OnlineDot from "./u_panels/u_components/OnlineDot";
+import HxA from "../web/HxA";
 
 type Props = {
     mode: Mode;
@@ -31,18 +32,18 @@ const Rankings = async (props: Props) => {
                 </thead>
                 <tbody>
                     {users.ranking.map((row, i) =>
-                        <tr class="hover:bg-base-100 hover:rounded-lg cursor-pointer"
-                            hx-get={`/users/${row.user.id}`} hx-push-url="true" hx-target="#main"
-                            hx-indicator="#page-loading">
+                        <tr class="hover:bg-base-100 hover:rounded-lg">
                             <th class="table-cell text-start">#{i + 1 + 50 * (props.page - 1)}</th>
                             <td class="table-cell">
-                                <div class="flex flex-row gap-4">
-                                    <img src={`https://flagcdn.com/h40/${row.user.country.code.toLowerCase()}.jpg`}
-                                        style="width: 32px; height: 24px;" class="rounded-sm" />
-                                    <span class="flex flex-row items-center gap-2">
-                                        {row.user.username}
-                                    </span>
-                                </div>
+                                <HxA url={`/users/${row.user.id}`}>
+                                    <div class="flex flex-row gap-4">
+                                        <img src={`https://flagcdn.com/h40/${row.user.country.code.toLowerCase()}.jpg`}
+                                            style="width: 32px; height: 24px;" class="rounded-sm" />
+                                        <span class="flex flex-row items-center gap-2">
+                                            {row.user.username}
+                                        </span>
+                                    </div>
+                                </HxA>
                             </td>
                             <td class="hidden sm:table-cell">{Number(row.pp?.toFixed()).toLocaleString()}pp</td>
                             <td class="hidden sm:table-cell">{row.ranked_score.toLocaleString()}</td>

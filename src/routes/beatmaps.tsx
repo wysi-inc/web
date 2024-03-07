@@ -3,6 +3,7 @@ import { html } from "@elysiajs/html";
 import { getPage } from '../resources/pages'
 import Beatmaps from '../components/beatmap/Beatmaps';
 import BeatmapsList from '../components/beatmap/BeatmapsList';
+import BeatmapsetPage from '../components/beatmap/BeatmapsetPage';
 
 const queryBodyElysia = {
     body: t.Object({
@@ -43,6 +44,9 @@ export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
     .use(html())
     .get("/", ({ request, html }) => getPage(request, html,
         <Beatmaps query={undefined} />
+    ))
+    .get("/:id", ({ request, html, params }) => getPage(request, html,
+        <BeatmapsetPage id={Number(params.id)} />
     ))
     .post("/list", ({ html, body }) => html(
         <BeatmapsList query={body} />

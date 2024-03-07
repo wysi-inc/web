@@ -2,6 +2,8 @@ import { colors } from "@/src/resources/colors";
 import type { Beatmap, Beatmapset } from "@/src/types/beatmaps";
 import DiffIcon from "./DiffIcon";
 import CardControls from "../web/CardControls";
+import HxA from "../web/HxA";
+import StatusBadge from "./StatusBadge";
 
 type Props = {
     beatmapset: Beatmapset,
@@ -9,7 +11,7 @@ type Props = {
 const BeatmapsetCard = (props: Props) => {
 
     const beatmapset = props.beatmapset;
-
+    const diffs = beatmapset.beatmaps;
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
 
     return (
@@ -30,14 +32,23 @@ const BeatmapsetCard = (props: Props) => {
                                 objectPosition: "center"
                             }} />
                         <div class="flex flex-col py-2 px-4 truncate">
-                            <p class="text-lg truncate">{beatmapset.title}</p>
-                            <p class="text-sm truncate text-gray-400"> by {beatmapset.artist}</p>
-                            <p class="text-sm truncate text-gray-400">mapped by {beatmapset.creator}</p>
+                            <HxA url={`/beatmaps/${beatmapset.id}`}>
+                                <h1 class="text-lg font-bold truncate text-white">
+                                    {beatmapset.title}
+                                </h1>
+                            </HxA>
+
+                            <p class="text-sm truncate text-gray-400">
+                                by {beatmapset.artist}
+                            </p>
+                            <p class="text-sm truncate text-gray-400">
+                                mapped by {beatmapset.creator}
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="flex flex-row p-2 gap-2 items-center">
-                    <div class="badge" style={`color: #000; background-color: ${colors.beatmap[beatmapset.status]}`}>{beatmapset.status}</div>
+                    <StatusBadge status={beatmapset.status} />
                     {beatmapset.beatmaps.sort((a, b) =>
                         a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int)
                         .map((beatmap: Beatmap, i: number) => i < 9 &&

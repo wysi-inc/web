@@ -1,4 +1,5 @@
 import type { Category, Mode } from "@/src/types/osu";
+import HxA from "@/src/components/web/HxA";
 
 type Props = {
     mode: string;
@@ -7,27 +8,30 @@ type Props = {
 }
 
 const Pagination = (props: Props) => {
-    const ModeTab = (mode: Mode) =>
-        <button hx-get={`/rankings/${mode}/${props.category}/${props.page}`}
-            hx-push-url="true" hx-swap="innerHTML" hx-target="#main"
-            class={`tab ${props.mode == mode && "tab-active"}`} role="tab">
-            {mode}
-        </button>;
+    const ModeTab = (mode: Mode) => (
+        <button class={`tab ${props.mode == mode && "tab-active"}`} role="tab">
+            <HxA url={`/rankings/${mode}/${props.category}/${props.page}`}>
+                {mode}
+            </HxA>
+        </button>
+    );
 
-    const PageTab = (page: number) =>
+    const PageTab = (page: number) => (
         page >= 1 && page <= 200 &&
-        <button hx-get={`/rankings/${props.mode}/${props.category}/${page}`}
-            hx-push-url="true" hx-swap="innerHTML" hx-target="#main"
-            class={`tab ${props.page == page && "tab-active"}`} role="tab">
-            {page}
-        </button>;
+        <button class={`tab ${props.page == page && "tab-active"}`} role="tab">
+            <HxA url={`/rankings/${props.mode}/${props.category}/${page}`}>
+                {page}
+            </HxA>
+        </button>
+    );
 
-    const CategoryTab = (category: Category) =>
-        <button hx-get={`/rankings/${props.mode}/${category}/${props.page}`}
-            hx-push-url="true" hx-swap="innerHTML" hx-target="#main"
-            class={`tab ${props.category == category && "tab-active"}`} role="tab">
-            {category}
-        </button>;
+    const CategoryTab = (category: Category) => (
+        <button class={`tab ${props.category == category && "tab-active"}`} role="tab">
+            <HxA url={`/rankings/${props.mode}/${category}/${props.page}`}>
+                {category}
+            </HxA>
+        </button>
+    );
 
     return (
         <div class="flex justify-between">

@@ -1,3 +1,4 @@
+import { v2 } from "osu-api-extended";
 import type { BeatmapQuery, Beatmapset } from "../types/beatmaps";
 
 export async function getBeatmaps(query: BeatmapQuery): Promise<Beatmapset[]> {
@@ -84,4 +85,9 @@ export async function getBeatmaps(query: BeatmapQuery): Promise<Beatmapset[]> {
 
     console.log(url.toString());
     return await (await fetch(url.toString())).json() as Beatmapset[];
+}
+
+export async function getBeatmap(id: number): Promise<Beatmapset> {
+    const beatmapset: any = await v2.beatmap.set.details(id.toString());
+    return beatmapset;
 }
