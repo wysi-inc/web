@@ -9,14 +9,14 @@ export async function getUser(id: string, mode: Mode): Promise<User | null> {
 
     if ("error" in user) return null;
 
-    const m = user.rank_history?.mode as Mode || "osu";
+    mode = user.rank_history?.mode as Mode || "osu";
 
     user.db_ranks = await updateUser(
         user.id,
         user.username,
         user?.rank_history?.data || [],
         user?.statistics?.country_rank,
-        m
+        mode
     );
 
     if (catalans.includes(user.id)) {

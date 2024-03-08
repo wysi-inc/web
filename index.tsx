@@ -1,13 +1,13 @@
 import { Elysia } from "elysia";
 import { staticPlugin } from '@elysiajs/static'
 import { auth } from "osu-api-extended";
-import mongoose from "mongoose";
 import { updateMedals } from "./src/db/medals";
 import { baseRoutes } from "./src/routes/base";
 import { rankingRoutes } from "./src/routes/rankings";
 import { userRoutes } from "./src/routes/user";
 import { beatmapRoutes } from "./src/routes/beatmaps";
 import { jsonRoutes } from "./src/routes/json";
+import mongoose from "mongoose";
 
 const port: number = process.env.PORT as any;
 const mongo_uri: string = process.env.MONGO_URI as any;

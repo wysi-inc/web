@@ -8,8 +8,8 @@ export const jsonRoutes = new Elysia({ prefix: '/json' })
     .get("/user/:id", ({ params }) =>
         getUser(params.id, "osu")
     )
-    .get("/rankings", () =>
-        getRankings("osu", "performance", 1)
+    .get("/rankings", async () =>
+        (await getRankings("osu", "performance", 1)).ranking
     )
     .get("/rankings/:mode/:category/:page", ({ params }) =>
         getRankings(params.mode as Mode, params.category as Category, Number(params.page))
