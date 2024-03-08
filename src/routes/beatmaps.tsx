@@ -8,6 +8,7 @@ import BeatmapsetPage from '../components/beatmap/BeatmapsetPage';
 const queryBodyElysia = {
     body: t.Object({
         title: t.Optional(t.String()),
+        artist: t.Optional(t.String()),
         mapper: t.Optional(t.String()),
         bpm_min: t.Optional(t.String()),
         bpm_max: t.Optional(t.String()),
@@ -25,17 +26,8 @@ const queryBodyElysia = {
         hp_max: t.Optional(t.String()),
         od_min: t.Optional(t.String()),
         od_max: t.Optional(t.String()),
-        mode_osu: t.Optional(t.String()),
-        mode_taiko: t.Optional(t.String()),
-        mode_fruits: t.Optional(t.String()),
-        mode_mania: t.Optional(t.String()),
-        status_ranked: t.Optional(t.String()),
-        status_approved: t.Optional(t.String()),
-        status_qualified: t.Optional(t.String()),
-        status_loved: t.Optional(t.String()),
-        status_pending: t.Optional(t.String()),
-        status_wip: t.Optional(t.String()),
-        status_graveyard: t.Optional(t.String()),
+        mode: t.Optional(t.String()),
+        status: t.Optional(t.String()),
         offset: t.Optional(t.String())
     })
 }

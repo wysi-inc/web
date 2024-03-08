@@ -42,10 +42,11 @@ const Beatmaps = (props: Props) => {
                         <span class="label-text">Modes</span>
                     </div>
                     <div class="flex flex-row flex-wrap gap-2">
-                        <input class="btn" type="checkbox" name="mode_osu" aria-label="osu" />
-                        <input class="btn" type="checkbox" name="mode_taiko" aria-label="taiko" />
-                        <input class="btn" type="checkbox" name="mode_fruits" aria-label="fruits" />
-                        <input class="btn" type="checkbox" name="mode_mania" aria-label="mania" />
+                        <input class="btn" type="radio" name="mode" value="all" aria-label="all" checked />
+                        <input class="btn" type="radio" name="mode" value="osu" aria-label="osu" />
+                        <input class="btn" type="radio" name="mode" value="taiko" aria-label="taiko" />
+                        <input class="btn" type="radio" name="mode" value="fruits" aria-label="fruits" />
+                        <input class="btn" type="radio" name="mode" value="mania" aria-label="mania" />
                     </div>
                 </div>
                 <div class="md:col-span-3">
@@ -53,13 +54,12 @@ const Beatmaps = (props: Props) => {
                         <span class="label-text">Status</span>
                     </div>
                     <div class="flex flex-row flex-wrap gap-2">
-                        <input class="btn" type="checkbox" name="status_ranked" aria-label="ranked" />
-                        <input class="btn" type="checkbox" name="status_approved" aria-label="approved" />
-                        <input class="btn" type="checkbox" name="status_qualified" aria-label="qualified" />
-                        <input class="btn" type="checkbox" name="status_loved" aria-label="loved" />
-                        <input class="btn" type="checkbox" name="status_pending" aria-label="pending" />
-                        <input class="btn" type="checkbox" name="status_wip" aria-label="wip" />
-                        <input class="btn" type="checkbox" name="status_graveyard" aria-label="graveyard" />
+                        <input class="btn" type="radio" name="status" value="all" aria-label="all" checked />
+                        <input class="btn" type="radio" name="status" value="ranked" aria-label="ranked" />
+                        <input class="btn" type="radio" name="status" value="loved" aria-label="loved" />
+                        <input class="btn" type="radio" name="status" value="pending" aria-label="pending" />
+                        <input class="btn" type="radio" name="status" value="wip" aria-label="wip" />
+                        <input class="btn" type="radio" name="status" value="graveyard" aria-label="graveyard" />
                     </div>
                 </div>
             </div>

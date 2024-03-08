@@ -8,13 +8,13 @@ type Props = {
 
 const BeatmapsList = async (props: Props) => {
 
-    const beatmaps = await getBeatmaps(props.query);
+    const sets = await getBeatmaps(props.query);
 
     return (<>
-        {beatmaps.map(beatmapset =>
-            <BeatmapsetCard beatmapset={beatmapset} />
+        {sets.map(set =>
+            <BeatmapsetCard beatmapset={set} />
         )}
-        {beatmaps.length < 50 ? null :
+        {sets.length < 50 ? null :
             <button class="col-span-full btn btn-success btn-sm flex flex-row gap-2"
                 hx-post={""}
                 hx-swap="outerHTML">

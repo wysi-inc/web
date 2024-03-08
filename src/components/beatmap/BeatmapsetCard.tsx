@@ -1,4 +1,3 @@
-import { colors } from "@/src/resources/colors";
 import type { Beatmap, Beatmapset } from "@/src/types/beatmaps";
 import DiffIcon from "./DiffIcon";
 import CardControls from "../web/CardControls";
@@ -8,6 +7,7 @@ import StatusBadge from "./StatusBadge";
 type Props = {
     beatmapset: Beatmapset,
 }
+
 const BeatmapsetCard = (props: Props) => {
 
     const beatmapset = props.beatmapset;
@@ -49,14 +49,14 @@ const BeatmapsetCard = (props: Props) => {
                 </div>
                 <div class="flex flex-row p-2 gap-2 items-center">
                     <StatusBadge status={beatmapset.status} />
-                    {beatmapset.beatmaps.sort((a, b) =>
+                    {diffs.sort((a, b) =>
                         a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int)
                         .map((beatmap: Beatmap, i: number) => i < 9 &&
                             <DiffIcon setId={beatmapset.id} diffId={beatmap.id}
                                 diff={beatmap.difficulty_rating} size={20}
                                 mode={beatmap.mode} name={beatmap.version} />)
                     }
-                    {beatmapset.beatmaps.length > 9 &&
+                    {diffs.length > 9 &&
                         <div class="badge badge-info">+{beatmapset.beatmaps.length - 9}</div>
                     }
                 </div>

@@ -1,4 +1,3 @@
-import AudioPlayer from "./web/AudioPlayer";
 import Footer from "./web/Footer";
 import Navbar from "./web/Navbar";
 
@@ -23,7 +22,6 @@ const BaseHtml = ({ children }: any) => (
                     {children}
                 </main>
             </div>
-            <AudioPlayer />
             <Footer />
         </body>
     </html>
