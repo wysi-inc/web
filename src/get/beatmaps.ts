@@ -2,7 +2,7 @@ import { v2 } from "osu-api-extended";
 import type { BeatmapQuery, BeatmapSearch, Beatmapset, BeatmapsetStatusQuery } from "../types/beatmaps";
 import type { Mode } from "../types/osu";
 
-export async function getBeatmaps(q: BeatmapQuery): Promise<BeatmapSearch | null> {
+export async function getBeatmaps(q: BeatmapQuery, cursor_string: string | undefined): Promise<BeatmapSearch | null> {
     const res: BeatmapSearch = (await v2.beatmaps.search({
         query: [
             q.title && q.title,
@@ -12,8 +12,8 @@ export async function getBeatmaps(q: BeatmapQuery): Promise<BeatmapSearch | null
             q.bpm_max === "300" ? null : `bpm<=${q.bpm_max}`,
             q.stars_min === "0" ? null : `stars>=${q.stars_min}`,
             q.stars_max === "10" ? null : `stars<=${q.stars_max}`,
-            q.length_min === "0" ? null : `len>=${q.length_min}`,
-            q.length_max === "600" ? null : `len<=${q.length_max}`,
+            q.length_min === "0" ? null : `length>=${q.length_min}`,
+            q.length_max === "600" ? null : `length<=${q.length_max}`,
             q.year_min === "2007" ? null : `created>=${q.year_min}`,
             q.year_max === new Date().getFullYear().toString() ? null : `created<=${q.year_max}`,
             q.ar_min === "0" ? null : `ar>=${q.ar_min}`,
@@ -28,19 +28,6 @@ export async function getBeatmaps(q: BeatmapQuery): Promise<BeatmapSearch | null
         sort: "updated_desc",
         section: q.status === "all" ? undefined : q.status as BeatmapsetStatusQuery,
         mode: q.mode === "all" ? undefined : q.mode as Mode,
-    }) as any) as BeatmapSearch;
-    if ((res as any).error) {
-        return null;
-    }
-    return res;
-}
-
-export async function getBeatmapsCursor(mode: Mode, section: BeatmapsetStatusQuery, cursor_string: string): Promise<BeatmapSearch | null> {
-    console.log(mode, section);
-    const res: BeatmapSearch = (await v2.beatmaps.search({
-        sort: "updated_desc",
-        section,
-        mode,
         cursor_string
     }) as any) as BeatmapSearch;
     if ((res as any).error) {

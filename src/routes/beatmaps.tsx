@@ -32,18 +32,10 @@ const queryBodyElysia = {
     })
 }
 
-const queryQueryElysia = {
-    query: t.Object({
-        cursor: t.Optional(t.String()),
-        mode: t.Optional(t.String()),
-        section: t.Optional(t.String())
-    })
-}
-
 export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
     .use(html())
     .get("/", ({ request, html }) => getPage(request, html,
-        <Beatmaps query={undefined} />
+        <Beatmaps />
     ))
     .get("/:id", ({ request, html, params }) => getPage(request, html,
         <BeatmapsetPage id={Number(params.id)} />
@@ -51,6 +43,7 @@ export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
     .post("/list", ({ html, body }) => html(
         <BeatmapsList body={body} />
     ), queryBodyElysia)
-    .get("/list", ({ html, query }) => html(
-        <BeatmapsList query={query} />
-    ), queryQueryElysia)
+    .post("/list/:cursor", ({ html, body, params }) => html(
+        <BeatmapsList body={body} cursor={params.cursor} />
+    ), queryBodyElysia)
+

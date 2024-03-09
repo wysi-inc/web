@@ -28,7 +28,6 @@ export type BeatmapQuery = {
     od_max?: string;
     mode?: string;
     status?: string;
-    offset?: string;
 }
 
 export type BeatmapSearch = V2BeatmapSearch;

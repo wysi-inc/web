@@ -1,16 +1,13 @@
 import DoubleSlider from "./DoubleSlider";
 import Input from "./Input";
 
-type Props = {
-    query: any;
-}
-
-const Beatmaps = (props: Props) => {
+const Beatmaps = () => {
     return (<>
         <form class="flex flex-col gap-4 p-4 rounded-lg drop-shadow-lg bg-base-100" onsubmit=""
+            id="search-form"
             hx-post="/beatmaps/list"
             hx-trigger="change delay:500ms"
-            hx-target="#beatmaps-results">
+            hx-target="#beatmap-search-results">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Input name="Title" placeholder="Beatmap Title or Artist" />
                 <Input name="Mapper" placeholder="Beatmap Mapper" />
@@ -64,7 +61,7 @@ const Beatmaps = (props: Props) => {
                 </div>
             </div>
         </form>
-        <div id="beatmaps-results" hx-trigger="load" hx-post="/beatmaps/list"
+        <div id="beatmap-search-results" hx-trigger="load" hx-post="/beatmaps/list"
             class="bg-base-100 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg">
         </div>
     </>);
