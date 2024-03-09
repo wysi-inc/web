@@ -1,6 +1,7 @@
 import type { Beatmap } from "@/src/types/beatmaps";
 import DiffIcon from "./DiffIcon";
 import { secondsToTime } from "@/src/resources/functions";
+import { colors } from "@/src/resources/colors";
 
 type Props = {
     diff: Beatmap,
@@ -53,8 +54,30 @@ const DiffStats = (props: Props) => {
                 {getProgress("HP", props.diff.drain)}
             </div>
             <form id="stats_form">
-                <input type="text" name="beatmap_id" />
-                <input type="text" name="beatmapset_id" />
+                <label class="input input-bordered flex items-center gap-2"
+                    style={{
+                        color: colors.judgements.x100,
+                    }}>
+                    100
+                    <input type="number" class="grow text-neutral-content text-right"
+                        placeholder="0" min="0" />
+                </label>
+                <label class="input input-bordered flex items-center gap-2"
+                    style={{
+                        color: colors.judgements.x50,
+                    }}>
+                    50
+                    <input type="number" class="grow text-neutral-content text-right"
+                        placeholder="0" min="0" />
+                </label>
+                <label class="input input-bordered flex items-center gap-2"
+                    style={{
+                        color: colors.judgements.xMiss
+                    }}>
+                    0
+                    <input type="number" class="grow text-neutral-content text-right"
+                        placeholder="0" min="0" />
+                </label>
             </form>
         </div>
     );
