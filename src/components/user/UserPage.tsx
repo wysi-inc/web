@@ -14,7 +14,7 @@ const UserPage = async (props: Props) => {
 
     const user = await getUser(props.id, props.mode);
 
-    if (!user) return <div>User not found</div>;
+    if (!user || (user as any).error) return <div>User not found</div>;
 
     const mode = user.rank_history?.mode as Mode || "osu";
     const defaultCategory = user.scores_pinned_count > 0 ? "pinned" : "best";

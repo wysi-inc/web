@@ -13,9 +13,8 @@ const DiffStats = (props: Props) => {
         return (
             <div id={`stats_${label.toLowerCase()}`} class="flex flex-row items-center gap-3">
                 <label class="w-10 text-start">{label.toUpperCase()}:</label>
-                <progress value={value} max="11"
-                    class="justify-between progress progress-accent"
-                />
+                <progress class="justify-between progress progress-accent"
+                    value={value} max="11" />
                 <span class="w-10 text-end">
                     {value}
                 </span>
@@ -36,17 +35,17 @@ const DiffStats = (props: Props) => {
                 <div class="flex flex-row flex-wrap items-center justify-center gap-8">
                     <div class="flex flex-row items-center gap-1">
                         <i class="fa-solid fa-star" />
-                        <div>{props.diff.difficulty_rating}</div>
+                        <div id="stats_sr">{props.diff.difficulty_rating}</div>
                     </div>
                     <div class="flex flex-row items-center gap-1">
                         <i class="fa-solid fa-clock" />
-                        <div>{secondsToTime(props.diff.total_length)}</div>
+                        <div id="stats_len">{secondsToTime(props.diff.total_length)}</div>
                     </div>
                     <div class="flex flex-row items-center gap-1">
                         <i class="fa-solid fa-music" />
-                        <div>{props.diff.bpm}</div>
+                        <div id="stats_bpm">{props.diff.bpm}</div>
                     </div>
-                    <div>3pp</div>
+                    <div id="stats_pp">69pp</div>
                 </div>
                 {getProgress("AR", props.diff.ar)}
                 {getProgress("CS", props.diff.cs)}

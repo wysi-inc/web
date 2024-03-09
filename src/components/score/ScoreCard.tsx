@@ -32,27 +32,27 @@ const ScoreCard = async (props: Props) => {
 
     let stats = {} as any;
 
-    if (score.mods.length > 0 || score.legacy_perfect === false) {
-        const url = `https://catboy.best/api/meta/${beatmap.id}?misses=0&acc=${fc_acc}&mods=${score.mods_id}`;
-        const res: any = await (await fetch(url)).json();
-        if (res) {
-            stats.sr = res?.difficulty?.stars?.toFixed(2);
-            stats.bpm = res?.map?.bpm?.toFixed(0);
-            stats.ar = res?.map?.ar?.toFixed(1);
-            stats.cs = res?.map?.cs?.toFixed(1);
-            stats.od = res?.map?.od?.toFixed(1);
-            stats.hp = res?.map?.hp?.toFixed(1);
-            stats.pp = Math.round(res?.pp?.[Number(fc_acc)]?.pp);
-            if (stats.pp <= Number(score.pp) + 10) {
-                stats.pp = null;
-            }
-            if (score.mods.find((mod) => mod.acronym === "DT")) {
-                stats.length = Math.round(beatmap.total_length / 1.5);
-            } else if (score.mods.find((mod) => mod.acronym === "HT")) {
-                stats.length = Math.round(beatmap.total_length / 0.75);
-            }
-        }
-    }
+    // if (score.mods.length > 0 || score.legacy_perfect === false) {
+    //     const url = `https://catboy.best/api/meta/${beatmap.id}?misses=0&acc=${fc_acc}&mods=${score.mods_id}`;
+    //     const res: any = await (await fetch(url)).json();
+    //     if (res) {
+    //         stats.sr = res?.difficulty?.stars?.toFixed(2);
+    //         stats.bpm = res?.map?.bpm?.toFixed(0);
+    //         stats.ar = res?.map?.ar?.toFixed(1);
+    //         stats.cs = res?.map?.cs?.toFixed(1);
+    //         stats.od = res?.map?.od?.toFixed(1);
+    //         stats.hp = res?.map?.hp?.toFixed(1);
+    //         stats.pp = Math.round(res?.pp?.[Number(fc_acc)]?.pp);
+    //         if (stats.pp <= Number(score.pp) + 10) {
+    //             stats.pp = null;
+    //         }
+    //         if (score.mods.find((mod) => mod.acronym === "DT")) {
+    //             stats.length = Math.round(beatmap.total_length / 1.5);
+    //         } else if (score.mods.find((mod) => mod.acronym === "HT")) {
+    //             stats.length = Math.round(beatmap.total_length / 0.75);
+    //         }
+    //     }
+    // }
 
     function getRankLetter(rank: string): string {
         switch (rank.toUpperCase()) {

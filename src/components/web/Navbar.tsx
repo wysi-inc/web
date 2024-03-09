@@ -5,7 +5,7 @@ const Navbar = () => {
     return (
         <div class="flex flex-col bg-base-100 shadow-lg sticky top-0 z-50 w-full">
             <nav class="grid grid-cols-3 p-2">
-                <div class="flex flex-row gap-2 items-center justify-start">
+                <div class="flex flex-row items-center justify-start">
                     <div class="dropdown lg:hidden">
                         <button tabindex="0" role="button" class="btn btn-ghost flex items-center justify-center">
                             <i class="fa-solid fa-bars fa-lg" />
@@ -60,7 +60,7 @@ const Navbar = () => {
                         class="hidden md:flex btn btn-ghost">
                         <i class="fa-brands fa-discord" />
                     </a>
-                    <button class="btn btn-ghost ">
+                    <button class="btn btn-ghost" disabled>
                         <span class="hidden lg:inline">login with osu!</span>
                         <i class="fa-solid fa-right-to-bracket" />
                     </button>

@@ -9,9 +9,9 @@ const BaseHtml = ({ children }: any) => (
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <link rel="icon" href="/public/wysi.ico" />
             <link rel="stylesheet" href="/public/css/main_out.css" type="text/css" />
-            <script src="/public/lib/htmx.min.js" />
-            <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" />
             <script src="https://kit.fontawesome.com/d5ab19acce.js" crossorigin="anonymous" />
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" />
+            <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
         </head>
         <body class="bg-base-300 flex flex-col items-center">
             <Navbar />

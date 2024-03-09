@@ -2,11 +2,18 @@ import DoubleSlider from "./DoubleSlider";
 import Input from "./Input";
 
 const Beatmaps = () => {
+
+    function radio(name: string, label: string) {
+        return (
+            <input class="btn" type="radio" name={name} value={label} aria-label={label} checked={label === "all"} />
+        );
+    }
+
     return (<>
         <form class="flex flex-col gap-4 p-4 rounded-lg drop-shadow-lg bg-base-100" onsubmit=""
             id="search-form"
             hx-post="/beatmaps/list"
-            hx-trigger="change delay:500ms"
+            hx-trigger="keyup delay:500ms, change delay:500ms"
             hx-target="#beatmap-search-results">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Input name="Title" placeholder="Beatmap Title or Artist" />
@@ -39,11 +46,11 @@ const Beatmaps = () => {
                         <span class="label-text">Modes</span>
                     </div>
                     <div class="flex flex-row flex-wrap gap-2">
-                        <input class="btn" type="radio" name="mode" value="all" aria-label="all" checked />
-                        <input class="btn" type="radio" name="mode" value="osu" aria-label="osu" />
-                        <input class="btn" type="radio" name="mode" value="taiko" aria-label="taiko" />
-                        <input class="btn" type="radio" name="mode" value="fruits" aria-label="fruits" />
-                        <input class="btn" type="radio" name="mode" value="mania" aria-label="mania" />
+                        {radio("mode", "all")}
+                        {radio("mode", "osu")}
+                        {radio("mode", "taiko")}
+                        {radio("mode", "fruits")}
+                        {radio("mode", "mania")}
                     </div>
                 </div>
                 <div class="md:col-span-3">
@@ -51,20 +58,21 @@ const Beatmaps = () => {
                         <span class="label-text">Status</span>
                     </div>
                     <div class="flex flex-row flex-wrap gap-2">
-                        <input class="btn" type="radio" name="status" value="all" aria-label="all" checked />
-                        <input class="btn" type="radio" name="status" value="ranked" aria-label="ranked" />
-                        <input class="btn" type="radio" name="status" value="loved" aria-label="loved" />
-                        <input class="btn" type="radio" name="status" value="pending" aria-label="pending" />
-                        <input class="btn" type="radio" name="status" value="wip" aria-label="wip" />
-                        <input class="btn" type="radio" name="status" value="graveyard" aria-label="graveyard" />
+                        {radio("status", "all")}
+                        {radio("status", "ranked")}
+                        {radio("status", "loved")}
+                        {radio("status", "pending")}
+                        {radio("status", "wip")}
+                        {radio("status", "graveyard")}
                     </div>
                 </div>
             </div>
         </form>
         <script src="/public/js/sliders.js" />
-        <div id="beatmap-search-results" hx-trigger="load" hx-post="/beatmaps/list"
+        <div id="beatmap-search-results" hx-trigger="load"
+            hx-post="/beatmaps/list" hx-swap="innerHTML" hx-include="#search-form"
             class="bg-base-100 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg">
-        </div>
+        </div >
     </>);
 }
 

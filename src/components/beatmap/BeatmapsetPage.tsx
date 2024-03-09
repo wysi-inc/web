@@ -20,9 +20,9 @@ const BeatmapsetPage = async (props: Props) => {
 
     const diff: Beatmap = (beatmapset.beatmaps?.find(b => b.id === props.beatmap_id) || beatmapset.beatmaps[0]) as any;
 
-    const isLocked = beatmapset.status === "ranked" || beatmapset.status === "approved" || beatmapset.status === "loved";
+    const hasLeaderboards = beatmapset.status === "ranked" || beatmapset.status === "approved" || beatmapset.status === "loved";
 
-    return (
+    return (<>
         <div class="flex flex-col rounded-lg shadow-lg"
             style={{
                 background: `linear-gradient(#000000cc, #000000cc), url(${cardImg})`,
@@ -30,8 +30,8 @@ const BeatmapsetPage = async (props: Props) => {
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat"
             }}>
-            <div class="flex flex-row flex-wrap gap-4 justify-between rounded-lg p-4" style={{ backdropFilter: "blur(8px)" }}>
-                <div class="flex flex-col gap-4">
+            <div class="grid grid-cols-5 flex-wrap gap-4 justify-between rounded-lg p-4" style={{ backdropFilter: "blur(8px)" }}>
+                <div class="col-span-3 flex flex-col gap-4">
                     <div class="flex flex-row gap-4">
                         <img src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
                             style={{
@@ -43,19 +43,24 @@ const BeatmapsetPage = async (props: Props) => {
                             <h1 class="text-lg font-bold text-white">
                                 {beatmapset.title}
                             </h1>
-                            <p class="text-sm text-gray-400">
+                            <p class="text-md text-gray-400">
                                 by {beatmapset.artist}
                             </p>
-                            <HxA url={`/users/${beatmapset.user_id}`}>
-                                <p class="text-sm text-gray-400">
-                                    mapped by {beatmapset.creator}
-                                </p>
-                            </HxA>
                         </div>
                     </div>
+                    <HxA url={`/users/${beatmapset.user_id}`}>
+                        <div class="flex flex-row gap-2 items-center">
+                            <img src={beatmapset.user.avatar_url}
+                                class="rounded-lg h-10 w-10"
+                                alt="mapper" loading="lazy" />
+                            <span class="">
+                                mapped by {beatmapset.user.username}
+                            </span>
+                        </div>
+                    </HxA>
                     <div class="flex flex-row gap-4">
                         <StatusBadge status={beatmapset.status as BeatmapsetStatus} />
-                        <div>{moment(isLocked ? beatmapset.ranked_date : beatmapset.submitted_date).format("MMMM Do YYYY")}</div>
+                        <div>{moment(hasLeaderboards ? beatmapset.ranked_date : beatmapset.submitted_date).format("MMMM Do YYYY")}</div>
                     </div>
                     <div class="flex flex-row flex-wrap gap-1 p-2 rounded-lg" style={{ backgroundColor: '#ffffff22' }}>
                         {beatmapset.beatmaps.sort((a, b) =>
@@ -72,10 +77,15 @@ const BeatmapsetPage = async (props: Props) => {
                             )}
                     </div>
                 </div>
-                {diff && <DiffStats diff={diff} />}
+                <div class="col-span-2">
+                    <DiffStats diff={diff} />
+                </div>
             </div>
         </div>
-    );
+        {hasLeaderboards &&
+            <div hx-post={`/beatmaps/${props.set_id}/${diff.id}/scores/${diff.mode}`} hx-trigger="load" />
+        }
+    </>);
 }
 
 export default BeatmapsetPage;

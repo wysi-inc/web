@@ -1,6 +1,9 @@
 const HxA = ({ url, children }: { url: string, children: any }) => {
     return (
-        <a hx-target="#main" hx-push-url="true" hx-indicator="#page-loading"
+        <a hx-target="#main" hx-push-url="true"
+            hx-indicator="#page-loading"
+            hx-swap="innerHTML scroll:top"
+            href={url}
             hx-get={url} class="cursor-pointer hover:underline p-0 m-0 flex">
             {children}
         </a>

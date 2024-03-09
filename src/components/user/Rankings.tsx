@@ -17,7 +17,7 @@ const Rankings = async (props: Props) => {
     return (
         <div class="flex flex-col gap-4">
             <Pagination mode={props.mode} category={props.category} page={props.page} />
-            <table class="table p-4 bg-base-300 rounded-lg">
+            <table class="table p-4 bg-base-100 rounded-lg">
                 <thead>
                     <tr>
                         <th></th>
@@ -32,7 +32,7 @@ const Rankings = async (props: Props) => {
                 </thead>
                 <tbody>
                     {users.ranking.map((row, i) =>
-                        <tr class="hover:bg-base-100 hover:rounded-lg">
+                        <tr class="hover:bg-base-300 hover:rounded-lg">
                             <th class="table-cell text-start">#{i + 1 + 50 * (props.page - 1)}</th>
                             <td class="table-cell">
                                 <HxA url={`/users/${row.user.id}`}>

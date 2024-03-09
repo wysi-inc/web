@@ -36,6 +36,12 @@ function stats() {
         setNewStats(stats_cs, Math.floor(Math.random() * 11));
         setNewStats(stats_od, Math.floor(Math.random() * 11));
         setNewStats(stats_hp, Math.floor(Math.random() * 11));
+
+        const stats_sr = document.getElementById('stats_sr');
+        const stats_len = document.getElementById('stats_len');
+        const stats_bpm = document.getElementById('stats_bpm');
+        const stats_pp = document.getElementById('stats_pp');
+
     })
 
     function setNewStats(html, val) {

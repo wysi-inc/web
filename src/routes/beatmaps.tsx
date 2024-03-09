@@ -4,6 +4,8 @@ import { getPage } from '../resources/pages'
 import Beatmaps from '../components/beatmap/Beatmaps';
 import BeatmapsList from '../components/beatmap/BeatmapsList';
 import BeatmapsetPage from '../components/beatmap/BeatmapsetPage';
+import BeatmapScoreTable from '../components/beatmap/BeatmapScoreTable';
+import type { Mode } from '../types/osu';
 
 const queryBodyElysia = {
     body: t.Object({
@@ -49,5 +51,8 @@ export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
     ), queryBodyElysia)
     .post("/list/:cursor", ({ html, body, params }) => html(
         <BeatmapsList body={body} cursor={params.cursor} />
+    ), queryBodyElysia)
+    .post("/:set_id/:beatmap_id/scores/:mode", ({ html, body, params }) => html(
+        <BeatmapScoreTable id={Number(params.beatmap_id)} mode={params.mode as Mode} />
     ), queryBodyElysia)
 
