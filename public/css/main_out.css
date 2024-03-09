@@ -2912,16 +2912,16 @@ details.collapse summary::-webkit-details-marker {
   z-index: 1;
 }
 
-.col-span-full {
-  grid-column: 1 / -1;
-}
-
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
 
 .col-span-3 {
   grid-column: span 3 / span 3;
+}
+
+.col-span-full {
+  grid-column: 1 / -1;
 }
 
 .col-start-1 {
@@ -3008,6 +3008,10 @@ details.collapse summary::-webkit-details-marker {
   height: 0.25rem;
 }
 
+.h-10 {
+  height: 2.5rem;
+}
+
 .h-2 {
   height: 0.5rem;
 }
@@ -3034,10 +3038,6 @@ details.collapse summary::-webkit-details-marker {
 
 .h-full {
   height: 100%;
-}
-
-.h-10 {
-  height: 2.5rem;
 }
 
 .min-h-28 {
@@ -3379,6 +3379,12 @@ details.collapse summary::-webkit-details-marker {
   font-family: Torus;
 
   src: url("/public/css/fonts/Torus-SemiBold.otf") format("opentype");
+
+  font-weight: 400;
+
+  font-style: normal;
+
+  font-display: swap;
 }
 
 * :not(i) {
@@ -3409,11 +3415,6 @@ details.collapse summary::-webkit-details-marker {
 
 .hover\:rounded-lg:hover {
   border-radius: 0.5rem;
-}
-
-.hover\:bg-base-100:hover {
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
 }
 
 .hover\:bg-base-200:hover {
