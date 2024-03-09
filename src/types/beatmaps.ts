@@ -1,8 +1,10 @@
 import type { response as V2Beatmapset } from "osu-api-extended/dist/types/v2_beatmap_set_details";
 import type { response as V2Beatmap } from "osu-api-extended/dist/types/v2_beatmap_id_details";
+import type { response as V2BeatmapSearch } from "osu-api-extended/dist/types/v2_beatmaps_search";
 
 export type BeatmapsetCategory = 'favourite' | 'graveyard' | 'ranked' | 'loved' | 'guest' | 'nominated' | 'pending';
 export type BeatmapsetStatus = "ranked" | "approved" | "qualified" | "loved" | "pending" | "wip" | "graveyard";
+export type BeatmapsetStatusQuery = "ranked" | "loved" | "pending" | "wip" | "graveyard";
 
 export type BeatmapQuery = {
     title?: string;
@@ -29,6 +31,7 @@ export type BeatmapQuery = {
     offset?: string;
 }
 
+export type BeatmapSearch = V2BeatmapSearch;
 
 export type Beatmapset = V2Beatmapset;
 
