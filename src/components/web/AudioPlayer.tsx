@@ -3,7 +3,8 @@ type Props = {
 }
 
 const AudioPlayer = (props: Props) => {
-    const audio_url = `https://catboy.best/preview/audio/${props.beatmap_id}`;
+    // const audio_url = `https://catboy.best/preview/audio/${props.beatmap_id}`;
+    const audio_url = "";
     const tag = `audio-${props.beatmap_id}`;
     return (
         <div>
