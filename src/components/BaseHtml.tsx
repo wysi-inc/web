@@ -11,7 +11,6 @@ const BaseHtml = ({ children }: any) => (
             <link rel="stylesheet" href="/public/css/main_out.css" type="text/css" />
             <script defer src="/public/lib/htmx.min.js" />
             <script defer src="/public/lib/chart.js" />
-            <script defer src="/public/js/main.js" />
             <script defer src="https://kit.fontawesome.com/d5ab19acce.js" crossorigin="anonymous" />
         </head>
         <body class="bg-base-300 flex flex-col items-center">

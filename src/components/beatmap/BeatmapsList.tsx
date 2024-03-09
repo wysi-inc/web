@@ -1,6 +1,6 @@
 import { getBeatmaps } from "@/src/get/beatmaps";
 import BeatmapsetCard from "./BeatmapsetCard";
-import type { BeatmapQuery, Beatmapset, BeatmapsetStatusQuery } from "@/src/types/beatmaps";
+import type { BeatmapQuery, Beatmapset } from "@/src/types/beatmaps";
 
 type Props = {
     body?: BeatmapQuery,

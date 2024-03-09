@@ -1,52 +1,5 @@
-animateSliders();
-getNewStats();
-document.querySelector('body').addEventListener('change', () => {
-    animateSliders();
-    getNewStats();
-}, false);
-
-const audio = document.getElementById('audio');
-
-function getNewStats() {
-
-    const url = window.location.href;
-
-    // get the beatmap id and set id from the url (ex: https://osu.ppy.sh/beatmaps/123456/654321)
-    // set_id is the first number
-    // beatmap_id is the second number
-
-    const set_id = url.split('/')[4];
-    const beatmap_id = url.split('/')[5];
-
-    const form = document.getElementById('stats_form');
-
-    const stats_ar = document.getElementById('stats_ar');
-    const stats_cs = document.getElementById('stats_cs');
-    const stats_od = document.getElementById('stats_od');
-    const stats_hp = document.getElementById('stats_hp');
-
-    form.addEventListener('change', (e) => {
-        e.preventDefault();
-        setNewStats(stats_ar, Math.floor(Math.random() * 11));
-        setNewStats(stats_cs, Math.floor(Math.random() * 11));
-        setNewStats(stats_od, Math.floor(Math.random() * 11));
-        setNewStats(stats_hp, Math.floor(Math.random() * 11));
-    })
-
-    function setNewStats(html, val) {
-        html.children[1].value = val;
-        html.children[2].innerHTML = val;
-    }
-}
-
-
-function playAudio(src) {
-    console.log(src);
-    audio.src = src;
-    audio.play();
-}
-
-function animateSliders() {
+sliders();
+function sliders() {
     // get the slider elements
     const stars_min = document.getElementById('stars_min');
     const stars_max = document.getElementById('stars_max');
@@ -73,14 +26,6 @@ function animateSliders() {
     const year_labels = [year_min_label, year_max_label];
     const len_sliders = [len_min, len_max];
     const len_labels = [len_min_label, len_max_label];
-
-    // set the initial values of the labels on input change
-    // if the values reach the max value set an infinite text to the label
-
-    // check if we didnt get all the sliders
-    if (!stars_min || !stars_max || !bpm_min || !bpm_max || !len_min || !len_max || !year_min || !year_max) {
-        return;
-    }
 
     for (let i = 0; i < sliders.length; i++) {
         sliders[i].oninput = function() {
@@ -113,7 +58,8 @@ function animateSliders() {
         let hours = Math.floor(secs / 3600);
         let minutes = Math.floor(secs / 60) % 60;
         let seconds = secs % 60;
-        return `${hours > 0 ? hours + 'h ' : ''}${minutes > 0 ? minutes + 'm ' : ''}${seconds}s`;
+        let h = hours > 0 ? hours + 'h ' : '';
+        let m = minutes > 0 ? minutes + 'm ' : '';
+        return `${h}${m}${seconds}s`;
     }
 }
-

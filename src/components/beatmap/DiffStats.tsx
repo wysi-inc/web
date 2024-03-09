@@ -59,7 +59,8 @@ const DiffStats = (props: Props) => {
                         color: colors.judgements.x100,
                     }}>
                     100
-                    <input type="number" class="grow text-neutral-content text-right"
+                    <input type="number" name="x100"
+                        class="grow text-neutral-content text-right"
                         placeholder="0" min="0" />
                 </label>
                 <label class="input input-bordered flex items-center gap-2"
@@ -67,18 +68,21 @@ const DiffStats = (props: Props) => {
                         color: colors.judgements.x50,
                     }}>
                     50
-                    <input type="number" class="grow text-neutral-content text-right"
+                    <input type="number" name="x50"
+                        class="grow text-neutral-content text-right"
                         placeholder="0" min="0" />
                 </label>
                 <label class="input input-bordered flex items-center gap-2"
                     style={{
                         color: colors.judgements.xMiss
                     }}>
-                    0
-                    <input type="number" class="grow text-neutral-content text-right"
+                    Miss
+                    <input type="number" name="xMiss"
+                        class="grow text-neutral-content text-right"
                         placeholder="0" min="0" />
                 </label>
             </form>
+            <script src="/public/js/stats.js" />
         </div>
     );
 }

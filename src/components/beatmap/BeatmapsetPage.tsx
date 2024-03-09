@@ -30,7 +30,7 @@ const BeatmapsetPage = async (props: Props) => {
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat"
             }}>
-            <div class="flex flex-row justify-between rounded-lg p-4" style={{ backdropFilter: "blur(8px)" }}>
+            <div class="flex flex-row flex-wrap gap-4 justify-between rounded-lg p-4" style={{ backdropFilter: "blur(8px)" }}>
                 <div class="flex flex-col gap-4">
                     <div class="flex flex-row gap-4">
                         <img src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
