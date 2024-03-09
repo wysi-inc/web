@@ -37,8 +37,12 @@ export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
     .get("/", ({ request, html }) => getPage(request, html,
         <Beatmaps />
     ))
-    .get("/:id", ({ request, html, params }) => getPage(request, html,
-        <BeatmapsetPage id={Number(params.id)} />
+    .get("/:set_id", ({ request, html, params }) => getPage(request, html,
+        <BeatmapsetPage set_id={Number(params.set_id)} />
+    ))
+
+    .get("/:set_id/:beatmap_id", ({ request, html, params }) => getPage(request, html,
+        <BeatmapsetPage set_id={Number(params.set_id)} beatmap_id={Number(params.beatmap_id)} />
     ))
     .post("/list", ({ html, body }) => html(
         <BeatmapsList body={body} />

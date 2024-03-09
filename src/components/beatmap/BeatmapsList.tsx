@@ -1,7 +1,6 @@
-import type { BeatmapQuery, Beatmapset, BeatmapsetStatusQuery } from "@/src/types/beatmaps";
-import BeatmapsetCard from "./BeatmapsetCard";
 import { getBeatmaps } from "@/src/get/beatmaps";
-import type { Mode } from "@/src/types/osu";
+import BeatmapsetCard from "./BeatmapsetCard";
+import type { BeatmapQuery, Beatmapset, BeatmapsetStatusQuery } from "@/src/types/beatmaps";
 
 type Props = {
     body?: BeatmapQuery,
@@ -10,15 +9,7 @@ type Props = {
 
 const BeatmapsList = async (props: Props) => {
 
-    let res;
-    let mode;
-    let section;
-
-    if (props.body) {
-        mode = props.body.mode as Mode;
-        section = props.body.status as BeatmapsetStatusQuery;
-        res = await getBeatmaps(props.body, props.cursor);
-    }
+    const res = await getBeatmaps(props.body, props.cursor);
 
     if (!res) {
         return <></>;

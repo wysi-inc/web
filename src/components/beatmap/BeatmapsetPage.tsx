@@ -3,21 +3,23 @@ import { getBeatmap } from "@/src/get/beatmaps";
 import HxA from "../web/HxA";
 import DiffIcon from "./DiffIcon";
 import StatusBadge from "./StatusBadge";
+import DiffStats from "./DiffStats";
+import type { Beatmap, BeatmapsetStatus } from "@/src/types/beatmaps";
 
 type Props = {
-    id: number,
+    set_id: number,
+    beatmap_id?: number
 }
 
 const BeatmapsetPage = async (props: Props) => {
 
-    const beatmapset = await getBeatmap(props.id);
+    const beatmapset = await getBeatmap(props.set_id);
 
     if ((beatmapset as any).error === null) return <h1>Not found</h1>;
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
 
-    const diff = beatmapset.beatmaps[0];
+    const diff: Beatmap = (beatmapset.beatmaps?.find(b => b.id === props.beatmap_id) || beatmapset.beatmaps[0]) as any;
 
-    const hasLeaderboard = beatmapset.status === "ranked" || beatmapset.status === "approved" || beatmapset.status === "loved" || beatmapset.status === "qualified";
     const isLocked = beatmapset.status === "ranked" || beatmapset.status === "approved" || beatmapset.status === "loved";
 
     return (
@@ -28,7 +30,7 @@ const BeatmapsetPage = async (props: Props) => {
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat"
             }}>
-            <div class="flex flex-row rounded-lg p-4" style={{ backdropFilter: "blur(8px)" }}>
+            <div class="flex flex-row justify-between rounded-lg p-4" style={{ backdropFilter: "blur(8px)" }}>
                 <div class="flex flex-col gap-4">
                     <div class="flex flex-row gap-4">
                         <img src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
@@ -52,7 +54,7 @@ const BeatmapsetPage = async (props: Props) => {
                         </div>
                     </div>
                     <div class="flex flex-row gap-4">
-                        <StatusBadge status={beatmapset.status} />
+                        <StatusBadge status={beatmapset.status as BeatmapsetStatus} />
                         <div>{moment(isLocked ? beatmapset.ranked_date : beatmapset.submitted_date).format("MMMM Do YYYY")}</div>
                     </div>
                     <div class="flex flex-row flex-wrap gap-1 p-2 rounded-lg" style={{ backgroundColor: '#ffffff22' }}>
@@ -70,6 +72,7 @@ const BeatmapsetPage = async (props: Props) => {
                             )}
                     </div>
                 </div>
+                {diff && <DiffStats diff={diff} />}
             </div>
         </div>
     );

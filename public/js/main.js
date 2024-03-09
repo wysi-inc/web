@@ -1,8 +1,50 @@
+animateSliders();
+getNewStats();
 document.querySelector('body').addEventListener('change', () => {
     animateSliders();
+    getNewStats();
 }, false);
 
-animateSliders();
+const audio = document.getElementById('audio');
+
+function getNewStats() {
+
+    const url = window.location.href;
+
+    // get the beatmap id and set id from the url (ex: https://osu.ppy.sh/beatmaps/123456/654321)
+    // set_id is the first number
+    // beatmap_id is the second number
+
+    const set_id = url.split('/')[4];
+    const beatmap_id = url.split('/')[5];
+
+    const form = document.getElementById('stats_form');
+
+    const stats_ar = document.getElementById('stats_ar');
+    const stats_cs = document.getElementById('stats_cs');
+    const stats_od = document.getElementById('stats_od');
+    const stats_hp = document.getElementById('stats_hp');
+
+    form.addEventListener('change', (e) => {
+        e.preventDefault();
+        setNewStats(stats_ar, Math.floor(Math.random() * 11));
+        setNewStats(stats_cs, Math.floor(Math.random() * 11));
+        setNewStats(stats_od, Math.floor(Math.random() * 11));
+        setNewStats(stats_hp, Math.floor(Math.random() * 11));
+    })
+
+    function setNewStats(html, val) {
+        html.children[1].value = val;
+        html.children[2].innerHTML = val;
+    }
+}
+
+
+function playAudio(src) {
+    console.log(src);
+    audio.src = src;
+    audio.play();
+}
 
 function animateSliders() {
     // get the slider elements

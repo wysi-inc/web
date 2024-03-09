@@ -1,5 +1,6 @@
 import { colors } from "@/src/resources/colors";
 import ModeIcon from "./ModeIcon";
+import HxA from "../web/HxA";
 
 interface Props {
     diff: number,
@@ -40,10 +41,11 @@ const DiffIcon = (props: Props) => {
     const color = getGradientColor(props.diff);
 
     return (
-        <a href={`/beatmaps/${props.setId}/${props.diffId}`}
-            data-tip={`★ ${props.diff} - [${props.name}]`} class="tooltip">
-            <ModeIcon size={props.size} color={color} mode={props.mode} />
-        </a>
+        <HxA url={`/beatmaps/${props.setId}/${props.diffId}`}>
+            <span data-tip={`★ ${props.diff} - [${props.name}]`} class="tooltip">
+                <ModeIcon size={props.size} color={color} mode={props.mode} />
+            </span>
+        </HxA>
     )
 }
 

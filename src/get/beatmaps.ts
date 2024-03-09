@@ -2,7 +2,16 @@ import { v2 } from "osu-api-extended";
 import type { BeatmapQuery, BeatmapSearch, Beatmapset, BeatmapsetStatusQuery } from "../types/beatmaps";
 import type { Mode } from "../types/osu";
 
-export async function getBeatmaps(q: BeatmapQuery, cursor_string: string | undefined): Promise<BeatmapSearch | null> {
+export async function getBeatmaps(q: BeatmapQuery | undefined, cursor_string: string | undefined): Promise<BeatmapSearch | null> {
+
+    if (!q) {
+        const res = (await v2.beatmaps.search({}) as any) as BeatmapSearch;
+        if ((res as any).error) {
+            return null;
+        }
+        return res;
+    }
+
     const res: BeatmapSearch = (await v2.beatmaps.search({
         query: [
             q.title && q.title,
