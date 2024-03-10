@@ -6,7 +6,7 @@ import SearchResults from "../components/web/SearchResults";
 
 export const baseRoutes = new Elysia({ prefix: "/" })
     .use(html())
-    .get("/", ({ request, html }) => getPage(request, html,
+    .get("/", ({ request, html, set }) => getPage(request, html, set,
         <Home />
     ))
     .post("/search", ({ request, html, body }) => htmxOnly(request, html,

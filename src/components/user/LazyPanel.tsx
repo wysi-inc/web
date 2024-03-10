@@ -12,7 +12,6 @@ type Props = {
 
 const LazyPanel = (props: Props) => {
     const body = JSON.stringify(props.body);
-    console.log(body);
     return (
         <Panel icon={props.icon} title={props.title} tooltip={props.tooltip} children={
             <span hx-post={props.url} hx-trigger="revealed" hx-swap="outerHTML"

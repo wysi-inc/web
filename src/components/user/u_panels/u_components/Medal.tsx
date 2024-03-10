@@ -1,4 +1,4 @@
-import type { UserMedal } from "@/src/types/users";
+import type { UserMedal } from "@/src/types/medals";
 
 type Props = {
     medal: UserMedal;

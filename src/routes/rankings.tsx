@@ -6,10 +6,10 @@ import type { Category, Mode } from '../types/osu';
 
 export const rankingRoutes = new Elysia({ prefix: '/rankings' })
     .use(html())
-    .get("/", ({ request, html }) => getPage(request, html,
+    .get("/", ({ request, set, html }) => getPage(request, html, set,
         <Rankings mode="osu" page={1} category="performance" />
     ))
-    .get("/:mode/:category/:page", ({ request, html, params }) => getPage(request, html,
+    .get("/:mode/:category/:page", ({ request, set, params, html }) => getPage(request, html, set,
         <Rankings mode={params.mode as Mode} category={params.category as Category} page={Number(params.page)} />
     ))
 

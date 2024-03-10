@@ -36,23 +36,23 @@ const queryBodyElysia = {
 
 export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
     .use(html())
-    .get("/", ({ request, html }) => getPage(request, html,
+    .get("/", ({ request, set, html }) => getPage(request, html, set,
         <Beatmaps />
     ))
-    .get("/:set_id", ({ request, html, params }) => getPage(request, html,
+    .get("/:set_id", ({ request, set, params, html }) => getPage(request, html, set,
         <BeatmapsetPage set_id={Number(params.set_id)} />
     ))
 
-    .get("/:set_id/:beatmap_id", ({ request, html, params }) => getPage(request, html,
+    .get("/:set_id/:beatmap_id", ({ request, set, params }) => getPage(request, html, set,
         <BeatmapsetPage set_id={Number(params.set_id)} beatmap_id={Number(params.beatmap_id)} />
     ))
     .post("/list", ({ html, body }) => html(
         <BeatmapsList body={body} />
     ), queryBodyElysia)
-    .post("/list/:cursor", ({ html, body, params }) => html(
+    .post("/list/:cursor", ({ body, params, html }) => html(
         <BeatmapsList body={body} cursor={params.cursor} />
     ), queryBodyElysia)
-    .post("/:set_id/:beatmap_id/scores/:mode", ({ html, body, params }) => html(
+    .post("/:set_id/:beatmap_id/scores/:mode", ({ html, params }) => html(
         <BeatmapScoreTable id={Number(params.beatmap_id)} mode={params.mode as Mode} />
     ), queryBodyElysia)
 
