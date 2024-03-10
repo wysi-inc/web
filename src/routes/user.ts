@@ -1,5 +1,4 @@
 import { Elysia } from 'elysia'
-import { html } from "@elysiajs/html";
 import {
     userBeatmapsListController,
     userBeatmapsPanelController,
@@ -15,7 +14,6 @@ import {
 } from '../controllers/user';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
-    .use(html())
     .get("/", userPageController)
     .group("/:mode", (_) => _
         .get("/", userPageController)

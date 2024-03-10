@@ -8,7 +8,9 @@ export type RankHistory = {
     country_rank_history: Rank[];
 };
 
-export type User = v2User & {
+export type UserBasic = v2User;
+
+export type User = UserBasic & {
     db_ranks: RankHistory;
     db_setup: Setup;
 };

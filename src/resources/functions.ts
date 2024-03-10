@@ -1,4 +1,6 @@
 import { osu_id, osu_redirect, osu_secret } from "@/index";
+import { auth } from "osu-api-extended";
+import type { UserBasic } from "../types/users";
 
 export function secondsToTime(secs: number): string {
     let hours = Math.floor(secs / 3600);
@@ -7,7 +9,7 @@ export function secondsToTime(secs: number): string {
     return `${hours > 0 ? hours + 'h ' : ''}${minutes > 0 ? minutes + 'm ' : ''}${seconds}s`;
 }
 
-export async function userAuthCode(code: string) {
+export async function userAuthCode(code: string): Promise<any> {
 
     const res = await fetch("https://osu.ppy.sh/oauth/token", {
         method: "POST",
@@ -21,4 +23,9 @@ export async function userAuthCode(code: string) {
     const data = await res.json();
     return data;
 
+}
+
+export async function userAuthData(code: string): Promise<UserBasic> {
+    const user_data: UserBasic = await auth.authorize(code, 'osu', osu_id, osu_secret, osu_redirect) as any;
+    return user_data;
 }
