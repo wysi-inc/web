@@ -38,12 +38,12 @@ setInterval(() => connect(), 1000 * 60 * 60 * 23);
 
 new Elysia()
     .use(staticPlugin())
-    .use(html())
     .use(cookie())
     .use(jwt({
         name: 'jwt',
         secret: osu_secret
     }))
+    .use(html())
     .use(baseRoutes)
     .use(rankingRoutes)
     .use(userRoutes)

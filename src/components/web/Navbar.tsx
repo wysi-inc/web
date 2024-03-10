@@ -1,8 +1,13 @@
+import type { UserCookie } from "@/src/types/users";
 import HxA from "./HxA";
 import Login from "./Login";
 import Search from "./Search";
 
-const Navbar = () => {
+type Props = {
+    user?: UserCookie;
+}
+
+const Navbar = (props: Props) => {
     return (
         <div class="flex flex-col bg-base-100 shadow-lg sticky top-0 z-50 w-full">
             <nav class="grid grid-cols-3 p-2">
@@ -61,7 +66,10 @@ const Navbar = () => {
                         class="hidden md:flex btn btn-ghost">
                         <i class="fa-brands fa-discord" />
                     </a>
-                    <Login />
+                    {props.user ?
+                        "hello" + props.user.username :
+                        <Login />
+                    }
                 </div>
             </nav>
             <div class="h-1">

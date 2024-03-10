@@ -1,40 +1,36 @@
+import { userAuthData, verifyUser } from "../resources/functions";
+import { getPage } from "../resources/pages";
+import type { UserCookie } from "../types/users";
 import Home from "../components/web/Home";
 import SearchResults from "../components/web/SearchResults";
-import { userAuthCode, userAuthData } from "../resources/functions";
-import { getPage } from "../resources/pages";
 
-export const homeController = ({ request, set, html }: any): Response => {
-    return getPage(request, html, set,
+export const homeController = async ({ request, set, html, jwt, cookie: { auth } }: any): Response => {
+    const user = await verifyUser(jwt, auth);
+    if (!user) {
+        <Home />
+    }
+    return getPage(request, html, set, user,
         <Home />
     )
 }
 
-export const whoamiController = async ({ jwt, set, cookie }: any) => {
-    console.log("cookie", cookie);
-    console.log("auth", cookie["auth"]);
-    const profile = await jwt.verify(cookie["auth"]);
-    if (!profile) {
+export const whoamiController = async ({ jwt, set, cookie: { auth } }: any) => {
+    const user = await verifyUser(jwt, auth);
+    if (!user) {
         set.status = 401;
         return "Unauthorized";
     }
-    return profile;
+    return user;
 }
 
-export const oauthController = async ({ jwt, cookie, setCookie, set, query, html, request }: any) => {
+export const oauthController = async ({ jwt, setCookie, query }: any) => {
     const code = query.code;
     //const data = await userAuthCode(code);
     const data = await userAuthData(code);
 
-    if ((data as any).error) return html(<Home />)
+    if ((data as any).error) return "error";
 
-    // const params = {
-    //     id: data.id,
-    //     username: data.username,
-    //     avatar: data.avatar_url,
-    // }
-    //
-
-    const params = {
+    const params: UserCookie = {
         id: data.id,
         username: data.username,
         avatar: data.avatar_url
@@ -50,27 +46,7 @@ export const oauthController = async ({ jwt, cookie, setCookie, set, query, html
         priority: "high",
     })
 
-    // console.log("auth", auth);
-    //
-    // if (!auth) {
-    //     set.status = 418;
-    //     return "wtf";
-    // }
-    //
-    // auth.set({
-    //     value: await jwt.sign(params),
-    //     httpOnly: true,
-    //     maxAge: 7 * 86400,
-    //     path: '/test',
-    // })
-    //
-    // console.log(auth.value);
-
-    return params;
-
-    // return getPage(request, html, set,
-    //     <Home />,
-    // )
+    return "authorized, go back to the site";
 }
 
 

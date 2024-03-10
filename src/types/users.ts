@@ -3,6 +3,12 @@ import type { response as v2User } from "osu-api-extended/dist/types/v2_user_det
 import type { response as v2Score } from "osu-api-extended/dist/types/v2_scores_user_category";
 import type { response as v2UserList } from "osu-api-extended/dist/types/v2_site_ranking_details";
 
+export type UserCookie = {
+    id: number,
+    username: string,
+    avatar: string
+}
+
 export type RankHistory = {
     global_rank_history: Rank[];
     country_rank_history: Rank[];
