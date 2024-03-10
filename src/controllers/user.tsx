@@ -12,9 +12,11 @@ import UserMedalsPanel from "../components/user/u_panels/UserMedalsPanel"
 import UserScoresList from "../components/user/u_panels/u_components/UserScoresList"
 import UserBeatmapsList from "../components/user/u_panels/u_components/UserBeatmapsList"
 import UserMostList from "../components/user/u_panels/u_components/UserMostList"
+import { verifyUser } from "../resources/functions"
 
-export const userPageController = ({ request, set, params, html }: any): Response => {
-    return getPage(request, html, set,
+export const userPageController = async ({ request, set, params, html, jwt, cookie: { auth } }: any): Promise<Response> => {
+    const user = await verifyUser(jwt, auth);
+    return getPage(request, html, set, user,
         <UserPage id={params.id} mode={params.mode} />
     )
 }

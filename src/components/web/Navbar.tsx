@@ -2,9 +2,10 @@ import type { UserCookie } from "@/src/types/users";
 import HxA from "./HxA";
 import Login from "./Login";
 import Search from "./Search";
+import Logged from "./Logged";
 
 type Props = {
-    user?: UserCookie;
+    user: UserCookie | null;
 }
 
 const Navbar = (props: Props) => {
@@ -66,8 +67,8 @@ const Navbar = (props: Props) => {
                         class="hidden md:flex btn btn-ghost">
                         <i class="fa-brands fa-discord" />
                     </a>
-                    {props.user ?
-                        "hello" + props.user.username :
+                    {props?.user ?
+                        <Logged user={props.user} /> :
                         <Login />
                     }
                 </div>

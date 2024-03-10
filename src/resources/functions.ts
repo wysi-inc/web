@@ -38,13 +38,13 @@ export async function verifyUser(jwt: any, auth: string): Promise<UserCookie | n
         return null;
     }
 
-    const user = await getUser(profile.id.toString(), undefined);
-    if (!user) {
-        return null;
-    }
-
-    profile.username = user.username;
-    profile.avatar = user.avatar_url;
+    // const user = await getUser(profile.id.toString(), undefined);
+    // if (!user) {
+    //     return null;
+    // }
+    //
+    // profile.username = user.username;
+    // profile.avatar = user.avatar_url;
 
     return profile;
 

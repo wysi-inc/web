@@ -7,7 +7,9 @@ export function getPage(request: Request, html: any, set: any, user: UserCookie 
         // set.headers['HX-Push-URL'] = request.url;
         return html(children);
     }
+    console.log("first request");
+    console.log(user);
     return html(
-        <BaseHtml user={user}>{children}</BaseHtml>
+        <BaseHtml user={user} children={children} />
     );
 }

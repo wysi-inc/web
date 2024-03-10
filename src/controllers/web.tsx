@@ -4,8 +4,9 @@ import type { UserCookie } from "../types/users";
 import Home from "../components/web/Home";
 import SearchResults from "../components/web/SearchResults";
 
-export const homeController = async ({ request, set, html, jwt, cookie: { auth } }: any): Response => {
+export const homeController = async ({ request, set, html, jwt, cookie: { auth } }: any): Promise<Response> => {
     const user = await verifyUser(jwt, auth);
+    console.log(user);
     if (!user) {
         <Home />
     }
