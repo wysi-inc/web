@@ -4,7 +4,7 @@ import { catalans } from "@/src/resources/constants";
 import type { Category, Mode } from "@/src/types/osu";
 import type { User, UserList } from "@/src/types/users";
 
-export async function getUser(id: string, mode: Mode): Promise<User | null> {
+export async function getUser(id: string, mode: Mode | undefined): Promise<User | null> {
     const user: User = (await v2.user.details(id, mode) as User);
 
     if ("error" in user) return null;

@@ -7,7 +7,7 @@ import Panel from "./Panel";
 
 type Props = {
     id: string;
-    mode: Mode;
+    mode?: Mode;
 }
 
 const UserPage = async (props: Props) => {
@@ -28,13 +28,13 @@ const UserPage = async (props: Props) => {
         <LazyPanel code="setup" title="Setup (wip)" icon={<i class="fa-solid fa-computer" />}
             url={`/users/${user.id}/0/panels/setup`} />
         <LazyPanel code="summary" title="Scores Summary" icon={<i class="fa-solid fa-ranking-star" />}
-            url={`/users/${user.id}/${mode}/panels/scores_summary`} />
+            url={`/users/${user.id}/${mode}/panels/summary`} />
         <LazyPanel code="scores" title="Scores" icon={<i class="fa-solid fa-flag-checkered" />}
             url={`/users/${user.id}/${mode}/panels/scores/${defaultCategory}`} />
         <LazyPanel code="beatmaps" title="Beatmaps" icon={<i class="fa-solid fa-screwdriver-wrench" />}
             url={`/users/${user.id}/${mode}/panels/beatmaps/favourite`} />
         <LazyPanel code="most" title="Most Played" icon={<i class="fa-solid fa-rotate-left" />}
-            url={`/users/${user.id}/0/panels/most_played`} />
+            url={`/users/${user.id}/0/panels/most`} />
         <LazyPanel code="medals" title="Medals" icon={<img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" />}
             tooltip="powered by osekai.net"
             url={`/users/${user.id}/0/panels/medals`}

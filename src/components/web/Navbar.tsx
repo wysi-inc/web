@@ -1,4 +1,5 @@
 import HxA from "./HxA";
+import Login from "./Login";
 import Search from "./Search";
 
 const Navbar = () => {
@@ -60,10 +61,7 @@ const Navbar = () => {
                         class="hidden md:flex btn btn-ghost">
                         <i class="fa-brands fa-discord" />
                     </a>
-                    <a href="/login" class="btn btn-ghost">
-                        <span class="hidden lg:inline">login with osu!</span>
-                        <i class="fa-solid fa-right-to-bracket" />
-                    </a>
+                    <Login />
                 </div>
             </nav>
             <div class="h-1">

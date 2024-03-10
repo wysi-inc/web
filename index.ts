@@ -1,13 +1,15 @@
-import { Elysia } from "elysia";
-import { staticPlugin } from '@elysiajs/static'
+import { Elysia, t } from "elysia";
+import { html } from "@elysiajs/html";
 import { auth } from "osu-api-extended";
+import { staticPlugin } from '@elysiajs/static'
 import { updateMedals } from "./src/db/medals";
-import { baseRoutes } from "./src/routes/base";
 import { rankingRoutes } from "./src/routes/rankings";
 import { userRoutes } from "./src/routes/user";
 import { beatmapRoutes } from "./src/routes/beatmaps";
 import { jsonRoutes } from "./src/routes/json";
+import { homeController, oauthController, searchController } from "./src/controllers/web";
 import mongoose from "mongoose";
+import jwt from "@elysiajs/jwt";
 
 export const port: number = process.env.PORT as any;
 export const mongo_uri: string = process.env.MONGO_URI as any;
@@ -32,9 +34,29 @@ function connect(): void {
 connect();
 setInterval(() => connect(), 1000 * 60 * 60 * 23);
 
+const oauthQuery = {
+    query: t.Object({
+        code: t.String(),
+        state: t.Any()
+    })
+}
+
+const searchBody = {
+    body: t.Object({
+        q: t.String()
+    })
+}
+
 new Elysia()
     .use(staticPlugin())
-    .use(baseRoutes)
+    .use(html())
+    .use(jwt({
+        name: 'cookiezi',
+        secret: 'test'
+    }))
+    .get("/", homeController)
+    .get("/oauth", oauthController, oauthQuery)
+    .post("/search", searchController, searchBody)
     .use(rankingRoutes)
     .use(userRoutes)
     .use(beatmapRoutes)
