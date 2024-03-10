@@ -1,7 +1,7 @@
 import { Elysia } from "elysia";
 import { html } from "@elysiajs/html";
 import { jwt } from "@elysiajs/jwt";
-import { auth } from "osu-api-extended";
+import { cookie } from "@elysiajs/cookie";
 import { staticPlugin } from '@elysiajs/static'
 import { baseRoutes } from "./src/routes/base";
 import { rankingRoutes } from "./src/routes/rankings";
@@ -9,7 +9,9 @@ import { userRoutes } from "./src/routes/user";
 import { beatmapRoutes } from "./src/routes/beatmaps";
 import { jsonRoutes } from "./src/routes/json";
 import { updateMedals } from "./src/db/medals";
+
 import mongoose from "mongoose";
+import { auth } from "osu-api-extended";
 
 export const port: number = Number(process.env.PORT as string);
 export const osu_id: number = Number(process.env.OSU_ID as string);
@@ -37,6 +39,11 @@ setInterval(() => connect(), 1000 * 60 * 60 * 23);
 new Elysia()
     .use(staticPlugin())
     .use(html())
+    .use(cookie())
+    .use(jwt({
+        name: 'jwt',
+        secret: osu_secret
+    }))
     .use(baseRoutes)
     .use(rankingRoutes)
     .use(userRoutes)

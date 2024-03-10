@@ -1,6 +1,5 @@
 import { Elysia, t } from "elysia";
 import { homeController, oauthController, searchController, whoamiController } from "../controllers/web";
-import { jwt } from "@elysiajs/jwt";
 
 const oauthQuery = {
     query: t.Object({
@@ -16,10 +15,6 @@ const searchBody = {
 }
 
 export const baseRoutes = new Elysia({ prefix: '' })
-    .use(jwt({
-        name: 'jwt',
-        secret: 'Fischl von Luftschloss Narfidort'
-    }))
     .get("/", homeController)
     .get("/oauth", oauthController, oauthQuery)
     .post("/search", searchController, searchBody)

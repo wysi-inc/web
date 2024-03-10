@@ -17,6 +17,10 @@ const BeatmapsList = async (props: Props) => {
 
     const sets: Beatmapset[] = res.beatmapsets as any[];
 
+    if (!sets) {
+        return <></>;
+    }
+
     return (<>
         {sets.map((set) =>
             <BeatmapsetCard beatmapset={set} />

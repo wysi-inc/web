@@ -9,8 +9,10 @@ export const homeController = ({ request, set, html }: any): Response => {
     )
 }
 
-export const whoamiController = async ({ jwt, set, auth }: any) => {
-    const profile = await jwt.verify(auth.value);
+export const whoamiController = async ({ jwt, set, cookie }: any) => {
+    console.log("cookie", cookie);
+    console.log("auth", cookie["auth"]);
+    const profile = await jwt.verify(cookie["auth"]);
     if (!profile) {
         set.status = 401;
         return "Unauthorized";
@@ -18,27 +20,57 @@ export const whoamiController = async ({ jwt, set, auth }: any) => {
     return profile;
 }
 
-export const oauthController = async ({ jwt, set, cookie: { auth }, query, html, request }: any) => {
+export const oauthController = async ({ jwt, cookie, setCookie, set, query, html, request }: any) => {
     const code = query.code;
     //const data = await userAuthCode(code);
     const data = await userAuthData(code);
 
     if ((data as any).error) return html(<Home />)
 
-    auth.set({
-        value: await jwt.sign({
-            id: data.id,
-            username: data.username,
-            avatar: data.avatar_url,
-        }),
-        httpOnly: true,
-        maxAge: 7 * 86400,
-        path: '/profile',
+    // const params = {
+    //     id: data.id,
+    //     username: data.username,
+    //     avatar: data.avatar_url,
+    // }
+    //
+
+    const params = {
+        id: data.id,
+        username: data.username,
+        avatar: data.avatar_url
+    }
+
+    const cookie_age = 60 * 60 * 24 * 7;
+
+    setCookie("auth", await jwt.sign(params), {
+        httpOnly: false,
+        maxAge: cookie_age,
+        sameSite: true,
+        secure: false,
+        priority: "high",
     })
 
-    return getPage(request, html, set,
-        <Home />,
-    )
+    // console.log("auth", auth);
+    //
+    // if (!auth) {
+    //     set.status = 418;
+    //     return "wtf";
+    // }
+    //
+    // auth.set({
+    //     value: await jwt.sign(params),
+    //     httpOnly: true,
+    //     maxAge: 7 * 86400,
+    //     path: '/test',
+    // })
+    //
+    // console.log(auth.value);
+
+    return params;
+
+    // return getPage(request, html, set,
+    //     <Home />,
+    // )
 }
 
 
