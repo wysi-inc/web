@@ -60,10 +60,10 @@ const Navbar = () => {
                         class="hidden md:flex btn btn-ghost">
                         <i class="fa-brands fa-discord" />
                     </a>
-                    <button class="btn btn-ghost" disabled>
+                    <a href="/login" class="btn btn-ghost">
                         <span class="hidden lg:inline">login with osu!</span>
                         <i class="fa-solid fa-right-to-bracket" />
-                    </button>
+                    </a>
                 </div>
             </nav>
             <div class="h-1">

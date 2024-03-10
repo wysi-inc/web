@@ -1,6 +1,6 @@
 import { Elysia } from 'elysia'
 import { html } from "@elysiajs/html";
-import { getPage, htmxOnly } from '../resources/pages'
+import { getPage } from '../resources/pages'
 import UserPage from '../components/user/UserPage';
 import UserScoresList from '../components/user/u_panels/u_components/UserScoresList';
 import UserBeatmapsList from '../components/user/u_panels/u_components/UserBeatmapsList';
@@ -25,33 +25,33 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             <UserPage id={params.id} mode={params.mode as Mode} />
         ))
         .group("/panels", (_) => _
-            .post("/scores_summary", ({ request, set, params, html }) => getPage(request, html, set,
+            .post("/scores_summary", ({ params, html }) => html(
                 <UserSummaryPanel id={Number(params.id)} mode={params.mode as Mode} />
             ))
-            .post("/scores/:category", ({ request, set, params, html }) => getPage(request, html, set,
+            .post("/scores/:category", ({ params, html }) => html(
                 <UserScoresPanel id={Number(params.id)} mode={params.mode as Mode} category={params.category as ScoreCategory} />
             ))
-            .post("/beatmaps/:category", ({ request, set, params, html }) => getPage(request, html, set,
+            .post("/beatmaps/:category", ({ params, html }) => html(
                 <UserBeatmapsPanel id={Number(params.id)} category={params.category as BeatmapCategory} />
             ))
-            .post("/most_played", ({ request, set, params, html }) => getPage(request, html, set,
+            .post("/most_played", ({ params, html }) => html(
                 <UserMostPanel id={Number(params.id)} />
             ))
-            .post("/skins", ({ request, set, params, html }) => getPage(request, html, set,
+            .post("/skins", ({ params, html }) => html(
                 <UserSkinsPanel id={Number(params.id)} />
             ))
-            .post("/setup", ({ request, set, params, html }) => getPage(request, html, set,
+            .post("/setup", ({ params, html }) => html(
                 <UserSetupPanel id={Number(params.id)} />
             ))
-            .post("/medals", ({ request, set, body, html }) => {
+            .post("/medals", ({ body, html }) => {
                 const medals: ProfileMedal[] = (body as any)?.medals?.map((m: string) => JSON.parse(m) as ProfileMedal);
-                return getPage(request, html, set,
+                return html(
                     <UserMedalsPanel user_medals={medals} />
                 )
             })
         )
         .group("/lists", (_) => _
-            .post("/scores/:category", ({ request, params, query, html }) => htmxOnly(request, html,
+            .post("/scores/:category", ({ params, query, html }) => html(
                 <UserScoresList id={Number(params.id)}
                     mode={params.mode as Mode}
                     category={params.category as ScoreCategory}
@@ -59,14 +59,14 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                     limit={Number(query.limit)}
                 />
             ))
-            .post("/beatmaps/:category", ({ request, params, query, html }) => htmxOnly(request, html,
+            .post("/beatmaps/:category", ({ params, query, html }) => html(
                 <UserBeatmapsList id={Number(params.id)}
                     category={params.category as BeatmapCategory}
                     offset={Number(query.offset)}
                     limit={Number(query.limit)}
                 />
             ))
-            .post("/most", ({ request, params, query, html }) => htmxOnly(request, html,
+            .post("/most", ({ params, query, html }) => html(
                 <UserMostList id={Number(params.id)} offset={Number(query.offset)} limit={Number(query.limit)} />
             ))
         )
