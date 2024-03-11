@@ -8,7 +8,6 @@ type Props = {
 }
 
 const BaseHtml = (props: Props) => {
-    console.log("still have it", props?.user);
     return (
         <html data-theme="dracula">
             <head>

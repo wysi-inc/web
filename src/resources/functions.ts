@@ -1,7 +1,6 @@
 import { osu_id, osu_redirect, osu_secret } from "@/index";
 import { auth } from "osu-api-extended";
 import type { UserBasic, UserCookie } from "../types/users";
-import { getUser } from "../get/user";
 
 export function secondsToTime(secs: number): string {
     let hours = Math.floor(secs / 3600);
@@ -31,21 +30,22 @@ export async function userAuthData(code: string): Promise<UserBasic> {
     return user_data;
 }
 
-export async function verifyUser(jwt: any, auth: string): Promise<UserCookie | null> {
+export async function verifyUser(jwt: any, auth: string | undefined): Promise<UserCookie | null> {
 
     const profile: UserCookie = await jwt.verify(auth);
     if (!profile) {
         return null;
     }
-
-    // const user = await getUser(profile.id.toString(), undefined);
-    // if (!user) {
-    //     return null;
-    // }
-    //
-    // profile.username = user.username;
-    // profile.avatar = user.avatar_url;
-
     return profile;
 
 }
+
+export const jwt_params = () => ({
+    secret: process.env.OSU_SECRET as string,
+    cookie: "auth",
+    cookieOptions: {
+        httpOnly: true,
+        maxAge: 60 * 60 * 24 * 7,
+        path: '/',
+    }
+})

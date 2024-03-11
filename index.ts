@@ -1,7 +1,5 @@
 import { Elysia } from "elysia";
 import { html } from "@elysiajs/html";
-import { jwt } from "@elysiajs/jwt";
-import { cookie } from "@elysiajs/cookie";
 import { staticPlugin } from '@elysiajs/static'
 import { baseRoutes } from "./src/routes/base";
 import { rankingRoutes } from "./src/routes/rankings";
@@ -38,18 +36,13 @@ setInterval(() => connect(), 1000 * 60 * 60 * 23);
 
 new Elysia()
     .use(staticPlugin())
-    .use(cookie())
-    .use(jwt({
-        name: 'jwt',
-        secret: osu_secret
-    }))
     .use(html())
     .use(baseRoutes)
     .use(rankingRoutes)
     .use(userRoutes)
     .use(beatmapRoutes)
     .use(jsonRoutes)
-    .listen(port)
     .onError((err) => console.error("[ EE ]", err))
     .onRequest(({ request }) => console.log(request.method, request.url))
     .onStart(() => console.info(`[ OK ] Listening on port ${port}`))
+    .listen(port)
