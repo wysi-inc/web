@@ -10,8 +10,8 @@ export type UserCookie = {
 }
 
 export type RankHistory = {
-    global_rank_history: Rank[];
-    country_rank_history: Rank[];
+    global_ranks: Rank[];
+    country_ranks: Rank[];
 };
 
 export type UserBasic = v2User;

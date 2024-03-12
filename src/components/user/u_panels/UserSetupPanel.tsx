@@ -1,13 +1,19 @@
+import type { Setup } from "@/src/models/User";
+import Tablet from "./setup/Tablet";
+
 type Props = {
-    id: number;
+    setup: Setup | undefined;
 }
 
 const UserSetupPanel = (props: Props) => {
 
+    if (!props.setup) return <div>No setup found</div>;
+
     return (
         <div>
-            <h1>UserSetupPanel</h1>
-            <p>id: {props.id}</p>
+            <form>
+                <Tablet tablet={props.setup.tablet} />
+            </form>
         </div>
     );
 }

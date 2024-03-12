@@ -5,19 +5,13 @@ import type { Category, Mode } from "@/src/types/osu";
 import type { User, UserList } from "@/src/types/users";
 
 export async function getUser(id: string, mode: Mode | undefined): Promise<User | null> {
-    const user: User = (await v2.user.details(id, mode) as User);
+    let user: User = (await v2.user.details(id, mode) as User);
 
     if ("error" in user) return null;
 
     mode = user.rank_history?.mode as Mode || "osu";
 
-    user.db_ranks = await updateUser(
-        user.id,
-        user.username,
-        user?.rank_history?.data || [],
-        user?.statistics?.country_rank,
-        mode
-    );
+    user = await updateUser(user, mode);
 
     if (catalans.includes(user.id)) {
         console.log("Bon dia tu!");

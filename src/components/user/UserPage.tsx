@@ -4,6 +4,7 @@ import UserTopPanel from "./u_panels/UserTopPanel";
 import UserHistoryPanel from "./u_panels/UserHistoryPanel";
 import LazyPanel from "./LazyPanel";
 import Panel from "./Panel";
+import UserSetupPanel from "./u_panels/UserSetupPanel";
 
 type Props = {
     id: string;
@@ -16,17 +17,28 @@ const UserPage = async (props: Props) => {
 
     if (!user || (user as any).error) return <div>User not found</div>;
 
+    console.log(user.db_setup);
+
     const mode = user.rank_history?.mode as Mode || "osu";
     const defaultCategory = user.scores_pinned_count > 0 ? "pinned" : "best";
 
     return (<>
         <UserTopPanel user={user} />
         <Panel title="History" icon={<i class="fa-solid fa-chart-line" />}
-            children={<UserHistoryPanel db_ranks={user.db_ranks} play_counts={user.monthly_playcounts} replays_watched={user.replays_watched_counts} />} />
+            children={
+                <UserHistoryPanel
+                    db_ranks={user.db_ranks}
+                    play_counts={user.monthly_playcounts}
+                    replays_watched={user.replays_watched_counts}
+                />}
+        />
+        <Panel title="Setup (wip)" icon={<i class="fa-solid fa-computer" />}
+            children={
+                <UserSetupPanel setup={user.db_setup} />
+            }
+        />
         <LazyPanel code="skins" title="Skins (wip)" icon={<i class="fa-solid fa-palette" />}
             url={`/users/${user.id}/0/panels/skins`} />
-        <LazyPanel code="setup" title="Setup (wip)" icon={<i class="fa-solid fa-computer" />}
-            url={`/users/${user.id}/0/panels/setup`} />
         <LazyPanel code="summary" title="Scores Summary" icon={<i class="fa-solid fa-ranking-star" />}
             url={`/users/${user.id}/${mode}/panels/summary`} />
         <LazyPanel code="scores" title="Scores" icon={<i class="fa-solid fa-flag-checkered" />}

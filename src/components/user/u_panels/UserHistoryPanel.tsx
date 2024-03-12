@@ -14,12 +14,13 @@ type Props = {
 
 const UserHistoryPanel = (props: Props) => {
 
-    function tab(type: string, title: string, data: Rank[] | MonthCount[]) {
+    function tab(type: string, title: string, data: Rank[] | MonthCount[] | undefined) {
+        if (!data) return <></>;
         return (<>
             <input type="radio" name="history_tabs" role="tab" class="tab text-nowrap"
                 aria-label={title} checked={type === "global"} />
             <div role="tabpanel" class="tab-content pt-4">
-                {props.db_ranks.global_rank_history.length > 0 ?
+                {data.length > 0 ?
                     <div class="h-64 w-full relative">
                         <canvas id={`chart-${type}`} class="absolute" data-vals={JSON.stringify(data)} />
                     </div> :
@@ -32,8 +33,8 @@ const UserHistoryPanel = (props: Props) => {
 
     return (<>
         <div role="tablist" class="tabs tabs-bordered grid grid-cols-4">
-            {tab('global', 'Global Rank', props.db_ranks.global_rank_history)}
-            {tab('country', 'Country Rank', props.db_ranks.country_rank_history)}
+            {tab('global', 'Global Rank', props.db_ranks?.global_ranks)}
+            {tab('country', 'Country Rank', props.db_ranks?.country_ranks)}
             {tab('plays', 'Play Count', props.play_counts)}
             {tab('replays', 'Replays Watched', props.replays_watched)}
         </div>

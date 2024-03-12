@@ -22,125 +22,75 @@ const setup = new mongoose.Schema({
             required: true,
         },
         area: {
-            w: {
-                type: Number,
-                required: true,
+            type: {
+                w: {
+                    type: Number,
+                    required: true,
+                },
+                h: {
+                    type: Number,
+                    required: true,
+                }
             },
-            h: {
-                type: Number,
-                required: true,
-            },
+            required: true,
         },
         position: {
-            x: {
-                type: Number,
-                required: true,
+            type: {
+                x: {
+                    type: Number,
+                    required: true,
+                },
+                y: {
+                    type: Number,
+                    required: true,
+                },
+                r: {
+                    type: Number,
+                    required: true,
+                }
             },
-            y: {
-                type: Number,
-                required: true,
-            },
-            z: {
-                type: Number,
-                required: true,
-            },
+            required: true,
         },
         size: {
-            w: {
-                type: Number,
-                required: true,
+            type: {
+                w: {
+                    type: Number,
+                    required: true,
+                },
+                h: {
+                    type: Number,
+                    required: true,
+                }
             },
-            h: {
-                type: Number,
-                required: true,
-            },
+            required: true,
         },
     },
     mouse: {
-        name: {
-            type: String,
-            required: true,
-        },
-        dpi: {
-            type: Number,
-            required: true,
-        },
+        name: String,
+        dpi: String,
     },
     peripherals: {
-        monitor: {
-            type: String,
-            required: true,
-        },
-        headphones: {
-            type: String,
-            required: true,
-        },
-        microphone: {
-            type: String,
-            required: true,
-        },
-        tablet: {
-            type: String,
-            required: true,
-        },
-        mouse: {
-            type: String,
-            required: true,
-        },
-        keyboard: {
-            type: String,
-            required: true,
-        },
-        keypad: {
-            type: String,
-            required: true,
-        },
-        mousepad: {
-            type: String,
-            required: true,
-        },
-        chair: {
-            type: String,
-            required: true,
-        },
-        camera: {
-            type: String,
-            required: true,
-        },
-        audio: {
-            type: String,
-            required: true,
-        },
+        monitor: String,
+        headphones: String,
+        microphone: String,
+        tablet: String,
+        mouse: String,
+        keyboard: String,
+        keypad: String,
+        mousepad: String,
+        chair: String,
+        camera: String,
+        audio: String,
     },
     computer: {
-        cpu: {
-            type: String,
-            required: true,
-        },
-        gpu: {
-            type: String,
-            required: true,
-        },
-        ram: {
-            type: String,
-            required: true,
-        },
-        psu: {
-            type: String,
-            required: true,
-        },
-        storage: {
-            type: String,
-            required: true,
-        },
-        motherboard: {
-            type: String,
-            required: true,
-        },
-        case: {
-            type: String,
-            required: true,
-        },
+        os: String,
+        cpu: String,
+        gpu: String,
+        ram: String,
+        psu: String,
+        storage: String,
+        motherboard: String,
+        case: String,
     }
 }, { _id: false })
 

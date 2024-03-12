@@ -55,11 +55,6 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             .post("/skins", ({ params }) => (
                 <UserSkinsPanel id={Number(params.id)} />
             ))
-            .post("/setup", ({ params }) => (
-                <UserSetupPanel
-                    id={Number(params.id)}
-                />
-            ))
             .post("/medals", async ({ body }) => (
                 <UserMedalsPanel
                     user_medals={

@@ -6,7 +6,7 @@ type Props = {
 }
 const Logged = (props: Props) => {
     return (
-        <div class="dropdown dropdown-end lg:hidden">
+        <div class="dropdown dropdown-end">
             <button tabindex="0" role="button" class="btn btn-ghost pt-0 flex flex-row gap-2 items-center">
                 <span>{props.user.username}</span>
                 <img src={props.user.avatar} class="w-8 h-8 rounded-lg drop-shadow-lg shadow-lg" alt="avatar" />
