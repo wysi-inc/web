@@ -35,3 +35,11 @@
         filter: opacity(1);
     }
 }
+
+.mod_img {
+    filter: brightness(0.5);
+}
+
+:checked+img {
+    filter: brightness(1) !important;
+}
