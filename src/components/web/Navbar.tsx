@@ -47,13 +47,13 @@ const Navbar = (props: Props) => {
                                 Home
                             </button>
                         </HxA>
-                        <HxA url="/">
+                        <HxA url="/rankings">
                             <button class="btn btn-ghost" hx-get="/rankings">
                                 Rankings
                             </button>
                         </HxA>
 
-                        <HxA url="/">
+                        <HxA url="/beatmaps">
                             <button class="btn btn-ghost" hx-get="/rankings">
                                 Beatmaps
                             </button>
