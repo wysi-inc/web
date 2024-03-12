@@ -10,6 +10,7 @@ import { updateMedals } from "./src/db/medals";
 
 import mongoose from "mongoose";
 import { auth } from "osu-api-extended";
+import { ip } from "elysia-ip";
 
 export const port: number = Number(process.env.PORT as string);
 export const osu_id: number = Number(process.env.OSU_ID as string);
@@ -37,12 +38,16 @@ setInterval(() => connect(), 1000 * 60 * 60 * 23);
 new Elysia()
     .use(staticPlugin())
     .use(html())
+    .use(ip())
+    .onBeforeHandle(({ ip, request }: any) => {
+        console.log(ip?.address, request?.method, request?.url)
+    })
     .use(baseRoutes)
     .use(rankingRoutes)
     .use(userRoutes)
     .use(beatmapRoutes)
     .use(jsonRoutes)
     .onError((err) => console.error("[ EE ]", err))
-    .onRequest(({ request }) => console.log(request.method, request.url))
+    //.onRequest(({ request }) => console.log(request.method, request.url))
     .onStart(() => console.info(`[ OK ] Listening on port ${port}`))
     .listen(port)
