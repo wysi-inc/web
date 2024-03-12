@@ -35,24 +35,29 @@ const Navbar = (props: Props) => {
                             </li>
                         </ul>
                     </div>
-                    <a class="hidden sm:flex gap-4 items-center btn btn-ghost px-2 text-xl"
-                        hx-get="/" hx-target="#main" hx-push-url="true" hx-indicator="#page-loading">
-                        <img src="/public/wysi.svg" class="w-8 h-8 rounded-lg drop-shadow-lg shadow-lg" alt="wysi" />
-                        <span>wysi</span>
-                    </a>
+                    <HxA url="/">
+                        <div class="hidden sm:flex gap-4 items-center btn btn-ghost px-2 text-xl">
+                            <img src="/public/wysi.svg" class="w-8 h-8 rounded-lg drop-shadow-lg shadow-lg" alt="wysi" />
+                            <span>wysi</span>
+                        </div>
+                    </HxA>
                     <div class="hidden lg:flex flex-row text-sm">
-                        <a hx-target="#main" hx-push-url="true" hx-indicator="#page-loading"
-                            class="btn btn-ghost" hx-get="/">
-                            Home
-                        </a>
-                        <a hx-target="#main" hx-push-url="true" hx-indicator="#page-loading"
-                            class="btn btn-ghost" hx-get="/rankings">
-                            Rankings
-                        </a>
-                        <a hx-target="#main" hx-push-url="true" hx-indicator="#page-loading"
-                            class="btn btn-ghost" hx-get="/beatmaps">
-                            Beatmaps
-                        </a>
+                        <HxA url="/">
+                            <button class="btn btn-ghost" hx-get="/rankings">
+                                Home
+                            </button>
+                        </HxA>
+                        <HxA url="/">
+                            <button class="btn btn-ghost" hx-get="/rankings">
+                                Rankings
+                            </button>
+                        </HxA>
+
+                        <HxA url="/">
+                            <button class="btn btn-ghost" hx-get="/rankings">
+                                Beatmaps
+                            </button>
+                        </HxA>
                     </div>
                 </div>
                 <div class="flex flex-row items-center justify-center">
