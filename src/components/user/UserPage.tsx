@@ -30,7 +30,8 @@ const UserPage = async (props: Props) => {
                     db_ranks={user.db_ranks}
                     play_counts={user.monthly_playcounts}
                     replays_watched={user.replays_watched_counts}
-                />}
+                />
+            }
         />
         <Panel title="Setup (wip)" icon={<i class="fa-solid fa-computer" />}
             children={

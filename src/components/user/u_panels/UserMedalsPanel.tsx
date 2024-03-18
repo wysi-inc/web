@@ -15,6 +15,8 @@ type Group = {
 
 const UserMedalsPanel = async (props: Props) => {
 
+    if (!props.user_medals) props.user_medals = [];
+
     const user_medals = props.user_medals;
 
     const db_medals: Medal[] = await Medal.find().lean();

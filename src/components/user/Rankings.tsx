@@ -14,6 +14,8 @@ const Rankings = async (props: Props) => {
 
     const users = await getRankings(props.mode, props.category, props.page);
 
+    if ((users as any).error) return <div>Rankings not found</div>;
+
     return (
         <div class="flex flex-col gap-4">
             <Pagination mode={props.mode} category={props.category} page={props.page} />

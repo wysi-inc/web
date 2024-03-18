@@ -2,6 +2,7 @@ import { colors } from "@/src/resources/colors";
 import type { User } from "@/src/types/users";
 import moment from "moment";
 import BarChart from "./u_components/BarChart";
+import Flag from "./u_components/Flag";
 
 type Props = {
     user: User;
@@ -52,10 +53,7 @@ const UserTopPanel = (props: Props) => {
                             <img src={`/public/img/countries/${user.country.code.toLowerCase()}.svg`}
                                 class="h-6 w-6" style="filter: invert(1);" />
                             <h2 class="text-xl">#{user.statistics?.country_rank?.toLocaleString() || "-"}</h2>
-                            <div class="tooltip" data-tip={user.country.name}>
-                                <img src={`https://flagcdn.com/h40/${user.country.code?.toLowerCase()}.jpg`}
-                                    class="h-5 w-7 rounded-sm" />
-                            </div>
+                            <Flag name={user.country.name} code={user.country.code} />
                         </div>
                         <div>
                             <div class="text-sm">Performance:</div>

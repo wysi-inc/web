@@ -95,7 +95,7 @@ const UserSummaryPanel = async (props: Props) => {
         return bpm;
     }).reduce((a, b) => a + b, 0) / scores.length);
     avg_length = Math.round(avg_length / scores.length);
-    avg_acc = avg_acc / scores.length;
+    avg_acc = avg_acc * 100 / scores.length;
     const avg_grade = grade_labels[grade_counts.indexOf(Math.max(...grade_counts))];
 
     let modsCounter: { [key: string]: number } = {};

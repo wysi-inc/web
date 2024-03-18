@@ -82,19 +82,19 @@ const BeatmapsetPage = async (props: Props) => {
             </div>
         </div>
         <div class="grid grid-cols-5 gap-4 p-4 rounded-lg bg-base-100" style={{ height: "250px" }}>
-            <div class="overflow-scroll grid grid-cols-2 gap-2 col-span-3">
+            <div class="overflow-y-scroll grid grid-cols-2 gap-2 col-span-3">
                 <div class="flex flex-col gap-2 text-sm">
                     <div class="grid grid-cols-2 gap-2">
                         <div class="rounded-lg bg-base-200 shadow-lg">
                             <div class="px-2">Play Count:</div>
                             <div class="p-2 rounded-lg bg-base-300">
-                                {beatmapset.play_count}
+                                {beatmapset.play_count.toLocaleString()}
                             </div>
                         </div>
                         <div class="rounded-lg bg-base-200 shadow-lg">
                             <div class="px-2">Favourites:</div>
                             <div class="p-2 rounded-lg bg-base-300">
-                                {beatmapset.favourite_count}
+                                {beatmapset.favourite_count.toLocaleString()}
                             </div>
                         </div>
                     </div>
@@ -138,7 +138,7 @@ const BeatmapsetPage = async (props: Props) => {
                     </div>
                 </div>
             </div>
-            <div class="overflow-scroll rounded-lg col-span-2">
+            <div class="overflow-y-scroll rounded-lg col-span-2">
                 {beatmapset.description.description}
             </div>
         </div>

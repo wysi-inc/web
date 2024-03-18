@@ -19,6 +19,7 @@ export async function getUser(id: string, mode: Mode | undefined): Promise<User 
         user.country.name = "Catalunya";
     }
 
+    console.log(user);
     return user;
 }
 
