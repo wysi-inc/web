@@ -6,20 +6,21 @@ const Tablet = ({ tablet }: { tablet: Setup["tablet"] }) => {
 
     function input(id: string, name: string, value: number, measure: string = "mm") {
         return (
-            <label class="input input-bordered flex text-sm input-sm items-center gap-2">
-                {name}
+            <label class="input has-[:disabled]:bg-base-300 has-[:disabled]:border-0 input-sm input-bordered flex text-sm items-center gap-2">
+                <span class="grow">{name}:</span>
                 <input id={id} name={id}
-                    type="number" placeholder="0" class="text-end w-full"
+                    type="number" placeholder="0"
+                    class="peer disabled:hidden text-end w-full"
                     value={value.toString()} />
-                {measure}
+                <span class="hidden peer-disabled:block">{value}</span>
+                <span>{measure}</span>
             </label>
         );
     }
 
-
-    return (<div>
-        <h1>Tablet</h1>
-        <div class="flex justify-center items-center">
+    return <div class="flex flex-col">
+        <h1 class="text-center">Tablet</h1>
+        <div class="flex justify-center items-center h-36">
             <div class="relative outline outline-1 overflow-hidden rounded-lg"
                 id="tablet" style={{
                     height: `${tablet.size.h}px`,
@@ -37,29 +38,46 @@ const Tablet = ({ tablet }: { tablet: Setup["tablet"] }) => {
                 </div>
             </div>
         </div>
-        <div class="flex flex-col gap-2">
-            <label>Name:</label>
-            <input id="tablet_name" name="tablet_name"
-                type="text" placeholder="Tablet name"
-                class="input input-sm input-bordered" value={tablet.name} />
-            <label>Size:</label>
-            <div class="grid grid-cols-2 gap-2">
-                {input("tablet_width", "Width", tablet.size.w)}
-                {input("tablet_height", "Height", tablet.size.h)}
-            </div>
-            <label>Area:</label>
-            <div class="grid grid-cols-2 gap-2">
-                {input("area_width", "Width", tablet.area.w)}
-                {input("area_hight", "Height", tablet.area.h)}
-            </div>
-            <label>Position:</label>
-            <div class="grid grid-cols-3 gap-2">
-                {input("area_x", "X", tablet.position.x)}
-                {input("area_y", "Y", tablet.position.y)}
-                {input("area_r", "R", tablet.position.r, "deg")}
-            </div>
+        <div class="flex flex-col gap-2 grow">
+            <label class="form-control">
+                <div class="label">
+                    <span class="label-text">Name:</span>
+                </div>
+                <input id="tablet_name" name="tablet_name"
+                    type="text" placeholder="Tablet name"
+                    class="input input-sm input-bordered peer disabled:hidden w-full" value={tablet.name} />
+                <span class="input input-sm bg-base-300 hidden peer-disabled:block">{tablet.name}</span>
+            </label>
+            <label class="form-control">
+                <div class="label">
+                    <span class="label-text">Size:</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    {input("tablet_width", "Width", tablet.size.w)}
+                    {input("tablet_height", "Height", tablet.size.h)}
+                </div>
+            </label>
+            <label class="form-control">
+                <div class="label">
+                    <span class="label-text">Area:</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    {input("area_width", "Width", tablet.area.w)}
+                    {input("area_hight", "Height", tablet.area.h)}
+                </div>
+            </label>
+            <label class="form-control">
+                <div class="label">
+                    <span class="label-text">Position:</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    {input("area_x", "X", tablet.position.x)}
+                    {input("area_y", "Y", tablet.position.y)}
+                    {input("area_r", "R", tablet.position.r, "deg")}
+                </div>
+            </label>
         </div>
-    </div>);
+    </div>;
 }
 
 export default Tablet;
