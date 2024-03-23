@@ -4,65 +4,51 @@ const setup = new mongoose.Schema({
     keyboard: {
         name: {
             type: String,
-            required: true,
         },
         layout: {
             type: String,
             enum: ["k2", "k3", "k4", "k60", "k75", "ktkl", "kfull", ""],
-            required: true,
         },
         keys: {
             type: [String],
-            required: true,
         },
     },
     tablet: {
         name: {
             type: String,
-            required: true,
         },
         area: {
             type: {
                 w: {
                     type: Number,
-                    required: true,
                 },
                 h: {
                     type: Number,
-                    required: true,
                 }
             },
-            required: true,
         },
         position: {
             type: {
                 x: {
                     type: Number,
-                    required: true,
                 },
                 y: {
                     type: Number,
-                    required: true,
                 },
                 r: {
                     type: Number,
-                    required: true,
                 }
             },
-            required: true,
         },
         size: {
             type: {
                 w: {
                     type: Number,
-                    required: true,
                 },
                 h: {
                     type: Number,
-                    required: true,
                 }
             },
-            required: true,
         },
     },
     mouse: {

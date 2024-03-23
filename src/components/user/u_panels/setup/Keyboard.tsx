@@ -61,7 +61,7 @@ const Keyboard = ({ keyboard }: { keyboard: Setup["keyboard"] }) => {
                     </div>
                     <input id="keyboard_name" name="keyboard_name"
                         type="text" placeholder="Keyboard name"
-                        class="input input-sm input-bordered peer disabled:hidden w-full" value={keyboard?.name} />
+                        class="input input-sm input-bordered peer disabled:hidden w-full" value={keyboard?.name || ""} />
                     <span class="input input-sm bg-base-200 hidden peer-disabled:block">{keyboard?.name}</span>
                 </label>
                 <label class="form-control">

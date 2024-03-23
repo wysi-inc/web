@@ -10,6 +10,11 @@ type Props = {
     mode: Mode;
 }
 
+type ColorCount = {
+    count: number;
+    color: string;
+}
+
 const UserSummaryPanel = async (props: Props) => {
 
     const scores: Score[] = await v2.scores.user.category(
@@ -23,64 +28,28 @@ const UserSummaryPanel = async (props: Props) => {
         return <></>;
     }
 
-    let score_grades = {
-        xh: 0,
-        x: 0,
-        sh: 0,
-        s: 0,
-        a: 0,
-        b: 0,
-        c: 0,
-        d: 0,
-    }
-    scores.forEach((sc: Score) => {
-        score_grades.xh += sc.rank === "XH" ? 1 : 0;
-        score_grades.x += sc.rank === "X" ? 1 : 0;
-        score_grades.sh += sc.rank === "SH" ? 1 : 0;
-        score_grades.s += sc.rank === "S" ? 1 : 0;
-        score_grades.a += sc.rank === "A" ? 1 : 0;
-        score_grades.b += sc.rank === "B" ? 1 : 0;
-        score_grades.c += sc.rank === "C" ? 1 : 0;
-        score_grades.d += sc.rank === "D" ? 1 : 0;
-    });
+    const grade_counts = new Map<string, ColorCount>();
+    const hit_counts = new Map<string, ColorCount>();
+    const mods_counts = new Map<string, number>();
 
-    const grade_labels: string[] = ["XH", "X", "SH", "S", "A", "B", "C", "D"];
-    const grade_counts: number[] = [score_grades.xh, score_grades.x, score_grades.sh, score_grades.s, score_grades.a, score_grades.b, score_grades.c, score_grades.d];
-    const grade_colors: string[] = [colors.grades.xh, colors.grades.x, colors.grades.sh, colors.grades.s, colors.grades.a, colors.grades.b, colors.grades.c, colors.grades.d];
+    const grade_letters: string[] = [];
+    const pp_values: number[] = [];
+    const acc_values: number[] = [];
+    const combo_values: number[] = [];
+    const bpm_values: number[] = [];
+    const length_values: number[] = [];
 
-    let score_hits = {
-        x300: 0,
-        x100: 0,
-        x50: 0,
-        xMiss: 0,
-    }
-    scores.forEach(sc => {
-        const statistics = sc.statistics;
-        score_hits.x300 += statistics.great || 0;
-        score_hits.x100 += statistics.ok || 0;
-        score_hits.x50 += statistics.meh || 0;
-        score_hits.xMiss += statistics.miss || 0;
-    })
+    for (let i = 0; i < scores.length; i++) {
+        const score: Score = scores[i];
 
-    const hit_labels: string[] = ["300", "100", "50", "Miss"];
-    const hit_counts: number[] = [score_hits.x300, score_hits.x100, score_hits.x50, score_hits.xMiss];
-    const hit_colors: string[] = [colors.judgements.x300, colors.judgements.x100, colors.judgements.x50, colors.judgements.xMiss];
+        const grade = score.rank;
 
-    const all_pp: number[] = scores.map(s => s.pp || 0);
+        const mods = getScoreMods(score);
+        const mods_key = mods.join('-');
 
-    const max_pp = Math.round(Math.max(...all_pp));
-    const min_pp = Math.round(Math.min(...all_pp));
-
-    const avg_pp = Math.round(all_pp.reduce((a, b) => a + b, 0) / all_pp.length);
-    const avg_combo = Math.round(scores.map(s => s.max_combo).reduce((a, b) => a + b, 0) / scores.length);
-
-    let avg_acc: number = 0;
-    let avg_length: number = 0;
-    const avg_bpm = Math.round(scores.map(s => {
-        let bpm = s.beatmap.bpm;
-        let len = s.beatmap.total_length;
-        avg_acc += s.accuracy;
-        s.mods.forEach(m => {
+        let bpm = score.beatmap.bpm;
+        let len = score.beatmap.total_length;
+        score.mods.forEach(m => {
             if (m.acronym === "DT" || m.acronym === "NC") {
                 bpm *= 1.5;
                 len *= 2 / 3;
@@ -91,67 +60,151 @@ const UserSummaryPanel = async (props: Props) => {
                 len *= 4 / 3;
             }
         })
-        avg_length += len;
-        return bpm;
-    }).reduce((a, b) => a + b, 0) / scores.length);
-    avg_length = Math.round(avg_length / scores.length);
-    avg_acc = avg_acc * 100 / scores.length;
-    const avg_grade = grade_labels[grade_counts.indexOf(Math.max(...grade_counts))];
+        bpm = Math.round(bpm);
+        len = Math.round(len);
 
-    let modsCounter: { [key: string]: number } = {};
-    scores.forEach((score) => {
-        const arr = score.mods.filter(m => m.acronym !== "CL").map(m => m.acronym);
-        const mods = arr.length > 0 ? arr : ["NM"];
-        const key = mods.join('-');
-        if (modsCounter[key]) {
-            modsCounter[key] += 1;
-        } else {
-            modsCounter[key] = 1;
-        }
-    });
-    let largestKey = null;
-    let largestValue = -Infinity;
-    for (const key in modsCounter) {
-        if (modsCounter[key] > largestValue) {
-            largestKey = key;
-            largestValue = modsCounter[key];
-        }
+        grade_letters.push(score.rank);
+        pp_values.push(score.pp || 0);
+        acc_values.push(score.accuracy * 100);
+        combo_values.push(score.max_combo);
+        bpm_values.push(bpm);
+        length_values.push(len);
+
+        mods_counts.set(mods_key, (mods_counts.get(mods_key) || 0) + 1);
+
+        grade_counts.set(grade, {
+            count: (grade_counts.get(grade)?.count || 0) + 1,
+            color: (colors.grades as any)[grade.toLowerCase()]
+        });
+
+        hit_counts.set("x300", {
+            count: (hit_counts.get("x300")?.count || 0) + (score.statistics.great || 0),
+            color: colors.judgements.x300
+        });
+
+        hit_counts.set("x100", {
+            count: (hit_counts.get("x100")?.count || 0) + (score.statistics.ok || 0),
+            color: colors.judgements.x100
+        });
+
+        hit_counts.set("x50", {
+            count: (hit_counts.get("x50")?.count || 0) + (score.statistics.meh || 0),
+            color: colors.judgements.x50
+        });
+
+        hit_counts.set("xMiss", {
+            count: (hit_counts.get("xMiss")?.count || 0) + (score.statistics.miss || 0),
+            color: colors.judgements.xMiss
+        });
+
     }
-    const avg_mods = largestKey ? largestKey.split('-').map(String) : [];
+
+    pp_values.sort((a, b) => a - b);
+
+    const grade_length = 100 / grade_letters.length;
+    const max_grade = Array.from(grade_counts.entries()).reduce((a, b) => a[1].count > b[1].count ? a : b);
+    const max_mods: string[] = Array.from(mods_counts.entries()).reduce((a, b) => a[1] > b[1] ? a : b)[0].split('-');
+    const avg_acc = (acc_values.reduce((a, b) => a + b) / acc_values.length).toFixed(2);
+    const avg_combo = Math.round(combo_values.reduce((a, b) => a + b) / combo_values.length);
+    const avg_pp = Math.round(pp_values.reduce((a, b) => a + b) / pp_values.length);
+    const avg_bpm = Math.round(bpm_values.reduce((a, b) => a + b) / bpm_values.length);
+    const avg_length = secondsToTime(length_values.reduce((a, b) => a + b) / length_values.length);
+
+    const max_pp = Math.round(pp_values[pp_values.length - 1]);
+    const min_pp = Math.round(pp_values[0]);
+
+    function getScoreMods(sc: Score): string[] {
+        const arr = sc.mods.filter(m => m.acronym !== "CL").map(m => m.acronym);
+        const mods = arr.length > 0 ? arr : ["NM"];
+        return mods;
+    }
 
     return (
         <div class="flex flex-col gap-4">
-            <div class="flex flex-col col-span-full bg-neutral rounded-lg">
+            <div class="flex flex-col grow col-span-full bg-neutral rounded-lg">
                 <div class="p-2">Average Play:</div>
-                <div class="flex flex-row flex-wrap gap-4 items-center p-4 rounded-lg bg-base-300">
-                    <h3 class="text-xl" style={{ color: (colors.grades as any)[avg_grade.toLowerCase()] }}>{avg_grade}</h3>
+                <div class="flex grow flex-row flex-wrap gap-4 items-center p-4 rounded-lg bg-base-300">
+                    <h3 class="text-xl" style={{ color: max_grade[1].color }}>{max_grade[0]}</h3>
                     <div>{avg_pp}pp</div>
-                    <div><i class="fa-solid fa-bullseye fa-xs" /> {avg_acc.toFixed(2)}%</div>
-                    <div><i class="fa-solid fa-fire fa-xs" /> {avg_combo.toLocaleString()}x</div>
-                    <div><i class="fa-solid fa-stopwatch fa-xs" /> {secondsToTime(avg_length)}</div>
+                    <div><i class="fa-solid fa-bullseye fa-xs" /> {avg_acc}%</div>
+                    <div><i class="fa-solid fa-fire fa-xs" /> {avg_combo}x</div>
+                    <div><i class="fa-solid fa-stopwatch fa-xs" /> {avg_length}</div>
                     <div><i class="fa-solid fa-music fa-xs" /> {avg_bpm}bpm</div>
-                    {avg_mods.map(m => (
-                        <div class="tooltip flex items-center justify-center" data-tip={m}>
-                            <img src={`/public/img/mods/${m.toLowerCase()}.png`} alt={m} class="h-5" />
+                    {max_mods.map(mod => (
+                        <div class="tooltip flex items-center justify-center" data-tip={mod}>
+                            <img src={`/public/img/mods/${mod.toLowerCase()}.png`} alt={mod} class="h-5" />
                         </div>
                     ))}
                 </div>
             </div>
-            <div class="flex flex-row gap-2 p-4 rounded-lg bg-base-300">
-                <h4>Max PP: {max_pp}pp</h4>
-                <h4>Min PP: {min_pp}pp</h4>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg bg-base-300">
-                <BarChart
-                    labels={grade_labels}
-                    data={grade_counts}
-                    colors={grade_colors}
-                />
-                <BarChart
-                    labels={hit_labels}
-                    data={hit_counts}
-                    colors={hit_colors}
-                />
+            <div class="grid grid-cols-2 gap-4">
+                <div class="flex flex-col bg-neutral rounded-lg">
+                    <div class="p-2 flex flex-row justify-between">
+                        <div>Performance:</div>
+                        <div>{avg_pp}pp</div>
+                    </div>
+                    <div class="flex grow flex-row items-center justify-between gap-4 p-4 rounded-lg bg-base-300">
+                        <span>{max_pp}pp</span>
+                        <span class="flex flex-row grow h-2 rounded-full overflow-hidden">
+                            {grade_letters.map(grade => <div style={{
+                                backgroundColor: (colors.grades as any)[grade.toLowerCase()], width: `${grade_length}%`
+                            }} />)}
+                        </span>
+                        <span>{min_pp}pp</span>
+                    </div>
+                </div>
+                <div class="flex flex-col bg-neutral rounded-lg">
+                    <div class="p-2 flex flex-row justify-between">
+                        <div>Mods:</div>
+                        <div class="flex flex-row gap-1 items-center">
+                            {max_mods.map(m => (
+                                <div class="tooltip flex items-center justify-center" data-tip={m}>
+                                    <img src={`/public/img/mods/${m.toLowerCase()}.png`} alt={m} class="h-5" />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div class="flex grow flex-row flex-wrap gap-4 items-center p-4 rounded-lg bg-base-300">
+                        {Array.from(mods_counts.entries()).sort((a, b) => b[1] - a[1]).map(([mods, count]) => (
+                            <div class="flex flex-row gap-1 items-center">
+                                {mods.split('-').map(mod => (
+                                    <div class="tooltip flex flex-row gap-1 items-center justify-center" data-tip={mod}>
+                                        <img src={`/public/img/mods/${mod.toLowerCase()}.png`} alt={mod} class="h-5" />
+                                    </div>
+                                ))}
+                                <div>{count}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div class="flex flex-col bg-neutral rounded-lg">
+                    <div class="p-2 flex flex-row justify-between">
+                        <div>Grades:</div>
+                        <div style={{ color: max_grade[1].color }}>
+                            {max_grade[0]}
+                        </div>
+                    </div>
+                    <div class="grow p-4 rounded-lg bg-base-300">
+                        <BarChart
+                            labels={Array.from(grade_counts.keys())}
+                            data={Array.from(grade_counts.values()).map(g => g.count)}
+                            colors={Array.from(grade_counts.values()).map(g => g.color)}
+                        />
+                    </div>
+                </div>
+                <div class="flex flex-col bg-neutral rounded-lg">
+                    <div class="p-2 flex flex-row justify-between">
+                        <div>Hits:</div>
+                        <div>{avg_acc}%</div>
+                    </div>
+                    <div class="grow p-4 rounded-lg bg-base-300">
+                        <BarChart
+                            labels={Array.from(hit_counts.keys())}
+                            data={Array.from(hit_counts.values()).map(h => h.count)}
+                            colors={Array.from(hit_counts.values()).map(h => h.color)}
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     );
