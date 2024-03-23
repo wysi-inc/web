@@ -1,7 +1,7 @@
 import { Key, type KeyboardProps } from "../Keyboard";
 
 function K60(p: KeyboardProps) {
-    return <div class="p-1 border rounded-lg w-min k60">
+    return <div class="p-1 outline outline-1 rounded-lg w-min k60">
         <div class="flex flex-row gap-1">
             <div class="flex flex-col">
                 <div class="flex flex-row items-start">

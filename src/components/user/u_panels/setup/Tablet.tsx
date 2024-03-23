@@ -4,7 +4,7 @@ import SetupInput from "./SetupInput";
 const Tablet = ({ tablet }: { tablet: Setup["tablet"] }) => {
 
     return <div class="bg-neutral rounded-lg flex flex-col">
-        <h1 class="p-2">Tablet</h1>
+        <h1 class="p-2 text-neutral-content">Tablet</h1>
         <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
             <div class="flex justify-center items-center h-36">
                 <div class="relative outline outline-1 overflow-hidden rounded-lg"
@@ -33,7 +33,7 @@ const Tablet = ({ tablet }: { tablet: Setup["tablet"] }) => {
                     <input id="tablet_name" name="tablet_name"
                         type="text" placeholder="Tablet name"
                         class="input input-sm input-bordered peer disabled:hidden w-full" value={tablet?.name || ""} />
-                    <span class="input input-sm bg-base-100 hidden peer-disabled:block">{tablet?.name}</span>
+                    <span class="input input-sm bg-base-200 hidden peer-disabled:block">{tablet?.name}</span>
                 </label>
                 <label class="form-control">
                     <div class="label">

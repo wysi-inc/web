@@ -43,7 +43,7 @@ export const Empty = () => {
 
 const Keyboard = ({ keyboard }: { keyboard: Setup["keyboard"] }) => {
     return <div class="bg-neutral rounded-lg flex flex-col">
-        <h1 class="p-2">Keyboard</h1>
+        <h1 class="p-2 text-neutral-content">Keyboard</h1>
         <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
             <div class="flex justify-center items-center h-36" id="keyboard_display">
                 {keyboard?.layout === "k2" && <K2 keys={keyboard?.keys} />}

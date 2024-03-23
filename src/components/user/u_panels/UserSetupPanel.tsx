@@ -47,7 +47,7 @@ const UserSetupPanel = (props: Props) => {
                     id="setup_form_cancel">
                     <i class="fa-solid fa-xmark" />
                 </button>
-                <button type="button" class="hidden peer-disabled:block btn btn-sm btn-warning"
+                <button type="button" class="hidden peer-disabled:block btn btn-sm btn-accent"
                     id="setup_form_edit">
                     <i class="fa-solid fa-pen-to-square" />
                 </button>

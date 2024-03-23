@@ -1,4 +1,5 @@
 import type { UserCookie } from "../types/users";
+import AudioPlayer from "./web/AudioPlayer";
 import Footer from "./web/Footer";
 import Navbar from "./web/Navbar";
 
@@ -19,6 +20,7 @@ const BaseHtml = (props: Props) => {
                 <script src="https://kit.fontawesome.com/d5ab19acce.js" crossorigin="anonymous" />
                 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" />
                 <script src="https://unpkg.com/htmx.org@1.9.10" />
+                <script src="/public/js/audio.js" defer />
             </head>
             <body class="bg-base-300 flex flex-col items-center">
                 <Navbar user={props?.user} />
@@ -27,6 +29,7 @@ const BaseHtml = (props: Props) => {
                         {props.children}
                     </main>
                 </div>
+                <AudioPlayer />
                 <Footer />
             </body>
         </html>

@@ -76,7 +76,7 @@ const UserMedalsPanel = async (props: Props) => {
         <div class="flex flex-col gap-4">
             <div class="flex flex-row flex-wrap gap-4">
                 <div class="rounded-lg bg-neutral shadow-lg grow">
-                    <div class="p-1 px-2">
+                    <div class="p-1 px-2 text-neutral-content">
                         Recent Medals
                     </div>
                     <div class="flex flex-row gap-2 flex-wrap p-4 bg-base-300 rounded-lg">
@@ -88,7 +88,7 @@ const UserMedalsPanel = async (props: Props) => {
                     </div>
                 </div>
                 <div class="rounded-lg bg-neutral shadow-lg grow">
-                    <div class="p-1 px-2">
+                    <div class="p-1 px-2 text-neutral-content">
                         Rarest Medal ({rarest_medal?.rarity?.toFixed(2)}%)
                     </div>
                     <div class="flex p-4 bg-base-300 rounded-lg justify-center items-center">
@@ -101,7 +101,7 @@ const UserMedalsPanel = async (props: Props) => {
             </div>
             {Object.entries(categories).map(([key, vals]) =>
                 <div class="rounded-lg bg-neutral shadow-lg">
-                    <div class="py-1 px-2 flex flex-row justify-between items-center">
+                    <div class="text-neutral-content py-1 px-2 flex flex-row justify-between items-center">
                         <div>
                             {key}
                         </div>

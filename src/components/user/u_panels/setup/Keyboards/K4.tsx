@@ -1,7 +1,7 @@
 import { Key, type KeyboardProps } from "../Keyboard";
 
 function K4(p: KeyboardProps) {
-    return <div class="p-1 border rounded-lg w-min k4">
+    return <div class="p-1 outline outline-1 rounded-lg w-min k4">
         <div class="flex flex-row mb-3">
             <Key char={'Z'} code={'z'} keys={p.keys} width={1} />
             <Key char={'X'} code={'x'} keys={p.keys} width={1} />

@@ -5,6 +5,7 @@ import DiffIcon from "./DiffIcon";
 import StatusBadge from "./StatusBadge";
 import DiffStats from "./DiffStats";
 import type { Beatmap, BeatmapsetStatus } from "@/src/types/beatmaps";
+import AudioPlayButton from "../web/AudioPlayButton";
 
 type Props = {
     set_id: number,
@@ -60,6 +61,14 @@ const BeatmapsetPage = async (props: Props) => {
                     <div class="flex flex-row gap-4">
                         <StatusBadge status={beatmapset.status as BeatmapsetStatus} />
                         <div>{moment(hasLeaderboards ? beatmapset.ranked_date : beatmapset.submitted_date).format("MMMM Do YYYY")}</div>
+                    </div>
+                    <div>
+                        <AudioPlayButton
+                            beatmap_id={diff.id}
+                            set_id={beatmapset.id}
+                            beatmap_title={beatmapset.title}
+                            beatmap_artist={beatmapset.artist}
+                        />
                     </div>
                     <div class="flex flex-row flex-wrap gap-1 p-2 rounded-lg" style={{ backgroundColor: '#ffffff22' }}>
                         {beatmapset.beatmaps.sort((a, b) =>

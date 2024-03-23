@@ -11,9 +11,11 @@ const UserTopPanel = (props: Props) => {
 
     const { user } = props;
 
+    const best_country = user.db_ranks.country_ranks.sort((a, b) => a.rank - b.rank)[0];
+
     return (
         <div class="rounded-lg bg-base-100 shadow-lg">
-            <div class="rounded-lg"
+            <div class="rounded-lg text-white"
                 style={{
                     backgroundImage: `url(${user.cover_url})`,
                     backgroundSize: `cover`,
@@ -27,7 +29,7 @@ const UserTopPanel = (props: Props) => {
                     <div class="flex flex-col justify-center">
                         <div class="flex flex-col gap-4 items-center justify-between">
                             <img src={user.avatar_url} class="rounded-lg aspect-square h-52 w-52" />
-                            <div>joined {moment(user.join_date).fromNow()}</div>
+                            <div class="tooltip" data-tip={moment(user.join_date).format("DD/MM/YYYY")}>joined {moment(user.join_date).fromNow()}</div>
                             <div class="flex flex-row justify-between gap-2 items-center">
                                 <span>{user.statistics.level.current}</span>
                                 <progress class="progress progress-accent w-32" value={user.statistics.level.progress} max="100" />
@@ -37,7 +39,8 @@ const UserTopPanel = (props: Props) => {
                     </div>
                     <div class="flex flex-col gap-2 grow">
                         <div class="flex flex-row gap-2 items-center">
-                            <h1 class="text-2xl">{user.username}</h1>
+                            <a href={`https://osu.ppy.sh/users/${user.id}`}
+                                target="_blank" class="text-2xl underline-offset-2 hover:underline">{user.username}</a>
                             {user.is_supporter &&
                                 <div class="badge badge-primary text-white">
                                     {[...Array(user.support_level)].map(() =>
@@ -47,12 +50,12 @@ const UserTopPanel = (props: Props) => {
                         </div>
                         <div class="flex flex-row gap-2 items-center">
                             <i class="fa-solid fa-earth-americas fa-xl" />
-                            <h2 class="text-xl">#{user.statistics?.global_rank?.toLocaleString() || "-"}</h2>
+                            <h2 class="text-xl tooltip" data-tip={`Peak rank: #${user.rank_highest.rank?.toLocaleString()}`}>#{user.statistics?.global_rank?.toLocaleString() || "-"}</h2>
                         </div>
                         <div class="flex flex-row gap-2 items-center">
                             <img src={`/public/img/countries/${user.country.code.toLowerCase()}.svg`}
                                 class="h-6 w-6" style="filter: invert(1);" />
-                            <h2 class="text-xl">#{user.statistics?.country_rank?.toLocaleString() || "-"}</h2>
+                            <h2 class="text-xl tooltip" data-tip={`Peak rank: #${best_country?.rank?.toLocaleString()}`}>#{user.statistics?.country_rank?.toLocaleString() || "-"}</h2>
                             <Flag name={user.country.name} code={user.country.code} />
                         </div>
                         <div>

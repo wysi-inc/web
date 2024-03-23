@@ -16,7 +16,7 @@ const BeatmapsetCard = (props: Props) => {
 
     return (
         <div class="flex flex-row bg-base-300 rounded-lg shadow-lg">
-            <div class="flex flex-col bg-neutral rounded-lg shadow-lg grow">
+            <div class="text-white flex flex-col bg-neutral rounded-lg shadow-lg grow">
                 <div class="flex flex-col rounded-lg shadow-lg"
                     style={{
                         background: `linear-gradient(#000000cc, #000000cc), url(${cardImg})`,
@@ -31,19 +31,10 @@ const BeatmapsetCard = (props: Props) => {
                                 objectFit: "cover",
                                 objectPosition: "center"
                             }} />
-                        <div class="flex flex-col py-2 px-4 truncate">
-                            <HxA url={`/beatmaps/${beatmapset.id}`}>
-                                <h1 class="text-lg font-bold truncate text-white">
-                                    {beatmapset.title}
-                                </h1>
-                            </HxA>
-
-                            <p class="text-sm truncate text-gray-400">
-                                by {beatmapset.artist}
-                            </p>
-                            <p class="text-sm truncate text-gray-400">
-                                mapped by {beatmapset.creator}
-                            </p>
+                        <div class="flex flex-col py-2 w-72 px-4 ">
+                            <HxA css="text-lg hover:underline underline-offset-2 truncate" url={`/beatmaps/${beatmapset.id}`}>{beatmapset.title}</HxA>
+                            <p class="text-sm text-gray-400 truncate"> by {beatmapset.artist}</p>
+                            <HxA css="text-sm text-gray-400 truncate" url={`/users/${beatmapset.user_id}`}>mapped by {beatmapset.creator}</HxA>
                         </div>
                     </div>
                 </div>
@@ -61,7 +52,12 @@ const BeatmapsetCard = (props: Props) => {
                     }
                 </div>
             </div>
-            <CardControls beatmap_id={beatmapset.beatmaps[0].id} set_id={beatmapset.id} />
+            <CardControls
+                beatmap_id={beatmapset.beatmaps[0].id}
+                set_id={beatmapset.id}
+                beatmap_title={beatmapset.title}
+                beatmap_artist={beatmapset.artist}
+            />
         </div>
     )
 }

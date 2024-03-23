@@ -21,18 +21,16 @@ const SearchResults = async (props: Props) => {
     return (<>
         {users.map((user, i) =>
             i < limit &&
-            <HxA url={`/users/${user.id}`}>
-                <div class="hover:bg-base-200 cursor-pointer flex flex-row justify-between rounded-md p-2">
-                    <div class="flex flex-row gap-4">
-                        <img src={`https://flagcdn.com/h40/${user.country_code.toLowerCase()}.jpg`}
-                            style="width: 32px; height: 24px;" class="rounded-sm" />
-                        <span class="flex flex-row items-center gap-2">
-                            {user.username}
-                        </span>
-                    </div>
-                    <div class="flex justify-center">
-                        <OnlineDot size={24} online={user.is_online} />
-                    </div>
+            <HxA url={`/users/${user.id}`} css="hover:bg-base-200 cursor-pointer flex flex-row justify-between rounded-md p-2">
+                <div class="flex flex-row gap-4">
+                    <img src={`https://flagcdn.com/h40/${user.country_code.toLowerCase()}.jpg`}
+                        style="width: 32px; height: 24px;" class="rounded-sm" />
+                    <span class="flex flex-row items-center gap-2">
+                        {user.username}
+                    </span>
+                </div>
+                <div class="flex justify-center">
+                    <OnlineDot size={24} online={user.is_online} />
                 </div>
             </HxA>
         )}

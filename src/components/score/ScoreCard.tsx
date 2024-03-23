@@ -6,6 +6,7 @@ import type { Score } from "@/src/types/users";
 import type { Mode } from "@/src/types/osu";
 import DiffIcon from "@/src/components/beatmap/DiffIcon";
 import CardControls from "@/src/components/web/CardControls";
+import HxA from "../web/HxA";
 
 type Props = {
     position: number;
@@ -67,7 +68,7 @@ const ScoreCard = async (props: Props) => {
 
     return (
         <div class="grow rounded-lg flex flex-row bg-base-300 shadow-lg">
-            <div class="bg-neutral flex flex-col grow rounded-lg shadow-lg">
+            <div class="text-white bg-neutral flex flex-col grow rounded-lg shadow-lg">
                 <div class="rounded-lg flex flex-col shadow-lg"
                     style={{
                         background: `linear-gradient(#000000cc, #000000cc), url(${cardImg})`,
@@ -84,9 +85,9 @@ const ScoreCard = async (props: Props) => {
                                     objectPosition: "center"
                                 }} />
                             <div class="flex flex-col py-2 px-4 truncate">
-                                <p class="text-lg truncate">{beatmapset.title}</p>
+                                <HxA css="text-lg truncate hover:underline underline-offset-2" url={`/beatmaps/${beatmapset.id}/${beatmap.id}`}>{beatmapset.title}</HxA>
                                 <p class="text-sm truncate text-gray-400"> by {beatmapset.artist}</p>
-                                <p class="text-sm truncate text-gray-400">mapped by {beatmapset.creator}</p>
+                                <HxA css="text-sm truncate text-gray-400" url={`/users/${beatmapset.user_id}`}>mapped by {beatmapset.creator}</HxA>
                             </div>
                         </div>
                         <div class="flex flex-col gap-2 py-2 px-4 justify-between md:col-span-2 rounded-lg"
@@ -174,7 +175,12 @@ const ScoreCard = async (props: Props) => {
                     <div>#{props.position}</div>
                 </div>
             </div>
-            <CardControls beatmap_id={score.beatmap.id} set_id={beatmapset.id} />
+            <CardControls
+                beatmap_id={score.beatmap.id}
+                set_id={beatmapset.id}
+                beatmap_title={beatmapset.title}
+                beatmap_artist={beatmapset.artist}
+            />
         </div>
     );
 }

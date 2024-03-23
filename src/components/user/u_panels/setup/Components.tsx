@@ -5,7 +5,7 @@ const Components = ({ peripherals, computer }: { peripherals: Setup["peripherals
 
     return <div class="col-span-full grid grid-cols-2 gap-4" >
         <div class="bg-neutral rounded-lg flex flex-col">
-            <h1 class="p-2">Peripherals</h1>
+            <h1 class="p-2 text-neutral-content">Peripherals</h1>
             <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
                 <SetupInput id="peripherals_mouse" icon={<i class="fa-solid fa-computer-mouse" />} name="Mouse" type="text" value={peripherals?.mouse} />
                 <SetupInput id="peripherals_mousepad" icon={<i class="fa-solid fa-square" />} name="Mousepad" type="text" value={peripherals?.mousepad} />
@@ -20,7 +20,7 @@ const Components = ({ peripherals, computer }: { peripherals: Setup["peripherals
             </div>
         </div>
         <div class="bg-neutral rounded-lg flex flex-col">
-            <h1 class="p-2">Computer</h1>
+            <h1 class="p-2 text-neutral-content">Computer</h1>
             <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
                 <SetupInput id="computer_os" icon={<i class="fa-solid fa-folder-closed" />} name="OS" type="text" value={computer?.os} />
                 <SetupInput id="computer_cpu" icon={<i class="fa-solid fa-microchip" />} name="CPU" type="text" value={computer?.cpu} />

@@ -42,7 +42,7 @@ const DiffIcon = (props: Props) => {
 
     return (
         <HxA url={`/beatmaps/${props.setId}/${props.diffId}`}>
-            <span data-tip={`★ ${props.diff} - [${props.name}]`} class="tooltip">
+            <span data-tip={`★ ${props.diff} - [${props.name}]`} class="p-0 m-0 tooltip">
                 <ModeIcon size={props.size} color={color} mode={props.mode} />
             </span>
         </HxA>
