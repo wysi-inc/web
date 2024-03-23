@@ -1,4 +1,4 @@
-import { type Rank, User } from "../models/User";
+import { type Rank, User, type Setup } from "../models/User";
 import type { Mode } from "../types/osu";
 import type { User as UserType } from "../types/users";
 
@@ -25,10 +25,8 @@ export async function updateUser(user: UserType, mode: Mode): Promise<UserType> 
             user.db_setup = db_user.setup as any;
             return user;
         }
-        console.log("Updating existing user")
         db_user.username = user.username;
         if (!db_user.modes[mode]) {
-            console.log("Creating new mode")
             db_user.modes[mode] = new_ranks as any;
             user.db_ranks = new_ranks;
             user.db_setup = db_user.setup as any;
@@ -83,4 +81,12 @@ function getNewGlobal(ranks: number[], today: Date): Rank[] {
 
 function getNewCountry(rank: number, today: Date): Rank[] {
     return [{ date: today, rank }]
+}
+
+export async function saveSetup(user_id: number, setup: any): Promise<void> {
+    const user = await User.findOne({ user_id });
+    if (!user) return;
+    const new_setup: Setup = {};
+    user.setup = new_setup;
+    user.save();
 }

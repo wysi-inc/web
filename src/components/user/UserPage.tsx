@@ -17,8 +17,6 @@ const UserPage = async (props: Props) => {
 
     if (!user || (user as any).error) return <div>User not found</div>;
 
-    console.log(user.db_setup);
-
     const mode = user.rank_history?.mode as Mode || "osu";
     const defaultCategory = user.scores_pinned_count > 0 ? "pinned" : "best";
 
@@ -35,7 +33,8 @@ const UserPage = async (props: Props) => {
         />
         <Panel title="Setup (wip)" icon={<i class="fa-solid fa-computer" />}
             children={
-                <UserSetupPanel setup={user.db_setup} />
+                <UserSetupPanel setup={user.db_setup}
+                    editable={true} id={user.id} />
             }
         />
         <LazyPanel code="skins" title="Skins (wip)" icon={<i class="fa-solid fa-palette" />}

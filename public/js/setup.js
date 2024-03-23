@@ -4,8 +4,6 @@ function setup() {
     const fieldset = document.getElementById('setup_fieldset');
 
     const form_edit = document.getElementById('setup_form_edit');
-    const form_submit = document.getElementById('setup_form_submit');
-    const form_cancel = document.getElementById('setup_form_cancel');
 
     const tablet = document.getElementById('tablet');
     const tablet_area = document.getElementById('tablet_area');
@@ -15,19 +13,10 @@ function setup() {
         fieldset.disabled = false;
     });
 
-    form_submit.addEventListener('click', (e) => {
-        e.preventDefault();
-        fieldset.disabled = true;
-    });
-
-    form_cancel.addEventListener('click', (e) => {
-        e.preventDefault();
-        fieldset.disabled = true;
-        form.reset();
-    });
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
+    form.addEventListener('submit', () => {
+        setTimeout(() => {
+            fieldset.disabled = true;
+        }, 0);
     });
 
     form.addEventListener('change', (e) => {
@@ -37,11 +26,9 @@ function setup() {
         switch (name) {
             case 'tablet_width':
                 tablet.style.width = `${value}px`;
-                scale();
                 break;
             case 'tablet_height':
                 tablet.style.height = `${value}px`;
-                scale();
                 break;
             case 'area_width':
                 tablet_area.style.width = `${value}px`;
@@ -69,16 +56,4 @@ function setup() {
         }
     });
 
-}
-
-function scale() {
-    const tablet = document.querySelector('#tablet');
-    const parent = tablet.parentNode;
-    const ratio = (parent.offsetWidth / tablet.offsetWidth);
-    const padding = tablet.offsetHeight * ratio;
-
-    tablet.style.transform = 'scale(' + ratio + ')';
-    tablet.style.transformOrigin = 'top left';
-
-    parent.style.paddingTop = padding; // keeps the parent height in ratio to child resize
 }

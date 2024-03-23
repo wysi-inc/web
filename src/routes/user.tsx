@@ -10,7 +10,6 @@ import UserBeatmapsPanel from '../components/user/u_panels/UserBeatmapsPanel';
 import UserSummaryPanel from '../components/user/u_panels/UserSummaryPanel';
 import UserMostPanel from '../components/user/u_panels/UserMostPanel';
 import UserSkinsPanel from '../components/user/u_panels/UserSkinsPanel';
-import UserSetupPanel from '../components/user/u_panels/UserSetupPanel';
 import UserMedalsPanel from '../components/user/u_panels/UserMedalsPanel';
 import UserScoresList from '../components/user/u_panels/u_components/UserScoresList';
 import UserBeatmapsList from '../components/user/u_panels/u_components/UserBeatmapsList';
@@ -23,6 +22,15 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             <UserPage id={params.id} />
         )
     )
+    .post("/setup", async ({ set, cookie: { auth }, body, jwt }) => {
+        const user = await verifyUser(jwt, auth.value);
+        if (!user) {
+            set.status = 401;
+            return "Unauthorized";
+        }
+        console.log(user.id);
+        console.log(body);
+    })
     .group("/:mode", (_) => _
         .get("/", async ({ request, cookie: { auth }, params, jwt }) =>
             getPage(request.headers, await verifyUser(jwt, auth.value),

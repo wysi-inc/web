@@ -1,22 +1,9 @@
 import type { Setup } from "@/src/models/User";
+import { Input } from "./Input";
 
 const Tablet = ({ tablet }: { tablet: Setup["tablet"] }) => {
 
     if (!tablet) return <div>No tablet found</div>;
-
-    function input(id: string, name: string, value: number, measure: string = "mm") {
-        return (
-            <label class="input has-[:disabled]:bg-base-300 has-[:disabled]:border-0 input-sm input-bordered flex text-sm items-center gap-2">
-                <span class="grow">{name}:</span>
-                <input id={id} name={id}
-                    type="number" placeholder="0"
-                    class="peer disabled:hidden text-end w-full"
-                    value={value.toString()} />
-                <span class="hidden peer-disabled:block">{value}</span>
-                <span>{measure}</span>
-            </label>
-        );
-    }
 
     return <div class="flex flex-col">
         <h1 class="text-center">Tablet</h1>
@@ -53,8 +40,8 @@ const Tablet = ({ tablet }: { tablet: Setup["tablet"] }) => {
                     <span class="label-text">Size:</span>
                 </div>
                 <div class="grid grid-cols-2 gap-2">
-                    {input("tablet_width", "Width", tablet.size.w)}
-                    {input("tablet_height", "Height", tablet.size.h)}
+                    <Input id="tablet_width" name="Width" measure="mm" value={tablet.size.w} type="number" />
+                    <Input id="tablet_height" name="Height" measure="mm" value={tablet.size.h} type="number" />
                 </div>
             </label>
             <label class="form-control">
@@ -62,8 +49,8 @@ const Tablet = ({ tablet }: { tablet: Setup["tablet"] }) => {
                     <span class="label-text">Area:</span>
                 </div>
                 <div class="grid grid-cols-2 gap-2">
-                    {input("area_width", "Width", tablet.area.w)}
-                    {input("area_hight", "Height", tablet.area.h)}
+                    <Input id="area_width" name="Width" measure="mm" value={tablet.area.w} type="number" />
+                    <Input id="area_hight" name="Height" measure="mm" value={tablet.area.h} type="number" />
                 </div>
             </label>
             <label class="form-control">
@@ -71,9 +58,9 @@ const Tablet = ({ tablet }: { tablet: Setup["tablet"] }) => {
                     <span class="label-text">Position:</span>
                 </div>
                 <div class="grid grid-cols-3 gap-2">
-                    {input("area_x", "X", tablet.position.x)}
-                    {input("area_y", "Y", tablet.position.y)}
-                    {input("area_r", "R", tablet.position.r, "deg")}
+                    <Input id="area_x" name="X" measure="mm" value={tablet.position.x} type="number" />
+                    <Input id="area_y" name="Y" measure="mm" value={tablet.position.y} type="number" />
+                    <Input id="area_r" name="R" measure="deg" value={tablet.position.r} type="number" />
                 </div>
             </label>
         </div>
