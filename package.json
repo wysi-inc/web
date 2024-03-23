@@ -11,7 +11,8 @@
         "dev": "bun run index.ts",
         "prod": "bun run index.ts",
         "css": "tailwindcss -i ./public/css/main_in.css -o ./public/css/main_out.css --watch",
-        "cssprod": "tailwindcss -o ./public/css/main_out.css --minify"
+        "cssprod": "tailwindcss -o ./public/css/main_out.css --minify",
+        "compile": "bun build --compile --minify --sourcemap index.ts --outfile wysi"
     },
     "peerDependencies": {
         "typescript": "^5.0.0"
