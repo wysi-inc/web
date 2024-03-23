@@ -39,9 +39,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
     })
     .group("/:mode", (_) => _
         .get("/", async ({ request, cookie: { auth }, params, jwt }) => {
-
             const user = await verifyUser(jwt, auth.value);
-
             return getPage(request.headers, user,
                 <UserPage
                     logged_id={user?.id}
