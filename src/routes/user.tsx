@@ -2,6 +2,7 @@ import { Elysia } from 'elysia'
 import { jwt } from '@elysiajs/jwt';
 import { jwt_params, verifyUser } from '../resources/functions';
 import { getPage } from '../resources/pages';
+import { saveSetup } from '../db/users';
 import type { BeatmapCategory, Mode, ScoreCategory } from '../types/osu';
 import type { ProfileMedal } from '../types/medals';
 import UserPage from '../components/user/UserPage';
@@ -14,29 +15,40 @@ import UserMedalsPanel from '../components/user/u_panels/UserMedalsPanel';
 import UserScoresList from '../components/user/u_panels/u_components/UserScoresList';
 import UserBeatmapsList from '../components/user/u_panels/u_components/UserBeatmapsList';
 import UserMostList from '../components/user/u_panels/u_components/UserMostList';
+import UserSetupPanel from '../components/user/u_panels/UserSetupPanel';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
     .use(jwt(jwt_params()))
-    .get("/", async ({ request, cookie: { auth }, params, jwt }) =>
-        getPage(request.headers, await verifyUser(jwt, auth.value),
-            <UserPage id={params.id} />
+    .get("/", async ({ request, cookie: { auth }, params, jwt }) => {
+
+        const user = await verifyUser(jwt, auth.value);
+
+        return getPage(request.headers, user,
+            <UserPage id={params.id} logged_id={user?.id} />
         )
-    )
+    })
     .post("/setup", async ({ set, cookie: { auth }, body, jwt }) => {
         const user = await verifyUser(jwt, auth.value);
         if (!user) {
             set.status = 401;
             return "Unauthorized";
         }
-        console.log(user.id);
-        console.log(body);
+        const setup = await saveSetup(user.id, body);
+        if (!setup) return "Failed to save setup, reload the page and try again.";
+        return <UserSetupPanel setup={setup} logged_id={user.id} page_id={user.id} />
     })
     .group("/:mode", (_) => _
-        .get("/", async ({ request, cookie: { auth }, params, jwt }) =>
-            getPage(request.headers, await verifyUser(jwt, auth.value),
-                <UserPage id={params.id} mode={params.mode as Mode} />
+        .get("/", async ({ request, cookie: { auth }, params, jwt }) => {
+
+            const user = await verifyUser(jwt, auth.value);
+
+            return getPage(request.headers, user,
+                <UserPage
+                    logged_id={user?.id}
+                    id={params.id}
+                    mode={params.mode as Mode} />
             )
-        )
+        })
         .group("/panels", (_) => _
             .post("/scores/:category", ({ params }) => (
                 <UserScoresPanel

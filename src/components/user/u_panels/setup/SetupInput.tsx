@@ -7,9 +7,9 @@ type Props = {
     type: "number" | "text",
 }
 
-export const Input = (props: Props) => {
+const SetupInput = (props: Props) => {
     return (
-        <label class="input has-[:disabled]:bg-base-300 has-[:disabled]:border-0 input-sm input-bordered flex text-sm items-center gap-2">
+        <label class="input has-[:disabled]:bg-base-200 has-[:disabled]:border-0 input-sm input-bordered flex text-sm items-center gap-2">
             <span class="grow flex flex-row items-center gap-2">{props.icon}<span>{props.name}:</span></span>
             <input id={props.id} name={props.id}
                 type={props.type} placeholder={props.type === "number" ? "0" : ""}
@@ -22,3 +22,5 @@ export const Input = (props: Props) => {
         </label>
     );
 }
+
+export default SetupInput;

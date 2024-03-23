@@ -83,10 +83,58 @@ function getNewCountry(rank: number, today: Date): Rank[] {
     return [{ date: today, rank }]
 }
 
-export async function saveSetup(user_id: number, setup: any): Promise<void> {
+export async function saveSetup(user_id: number, setup: any): Promise<Setup | null> {
     const user = await User.findOne({ user_id });
-    if (!user) return;
-    const new_setup: Setup = {};
-    user.setup = new_setup;
+    if (!user) return null;
+    const tablet: Setup["tablet"] = {
+        name: setup.tablet_name,
+        size: {
+            w: Number(setup.tablet_size_w),
+            h: Number(setup.tablet_size_h),
+        },
+        area: {
+            w: Number(setup.tablet_area_w),
+            h: Number(setup.tablet_area_h),
+        },
+        position: {
+            y: Number(setup.tablet_position_y),
+            x: Number(setup.tablet_position_x),
+            r: Number(setup.tablet_position_r),
+        }
+    };
+    const keyboard: Setup["keyboard"] = {
+        name: setup.keyboard_name,
+        layout: setup.keyboard_layout,
+        keys: Object.keys(setup).filter(key => key.startsWith("keyboard_key_")).map(key => key.replace("keyboard_key_", "")),
+    };
+    const peripherals: Setup["peripherals"] = {
+        mouse: setup.peripherals_mouse,
+        mousepad: setup.peripherals_mousepad,
+        keyboard: setup.peripherals_keyboard,
+        keypad: setup.peripherals_keypad,
+        headphones: setup.peripherals_headphones,
+        audio: setup.peripherals_audio,
+        camera: setup.peripherals_camera,
+        microphone: setup.peripherals_microphone,
+        chair: setup.peripherals_chair,
+        monitor: setup.peripherals_monitor,
+    };
+    const computer: Setup["computer"] = {
+        os: setup.computer_os,
+        cpu: setup.computer_cpu,
+        gpu: setup.computer_gpu,
+        ram: setup.computer_ram,
+        storage: setup.computer_storage,
+        motherboard: setup.computer_motherboard,
+        psu: setup.computer_psu,
+        case: setup.computer_case,
+    };
+    user.setup = {
+        tablet,
+        keyboard,
+        peripherals,
+        computer,
+    };
     user.save();
+    return user.setup;
 }

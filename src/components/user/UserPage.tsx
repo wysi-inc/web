@@ -7,6 +7,7 @@ import Panel from "./Panel";
 import UserSetupPanel from "./u_panels/UserSetupPanel";
 
 type Props = {
+    logged_id: number | undefined;
     id: string;
     mode?: Mode;
 }
@@ -33,8 +34,10 @@ const UserPage = async (props: Props) => {
         />
         <Panel title="Setup (wip)" icon={<i class="fa-solid fa-computer" />}
             children={
-                <UserSetupPanel setup={user.db_setup}
-                    editable={true} id={user.id} />
+                <UserSetupPanel
+                    setup={user.db_setup}
+                    logged_id={props.logged_id}
+                    page_id={user.id} />
             }
         />
         <LazyPanel code="skins" title="Skins (wip)" icon={<i class="fa-solid fa-palette" />}
