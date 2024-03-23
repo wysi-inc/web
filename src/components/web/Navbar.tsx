@@ -20,17 +20,23 @@ const Navbar = (props: Props) => {
                         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                             <li>
                                 <HxA url="/">
-                                    Home
+                                    <span class="p-1">
+                                        Home
+                                    </span>
                                 </HxA>
                             </li>
                             <li>
                                 <HxA url="/rankings">
-                                    Rankings
+                                    <span class="p-1">
+                                        Rankings
+                                    </span>
                                 </HxA>
                             </li>
                             <li>
                                 <HxA url="/beatmaps">
-                                    Beatmaps
+                                    <span class="p-1">
+                                        Beatmaps
+                                    </span>
                                 </HxA>
                             </li>
                         </ul>
@@ -52,7 +58,6 @@ const Navbar = (props: Props) => {
                                 Rankings
                             </button>
                         </HxA>
-
                         <HxA url="/beatmaps">
                             <button class="btn btn-ghost" hx-get="/rankings">
                                 Beatmaps

@@ -14,18 +14,22 @@ const Logged = (props: Props) => {
             <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                 <li>
                     <HxA url={`/users/${props.user.id}`}>
-                        wysi!profile
+                        <span class="p-1">
+                            wysi!profile
+                        </span>
                     </HxA>
                 </li>
                 <li>
                     <a href={`https://osu.ppy.sh/users/${props.user.id}`}
-                        target="_blank" rel="noreferrer noopener">
+                        target="_blank" rel="noreferrer noopener" class="p-1">
                         osu!profile
                     </a>
                 </li>
                 <li>
                     <HxA url="/logout">
-                        logout
+                        <span class="p-1">
+                            logout
+                        </span>
                     </HxA>
                 </li>
             </ul>

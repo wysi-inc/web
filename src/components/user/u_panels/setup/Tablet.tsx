@@ -18,7 +18,8 @@ const Tablet = ({ tablet }: { tablet: Setup["tablet"] }) => {
                             width: `${tablet?.area.w}px`,
                             top: `${tablet?.position.y}px`,
                             left: `${tablet?.position.x}px`,
-                            rotate: `${tablet?.position.r}deg`,
+                            transformOrigin: "center",
+                            transform: `translate(-50%, -50%) rotate(${tablet?.position.r}deg)`,
                         }}>
                         <div>{tablet?.area.w} x {tablet?.area.h}</div>
                     </div>

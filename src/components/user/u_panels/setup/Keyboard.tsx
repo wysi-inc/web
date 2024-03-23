@@ -77,16 +77,24 @@ const Keyboard = ({ keyboard }: { keyboard: Setup["keyboard"] }) => {
                         <option value="ktkl" selected={keyboard?.layout === "ktkl"}>Tenkeyless Keyboard</option>
                         <option value="kfull" selected={keyboard?.layout === "kfull"}>Full Keyboard</option>
                     </select>
-                    <span class="input input-sm bg-base-200 hidden peer-disabled:block">{keyboard?.layout}</span>
+                    <span class="input input-sm bg-base-200 hidden peer-disabled:block">
+                        {keyboard?.layout === "k2" && "2 Keys"}
+                        {keyboard?.layout === "k3" && "3 Keys"}
+                        {keyboard?.layout === "k4" && "4 Keys"}
+                        {keyboard?.layout === "k60" && "60% Keyboard"}
+                        {keyboard?.layout === "k75" && "75% Keyboard"}
+                        {keyboard?.layout === "ktkl" && "Tenkeyless Keyboard"}
+                        {keyboard?.layout === "kfull" && "Full Keyboard"}
+                    </span>
                 </label>
                 <fieldset disabled class="hidden" id="keyboard_store">
-                    <K2 keys={keyboard?.keys} />
-                    <K3 keys={keyboard?.keys} />
-                    <K4 keys={keyboard?.keys} />
-                    <K60 keys={keyboard?.keys} />
-                    <K75 keys={keyboard?.keys} />
-                    <KTkl keys={keyboard?.keys} />
-                    <KFull keys={keyboard?.keys} />
+                    <K2 keys={[]} />
+                    <K3 keys={[]} />
+                    <K4 keys={[]} />
+                    <K60 keys={[]} />
+                    <K75 keys={[]} />
+                    <KTkl keys={[]} />
+                    <KFull keys={[]} />
                 </fieldset>
             </div>
         </div>

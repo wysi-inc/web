@@ -11,7 +11,7 @@ const SetupInput = (props: Props) => {
     return (
         <label class="input has-[:disabled]:bg-base-200 has-[:disabled]:border-0 input-sm input-bordered flex text-sm items-center gap-2">
             <span class="grow flex flex-row items-center gap-2">{props.icon}<span>{props.name}:</span></span>
-            <input id={props.id} name={props.id}
+            <input id={props.id} name={props.id} step="any"
                 type={props.type} placeholder={props.type === "number" ? "0" : ""}
                 class="peer disabled:hidden text-end w-full"
                 value={props.value?.toString()} />
