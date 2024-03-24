@@ -3,6 +3,7 @@ type Props = {
     beatmap_id: number;
     beatmap_title: string;
     beatmap_artist: string;
+    css?: string;
 }
 
 const AudioPlayButton = (props: Props) => {
@@ -15,7 +16,7 @@ const AudioPlayButton = (props: Props) => {
     const audio_artist = `document.getElementById('audio_artist')`;
 
     return (
-        <button class="btn btn-ghost btn-sm grow p-2"
+        <button class={props.css}
             onclick={`
                 ${audio_player}.src = '${audio_src}'; 
                 ${audio_image}.src = '${cardImg}';

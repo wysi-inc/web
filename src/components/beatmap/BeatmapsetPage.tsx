@@ -62,13 +62,19 @@ const BeatmapsetPage = async (props: Props) => {
                         <StatusBadge status={beatmapset.status as BeatmapsetStatus} />
                         <div>{moment(hasLeaderboards ? beatmapset.ranked_date : beatmapset.submitted_date).format("MMMM Do YYYY")}</div>
                     </div>
-                    <div>
-                        <AudioPlayButton
+                    <div class="join">
+                        <AudioPlayButton css="btn btn-secondary join-item"
                             beatmap_id={diff.id}
                             set_id={beatmapset.id}
                             beatmap_title={beatmapset.title}
                             beatmap_artist={beatmapset.artist}
                         />
+                        <a class="btn btn-secondary join-item" href="osu://b/4523032">
+                            <i class="fa-solid fa-angles-down" />
+                        </a>
+                        <a class="btn btn-secondary join-item" href={`https://catboy.best/d/${props.set_id}`}>
+                            <i class="fa-solid fa-download" />
+                        </a>
                     </div>
                     <div class="flex flex-row flex-wrap gap-1 p-2 rounded-lg" style={{ backgroundColor: '#ffffff22' }}>
                         {beatmapset.beatmaps.sort((a, b) =>

@@ -9,6 +9,9 @@ const AudioPlayer = () => {
                         <div id="audio_artist" class="text-sm text-gray-400" />
                     </div>
                     <div>
+                        <button class="btn btn-ghost" id="audio_loading">
+                            <span class="loading loading-spinner loading-md" />
+                        </button>
                         <button class="btn btn-ghost" id="audio_play" onclick="document.getElementById('audio_player').play()">
                             <i class="fa-solid fa-play fa-lg" />
                         </button>
