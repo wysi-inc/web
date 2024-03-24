@@ -1,6 +1,5 @@
 import { Elysia } from 'elysia'
-import { jwt } from '@elysiajs/jwt';
-import { jwt_params, verifyUser } from '../resources/functions';
+import { verifyUser } from '../resources/functions';
 import { getPage } from '../resources/pages';
 import { saveSetup } from '../db/users';
 import type { BeatmapCategory, Mode, ScoreCategory } from '../types/osu';
@@ -18,15 +17,15 @@ import UserMostList from '../components/user/u_panels/u_components/UserMostList'
 import UserSetupPanel from '../components/user/u_panels/UserSetupPanel';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
-    .use(jwt(jwt_params()))
-    .get("/", async ({ request, cookie: { auth }, params, jwt }) => {
-
+    //@ts-ignore
+    .get("/", async ({ t, request, cookie: { auth }, params, jwt }) => {
         const user = await verifyUser(jwt, auth.value);
-
         return getPage(request.headers, user,
-            <UserPage id={params.id} logged_id={user?.id} />
+            <UserPage t={t}
+                id={params.id} logged_id={user?.id} />
         )
     })
+    //@ts-ignore
     .post("/setup", async ({ set, cookie: { auth }, body, jwt }) => {
         const user = await verifyUser(jwt, auth.value);
         if (!user) {
@@ -38,10 +37,11 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         return <UserSetupPanel setup={setup} logged_id={user.id} page_id={user.id} />
     })
     .group("/:mode", (_) => _
-        .get("/", async ({ request, cookie: { auth }, params, jwt }) => {
+        //@ts-ignore
+        .get("/", async ({ t, request, cookie: { auth }, params, jwt }) => {
             const user = await verifyUser(jwt, auth.value);
             return getPage(request.headers, user,
-                <UserPage
+                <UserPage t={t}
                     logged_id={user?.id}
                     id={params.id}
                     mode={params.mode as Mode} />

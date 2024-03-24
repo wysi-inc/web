@@ -1,0 +1,123 @@
+{
+    "nav": {
+        "home": "Inici",
+        "users": "Usuaris",
+        "beatmaps": "Beatmaps",
+        "search": "Busca algú",
+        "help": "Help translate the site!",
+        "log": {
+            "login": "Registra't amb osu!",
+            "logout": "Logout",
+            "osu": "perfil d'osu!",
+            "wysi": "perfil wysi"
+        }
+    },
+    "user": {
+        "sections": {
+            "setup": {
+                "title": "Setup",
+                "tabs": {
+                    "inputs": "Inputs",
+                    "peripherals": "Periferics",
+                    "computer": "Ordinador"
+                },
+                "components": {
+                    "component": "Component",
+                    "details": "Detalls",
+                    "cpu": "CPU",
+                    "gpu": "GPU",
+                    "ram": "RAM",
+                    "storage": "Enmagatzematge",
+                    "motherboard": "Placa Base",
+                    "psu": "Font d'alimentació",
+                    "case": "Caixa"
+                },
+                "model": "Model",
+                "size": "Tamany",
+                "area": "Area",
+                "position": "Posició",
+                "dpi": "DPI",
+                "layout": {
+                    "k2": "2 Tecles",
+                    "k3": "3 Tecles",
+                    "k4": "4 Tecles",
+                    "k60": "60%",
+                    "k75": "75%",
+                    "ktkl": "TKL",
+                    "kfull": "FULL"
+                }
+            },
+            "history": {
+                "title": "Historial"
+            },
+            "scores": "Scores",
+            "beatmaps": {
+                "title": "Beatmaps"
+            },
+            "medals": {
+                "title": "Medalles"
+            },
+            "scores_summary": {
+                "title": "Resum d'Scores",
+                "tabs": {
+                    "hit_ratios": "Proporció del clicks",
+                    "grade_ratios": "Proporció de notes",
+                    "average_play": "Partida promitja"
+                }
+            },
+            "mostplayed": "Most Played"
+        },
+        "performance": "Rendiment",
+        "total_score": "Puntuació Total",
+        "global_rank": "Rang Global",
+        "country_rank": "Rang Nacional",
+        "play_time": "Temps De Partida",
+        "play_count": "Vegades Jugades",
+        "replays_watched": "Repeticions Vistes",
+        "hits_x_play": "Clicks x Partida",
+        "followers": "Seguidors",
+        "online": "En Linea"
+    },
+    "score": {
+        "status": {
+            "pinned": "Fixades",
+            "best": "Millors",
+            "firsts": "Primer Lloc",
+            "recent": "Recents"
+        },
+        "mods": "Mods",
+        "max_combo": "Combo Màxim",
+        "combo": "Combo",
+        "grade": "Nota",
+        "grades": "Notes",
+        "acc": "Acc",
+        "accuracy": "Presició",
+        "score": "Puntuació",
+        "ranked_score": "Puntuació Classificada"
+    },
+    "beatmapset": {
+        "status": {
+            "favourite": "Preferits",
+            "ranked": "Classificats",
+            "guest": "Col·laborador",
+            "loved": "Loved",
+            "nominated": "Nominat",
+            "pending": "Pendent",
+            "graveyard": "Descalificat",
+            "wip": "En curs",
+            "approved": "Approved"
+        },
+        "length": "Duració",
+        "bpm": "BPM"
+    },
+    "footer": {
+        "rights": "Tots els drets estan reservats a aquest mico"
+    },
+    "alerts": {
+        "user": {
+            "user_doesnt_exist": "Aquest usuari no existeix",
+            "user_is_bot": "Aquest usuari es un BOT, els BOTs encara no estan suportats :(",
+            "users_fail": "No s'han pogut obtindre els usuaris"
+        }
+    }
+}

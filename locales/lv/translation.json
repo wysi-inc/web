@@ -1,0 +1,123 @@
+{
+    "nav": {
+        "home": "Sākums",
+        "users": "Lietotāji",
+        "beatmaps": "Bītmapes",
+        "search": "Meklēt kādu",
+        "help": "Palīdziet tulkot vietni!",
+        "log": {
+            "login": "Piesakieties ar osu!",
+            "logout": "Iziet",
+            "osu": "osu!profils",
+            "wysi": "wysi!profils"
+        }
+    },
+    "user": {
+        "sections": {
+            "setup": {
+                "title": "Uzstādījumi",
+                "tabs": {
+                    "inputs": "Inputi",
+                    "peripherals": "Perifērijas ierīces",
+                    "computer": "Dators"
+                },
+                "components": {
+                    "component": "Komponents",
+                    "details": "Informācija",
+                    "cpu": "Procesors",
+                    "gpu": "Video karte",
+                    "ram": "RAM",
+                    "storage": "Atmiņa",
+                    "motherboard": "Mātesplatē",
+                    "psu": "Barošanas avots",
+                    "case": "Korpuss"
+                },
+                "model": "Modelis",
+                "size": "Izmērs",
+                "area": "Laukums",
+                "position": "Pozīcija",
+                "dpi": "DPI",
+                "layout": {
+                    "k2": "2 Pogas",
+                    "k3": "3 Pogas",
+                    "k4": "4 Pogas",
+                    "k60": "60%",
+                    "k75": "75%",
+                    "ktkl": "TKL",
+                    "kfull": "PILNS"
+                }
+            },
+            "history": {
+                "title": "Vēsture"
+            },
+            "scores": "Rezultāti",
+            "beatmaps": {
+                "title": "Bītmapes"
+            },
+            "medals": {
+                "title": "Medaļas"
+            },
+            "scores_summary": {
+                "title": "Rezultātu kopsavilkums",
+                "tabs": {
+                    "hit_ratios": "Hit attiecība",
+                    "grade_ratios": "Grade attiecība",
+                    "average_play": "Vidēja Play"
+                }
+            },
+            "mostplayed": "Most Played"
+        },
+        "performance": "Veiktspēja",
+        "total_score": "Kopējie Punkti",
+        "global_rank": "Globālais rangs",
+        "country_rank": "Valsts rangs",
+        "play_time": "Spēļu laiks",
+        "play_count": "Spēļu skaits",
+        "replays_watched": "Atkārtojumi Apskatīti",
+        "hits_x_play": "Hiti katrai rezultātai",
+        "followers": "Sekotāji",
+        "online": "Onlaina"
+    },
+    "score": {
+        "status": {
+            "pinned": "Piesprausts",
+            "best": "Labākais",
+            "firsts": "Pirmie",
+            "recent": "Nesenie"
+        },
+        "mods": "Modi",
+        "max_combo": "Maksimalais kombo",
+        "combo": "Kombo",
+        "grade": "Novērtējums",
+        "grades": "Novērtējumi",
+        "acc": "Acc",
+        "accuracy": "Precizitāte",
+        "score": "Punkti",
+        "ranked_score": "Ranked punkti"
+    },
+    "beatmapset": {
+        "status": {
+            "favourite": "Mīļākie",
+            "ranked": "Rankots",
+            "guest": "Viesis",
+            "loved": "Mīlēts",
+            "nominated": "Nominēts",
+            "pending": "Neizšķirts",
+            "graveyard": "Pamesta",
+            "wip": "Notiek process",
+            "approved": "Approved"
+        },
+        "length": "Garums",
+        "bpm": "BPM"
+    },
+    "footer": {
+        "rights": "Visas tiesības paturētas šim muļķīgajam mērkaķim"
+    },
+    "alerts": {
+        "user": {
+            "user_doesnt_exist": "Šis lietotājs neeksistē",
+            "user_is_bot": "Šis lietotājs ir bots, roboti vēl netiek atbalstīti :(",
+            "users_fail": "\nNeizdevās atrast lietotājus"
+        }
+    }
+}

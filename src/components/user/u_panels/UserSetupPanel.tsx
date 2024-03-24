@@ -1,5 +1,5 @@
 import type { Setup } from "@/src/models/User";
-import Tablet from "./setup/Tablet";
+import TabletDisplay from "./setup/TabletDisplay";
 import Keyboard from "./setup/Keyboard";
 import Components from "./setup/Components";
 
@@ -25,7 +25,7 @@ const UserSetupPanel = (props: Props) => {
             <fieldset class="peer grid w-full grid-cols-2 gap-4"
                 id="setup_fieldset" disabled>
                 {props.setup?.tablet || editable ?
-                    <Tablet tablet={props.setup?.tablet} /> : <></>
+                    <TabletDisplay tablet={props.setup?.tablet} /> : <></>
                 }
                 {props.setup?.keyboard || editable ?
                     <Keyboard keyboard={props.setup?.keyboard} /> : <></>

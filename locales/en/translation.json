@@ -1,0 +1,123 @@
+{
+    "nav": {
+        "home": "Home",
+        "users": "Users",
+        "beatmaps": "Beatmaps",
+        "search": "Search someone",
+        "help": "Help translate the site!",
+        "log": {
+            "login": "Login with osu!",
+            "logout": "Logout",
+            "osu": "osu!profile",
+            "wysi": "wysi!profile"
+        }
+    },
+    "user": {
+        "sections": {
+            "setup": {
+                "title": "Setup",
+                "tabs": {
+                    "inputs": "Inputs",
+                    "peripherals": "Peripherals",
+                    "computer": "Computer"
+                },
+                "components": {
+                    "component": "Component",
+                    "details": "Details",
+                    "cpu": "CPU",
+                    "gpu": "GPU",
+                    "ram": "RAM",
+                    "storage": "Storage",
+                    "motherboard": "Motherboard",
+                    "psu": "Power Supply",
+                    "case": "Case"
+                },
+                "model": "Model",
+                "size": "Size",
+                "area": "Area",
+                "position": "Position",
+                "dpi": "DPI",
+                "layout": {
+                    "k2": "2 Keys",
+                    "k3": "3 Keys",
+                    "k4": "4 Keys",
+                    "k60": "60%",
+                    "k75": "75%",
+                    "ktkl": "TKL",
+                    "kfull": "FULL"
+                }
+            },
+            "history": {
+                "title": "History"
+            },
+            "scores": "Scores",
+            "beatmaps": {
+                "title": "Beatmaps"
+            },
+            "medals": {
+                "title": "Medals"
+            },
+            "scores_summary": {
+                "title": "Scores Summary",
+                "tabs": {
+                    "hit_ratios": "Hit Ratios",
+                    "grade_ratios": "Grade Ratios",
+                    "average_play": "Average Play"
+                }
+            },
+            "mostplayed": "Most Played"
+        },
+        "performance": "Performance",
+        "total_score": "Total Score",
+        "global_rank": "Global Rank",
+        "country_rank": "Country Rank",
+        "play_time": "Play Time",
+        "play_count": "Play Count",
+        "replays_watched": "Replays Watched",
+        "hits_x_play": "Hits x Play",
+        "followers": "Followers",
+        "online": "Online"
+    },
+    "score": {
+        "status": {
+            "pinned": "Pinned",
+            "best": "Best",
+            "firsts": "Firsts",
+            "recent": "Recent"
+        },
+        "mods": "Mods",
+        "max_combo": "Max Combo",
+        "combo": "Combo",
+        "grade": "Grade",
+        "grades": "Grades",
+        "acc": "Acc",
+        "accuracy": "Accuracy",
+        "score": "Score",
+        "ranked_score": "Ranked Score"
+    },
+    "beatmapset": {
+        "status": {
+            "favourite": "Favourite",
+            "ranked": "Ranked",
+            "guest": "Guest",
+            "loved": "Loved",
+            "nominated": "Nominated",
+            "pending": "Pending",
+            "graveyard": "Graveyard",
+            "wip": "In Progress",
+            "approved": "Approved"
+        },
+        "length": "Length",
+        "bpm": "BPM"
+    },
+    "footer": {
+        "rights": "All rights reserved to this silly monkey"
+    },
+    "alerts": {
+        "user": {
+            "user_doesnt_exist": "This user doesn't exist",
+            "user_is_bot": "This user is a bot, bots are not supported yet :(",
+            "users_fail": "Failed to fetch users"
+        }
+    }
+}

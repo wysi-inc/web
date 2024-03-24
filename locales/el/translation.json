@@ -1,0 +1,123 @@
+{
+    "nav": {
+        "home": "Αρχική Σελίδα",
+        "users": "Χρήστες",
+        "beatmaps": "Beatmaps",
+        "search": "Αναζήτηση Χρήστη",
+        "help": "Βοηθήστε στη μετάφραση της ιστοσελίδας!",
+        "log": {
+            "login": "Σύνδεση με osu!",
+            "logout": "Έξοδος",
+            "osu": "Osu!Προφίλ",
+            "wysi": "wysi!Προφίλ"
+        }
+    },
+    "user": {
+        "sections": {
+            "setup": {
+                "title": "Εγκατάσταση",
+                "tabs": {
+                    "inputs": "Εισαγωγές",
+                    "peripherals": "Περιφερειακά",
+                    "computer": "Υπολογιστής"
+                },
+                "components": {
+                    "component": "Εξαρτήματα",
+                    "details": "Λεπτομέρειες",
+                    "cpu": "Επεξεργαστής",
+                    "gpu": "Επεξεργαστής γραφικών",
+                    "ram": "Μνήμη",
+                    "storage": "Αποθηκευτικός χώρος",
+                    "motherboard": "Μητρική Κάρτα",
+                    "psu": "Τροφοδοτικό",
+                    "case": "Κουτί"
+                },
+                "model": "Μοντέλο",
+                "size": "Μέγεθος",
+                "area": "Περιοχή",
+                "position": "Θέση",
+                "dpi": "DPI",
+                "layout": {
+                    "k2": "2 Πλήκτρα",
+                    "k3": "3 Πλήκτρα",
+                    "k4": "4 Πλήκτρα",
+                    "k60": "60%",
+                    "k75": "75%",
+                    "ktkl": "TKL",
+                    "kfull": "ΠΛΗΡΕΣ"
+                }
+            },
+            "history": {
+                "title": "Ιστορικό"
+            },
+            "scores": "Σκορ",
+            "beatmaps": {
+                "title": "Beatmaps"
+            },
+            "medals": {
+                "title": "Μετάλλια"
+            },
+            "scores_summary": {
+                "title": "Σύνοψη Βαθμολογιών",
+                "tabs": {
+                    "hit_ratios": "Αναλογίες Hit",
+                    "grade_ratios": "Αναλογίες Βαθμού",
+                    "average_play": "Μέσος Όρος Παιχνιδιού"
+                }
+            },
+            "mostplayed": "Most Played"
+        },
+        "performance": "Επίδοση",
+        "total_score": "Συνολική Βαθμολογία",
+        "global_rank": "Παγκόσμια Κατάταξη",
+        "country_rank": "Εθνική Κατάταξη",
+        "play_time": "Χρόνος Παιχνιδιού",
+        "play_count": "Αριθμός Προσπαθειών",
+        "replays_watched": "Παρακολουθημένες Επαναλήψεις",
+        "hits_x_play": "Hits x Play",
+        "followers": "Ακόλουθοι",
+        "online": "Συνδεμένος"
+    },
+    "score": {
+        "status": {
+            "pinned": "Καρφιτσωμένα",
+            "best": "Καλύτερες Επιδώσεις",
+            "firsts": "Πρώτες Θέσεις",
+            "recent": "Πρόσφατα"
+        },
+        "mods": "Mods",
+        "max_combo": "Μέγιστο Combo",
+        "combo": "Combo",
+        "grade": "Βαθμίδα",
+        "grades": "Βαθμοί",
+        "acc": "Ακρίβεια",
+        "accuracy": "Ακρίβεια",
+        "score": "Βαθμολογία",
+        "ranked_score": "Σκορ Κατάταξης"
+    },
+    "beatmapset": {
+        "status": {
+            "favourite": "Αγαπημένο",
+            "ranked": "Κατάταξη",
+            "guest": "Επισκέπτης",
+            "loved": "Αγαπημένο",
+            "nominated": "Επιβραβευμένο",
+            "pending": "Σε εκκρεμότητα",
+            "graveyard": "Νεκροταφείο",
+            "wip": "Σε εξέλιξη",
+            "approved": "Approved"
+        },
+        "length": "Διάρκεια",
+        "bpm": "BPM (Χτύποι/λεπτό)"
+    },
+    "footer": {
+        "rights": "Με επιφύλαξη παντός δικαιώματος σε αυτόν τον ανόητο πίθηρο"
+    },
+    "alerts": {
+        "user": {
+            "user_doesnt_exist": "Ο χρήστης δεν υπάρχει",
+            "user_is_bot": "Αυτός ο χρήστης είναι ένα bot, τα bots δεν υποστηρίζονται ακόμα :(",
+            "users_fail": "Αποτυχία ανάκτησης χρηστών"
+        }
+    }
+}

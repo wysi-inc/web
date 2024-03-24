@@ -1,6 +1,5 @@
 import { Elysia, t } from "elysia";
-import { jwt_params, userAuthData, verifyUser } from "../resources/functions";
-import { jwt } from "@elysiajs/jwt";
+import { userAuthData, verifyUser } from "../resources/functions";
 import { getPage } from "../resources/pages";
 import Home from "../components/web/Home";
 import SearchResults from "../components/web/SearchResults";
@@ -19,7 +18,7 @@ const oauthQuery = {
 }
 
 export const baseRoutes = new Elysia({ prefix: '' })
-    .use(jwt(jwt_params()))
+    //@ts-ignore
     .get("/", async ({ request, jwt, cookie: { auth } }) => (
         getPage(request.headers, await verifyUser(jwt, auth.value),
             <Home />
@@ -28,6 +27,7 @@ export const baseRoutes = new Elysia({ prefix: '' })
     .post("/search", ({ body }) => (
         <SearchResults query={body.q} />
     ), searchBody)
+    //@ts-ignore
     .get("/oauth", async ({ request, jwt, cookie: { auth }, query }) => {
         const data = await userAuthData(query.code);
         if ((data as any).error) return "error";
@@ -46,6 +46,7 @@ export const baseRoutes = new Elysia({ prefix: '' })
             <Home />
         )
     }, oauthQuery)
+    //@ts-ignore
     .get("/logout", ({ request, cookie }) => {
         cookie.auth.remove();
         return getPage(request.headers, null,

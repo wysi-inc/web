@@ -1,6 +1,5 @@
 import { Elysia, t } from 'elysia'
-import { jwt } from '@elysiajs/jwt';
-import { jwt_params, verifyUser } from '../resources/functions';
+import { verifyUser } from '../resources/functions';
 import { getPage } from '../resources/pages';
 import type { Mode } from '../types/osu';
 import Beatmaps from '../components/beatmap/Beatmaps';
@@ -36,7 +35,7 @@ const queryBodyElysia = {
 }
 
 export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
-    .use(jwt(jwt_params()))
+    //@ts-ignore
     .get("/", async ({ request, jwt, cookie: { auth } }) => (
         getPage(request.headers, await verifyUser(jwt, auth.value),
             <Beatmaps />
@@ -48,11 +47,13 @@ export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
     .post("/list/:cursor", ({ body, params: { cursor } }) => (
         <BeatmapsList body={body} cursor={cursor} />
     ), queryBodyElysia)
+    //@ts-ignore
     .get("/:set_id", async ({ request, jwt, cookie: { auth }, params: { set_id } }) => (
         getPage(request.headers, await verifyUser(jwt, auth.value),
             <BeatmapsetPage set_id={Number(set_id)} />
         ))
     )
+    //@ts-ignore
     .get("/:set_id/:beatmap_id", async ({ request, jwt, cookie: { auth }, params: { set_id, beatmap_id } }) => (
         getPage(request.headers, await verifyUser(jwt, auth.value),
             <BeatmapsetPage set_id={Number(set_id)} beatmap_id={Number(beatmap_id)} />

@@ -1,0 +1,123 @@
+{
+    "nav": {
+        "home": "Inicio",
+        "users": "Usuarios",
+        "beatmaps": "Beatmaps",
+        "search": "Busca alguien",
+        "help": "Help translate the site!",
+        "log": {
+            "login": "Registrate con osu!",
+            "logout": "Salir",
+            "osu": "perfil de osu!",
+            "wysi": "perfil de wysi"
+        }
+    },
+    "user": {
+        "sections": {
+            "setup": {
+                "title": "Setup",
+                "tabs": {
+                    "inputs": "Inputs",
+                    "peripherals": "Periféricos",
+                    "computer": "Ordenador"
+                },
+                "components": {
+                    "component": "Componente",
+                    "details": "Detalles",
+                    "cpu": "CPU",
+                    "gpu": "GPU",
+                    "ram": "RAM",
+                    "storage": "Almacenamiento",
+                    "motherboard": "Placa base",
+                    "psu": "Fuente de alimentación",
+                    "case": "Caja"
+                },
+                "model": "Modelo",
+                "size": "Tamaño",
+                "area": "Área",
+                "position": "Posición",
+                "dpi": "DPI",
+                "layout": {
+                    "k2": "2 Teclas",
+                    "k3": "3 Teclas",
+                    "k4": "4 Teclas",
+                    "k60": "60%",
+                    "k75": "75%",
+                    "ktkl": "TKL",
+                    "kfull": "FULL"
+                }
+            },
+            "history": {
+                "title": "Historial"
+            },
+            "scores": "Puntuaciones",
+            "beatmaps": {
+                "title": "Mapas"
+            },
+            "medals": {
+                "title": "Medallas"
+            },
+            "scores_summary": {
+                "title": "Resumen de puntuaciones",
+                "tabs": {
+                    "hit_ratios": "Proporción de aciertos",
+                    "grade_ratios": "Proporción de Notas",
+                    "average_play": "Partida Promedia"
+                }
+            },
+            "mostplayed": "Most Played"
+        },
+        "performance": "Rendimiento",
+        "total_score": "Puntuación total",
+        "global_rank": "Posición global",
+        "country_rank": "Posición nacional",
+        "play_time": "Tiempo jugado",
+        "play_count": "Número de Jugadas",
+        "replays_watched": "Repeticiones Vistas",
+        "hits_x_play": "Clics x Partida",
+        "followers": "Seguidores",
+        "online": "En línea"
+    },
+    "score": {
+        "status": {
+            "pinned": "Fijadas",
+            "best": "Mejores",
+            "firsts": "Primeras",
+            "recent": "Recientes"
+        },
+        "mods": "Mods",
+        "max_combo": "Combo máximo",
+        "combo": "Combo",
+        "grade": "Nota",
+        "grades": "Notas",
+        "acc": "Acc",
+        "accuracy": "Precisión",
+        "score": "Puntuación",
+        "ranked_score": "Puntuación Rankeada"
+    },
+    "beatmapset": {
+        "status": {
+            "favourite": "Favoritos",
+            "ranked": "Clasificados",
+            "guest": "Colaborador",
+            "loved": "Amados",
+            "nominated": "Nominados",
+            "pending": "Pendientes",
+            "graveyard": "Abandonados",
+            "wip": "In Progress",
+            "approved": "Approved"
+        },
+        "length": "Duración",
+        "bpm": "BPM"
+    },
+    "footer": {
+        "rights": "Todos los derechos reservados a este estúpido mono"
+    },
+    "alerts": {
+        "user": {
+            "user_doesnt_exist": "Este usuario no existe",
+            "user_is_bot": "Este usuario es un bot, los bots no están soportados aún :(",
+            "users_fail": "No se pudo obtener los usuarios"
+        }
+    }
+}

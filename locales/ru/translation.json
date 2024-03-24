@@ -1,0 +1,123 @@
+{
+    "nav": {
+        "home": "Главная",
+        "users": "Пользователи",
+        "beatmaps": "Бит-карты",
+        "search": "Найти кого-то",
+        "help": "Помогите перевести сайт!",
+        "log": {
+            "login": "Войти с помощью osu!",
+            "logout": "Выйти",
+            "osu": "osu! профиль",
+            "wysi": "wysi! профиль"
+        }
+    },
+    "user": {
+        "sections": {
+            "setup": {
+                "title": "Настройка",
+                "tabs": {
+                    "inputs": "Вводы",
+                    "peripherals": "Периферия",
+                    "computer": "Компьютер"
+                },
+                "components": {
+                    "component": "Компонент",
+                    "details": "Детали",
+                    "cpu": "Процессор",
+                    "gpu": "Графический процессор",
+                    "ram": "Оперативная память",
+                    "storage": "Хранилище",
+                    "motherboard": "Материнская плата",
+                    "psu": "Источник питания",
+                    "case": "Случай"
+                },
+                "model": "Модель",
+                "size": "Размер",
+                "area": "Зона",
+                "position": "Позиция",
+                "dpi": "Количество пикселей на дюйм",
+                "layout": {
+                    "k2": "2 Ключа",
+                    "k3": "3 Ключа",
+                    "k4": "4 Ключа",
+                    "k60": "60%",
+                    "k75": "75%",
+                    "ktkl": "TKL",
+                    "kfull": "ПОЛНОЕ"
+                }
+            },
+            "history": {
+                "title": "История"
+            },
+            "scores": "Очки",
+            "beatmaps": {
+                "title": "Бит-карты"
+            },
+            "medals": {
+                "title": "Медали"
+            },
+            "scores_summary": {
+                "title": "Итог очков",
+                "tabs": {
+                    "hit_ratios": "Соотношение попаданий",
+                    "grade_ratios": "Коэффициенты оценки",
+                    "average_play": "Среднее время игры"
+                }
+            },
+            "mostplayed": "Most Played"
+        },
+        "performance": "Показатели",
+        "total_score": "Итого",
+        "global_rank": "Глобальный ранг",
+        "country_rank": "Рейтинг в стране",
+        "play_time": "Время в игре",
+        "play_count": "Количество игр",
+        "replays_watched": "Просмотренные",
+        "hits_x_play": "Hits x Play",
+        "followers": "Подписчики",
+        "online": "Онлайн"
+    },
+    "score": {
+        "status": {
+            "pinned": "Закреплено",
+            "best": "Лучший",
+            "firsts": "Первый",
+            "recent": "Последний"
+        },
+        "mods": "Моды",
+        "max_combo": "Максимальное комбо",
+        "combo": "Комбо",
+        "grade": "Оценка",
+        "grades": "Оценки",
+        "acc": "Акк",
+        "accuracy": "Точность",
+        "score": "Очки",
+        "ranked_score": "Рейтинговые очки"
+    },
+    "beatmapset": {
+        "status": {
+            "favourite": "Избранное",
+            "ranked": "Рейтинговая",
+            "guest": "Гость",
+            "loved": "Любимый",
+            "nominated": "Номинированный",
+            "pending": "Ожидание",
+            "graveyard": "Кладбище",
+            "wip": "In Progress",
+            "approved": "Approved"
+        },
+        "length": "Длительность",
+        "bpm": "УД/МИН"
+    },
+    "footer": {
+        "rights": "Все права защищены этой глупой обезьяне"
+    },
+    "alerts": {
+        "user": {
+            "user_doesnt_exist": "Такого пользователя не существует",
+            "user_is_bot": "Этот пользователь является ботом, боты еще не поддерживаются :(",
+            "users_fail": "Не удалось получить пользователей"
+        }
+    }
+}

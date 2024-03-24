@@ -1,0 +1,123 @@
+{
+    "nav": {
+        "home": "Page d'accueil",
+        "users": "Utilisateur",
+        "beatmaps": "Beatmaps",
+        "search": "rechercher quelqu'un",
+        "help": "Contribuez à la traduction du site!",
+        "log": {
+            "login": "Connectez-vous avec osu!",
+            "logout": "Se déconnecter",
+            "osu": "Profil osu!",
+            "wysi": "Profil wysi!"
+        }
+    },
+    "user": {
+        "sections": {
+            "setup": {
+                "title": "Configurer",
+                "tabs": {
+                    "inputs": "Entrées",
+                    "peripherals": "Périphériques",
+                    "computer": "Ordinateur"
+                },
+                "components": {
+                    "component": "Composant",
+                    "details": "Détails",
+                    "cpu": "Processeur",
+                    "gpu": "Carte graphique",
+                    "ram": "RAM",
+                    "storage": "Stockage",
+                    "motherboard": "carte mère",
+                    "psu": "Source d'alimentation",
+                    "case": "boîtier pc"
+                },
+                "model": "Modèle",
+                "size": "Taille",
+                "area": "Zone",
+                "position": "Position",
+                "dpi": "DPI",
+                "layout": {
+                    "k2": "2 touches",
+                    "k3": "3 touches",
+                    "k4": "4 touches",
+                    "k60": "60%",
+                    "k75": "75%",
+                    "ktkl": "TKL",
+                    "kfull": "COMPLET"
+                }
+            },
+            "history": {
+                "title": "Historique"
+            },
+            "scores": "Scores",
+            "beatmaps": {
+                "title": "Beatmaps"
+            },
+            "medals": {
+                "title": "Médailles"
+            },
+            "scores_summary": {
+                "title": "Résumé des scores",
+                "tabs": {
+                    "hit_ratios": "Ratios de frappe",
+                    "grade_ratios": "Ratios de note",
+                    "average_play": "Jeu moyen"
+                }
+            },
+            "mostplayed": "Le plus joué"
+        },
+        "performance": "Performance",
+        "total_score": "Score total",
+        "global_rank": "Rank global",
+        "country_rank": "Rank national",
+        "play_time": "Durée du jeu",
+        "play_count": "Nombre de sessions",
+        "replays_watched": "Replays regardés",
+        "hits_x_play": "Hits x Play",
+        "followers": "Abonnés",
+        "online": "En ligne"
+    },
+    "score": {
+        "status": {
+            "pinned": "Épinglé",
+            "best": "Meilleure",
+            "firsts": "Premier",
+            "recent": "Récent"
+        },
+        "mods": "Mods",
+        "max_combo": "Max combo",
+        "combo": "Combo",
+        "grade": "note",
+        "grades": "Notes",
+        "acc": "Acc",
+        "accuracy": "Précision",
+        "score": "Score",
+        "ranked_score": "Score du classement"
+    },
+    "beatmapset": {
+        "status": {
+            "favourite": "Favoris",
+            "ranked": "Classé",
+            "guest": "Invité",
+            "loved": "Aimé",
+            "nominated": "Nominer",
+            "pending": "en attendant",
+            "graveyard": "Cimetière",
+            "wip": "En cours",
+            "approved": "Approuvé"
+        },
+        "length": "longueur",
+        "bpm": "BPM"
+    },
+    "footer": {
+        "rights": "Tous droits réservés à ce singe stupide"
+    },
+    "alerts": {
+        "user": {
+            "user_doesnt_exist": "Cet utilisateur n'existe pas",
+            "user_is_bot": "Cet utilisateur est un bot, les bots ne sont pas encore pris en charge :(",
+            "users_fail": "Impossible de récupérer les infos d'utilisateur"
+        }
+    }
+}

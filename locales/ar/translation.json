@@ -1,0 +1,123 @@
+{
+    "nav": {
+        "home": "الصفحة الرئيسية",
+        "users": "المستخدمون",
+        "beatmaps": "خرائط الموسيقية",
+        "search": "ال باحت",
+        "help": "ساعد في طرجمة الموقع الإلكتروني",
+        "log": {
+            "login": "تسجيل الدخول باستخدام osu!",
+            "logout": "تسجيل الخروج",
+            "osu": "حساب osu",
+            "wysi": "حساب wysi"
+        }
+    },
+    "user": {
+        "sections": {
+            "setup": {
+                "title": "إعداد",
+                "tabs": {
+                    "inputs": "التحكم",
+                    "peripherals": "ملحقات (حاسوب)",
+                    "computer": "حاسوب"
+                },
+                "components": {
+                    "component": "مكونات الحاسوب",
+                    "details": "التفاصيل",
+                    "cpu": "معالج الحاسوب",
+                    "gpu": "كرت الشاشة",
+                    "ram": "ذاكرة RAM",
+                    "storage": "تخزين",
+                    "motherboard": "اللوحة الأم",
+                    "psu": "وحدة الإمداد الطاقة",
+                    "case": "علبة الحاسب"
+                },
+                "model": "النموذج",
+                "size": "الحجم",
+                "area": "المنطقة",
+                "position": "الموقع",
+                "dpi": "نقطة في البوصة (DPI)",
+                "layout": {
+                    "k2": "2 مفتاحين",
+                    "k3": "3 مفاتيح",
+                    "k4": "4 مفاتيح",
+                    "k60": "60%",
+                    "k75": "75%",
+                    "ktkl": "TKL",
+                    "kfull": "كامل"
+                }
+            },
+            "history": {
+                "title": "سوابق"
+            },
+            "scores": "النقاط",
+            "beatmaps": {
+                "title": "خرائط الموسيقية"
+            },
+            "medals": {
+                "title": "الميداليات"
+            },
+            "scores_summary": {
+                "title": "ملخص النقاط",
+                "tabs": {
+                    "hit_ratios": "نسب الضرب",
+                    "grade_ratios": "نسب الصف",
+                    "average_play": "معدل اللعب"
+                }
+            },
+            "mostplayed": "الأكثر لعبًا"
+        },
+        "performance": "الأداء",
+        "total_score": "مجموع النقاط",
+        "global_rank": "الترتيب العالمي",
+        "country_rank": "التصنيف في البلد",
+        "play_time": "وقت اللعب",
+        "play_count": "مرات اللعب",
+        "replays_watched": "مشاهدة الاستعراضات",
+        "hits_x_play": "اللعب x الضرب",
+        "followers": "المتابِعون",
+        "online": "مُتّصل"
+    },
+    "score": {
+        "status": {
+            "pinned": "مثبّت",
+            "best": "الأفضل",
+            "firsts": "الأول",
+            "recent": "حديثة"
+        },
+        "mods": "مودات (mods)",
+        "max_combo": "اقصى كومبو",
+        "combo": "كومبو",
+        "grade": "الدرجة",
+        "grades": "الدرجات",
+        "acc": "الدقة",
+        "accuracy": "الدقة",
+        "score": "نقاط",
+        "ranked_score": "درجة التصنيف"
+    },
+    "beatmapset": {
+        "status": {
+            "favourite": "المفضلة",
+            "ranked": "مرتبة",
+            "guest": "ضيف",
+            "loved": "محبوبة",
+            "nominated": "ترشيح",
+            "pending": "في إنتظار المُراجعة",
+            "graveyard": "مقبرة",
+            "wip": "قيد التنفيذ",
+            "approved": "مصادق عليه"
+        },
+        "length": "الطول",
+        "bpm": "نبضة/دق"
+    },
+    "footer": {
+        "rights": "جميع الحقوق محفوظة لهذا القرد السخيف"
+    },
+    "alerts": {
+        "user": {
+            "user_doesnt_exist": "هذا المستخدم غير موجود",
+            "user_is_bot": "هذا المستخدم هو روبوت، الروبوتات غير مدعومة حتى الآن :(",
+            "users_fail": "لم تنجح عملية إحضار معلومات المستخدم."
+        }
+    }
+}

@@ -1,7 +1,12 @@
 import type { Setup } from "@/src/models/User";
 import SetupInput from "./SetupInput";
+import { TabletModel } from "@/src/models/Tablet";
 
-const Tablet = ({ tablet }: { tablet: Setup["tablet"] }) => {
+const TabletDisplay = async ({ tablet }: { tablet: Setup["tablet"] }) => {
+
+    const tablets = await TabletModel.find();
+
+    const custom: boolean = tablet?.name === "" || tablets.find((t) => t.name === tablet?.name) === undefined;
 
     return <div class="bg-neutral rounded-lg flex flex-col">
         <h1 class="p-2 text-neutral-content">Tablet</h1>
@@ -28,22 +33,34 @@ const Tablet = ({ tablet }: { tablet: Setup["tablet"] }) => {
             <div class="flex flex-col gap-2 grow">
                 <label class="form-control">
                     <div class="label">
-                        <span class="label-text">Name:</span>
+                        <span class="label-text">Model:</span>
                     </div>
-                    <input id="tablet_name" name="tablet_name"
-                        type="text" placeholder="Tablet name"
-                        class="input input-sm input-bordered peer disabled:hidden w-full" value={tablet?.name || ""} />
+                    <select class="peer disabled:hidden w-full select select-bordered select-sm" name="tablet_model">
+                        {tablets.map((t) => <option value={JSON.stringify(t)} selected={tablet?.name === t.name}>{t.name}</option>)}
+                        <option value="custom" selected={custom}>Custom</option>
+                    </select>
                     <span class="input input-sm bg-base-200 hidden peer-disabled:block">{tablet?.name}</span>
                 </label>
-                <label class="form-control">
-                    <div class="label">
-                        <span class="label-text">Size:</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <SetupInput id="tablet_size_w" name="Width" measure="mm" value={tablet?.size?.w} type="number" />
-                        <SetupInput id="tablet_size_h" name="Height" measure="mm" value={tablet?.size?.h} type="number" />
-                    </div>
-                </label>
+                <div id="tablet_custom" class={custom ? "" : "hidden"}>
+                    <label class="form-control">
+                        <div class="label">
+                            <span class="label-text">Name:</span>
+                        </div>
+                        <input id="tablet_name" name="tablet_name"
+                            type="text" placeholder="Tablet name"
+                            class="input input-sm input-bordered peer disabled:hidden w-full" value={tablet?.name || ""} />
+                        <span class="input input-sm bg-base-200 hidden peer-disabled:block">{tablet?.name}</span>
+                    </label>
+                    <label class="form-control">
+                        <div class="label">
+                            <span class="label-text">Size:</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <SetupInput id="tablet_size_w" name="Width" measure="mm" value={tablet?.size?.w} type="number" />
+                            <SetupInput id="tablet_size_h" name="Height" measure="mm" value={tablet?.size?.h} type="number" />
+                        </div>
+                    </label>
+                </div>
                 <label class="form-control">
                     <div class="label">
                         <span class="label-text">Area:</span>
@@ -68,4 +85,4 @@ const Tablet = ({ tablet }: { tablet: Setup["tablet"] }) => {
     </div>;
 }
 
-export default Tablet;
+export default TabletDisplay;

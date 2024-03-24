@@ -1,12 +1,11 @@
 import { Elysia } from 'elysia'
-import { jwt } from '@elysiajs/jwt';
 import { getPage } from '../resources/pages';
-import { jwt_params, verifyUser } from '../resources/functions';
+import { verifyUser } from '../resources/functions';
 import type { Category, Mode } from '../types/osu';
 import Rankings from '../components/user/Rankings';
 
 export const rankingRoutes = new Elysia({ prefix: '/rankings' })
-    .use(jwt(jwt_params()))
+    //@ts-ignore
     .get("/", async ({ request, jwt, cookie: { auth } }) =>
         getPage(request.headers, await verifyUser(jwt, auth.value),
             <Rankings
@@ -15,6 +14,7 @@ export const rankingRoutes = new Elysia({ prefix: '/rankings' })
                 page={1}
             />
         ))
+    //@ts-ignore
     .get("/:mode/:category/:page", async ({ params: { mode, category, page }, request, jwt, cookie: { auth } }) =>
         getPage(request.headers, await verifyUser(jwt, auth.value),
             <Rankings
