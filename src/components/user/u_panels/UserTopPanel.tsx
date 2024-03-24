@@ -13,6 +13,13 @@ const UserTopPanel = (props: Props) => {
 
     const best_country = user.db_ranks.country_ranks.sort((a, b) => a.rank - b.rank)[0];
 
+    const grade_counts = new Map<string, { count: number, color: string }>();
+    grade_counts.set("XH", { count: user.statistics.grade_counts.ssh, color: colors.grades.xh });
+    grade_counts.set("X", { count: user.statistics.grade_counts.ss, color: colors.grades.x });
+    grade_counts.set("SH", { count: user.statistics.grade_counts.sh, color: colors.grades.sh });
+    grade_counts.set("S", { count: user.statistics.grade_counts.s, color: colors.grades.s });
+    grade_counts.set("A", { count: user.statistics.grade_counts.a, color: colors.grades.a });
+
     return (
         <div class="rounded-lg bg-base-100 shadow-lg">
             <div class="rounded-lg text-white"
@@ -113,22 +120,7 @@ const UserTopPanel = (props: Props) => {
                                 <h2>{user.statistics.replays_watched_by_others.toLocaleString()}</h2>
                             </div>
                         </div>
-                        <BarChart labels={['XH', 'X', 'SH', 'S', 'A']}
-                            data={[
-                                user.statistics.grade_counts.ssh,
-                                user.statistics.grade_counts.ss,
-                                user.statistics.grade_counts.sh,
-                                user.statistics.grade_counts.s,
-                                user.statistics.grade_counts.a
-                            ]}
-                            colors={[
-                                colors.grades.xh,
-                                colors.grades.x,
-                                colors.grades.sh,
-                                colors.grades.s,
-                                colors.grades.a
-                            ]}
-                        />
+                        <BarChart data={grade_counts} />
                     </div>
                 </div>
             </div >

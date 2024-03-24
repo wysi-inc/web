@@ -1,30 +1,26 @@
-type Props = {
-    labels: string[];
-    data: number[];
-    colors: string[];
-}
+import type { ColorCount } from "@/src/types/users";
 
-const BarChart = (props: Props) => {
+const BarChart = ({ data }: { data: Map<string, ColorCount> }) => {
 
-    const total = props.data.reduce((a, b) => a + b, 0);
+    const total = Array.from(data.values()).reduce((acc, val) => acc + val.count, 0);
 
     return (
         <div class="flex flex-col gap-2">
             <div class="flex flex-row justify-around">
-                {props.labels.map((label, i) => (
-                    props.data[i] === 0 ? null :
+                {Array.from(data.entries()).map(([label, count]) => (
+                    count.count === 0 ? null :
                         <div class="flex flex-col items-center">
-                            <h4 style={{ color: props.colors[i] }}>{label}</h4>
-                            <div>{props.data[i].toLocaleString()}</div>
+                            <h4 style={{ color: count.color }}>{label}</h4>
+                            <div>{count.count.toLocaleString()}</div>
                         </div>
                 ))}
             </div>
             <div class="flex flex-row h-2 rounded-lg overflow-hidden">
-                {props.data.map((d, i) => (
-                    d === 0 ? null :
+                {Array.from(data.values()).map((d) => (
+                    d.count === 0 ? null :
                         <div class="h-full" style={{
-                            width: `${d / total * 100}%`,
-                            backgroundColor: props.colors[i]
+                            width: `${d.count / total * 100}%`,
+                            backgroundColor: d.color
                         }} />
                 ))}
             </div>

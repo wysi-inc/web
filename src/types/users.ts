@@ -28,3 +28,8 @@ export type UserAchievement = {
     achieved_at: Date;
     achievement_id: number;
 };
+
+export type ColorCount = {
+    count: number;
+    color: string;
+}

@@ -1,5 +1,5 @@
 import type { Mode } from "@/src/types/osu";
-import type { Score } from "@/src/types/users";
+import type { ColorCount, Score } from "@/src/types/users";
 import { v2 } from "osu-api-extended";
 import BarChart from "./u_components/BarChart";
 import { colors } from "@/src/resources/colors";
@@ -8,11 +8,6 @@ import { secondsToTime } from "@/src/resources/functions";
 type Props = {
     id: number;
     mode: Mode;
-}
-
-type ColorCount = {
-    count: number;
-    color: string;
 }
 
 const UserSummaryPanel = async (props: Props) => {
@@ -39,6 +34,15 @@ const UserSummaryPanel = async (props: Props) => {
     const bpm_values: number[] = [];
     const length_values: number[] = [];
 
+    grade_counts.set("XH", { count: 0, color: colors.grades.xh });
+    grade_counts.set("X", { count: 0, color: colors.grades.x });
+    grade_counts.set("SH", { count: 0, color: colors.grades.sh });
+    grade_counts.set("S", { count: 0, color: colors.grades.s });
+    grade_counts.set("A", { count: 0, color: colors.grades.a });
+    grade_counts.set("B", { count: 0, color: colors.grades.b });
+    grade_counts.set("C", { count: 0, color: colors.grades.c });
+    grade_counts.set("D", { count: 0, color: colors.grades.d });
+
     for (let i = 0; i < scores.length; i++) {
         const score: Score = scores[i];
 
@@ -49,15 +53,17 @@ const UserSummaryPanel = async (props: Props) => {
 
         let bpm = score.beatmap.bpm;
         let len = score.beatmap.total_length;
-        score.mods.forEach(m => {
-            if (m.acronym === "DT" || m.acronym === "NC") {
-                bpm *= 1.5;
-                len *= 2 / 3;
-            }
-
-            if (m.acronym === "HT") {
-                bpm *= 0.75;
-                len *= 4 / 3;
+        score.mods.forEach((mod) => {
+            switch (mod.acronym) {
+                case "DT":
+                case "NC":
+                    bpm *= 1.5;
+                    len *= 2 / 3;
+                    break;
+                case "HT":
+                    bpm *= 0.75;
+                    len *= 4 / 3;
+                    break;
             }
         })
         bpm = Math.round(bpm);
@@ -185,11 +191,7 @@ const UserSummaryPanel = async (props: Props) => {
                         </div>
                     </div>
                     <div class="grow p-4 rounded-lg bg-base-300">
-                        <BarChart
-                            labels={Array.from(grade_counts.keys())}
-                            data={Array.from(grade_counts.values()).map(g => g.count)}
-                            colors={Array.from(grade_counts.values()).map(g => g.color)}
-                        />
+                        <BarChart data={grade_counts} />
                     </div>
                 </div>
                 <div class="flex flex-col bg-neutral rounded-lg">
@@ -198,11 +200,7 @@ const UserSummaryPanel = async (props: Props) => {
                         <div>{avg_acc}%</div>
                     </div>
                     <div class="grow p-4 rounded-lg bg-base-300">
-                        <BarChart
-                            labels={Array.from(hit_counts.keys())}
-                            data={Array.from(hit_counts.values()).map(h => h.count)}
-                            colors={Array.from(hit_counts.values()).map(h => h.color)}
-                        />
+                        <BarChart data={hit_counts} />
                     </div>
                 </div>
             </div>
