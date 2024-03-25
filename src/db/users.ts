@@ -121,6 +121,7 @@ export async function saveSetup(user_id: number, setup: any): Promise<Setup | nu
         camera: setup.peripherals_camera,
         microphone: setup.peripherals_microphone,
         chair: setup.peripherals_chair,
+        desk: setup.computer_desk,
         monitor: setup.peripherals_monitor,
     };
     const computer: Setup["computer"] = {

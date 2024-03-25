@@ -40,6 +40,9 @@ const Components = ({ peripherals, computer, editable }: Props) => {
                 {peripherals?.audio || editable ?
                     <SetupInput id="peripherals_audio" icon={<i class="fa-solid fa-sliders" />} name="Audio" type="text" value={peripherals?.audio} />
                     : <></>}
+                {peripherals?.desk || editable ?
+                    <SetupInput id="peripherals_desk" icon={<i class="fa-solid fa-database" />} name="Desk" type="text" value={peripherals?.desk} />
+                    : <></>}
                 {peripherals?.tablet || editable ?
                     <SetupInput id="peripherals_chair" icon={<i class="fa-solid fa-chair" />} name="Chair" type="text" value={peripherals?.chair} />
                     : <></>}

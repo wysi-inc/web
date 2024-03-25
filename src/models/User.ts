@@ -64,6 +64,7 @@ const setup = new mongoose.Schema({
         keyboard: String,
         keypad: String,
         mousepad: String,
+        desk: String,
         chair: String,
         camera: String,
         audio: String,
