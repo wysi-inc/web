@@ -24,7 +24,7 @@ const UserSetupPanel = ({ logged_id, page_id, setup }: Props) => {
         <form id="setup_form" hx-post={`/users/${page_id}/setup`}
             hx-trigger="submit" hx-swap="outerHTML" hx-target="#setup_panel"
             class="flex flex-wrap-reverse justify-end gap-2 -mt-10">
-            <fieldset class="peer grid w-full grid-cols-2 gap-4"
+            <fieldset class="peer w-full grid md:grid-cols-2 gap-4"
                 id="setup_fieldset" disabled>
                 <TabletDisplay editable={editable} tablet={setup?.tablet} />
                 <KeyboardDisplay editable={editable} keyboard={setup?.keyboard} />

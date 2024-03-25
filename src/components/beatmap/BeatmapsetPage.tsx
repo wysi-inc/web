@@ -31,8 +31,8 @@ const BeatmapsetPage = async (props: Props) => {
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat"
             }}>
-            <div class="grid grid-cols-5 flex-wrap gap-4 justify-between rounded-lg p-4" style={{ backdropFilter: "blur(8px)" }}>
-                <div class="col-span-3 flex flex-col gap-4">
+            <div class="grid md:grid-cols-5 flex-wrap gap-4 justify-between rounded-lg p-4" style={{ backdropFilter: "blur(8px)" }}>
+                <div class="md:col-span-3 flex flex-col gap-4">
                     <img src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
                         style={{
                             objectFit: "cover",
@@ -48,33 +48,35 @@ const BeatmapsetPage = async (props: Props) => {
                             </p>
                         </div>
                     </div>
-                    <HxA url={`/users/${beatmapset.user_id}`}>
+                    <StatusBadge status={beatmapset.status as BeatmapsetStatus} />
+                    <div class="mt-auto flex flex-row flex-wrap justify-between">
                         <div class="flex flex-row gap-2 items-center">
                             <img src={beatmapset.user.avatar_url}
-                                class="rounded-lg h-10 w-10"
+                                class="rounded-lg size-12"
                                 alt="mapper" loading="lazy" />
-                            <span class="">
-                                mapped by {beatmapset.user.username}
-                            </span>
+                            <div class="flex flex-col gap-1 text-base-content ">
+                                <HxA url={`/users/${beatmapset.user_id}`}>
+                                    mapped by {beatmapset.user.username}
+                                </HxA>
+                                <div class="text-base-content">
+                                    {moment(hasLeaderboards ? beatmapset.ranked_date : beatmapset.submitted_date).format("MMMM Do YYYY")}
+                                </div>
+                            </div>
                         </div>
-                    </HxA>
-                    <div class="flex flex-row gap-4">
-                        <StatusBadge status={beatmapset.status as BeatmapsetStatus} />
-                        <div>{moment(hasLeaderboards ? beatmapset.ranked_date : beatmapset.submitted_date).format("MMMM Do YYYY")}</div>
-                    </div>
-                    <div class="join">
-                        <AudioPlayButton css="btn btn-secondary join-item"
-                            beatmap_id={diff.id}
-                            set_id={beatmapset.id}
-                            beatmap_title={beatmapset.title}
-                            beatmap_artist={beatmapset.artist}
-                        />
-                        <a class="btn btn-secondary join-item" href="osu://b/4523032">
-                            <i class="fa-solid fa-angles-down" />
-                        </a>
-                        <a class="btn btn-secondary join-item" href={`https://catboy.best/d/${props.set_id}`}>
-                            <i class="fa-solid fa-download" />
-                        </a>
+                        <div class="join">
+                            <AudioPlayButton css="btn btn-info join-item"
+                                beatmap_id={diff.id}
+                                set_id={beatmapset.id}
+                                beatmap_title={beatmapset.title}
+                                beatmap_artist={beatmapset.artist}
+                            />
+                            <a class="btn btn-info join-item" href="osu://b/4523032">
+                                <i class="fa-solid fa-angles-down" />
+                            </a>
+                            <a class="btn btn-info join-item" href={`https://catboy.best/d/${props.set_id}`}>
+                                <i class="fa-solid fa-download" />
+                            </a>
+                        </div>
                     </div>
                     <div class="flex flex-row flex-wrap gap-1 p-2 rounded-lg" style={{ backgroundColor: '#ffffff22' }}>
                         {beatmapset.beatmaps.sort((a, b) =>
@@ -91,12 +93,12 @@ const BeatmapsetPage = async (props: Props) => {
                             )}
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="md:col-span-2">
                     <DiffStats diff={diff} />
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-5 gap-4 p-4 rounded-lg bg-base-100" style={{ height: "250px" }}>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 p-4 rounded-lg bg-base-100" style={{ height: "250px" }}>
             <div class="overflow-y-scroll grid grid-cols-2 gap-2 col-span-3">
                 <div class="flex flex-col gap-2 text-sm">
                     <div class="grid grid-cols-2 gap-2">
@@ -153,7 +155,7 @@ const BeatmapsetPage = async (props: Props) => {
                     </div>
                 </div>
             </div>
-            <div class="overflow-y-scroll rounded-lg col-span-2">
+            <div class="overflow-y-scroll rounded-lg col-span-full md:col-span-2">
                 {beatmapset.description.description}
             </div>
         </div>

@@ -86,7 +86,7 @@ const Navbar = (props: Props) => {
                 <div class="flex flex-row items-center justify-end">
                     <label class="hidden sm:flex btn btn-ghost flex-row gap-2 justify-between items-center">
                         <i class="fa-solid fa-moon" />
-                        <input class="toggle" type="checkbox" checked
+                        <input class="toggle" type="checkbox"
                             data-toggle-theme="dracula,pastel" />
                         <i class="fa-solid fa-sun" />
                     </label>

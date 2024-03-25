@@ -148,7 +148,7 @@ const ScoreCard = async (props: Props) => {
                     <DiffIcon setId={beatmapset.id} diffId={score.beatmap.id}
                         diff={score.beatmap.difficulty_rating} size={20}
                         mode={score.beatmap.mode} name={score.beatmap.version} />
-                    <div class="tooltip" data-tip={moment(new Date(beatmap.last_updated)).format("DD/MM/YYYY")}>
+                    <div class="tooltip hidden md:block" data-tip={moment(new Date(beatmap.last_updated)).format("DD/MM/YYYY")}>
                         {new Date(beatmap.last_updated).getFullYear()}
                     </div>
                     <div class="flex flex-row gap-1 items-center">

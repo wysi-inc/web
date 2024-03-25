@@ -143,7 +143,7 @@ const UserSummaryPanel = async (props: Props) => {
                     ))}
                 </div>
             </div>
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid md:grid-cols-2 gap-4">
                 <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
                     <div class="p-2 flex flex-row text-neutral-content justify-between">
                         <div>Performance:</div>
