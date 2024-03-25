@@ -1,4 +1,4 @@
-import { Key, type KeyboardProps } from "../Keyboard";
+import { Key, type KeyboardProps } from "../KeyboardDisplay";
 
 function K3(p: KeyboardProps) {
     return <div class="p-1 outline outline-1 rounded-lg w-min k3">

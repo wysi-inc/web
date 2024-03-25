@@ -10,16 +10,12 @@ type Props = {
 };
 
 
-const LazyPanel = (props: Props) => {
-    const body = JSON.stringify(props.body);
-    return (
-        <Panel icon={props.icon} title={props.title} tooltip={props.tooltip} children={
-            <span hx-post={props.url} hx-trigger="revealed" hx-swap="outerHTML"
-                hx-vals={body} hx-indicator={`#loading-${props.code}`}>
-                <span class="loading loading-spinner" id={`loading-${props.code}`} />
-            </span>
-        } />
-    );
-}
+const LazyPanel = ({ title, code, tooltip, icon, url, body }: Props) =>
+    <Panel icon={icon} title={title} tooltip={tooltip}>
+        <span hx-post={url} hx-trigger="revealed" hx-swap="outerHTML"
+            hx-vals={JSON.stringify(body)} hx-indicator={`#loading-${code}`}>
+            <span class="loading loading-spinner htmx-indicator" id={`loading-${code}`} />
+        </span>
+    </Panel>
 
 export default LazyPanel;

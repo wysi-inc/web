@@ -10,9 +10,9 @@ type Props = {
     page: number;
 }
 
-const Rankings = async (props: Props) => {
+const Rankings = async ({ mode, category, page }: Props) => {
 
-    const users = await getRankings(props.mode, props.category, props.page);
+    const users = await getRankings(mode, category, page);
 
     if ((users as any).error) return <div>Rankings not found</div>;
     if (!users) return <div>Loading...</div>;
@@ -20,7 +20,7 @@ const Rankings = async (props: Props) => {
 
     return (
         <div class="flex flex-col gap-4">
-            <Pagination mode={props.mode} category={props.category} page={props.page} />
+            <Pagination mode={mode} category={category} page={page} />
             <table class="table p-4 bg-base-100 rounded-lg">
                 <thead>
                     <tr>
@@ -37,7 +37,7 @@ const Rankings = async (props: Props) => {
                 <tbody>
                     {users.ranking.map((row, i) =>
                         <tr class="hover:bg-base-300 hover:rounded-lg">
-                            <th class="table-cell text-start">#{i + 1 + 50 * (props.page - 1)}</th>
+                            <th class="table-cell text-start">#{i + 1 + 50 * (page - 1)}</th>
                             <td class="table-cell">
                                 <HxA url={`/users/${row.user.id}`}>
                                     <div class="flex flex-row gap-4">
@@ -63,7 +63,7 @@ const Rankings = async (props: Props) => {
                     )}
                 </tbody>
             </table>
-            <Pagination mode={props.mode} category={props.category} page={props.page} />
+            <Pagination mode={mode} category={category} page={page} />
         </div>
     );
 }

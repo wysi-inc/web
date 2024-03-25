@@ -107,6 +107,10 @@ export async function saveSetup(user_id: number, setup: any): Promise<Setup | nu
         layout: setup.keyboard_layout,
         keys: Object.keys(setup).filter(key => key.startsWith("keyboard_key_")).map(key => key.replace("keyboard_key_", "")),
     };
+    const mouse: Setup["mouse"] = {
+        name: setup.mouse_name,
+        dpi: Number(setup.mouse_dpi),
+    };
     const peripherals: Setup["peripherals"] = {
         mouse: setup.peripherals_mouse,
         mousepad: setup.peripherals_mousepad,
@@ -132,6 +136,7 @@ export async function saveSetup(user_id: number, setup: any): Promise<Setup | nu
     user.setup = {
         tablet,
         keyboard,
+        mouse,
         peripherals,
         computer,
     };

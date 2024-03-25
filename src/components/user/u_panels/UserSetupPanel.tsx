@@ -1,39 +1,43 @@
 import type { Setup } from "@/src/models/User";
 import TabletDisplay from "./setup/TabletDisplay";
-import Keyboard from "./setup/Keyboard";
+import KeyboardDisplay from "./setup/KeyboardDisplay";
 import Components from "./setup/Components";
+import MouseDisplay from "./setup/MouseDisplay";
 
 type Props = {
-    logged_id: number | undefined;
+    logged_id?: number;
     page_id: number;
-    setup: Setup | undefined;
+    setup?: Setup;
 }
 
-const UserSetupPanel = (props: Props) => {
+const UserSetupPanel = ({ logged_id, page_id, setup }: Props) => {
 
     let form_post = "";
     let editable = false;
-    if (props.page_id === props.logged_id) {
-        form_post = `/users/${props.page_id}/setup`;
+    if (page_id === logged_id) {
+        form_post = `/users/${page_id}/setup`;
         editable = true;
     }
 
     return <div id="setup_panel">
-        <form id="setup_form" hx-post={`/users/${props.page_id}/setup`}
+        <form id="setup_form" hx-post={`/users/${page_id}/setup`}
             hx-trigger="submit" hx-swap="outerHTML" hx-target="#setup_panel"
             class="flex flex-wrap-reverse justify-end gap-2 -mt-10">
             <fieldset class="peer grid w-full grid-cols-2 gap-4"
                 id="setup_fieldset" disabled>
-                {props.setup?.tablet || editable ?
-                    <TabletDisplay tablet={props.setup?.tablet} /> : <></>
+                {setup?.tablet || editable ?
+                    <TabletDisplay tablet={setup?.tablet} /> : <></>
                 }
-                {props.setup?.keyboard || editable ?
-                    <Keyboard keyboard={props.setup?.keyboard} /> : <></>
+                {setup?.keyboard || editable ?
+                    <KeyboardDisplay keyboard={setup?.keyboard} /> : <></>
                 }
-                {props.setup?.computer || props.setup?.peripherals || editable ?
-                    <Components
-                        computer={props.setup?.computer}
-                        peripherals={props.setup?.peripherals}
+                {setup?.mouse || editable ?
+                    <MouseDisplay mouse={setup?.mouse} /> : <></>
+                }
+                {setup?.computer || setup?.peripherals || editable ?
+                    <Components editable={editable}
+                        computer={setup?.computer}
+                        peripherals={setup?.peripherals}
                     /> : <></>
                 }
             </fieldset>

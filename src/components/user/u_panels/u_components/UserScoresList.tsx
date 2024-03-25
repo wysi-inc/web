@@ -11,23 +11,23 @@ type Props = {
     limit: number;
 }
 
-const UserScoresList = async (props: Props) => {
+const UserScoresList = async ({ id, mode, category, offset, limit }: Props) => {
 
-    const scores: Score[] = await v2.scores.user.category(props.id, props.category, {
-        mode: props.mode,
-        offset: String(props.offset),
-        limit: String(props.limit)
+    const scores: Score[] = await v2.scores.user.category(id, category, {
+        mode: mode,
+        offset: String(offset),
+        limit: String(limit)
     });
 
-    if (!scores || scores.length === 0) return <div>No {props.category} scores found</div>;
+    if (!scores || scores.length === 0) return <div>No {category} scores found</div>;
 
     return (<>
         {scores.map((score, i) =>
-            <ScoreCard position={i + props.offset + 1} score={score} />
+            <ScoreCard position={i + offset + 1} score={score} />
         )}
-        {scores.length < props.limit ? null : <>
+        {scores.length < limit ? null : <>
             <button class="btn btn-success btn-sm flex flex-row gap-2"
-                hx-post={`/users/${props.id}/${props.mode}/lists/scores/${props.category}?offset=${props.offset + props.limit}&limit=20`}
+                hx-post={`/users/${id}/${mode}/lists/scores/${category}?offset=${offset + limit}&limit=20`}
                 hx-swap="outerHTML">
                 <div>Load more</div>
                 <span class="htmx-indicator loading loading-spinner loading-md" />

@@ -3,18 +3,18 @@ type Props = {
     icon: JSX.Element;
     tooltip?: string;
     url?: string;
-    children: JSX.Element;
+    children: any;
 };
 
-const Panel = (props: Props) => (
+const Panel = ({ children, icon, tooltip, title }: Props) => (
     <div class="min-h-28 shadow-lg rounded-lg bg-base-100 p-4 flex flex-col gap-4">
         <div class="flex flex-row items-center gap-2">
-            <div class="tooltip" data-tip={props.tooltip}>
-                {props.icon}
+            <div class="tooltip" data-tip={tooltip}>
+                {icon}
             </div>
-            <div>{props.title}</div>
+            <div>{title}</div>
         </div>
-        {props.children}
+        {children}
     </div>
 );
 

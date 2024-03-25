@@ -10,24 +10,23 @@ type Props = {
     limit: number;
 }
 
-const UserBeatmapsList = async (props: Props) => {
+const UserBeatmapsList = async ({ id, category, offset, limit }: Props) => {
 
-    const beatmaps: Beatmapset[] = await v2.user.beatmaps.category(props.id, props.category, {
-        offset: props.offset,
-        limit: props.limit
+    const beatmaps: Beatmapset[] = await v2.user.beatmaps.category(id, category, {
+        offset: offset,
+        limit: limit
     }) as any;
 
-    if (!beatmaps || beatmaps.length === 0) return <div>No {props.category} beatmaps</div>;
+    if (!beatmaps || beatmaps.length === 0) return <div>No {category} beatmaps</div>;
 
     return (<>
         {beatmaps.map((beatmap) =>
             <BeatmapsetCard beatmapset={beatmap} />
         )}
-        {beatmaps.length < props.limit ? null :
+        {beatmaps.length < limit ? null :
             <>
                 <button class="btn btn-success btn-sm flex flex-row gap-2 col-span-full"
-                    hx-post={`/users/${props.id}/0/beatmaps/${props.category}/list?offset=${props.offset + props.limit}&limit=20`}
-                    hx-post={`/users/${props.id}/0/lists/beatmaps/${props.category}?offset=${props.offset + props.limit}&limit=20`}
+                    hx-post={`/users/${id}/0/lists/beatmaps/${category}?offset=${offset + limit}&limit=20`}
                     hx-swap="outerHTML">
                     <div>Load more</div>
                     <span class="htmx-indicator loading loading-spinner loading-md" />

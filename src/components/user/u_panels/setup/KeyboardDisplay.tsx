@@ -41,7 +41,7 @@ export const Empty = () => {
 }
 
 
-const Keyboard = ({ keyboard }: { keyboard: Setup["keyboard"] }) => {
+const KeyboardDisplay = ({ keyboard }: { keyboard: Setup["keyboard"] }) => {
     return <div class="bg-neutral rounded-lg flex flex-col">
         <h1 class="p-2 text-neutral-content">Keyboard</h1>
         <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
@@ -101,4 +101,4 @@ const Keyboard = ({ keyboard }: { keyboard: Setup["keyboard"] }) => {
     </div>;
 }
 
-export default Keyboard;
+export default KeyboardDisplay;

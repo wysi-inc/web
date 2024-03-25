@@ -1,4 +1,4 @@
-import { Empty, Key, type KeyboardProps } from "../Keyboard";
+import { Empty, Key, type KeyboardProps } from "../KeyboardDisplay";
 
 function KTkl(p: KeyboardProps) {
     return <div class="p-1 outline outline-1 rounded-lg w-min ktkl">

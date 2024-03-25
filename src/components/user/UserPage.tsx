@@ -12,34 +12,35 @@ type Props = {
     mode?: Mode;
 }
 
-const UserPage = async (props: Props) => {
+const UserPage = async ({ id, logged_id, mode }: Props) => {
 
-    const user = await getUser(props.id, props.mode);
+    const user = await getUser(id, mode);
 
     if (!user || (user as any).error) return <div>User not found</div>;
 
-    const mode = user.rank_history?.mode as Mode || "osu";
+    mode = user.rank_history?.mode as Mode || "osu";
     const defaultCategory = user.scores_pinned_count > 0 ? "pinned" : "best";
 
     return (<>
         <UserTopPanel user={user} />
-        <Panel title="History" icon={<i class="fa-solid fa-chart-line" />}
-            children={
-                <UserHistoryPanel
-                    db_ranks={user.db_ranks}
-                    play_counts={user.monthly_playcounts}
-                    replays_watched={user.replays_watched_counts}
-                />
-            }
-        />
-        <Panel title="Setup (wip)" icon={<i class="fa-solid fa-computer" />}
-            children={
-                <UserSetupPanel
-                    setup={user.db_setup}
-                    logged_id={props.logged_id}
-                    page_id={user.id} />
-            }
-        />
+        <Panel title="History" icon={<i class="fa-solid fa-chart-line" />}>
+            <UserHistoryPanel
+                db_ranks={user.db_ranks}
+                play_counts={user.monthly_playcounts}
+                replays_watched={user.replays_watched_counts}
+            />
+        </Panel>
+        <Panel title="About me" icon={<i class="fa-solid fa-user" />}>
+            <div class="h-96 overflow-y-scroll">
+                {user.page.html}
+            </div>
+        </Panel>
+        <Panel title="Setup (wip)" icon={<i class="fa-solid fa-computer" />}>
+            <UserSetupPanel
+                setup={user.db_setup}
+                logged_id={logged_id}
+                page_id={user.id} />
+        </Panel>
         <LazyPanel code="skins" title="Skins (wip)" icon={<i class="fa-solid fa-palette" />}
             url={`/users/${user.id}/0/panels/skins`} />
         <LazyPanel code="summary" title="Scores Summary" icon={<i class="fa-solid fa-ranking-star" />}

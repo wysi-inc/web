@@ -18,10 +18,10 @@ import UserSetupPanel from '../components/user/u_panels/UserSetupPanel';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
     //@ts-ignore
-    .get("/", async ({ t, request, cookie: { auth }, params, jwt }) => {
+    .get("/", async ({ request, cookie: { auth }, params, jwt }) => {
         const user = await verifyUser(jwt, auth.value);
         return getPage(request.headers, user,
-            <UserPage t={t}
+            <UserPage
                 id={params.id} logged_id={user?.id} />
         )
     })
@@ -38,10 +38,10 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
     })
     .group("/:mode", (_) => _
         //@ts-ignore
-        .get("/", async ({ t, request, cookie: { auth }, params, jwt }) => {
+        .get("/", async ({ request, cookie: { auth }, params, jwt }) => {
             const user = await verifyUser(jwt, auth.value);
             return getPage(request.headers, user,
-                <UserPage t={t}
+                <UserPage
                     logged_id={user?.id}
                     id={params.id}
                     mode={params.mode as Mode} />
