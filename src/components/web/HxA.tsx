@@ -3,7 +3,7 @@ const HxA = ({ url, css, children }: any) => {
         <a href={url}
             // hx-get={url}
             // hx-target="#main"
-            // hx-push-url="true"
+            // hx-replace-url="true"
             // hx-indicator="#page-loading"
             // hx-swap="innerHTML show:window:top"
             class={"cursor-pointer hover:underline underline-offset-2 p-0 m-0 flex"}>

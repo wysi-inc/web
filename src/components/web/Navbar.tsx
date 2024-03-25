@@ -69,6 +69,12 @@ const Navbar = (props: Props) => {
                     <Search />
                 </div>
                 <div class="flex flex-row items-center justify-end">
+                    <label class="btn btn-ghost flex flex-row gap-2 justify-between items-center">
+                        <i class="fa-solid fa-sun" />
+                        <input class="toggle" type="checkbox" checked
+                            data-toggle-theme="dracula,pastel" />
+                        <i class="fa-solid fa-moon" />
+                    </label>
                     <a href="https://github.com/wysi-inc" target="_blank"
                         class="hidden md:flex btn btn-ghost">
                         <i class="fa-brands fa-github fa-lg" />

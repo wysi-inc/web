@@ -20,6 +20,7 @@ const BaseHtml = (props: Props) => {
                 <script src="https://kit.fontawesome.com/d5ab19acce.js" crossorigin="anonymous" />
                 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" />
                 <script src="https://unpkg.com/htmx.org@1.9.10" />
+                <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js" />
                 <script src="/public/js/search.js" defer />
                 <script src="/public/js/audio.js" defer />
             </head>

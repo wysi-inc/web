@@ -21,7 +21,7 @@ type KeyProps = {
 
 export const Key = (p: KeyProps) => {
     return (
-        <label class="m-0 p-0 rounded-sm cursor-pointer text-center border has-[:checked]:bg-secondary has-[:checked]:border-secondary has-[:checked]:bg-opacity-50"
+        <label class="m-0 p-0 rounded-sm cursor-pointer text-center border-base-content border has-[:checked]:bg-secondary bg-opacity-75"
             style={{
                 fontSize: '0.5rem',
                 width: `${p.width}rem`,

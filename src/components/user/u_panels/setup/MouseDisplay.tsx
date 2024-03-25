@@ -6,8 +6,8 @@ const MouseDisplay = ({ mouse }: { mouse: Setup["mouse"] }) => {
         <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
             <div class="h-36 p-2 flex">
                 <div class="grow flex justify-center items-center">
-                    <div class="flex flex-col justify-between outline outline-1 divide-y rounded-full w-20 h-full">
-                        <div class="flex h-2/5 divide-x relative" >
+                    <div class="flex flex-col divide-base-content justify-between outline outline-1 divide-y rounded-full w-20 h-full">
+                        <div class="flex h-2/5 divide-base-content divide-x relative" >
                             <div class="h-full w-1/2" />
                             <div class="h-full w-1/2" />
                             <div class="absolute outline outline-1 rounded-lg bg-base-300 top-1/2 left-1/2 w-3 h-6 transform -translate-x-1/2 -translate-y-1/2" />
