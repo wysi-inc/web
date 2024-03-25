@@ -10,7 +10,7 @@ type Props = {
 
 const BaseHtml = (props: Props) => {
     return (
-        <html data-theme="dracula">
+        <html>
             <head>
                 <title>wysi</title>
                 <meta charset="UTF-8" />

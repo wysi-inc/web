@@ -7,29 +7,28 @@ type Props = {
 const Logged = (props: Props) => {
     return (
         <div class="dropdown dropdown-end">
-            <button tabindex="0" role="button" class="btn btn-ghost pt-0 flex flex-row gap-2 items-center">
-                <span class="md:hidden">{props.user.username}</span>
-                <img src={props.user.avatar} class="w-8 h-8 rounded-lg drop-shadow-lg shadow-lg" alt="avatar" />
+            <button tabindex="0" role="button" class="btn btn-ghost flex flex-row gap-2 items-center">
+                <img src={props.user.avatar} class="size-8 rounded-lg drop-shadow-lg shadow-lg" alt="avatar" />
             </button>
-            <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <ul tabindex="0" class="menu menu-sm dropdown-content mt-5 z-50 p-2 shadow-lg bg-base-100 rounded-box w-40">
                 <li>
-                    <HxA url={`/users/${props.user.id}`}>
-                        <span class="p-1">
-                            wysi!profile
-                        </span>
+                    <HxA url={`/users/${props.user.id}`} css="btn btn-ghost flex">
+                        <i class="fa-solid fa-user" />
+                        wysi!profile
                     </HxA>
                 </li>
                 <li>
                     <a href={`https://osu.ppy.sh/users/${props.user.id}`}
-                        target="_blank" rel="noreferrer noopener" class="p-1">
+                        target="_blank" rel="noreferrer noopener"
+                        class="btn btn-ghost flex">
+                        <i class="fa-regular fa-user" />
                         osu!profile
                     </a>
                 </li>
                 <li>
-                    <HxA url="/logout">
-                        <span class="p-1">
-                            logout
-                        </span>
+                    <HxA url="/logout" css="btn btn-ghost flex">
+                        <i class="fa-solid fa-right-from-bracket" />
+                        logout
                     </HxA>
                 </li>
             </ul>

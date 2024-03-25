@@ -582,7 +582,7 @@ html {
   --pc: 0.166166 0.006979 316.8737;
   --sc: 0.176153 0.009839 8.688364;
   --ac: 0.178419 0.012056 170.923263;
-  --nc: 0.142681 0.014702 228.183906;
+  --nc: 0.150803 0 0;
   --inc: 0 0 0;
   --suc: 0 0 0;
   --wac: 0 0 0;
@@ -596,11 +596,11 @@ html {
   --p: 0.830828 0.034896 316.8737;
   --s: 0.880763 0.049197 8.688364;
   --a: 0.892096 0.06028 170.923263;
-  --n: 0.713406 0.07351 228.183906;
+  --n: 0.754017 0 0;
   --b1: 1 0 0;
   --b2: 0.984625 0.001706 247.838921;
   --b3: 0.871681 0.009339 258.338227;
-  --rounded-btn: 0.50rem;
+  --rounded-btn: 0.5rem;
   --tab-radius: 0.7rem;
   --rounded-box: 0.5rem;
 }
@@ -934,6 +934,27 @@ html {
   overflow: hidden;
   container-type: inline-size;
   grid-template-columns: auto 1fr;
+}
+
+.divider {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-self: stretch;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  height: 1rem;
+  white-space: nowrap;
+}
+
+.divider:before,
+  .divider:after {
+  height: 0.125rem;
+  width: 100%;
+  flex-grow: 1;
+  --tw-content: '';
+  content: var(--tw-content);
+  background-color: var(--fallback-bc,oklch(var(--bc)/0.1));
 }
 
 .dropdown {
@@ -2147,6 +2168,10 @@ details.collapse summary::-webkit-details-marker {
 .collapse-plus:not(.collapse-close) > input[type="checkbox"]:checked ~ .collapse-title:after,
 .collapse-plus:not(.collapse-close) > input[type="radio"]:checked ~ .collapse-title:after {
   content: "−";
+}
+
+.divider:not(:empty) {
+  gap: 1rem;
 }
 
 .dropdown.dropdown-open .dropdown-content,
@@ -3472,6 +3497,10 @@ details.collapse summary::-webkit-details-marker {
   z-index: 1;
 }
 
+.z-\[50\] {
+  z-index: 50;
+}
+
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
@@ -3553,6 +3582,10 @@ details.collapse summary::-webkit-details-marker {
   margin-top: 0.75rem;
 }
 
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
 .block {
   display: block;
 }
@@ -3594,6 +3627,11 @@ details.collapse summary::-webkit-details-marker {
 .size-4 {
   width: 1rem;
   height: 1rem;
+}
+
+.size-8 {
+  width: 2rem;
+  height: 2rem;
 }
 
 .h-1 {
@@ -3690,6 +3728,10 @@ details.collapse summary::-webkit-details-marker {
 
 .w-4 {
   width: 1rem;
+}
+
+.w-40 {
+  width: 10rem;
 }
 
 .w-5 {
@@ -4015,10 +4057,6 @@ details.collapse summary::-webkit-details-marker {
   padding-bottom: 0.5rem;
 }
 
-.pt-0 {
-  padding-top: 0px;
-}
-
 .pt-4 {
   padding-top: 1rem;
 }
@@ -4241,6 +4279,10 @@ details.collapse summary::-webkit-details-marker {
 
   .sm\:table-cell {
     display: table-cell;
+  }
+
+  .sm\:hidden {
+    display: none;
   }
 }
 

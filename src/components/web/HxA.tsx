@@ -1,4 +1,10 @@
-const HxA = ({ url, css, children }: any) => {
+type Props = {
+    url: string;
+    children: any;
+    css?: string;
+}
+
+const HxA = ({ url, css, children }: Props) => {
     return (
         <a href={url}
             // hx-get={url}
@@ -6,10 +12,8 @@ const HxA = ({ url, css, children }: any) => {
             // hx-replace-url="true"
             // hx-indicator="#page-loading"
             // hx-swap="innerHTML show:window:top"
-            class={"cursor-pointer hover:underline underline-offset-2 p-0 m-0 flex"}>
-            <span class={css ? css + " " : "" + "flex p-0 m-0"}>
-                {children}
-            </span>
+            class={`${css} cursor-pointer hover:underline underline-offset-2`}>
+            {children}
         </a>
     )
 }
