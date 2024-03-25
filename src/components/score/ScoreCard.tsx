@@ -69,7 +69,7 @@ const ScoreCard = async (props: Props) => {
     }
 
     return (
-        <div class="grow rounded-lg flex flex-row bg-base-300 shadow-lg">
+        <div class="group grow rounded-lg flex flex-row bg-base-300 shadow-lg">
             <div class="text-white bg-neutral flex flex-col grow rounded-lg shadow-lg">
                 <div class="rounded-lg flex flex-col shadow-lg"
                     style={{

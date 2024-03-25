@@ -582,7 +582,7 @@ html {
   --pc: 0.166166 0.006979 316.8737;
   --sc: 0.176153 0.009839 8.688364;
   --ac: 0.166785 0.024826 66.558491;
-  --nc: 0.150803 0 0;
+  --nc: 0.194629 0 0;
   --inc: 0 0 0;
   --suc: 0 0 0;
   --wac: 0 0 0;
@@ -596,7 +596,7 @@ html {
   --p: 0.830828 0.034896 316.8737;
   --s: 0.880763 0.049197 8.688364;
   --a: 0.833927 0.124132 66.558491;
-  --n: 0.754017 0 0;
+  --n: 0.973146 0 0;
   --b1: 1 0 0;
   --b2: 0.984625 0.001706 247.838921;
   --b3: 0.871681 0.009339 258.338227;
@@ -4195,6 +4195,11 @@ details.collapse summary::-webkit-details-marker {
   font-weight: 700;
 }
 
+.text-base-content {
+  --tw-text-opacity: 1;
+  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
+}
+
 .text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
@@ -4212,11 +4217,6 @@ details.collapse summary::-webkit-details-marker {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-base-content {
-  --tw-text-opacity: 1;
-  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
 }
 
 .underline-offset-2 {
@@ -4241,6 +4241,10 @@ details.collapse summary::-webkit-details-marker {
 
 .outline-1 {
   outline-width: 1px;
+}
+
+.outline-black {
+  outline-color: #000;
 }
 
 .outline-secondary {
@@ -4279,6 +4283,28 @@ details.collapse summary::-webkit-details-marker {
 
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @font-face {
@@ -4347,6 +4373,10 @@ details.collapse summary::-webkit-details-marker {
 
 .disabled\:hidden:disabled {
   display: none;
+}
+
+.group:hover .group-hover\:flex {
+  display: flex;
 }
 
 .peer:disabled ~ .peer-disabled\:block {

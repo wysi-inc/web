@@ -127,7 +127,7 @@ const UserSummaryPanel = async (props: Props) => {
 
     return (
         <div class="flex flex-col gap-4">
-            <div class="flex flex-col grow col-span-full bg-neutral rounded-lg">
+            <div class="shadow-lg flex flex-col grow col-span-full bg-neutral rounded-lg">
                 <div class="p-2 text-neutral-content">Average Play:</div>
                 <div class="flex grow flex-row flex-wrap gap-4 items-center p-4 rounded-lg bg-base-300">
                     <h3 class="text-xl" style={{ color: max_grade[1].color }}>{max_grade[0]}</h3>
@@ -144,7 +144,7 @@ const UserSummaryPanel = async (props: Props) => {
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-4">
-                <div class="flex flex-col bg-neutral rounded-lg">
+                <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
                     <div class="p-2 flex flex-row text-neutral-content justify-between">
                         <div>Performance:</div>
                         <div>{avg_pp}pp</div>
@@ -159,7 +159,7 @@ const UserSummaryPanel = async (props: Props) => {
                         <span>{min_pp}pp</span>
                     </div>
                 </div>
-                <div class="flex flex-col bg-neutral rounded-lg">
+                <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
                     <div class="p-2 flex flex-row text-neutral-content justify-between">
                         <div>Mods:</div>
                         <div class="flex flex-row gap-1 items-center">
@@ -183,7 +183,7 @@ const UserSummaryPanel = async (props: Props) => {
                         ))}
                     </div>
                 </div>
-                <div class="flex flex-col bg-neutral rounded-lg">
+                <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
                     <div class="p-2 flex flex-row text-neutral-content justify-between">
                         <div>Grades:</div>
                         <div style={{ color: max_grade[1].color }}>
@@ -194,7 +194,7 @@ const UserSummaryPanel = async (props: Props) => {
                         <BarChart data={grade_counts} />
                     </div>
                 </div>
-                <div class="flex flex-col bg-neutral rounded-lg">
+                <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
                     <div class="p-2 flex flex-row text-neutral-content justify-between">
                         <div>Hits:</div>
                         <div>{avg_acc}%</div>

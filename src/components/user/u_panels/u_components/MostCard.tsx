@@ -19,7 +19,7 @@ const MostCard = (props: Props) => {
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
 
     return (
-        <div class="rounded-lg flex flex-row bg-base-300 shadow-lg">
+        <div class="group rounded-lg flex flex-row bg-base-300 shadow-lg">
             <div class="text-white bg-neutral flex flex-col grow rounded-lg shadow-lg">
                 <div class="rounded-lg overflow-hidden flex flex-col shadow-lg"
                     style={{

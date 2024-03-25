@@ -10,7 +10,7 @@ type Props = {
 const CardControls = (props: Props) => {
 
     return (
-        <div class="flex flex-col items-center justify-around p-1 gap-1">
+        <div class="transition duration-300 ease-in-out hidden group-hover:flex flex-col items-center justify-around p-1 gap-1">
             <AudioPlayButton css="btn btn-ghost btn-sm grow p-2"
                 beatmap_id={props.beatmap_id}
                 set_id={props.set_id}

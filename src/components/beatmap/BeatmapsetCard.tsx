@@ -15,8 +15,8 @@ const BeatmapsetCard = (props: Props) => {
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
 
     return (
-        <div class="flex flex-row bg-base-300 rounded-lg shadow-lg">
-            <div class="text-white flex flex-col bg-neutral rounded-lg shadow-lg grow">
+        <div class="group flex flex-row bg-base-300 rounded-lg shadow-lg">
+            <div class="transition duration-300 ease-in-out text-white flex flex-col bg-neutral rounded-lg shadow-lg grow">
                 <div class="flex flex-col rounded-lg shadow-lg"
                     style={{
                         background: `linear-gradient(#000000cc, #000000cc), url(${cardImg})`,

@@ -33,12 +33,12 @@ const Navbar = (props: Props) => {
                                     Beatmaps
                                 </HxA>
                             </li>
-                            <div class="divider" />
+                            <div class="md:hidden divider" />
                             <label class="flex sm:hidden btn btn-ghost flex-row gap-2 justify-between items-center">
-                                <i class="fa-solid fa-sun" />
+                                <i class="fa-solid fa-moon" />
                                 <input class="toggle" type="checkbox" checked
                                     data-toggle-theme="dracula,pastel" />
-                                <i class="fa-solid fa-moon" />
+                                <i class="fa-solid fa-sun" />
                             </label>
                             <li>
                                 <a href="https://github.com/wysi-inc" target="_blank"
@@ -85,10 +85,10 @@ const Navbar = (props: Props) => {
                 </div>
                 <div class="flex flex-row items-center justify-end">
                     <label class="hidden sm:flex btn btn-ghost flex-row gap-2 justify-between items-center">
-                        <i class="fa-solid fa-sun" />
+                        <i class="fa-solid fa-moon" />
                         <input class="toggle" type="checkbox" checked
                             data-toggle-theme="dracula,pastel" />
-                        <i class="fa-solid fa-moon" />
+                        <i class="fa-solid fa-sun" />
                     </label>
                     <div class="hidden md:flex flex-row items-center justify-end">
                         <a href="https://github.com/wysi-inc" target="_blank"
