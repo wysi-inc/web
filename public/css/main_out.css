@@ -518,8 +518,6 @@ html {
   --suc: 0.174199 0.043903 148.024881;
   --wac: 0.191068 0.026849 112.757109;
   --erc: 0.136441 0.041266 24.430965;
-  --rounded-box: 1rem;
-  --rounded-btn: 0.5rem;
   --rounded-badge: 1.9rem;
   --animation-btn: 0.25s;
   --animation-input: .2s;
@@ -537,6 +535,8 @@ html {
   --su: 0.870995 0.219516 148.024881;
   --wa: 0.955338 0.134246 112.757109;
   --er: 0.682204 0.206328 24.430965;
+  --rounded-box: 0.5rem;
+  --rounded-btn: 0.5rem;
 }
 
 [data-theme=dracula] {
@@ -551,8 +551,6 @@ html {
   --suc: 0.174199 0.043903 148.024881;
   --wac: 0.191068 0.026849 112.757109;
   --erc: 0.136441 0.041266 24.430965;
-  --rounded-box: 1rem;
-  --rounded-btn: 0.5rem;
   --rounded-badge: 1.9rem;
   --animation-btn: 0.25s;
   --animation-input: .2s;
@@ -570,6 +568,8 @@ html {
   --su: 0.870995 0.219516 148.024881;
   --wa: 0.955338 0.134246 112.757109;
   --er: 0.682204 0.206328 24.430965;
+  --rounded-box: 0.5rem;
+  --rounded-btn: 0.5rem;
 }
 
 [data-theme=pastel] {
@@ -581,7 +581,7 @@ html {
   --bc: 0.2 0 0;
   --pc: 0.166166 0.006979 316.8737;
   --sc: 0.176153 0.009839 8.688364;
-  --ac: 0.178419 0.012056 170.923263;
+  --ac: 0.166785 0.024826 66.558491;
   --nc: 0.150803 0 0;
   --inc: 0 0 0;
   --suc: 0 0 0;
@@ -595,7 +595,7 @@ html {
   --tab-border: 1px;
   --p: 0.830828 0.034896 316.8737;
   --s: 0.880763 0.049197 8.688364;
-  --a: 0.892096 0.06028 170.923263;
+  --a: 0.833927 0.124132 66.558491;
   --n: 0.754017 0 0;
   --b1: 1 0 0;
   --b2: 0.984625 0.001706 247.838921;
@@ -845,6 +845,107 @@ html {
 .btn:is(input[type="radio"]):after {
   --tw-content: attr(aria-label);
   content: var(--tw-content);
+}
+
+.chat {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  -moz-column-gap: 0.75rem;
+       column-gap: 0.75rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.chat-image {
+  grid-row: span 2 / span 2;
+  align-self: flex-end;
+}
+
+.chat-bubble {
+  position: relative;
+  display: block;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  max-width: 90%;
+  border-radius: var(--rounded-box, 1rem);
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-n,oklch(var(--n)/var(--tw-bg-opacity)));
+  --tw-text-opacity: 1;
+  color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity)));
+}
+
+.chat-bubble:before {
+  position: absolute;
+  bottom: 0px;
+  height: 0.75rem;
+  width: 0.75rem;
+  background-color: inherit;
+  content: "";
+  -webkit-mask-size: contain;
+          mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+          mask-position: center;
+}
+
+.chat-start {
+  place-items: start;
+  grid-template-columns: auto 1fr;
+}
+
+.chat-start .chat-header {
+  grid-column-start: 2;
+}
+
+.chat-start .chat-footer {
+  grid-column-start: 2;
+}
+
+.chat-start .chat-image {
+  grid-column-start: 1;
+}
+
+.chat-start .chat-bubble {
+  grid-column-start: 2;
+  border-end-start-radius: 0px;
+}
+
+.chat-start .chat-bubble:before {
+  -webkit-mask-image: url("data:image/svg+xml,%3csvg width='3' height='3' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill='black' d='m 0 3 L 3 3 L 3 0 C 3 1 1 3 0 3'/%3e%3c/svg%3e");
+          mask-image: url("data:image/svg+xml,%3csvg width='3' height='3' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill='black' d='m 0 3 L 3 3 L 3 0 C 3 1 1 3 0 3'/%3e%3c/svg%3e");
+  inset-inline-start: -0.749rem;
+}
+
+[dir="rtl"] .chat-start .chat-bubble:before {
+  -webkit-mask-image: url("data:image/svg+xml,%3csvg width='3' height='3' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill='black' d='m 0 3 L 1 3 L 3 3 C 2 3 0 1 0 0'/%3e%3c/svg%3e");
+          mask-image: url("data:image/svg+xml,%3csvg width='3' height='3' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill='black' d='m 0 3 L 1 3 L 3 3 C 2 3 0 1 0 0'/%3e%3c/svg%3e");
+}
+
+.chat-end .chat-image {
+  grid-column-start: 2;
+}
+
+.chat-end .chat-bubble {
+  grid-column-start: 1;
+  border-end-end-radius: 0px;
+}
+
+.chat-end .chat-bubble:before {
+  -webkit-mask-image: url("data:image/svg+xml,%3csvg width='3' height='3' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill='black' d='m 0 3 L 1 3 L 3 3 C 2 3 0 1 0 0'/%3e%3c/svg%3e");
+          mask-image: url("data:image/svg+xml,%3csvg width='3' height='3' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill='black' d='m 0 3 L 1 3 L 3 3 C 2 3 0 1 0 0'/%3e%3c/svg%3e");
+  inset-inline-start: 99.9%;
+}
+
+[dir="rtl"] .chat-end .chat-bubble:before {
+  -webkit-mask-image: url("data:image/svg+xml,%3csvg width='3' height='3' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill='black' d='m 0 3 L 3 3 L 3 0 C 3 1 1 3 0 3'/%3e%3c/svg%3e");
+          mask-image: url("data:image/svg+xml,%3csvg width='3' height='3' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill='black' d='m 0 3 L 3 3 L 3 0 C 3 1 1 3 0 3'/%3e%3c/svg%3e");
 }
 
 .checkbox {
@@ -3493,14 +3594,6 @@ details.collapse summary::-webkit-details-marker {
   z-index: 50;
 }
 
-.z-\[1\] {
-  z-index: 1;
-}
-
-.z-\[50\] {
-  z-index: 50;
-}
-
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
@@ -3578,10 +3671,6 @@ details.collapse summary::-webkit-details-marker {
   margin-inline-start: auto;
 }
 
-.mt-3 {
-  margin-top: 0.75rem;
-}
-
 .mt-5 {
   margin-top: 1.25rem;
 }
@@ -3612,6 +3701,11 @@ details.collapse summary::-webkit-details-marker {
 
 .aspect-square {
   aspect-ratio: 1 / 1;
+}
+
+.size-10 {
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 .size-24 {
@@ -3954,6 +4048,10 @@ details.collapse summary::-webkit-details-marker {
   border-width: 1px;
 }
 
+.border-0 {
+  border-width: 0px;
+}
+
 .border-base-content {
   --tw-border-opacity: 1;
   border-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-border-opacity)));
@@ -4114,6 +4212,11 @@ details.collapse summary::-webkit-details-marker {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-base-content {
+  --tw-text-opacity: 1;
+  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
 }
 
 .underline-offset-2 {

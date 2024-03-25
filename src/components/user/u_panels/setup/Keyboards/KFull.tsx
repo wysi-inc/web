@@ -166,8 +166,8 @@ const KFull = (p: KeyboardProps) => {
                     <div class="flex flex-row items-start">
                         <Key char={'-'} code={'nmin'} keys={p.keys} width={1} />
                     </div>
-                    <Key height="2rem" char={'+'} code={'nplus'} keys={p.keys} width={1} />
-                    <Key height="2rem" char={'⏎'} code={'nenter'} keys={p.keys} width={1} />
+                    <Key char={'+'} code={'nplus'} keys={p.keys} width={1} height={2} />
+                    <Key char={'⏎'} code={'nenter'} keys={p.keys} width={1} height={2} />
                 </div>
             </div>
         </div>

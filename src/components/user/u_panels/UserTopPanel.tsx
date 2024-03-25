@@ -7,9 +7,9 @@ import Flag from "./u_components/Flag";
 type Props = {
     user: User;
 }
-const UserTopPanel = (props: Props) => {
+const UserTopPanel = ({ user }: Props) => {
 
-    const { user } = props;
+    if (!user) return;
 
     const best_country = user.db_ranks.country_ranks.sort((a, b) => a.rank - b.rank)[0];
 

@@ -2,7 +2,14 @@ import type { Setup } from "@/src/models/User";
 import SetupInput from "./SetupInput";
 import { TabletModel } from "@/src/models/Tablet";
 
-const TabletDisplay = async ({ tablet }: { tablet: Setup["tablet"] }) => {
+type Props = {
+    tablet: Setup["tablet"],
+    editable: boolean
+}
+
+const TabletDisplay = async ({ tablet, editable }: Props) => {
+
+    if (!editable && !tablet) return <></>;
 
     const tablets = await TabletModel.find();
 
@@ -56,8 +63,8 @@ const TabletDisplay = async ({ tablet }: { tablet: Setup["tablet"] }) => {
                             <span class="label-text">Size:</span>
                         </div>
                         <div class="grid grid-cols-2 gap-2">
-                            <SetupInput id="tablet_size_w" name="Width" measure="mm" value={tablet?.size?.w} type="number" />
-                            <SetupInput id="tablet_size_h" name="Height" measure="mm" value={tablet?.size?.h} type="number" />
+                            <SetupInput editable={editable} id="tablet_size_w" name="Width" measure="mm" value={tablet?.size?.w} type="number" />
+                            <SetupInput editable={editable} id="tablet_size_h" name="Height" measure="mm" value={tablet?.size?.h} type="number" />
                         </div>
                     </label>
                 </div>
@@ -66,8 +73,8 @@ const TabletDisplay = async ({ tablet }: { tablet: Setup["tablet"] }) => {
                         <span class="label-text">Area:</span>
                     </div>
                     <div class="grid grid-cols-2 gap-2">
-                        <SetupInput id="tablet_area_w" name="Width" measure="mm" value={tablet?.area?.w} type="number" />
-                        <SetupInput id="tablet_area_h" name="Height" measure="mm" value={tablet?.area?.h} type="number" />
+                        <SetupInput editable={editable} id="tablet_area_w" name="Width" measure="mm" value={tablet?.area?.w} type="number" />
+                        <SetupInput editable={editable} id="tablet_area_h" name="Height" measure="mm" value={tablet?.area?.h} type="number" />
                     </div>
                 </label>
                 <label class="form-control">
@@ -75,9 +82,9 @@ const TabletDisplay = async ({ tablet }: { tablet: Setup["tablet"] }) => {
                         <span class="label-text">Position:</span>
                     </div>
                     <div class="grid grid-cols-3 gap-2">
-                        <SetupInput id="tablet_position_x" name="X" measure="mm" value={tablet?.position?.x} type="number" />
-                        <SetupInput id="tablet_position_y" name="Y" measure="mm" value={tablet?.position?.y} type="number" />
-                        <SetupInput id="tablet_position_r" name="R" measure="deg" value={tablet?.position?.r} type="number" />
+                        <SetupInput editable={editable} id="tablet_position_x" name="X" measure="mm" value={tablet?.position?.x} type="number" />
+                        <SetupInput editable={editable} id="tablet_position_y" name="Y" measure="mm" value={tablet?.position?.y} type="number" />
+                        <SetupInput editable={editable} id="tablet_position_r" name="R" measure="deg" value={tablet?.position?.r} type="number" />
                     </div>
                 </label>
             </div>

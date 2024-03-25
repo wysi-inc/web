@@ -3,6 +3,7 @@ import TabletDisplay from "./setup/TabletDisplay";
 import KeyboardDisplay from "./setup/KeyboardDisplay";
 import Components from "./setup/Components";
 import MouseDisplay from "./setup/MouseDisplay";
+import Peripherals from "./setup/Peripherals";
 
 type Props = {
     logged_id?: number;
@@ -25,21 +26,11 @@ const UserSetupPanel = ({ logged_id, page_id, setup }: Props) => {
             class="flex flex-wrap-reverse justify-end gap-2 -mt-10">
             <fieldset class="peer grid w-full grid-cols-2 gap-4"
                 id="setup_fieldset" disabled>
-                {setup?.tablet || editable ?
-                    <TabletDisplay tablet={setup?.tablet} /> : <></>
-                }
-                {setup?.keyboard || editable ?
-                    <KeyboardDisplay keyboard={setup?.keyboard} /> : <></>
-                }
-                {setup?.mouse || editable ?
-                    <MouseDisplay mouse={setup?.mouse} /> : <></>
-                }
-                {setup?.computer || setup?.peripherals || editable ?
-                    <Components editable={editable}
-                        computer={setup?.computer}
-                        peripherals={setup?.peripherals}
-                    /> : <></>
-                }
+                <TabletDisplay editable={editable} tablet={setup?.tablet} />
+                <KeyboardDisplay editable={editable} keyboard={setup?.keyboard} />
+                <MouseDisplay editable={editable} mouse={setup?.mouse} />
+                <Peripherals editable={editable} peripherals={setup?.peripherals} />
+                <Components editable={editable} computer={setup?.computer} />
             </fieldset>
             <div class="h-8" />
             {editable && <>

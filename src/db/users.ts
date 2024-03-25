@@ -110,6 +110,7 @@ export async function saveSetup(user_id: number, setup: any): Promise<Setup | nu
     const mouse: Setup["mouse"] = {
         name: setup.mouse_name,
         dpi: Number(setup.mouse_dpi),
+        mult: Number(setup.mouse_x),
     };
     const peripherals: Setup["peripherals"] = {
         mouse: setup.peripherals_mouse,

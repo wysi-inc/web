@@ -41,7 +41,7 @@ const DiffIcon = (props: Props) => {
     const color = getGradientColor(props.diff);
 
     return (
-        <HxA url={`/beatmaps/${props.setId}/${props.diffId}`}>
+        <HxA url={`/beatmaps/${props.setId}/${props.diffId}`} css="flex items-center">
             <span data-tip={`★ ${props.diff} - [${props.name}]`} class="p-0 m-0 tooltip">
                 <ModeIcon size={props.size} color={color} mode={props.mode} />
             </span>

@@ -8,16 +8,21 @@ module.exports = {
     },
     plugins: [require("daisyui")],
     daisyui: {
-        themes: [
-            "dracula",
-            {
-                pastel: {
-                    ...require("daisyui/src/theming/themes")["pastel"],
-                    "--rounded-box": "0.5rem", // border radius rounded-box utility class, used in card and other large boxes
-                    "--rounded-btn": "0.5rem",
-                    "neutral": "#afafaf",
-                }
+        themes: [{
+            dracula: {
+                ...require("daisyui/src/theming/themes")["dracula"],
+                "--rounded-box": "0.5rem", // border radius rounded-box utility class, used in card and other large boxes
+                "--rounded-btn": "0.5rem",
+                "accent": "#ffb86c",
             }
-        ]
-    },
+        }, {
+            pastel: {
+                ...require("daisyui/src/theming/themes")["pastel"],
+                "--rounded-box": "0.5rem", // border radius rounded-box utility class, used in card and other large boxes
+                "--rounded-btn": "0.5rem",
+                "accent": "#ffb86c",
+                "neutral": "#afafaf",
+            }
+        }]
+    }
 }

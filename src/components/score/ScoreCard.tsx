@@ -7,6 +7,8 @@ import type { Mode } from "@/src/types/osu";
 import DiffIcon from "@/src/components/beatmap/DiffIcon";
 import CardControls from "@/src/components/web/CardControls";
 import HxA from "../web/HxA";
+import StatusBadge from "../beatmap/StatusBadge";
+import type { BeatmapsetStatus } from "@/src/types/beatmaps";
 
 type Props = {
     position: number;
@@ -141,14 +143,8 @@ const ScoreCard = async (props: Props) => {
                         </div>
                     </div>
                 </div>
-                <div class="p-2 flex flex-row flex-wrap gap-4 items-center">
-                    <div class="badge m-0"
-                        style={{
-                            color: "#000",
-                            backgroundColor: (colors.beatmap as any)[beatmapset.status]
-                        }}>
-                        {beatmapset.status}
-                    </div>
+                <div class="text-base-content p-2 flex flex-row flex-wrap gap-4 items-center">
+                    <StatusBadge status={beatmapset.status as BeatmapsetStatus} />
                     <DiffIcon setId={beatmapset.id} diffId={score.beatmap.id}
                         diff={score.beatmap.difficulty_rating} size={20}
                         mode={score.beatmap.mode} name={score.beatmap.version} />

@@ -51,7 +51,7 @@ const MostCard = (props: Props) => {
                             diff={beatmap.difficulty_rating} size={20}
                             mode={beatmap.mode} name={beatmap.version} />
                     </div>
-                    <div class="flex flex-row items-center gap-2">
+                    <div class="flex flex-row items-center gap-2 text-base-content">
                         <div class="flex flex-row items-center gap-2">
                             <i class="fa-sm fa-solid fa-arrow-rotate-left" />
                             <div>

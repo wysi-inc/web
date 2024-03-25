@@ -54,6 +54,7 @@ const setup = new mongoose.Schema({
     mouse: {
         name: String,
         dpi: Number,
+        mult: Number,
     },
     peripherals: {
         monitor: String,

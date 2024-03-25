@@ -1,6 +1,15 @@
 import type { Setup } from "@/src/models/User";
+import SetupInput from "./SetupInput";
 
-const MouseDisplay = ({ mouse }: { mouse: Setup["mouse"] }) => {
+type Props = {
+    mouse: Setup["mouse"],
+    editable: boolean
+}
+
+const MouseDisplay = ({ mouse, editable }: Props) => {
+
+    if (!editable && !mouse) return <></>;
+
     return <div class="bg-neutral rounded-lg flex flex-col">
         <h1 class="p-2 text-neutral-content">Mouse</h1>
         <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
@@ -28,12 +37,12 @@ const MouseDisplay = ({ mouse }: { mouse: Setup["mouse"] }) => {
                 </label>
                 <label class="form-control">
                     <div class="label">
-                        <span class="label-text">Sensitivity (dpi):</span>
+                        <span class="label-text">Sensitivity:</span>
                     </div>
-                    <input id="mouse_dpi" name="mouse_dpi"
-                        type="text" placeholder="100"
-                        class="input input-sm input-bordered peer disabled:hidden w-full" value={mouse?.dpi?.toString() || ""} />
-                    <span class="input input-sm bg-base-200 hidden peer-disabled:block">{mouse?.dpi}</span>
+                    <div class="grow grid grid-cols-2 gap-2">
+                        <SetupInput editable={editable} id="mouse_dpi" name="DPI" measure="dpi" value={mouse?.dpi} type="number" />
+                        <SetupInput editable={editable} id="mouse_x" name="Multiplier" measure="x" value={mouse?.mult} type="number" />
+                    </div>
                 </label>
             </div>
         </div>

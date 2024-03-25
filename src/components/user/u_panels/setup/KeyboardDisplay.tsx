@@ -16,21 +16,21 @@ type KeyProps = {
     code: string,
     width: number,
     keys?: string[],
-    height?: string,
+    height?: number,
 }
 
-export const Key = (p: KeyProps) => {
+export const Key = ({ char, code, width, keys, height }: KeyProps) => {
     return (
         <label class="m-0 p-0 rounded-sm cursor-pointer text-center border-base-content border has-[:checked]:bg-secondary bg-opacity-75"
             style={{
                 fontSize: '0.5rem',
-                width: `${p.width}rem`,
-                height: p.height || '1rem',
-                lineHeight: p.height || '1rem',
+                width: `${width}rem`,
+                height: `${height || 1}rem`,
+                lineHeight: `${height || 1}rem`,
             }}>
-            {p.char}
-            <input name={`keyboard_key_${p.code}`} type="checkbox"
-                checked={p.keys?.includes(p.code)} class="appearance-none"
+            {char}
+            <input name={`keyboard_key_${code}`} type="checkbox"
+                checked={keys?.includes(code)} class="appearance-none"
             />
         </label>
     );
@@ -40,8 +40,15 @@ export const Empty = () => {
     return <div class="size-4" />
 }
 
+type Props = {
+    keyboard: Setup["keyboard"],
+    editable: boolean
+}
 
-const KeyboardDisplay = ({ keyboard }: { keyboard: Setup["keyboard"] }) => {
+const KeyboardDisplay = ({ keyboard, editable }: Props) => {
+
+    if (!editable && !keyboard) return <></>;
+
     return <div class="bg-neutral rounded-lg flex flex-col">
         <h1 class="p-2 text-neutral-content">Keyboard</h1>
         <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">

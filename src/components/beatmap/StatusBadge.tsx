@@ -4,15 +4,15 @@ import type { BeatmapsetStatus } from "@/src/types/beatmaps";
 type Props = {
     status: BeatmapsetStatus
 }
-const StatusBadge = (props: Props) => {
+const StatusBadge = ({ status }: Props) => {
     return (
-        <div class="badge" style={{
+        <div class="badge m-0 border-0" style={{
             color: "#000",
-            backgroundColor: colors.beatmap[props.status]
+            backgroundColor: colors.beatmap[status]
         }}>
-            {props.status}
+            {status}
         </div>
-    )
+    );
 }
 
 export default StatusBadge;
