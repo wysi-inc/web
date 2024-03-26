@@ -582,7 +582,7 @@ html {
   --pc: 0.166166 0.006979 316.8737;
   --sc: 0.176153 0.009839 8.688364;
   --ac: 0.166785 0.024826 66.558491;
-  --nc: 0.194629 0 0;
+  --nc: 0.191028 0 0;
   --inc: 0 0 0;
   --suc: 0 0 0;
   --wac: 0 0 0;
@@ -596,7 +596,7 @@ html {
   --p: 0.830828 0.034896 316.8737;
   --s: 0.880763 0.049197 8.688364;
   --a: 0.833927 0.124132 66.558491;
-  --n: 0.973146 0 0;
+  --n: 0.95514 0 0;
   --b1: 1 0 0;
   --b2: 0.984625 0.001706 247.838921;
   --b3: 0.871681 0.009339 258.338227;
@@ -3635,10 +3635,6 @@ details.collapse summary::-webkit-details-marker {
   z-index: 50;
 }
 
-.col-span-2 {
-  grid-column: span 2 / span 2;
-}
-
 .col-span-3 {
   grid-column: span 3 / span 3;
 }
@@ -3753,6 +3749,11 @@ details.collapse summary::-webkit-details-marker {
   height: 2.5rem;
 }
 
+.size-12 {
+  width: 3rem;
+  height: 3rem;
+}
+
 .size-24 {
   width: 6rem;
   height: 6rem;
@@ -3773,17 +3774,8 @@ details.collapse summary::-webkit-details-marker {
   height: 2rem;
 }
 
-.size-12 {
-  width: 3rem;
-  height: 3rem;
-}
-
 .h-1 {
   height: 0.25rem;
-}
-
-.h-10 {
-  height: 2.5rem;
 }
 
 .h-12 {
@@ -4137,8 +4129,17 @@ details.collapse summary::-webkit-details-marker {
   background-color: var(--fallback-s,oklch(var(--s)/var(--tw-bg-opacity)));
 }
 
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
 .bg-opacity-75 {
   --tw-bg-opacity: 0.75;
+}
+
+.bg-opacity-50 {
+  --tw-bg-opacity: 0.5;
 }
 
 .bg-gradient-to-r {
@@ -4153,6 +4154,14 @@ details.collapse summary::-webkit-details-marker {
 
 .to-sky-500 {
   --tw-gradient-to: #0ea5e9 var(--tw-gradient-to-position);
+}
+
+.bg-clip-padding {
+  background-clip: padding-box;
+}
+
+.bg-clip-content {
+  background-clip: content-box;
 }
 
 .bg-clip-text {
@@ -4269,8 +4278,46 @@ details.collapse summary::-webkit-details-marker {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-secondary-content {
+  --tw-text-opacity: 1;
+  color: var(--fallback-sc,oklch(var(--sc)/var(--tw-text-opacity)));
+}
+
+.text-neutral {
+  --tw-text-opacity: 1;
+  color: var(--fallback-n,oklch(var(--n)/var(--tw-text-opacity)));
+}
+
+.text-opacity-75 {
+  --tw-text-opacity: 0.75;
+}
+
+.text-opacity-50 {
+  --tw-text-opacity: 0.5;
+}
+
+.text-opacity-65 {
+  --tw-text-opacity: 0.65;
+}
+
+.text-opacity-60 {
+  --tw-text-opacity: 0.6;
+}
+
 .underline-offset-2 {
   text-underline-offset: 2px;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.opacity-25 {
+  opacity: 0.25;
+}
+
+.opacity-35 {
+  opacity: 0.35;
 }
 
 .shadow {
@@ -4335,12 +4382,6 @@ details.collapse summary::-webkit-details-marker {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
-.transition-transform {
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
 .transition {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -4351,6 +4392,10 @@ details.collapse summary::-webkit-details-marker {
 
 .duration-300 {
   transition-duration: 300ms;
+}
+
+.duration-150 {
+  transition-duration: 150ms;
 }
 
 .ease-in-out {
@@ -4403,6 +4448,18 @@ details.collapse summary::-webkit-details-marker {
   filter: brightness(1) !important;
 }
 
+.hover\:scale-110:hover {
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.hover\:scale-125:hover {
+  --tw-scale-x: 1.25;
+  --tw-scale-y: 1.25;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .hover\:rounded-lg:hover {
   border-radius: 0.5rem;
 }
@@ -4427,6 +4484,10 @@ details.collapse summary::-webkit-details-marker {
 
 .group:hover .group-hover\:flex {
   display: flex;
+}
+
+.group:disabled .group-disabled\:hidden {
+  display: none;
 }
 
 .peer:disabled ~ .peer-disabled\:block {

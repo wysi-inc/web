@@ -10,7 +10,10 @@ const BarChart = ({ data }: { data: Map<string, ColorCount> }) => {
                 {Array.from(data.entries()).map(([label, count]) => (
                     count.count === 0 ? null :
                         <div class="flex flex-col items-center">
-                            <h4 style={{ color: count.color }} class="outline outline-black outline-1">{label}</h4>
+                            <h4 style={{
+                                color: count.color,
+                                textShadow: "#000 0px 0px 2px"
+                            }}>{label}</h4>
                             <div>{count.count.toLocaleString()}</div>
                         </div>
                 ))}

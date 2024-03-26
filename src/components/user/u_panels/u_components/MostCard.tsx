@@ -21,14 +21,14 @@ const MostCard = (props: Props) => {
     return (
         <div class="group rounded-lg flex flex-row bg-base-300 shadow-lg">
             <div class="text-white bg-neutral flex flex-col grow rounded-lg shadow-lg">
-                <div class="rounded-lg overflow-hidden flex flex-col shadow-lg"
+                <div class="flex flex-col rounded-lg shadow-lg"
                     style={{
-                        background: `linear-gradient(#000000cc, #000000cc), url(${cardImg})`,
+                        background: `url(${cardImg})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat"
                     }}>
-                    <div class="flex flex-row grow" style={{ backdropFilter: "blur(8px)" }}>
+                    <div class="bg-base-300 bg-opacity-75 flex flex-row rounded-lg" style={{ backdropFilter: "blur(8px)" }}>
                         <img src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
                             style={{
                                 width: "100px",
@@ -36,9 +36,9 @@ const MostCard = (props: Props) => {
                                 objectPosition: "center"
                             }} />
                         <div class="flex flex-col py-2 w-72 px-4 ">
-                            <HxA css="text-lg hover:underline underline-offset-2 truncate" url={`/beatmaps/${beatmapset.id}`}>{beatmapset.title}</HxA>
-                            <p class="text-sm text-gray-400 truncate"> by {beatmapset.artist}</p>
-                            <HxA css="text-sm text-gray-400 truncate" url={`/users/${beatmapset.user_id}`}>mapped by {beatmapset.creator}</HxA>
+                            <HxA css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmaps/${beatmapset.id}`}>{beatmapset.title}</HxA>
+                            <p class="text-neutral-content text-opacity-75 text-sm truncate"> by {beatmapset.artist}</p>
+                            <HxA css="text-neutral-content text-opacity-75 text-sm text-gray-400 truncate" url={`/users/${beatmapset.user_id}`}>mapped by {beatmapset.creator}</HxA>
                         </div>
                     </div>
                 </div>

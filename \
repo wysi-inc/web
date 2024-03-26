@@ -84,83 +84,100 @@ function getNewCountry(rank: number, today: Date): Rank[] {
 }
 
 export async function saveSetup(user_id: number, setup: any): Promise<Setup | null> {
-    try {
-        const user = await User.findOne({ user_id });
+    const user = await User.findOne({ user_id });
 
-        if (!user) return null;
-        if (setup.keyboard_layout === "k0") setup.keyboard_layout = "";
+    if (!user) return null;
+    if (setup.keyboard_layout === "k0") setup.keyboard_layout = "";
 
-        const tablet: Setup["tablet"] = {
-            name: setup.tablet_name,
-            size: {
-                w: Number(setup.tablet_size_w),
-                h: Number(setup.tablet_size_h),
-            },
-            area: {
-                w: Number(setup.tablet_area_w),
-                h: Number(setup.tablet_area_h),
-            },
-            position: {
-                y: Number(setup.tablet_position_y),
-                x: Number(setup.tablet_position_x),
-                r: Number(setup.tablet_position_r),
-            }
-        };
+    const tablet: Setup["tablet"] = {
+        name: setup.tablet_name,
+        size: {
+            w: Number(setup.tablet_size_w),
+            h: Number(setup.tablet_size_h),
+        },
+        area: {
+            w: Number(setup.tablet_area_w),
+            h: Number(setup.tablet_area_h),
+        },
+        position: {
+            y: Number(setup.tablet_position_y),
+            x: Number(setup.tablet_position_x),
+            r: Number(setup.tablet_position_r),
+        }
+    };
 
-        const keys: string[] = [];
-        Object.entries(setup).forEach(([key, value]) => {
-            if (key.startsWith("keyboard_key_") && value === "on") {
-                keys.push(key.replace("keyboard_key_", ""));
-            }
-        });
 
-        const keyboard: Setup["keyboard"] = {
-            name: setup.keyboard_name,
-            layout: setup.keyboard_layout,
-            keys: keys,
-        };
+    const keys: string[] = [];
+    Object.entries(setup).forEach(([key, value]) => {
+        if (key.startsWith("keyboard_key_") && value === "on") {
+            keys.push(key.replace("keyboard_key_", ""));
+        }
+    });
 
-        const mouse: Setup["mouse"] = {
-            name: setup.mouse_name,
-            dpi: Number(setup.mouse_dpi),
-            mult: Number(setup.mouse_x),
-        };
-        const peripherals: Setup["peripherals"] = {
-            mouse: setup.peripherals_mouse,
-            mousepad: setup.peripherals_mousepad,
-            keyboard: setup.peripherals_keyboard,
-            keypad: setup.peripherals_keypad,
-            headphones: setup.peripherals_headphones,
-            audio: setup.peripherals_audio,
-            camera: setup.peripherals_camera,
-            microphone: setup.peripherals_microphone,
-            chair: setup.peripherals_chair,
-            desk: setup.peripherals_desk,
-            monitor: setup.peripherals_monitor,
-        };
-        const computer: Setup["computer"] = {
-            os: setup.computer_os,
-            cpu: setup.computer_cpu,
-            gpu: setup.computer_gpu,
-            ram: setup.computer_ram,
-            storage: setup.computer_storage,
-            motherboard: setup.computer_motherboard,
-            psu: setup.computer_psu,
-            case: setup.computer_case,
-        };
+    const keyboard: Setup["keyboard"] = {
+        name: setup.keyboard_name,
+        layout: setup.keyboard_layout,
+        keys: keys,
+    };
 
-        user.setup = {
-            keyboard,
-            mouse,
-            tablet,
-            peripherals,
-            computer,
-        };
+    const mouse: Setup["mouse"] = {
+        name: setup.mouse_name,
+        dpi: Number(setup.mouse_dpi),
+        mult: Number(setup.mouse_x),
+    };
+    const peripherals: Setup["peripherals"] = {
+        mouse: setup.peripherals_mouse,
+        mousepad: setup.peripherals_mousepad,
+        keyboard: setup.peripherals_keyboard,
+        keypad: setup.peripherals_keypad,
+        headphones: setup.peripherals_headphones,
+        audio: setup.peripherals_audio,
+        camera: setup.peripherals_camera,
+        microphone: setup.peripherals_microphone,
+        chair: setup.peripherals_chair,
+        desk: setup.peripherals_desk,
+        monitor: setup.peripherals_monitor,
+    };
+    const computer: Setup["computer"] = {
+        os: setup.computer_os,
+        cpu: setup.computer_cpu,
+        gpu: setup.computer_gpu,
+        ram: setup.computer_ram,
+        storage: setup.computer_storage,
+        motherboard: setup.computer_motherboard,
+        psu: setup.computer_psu,
+        case: setup.computer_case,
+    };
 
-        user.save();
-        return user.setup;
-    } catch (err) {
-        console.error(err);
-        return null;
+    user.setup = {};
+
+    if (!isEmpty(tablet)) user.setup.tablet = tablet;
+    if (!isEmpty(keyboard)) user.setup.keyboard = keyboard;
+    if (!isEmpty(mouse)) user.setup.mouse = mouse;
+    if (!isEmpty(peripherals)) user.setup.peripherals = peripherals;
+    if (!isEmpty(computer)) user.setup.computer = computer;
+
+    user.save();
+    return user.setup;
+}
+
+function isEmpty(obj: any): boolean {
+    if (Array.isArray(obj)) {
+        return obj.length === 0;
+    }
+    switch (typeof obj) {
+        case "object":
+            Object.keys(obj).forEach(key => {
+                if (!isEmpty(obj[key])) return false;
+            });
+            return true;
+        case "string":
+            return obj === "";
+        case "number":
+            return obj === 0;
+        case "boolean":
+            return obj === false;
+        default:
+            return true;
     }
 }

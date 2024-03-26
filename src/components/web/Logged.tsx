@@ -7,7 +7,7 @@ type Props = {
 const Logged = (props: Props) => {
     return (
         <div class="dropdown dropdown-end">
-            <button tabindex="0" role="button" class="btn btn-ghost flex flex-row gap-2 items-center">
+            <button tabindex="0" role="button" class="btn p-2 btn-ghost flex flex-row gap-2 items-center">
                 <img src={props.user.avatar} class="size-8 rounded-lg drop-shadow-lg shadow-lg" alt="avatar" />
             </button>
             <ul tabindex="0" class="menu menu-sm dropdown-content mt-5 z-50 p-2 shadow-lg bg-base-100 rounded-box w-40">

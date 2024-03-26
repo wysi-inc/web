@@ -13,7 +13,7 @@ const SetupInput = ({ id, name, editable, icon, value, measure, type }: Props) =
     if (!editable && !value) return <></>;
 
     return (
-        <label class="input has-[:disabled]:bg-base-200 has-[:disabled]:border-0 input-sm input-bordered flex text-sm items-center gap-2">
+        <label class={`${!value && type === "text" && "group-disabled:hidden"} flex input has-[:disabled]:bg-base-200 has-[:disabled]:border-0 input-sm input-bordered text-sm items-center gap-2`}>
             <span class="grow flex flex-row items-center gap-2">{icon}<span>{name}:</span></span>
             <input id={id} name={id} step="any"
                 type={type} placeholder={type === "number" ? "0" : ""}

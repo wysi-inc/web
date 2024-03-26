@@ -6,6 +6,7 @@ import K75 from "./Keyboards/K75";
 import K2 from "./Keyboards/K2";
 import K3 from "./Keyboards/K3";
 import K4 from "./Keyboards/K4";
+import { isEmpty } from "@/src/resources/functions";
 
 export type KeyboardProps = {
     keys?: string[];
@@ -47,9 +48,11 @@ type Props = {
 
 const KeyboardDisplay = ({ keyboard, editable }: Props) => {
 
-    if (!editable && !keyboard) return <></>;
+    const empty = isEmpty(keyboard);
 
-    return <div class="bg-neutral rounded-lg flex flex-col">
+    if (!editable && empty) return <></>;
+
+    return <div class={`${empty ? "block group-disabled:hidden" : ""} bg-neutral rounded-lg flex flex-col`}>
         <h1 class="p-2 text-neutral-content">Keyboard</h1>
         <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
             <div class="flex justify-center items-center h-36" id="keyboard_display">
@@ -76,6 +79,7 @@ const KeyboardDisplay = ({ keyboard, editable }: Props) => {
                         <span class="label-text">Keyboard Layout:</span>
                     </div>
                     <select class="peer disabled:hidden w-full select select-bordered select-sm" name="keyboard_layout">
+                        <option value="k0" selected={!keyboard?.layout}>None</option>
                         <option value="k2" selected={keyboard?.layout === "k2"}>2 Keys</option>
                         <option value="k3" selected={keyboard?.layout === "k3"}>3 Keys</option>
                         <option value="k4" selected={keyboard?.layout === "k4"}>4 Keys</option>
@@ -95,6 +99,7 @@ const KeyboardDisplay = ({ keyboard, editable }: Props) => {
                     </span>
                 </label>
                 <fieldset disabled class="hidden" id="keyboard_store">
+                    <div class="k0" />
                     <K2 keys={[]} />
                     <K3 keys={[]} />
                     <K4 keys={[]} />

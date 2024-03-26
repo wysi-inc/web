@@ -6,10 +6,11 @@ type Props = {
 
 const MedalBadge = (props: Props) => {
     return (
-        <a target="_blank" class="tooltip" data-tip={props.medal.name}
-            href={`https://osekai.net/medals/?medal=${props.medal.name}`}>
+        <a target="_blank" data-tip={props.medal.name}
+            href={`https://osekai.net/medals/?medal=${props.medal.name}`}
+            class="tooltip transform hover:scale-110 transition easeinout duration-150">
             <img src={props.medal.link} alt={props.medal.name} loading="lazy"
-                style={{ height: "50px" }} class={props.medal.achieved ? "brightness-100" : "brightness-50"}
+                style={{ height: "50px" }} class={`${props.medal.achieved ? "" : "opacity-35"}`}
             />
         </a>
     );

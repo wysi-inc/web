@@ -2,53 +2,27 @@ import * as mongoose from "mongoose";
 
 const setup = new mongoose.Schema({
     keyboard: {
-        name: {
-            type: String,
-        },
+        name: String,
         layout: {
             type: String,
             enum: ["k2", "k3", "k4", "k60", "k75", "ktkl", "kfull", ""],
         },
-        keys: {
-            type: [String],
-        },
+        keys: [String],
     },
     tablet: {
-        name: {
-            type: String,
-        },
+        name: String,
         area: {
-            type: {
-                w: {
-                    type: Number,
-                },
-                h: {
-                    type: Number,
-                }
-            },
+            w: Number,
+            h: Number,
         },
         position: {
-            type: {
-                x: {
-                    type: Number,
-                },
-                y: {
-                    type: Number,
-                },
-                r: {
-                    type: Number,
-                }
-            },
+            x: Number,
+            y: Number,
+            r: Number,
         },
         size: {
-            type: {
-                w: {
-                    type: Number,
-                },
-                h: {
-                    type: Number,
-                }
-            },
+            w: Number,
+            h: Number,
         },
     },
     mouse: {

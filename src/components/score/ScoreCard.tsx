@@ -71,14 +71,14 @@ const ScoreCard = async (props: Props) => {
     return (
         <div class="group grow rounded-lg flex flex-row bg-base-300 shadow-lg">
             <div class="text-white bg-neutral flex flex-col grow rounded-lg shadow-lg">
-                <div class="rounded-lg flex flex-col shadow-lg"
+                <div class="flex flex-col rounded-lg shadow-lg"
                     style={{
-                        background: `linear-gradient(#000000cc, #000000cc), url(${cardImg})`,
+                        background: `url(${cardImg})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat"
                     }}>
-                    <div class="grid grid-cols-1 md:grid-cols-5 rounded-lg" style={{ backdropFilter: "blur(8px)" }}>
+                    <div class="bg-base-300 bg-opacity-75 grid grid-cols-1 md:grid-cols-5 rounded-lg" style={{ backdropFilter: "blur(8px)" }}>
                         <div class="flex flex-row md:col-span-3">
                             <img src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
                                 style={{
@@ -87,15 +87,15 @@ const ScoreCard = async (props: Props) => {
                                     objectPosition: "center"
                                 }} />
                             <div class="flex flex-col py-2 px-4 truncate">
-                                <HxA css="text-lg truncate hover:underline underline-offset-2" url={`/beatmaps/${beatmapset.id}/${beatmap.id}`}>{beatmapset.title}</HxA>
-                                <p class="text-sm truncate text-gray-400"> by {beatmapset.artist}</p>
-                                <HxA css="text-sm truncate text-gray-400" url={`/users/${beatmapset.user_id}`}>mapped by {beatmapset.creator}</HxA>
+                                <HxA css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmaps/${beatmapset.id}`}>{beatmapset.title}</HxA>
+                                <p class="text-neutral-content text-opacity-75 text-sm truncate"> by {beatmapset.artist}</p>
+                                <HxA css="text-neutral-content text-opacity-75 text-sm text-gray-400 truncate" url={`/users/${beatmapset.user_id}`}>mapped by {beatmapset.creator}</HxA>
                             </div>
                         </div>
                         <div class="flex flex-col gap-2 py-2 px-4 justify-between md:col-span-2 rounded-lg"
                             style={{ backgroundColor: "rgba(255,255,255, 0.1)" }}>
                             <div class="flex flex-row justify-between gap-4">
-                                <div class="flex flex-col gap-1">
+                                <div class="flex flex-col gap-1 text-base-content">
                                     <div class="flex flex-row gap-4 items-center">
                                         <div class="flex flex-row gap-2 items-center">
                                             <i class="fa-solid fa-flag-checkered" />
@@ -103,7 +103,7 @@ const ScoreCard = async (props: Props) => {
                                         </div>
                                         {stats?.pp ?
                                             <div class="tooltip" data-tip={`${stats.pp}pp if FC`}>
-                                                <span class="text-gray-400">{Math.round(Number(score.pp))}pp</span>
+                                                <span class="text-base-content text-opacity-60">{Math.round(Number(score.pp))}pp</span>
                                             </div> :
                                             <div>
                                                 <span>{Math.round(Number(score.pp))}pp</span>
@@ -114,7 +114,9 @@ const ScoreCard = async (props: Props) => {
                                         <div><i class="fa-solid fa-fire" /> {score.max_combo.toLocaleString()}x</div>
                                         <div><i class="fa-solid fa-crosshairs" /> {acc}%</div>
                                     </div>
-                                    <div class="flex flex-row gap-2 text-sm">
+                                    <div class="flex flex-row gap-2 text-sm" style={{
+                                        textShadow: "#000 0px 0px 2px"
+                                    }}>
                                         <span style={{ color: colors.judgements.x300 }}>{score.statistics?.great || 0}</span>
                                         <span style={{ color: colors.judgements.x100 }}>{score.statistics?.ok || 0}</span>
                                         <span style={{ color: colors.judgements.x50 }}>{score.statistics?.meh || 0}</span>
@@ -126,6 +128,7 @@ const ScoreCard = async (props: Props) => {
                                         fontSize: "48px",
                                         marginTop: "-18px",
                                         marginBottom: "-14px",
+                                        textShadow: "#000 0px 0px 2px",
                                         color: (colors.grades as any)[score.rank.toLowerCase()]
                                     }}>
                                         {getRankLetter(score.rank)}

@@ -151,7 +151,7 @@ const UserSummaryPanel = async (props: Props) => {
                     </div>
                     <div class="flex grow flex-row items-center justify-between gap-4 p-4 rounded-lg bg-base-300">
                         <span>{max_pp}pp</span>
-                        <span class="flex flex-row grow h-2 rounded-full overflow-hidden">
+                        <span class="flex flex-row shadow-lg grow h-2 rounded-full overflow-hidden">
                             {grade_letters.map(grade => <div style={{
                                 backgroundColor: (colors.grades as any)[grade.toLowerCase()], width: `${grade_length}%`
                             }} />)}

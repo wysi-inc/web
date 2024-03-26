@@ -1,6 +1,7 @@
 import type { Setup } from "@/src/models/User";
 import SetupInput from "./SetupInput";
 import { TabletModel } from "@/src/models/Tablet";
+import { isEmpty } from "@/src/resources/functions";
 
 type Props = {
     tablet: Setup["tablet"],
@@ -9,13 +10,15 @@ type Props = {
 
 const TabletDisplay = async ({ tablet, editable }: Props) => {
 
-    if (!editable && !tablet) return <></>;
+    const empty = isEmpty(tablet);
+
+    if (!editable && empty) return <></>;
 
     const tablets = await TabletModel.find();
 
     const custom: boolean = tablet?.name === "" || tablets.find((t) => t.name === tablet?.name) === undefined;
 
-    return <div class="bg-neutral rounded-lg flex flex-col">
+    return <div class={`${empty ? "block group-disabled:hidden" : ""} bg-neutral rounded-lg flex flex-col`}>
         <h1 class="p-2 text-neutral-content">Tablet</h1>
         <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
             <div class="flex justify-center items-center h-36">
@@ -43,7 +46,7 @@ const TabletDisplay = async ({ tablet, editable }: Props) => {
                         <span class="label-text">Model:</span>
                     </div>
                     <select class="peer disabled:hidden w-full select select-bordered select-sm" name="tablet_model">
-                        {tablets.map((t) => <option value={JSON.stringify(t)} selected={tablet?.name === t.name}>{t.name}</option>)}
+                        {tablets.sort((a, b) => a.name.localeCompare(b.name)).map((t) => <option value={JSON.stringify(t)} selected={tablet?.name === t.name}>{t.name}</option>)}
                         <option value="custom" selected={custom}>Custom</option>
                     </select>
                     <span class="input input-sm bg-base-200 hidden peer-disabled:block">{tablet?.name}</span>

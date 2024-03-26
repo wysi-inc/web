@@ -49,3 +49,20 @@ export const jwt_params = () => ({
         path: '/',
     }
 })
+
+
+export function isEmpty(obj: any): boolean {
+    if (!obj) return true;
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            if (obj[key] === null || obj[key] === undefined || obj[key] === "" || obj[key] === 0 || (Array.isArray(obj[key]) && obj[key].length === 0)) {
+                continue;
+            } else if (typeof obj[key] === 'object') {
+                return isEmpty(obj[key]);
+            } else {
+                return false;
+            }
+        }
+    }
+    return true;
+}

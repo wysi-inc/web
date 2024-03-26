@@ -1,5 +1,6 @@
 import type { Setup } from "@/src/models/User";
 import SetupInput from "./SetupInput";
+import { isEmpty } from "@/src/resources/functions";
 
 type Props = {
     mouse: Setup["mouse"],
@@ -8,9 +9,11 @@ type Props = {
 
 const MouseDisplay = ({ mouse, editable }: Props) => {
 
-    if (!editable && !mouse) return <></>;
+    const empty = isEmpty(mouse);
 
-    return <div class="bg-neutral rounded-lg flex flex-col">
+    if (!editable && empty) return <></>;
+
+    return <div class={`${empty ? "block group-disabled:hidden" : ""} bg-neutral rounded-lg flex flex-col`}>
         <h1 class="p-2 text-neutral-content">Mouse</h1>
         <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
             <div class="h-36 p-2 flex">
