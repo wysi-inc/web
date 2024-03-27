@@ -24,37 +24,35 @@ const Beatmaps = () => {
 
         label = label.toLowerCase();
 
-        return <>
-            <div class="grid">
-                <label class="col-start-1 row-start-1 bg-base-300 peer/one has-[:checked]:hidden">
-                    <div class="grow btn btn-sm btn-ghost cursor-pointer px-2 flex flex-row gap-2 items-center">
-                        <span>{name}</span>
-                        <i class="fa-solid fa-caret-up" />
-                    </div>
-                    <input checked class="hidden" type="radio" name={`sort_${label}`}
-                        value={`sort_off_${label}`} />
-                </label>
-                <label class="col-start-1 row-start-1 bg-base-300 peer/two hidden peer-has-[:checked]/one:z-20 peer-has-[:checked]/one:flex">
-                    <div class="grow btn btn-sm btn-ghost cursor-pointer px-2 flex flex-row gap-2 items-center">
-                        <span>{name}</span>
-                    </div>
-                    <input class="hidden" type="radio" name={`sort_${label}`}
-                        value={`sort_desc_${label}`} />
-                </label>
-                <label class="col-start-1 row-start-1 bg-base-300 hidden peer-has-[:checked]/two:z-20 peer-has-[:checked]/two:flex">
-                    <div class="grow btn btn-sm btn-ghost cursor-pointer px-2 flex flex-row gap-2 items-center">
-                        <span>{name}</span>
-                        <i class="fa-solid fa-caret-down"></i>
-                    </div>
-                    <input class="hidden" type="radio" name={`sort_${label}`}
-                        value={`sort_asc_${label}`} />
-                </label>
-            </div>
-        </>;
+        return <div class="grid">
+            <label class="col-start-1 row-start-1 bg-base-300 peer/one has-[:checked]:hidden">
+                <div class="grow btn btn-sm btn-ghost cursor-pointer px-2 flex flex-row gap-2 items-center">
+                    <span>{name}</span>
+                    <i class="fa-solid fa-caret-up" />
+                </div>
+                <input checked class="hidden" type="radio" name={`sort_${label}`}
+                    value={`sort_off_${label}`} />
+            </label>
+            <label class="col-start-1 row-start-1 bg-base-300 peer/two hidden peer-has-[:checked]/one:z-20 peer-has-[:checked]/one:flex">
+                <div class="grow btn btn-sm btn-ghost cursor-pointer px-2 flex flex-row gap-2 items-center">
+                    <span>{name}</span>
+                </div>
+                <input class="hidden" type="radio" name={`sort_${label}`}
+                    value={`sort_desc_${label}`} />
+            </label>
+            <label class="col-start-1 row-start-1 bg-base-300 hidden peer-has-[:checked]/two:z-20 peer-has-[:checked]/two:flex">
+                <div class="grow btn btn-sm btn-ghost cursor-pointer px-2 flex flex-row gap-2 items-center">
+                    <span>{name}</span>
+                    <i class="fa-solid fa-caret-down"></i>
+                </div>
+                <input class="hidden" type="radio" name={`sort_${label}`}
+                    value={`sort_asc_${label}`} />
+            </label>
+        </div>;
     }
 
 
-    return (<>
+    return <>
         <form class="flex flex-col rounded-lg drop-shadow-lg bg-base-300" onsubmit=""
             id="search-form" hx-post="/beatmaps/list"
             hx-trigger="keyup delay:500ms, change delay:500ms"
@@ -130,8 +128,8 @@ const Beatmaps = () => {
         <div id="beatmap-search-results" hx-trigger="load"
             hx-post="/beatmaps/list" hx-swap="innerHTML" hx-include="#search-form"
             class="bg-base-100 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg">
-        </div >
-    </>);
+        </div>
+    </>;
 }
 
 export default Beatmaps;
