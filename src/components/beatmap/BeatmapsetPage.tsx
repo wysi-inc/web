@@ -26,12 +26,12 @@ const BeatmapsetPage = async (props: Props) => {
     return (<>
         <div class="flex flex-col rounded-lg shadow-lg"
             style={{
-                background: `linear-gradient(#000000cc, #000000cc), url(${cardImg})`,
+                background: `url(${cardImg})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat"
             }}>
-            <div class="grid md:grid-cols-5 flex-wrap gap-4 justify-between rounded-lg p-4" style={{ backdropFilter: "blur(8px)" }}>
+            <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm grid md:grid-cols-5 flex-wrap gap-4 justify-between rounded-lg p-4">
                 <div class="md:col-span-3 flex flex-col gap-4">
                     <img src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
                         style={{
@@ -40,10 +40,10 @@ const BeatmapsetPage = async (props: Props) => {
                         }} />
                     <div class="flex flex-row gap-4">
                         <div class="flex flex-col gap-1 justify-between">
-                            <h1 class="text-lg font-bold text-white">
+                            <h1 class="text-lg text-base-content">
                                 {beatmapset.title}
                             </h1>
-                            <p class="text-md text-gray-400">
+                            <p class="text-md text-neutral-content text-opacity-75">
                                 by {beatmapset.artist}
                             </p>
                         </div>
@@ -78,13 +78,13 @@ const BeatmapsetPage = async (props: Props) => {
                             </a>
                         </div>
                     </div>
-                    <div class="flex flex-row flex-wrap gap-1 p-2 rounded-lg" style={{ backgroundColor: '#ffffff22' }}>
+                    <div class="flex flex-row flex-wrap gap-1 p-2 rounded-lg bg-base-content bg-opacity-25">
                         {beatmapset.beatmaps.sort((a, b) =>
                             a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int)
                             .map(beatmap =>
-                                <div class='flex items-center justify-center p-1 rounded-md'
+                                <div class='outline-base-content flex items-center justify-center p-1 rounded-md'
                                     style={{
-                                        outline: `#ffffff99 ${diff?.id === beatmap.id ? 'solid 2px' : 'none'}`
+                                        outline: `${diff?.id === beatmap.id ? 'solid 2px' : 'none'}`
                                     }}>
                                     <DiffIcon setId={beatmapset.id} diffId={beatmap.id}
                                         diff={beatmap.difficulty_rating} size={20}

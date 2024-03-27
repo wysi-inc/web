@@ -19,7 +19,7 @@ const Flag = (props: Props) => {
 
     return (
         <div class="tooltip" data-tip={props.name}>
-            <img src={url} class="h-5 w-7 rounded-sm" />
+            <img src={url} class="h-5 w-7 rounded-sm outline outline-1 outline-base-300" />
         </div>
     );
 }

@@ -4,6 +4,7 @@ import { v2 } from "osu-api-extended";
 import BarChart from "./u_components/BarChart";
 import { colors } from "@/src/resources/colors";
 import { secondsToTime } from "@/src/resources/functions";
+import ModIcon from "../../score/ModIcon";
 
 type Props = {
     id: number;
@@ -137,9 +138,7 @@ const UserSummaryPanel = async (props: Props) => {
                     <div><i class="fa-solid fa-stopwatch fa-xs" /> {avg_length}</div>
                     <div><i class="fa-solid fa-music fa-xs" /> {avg_bpm}bpm</div>
                     {max_mods.map(mod => (
-                        <div class="tooltip flex items-center justify-center" data-tip={mod}>
-                            <img src={`/public/img/mods/${mod.toLowerCase()}.png`} alt={mod} class="h-5" />
-                        </div>
+                        <ModIcon mod={mod} />
                     ))}
                 </div>
             </div>
@@ -163,10 +162,8 @@ const UserSummaryPanel = async (props: Props) => {
                     <div class="p-2 flex flex-row text-neutral-content justify-between">
                         <div>Mods:</div>
                         <div class="flex flex-row gap-1 items-center">
-                            {max_mods.map(m => (
-                                <div class="tooltip flex items-center justify-center" data-tip={m}>
-                                    <img src={`/public/img/mods/${m.toLowerCase()}.png`} alt={m} class="h-5" />
-                                </div>
+                            {max_mods.map((mod) => (
+                                <ModIcon mod={mod} />
                             ))}
                         </div>
                     </div>
@@ -174,9 +171,7 @@ const UserSummaryPanel = async (props: Props) => {
                         {Array.from(mods_counts.entries()).sort((a, b) => b[1] - a[1]).map(([mods, count]) => (
                             <div class="flex flex-row gap-1 items-center">
                                 {mods.split('-').map(mod => (
-                                    <div class="tooltip flex flex-row gap-1 items-center justify-center" data-tip={mod}>
-                                        <img src={`/public/img/mods/${mod.toLowerCase()}.png`} alt={mod} class="h-5" />
-                                    </div>
+                                    <ModIcon mod={mod} />
                                 ))}
                                 <div>{count}</div>
                             </div>

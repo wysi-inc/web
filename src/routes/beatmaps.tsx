@@ -9,9 +9,11 @@ import BeatmapScoreTable from '../components/beatmap/BeatmapScoreTable';
 
 const queryBodyElysia = {
     body: t.Object({
+        // Search
         title: t.Optional(t.String()),
         artist: t.Optional(t.String()),
         mapper: t.Optional(t.String()),
+        // Filters
         bpm_min: t.Optional(t.String()),
         bpm_max: t.Optional(t.String()),
         stars_min: t.Optional(t.String()),
@@ -30,7 +32,15 @@ const queryBodyElysia = {
         od_max: t.Optional(t.String()),
         mode: t.Optional(t.String()),
         status: t.Optional(t.String()),
-        offset: t.Optional(t.String())
+        offset: t.Optional(t.String()),
+        // Sorting
+        sort_title: t.Optional(t.String()),
+        sort_artist: t.Optional(t.String()),
+        sort_ranked: t.Optional(t.String()),
+        sort_difficulty: t.Optional(t.String()),
+        sort_plays: t.Optional(t.String()),
+        sort_rating: t.Optional(t.String()),
+        sort_favourites: t.Optional(t.String()),
     })
 }
 

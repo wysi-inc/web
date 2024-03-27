@@ -5,6 +5,14 @@ export const colors = {
         main: '#b74757',
         accent: '#ffb86b',
     },
+    mods: {
+        nomod: "#bbbbbb",
+        reduction: "#9ce64e",
+        increase: "#ed5750",
+        automation: "#66d3ee",
+        conversion: "#8c66ff",
+        fun: "#ff66ab",
+    },
     modes: {
         any: "#f0f0f0",
         osu: "#e1567d",
@@ -14,22 +22,22 @@ export const colors = {
     },
     judgements: {
         x320: '#bbbbbb',
-        x300: '#78dcec',
+        x300: '#66b0ff',
         x200: '#2266ff',
-        x100: '#88e55d',
-        x50: '#fdfd97',
+        x100: '#0cad60',
+        x50: '#ffa317',
         x20: '#bbbbbb',
         xMiss: '#f87454',
     },
     grades: {
-        xh: '#f0f0f0',
-        x: '#faf56a',
-        sh: '#f8f4f4',
-        s: '#ffdc4c',
-        a: '#88e55d',
-        b: '#78dcec',
-        c: '#bc64f4',
-        d: '#f87454',
+        xh: '#dddddd',
+        x: '#ffa317',
+        sh: '#dddddd',
+        s: '#ff7d31',
+        a: '#4db508',
+        b: '#0564eb',
+        c: '#c715e0',
+        d: '#e30012',
         f: '#aaaaaa'
     },
     beatmap: {
@@ -41,14 +49,6 @@ export const colors = {
         approved: '#b3ff66',
         qualified: '#4cb6ff',
         loved: '#fe67ab',
-    },
-    charts: {
-        lvl: '#ffffff',
-        skills: '#ffffff',
-        global: '#ffdc4c',
-        country: '#ffdc4c',
-        plays: '#ffdc4c',
-        topPp: '#78dcec'
     },
     difficulty: [
         '#4290fe',

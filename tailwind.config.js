@@ -21,7 +21,10 @@ module.exports = {
                 "--rounded-box": "0.5rem", // border radius rounded-box utility class, used in card and other large boxes
                 "--rounded-btn": "0.5rem",
                 "accent": "#ffb86c",
+                "info": "#88e9fd",
                 "neutral": "#f0f0f0",
+                "primary": "#ff79c6",
+                "secondary": "#bd93f9",
             }
         }]
     }

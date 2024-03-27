@@ -28,13 +28,8 @@ const MostCard = (props: Props) => {
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat"
                     }}>
-                    <div class="bg-base-300 bg-opacity-75 flex flex-row rounded-lg" style={{ backdropFilter: "blur(8px)" }}>
-                        <img src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
-                            style={{
-                                width: "100px",
-                                objectFit: "cover",
-                                objectPosition: "center"
-                            }} />
+                    <div class="bg-base-300 bg-opacity-75 flex flex-row rounded-lg backdrop-blur-sm">
+                        <img src={cardImg} class="rounded-lg w-24 object-cover object-center" alt="cover" loading="lazy" />
                         <div class="flex flex-col py-2 w-72 px-4 ">
                             <HxA css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmaps/${beatmapset.id}`}>{beatmapset.title}</HxA>
                             <p class="text-neutral-content text-opacity-75 text-sm truncate"> by {beatmapset.artist}</p>
@@ -54,9 +49,7 @@ const MostCard = (props: Props) => {
                     <div class="flex flex-row items-center gap-2 text-base-content">
                         <div class="flex flex-row items-center gap-2">
                             <i class="fa-sm fa-solid fa-arrow-rotate-left" />
-                            <div>
-                                {props.plays}
-                            </div>
+                            <div>{props.plays}</div>
                         </div>
                         <div>#{props.position}</div>
                     </div>

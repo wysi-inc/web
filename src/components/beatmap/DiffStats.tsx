@@ -2,6 +2,7 @@ import type { Beatmap } from "@/src/types/beatmaps";
 import DiffIcon from "./DiffIcon";
 import { secondsToTime } from "@/src/resources/functions";
 import { colors } from "@/src/resources/colors";
+import ModIcon from "../score/ModIcon";
 
 type Props = {
     diff: Beatmap,
@@ -97,16 +98,14 @@ const DiffStats = (props: Props) => {
                             placeholder="0" min="0" />
                     </label>
                 </div>
-                <div class="flex flex-row flex-wrap justify-center bg-base-300 rounded-lg gap-2 p-2">
+                <div class="flex flex-row flex-wrap items-center justify-center bg-base-300 rounded-lg gap-2 p-2">
                     {mods.map((mod) =>
-                        <div class="">
-                            <label>
-                                <input type="checkbox" name={`mod-${mod}`} class="hidden" />
-                                <img src={`/public/img/mods/${mod.toLowerCase()}.png`}
-                                    class="h-6 mod_img cursor-pointer"
-                                />
-                            </label>
-                        </div>
+                        <label>
+                            <input type="checkbox" name={`mod-${mod}`} class="peer hidden" />
+                            <div class="transform hover:scale-110 transition easeinout duration-150 flex icons-center cursor-pointer opacity-50 peer-checked:opacity-100">
+                                <ModIcon mod={mod} />
+                            </div>
+                        </label>
                     )}
                 </div>
                 <div class="flex flex-row gap-2">

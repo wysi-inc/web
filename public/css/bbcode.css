@@ -1,0 +1,127 @@
+.bbcode {
+    word-wrap: break-word;
+    line-height: 1.5;
+
+    .bbcode-spoilerbox {
+
+        /* Spoilerbox */
+        /* when clicked, the spoilerbox toggle the content visibility*/
+        /* the content is hidden by default */
+
+        .bbcode-spoilerbox__link {
+            pointer-events: none;
+        }
+
+        .bbcode-spoilerbox__link::before {
+            content: '> ';
+        }
+
+        .bbcode-spoilerbox__body {}
+
+    }
+
+    code {
+        padding: 1px 4px;
+        font-family: monospace;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .imagemap {
+
+        position: relative;
+        width: max-content;
+
+        .imagemap__link {
+            position: absolute;
+        }
+
+        /* imagemap_link have a "title" attribute, show it as a tooltip on hover */
+
+        .imagemap__link:hover::after {
+            content: attr(title);
+            position: absolute;
+            top: 0%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            z-index: 100;
+        }
+
+    }
+
+    a:not([class]),
+    a[class=""] {
+        text-decoration: underline;
+    }
+
+    h2,
+    h4 {
+        font-style: normal;
+        font-weight: bold;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    blockquote {
+        font-size: inherit;
+        padding: 0 0 0 20px;
+        border: none;
+        position: relative;
+    }
+
+    blockquote::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2px;
+        height: 100%;
+        border-radius: 10000px;
+        /* background-color: ; */
+    }
+
+    blockquote {
+        border-radius: 5px;
+        padding-left: 0;
+        font-size: 1em;
+    }
+
+    pre {
+        white-space: pre-wrap;
+        color: inherit;
+        padding: 10px;
+        border: none;
+        font-size: inherit;
+    }
+
+    .unordered {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
+
+    .spoiler {
+        background-color: #000 !important;
+        color: #000 !important;
+    }
+
+    .well {
+        margin: 0;
+        background-color: rgba(0, 0, 0, 0.2);
+        border: 2px solid;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .bbcode__video-box {
+        max-width: 425px;
+    }
+
+}

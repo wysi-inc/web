@@ -18,6 +18,8 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
 
     if (!user || (user as any).error) return <div>User not found</div>;
 
+    const editable = logged_id === user.id;
+
     mode = user.rank_history?.mode as Mode || "osu";
     const defaultCategory = user.scores_pinned_count > 0 ? "pinned" : "best";
 
@@ -30,19 +32,27 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
                 replays_watched={user.replays_watched_counts}
             />
         </Panel>
-        <Panel title="About me" icon={<i class="fa-solid fa-user" />}>
-            <div class="h-96 overflow-y-scroll">
-                {user.page.html}
-            </div>
-        </Panel>
-        <Panel title="Setup (wip)" icon={<i class="fa-solid fa-computer" />}>
-            <UserSetupPanel
-                setup={user.db_setup}
-                logged_id={logged_id}
-                page_id={user.id} />
-        </Panel>
+        {user.page?.html ?
+            <Panel title="About me" icon={<i class="fa-solid fa-user" />}>
+                <div class="p-4 rounded-lg bg-base-300">
+                    <div class="h-96 overflow-y-scroll">
+                        {user.page.html}
+                    </div>
+                </div>
+            </Panel> : <></>
+        }
+        {!editable && !user.db_setup ? <></> :
+            <Panel title="Setup (wip)" icon={<i class="fa-solid fa-computer" />}>
+                <UserSetupPanel
+                    setup={user.db_setup}
+                    logged_id={logged_id}
+                    page_id={user.id} />
+            </Panel>
+        }
+        {/*
         <LazyPanel code="skins" title="Skins (wip)" icon={<i class="fa-solid fa-palette" />}
             url={`/users/${user.id}/0/panels/skins`} />
+        */}
         <LazyPanel code="summary" title="Scores Summary" icon={<i class="fa-solid fa-ranking-star" />}
             url={`/users/${user.id}/${mode}/panels/summary`} />
         <LazyPanel code="scores" title="Scores" icon={<i class="fa-solid fa-flag-checkered" />}

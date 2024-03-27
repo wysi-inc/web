@@ -9,6 +9,8 @@ import CardControls from "@/src/components/web/CardControls";
 import HxA from "../web/HxA";
 import StatusBadge from "../beatmap/StatusBadge";
 import type { BeatmapsetStatus } from "@/src/types/beatmaps";
+import Grade from "./Grade";
+import ModIcon from "./ModIcon";
 
 type Props = {
     position: number;
@@ -57,35 +59,18 @@ const ScoreCard = async (props: Props) => {
         }
     }
 
-    function getRankLetter(rank: string): string {
-        switch (rank.toUpperCase()) {
-            case "XH":
-                return "X";
-            case "SH":
-                return "S";
-            default:
-                return rank.toUpperCase();
-        }
-    }
-
     return (
         <div class="group grow rounded-lg flex flex-row bg-base-300 shadow-lg">
             <div class="text-white bg-neutral flex flex-col grow rounded-lg shadow-lg">
-                <div class="flex flex-col rounded-lg shadow-lg"
-                    style={{
-                        background: `url(${cardImg})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        backgroundRepeat: "no-repeat"
-                    }}>
-                    <div class="bg-base-300 bg-opacity-75 grid grid-cols-1 md:grid-cols-5 rounded-lg" style={{ backdropFilter: "blur(8px)" }}>
+                <div class="flex flex-col rounded-lg shadow-lg" style={{
+                    background: `url(${cardImg})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat"
+                }}>
+                    <div class="bg-base-300 bg-opacity-75 grid grid-cols-1 md:grid-cols-5 rounded-lg backdrop-blur-sm">
                         <div class="flex flex-row md:col-span-3">
-                            <img src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
-                                style={{
-                                    width: "100px",
-                                    objectFit: "cover",
-                                    objectPosition: "center"
-                                }} />
+                            <img src={cardImg} class="rounded-lg w-24 object-cover object-center" alt="cover" loading="lazy" />
                             <div class="flex flex-col py-2 px-4 truncate">
                                 <HxA css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmaps/${beatmapset.id}`}>{beatmapset.title}</HxA>
                                 <p class="text-neutral-content text-opacity-75 text-sm truncate"> by {beatmapset.artist}</p>
@@ -124,21 +109,14 @@ const ScoreCard = async (props: Props) => {
                                     </div>
                                 </div>
                                 <div class="flex flex-col gap-1 text-end justify-between">
-                                    <div style={{
-                                        fontSize: "48px",
-                                        marginTop: "-18px",
-                                        marginBottom: "-14px",
-                                        textShadow: "#000 0px 0px 2px",
+                                    <div class="-mt-2 text-5xl" style={{
                                         color: (colors.grades as any)[score.rank.toLowerCase()]
                                     }}>
-                                        {getRankLetter(score.rank)}
+                                        {score.rank}
                                     </div>
-                                    <div class="flex flex-row-reverse gap-1">
+                                    <div class="flex flex-wrap flex-row-reverse gap-1">
                                         {score.mods.map((mod) =>
-                                            <div class="tooltip" data-tip={mod.acronym}>
-                                                <img src={`/public/img/mods/${mod.acronym.toLowerCase()}.png`}
-                                                    style={{ height: "20px" }} alt={mod.acronym} loading="lazy" />
-                                            </div>
+                                            <ModIcon mod={mod.acronym} />
                                         )}
                                     </div>
                                 </div>
@@ -170,7 +148,9 @@ const ScoreCard = async (props: Props) => {
                     <div class="hidden md:block">cs:{stats?.cs ? stats.cs : beatmap.cs}</div>
                     <div class="hidden md:block">od:{stats?.od ? stats.od : beatmap.accuracy}</div>
                     <div class="hidden md:block">hp:{stats?.hp ? stats.hp : beatmap.drain}</div>
-                    <div class="ms-auto">{moment(new Date(score.ended_at)).fromNow()}</div>
+                    <div class="ms-auto tooltip" data-tip={moment(new Date(score.ended_at)).format("MMMM Do YYYY")}>
+                        {moment(new Date(score.ended_at)).fromNow()}
+                    </div>
                     <div>#{props.position}</div>
                 </div>
             </div>

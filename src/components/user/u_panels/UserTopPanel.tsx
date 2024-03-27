@@ -3,13 +3,15 @@ import type { User } from "@/src/types/users";
 import moment from "moment";
 import BarChart from "./u_components/BarChart";
 import Flag from "./u_components/Flag";
+import Country from "./u_components/Country";
+import Supporter from "./u_components/Supporter";
 
 type Props = {
     user: User;
 }
 const UserTopPanel = ({ user }: Props) => {
 
-    if (!user) return;
+    if (!user) return <></>;
 
     const best_country = user.db_ranks.country_ranks.sort((a, b) => a.rank - b.rank)[0];
 
@@ -22,17 +24,14 @@ const UserTopPanel = ({ user }: Props) => {
 
     return (
         <div class="rounded-lg bg-base-100 shadow-lg">
-            <div class="rounded-lg text-white"
+            <div class="rounded-lg"
                 style={{
                     backgroundImage: `url(${user.cover_url})`,
                     backgroundSize: `cover`,
-                    backgroundPosition: `center`
+                    backgroundPosition: `center`,
+                    backgroundRepeat: "no-repeat"
                 }}>
-                <div class="flex flex-row flex-wrap gap-8 p-8 rounded-lg"
-                    style={{
-                        backgroundColor: `rgba(0, 0, 0, 0.8)`,
-                        backdropFilter: `blur(8px)`
-                    }}>
+                <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm flex flex-row flex-wrap gap-8 p-8 rounded-lg">
                     <div class="flex flex-col justify-center">
                         <div class="flex flex-col gap-4 items-center justify-between">
                             <img src={user.avatar_url} class="rounded-lg aspect-square h-52 w-52" />
@@ -49,10 +48,7 @@ const UserTopPanel = ({ user }: Props) => {
                             <a href={`https://osu.ppy.sh/users/${user.id}`}
                                 target="_blank" class="text-2xl underline-offset-2 hover:underline">{user.username}</a>
                             {user.is_supporter &&
-                                <div class="badge badge-primary text-white">
-                                    {[...Array(user.support_level)].map(() =>
-                                        <i class="fa-solid fa-heart" />)}
-                                </div>
+                                <Supporter level={user.support_level} />
                             }
                         </div>
                         <div class="flex flex-row gap-2 items-center">
@@ -60,8 +56,7 @@ const UserTopPanel = ({ user }: Props) => {
                             <h2 class="text-xl tooltip" data-tip={`Peak rank: #${user.rank_highest.rank?.toLocaleString()}`}>#{user.statistics?.global_rank?.toLocaleString() || "-"}</h2>
                         </div>
                         <div class="flex flex-row gap-2 items-center">
-                            <img src={`/public/img/countries/${user.country.code.toLowerCase()}.svg`}
-                                class="h-6 w-6" style="filter: invert(1);" />
+                            <Country code={user.country.code} name={user.country.name} />
                             <h2 class="text-xl tooltip" data-tip={`Peak rank: #${best_country?.rank?.toLocaleString()}`}>#{user.statistics?.country_rank?.toLocaleString() || "-"}</h2>
                             <Flag name={user.country.name} code={user.country.code} />
                         </div>
@@ -124,15 +119,63 @@ const UserTopPanel = ({ user }: Props) => {
                     </div>
                 </div>
             </div >
-            {user.badges.length > 0 &&
-                <div class="flex flex-row gap-2 flex-wrap p-4">
-                    {user.badges.map(badge =>
-                        <div class="tooltip" data-tip={badge.description}>
-                            <img width="86" height="40" src={badge.image_url} />
+            <div class="flex flex-col gap-4 p-4">
+                <div class="flex flex-row flex-wrap gap-4">
+                    {user.location ?
+                        <div class="flex flex-row items-center gap-1">
+                            <i class="fa-solid fa-location-dot" />
+                            <span>{user.location}</span>
                         </div>
-                    )}
+                        : <></>
+                    }
+                    {user.interests ?
+                        <div class="flex flex-row items-center gap-1">
+                            <i class="fa-solid fa-heart" />
+                            <span>{user.interests}</span>
+                        </div>
+                        : <></>
+                    }
+                    {user.occupation ?
+                        <div class="flex flex-row items-center gap-1">
+                            <i class="fa-solid fa-building" />
+                            <span>{user.occupation}</span>
+                        </div>
+                        : <></>
+                    }
+                    {user.twitter ?
+                        <div class="flex flex-row items-center gap-1">
+                            <i class="fa-brands fa-twitter" />
+                            <a href={`https://twitter.com/${user.twitter}`} target="_blank" class="hover:underline">
+                                {user.twitter}
+                            </a>
+                        </div>
+                        : <></>
+                    }
+                    {user.discord ?
+                        <div class="flex flex-row items-center gap-1">
+                            <i class="fa-brands fa-discord" />
+                            <span>{user.discord}</span>
+                        </div>
+                        : <></>
+                    }
+                    {user.website ?
+                        <div class="flex flex-row items-center gap-1">
+                            <i class="fa-solid fa-globe"></i>
+                            <a href={user.website} target="_blank" class="hover:underline">{user.website}</a>
+                        </div>
+                        : <></>
+                    }
                 </div>
-            }
+                {user.badges.length > 0 &&
+                    <div class="flex flex-row flex-wrap gap-2">
+                        {user.badges.map(badge =>
+                            <div class="tooltip" data-tip={badge.description}>
+                                <img width="86" height="40" src={badge.image_url} />
+                            </div>
+                        )}
+                    </div>
+                }
+            </div>
         </div>
     );
 }
