@@ -4022,10 +4022,6 @@ details.collapse summary::-webkit-details-marker {
   gap: 1rem;
 }
 
-.gap-5 {
-  gap: 1.25rem;
-}
-
 .gap-8 {
   gap: 2rem;
 }

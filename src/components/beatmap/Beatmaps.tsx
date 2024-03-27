@@ -109,10 +109,8 @@ const Beatmaps = () => {
                     </div>
                 </div>
             </div>
-            <div class="p-4 flex flex-row gap-4">
-                <div class="label">
-                    <span class="label-text">Sort by:</span>
-                </div>
+            <div class="p-4 flex flex-row flex-wrap items-center gap-4">
+                <span class="text-sm">Sort by:</span>
                 <div class="flex flex-row gap-4 flex-wrap">
                     <Sort label="Title" />
                     <Sort label="Artist" />
