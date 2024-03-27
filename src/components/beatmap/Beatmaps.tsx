@@ -84,7 +84,7 @@ const Beatmaps = () => {
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
                     <div class="md:col-span-2">
                         <div class="label">
-                            <span class="label-text">Modes</span>
+                            <span class="label-text">Mode:</span>
                         </div>
                         <div class="flex flex-row flex-wrap gap-2">
                             <Radio name="mode" label="any" />
@@ -96,7 +96,7 @@ const Beatmaps = () => {
                     </div>
                     <div class="md:col-span-3">
                         <div class="label">
-                            <span class="label-text">Status</span>
+                            <span class="label-text">Status:</span>
                         </div>
                         <div class="flex flex-row flex-wrap gap-2">
                             <Radio name="status" label="any" />
@@ -109,11 +109,11 @@ const Beatmaps = () => {
                     </div>
                 </div>
             </div>
-            <div class="p-4">
+            <div class="p-4 flex flex-row gap-4">
                 <div class="label">
-                    <span class="label-text">Sort by</span>
+                    <span class="label-text">Sort by:</span>
                 </div>
-                <div class="flex flex-row gap-5 flex-wrap">
+                <div class="flex flex-row gap-4 flex-wrap">
                     <Sort label="Title" />
                     <Sort label="Artist" />
                     <Sort label="Ranked" />

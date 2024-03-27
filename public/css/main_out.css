@@ -3617,10 +3617,6 @@ details.collapse summary::-webkit-details-marker {
   top: 50%;
 }
 
-.z-10 {
-  z-index: 10;
-}
-
 .z-50 {
   z-index: 50;
 }
@@ -3837,10 +3833,6 @@ details.collapse summary::-webkit-details-marker {
   height: 100%;
 }
 
-.h-10 {
-  height: 2.5rem;
-}
-
 .min-h-28 {
   min-height: 7rem;
 }
@@ -3912,18 +3904,6 @@ details.collapse summary::-webkit-details-marker {
 .w-min {
   width: -moz-min-content;
   width: min-content;
-}
-
-.w-16 {
-  width: 4rem;
-}
-
-.w-2 {
-  width: 0.5rem;
-}
-
-.w-14 {
-  width: 3.5rem;
 }
 
 .grow {
@@ -4151,11 +4131,6 @@ details.collapse summary::-webkit-details-marker {
   background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity)));
 }
 
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-}
-
 .bg-neutral {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-n,oklch(var(--n)/var(--tw-bg-opacity)));
@@ -4249,10 +4224,6 @@ details.collapse summary::-webkit-details-marker {
 
 .pt-4 {
   padding-top: 1rem;
-}
-
-.pe-2 {
-  padding-inline-end: 0.5rem;
 }
 
 .text-center {
@@ -4463,10 +4434,6 @@ details.collapse summary::-webkit-details-marker {
   filter: brightness(1) !important;
 }
 
-.\*\:cursor-pointer > * {
-  cursor: pointer;
-}
-
 .hover\:scale-110:hover {
   --tw-scale-x: 1.1;
   --tw-scale-y: 1.1;
@@ -4503,14 +4470,6 @@ details.collapse summary::-webkit-details-marker {
   display: none;
 }
 
-.peer\/one:checked ~ .peer-checked\/one\:z-10 {
-  z-index: 10;
-}
-
-.peer\/two:checked ~ .peer-checked\/two\:z-20 {
-  z-index: 20;
-}
-
 .peer:checked ~ .peer-checked\:opacity-100 {
   opacity: 1;
 }
@@ -4521,10 +4480,6 @@ details.collapse summary::-webkit-details-marker {
 
 .peer:disabled ~ .peer-disabled\:hidden {
   display: none;
-}
-
-.has-\[\:checked\]\:-z-10:has(:checked) {
-  z-index: -10;
 }
 
 .has-\[\:checked\]\:hidden:has(:checked) {
@@ -4545,20 +4500,12 @@ details.collapse summary::-webkit-details-marker {
   background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
 }
 
-.peer\/one:has(:checked) ~ .peer-has-\[\:checked\]\/one\:z-10 {
-  z-index: 10;
-}
-
-.peer\/two:has(:checked) ~ .peer-has-\[\:checked\]\/two\:z-20 {
-  z-index: 20;
-}
-
 .peer\/one:has(:checked) ~ .peer-has-\[\:checked\]\/one\:z-20 {
   z-index: 20;
 }
 
-.peer\/two:has(:checked) ~ .peer-has-\[\:checked\]\/two\:z-10 {
-  z-index: 10;
+.peer\/two:has(:checked) ~ .peer-has-\[\:checked\]\/two\:z-20 {
+  z-index: 20;
 }
 
 .peer\/one:has(:checked) ~ .peer-has-\[\:checked\]\/one\:flex {
