@@ -5,6 +5,7 @@ import BarChart from "./u_components/BarChart";
 import { colors } from "@/src/resources/colors";
 import { secondsToTime } from "@/src/resources/functions";
 import ModIcon from "../../score/ModIcon";
+import Grade from "../../score/Grade";
 
 type Props = {
     id: number;
@@ -84,23 +85,23 @@ const UserSummaryPanel = async (props: Props) => {
             color: (colors.grades as any)[grade.toLowerCase()]
         });
 
-        hit_counts.set("x300", {
-            count: (hit_counts.get("x300")?.count || 0) + (score.statistics.great || 0),
+        hit_counts.set("300", {
+            count: (hit_counts.get("300")?.count || 0) + (score.statistics.great || 0),
             color: colors.judgements.x300
         });
 
-        hit_counts.set("x100", {
-            count: (hit_counts.get("x100")?.count || 0) + (score.statistics.ok || 0),
+        hit_counts.set("100", {
+            count: (hit_counts.get("100")?.count || 0) + (score.statistics.ok || 0),
             color: colors.judgements.x100
         });
 
-        hit_counts.set("x50", {
-            count: (hit_counts.get("x50")?.count || 0) + (score.statistics.meh || 0),
+        hit_counts.set("50", {
+            count: (hit_counts.get("50")?.count || 0) + (score.statistics.meh || 0),
             color: colors.judgements.x50
         });
 
-        hit_counts.set("xMiss", {
-            count: (hit_counts.get("xMiss")?.count || 0) + (score.statistics.miss || 0),
+        hit_counts.set("Miss", {
+            count: (hit_counts.get("Miss")?.count || 0) + (score.statistics.miss || 0),
             color: colors.judgements.xMiss
         });
 
@@ -109,7 +110,7 @@ const UserSummaryPanel = async (props: Props) => {
     pp_values.sort((a, b) => a - b);
 
     const grade_length = 100 / grade_letters.length;
-    const max_grade = Array.from(grade_counts.entries()).reduce((a, b) => a[1].count > b[1].count ? a : b);
+    const max_grade: string = Array.from(grade_counts.entries()).reduce((a, b) => a[1].count > b[1].count ? a : b)[0];
     const max_mods: string[] = Array.from(mods_counts.entries()).reduce((a, b) => a[1] > b[1] ? a : b)[0].split('-');
     const avg_acc = (acc_values.reduce((a, b) => a + b) / acc_values.length).toFixed(2);
     const avg_combo = Math.round(combo_values.reduce((a, b) => a + b) / combo_values.length);
@@ -131,12 +132,12 @@ const UserSummaryPanel = async (props: Props) => {
             <div class="shadow-lg flex flex-col grow col-span-full bg-neutral rounded-lg">
                 <div class="p-2 text-neutral-content">Average Play:</div>
                 <div class="flex grow flex-row flex-wrap gap-4 items-center p-4 rounded-lg bg-base-300">
-                    <h3 class="text-xl" style={{ color: max_grade[1].color }}>{max_grade[0]}</h3>
+                    <Grade grade={max_grade} />
                     <div>{avg_pp}pp</div>
-                    <div><i class="fa-solid fa-bullseye fa-xs" /> {avg_acc}%</div>
-                    <div><i class="fa-solid fa-fire fa-xs" /> {avg_combo}x</div>
-                    <div><i class="fa-solid fa-stopwatch fa-xs" /> {avg_length}</div>
-                    <div><i class="fa-solid fa-music fa-xs" /> {avg_bpm}bpm</div>
+                    <div><i class="fa-solid fa-crosshairs" /> {avg_acc}%</div>
+                    <div><i class="fa-solid fa-fire" /> {avg_combo}x</div>
+                    <div><i class="fa-solid fa-stopwatch" /> {avg_length}</div>
+                    <div><i class="fa-solid fa-music" /> {avg_bpm}bpm</div>
                     {max_mods.map(mod => (
                         <ModIcon mod={mod} />
                     ))}
@@ -146,26 +147,27 @@ const UserSummaryPanel = async (props: Props) => {
                 <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
                     <div class="p-2 flex flex-row text-neutral-content justify-between">
                         <div>Performance:</div>
-                        <div>{avg_pp}pp</div>
                     </div>
-                    <div class="flex grow flex-row items-center justify-between gap-4 p-4 rounded-lg bg-base-300">
-                        <span>{max_pp}pp</span>
-                        <span class="flex flex-row shadow-lg grow h-2 rounded-full overflow-hidden">
-                            {grade_letters.map(grade => <div style={{
-                                backgroundColor: (colors.grades as any)[grade.toLowerCase()], width: `${grade_length}%`
-                            }} />)}
-                        </span>
-                        <span>{min_pp}pp</span>
+                    <div class="flex grow flex-col gap-1 p-4 rounded-lg justify-center bg-base-300">
+                        <div class="flex flex-row items-center justify-between gap-4">
+                            <span>{max_pp}pp</span>
+                            <span class="flex flex-row shadow-lg grow h-2 rounded-full overflow-hidden">
+                                {grade_letters.map(grade => <div style={{
+                                    backgroundColor: (colors.grades as any)[grade.toLowerCase()], width: `${grade_length}%`
+                                }} />)}
+                            </span>
+                            <span>{min_pp}pp</span>
+                        </div>
+                        <div class="flex flex-row items-center justify-between gap-2 px-2">
+                            <div class="h-2 border-b border-l grow" />
+                            <span>{max_pp - min_pp}pp</span>
+                            <div class="h-2 border-b border-r grow" />
+                        </div>
                     </div>
                 </div>
                 <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
                     <div class="p-2 flex flex-row text-neutral-content justify-between">
                         <div>Mods:</div>
-                        <div class="flex flex-row gap-1 items-center">
-                            {max_mods.map((mod) => (
-                                <ModIcon mod={mod} />
-                            ))}
-                        </div>
                     </div>
                     <div class="flex grow flex-row flex-wrap gap-4 items-center p-4 rounded-lg bg-base-300">
                         {Array.from(mods_counts.entries()).sort((a, b) => b[1] - a[1]).map(([mods, count]) => (
@@ -181,9 +183,6 @@ const UserSummaryPanel = async (props: Props) => {
                 <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
                     <div class="p-2 flex flex-row text-neutral-content justify-between">
                         <div>Grades:</div>
-                        <div style={{ color: max_grade[1].color }}>
-                            {max_grade[0]}
-                        </div>
                     </div>
                     <div class="grow p-4 rounded-lg bg-base-300">
                         <BarChart data={grade_counts} />
@@ -192,7 +191,6 @@ const UserSummaryPanel = async (props: Props) => {
                 <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
                     <div class="p-2 flex flex-row text-neutral-content justify-between">
                         <div>Hits:</div>
-                        <div>{avg_acc}%</div>
                     </div>
                     <div class="grow p-4 rounded-lg bg-base-300">
                         <BarChart data={hit_counts} />

@@ -30,13 +30,8 @@ export type BeatmapQuery = {
     mode?: string;
     status?: string;
     offset?: string;
-    sort_title?: string;
-    sort_artist?: string;
-    sort_ranked?: string;
-    sort_difficulty?: string;
-    sort_plays?: string;
-    sort_rating?: string;
-    sort_favourites?: string;
+    sorting?: string;
+    sorting_title?: string;
 }
 
 export type BeatmapSearch = V2BeatmapSearch;

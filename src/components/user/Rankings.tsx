@@ -36,7 +36,8 @@ const Rankings = async ({ mode, category, page }: Props) => {
                 </thead>
                 <tbody>
                     {users.ranking.map((row, i) =>
-                        <tr class="hover:bg-base-300 hover:rounded-lg">
+                        <tr class={`hover:bg-base-300 hover:rounded-lg ${!row.user.is_active ? 'opacity-75 bg-base-300' : ''}
+                        `}>
                             <th class="table-cell text-start">#{i + 1 + 50 * (page - 1)}</th>
                             <td class="table-cell">
                                 <HxA url={`/users/${row.user.id}`}>

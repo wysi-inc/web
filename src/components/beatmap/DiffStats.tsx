@@ -100,11 +100,10 @@ const DiffStats = (props: Props) => {
                 </div>
                 <div class="flex flex-row flex-wrap items-center justify-center bg-base-300 rounded-lg gap-2 p-2">
                     {mods.map((mod) =>
-                        <label>
-                            <input type="checkbox" name={`mod-${mod}`} class="peer hidden" />
-                            <div class="transform hover:scale-110 transition easeinout duration-150 flex icons-center cursor-pointer opacity-50 peer-checked:opacity-100">
-                                <ModIcon mod={mod} />
-                            </div>
+                        <label class="has-[:checked]:opacity-100 opacity-50 transform hover:scale-110 
+                            transition easeinout duration-150 flex icons-center cursor-pointer ">
+                            <input type="checkbox" name={`mod-${mod}`} class="hidden" />
+                            <ModIcon mod={mod} />
                         </label>
                     )}
                 </div>

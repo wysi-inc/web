@@ -1,3 +1,4 @@
+import { getGradeLetter } from "@/src/resources/functions";
 import type { ColorCount } from "@/src/types/users";
 
 const BarChart = ({ data }: { data: Map<string, ColorCount> }) => {
@@ -8,14 +9,18 @@ const BarChart = ({ data }: { data: Map<string, ColorCount> }) => {
         <div class="flex flex-col gap-2">
             <div class="flex flex-row justify-around">
                 {Array.from(data.entries()).map(([label, count]) => (
-                    count.count === 0 ? null :
-                        <div class="flex flex-col items-center">
-                            <h4 style={{
-                                color: count.color,
-                                textShadow: "#000 0px 0px 2px"
-                            }}>{label}</h4>
-                            <div>{count.count.toLocaleString()}</div>
+                    count.count === 0 ? null : <div>
+                        <div class="px-4 text-center rounded-full"
+                            style={{
+                                backgroundColor: count.color,
+                                color: "#000"
+                            }}>
+                            {getGradeLetter(label)}
                         </div>
+                        <div class="text-center">
+                            {count.count?.toLocaleString()}
+                        </div>
+                    </div>
                 ))}
             </div>
             <div class="flex flex-row h-2 rounded-lg overflow-hidden">

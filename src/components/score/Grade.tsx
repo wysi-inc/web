@@ -1,4 +1,5 @@
 import { colors } from "@/src/resources/colors";
+import { getGradeLetter } from "@/src/resources/functions";
 
 type Props = {
     grade: string;
@@ -6,22 +7,7 @@ type Props = {
 
 const Grade = ({ grade }: Props) => {
 
-    let letter;
     let color;
-
-    switch (grade.toLowerCase()) {
-        case "ssh":
-        case "ss":
-        case "xh":
-            letter = "x";
-            break;
-        case "sh":
-            letter = "s";
-            break;
-        default:
-            letter = grade.toLowerCase();
-            break;
-    }
 
     switch (grade.toLowerCase()) {
         case "x":
@@ -55,13 +41,12 @@ const Grade = ({ grade }: Props) => {
             break;
     }
 
-
     return <>
-        <div class="w-8 text-center rounded-full" style={{
-            backgroundColor: color,
-            color: "#000"
-        }}>
-            {letter.toUpperCase()}
+        <div class="px-4 py-1 flex items-center justify-center text-black rounded-full"
+            style={{ backgroundColor: color }}>
+            <div class="leading-none">
+                {getGradeLetter(grade)}
+            </div>
         </div>
     </>;
 }

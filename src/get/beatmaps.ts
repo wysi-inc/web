@@ -11,38 +11,14 @@ export async function getBeatmaps(q: BeatmapQuery | undefined, cursor_string: st
         return res;
     }
 
-    let sort: BeatmapSort = "ranked_desc";
-
-    if (q.sort_title == "sort_asc_title") {
-        sort = "title_asc";
-    } else if (q.sort_title == "sort_desc_title") {
-        sort = "title_desc";
-    } else if (q.sort_artist == "sort_asc_artist") {
-        sort = "artist_asc";
-    } else if (q.sort_artist == "sort_desc_artist") {
-        sort = "artist_desc";
-    } else if (q.sort_ranked == "sort_asc_ranked") {
-        sort = "ranked_asc";
-    } else if (q.sort_ranked == "sort_desc_ranked") {
-        sort = "ranked_desc";
-    } else if (q.sort_difficulty == "sort_asc_difficulty") {
-        sort = "difficulty_asc";
-    } else if (q.sort_difficulty == "sort_desc_difficulty") {
-        sort = "difficulty_desc";
-    } else if (q.sort_plays == "sort_asc_plays") {
-        sort = "plays_asc";
-    } else if (q.sort_plays == "sort_desc_plays") {
-        sort = "plays_desc";
-    } else if (q.sort_rating == "sort_asc_rating") {
-        sort = "rating_asc";
-    } else if (q.sort_rating == "sort_desc_rating") {
-        sort = "rating_desc";
-    } else if (q.sort_favourites == "sort_asc_favourites") {
-        sort = "favourites_asc";
-    } else if (q.sort_favourites == "sort_desc_favourites") {
-        sort = "favourites_desc";
+    let sorting: BeatmapSort;
+    if (!q.sorting_title) {
+        sorting = "ranked_desc";
+    } else if (q.sorting?.includes(q.sorting_title)) {
+        sorting = q.sorting as BeatmapSort;
+    } else {
+        sorting = `${q.sorting_title}_desc` as BeatmapSort;
     }
-
 
     const res: BeatmapSearch = (await v2.beatmaps.search({
         query: [
@@ -66,7 +42,7 @@ export async function getBeatmaps(q: BeatmapQuery | undefined, cursor_string: st
             q.od_min === "0" ? null : `od>=${q.od_min}`,
             q.od_max === "10" ? null : `od<=${q.od_max}`,
         ].filter(Boolean).join(" "),
-        sort,
+        sort: sorting,
         section: q.status as any,
         mode: q.mode as any,
         cursor_string

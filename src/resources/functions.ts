@@ -40,6 +40,19 @@ export async function verifyUser(jwt: any, auth: string | undefined): Promise<Us
 
 }
 
+export function getGradeLetter(grade: string): string {
+    switch (grade.toLowerCase()) {
+        case "ssh":
+        case "ss":
+        case "xh":
+            return "X";
+        case "sh":
+            return "S";
+        default:
+            return grade.toUpperCase();
+    }
+}
+
 export const jwt_params = () => ({
     secret: process.env.OSU_SECRET as string,
     cookie: "auth",

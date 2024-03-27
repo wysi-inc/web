@@ -17,12 +17,11 @@ const AudioPlayButton = (props: Props) => {
 
     return (
         <button class={props.css}
-            onclick={`
-                ${audio_player}.src = '${audio_src}'; 
-                ${audio_image}.src = '${cardImg}';
-                ${audio_title}.innerText = '${props.beatmap_title}';
-                ${audio_title}.href = '/beatmaps/${props.set_id}/${props.beatmap_id}';
-                ${audio_artist}.innerText = 'by ${props.beatmap_artist}';
+            onclick={`${audio_player}.src = '${audio_src}'; 
+                      ${audio_image}.style.backgroundImage = "url('${cardImg}')";
+                      ${audio_title}.innerText = '${props.beatmap_title}';
+                      ${audio_title}.href = '/beatmaps/${props.set_id}/${props.beatmap_id}';
+                      ${audio_artist}.innerText = 'by ${props.beatmap_artist}';
             `}>
             <i class="fa-solid fa-headphones" />
         </button >

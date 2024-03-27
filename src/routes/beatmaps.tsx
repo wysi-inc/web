@@ -2,7 +2,7 @@ import { Elysia, t } from 'elysia'
 import { verifyUser } from '../resources/functions';
 import { getPage } from '../resources/pages';
 import type { Mode } from '../types/osu';
-import Beatmaps from '../components/beatmap/Beatmaps';
+import BeatmapsetSearch from '../components/beatmap/BeatmapsetSearch';
 import BeatmapsList from '../components/beatmap/BeatmapsList';
 import BeatmapsetPage from '../components/beatmap/BeatmapsetPage';
 import BeatmapScoreTable from '../components/beatmap/BeatmapScoreTable';
@@ -33,14 +33,8 @@ const queryBodyElysia = {
         mode: t.Optional(t.String()),
         status: t.Optional(t.String()),
         offset: t.Optional(t.String()),
-        // Sorting
-        sort_title: t.Optional(t.String()),
-        sort_artist: t.Optional(t.String()),
-        sort_ranked: t.Optional(t.String()),
-        sort_difficulty: t.Optional(t.String()),
-        sort_plays: t.Optional(t.String()),
-        sort_rating: t.Optional(t.String()),
-        sort_favourites: t.Optional(t.String()),
+        sorting: t.Optional(t.String()),
+        sorting_title: t.Optional(t.String()),
     })
 }
 
@@ -48,7 +42,7 @@ export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
     //@ts-ignore
     .get("/", async ({ request, jwt, cookie: { auth } }) => (
         getPage(request.headers, await verifyUser(jwt, auth.value),
-            <Beatmaps />
+            <BeatmapsetSearch />
         )
     ))
     .post("/list", ({ body }) => (

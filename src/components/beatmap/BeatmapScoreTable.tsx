@@ -69,7 +69,7 @@ const BeatmapScoreTable = async (props: Props) => {
                             {(score.accuracy * 100).toFixed(2)}%
                         </td>
                         <td class="hidden md:table-cell">
-                            <div class="grid grid-cols-4 gap-1 px-2 bg-base-300 rounded-full">
+                            <div class="grid grid-cols-4 gap-4 px-2 bg-base-300 rounded-full">
                                 <span class={`text-base-content ${score.statistics.great ? "" : "text-opacity-50"}`} style={{ color: score.statistics.great ? colors.judgements.x300 : "" }}>{score.statistics.great || 0}</span>
                                 <span class={`text-base-content ${score.statistics.ok ? "" : "text-opacity-50"}`} style={{ color: score.statistics.ok ? colors.judgements.x100 : "" }}>{score.statistics.ok || 0}</span>
                                 <span class={`text-base-content ${score.statistics.meh ? "" : "text-opacity-50"}`} style={{ color: score.statistics.meh ? colors.judgements.x50 : "" }}>{score.statistics.meh || 0}</span>
