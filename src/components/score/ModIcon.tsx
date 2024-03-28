@@ -47,6 +47,16 @@ const ModIcon = ({ mod }: Props) => {
         case "mr": // Mirror
         case "al": // Alternate
         case "st": // Singletap
+        case "1k": // 1 Key  
+        case "2k": // 2 Key  
+        case "3k": // 3 Key  
+        case "4k": // 4 Key  
+        case "5k": // 5 Key  
+        case "6k": // 6 Key  
+        case "7k": // 7 Key  
+        case "8k": // 8 Key  
+        case "9k": // 9 Key  
+        case "co": // Co-op
             color = colors.mods.conversion;
             break;
         default:

@@ -141,8 +141,8 @@ const ScoreCard = async (props: Props) => {
                         <i class="fa-solid fa-music fa-xs" />
                         {stats?.bpm ?
                             <span class={`text-opacity-75
-                                    ${stats.bpm > beatmap.bpm && "text-error tooltip"}
-                                    ${stats.bpm < beatmap.bpm && "text-success tooltip"}
+                                    ${Math.round(stats.bpm) > Math.round(beatmap.bpm) && "text-error tooltip"}
+                                    ${Math.round(stats.bpm) < Math.round(beatmap.bpm) && "text-success tooltip"}
                                 `}
                                 data-tip={`${beatmap.bpm}bpm`}>
                                 {stats.bpm}bpm
