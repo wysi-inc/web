@@ -1,12 +1,12 @@
 import type { Mod, Mode } from "@/src/types/osu";
 import { v2 } from "osu-api-extended";
 import HxA from "../web/HxA";
-import { colors } from "@/src/resources/colors";
 import type { response } from "osu-api-extended/dist/types/v2_scores_beatmap";
 import moment from "moment";
 import Grade from "../score/Grade";
 import ModIcon from "../score/ModIcon";
 import Flag from "../user/u_panels/u_components/Flag";
+import { colors } from "@/src/libs/colors";
 
 type Props = {
     id: number;
@@ -70,10 +70,22 @@ const BeatmapScoreTable = async (props: Props) => {
                         </td>
                         <td class="hidden md:table-cell">
                             <div class="grid grid-cols-4 gap-4 px-2 bg-base-300 rounded-full">
-                                <span class={`text-base-content ${score.statistics.great ? "" : "text-opacity-50"}`} style={{ color: score.statistics.great ? colors.judgements.x300 : "" }}>{score.statistics.great || 0}</span>
-                                <span class={`text-base-content ${score.statistics.ok ? "" : "text-opacity-50"}`} style={{ color: score.statistics.ok ? colors.judgements.x100 : "" }}>{score.statistics.ok || 0}</span>
-                                <span class={`text-base-content ${score.statistics.meh ? "" : "text-opacity-50"}`} style={{ color: score.statistics.meh ? colors.judgements.x50 : "" }}>{score.statistics.meh || 0}</span>
-                                <span class={`text-base-content ${score.statistics.miss ? "" : "text-opacity-50"}`} style={{ color: score.statistics.miss ? colors.judgements.xMiss : "" }}>{score.statistics.miss || 0}</span>
+                                <span class={`text-base-content ${score.statistics.great ? "" : "text-opacity-50"}`}
+                                    style={{ color: score.statistics.great ? colors.judgements.x300 : "" }}>
+                                    {score.statistics.great || 0}
+                                </span>
+                                <span class={`text-base-content ${score.statistics.ok ? "" : "text-opacity-50"}`}
+                                    style={{ color: score.statistics.ok ? colors.judgements.x100 : "" }}>
+                                    {score.statistics.ok || 0}
+                                </span>
+                                <span class={`text-base-content ${score.statistics.meh ? "" : "text-opacity-50"}`}
+                                    style={{ color: score.statistics.meh ? colors.judgements.x50 : "" }}>
+                                    {score.statistics.meh || 0}
+                                </span>
+                                <span class={`text-base-content ${score.statistics.miss ? "" : "text-opacity-50"}`}
+                                    style={{ color: score.statistics.miss ? colors.judgements.xMiss : "" }}>
+                                    {score.statistics.miss || 0}
+                                </span>
                             </div>
                         </td>
                         <td class="hidden md:table-cell">

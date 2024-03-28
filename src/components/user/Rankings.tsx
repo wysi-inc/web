@@ -1,8 +1,8 @@
-import { getRankings } from "@/src/get/user";
 import type { Category, Mode } from "@/src/types/osu";
 import Pagination from "./u_panels/u_components/Pagination";
 import OnlineDot from "./u_panels/u_components/OnlineDot";
 import HxA from "../web/HxA";
+import { getRankings } from "@/src/db/users/get_user";
 
 type Props = {
     mode: Mode;

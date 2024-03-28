@@ -1,8 +1,8 @@
 import { v2 } from "osu-api-extended";
-import { updateUser } from "@/src/db/users";
-import { catalans } from "@/src/resources/constants";
 import type { Category, Mode } from "@/src/types/osu";
 import type { User, UserList } from "@/src/types/users";
+import { updateUser } from "./update_user";
+import { catalans } from "@/src/libs/constants";
 
 export async function getUser(id: string, mode: Mode | undefined): Promise<User | null> {
     try {

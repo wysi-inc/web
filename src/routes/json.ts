@@ -1,6 +1,6 @@
 import { Elysia } from "elysia";
-import { getRankings, getUser } from "../get/user";
 import type { Category, Mode } from "../types/osu";
+import { getRankings, getUser } from "../db/users/get_user";
 
 export const jsonRoutes = new Elysia({ prefix: '/json' })
     .get("/", () => ({ msg: "test" })

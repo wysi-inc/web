@@ -2,10 +2,10 @@ import type { Mode } from "@/src/types/osu";
 import type { ColorCount, Score } from "@/src/types/users";
 import { v2 } from "osu-api-extended";
 import BarChart from "./u_components/BarChart";
-import { colors } from "@/src/resources/colors";
-import { secondsToTime } from "@/src/resources/functions";
 import ModIcon from "../../score/ModIcon";
 import Grade from "../../score/Grade";
+import { colors } from "@/src/libs/colors";
+import { secondsToTime } from "@/src/libs/web_utils";
 
 type Props = {
     id: number;

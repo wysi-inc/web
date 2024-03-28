@@ -1,11 +1,10 @@
 import { Elysia, t } from 'elysia'
-import { verifyUser } from '../resources/functions';
-import { getPage } from '../resources/pages';
 import type { Mode } from '../types/osu';
 import BeatmapsetSearch from '../components/beatmap/BeatmapsetSearch';
 import BeatmapsList from '../components/beatmap/BeatmapsList';
 import BeatmapsetPage from '../components/beatmap/BeatmapsetPage';
 import BeatmapScoreTable from '../components/beatmap/BeatmapScoreTable';
+import HtmxPage from '../libs/routes';
 
 const queryBodyElysia = {
     body: t.Object({
@@ -40,10 +39,10 @@ const queryBodyElysia = {
 
 export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
     //@ts-ignore
-    .get("/", async ({ request, jwt, cookie: { auth } }) => (
-        getPage(request.headers, await verifyUser(jwt, auth.value),
+    .get("/", async ({ request, jwt, cookie }) => (
+        <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
             <BeatmapsetSearch />
-        )
+        </HtmxPage>
     ))
     .post("/list", ({ body }) => (
         <BeatmapsList body={body} />
@@ -52,17 +51,17 @@ export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
         <BeatmapsList body={body} cursor={cursor} />
     ), queryBodyElysia)
     //@ts-ignore
-    .get("/:set_id", async ({ request, jwt, cookie: { auth }, params: { set_id } }) => (
-        getPage(request.headers, await verifyUser(jwt, auth.value),
+    .get("/:set_id", async ({ request, jwt, cookie, params: { set_id } }) => (
+        <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
             <BeatmapsetPage set_id={Number(set_id)} />
-        ))
-    )
+        </HtmxPage>
+    ))
     //@ts-ignore
-    .get("/:set_id/:beatmap_id", async ({ request, jwt, cookie: { auth }, params: { set_id, beatmap_id } }) => (
-        getPage(request.headers, await verifyUser(jwt, auth.value),
+    .get("/:set_id/:beatmap_id", async ({ request, jwt, cookie, params: { set_id, beatmap_id } }) => (
+        <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
             <BeatmapsetPage set_id={Number(set_id)} beatmap_id={Number(beatmap_id)} />
-        ))
-    )
+        </HtmxPage>
+    ))
     .post("/:set_id/:beatmap_id/scores/:mode", ({ params: { beatmap_id, mode } }) => (
         <BeatmapScoreTable
             id={Number(beatmap_id)}

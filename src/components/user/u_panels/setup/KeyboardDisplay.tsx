@@ -6,7 +6,7 @@ import K75 from "./Keyboards/K75";
 import K2 from "./Keyboards/K2";
 import K3 from "./Keyboards/K3";
 import K4 from "./Keyboards/K4";
-import { isEmpty } from "@/src/resources/functions";
+import { isEmpty } from "@/src/libs/web_utils";
 
 export type KeyboardProps = {
     keys?: string[];

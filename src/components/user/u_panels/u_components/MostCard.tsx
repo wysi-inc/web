@@ -1,7 +1,7 @@
 import DiffIcon from "@/src/components/beatmap/DiffIcon";
 import CardControls from "@/src/components/web/CardControls";
 import HxA from "@/src/components/web/HxA";
-import { colors } from "@/src/resources/colors";
+import { colors } from "@/src/libs/colors";
 import type { Beatmap, Beatmapset } from "@/src/types/beatmaps";
 
 type Props = {

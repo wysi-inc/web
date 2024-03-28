@@ -1,11 +1,11 @@
 import moment from "moment";
-import { getBeatmap } from "@/src/get/beatmaps";
 import HxA from "../web/HxA";
 import DiffIcon from "./DiffIcon";
 import StatusBadge from "./StatusBadge";
 import DiffStats from "./DiffStats";
-import type { Beatmap, BeatmapsetStatus } from "@/src/types/beatmaps";
 import AudioPlayButton from "../web/AudioPlayButton";
+import type { Beatmap, Beatmapset, BeatmapsetStatus } from "@/src/types/beatmaps";
+import { getBeatmapset } from "@/src/db/beatmaps/get_beatmaps";
 
 type Props = {
     set_id: number,
@@ -14,7 +14,7 @@ type Props = {
 
 const BeatmapsetPage = async (props: Props) => {
 
-    const beatmapset = await getBeatmap(props.set_id);
+    const beatmapset: Beatmapset = await getBeatmapset(props.set_id);
 
     if ((beatmapset as any).error === null) return <h1>Not found</h1>;
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;

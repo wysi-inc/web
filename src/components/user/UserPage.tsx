@@ -1,10 +1,10 @@
-import { getUser } from "@/src/get/user";
 import type { Mode } from "@/src/types/osu";
 import UserTopPanel from "./u_panels/UserTopPanel";
 import UserHistoryPanel from "./u_panels/UserHistoryPanel";
 import LazyPanel from "./LazyPanel";
 import Panel from "./Panel";
 import UserSetupPanel from "./u_panels/UserSetupPanel";
+import { getUser } from "@/src/db/users/get_user";
 
 type Props = {
     logged_id: number | undefined;
@@ -22,7 +22,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
 
     mode = user.rank_history?.mode as Mode || "osu";
 
-    return (<>
+    return <>
         <UserTopPanel user={user} mode={mode} />
         <Panel title="History" icon={<i class="fa-solid fa-chart-line" />}>
             <UserHistoryPanel
@@ -63,7 +63,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             url={`/users/${user.id}/0/panels/medals`}
             body={{ medals: user.user_achievements }}
         />
-    </>);
+    </>
 }
 
 export default UserPage;

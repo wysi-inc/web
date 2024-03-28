@@ -11,7 +11,7 @@ import { rankingRoutes } from "./src/routes/rankings";
 import { userRoutes } from "./src/routes/user";
 import { beatmapRoutes } from "./src/routes/beatmaps";
 import { jsonRoutes } from "./src/routes/json";
-import { updateMedals } from "./src/db/medals";
+import { updateMedals } from "./src/db/medals/update_medals";
 
 const port = Number(process.env.PORT as string);
 const mongo_uri = process.env.MONGO_URI as string;
@@ -54,21 +54,6 @@ new Elysia()
     .use(userRoutes)
     .use(beatmapRoutes)
     .use(jsonRoutes)
-    // .post("/tablet", ({ body }) => {
-    //     const tablet = new Tablet({
-    //         name: body.name,
-    //         w: body.w,
-    //         h: body.h,
-    //     });
-    //     tablet.save();
-    //     return "OK";
-    // }, {
-    //     body: t.Object({
-    //         name: t.String(),
-    //         w: t.Number(),
-    //         h: t.Number(),
-    //     })
-    // })
     .onError((err) => console.error(err.error))
     .onRequest(({ request }) => console.log(request.method, request.url))
     .onStart(() => console.info(`[ OK ] Listening on port ${port}`))

@@ -1,7 +1,4 @@
 import { Elysia } from 'elysia'
-import { verifyUser } from '../resources/functions';
-import { getPage } from '../resources/pages';
-import { saveSetup } from '../db/users';
 import type { BeatmapCategory, Mode, ScoreCategory } from '../types/osu';
 import type { ProfileMedal } from '../types/medals';
 import UserPage from '../components/user/UserPage';
@@ -15,15 +12,20 @@ import UserScoresList from '../components/user/u_panels/u_components/UserScoresL
 import UserBeatmapsList from '../components/user/u_panels/u_components/UserBeatmapsList';
 import UserMostList from '../components/user/u_panels/u_components/UserMostList';
 import UserSetupPanel from '../components/user/u_panels/UserSetupPanel';
+import HtmxPage from '../libs/routes';
+import { verifyUser } from '../libs/auth';
+import { saveSetup } from '../db/users/update_user';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
     //@ts-ignore
-    .get("/", async ({ request, cookie: { auth }, params, jwt }) => {
-        const user = await verifyUser(jwt, auth.value);
-        return getPage(request.headers, user,
-            <UserPage
-                id={params.id} logged_id={user?.id} />
-        )
+    .get("/", async ({ request, cookie, params, jwt }) => {
+        const user = await verifyUser(jwt, cookie.auth.value);
+        return <>
+            <HtmxPage headers={request.headers} user={user}>
+                <UserPage
+                    id={params.id} logged_id={user?.id} />
+            </HtmxPage>
+        </>
     })
     //@ts-ignore
     .post("/setup", async ({ set, cookie: { auth }, body, jwt }) => {
@@ -40,12 +42,14 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         //@ts-ignore
         .get("/", async ({ request, cookie: { auth }, params, jwt }) => {
             const user = await verifyUser(jwt, auth.value);
-            return getPage(request.headers, user,
-                <UserPage
-                    logged_id={user?.id}
-                    id={params.id}
-                    mode={params.mode as Mode} />
-            )
+            return <>
+                <HtmxPage headers={request.headers} user={user}>
+                    <UserPage
+                        logged_id={user?.id}
+                        id={params.id}
+                        mode={params.mode as Mode} />
+                </HtmxPage>
+            </>
         })
         .group("/panels", (_) => _
             .post("/scores/:category", ({ params }) => (

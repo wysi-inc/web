@@ -1,7 +1,7 @@
 import type { Setup } from "@/src/models/User";
 import SetupInput from "./SetupInput";
 import { TabletModel } from "@/src/models/Tablet";
-import { isEmpty } from "@/src/resources/functions";
+import { isEmpty } from "@/src/libs/web_utils";
 
 type Props = {
     tablet: Setup["tablet"],

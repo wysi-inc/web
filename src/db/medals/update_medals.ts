@@ -1,5 +1,5 @@
-import { Medal } from "../models/Medal";
-import type { OsekaiMedal } from "../types/medals";
+import { Medal } from "@/src/models/Medal";
+import type { OsekaiMedal } from "@/src/types/medals";
 
 export async function updateMedals() {
     try {

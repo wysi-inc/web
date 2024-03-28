@@ -1,6 +1,6 @@
 import type { Setup } from "@/src/models/User";
 import SetupInput from "./SetupInput";
-import { isEmpty } from "@/src/resources/functions";
+import { isEmpty } from "@/src/libs/web_utils";
 
 type Props = {
     peripherals: Setup["peripherals"],

@@ -1,4 +1,4 @@
-import { getGradeLetter } from "@/src/resources/functions";
+import { getGradeLetter } from "@/src/libs/web_utils";
 import type { ColorCount } from "@/src/types/users";
 
 const BarChart = ({ data }: { data: Map<string, ColorCount> }) => {

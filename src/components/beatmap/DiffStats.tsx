@@ -1,8 +1,8 @@
 import type { Beatmap } from "@/src/types/beatmaps";
 import DiffIcon from "./DiffIcon";
-import { secondsToTime } from "@/src/resources/functions";
-import { colors } from "@/src/resources/colors";
 import ModIcon from "../score/ModIcon";
+import { secondsToTime } from "@/src/libs/web_utils";
+import { colors } from "@/src/libs/colors";
 
 type Props = {
     diff: Beatmap,

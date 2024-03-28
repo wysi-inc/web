@@ -53,6 +53,6 @@ export async function getBeatmaps(q: BeatmapQuery | undefined, cursor_string: st
     return res;
 }
 
-export async function getBeatmap(id: number): Promise<Beatmapset> {
+export async function getBeatmapset(id: number): Promise<Beatmapset> {
     return await v2.beatmap.set.details(id.toString());
 }

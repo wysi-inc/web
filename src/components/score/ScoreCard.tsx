@@ -1,7 +1,5 @@
 import moment from "moment";
 import { tools } from "osu-api-extended";
-import { colors } from "@/src/resources/colors";
-import { getGradeLetter, secondsToTime } from "@/src/resources/functions";
 import type { Score } from "@/src/types/users";
 import type { Mode } from "@/src/types/osu";
 import DiffIcon from "@/src/components/beatmap/DiffIcon";
@@ -10,6 +8,8 @@ import HxA from "../web/HxA";
 import StatusBadge from "../beatmap/StatusBadge";
 import type { BeatmapsetStatus } from "@/src/types/beatmaps";
 import ModIcon from "./ModIcon";
+import { getGradeColor, getGradeLetter, secondsToTime } from "@/src/libs/web_utils";
+import { colors } from "@/src/libs/colors";
 
 type Props = {
     position: number;
@@ -102,7 +102,7 @@ const ScoreCard = async (props: Props) => {
                                 </div>
                                 <div class="flex flex-col gap-1 text-end justify-between">
                                     <div class="-mt-2 text-5xl" style={{
-                                        color: (colors.grades as any)[score.rank.toLowerCase()]
+                                        color: getGradeColor(score.rank)
                                     }}>
                                         {getGradeLetter(score.rank)}
                                     </div>

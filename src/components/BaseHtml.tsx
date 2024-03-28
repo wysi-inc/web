@@ -8,7 +8,7 @@ type Props = {
     user: UserCookie | null;
 }
 
-const BaseHtml = (props: Props) => {
+const BaseHtml = ({ user, children }: Props) => {
     return (
         <html>
             <head>
@@ -36,10 +36,10 @@ const BaseHtml = (props: Props) => {
                 <script src="/public/js/audio.js" defer />
             </head>
             <body class="bg-base-300 flex flex-col items-center">
-                <Navbar user={props?.user} />
+                <Navbar user={user} />
                 <div class="flex justify-center items-center w-full" style={{ maxWidth: "1000px" }}>
                     <main id="main" class="p-4 flex flex-col gap-4 bg-neutral shadow-lg w-full" style="max-width: 1000px;">
-                        {props.children}
+                        {children}
                     </main>
                 </div>
                 <AudioPlayer />

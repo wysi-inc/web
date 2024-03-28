@@ -1,6 +1,6 @@
-import { type Rank, User, type Setup } from "../models/User";
-import type { Mode } from "../types/osu";
-import type { User as UserType } from "../types/users";
+import { type Rank, User, type Setup } from "../../models/User";
+import type { Mode } from "../../types/osu";
+import type { User as UserType } from "../../types/users";
 
 export async function updateUser(user: UserType, mode: Mode): Promise<UserType> {
     const country_rank = user.statistics.country_rank;

@@ -1,13 +1,13 @@
-import { colors } from "@/src/resources/colors";
-import type { User } from "@/src/types/users";
 import moment from "moment";
 import BarChart from "./u_components/BarChart";
 import Flag from "./u_components/Flag";
 import Country from "./u_components/Country";
 import Supporter from "./u_components/Supporter";
-import type { Mode } from "@/src/types/osu";
 import ModeIcon from "../../beatmap/ModeIcon";
 import HxA from "../../web/HxA";
+import type { User } from "@/src/types/users";
+import type { Mode } from "@/src/types/osu";
+import { colors } from "@/src/libs/colors";
 
 type Props = {
     user: User;

@@ -1,4 +1,4 @@
-import { colors } from "@/src/resources/colors";
+import { colors } from "@/src/libs/colors";
 import type { BeatmapsetStatus } from "@/src/types/beatmaps";
 
 type Props = {

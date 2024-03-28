@@ -1,4 +1,4 @@
-import { getBeatmaps } from "@/src/get/beatmaps";
+import { getBeatmaps } from "@/src/db/beatmaps/get_beatmaps";
 import BeatmapsetCard from "./BeatmapsetCard";
 import type { BeatmapQuery, Beatmapset } from "@/src/types/beatmaps";
 
