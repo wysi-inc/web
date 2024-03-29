@@ -14,7 +14,7 @@ const Computer = ({ computer, editable }: Props) => {
     if (!editable && empty) return <></>;
 
     return <div class={`${empty ? "block group-disabled:hidden" : ""} bg-neutral rounded-lg flex flex-col`}>
-        <h1 class="p-2 text-neutral-content">Computer</h1>
+        <h1 class="py-1 px-2 text-neutral-content">Computer</h1>
         <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
             <SetupInput editable={editable} type="text" id="computer_os" name="OS" value={computer?.os} icon={<i class="fa-solid fa-folder-closed" />} />
             <SetupInput editable={editable} type="text" id="computer_cpu" name="CPU" value={computer?.cpu} icon={<i class="fa-solid fa-microchip" />} />

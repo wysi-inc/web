@@ -11,7 +11,7 @@ type Props = {
 
 
 const LazyPanel = ({ title, code, tooltip, icon, url, body }: Props) =>
-    <Panel icon={icon} title={title} tooltip={tooltip}>
+    <Panel icon={icon} title={title} tooltip={tooltip} code={code}>
         <span hx-post={url} hx-trigger="revealed" hx-swap="outerHTML"
             hx-vals={JSON.stringify(body)} hx-indicator={`#loading-${code}`}>
             <span class="loading loading-spinner htmx-indicator" id={`loading-${code}`} />

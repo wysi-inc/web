@@ -53,7 +53,7 @@ const KeyboardDisplay = ({ keyboard, editable }: Props) => {
     if (!editable && empty) return <></>;
 
     return <div class={`${empty ? "block group-disabled:hidden" : ""} bg-neutral rounded-lg flex flex-col`}>
-        <h1 class="p-2 text-neutral-content">Keyboard</h1>
+        <h1 class="py-1 px-2 text-neutral-content">Keyboard</h1>
         <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
             <div class="flex justify-center items-center h-36" id="keyboard_display">
                 {keyboard?.layout === "k2" && <K2 keys={keyboard?.keys} />}
@@ -72,7 +72,7 @@ const KeyboardDisplay = ({ keyboard, editable }: Props) => {
                     <input id="keyboard_name" name="keyboard_name"
                         type="text" placeholder="Keyboard name"
                         class="input input-sm input-bordered peer disabled:hidden w-full" value={keyboard?.name || ""} />
-                    <span class="input input-sm bg-base-200 hidden peer-disabled:block">{keyboard?.name}</span>
+                    <span class="input input-sm bg-base-300 hidden peer-disabled:block">{keyboard?.name}</span>
                 </label>
                 <label class="form-control">
                     <div class="label">
@@ -88,7 +88,7 @@ const KeyboardDisplay = ({ keyboard, editable }: Props) => {
                         <option value="ktkl" selected={keyboard?.layout === "ktkl"}>Tenkeyless Keyboard</option>
                         <option value="kfull" selected={keyboard?.layout === "kfull"}>Full Keyboard</option>
                     </select>
-                    <span class="input input-sm bg-base-200 hidden peer-disabled:block">
+                    <span class="input input-sm bg-base-300 hidden peer-disabled:block">
                         {keyboard?.layout === "k2" && "2 Keys"}
                         {keyboard?.layout === "k3" && "3 Keys"}
                         {keyboard?.layout === "k4" && "4 Keys"}

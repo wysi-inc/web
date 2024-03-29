@@ -130,7 +130,7 @@ const UserSummaryPanel = async (props: Props) => {
     return (
         <div class="flex flex-col gap-4">
             <div class="shadow-lg flex flex-col grow col-span-full bg-neutral rounded-lg">
-                <div class="p-2 text-neutral-content">Average Play:</div>
+                <div class="py-1 px-2 text-neutral-content">Average Play:</div>
                 <div class="flex grow flex-row flex-wrap gap-4 items-center p-4 rounded-lg bg-base-300">
                     <Grade grade={max_grade} />
                     <div>{avg_pp}pp</div>
@@ -138,14 +138,16 @@ const UserSummaryPanel = async (props: Props) => {
                     <div><i class="fa-solid fa-fire" /> {avg_combo}x</div>
                     <div><i class="fa-solid fa-stopwatch" /> {avg_length}</div>
                     <div><i class="fa-solid fa-music" /> {avg_bpm}bpm</div>
-                    {max_mods.map(mod => (
-                        <ModIcon mod={mod} />
-                    ))}
+                    <div class="flex flex-row items-center gap-1">
+                        {max_mods.map(mod => (
+                            <ModIcon mod={mod} />
+                        ))}
+                    </div>
                 </div>
             </div>
             <div class="grid md:grid-cols-2 gap-4">
                 <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
-                    <div class="p-2 flex flex-row text-neutral-content justify-between">
+                    <div class="py-1 px-2 flex flex-row text-neutral-content justify-between">
                         <div>Performance:</div>
                     </div>
                     <div class="flex grow flex-col gap-1 p-4 rounded-lg justify-center bg-base-300">
@@ -166,7 +168,7 @@ const UserSummaryPanel = async (props: Props) => {
                     </div>
                 </div>
                 <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
-                    <div class="p-2 flex flex-row text-neutral-content justify-between">
+                    <div class="py-1 px-2 flex flex-row text-neutral-content justify-between">
                         <div>Mods:</div>
                     </div>
                     <div class="flex grow flex-row flex-wrap gap-4 items-center p-4 rounded-lg bg-base-300">
@@ -181,7 +183,7 @@ const UserSummaryPanel = async (props: Props) => {
                     </div>
                 </div>
                 <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
-                    <div class="p-2 flex flex-row text-neutral-content justify-between">
+                    <div class="py-1 px-2 flex flex-row text-neutral-content justify-between">
                         <div>Grades:</div>
                     </div>
                     <div class="grow p-4 rounded-lg bg-base-300">
@@ -189,7 +191,7 @@ const UserSummaryPanel = async (props: Props) => {
                     </div>
                 </div>
                 <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
-                    <div class="p-2 flex flex-row text-neutral-content justify-between">
+                    <div class="py-1 px-2 flex flex-row text-neutral-content justify-between">
                         <div>Hits:</div>
                     </div>
                     <div class="grow p-4 rounded-lg bg-base-300">

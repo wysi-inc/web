@@ -19,7 +19,7 @@ const TabletDisplay = async ({ tablet, editable }: Props) => {
     const custom: boolean = tablet?.name === "" || tablets.find((t) => t.name === tablet?.name) === undefined;
 
     return <div class={`${empty ? "block group-disabled:hidden" : ""} bg-neutral rounded-lg flex flex-col`}>
-        <h1 class="p-2 text-neutral-content">Tablet</h1>
+        <h1 class="py-1 px-2 text-neutral-content">Tablet</h1>
         <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
             <div class="flex justify-center items-center h-36">
                 <div class="relative outline outline-1 overflow-hidden rounded-lg"
@@ -49,7 +49,7 @@ const TabletDisplay = async ({ tablet, editable }: Props) => {
                         {tablets.sort((a, b) => a.name.localeCompare(b.name)).map((t) => <option value={JSON.stringify(t)} selected={tablet?.name === t.name}>{t.name}</option>)}
                         <option value="custom" selected={custom}>Custom</option>
                     </select>
-                    <span class="input input-sm bg-base-200 hidden peer-disabled:block">{tablet?.name}</span>
+                    <span class="input input-sm bg-base-300 hidden peer-disabled:block">{tablet?.name}</span>
                 </label>
                 <div id="tablet_custom" class={custom ? "" : "hidden"}>
                     <label class="form-control">

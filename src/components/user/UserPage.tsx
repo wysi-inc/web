@@ -24,7 +24,18 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
 
     return <>
         <UserTopPanel user={user} mode={mode} />
-        <Panel title="History" icon={<i class="fa-solid fa-chart-line" />}>
+        <div class="underline-offset-1 text-neutral-content sticky top-16 bg-base-300 rounded-lg shadow-lg p-2 z-50 flex flex-row justify-around">
+            <a class="hover:underline" href="#history">History</a>
+            <a class="hover:underline" href="#about">About me</a>
+            <a class="hover:underline" href="#setup">Setup</a>
+            <a class="hover:underline" href="#skins">Skins</a>
+            <a class="hover:underline" href="#summary">Scores Summary</a>
+            <a class="hover:underline" href="#scores">Scores</a>
+            <a class="hover:underline" href="#beatmaps">Beatmaps</a>
+            <a class="hover:underline" href="#most">Most Played</a>
+            <a class="hover:underline" href="#medals">Medals</a>
+        </div>
+        <Panel title="History" code="history" icon={<i class="fa-solid fa-chart-line" />}>
             <UserHistoryPanel
                 db_ranks={user.db_ranks}
                 play_counts={user.monthly_playcounts}
@@ -32,7 +43,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             />
         </Panel>
         {user.page?.html ?
-            <Panel title="About me" icon={<i class="fa-solid fa-user" />}>
+            <Panel title="About me" code="about" icon={<i class="fa-solid fa-user" />}>
                 <div class="p-4 rounded-lg bg-base-300">
                     <div class="h-96 overflow-y-scroll">
                         {user.page.html}
@@ -41,7 +52,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             </Panel> : <></>
         }
         {!editable && !user.db_setup ? <></> :
-            <Panel title="Setup" icon={<i class="fa-solid fa-computer" />}>
+            <Panel title="Setup" code="setup" icon={<i class="fa-solid fa-computer" />}>
                 <UserSetupPanel
                     setup={user.db_setup}
                     logged_id={logged_id}

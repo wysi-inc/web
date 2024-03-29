@@ -10,7 +10,7 @@ type Props = {
 
 const BaseHtml = ({ user, children }: Props) => {
     return (
-        <html>
+        <html class="scroll-smooth">
             <head>
                 <title>wysi</title>
                 <meta charset="UTF-8" />

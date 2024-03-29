@@ -37,7 +37,7 @@ const MostCard = (props: Props) => {
                         </div>
                     </div>
                 </div>
-                <div class="p-2 flex flex-row justify-between items-center gap-2">
+                <div class="py-1 px-2 flex flex-row justify-between items-center gap-2">
                     <div class="flex flex-row gap-2">
                         <div class="badge" style={`color: #000; background-color: ${(colors.beatmap as any)[beatmapset.status]}`}>
                             {beatmapset.status}
