@@ -90,7 +90,7 @@ const UserTopPanel = ({ user, mode }: Props) => {
                             </div>
                             <div class="flex flex-row gap-2 items-center">
                                 <i class="fa-solid fa-earth-americas fa-xl" />
-                                <h2 class="text-xl tooltip" data-tip={`Peak rank: #${user.rank_highest.rank?.toLocaleString?.()}`}>
+                                <h2 class="text-xl tooltip" data-tip={`Peak rank: #${user?.rank_highest?.rank?.toLocaleString?.()}`}>
                                     #{user.statistics?.global_rank?.toLocaleString() || "-"}
                                 </h2>
                             </div>
