@@ -55,11 +55,16 @@ new Elysia()
     .use(beatmapRoutes)
     .use(jsonRoutes)
     .onError((err) => console.error(err.error))
-    .onRequest(({ request }) => {
+    .onRequest(({ request, set }) => {
+        const agent = request.headers.get("user-agent");
+        if (agent === "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/600.2.5 (KHTML\, like Gecko) Version/8.0.2 Safari/600.2.5 (Amazonbot/0.1; +https://developer.amazon.com/support/amazonbot)") {
+            console.log("amazon");
+            set.status = 403;
+            return "🖕";
+        }
         const route = request.url.split("/").slice(3).join("/");
         const method = request.method;
-        const extra = request.headers.get("user-agent");
-        console.log(`${method}::/${route} | ${extra}`)
+        console.log(`${method}::/${route} | ${agent}`)
     })
     .onStart(() => console.info(`[ OK ] Listening on port ${port}`))
     .listen(port)
