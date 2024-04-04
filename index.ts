@@ -55,6 +55,11 @@ new Elysia()
     .use(beatmapRoutes)
     .use(jsonRoutes)
     .onError((err) => console.error(err.error))
-    .onRequest(({ request }) => console.log(request.method, request.url))
+    .onRequest(({ request }) => {
+        const route = request.url.split("/").slice(3).join("/");
+        const method = request.method;
+        const extra = request.headers.get("user-agent");
+        console.log(`${method}::/${route} | ${extra}`)
+    })
     .onStart(() => console.info(`[ OK ] Listening on port ${port}`))
     .listen(port)
