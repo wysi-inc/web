@@ -12,7 +12,9 @@ type Props = {
 
 const HtmxPage = async (props: Props) => {
     if (props.headers?.has("hx-request")) {
-        return props.children;
+        return <>
+            {props.children}
+        </>
     }
 
     if ("cookie" in props) {

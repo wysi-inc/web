@@ -7,11 +7,11 @@ type Props = {
 const HxA = ({ url, css, children }: Props) => {
     return <a
         href={url}
-        // hx-get={url}
-        // hx-target="#main"
-        // hx-push-url="true"
-        // hx-indicator="#page-loading"
-        // hx-swap="innerHTML show:window:top"
+        hx-get={url}
+        hx-target="#main"
+        hx-indicator="#page-loading"
+        hx-swap="innerHTML show:window:top"
+        hx-push-url="true"
         class={`${css} 
             cursor-pointer 
             hover:underline 

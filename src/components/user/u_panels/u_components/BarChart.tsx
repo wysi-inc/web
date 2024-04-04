@@ -5,7 +5,7 @@ const BarChart = ({ data }: { data: Map<string, ColorCount> }) => {
 
     const total = Array.from(data.values()).reduce((acc, val) => acc + val.count, 0);
 
-    return (
+    return <>
         <div class="flex flex-col gap-2">
             <div class="flex flex-row justify-around">
                 {Array.from(data.entries()).map(([label, count]) => (
@@ -33,7 +33,7 @@ const BarChart = ({ data }: { data: Map<string, ColorCount> }) => {
                 ))}
             </div>
         </div>
-    );
+    </>
 }
 
 export default BarChart;

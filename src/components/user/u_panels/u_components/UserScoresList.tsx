@@ -21,19 +21,20 @@ const UserScoresList = async ({ id, mode, category, offset, limit }: Props) => {
 
     if (!scores || scores.length === 0) return <div>No {category} scores found</div>;
 
-    return (<>
+    return <>
         {scores.map((score, i) =>
             <ScoreCard position={i + offset + 1} score={score} />
         )}
         {scores.length < limit ? null : <>
             <button class="btn btn-success btn-sm flex flex-row gap-2"
                 hx-post={`/users/${id}/${mode}/lists/scores/${category}?offset=${offset + limit}&limit=20`}
+                hx-push-url="true"
                 hx-swap="outerHTML">
                 <div>Load more</div>
                 <span class="htmx-indicator loading loading-spinner loading-md" />
             </button>
         </>}
-    </>)
+    </>
 }
 
 export default UserScoresList;
