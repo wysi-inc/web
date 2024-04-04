@@ -17,7 +17,7 @@ const UserTopPanel = ({ user, mode }: Props) => {
 
     if (!user) return <></>;
 
-    const best_country = user.db_ranks.country_ranks.sort((a, b) => a.rank - b.rank)[0];
+    const best_country = user.db_ranks.country_ranks?.sort((a, b) => a.rank - b.rank)[0];
 
     const grade_counts = new Map<string, { count: number, color: string }>();
     grade_counts.set("XH", { count: user.statistics.grade_counts.ssh, color: colors.grades.xh });
