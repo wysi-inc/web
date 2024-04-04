@@ -59,7 +59,6 @@ new Elysia()
     .onRequest(({ request, set }) => {
         const agent = request.headers.get("user-agent");
         if (agent && blocked_agents.includes(agent)) {
-            console.log("🖕");
             set.status = 403;
             return "🖕";
         }
