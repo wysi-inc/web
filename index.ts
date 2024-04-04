@@ -12,6 +12,7 @@ import { userRoutes } from "./src/routes/user";
 import { beatmapRoutes } from "./src/routes/beatmaps";
 import { jsonRoutes } from "./src/routes/json";
 import { updateMedals } from "./src/db/medals/update_medals";
+import { blocked_agents } from "./src/libs/constants";
 
 const port = Number(process.env.PORT as string);
 const mongo_uri = process.env.MONGO_URI as string;
@@ -57,8 +58,8 @@ new Elysia()
     .onError((err) => console.error(err.error))
     .onRequest(({ request, set }) => {
         const agent = request.headers.get("user-agent");
-        if (agent === "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/600.2.5 (KHTML\, like Gecko) Version/8.0.2 Safari/600.2.5 (Amazonbot/0.1; +https://developer.amazon.com/support/amazonbot)") {
-            console.log("amazon");
+        if (agent && blocked_agents.includes(agent)) {
+            console.log("🖕");
             set.status = 403;
             return "🖕";
         }
