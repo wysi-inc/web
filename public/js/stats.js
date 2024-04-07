@@ -1,7 +1,7 @@
 stats();
 function stats() {
     const form = document.getElementById('stats_form');
-
+    getStats(form);
     form.addEventListener('change', (e) => {
         e.preventDefault();
         const name = e.target.name;
@@ -103,8 +103,6 @@ async function getStats(form) {
     const acc = getAcc(form);
 
     const formData = new FormData(form);
-    console.log(formData);
-
 
     // get all the entries from formData that start with "mod"
     const mods = Array.from(formData.entries()).filter(([name, _]) => name.startsWith('mod'));
@@ -141,8 +139,6 @@ async function getStats(form) {
     stats_pp.innerHTML = Math.round(data.pp[acc.acc].pp) + "pp";
 
     const length = parseInt(stats_len.getAttribute("data-len"));
-    console.log(length);
-    console.log(data);
     const new_len = length / data.map.clockRate;
 
     stats_len.innerHTML = secondsToTime(new_len);

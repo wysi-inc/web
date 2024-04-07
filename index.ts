@@ -59,7 +59,7 @@ new Elysia()
     .onRequest(({ request, set }) => {
         const agent = request.headers.get("user-agent");
         if (agent && blocked_agents.includes(agent)) {
-            set.status = 403;
+            set.status = 451;
             return "🖕";
         }
         const route = request.url.split("/").slice(3).join("/");
@@ -67,7 +67,7 @@ new Elysia()
         // current hour, minute, second
         const time = new Date().toTimeString().split(" ")[0];
         time.split(":").length === 2 && time.concat(":00");
-        console.log(`${time} - ${method}::/${route} | ${agent}`)
+        console.log(`[ ${time} ] -> ${method}::/${route}`)
     })
     .onStart(() => console.info(`[ OK ] Listening on port ${port}`))
     .listen(port)

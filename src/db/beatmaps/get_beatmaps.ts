@@ -1,5 +1,5 @@
+import type { BeatmapQuery, BeatmapSearch, BeatmapSort, Beatmapset } from "@/src/types/beatmaps";
 import { v2 } from "osu-api-extended";
-import type { BeatmapQuery, BeatmapSearch, BeatmapSort, Beatmapset } from "../types/beatmaps";
 
 export async function getBeatmaps(q: BeatmapQuery | undefined, cursor_string: string | undefined): Promise<BeatmapSearch | null> {
 

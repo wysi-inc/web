@@ -37,39 +37,41 @@ const UserTopPanel = ({ user, mode }: Props) => {
                 }}>
                 <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm justify-center flex flex-row flex-wrap gap-8 p-8 rounded-lg">
                     <div class="flex flex-col gap-4 items-center justify-between">
-                        <img src={user.avatar_url} class="rounded-lg aspect-square size-40" />
-                        <div class="flex flex-row gap-1 flex-wrap justify-around items-center">
-                            <div class="tooltip" data-tip="osu!">
-                                {mode === "osu" ?
-                                    <ModeIcon mode="osu" size={24} css={`fill-secondary`} /> :
-                                    <HxA url={`/users/${user.id}/osu`}>
-                                        <ModeIcon mode="osu" size={24} css={`fill-base-content`} />
-                                    </HxA>
-                                }
-                            </div>
-                            <div class="tooltip" data-tip="osu!taiko">
-                                {mode === "taiko" ?
-                                    <ModeIcon mode="taiko" size={24} css={`fill-secondary`} /> :
-                                    <HxA url={`/users/${user.id}/taiko`}>
-                                        <ModeIcon mode="taiko" size={24} css={`fill-base-content`} />
-                                    </HxA>
-                                }
-                            </div>
-                            <div class="tooltip" data-tip="osu!catch">
-                                {mode === "fruits" ?
-                                    <ModeIcon mode="fruits" size={24} css={`fill-secondary`} /> :
-                                    <HxA url={`/users/${user.id}/fruits`}>
-                                        <ModeIcon mode="fruits" size={24} css={`fill-base-content`} />
-                                    </HxA>
-                                }
-                            </div>
-                            <div class="tooltip" data-tip="osu!mania">
-                                {mode === "mania" ?
-                                    <ModeIcon mode="mania" size={24} css={`fill-secondary`} /> :
-                                    <HxA url={`/users/${user.id}/mania`}>
-                                        <ModeIcon mode="mania" size={24} css={`fill-base-content`} />
-                                    </HxA>
-                                }
+                        <div class="flex flex-col bg-base-300 rounded-lg">
+                            <img src={user.avatar_url} class="rounded-lg aspect-square size-40" />
+                            <div class="flex flex-row gap-1 p-2 flex-wrap justify-around items-center">
+                                <div class="tooltip" data-tip="osu!">
+                                    {mode === "osu" ?
+                                        <ModeIcon mode="osu" size={24} css={`fill-secondary`} /> :
+                                        <HxA url={`/users/${user.id}/osu`}>
+                                            <ModeIcon mode="osu" size={24} css={`fill-base-content`} />
+                                        </HxA>
+                                    }
+                                </div>
+                                <div class="tooltip" data-tip="osu!taiko">
+                                    {mode === "taiko" ?
+                                        <ModeIcon mode="taiko" size={24} css={`fill-secondary`} /> :
+                                        <HxA url={`/users/${user.id}/taiko`}>
+                                            <ModeIcon mode="taiko" size={24} css={`fill-base-content`} />
+                                        </HxA>
+                                    }
+                                </div>
+                                <div class="tooltip" data-tip="osu!catch">
+                                    {mode === "fruits" ?
+                                        <ModeIcon mode="fruits" size={24} css={`fill-secondary`} /> :
+                                        <HxA url={`/users/${user.id}/fruits`}>
+                                            <ModeIcon mode="fruits" size={24} css={`fill-base-content`} />
+                                        </HxA>
+                                    }
+                                </div>
+                                <div class="tooltip" data-tip="osu!mania">
+                                    {mode === "mania" ?
+                                        <ModeIcon mode="mania" size={24} css={`fill-secondary`} /> :
+                                        <HxA url={`/users/${user.id}/mania`}>
+                                            <ModeIcon mode="mania" size={24} css={`fill-base-content`} />
+                                        </HxA>
+                                    }
+                                </div>
                             </div>
                         </div>
                         <div class="tooltip" data-tip={moment(user.join_date).format("DD/MM/YYYY")}>joined {moment(user.join_date).fromNow()}</div>

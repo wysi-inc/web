@@ -8,16 +8,16 @@ type Props = {
     user: UserCookie | null;
 }
 
-const Navbar = (props: Props) => {
-    return (
-        <div class="flex flex-col bg-base-100 shadow-lg sticky top-0 z-50 w-full">
-            <nav class="grid grid-cols-3 p-2">
+const Navbar = ({ user }: Props) => {
+    return <>
+        <nav class="flex flex-col bg-base-100 shadow-lg sticky top-0 z-50 w-full">
+            <div class="grid grid-cols-3 p-2">
                 <div class="flex flex-row items-center justify-start">
                     <div class="dropdown lg:hidden">
                         <button tabindex="0" role="button" class="btn btn-ghost flex items-center justify-center">
                             <i class="fa-solid fa-bars fa-lg" />
                         </button>
-                        <ul tabindex="0" class="menu menu-sm dropdown-content mt-5 z-50 p-2 shadow bg-base-100 rounded-box w-40">
+                        <ul class="menu menu-sm dropdown-content mt-5 z-50 p-2 shadow bg-base-100 rounded-box w-40">
                             <li>
                                 <HxA url="/" css="btn btn-ghost">
                                     Home
@@ -34,12 +34,14 @@ const Navbar = (props: Props) => {
                                 </HxA>
                             </li>
                             <div class="md:hidden divider" />
-                            <label class="flex sm:hidden btn btn-ghost flex-row gap-2 justify-between items-center">
-                                <i class="fa-solid fa-moon" />
-                                <input class="toggle" type="checkbox" checked
-                                    data-toggle-theme="dracula,pastel" />
-                                <i class="fa-solid fa-sun" />
-                            </label>
+                            <li>
+                                <label class="flex sm:hidden btn btn-ghost flex-row gap-2 justify-between items-center">
+                                    <i class="fa-solid fa-moon" />
+                                    <input class="toggle" type="checkbox" checked
+                                        data-toggle-theme="dracula,pastel" />
+                                    <i class="fa-solid fa-sun" />
+                                </label>
+                            </li>
                             <li>
                                 <a href="https://github.com/wysi-inc" target="_blank"
                                     class="flex md:hidden btn btn-ghost">
@@ -56,27 +58,19 @@ const Navbar = (props: Props) => {
                             </li>
                         </ul>
                     </div>
-                    <HxA url="/">
-                        <div class="hidden sm:flex gap-4 items-center btn btn-ghost px-2 text-xl">
-                            <img src="/public/wysi.svg" class="w-8 h-8 rounded-lg drop-shadow-lg shadow-lg" alt="wysi" />
-                            <span>wysi</span>
-                        </div>
+                    <HxA url="/" css="hidden sm:flex gap-4 items-center btn btn-ghost px-2 text-xl">
+                        <img src="/public/wysi.svg" class="w-8 h-8 rounded-lg drop-shadow-lg shadow-lg" alt="wysi" />
+                        <span>wysi</span>
                     </HxA>
                     <div class="hidden lg:flex flex-row text-sm">
-                        <HxA url="/">
-                            <button class="btn btn-ghost" hx-get="/rankings">
-                                Home
-                            </button>
+                        <HxA url="/" css="btn btn-ghost">
+                            Home
                         </HxA>
-                        <HxA url="/rankings">
-                            <button class="btn btn-ghost" hx-get="/rankings">
-                                Rankings
-                            </button>
+                        <HxA url="/rankings" css="btn btn-ghost">
+                            Rankings
                         </HxA>
-                        <HxA url="/beatmaps">
-                            <button class="btn btn-ghost" hx-get="/rankings">
-                                Beatmaps
-                            </button>
+                        <HxA url="/beatmaps" css="btn btn-ghost">
+                            Beatmaps
                         </HxA>
                     </div>
                 </div>
@@ -100,16 +94,16 @@ const Navbar = (props: Props) => {
                             <i class="fa-brands fa-discord" />
                         </a>
                     </div>
-                    {props?.user ?
-                        <Logged user={props.user} /> :
+                    {user ?
+                        <Logged user={user} /> :
                         <Login />
                     }
                 </div>
-            </nav>
+            </div>
             <div class="h-1">
                 <div id="page-loading" class="htmx-indicator bg-accent h-full w-full loading-indicator" />
             </div>
-        </div>
-    );
+        </nav>
+    </>
 }
 export default Navbar;

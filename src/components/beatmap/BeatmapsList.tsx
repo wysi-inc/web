@@ -26,8 +26,9 @@ const BeatmapsList = async (props: Props) => {
             <BeatmapsetCard beatmapset={set} />
         )}
         {sets.length < 50 ? null :
-            <button hx-post={`/beatmaps/list/${res.cursor_string}`} hx-trigger="click"
-                hx-swap="outerHTML" hx-include="#search-form"
+            <button hx-post={`/beatmaps/list/${res.cursor_string}`}
+                hx-trigger="click" hx-swap="outerHTML"
+                hx-boost="false" hx-include="#search-form"
                 class="col-span-full btn btn-success btn-sm flex flex-row gap-2">
                 Load more
             </button>

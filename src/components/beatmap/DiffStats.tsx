@@ -53,7 +53,7 @@ const DiffStats = (props: Props) => {
                         <i class="fa-solid fa-music" />
                         <div id="stats_bpm">{props.diff.bpm}</div>
                     </div>
-                    <div id="stats_pp">0pp</div>
+                    <div id="stats_pp"><span class="loading loading-spinner loading-xs" />pp</div>
                 </div>
                 <div class="flex flex-col p-2 gap-2">
                     {getProgress("AR", props.diff.ar)}
