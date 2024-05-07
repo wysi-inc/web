@@ -11,8 +11,8 @@ import { rankingRoutes } from "./src/routes/rankings";
 import { userRoutes } from "./src/routes/user";
 import { beatmapRoutes } from "./src/routes/beatmaps";
 import { jsonRoutes } from "./src/routes/json";
-import { updateMedals } from "./src/db/medals/update_medals";
 import { blocked_agents } from "./src/libs/constants";
+import { updateMedals } from "./src/db/medals/update_medals";
 
 const port = Number(process.env.PORT as string);
 const mongo_uri = process.env.MONGO_URI as string;
