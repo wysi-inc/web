@@ -23,16 +23,7 @@ COPY . .
 
 # build
 
-ENV OSU_ID=$OSU_ID
-ENV OSU_SECRET=$OSU_SECRET
-ENV OSU_REDIRECT=$OSU_REDIRECT
-ENV MONGO_URI=$MONGO_URI
-ENV CROWDIN_ID=$CROWDIN_ID
-ENV CROWDIN_SECRET=$CROWDIN_SECRET
-ENV PORT=$PORT
-
 RUN bun run cssprod
-RUN bun run build
 
 # copy production dependencies and source code into final image
 FROM base AS release
@@ -42,5 +33,5 @@ COPY --from=prerelease /usr/src/app/package.json .
 
 # run the app
 USER bun
-EXPOSE 4000/tcp
-ENTRYPOINT [ "bun", "run", "index.ts" ]
+EXPOSE ${PORT}/tcp
+ENTRYPOINT [ "bun", "run", "prod" ]
