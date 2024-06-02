@@ -2,8 +2,6 @@ services:
   wysi:
     build:
       context: .
-    env_file:
-     - .env
     environment:
       OSU_ID: ${OSU_ID}
       OSU_SECRET: ${OSU_SECREt}
