@@ -40,7 +40,7 @@ const BaseHtml = ({ user, children }: Props) => {
                 <Navbar user={user} />
                 <div class="flex justify-center items-center max-w-[1000px]">
                     <main id="main" hx-history-elt
-                        class="p-4 flex flex-col gap-4 bg-neutral shadow-lg">
+                        class="p-4 flex flex-col gap-4 bg-neutral shadow-lg max-w-[1000px]">
                         {children}
                     </main>
                 </div>
