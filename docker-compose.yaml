@@ -4,7 +4,7 @@ services:
       context: .
     environment:
       OSU_ID: ${OSU_ID}
-      OSU_SECRET: ${OSU_SECREt}
+      OSU_SECRET: ${OSU_SECRET}
       OSU_REDIRECT: ${OSU_REDIRECT}
       MONGO_URI: ${MONGO_URI}
       CROWDIN_ID: ${CROWDIN_ID}
