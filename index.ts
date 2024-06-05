@@ -45,7 +45,7 @@ new Elysia()
         cookie: "auth",
         cookieOptions: {
             httpOnly: true,
-            maxAge: 60 * 60 * 24 * 7,
+            maxAge: 60 * 60 * 24 * 7 * 31 * 2,
             path: '/',
         }
     }))
