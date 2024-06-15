@@ -90,3 +90,108 @@ export type SongSortType =
     | "plays_asc"
     | "favourites_desc"
     | "favourites_asc";
+
+export type v1Beatmap = {
+    id: {
+        set: number;
+        diff: number;
+    };
+    date: {
+        submit: string;
+        approved: string;
+        update: string;
+    };
+    metadata: {
+        artist: {
+            original: string;
+            unicode: string;
+        };
+        title: {
+            original: string;
+            unicode: string;
+        };
+        creator: {
+            id: number;
+            name: string;
+        };
+        favs: number;
+        rating: number;
+        source: string;
+        genre_id: {
+            id: number;
+            name: string;
+        };
+        language_id: {
+            id: number;
+            name: string;
+        };
+        tags: string;
+    };
+    status: {
+        id: number;
+        name: string;
+    };
+    difficulties: {
+        id: number;
+        diff: string;
+        mode: {
+            id: number;
+            name: string;
+        };
+        file_md5: string;
+        stats: {
+            star: {
+                pure: number;
+                aim: number;
+                speed: number;
+            };
+            ar: number;
+            od: number;
+            cs: number;
+            hp: number;
+            bpm: {
+                avg: number;
+            };
+            combo: number;
+            time: {
+                full: number;
+                drain: number;
+            };
+            objects: {
+                all: number;
+                circles: number;
+                sliders: number;
+                spinners: number;
+            };
+        };
+        plays: number;
+        pass: number;
+    };
+    misc: {
+        download_unavailable: boolean;
+        audio_unavailable: boolean;
+        storyboard: boolean;
+        video: boolean;
+        packs: string;
+        bg: {
+            full: string;
+            raw: string;
+            slim: {
+                1: string;
+                2: string;
+            };
+            cover: {
+                1: string;
+                2: string;
+            };
+            card: {
+                1: string;
+                2: string;
+            };
+            list: {
+                1: string;
+                2: string;
+            };
+        };
+    };
+}

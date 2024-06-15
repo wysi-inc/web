@@ -51,13 +51,13 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
                 </div>
             </Panel> : <></>
         }
-        {!editable && !user.db_setup ? <></> :
+        {editable && user.db_setup ?
             <Panel title="Setup" code="setup" icon={<i class="fa-solid fa-computer" />}>
                 <UserSetupPanel
                     setup={user.db_setup}
                     logged_id={logged_id}
                     page_id={user.id} />
-            </Panel>
+            </Panel> : <></>
         }
         <LazyPanel code="skins" title="Skins (wip)" icon={<i class="fa-solid fa-palette" />}
             url={`/users/${user.id}/0/panels/skins`} />
@@ -67,6 +67,21 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             url={`/users/${user.id}/${mode}/panels/scores/best`} />
         <LazyPanel code="beatmaps" title="Beatmaps" icon={<i class="fa-solid fa-screwdriver-wrench" />}
             url={`/users/${user.id}/${mode}/panels/beatmaps/favourite`} />
+        {editable && user.db_setup ?
+            <Panel title="Collections" code="collections" icon={<i class="fa-solid fa-list" />}>
+                <form hx-swap="none" hx-post={`/users/${user.id}/collections`} hx-trigger="submit">
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text">collections.db</span>
+                        </div>
+                        <input type="file" name="collection" class="file-input file-input-bordered w-full max-w-xs" />
+                    </label>
+                    <button type="submit" class="btn btn-primary">
+                        Send
+                    </button>
+                </form>
+            </Panel> : <></>
+        }
         <LazyPanel code="most" title="Most Played" icon={<i class="fa-solid fa-rotate-left" />}
             url={`/users/${user.id}/0/panels/most`} />
         <LazyPanel code="medals" title="Medals" icon={<img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" />}

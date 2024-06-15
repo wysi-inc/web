@@ -1,4 +1,4 @@
-import { Elysia } from 'elysia'
+import { Elysia, t } from 'elysia'
 import type { BeatmapCategory, Mode, ScoreCategory } from '../types/osu';
 import type { ProfileMedal } from '../types/medals';
 import UserPage from '../components/user/UserPage';
@@ -14,7 +14,13 @@ import UserMostList from '../components/user/u_panels/u_components/UserMostList'
 import UserSetupPanel from '../components/user/u_panels/UserSetupPanel';
 import HtmxPage from '../libs/routes';
 import { verifyUser } from '../libs/auth';
-import { saveSetup } from '../db/users/update_user';
+import { saveCollection, saveSetup } from '../db/users/update_user';
+import fs from "fs";
+//@ts-ignore
+import OsuDBParser from "osu-db-parser";
+import type { v1Beatmap } from '../types/beatmaps';
+import { v1 } from 'osu-api-extended';
+import type { CollectionDB } from '../models/CollectionDB';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
     //@ts-ignore
@@ -28,15 +34,49 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         </>
     })
     //@ts-ignore
-    .post("/setup", async ({ set, cookie: { auth }, body, jwt }) => {
+    .post("/setup", async ({ params, set, cookie: { auth }, body, jwt }) => {
         const user = await verifyUser(jwt, auth.value);
         if (!user) {
             set.status = 401;
             return "Unauthorized";
         }
+
+        if (Number(params.id) != user.id) return;
+
         const setup = await saveSetup(user.id, body);
         if (!setup) return "Failed to save setup, reload the page and try again.";
         return <UserSetupPanel setup={setup} logged_id={user.id} page_id={user.id} />
+    })
+    //@ts-ignore
+    .post("/collections", async ({ params, set, cookie: { auth }, body, jwt }) => {
+
+        const user = await verifyUser(jwt, auth.value);
+        if (!user) {
+            set.status = 401;
+            return "Unauthorized";
+        }
+
+        if (Number(params.id) != user.id) return;
+
+        console.log(body.collection);
+
+        let collectionBuffer = Buffer.from("");
+        const collectionDB = new OsuDBParser(null, collectionBuffer); // Yeah, that's okay
+
+        console.log(collectionDB);
+        // let osuCollectionData = collectionDB.getCollectionData(); // This is collection.db data you can make with this all that you want.
+        // const osuCollectionDB: CollectionDB = {
+        //     user_id: user.id,
+        //     collections: osuCollectionData.collection.map((c: any) => ({
+        //         name: c.name,
+        //         beatmapsMd5: c.beatmapsMd5
+        //     }))
+        // };
+        // saveCollection(osuCollectionDB);
+    }, {
+        body: t.Object({
+            collection: t.String()
+        })
     })
     .group("/:mode", (_) => _
         //@ts-ignore

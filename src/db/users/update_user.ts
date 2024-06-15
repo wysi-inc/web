@@ -1,3 +1,4 @@
+import { CollectionDBModel, type CollectionDB } from "@/src/models/CollectionDB";
 import { type Rank, User, type Setup } from "../../models/User";
 import type { Mode } from "../../types/osu";
 import type { User as UserType } from "../../types/users";
@@ -162,5 +163,21 @@ export async function saveSetup(user_id: number, setup: any): Promise<Setup | nu
     } catch (err) {
         console.error(err);
         return null;
+    }
+}
+
+export async function saveCollection(collection: CollectionDB) {
+    try {
+        const db_collection = await CollectionDBModel.findOne({ user_id: collection.user_id });
+
+        if (!db_collection) {
+            const collectionDB = new CollectionDBModel(collection);
+            collectionDB.save();
+            return;
+        }
+        return;
+    } catch (err) {
+        console.error(err);
+        return;
     }
 }

@@ -27,6 +27,7 @@ export async function verifyUser(jwt?: any, auth?: string): Promise<UserCookie |
     if (!profile) {
         return null;
     }
+
     return profile;
 
 }
