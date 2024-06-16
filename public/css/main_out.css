@@ -4306,6 +4306,16 @@ details.collapse summary::-webkit-details-marker {
   background-color: var(--fallback-s,oklch(var(--s)/var(--tw-bg-opacity)));
 }
 
+.bg-success {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-su,oklch(var(--su)/var(--tw-bg-opacity)));
+}
+
+.bg-info {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-in,oklch(var(--in)/var(--tw-bg-opacity)));
+}
+
 .bg-opacity-15 {
   --tw-bg-opacity: 0.15;
 }
@@ -4330,14 +4340,38 @@ details.collapse summary::-webkit-details-marker {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
 
+.bg-gradient-to-b {
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+}
+
+.bg-none {
+  background-image: none;
+}
+
 .from-emerald-500 {
   --tw-gradient-from: #10b981 var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(16 185 129 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
+.from-success {
+  --tw-gradient-from: var(--fallback-su,oklch(var(--su)/1)) var(--tw-gradient-from-position);
+  --tw-gradient-to: var(--fallback-su,oklch(var(--su)/0)) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-info {
+  --tw-gradient-from: var(--fallback-in,oklch(var(--in)/1)) var(--tw-gradient-from-position);
+  --tw-gradient-to: var(--fallback-in,oklch(var(--in)/0)) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .to-sky-500 {
   --tw-gradient-to: #0ea5e9 var(--tw-gradient-to-position);
+}
+
+.to-base-200 {
+  --tw-gradient-to: var(--fallback-b2,oklch(var(--b2)/1)) var(--tw-gradient-to-position);
 }
 
 .bg-cover {
@@ -4399,6 +4433,10 @@ details.collapse summary::-webkit-details-marker {
   padding: 2rem;
 }
 
+.p-0\.5 {
+  padding: 0.125rem;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -4419,8 +4457,27 @@ details.collapse summary::-webkit-details-marker {
   padding-bottom: 0.5rem;
 }
 
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
 .pt-4 {
   padding-top: 1rem;
+}
+
+.pt-0 {
+  padding-top: 0px;
 }
 
 .text-center {
@@ -4465,6 +4522,10 @@ details.collapse summary::-webkit-details-marker {
   line-height: 1rem;
 }
 
+.font-medium {
+  font-weight: 500;
+}
+
 .leading-none {
   line-height: 1;
 }
@@ -4506,6 +4567,11 @@ details.collapse summary::-webkit-details-marker {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-info-content {
+  --tw-text-opacity: 1;
+  color: var(--fallback-inc,oklch(var(--inc)/var(--tw-text-opacity)));
 }
 
 .text-opacity-100 {
@@ -4553,6 +4619,12 @@ details.collapse summary::-webkit-details-marker {
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-none {
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -4724,6 +4796,24 @@ details.collapse summary::-webkit-details-marker {
 .has-\[\:disabled\]\:bg-base-300:has(:disabled) {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity)));
+}
+
+.has-\[disabled\]\:bg-info:has(disabled) {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-in,oklch(var(--in)/var(--tw-bg-opacity)));
+}
+
+.has-\[\:not\(checked\)\]\:bg-info:has(:not(checked)) {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-in,oklch(var(--in)/var(--tw-bg-opacity)));
+}
+
+.has-\[checked\]\:bg-gradient-to-b:has(checked) {
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+}
+
+.has-\[\:checked\]\:bg-gradient-to-b:has(:checked) {
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
 
 .has-\[\:checked\]\:opacity-100:has(:checked) {

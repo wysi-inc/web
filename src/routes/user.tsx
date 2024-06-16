@@ -21,6 +21,7 @@ import OsuDBParser from "osu-db-parser";
 import type { v1Beatmap } from '../types/beatmaps';
 import { v1 } from 'osu-api-extended';
 import type { CollectionDB } from '../models/CollectionDB';
+import UserCollectionsPanel from '../components/user/u_panels/UserCollectionsPanel';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
     //@ts-ignore
@@ -28,8 +29,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         const user = await verifyUser(jwt, cookie.auth.value);
         return <>
             <HtmxPage headers={request.headers} user={user}>
-                <UserPage
-                    id={params.id} logged_id={user?.id} />
+                <UserPage id={params.id} logged_id={user?.id} />
             </HtmxPage>
         </>
     })
@@ -58,24 +58,23 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
 
         if (Number(params.id) != user.id) return;
 
-        console.log(body.collection);
-
-        let collectionBuffer = Buffer.from("");
+        let collectionBuffer = Buffer.from(await body.collection.arrayBuffer());
         const collectionDB = new OsuDBParser(null, collectionBuffer); // Yeah, that's okay
 
-        console.log(collectionDB);
-        // let osuCollectionData = collectionDB.getCollectionData(); // This is collection.db data you can make with this all that you want.
-        // const osuCollectionDB: CollectionDB = {
-        //     user_id: user.id,
-        //     collections: osuCollectionData.collection.map((c: any) => ({
-        //         name: c.name,
-        //         beatmapsMd5: c.beatmapsMd5
-        //     }))
-        // };
-        // saveCollection(osuCollectionDB);
+        let osuCollectionData = collectionDB.getCollectionData(); // This is collection.db data you can make with this all that you want.
+        const osuCollectionDB: CollectionDB = {
+            user_id: user.id,
+            collections: osuCollectionData.collection.map((c: any) => ({
+                name: c.name,
+                beatmapsMd5: c.beatmapsMd5
+            }))
+        };
+
+        console.log(osuCollectionDB);
+        saveCollection(osuCollectionDB);
     }, {
         body: t.Object({
-            collection: t.String()
+            collection: t.Any()
         })
     })
     .group("/:mode", (_) => _
@@ -111,6 +110,11 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                     mode={params.mode as Mode}
                 />
             ))
+            //@ts-ignore
+            .post("/collections", async ({ cookie: { auth }, params, jwt }) => {
+                const user = await verifyUser(jwt, auth.value);
+                return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user?.id} />
+            })
             .post("/most", ({ params }) => (
                 <UserMostPanel id={Number(params.id)} />
             ))

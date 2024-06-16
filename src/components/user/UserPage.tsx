@@ -5,6 +5,7 @@ import LazyPanel from "./LazyPanel";
 import Panel from "./Panel";
 import UserSetupPanel from "./u_panels/UserSetupPanel";
 import { getUser } from "@/src/db/users/get_user";
+import UserCollectionsPanel from "./u_panels/UserCollectionsPanel";
 
 type Props = {
     logged_id: number | undefined;
@@ -67,21 +68,8 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             url={`/users/${user.id}/${mode}/panels/scores/best`} />
         <LazyPanel code="beatmaps" title="Beatmaps" icon={<i class="fa-solid fa-screwdriver-wrench" />}
             url={`/users/${user.id}/${mode}/panels/beatmaps/favourite`} />
-        {editable && user.db_setup ?
-            <Panel title="Collections" code="collections" icon={<i class="fa-solid fa-list" />}>
-                <form hx-swap="none" hx-post={`/users/${user.id}/collections`} hx-trigger="submit">
-                    <label class="form-control w-full max-w-xs">
-                        <div class="label">
-                            <span class="label-text">collections.db</span>
-                        </div>
-                        <input type="file" name="collection" class="file-input file-input-bordered w-full max-w-xs" />
-                    </label>
-                    <button type="submit" class="btn btn-primary">
-                        Send
-                    </button>
-                </form>
-            </Panel> : <></>
-        }
+        <LazyPanel code="collections" title="Collections" icon={<i class="fa-solid fa-list" />}
+            url={`/users/${user.id}/${mode}/panels/collections`} />
         <LazyPanel code="most" title="Most Played" icon={<i class="fa-solid fa-rotate-left" />}
             url={`/users/${user.id}/0/panels/most`} />
         <LazyPanel code="medals" title="Medals" icon={<img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" />}
