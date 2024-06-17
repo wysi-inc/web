@@ -49,13 +49,21 @@ async function UserCollectionsPanel({ user_id, logged_id }: Props) {
         <div class="flex flex-col gap-4">
             {
                 dbcollection?.collections.map((c) => (
-                    <div class="flex flex-row gap-2 items-center">
-                        <button onclick="downloadCollection(this.id);"
-                            class="px-2 btn btn-info text-info-content border-none"
-                            id={`btn_download_${c.name}`} data-name={c.name}
+                    <div class="flex flex-col items-start gap-1 p-2 bg-base-300 rounded-lg">
+                        <button class="h-8 cursor-pointer link link-info flex flex-row gap-2 items-center" id={`btn_download_${c.name}`}
+                            onclick="downloadCollection(this.id);" data-name={c.name}
                             data-ids={JSON.stringify(c.beatmapsMd5.map(h => h))}>
-                            <i class="px-2 regular fa-regular fa-file-zipper" />
-                            <span class="loading loading-spinner loading-sm" style={{ display: "none" }} />
+                            <i class="regular fa-regular fa-file-zipper" />
+                            <span class="loading loading-spinner loading-xs"
+                                style={{ display: "none" }} />
+                            <label class="cursor-pointer">
+                                Download
+                            </label>
+                            <progress class="progress progress-success w-56" value={0} max={c.beatmapsMd5.length}
+                                style={{ display: "none" }} />
+                            <span class="progress-indicator" style={{ display: "none" }}>
+                                0/{c.beatmapsMd5.length}
+                            </span>
                         </button>
                         <div class="collapse collapse-arrow bg-info bg-opacity-50 has-[:checked]:bg-gradient-to-b from-info to-base-200 p-0.5">
                             <input type="checkbox" name="collections-acordion" />
@@ -63,7 +71,7 @@ async function UserCollectionsPanel({ user_id, logged_id }: Props) {
                                 {c.name} ({c.beatmapsMd5.length})
                             </div>
                             <div class="collapse-content p-0 m-0">
-                                <div class="flex flex-col">
+                                <div class="flex flex-col gap-2 p-2">
                                     {
                                         c.beatmapsMd5.map((h) => (
                                             <BeatmapCollectionPlaceholderCard hash={h} />
