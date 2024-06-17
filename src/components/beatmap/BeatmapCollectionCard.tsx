@@ -2,15 +2,13 @@ import type { BeatmapsetStatus, MinoBeatmap } from "@/src/types/beatmaps";
 import DiffIcon from "./DiffIcon";
 import StatusBadge from "./StatusBadge";
 import HxA from "../web/HxA";
+import AudioPlayButton from "../web/AudioPlayButton";
 
 type Props = {
-    hash: string
+    beatmap: MinoBeatmap
 }
 
-async function BeatmapCollectionCard({ hash }: Props) {
-
-    const res = await fetch(`https://catboy.best/api/v2/md5/${hash}`);
-    const beatmap = await res.json() as MinoBeatmap;
+async function BeatmapCollectionCard({ beatmap }: Props) {
 
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmap.set.id}/covers/card.jpg?${beatmap.set.id}`;
 
@@ -32,6 +30,20 @@ async function BeatmapCollectionCard({ hash }: Props) {
                 <div class="flex flex-row gap-2 items-center">
                     <HxA css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmaps/${beatmap.set.id}`}>{beatmap.set.title}</HxA>
                     <p class="text-neutral-content text-opacity-75 text-sm truncate"> by {beatmap.set.artist}</p>
+                </div>
+                <div class="ml-auto flex flex-row items-center justify-around p-1 gap-1">
+                    <AudioPlayButton css="btn btn-ghost btn-sm grow p-2"
+                        beatmap_id={beatmap.id}
+                        set_id={beatmap.set.id}
+                        beatmap_title={beatmap.set.title}
+                        beatmap_artist={beatmap.set.artist}
+                    />
+                    <a class="btn btn-ghost btn-sm grow p-2" href={`https://catboy.best/d/${beatmap.set.id}`}>
+                        <i class="fa-solid fa-download" />
+                    </a>
+                    <a class="btn btn-ghost btn-sm grow p-2" href={`osu://b/${beatmap.id}`}>
+                        <i class="fa-solid fa-angles-down" />
+                    </a>
                 </div>
             </div>
         </div>

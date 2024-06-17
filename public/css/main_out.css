@@ -3853,6 +3853,14 @@ details.collapse summary::-webkit-details-marker {
   margin-top: auto;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
 .block {
   display: block;
 }
@@ -4296,6 +4304,11 @@ details.collapse summary::-webkit-details-marker {
   background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity)));
 }
 
+.bg-info {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-in,oklch(var(--in)/var(--tw-bg-opacity)));
+}
+
 .bg-neutral {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-n,oklch(var(--n)/var(--tw-bg-opacity)));
@@ -4304,16 +4317,6 @@ details.collapse summary::-webkit-details-marker {
 .bg-secondary {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-s,oklch(var(--s)/var(--tw-bg-opacity)));
-}
-
-.bg-success {
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-su,oklch(var(--su)/var(--tw-bg-opacity)));
-}
-
-.bg-info {
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-in,oklch(var(--in)/var(--tw-bg-opacity)));
 }
 
 .bg-opacity-15 {
@@ -4336,27 +4339,17 @@ details.collapse summary::-webkit-details-marker {
   --tw-bg-opacity: 0.75;
 }
 
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
 
-.bg-none {
-  background-image: none;
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
 
 .from-emerald-500 {
   --tw-gradient-from: #10b981 var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(16 185 129 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.from-success {
-  --tw-gradient-from: var(--fallback-su,oklch(var(--su)/1)) var(--tw-gradient-from-position);
-  --tw-gradient-to: var(--fallback-su,oklch(var(--su)/0)) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
@@ -4366,12 +4359,12 @@ details.collapse summary::-webkit-details-marker {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
-.to-sky-500 {
-  --tw-gradient-to: #0ea5e9 var(--tw-gradient-to-position);
-}
-
 .to-base-200 {
   --tw-gradient-to: var(--fallback-b2,oklch(var(--b2)/1)) var(--tw-gradient-to-position);
+}
+
+.to-sky-500 {
+  --tw-gradient-to: #0ea5e9 var(--tw-gradient-to-position);
 }
 
 .bg-cover {
@@ -4417,6 +4410,10 @@ details.collapse summary::-webkit-details-marker {
   padding: 0px;
 }
 
+.p-0\.5 {
+  padding: 0.125rem;
+}
+
 .p-1 {
   padding: 0.25rem;
 }
@@ -4431,10 +4428,6 @@ details.collapse summary::-webkit-details-marker {
 
 .p-8 {
   padding: 2rem;
-}
-
-.p-0\.5 {
-  padding: 0.125rem;
 }
 
 .px-2 {
@@ -4457,27 +4450,12 @@ details.collapse summary::-webkit-details-marker {
   padding-bottom: 0.5rem;
 }
 
-.px-0 {
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
-.px-1 {
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
+.pt-0 {
+  padding-top: 0px;
 }
 
 .pt-4 {
   padding-top: 1rem;
-}
-
-.pt-0 {
-  padding-top: 0px;
 }
 
 .text-center {
@@ -4522,10 +4500,6 @@ details.collapse summary::-webkit-details-marker {
   line-height: 1rem;
 }
 
-.font-medium {
-  font-weight: 500;
-}
-
 .leading-none {
   line-height: 1;
 }
@@ -4550,6 +4524,11 @@ details.collapse summary::-webkit-details-marker {
   color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
+.text-info-content {
+  --tw-text-opacity: 1;
+  color: var(--fallback-inc,oklch(var(--inc)/var(--tw-text-opacity)));
+}
+
 .text-neutral-content {
   --tw-text-opacity: 1;
   color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity)));
@@ -4567,11 +4546,6 @@ details.collapse summary::-webkit-details-marker {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-info-content {
-  --tw-text-opacity: 1;
-  color: var(--fallback-inc,oklch(var(--inc)/var(--tw-text-opacity)));
 }
 
 .text-opacity-100 {
@@ -4796,20 +4770,6 @@ details.collapse summary::-webkit-details-marker {
 .has-\[\:disabled\]\:bg-base-300:has(:disabled) {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity)));
-}
-
-.has-\[disabled\]\:bg-info:has(disabled) {
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-in,oklch(var(--in)/var(--tw-bg-opacity)));
-}
-
-.has-\[\:not\(checked\)\]\:bg-info:has(:not(checked)) {
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-in,oklch(var(--in)/var(--tw-bg-opacity)));
-}
-
-.has-\[checked\]\:bg-gradient-to-b:has(checked) {
-  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
 
 .has-\[\:checked\]\:bg-gradient-to-b:has(:checked) {
