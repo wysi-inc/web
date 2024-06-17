@@ -3,9 +3,16 @@ import { downloadZip } from "https://unpkg.com/client-zip@2.4.5/index.js"
 async function downloadCollection(id) {
 
     console.log("starting download");
+    const button = document.getElementById(id);
+    const regular = button.getElementsByClassName("regular")[0];
+    const loading = button.getElementsByClassName("loading")[0];
 
-    const name = document.getElementById(id).getAttribute("data-name");
-    const hashes = JSON.parse(document.getElementById(id).getAttribute("data-ids"));
+    button.disabled = true;
+    regular.style.display = "none";
+    loading.style.display = "flex";
+
+    const name = button.getAttribute("data-name");
+    const hashes = JSON.parse(button.getAttribute("data-ids"));
 
     const files = [];
 
@@ -23,7 +30,12 @@ async function downloadCollection(id) {
 
     const content = await downloadZip(files).blob();
     var blobUrl = URL.createObjectURL(content);
-    let link = document.createElement("a"); // Or maybe get it from the current document
+
+    button.disabled = false;
+    regular.style.display = "flex";
+    loading.style.display = "none";
+
+    let link = document.createElement("a");
     link.href = blobUrl;
     link.download = `collection-${name}.zip`;
     link.click();

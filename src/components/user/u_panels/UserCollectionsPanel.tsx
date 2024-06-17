@@ -51,10 +51,11 @@ async function UserCollectionsPanel({ user_id, logged_id }: Props) {
                 dbcollection?.collections.map((c) => (
                     <div class="flex flex-row gap-2 items-center">
                         <button onclick="downloadCollection(this.id);"
-                            class="btn btn-info text-info-content border-none"
+                            class="px-2 btn btn-info text-info-content border-none"
                             id={`btn_download_${c.name}`} data-name={c.name}
                             data-ids={JSON.stringify(c.beatmapsMd5.map(h => h))}>
-                            <i class="fa-regular fa-file-zipper" />
+                            <i class="px-2 regular fa-regular fa-file-zipper" />
+                            <span class="loading loading-spinner loading-sm" style={{ display: "none" }} />
                         </button>
                         <div class="collapse collapse-arrow bg-info bg-opacity-50 has-[:checked]:bg-gradient-to-b from-info to-base-200 p-0.5">
                             <input type="checkbox" name="collections-acordion" />
