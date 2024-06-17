@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 
+
 # testing
 /coverage
 /devel
@@ -15,6 +16,10 @@
 
 # production
 /build
+/public/css/main_out.css
+
+.pnp.js
+np.js
 
 # misc
 .DS_Store
