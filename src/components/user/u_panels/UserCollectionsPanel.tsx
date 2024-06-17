@@ -34,7 +34,7 @@ async function UserCollectionsPanel({ user_id, logged_id }: Props) {
     //     }
     // }
 
-    return (<div id="colpanel">
+    return (<div id="colpanel" class="max-h-96 overflow-y-scroll">
         <script type="module" src="/public/js/collectiondownloader.js" />
         {user_id === logged_id ?
             <form class="flex flex-row items-center gap-2 mb-2" hx-indicator="#send-indicator" hx-swap="outerHTML" hx-target="#colpanel" hx-trigger="submit"

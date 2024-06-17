@@ -30,17 +30,22 @@ async function downloadCollection(id) {
         for (let i = 0; i < hashes.length; i++) {
             const res = await fetch(`https://catboy.best/api/v2/md5/${hashes[i]}`);
             const beatmap = await res.json();
-            const data = await fetch(`https://catboy.best/d/${beatmap.set.id}`);
-            if (Number(data.headers.get("x-ratelimit-remaining")) <= 0) {
+            let data = await fetch(`https://catboy.best/d/${beatmap.set.id}`);
+            while (Number(data.headers.get("x-ratelimit-remaining")) <= 0) {
+                label.innerText = "Rate Limit Hit, waiting 60s...";
                 await delay(61000);
-                const data = await fetch(`https://catboy.best/d/${beatmap.set.id}`);
+                data = await fetch(`https://catboy.best/d/${beatmap.set.id}`);
             }
-            const input = {
-                name: `${beatmap.set.id}.osz`,
-                lastModified: new Date(),
-                input: data.body
-            };
-            files.push(input);
+            try {
+                const input = {
+                    name: `${beatmap.set.id}.osz`,
+                    lastModified: new Date(),
+                    input: data.body
+                };
+                files.push(input);
+            } catch (err) {
+                console.error(err);
+            }
             count++;
             indicator.innerHTML = `${count}/${hashes.length}`;
             progress.value = count;
