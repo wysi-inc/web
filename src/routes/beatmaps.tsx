@@ -5,6 +5,7 @@ import BeatmapsList from '../components/beatmap/BeatmapsList';
 import BeatmapsetPage from '../components/beatmap/BeatmapsetPage';
 import BeatmapScoreTable from '../components/beatmap/BeatmapScoreTable';
 import HtmxPage from '../libs/routes';
+import { BeatmapCollectionCard } from '../components/beatmap/BeatmapCollectionCard';
 
 const queryBodyElysia = {
     body: t.Object({
@@ -47,25 +48,29 @@ export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
     .post("/list", ({ body }) => (
         <BeatmapsList body={body} />
     ), queryBodyElysia)
-    .post("/list/:cursor", ({ body, params: { cursor } }) => (
-        <BeatmapsList body={body} cursor={cursor} />
+    .post("/list/:cursor", ({ body, params }) => (
+        <BeatmapsList body={body} cursor={params.cursor} />
     ), queryBodyElysia)
     //@ts-ignore
-    .get("/:set_id", async ({ request, jwt, cookie, params: { set_id } }) => (
+    .get("/:set_id", async ({ request, jwt, cookie, params }) => (
         <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
-            <BeatmapsetPage set_id={Number(set_id)} />
+            <BeatmapsetPage set_id={Number(params.set_id)} />
         </HtmxPage>
     ))
     //@ts-ignore
-    .get("/:set_id/:beatmap_id", async ({ request, jwt, cookie, params: { set_id, beatmap_id } }) => (
+    .get("/:set_id/:beatmap_id", async ({ request, jwt, cookie, params }) => (
         <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
-            <BeatmapsetPage set_id={Number(set_id)} beatmap_id={Number(beatmap_id)} />
+            <BeatmapsetPage set_id={Number(params.set_id)}
+                beatmap_id={Number(params.beatmap_id)} />
         </HtmxPage>
     ))
-    .post("/:set_id/:beatmap_id/scores/:mode", ({ params: { beatmap_id, mode } }) => (
+    .post("/:set_id/:beatmap_id/scores/:mode", ({ params }) => (
         <BeatmapScoreTable
-            id={Number(beatmap_id)}
-            mode={mode as Mode}
+            id={Number(params.beatmap_id)}
+            mode={params.mode as Mode}
         />
     ), queryBodyElysia)
+    .post("/collectioncard/:hash", ({ params }) => (
+        <BeatmapCollectionCard hash={params.hash} />
+    ))
 

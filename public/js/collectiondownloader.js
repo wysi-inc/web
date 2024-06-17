@@ -5,15 +5,16 @@ async function downloadCollection(id) {
     console.log("starting download");
 
     const name = document.getElementById(id).getAttribute("data-name");
-    const ids = JSON.parse(document.getElementById(id).getAttribute("data-ids"));
+    const hashes = JSON.parse(document.getElementById(id).getAttribute("data-ids"));
 
     const files = [];
 
-    for (let i = 0; i < ids.length; i++) {
-        const data = await fetch(`https://catboy.best/d/${ids[i]}`);
-        console.log(data);
+    for (let i = 0; i < hashes.length; i++) {
+        const res = await fetch(`https://catboy.best/api/v2/md5/${hashes[i]}`);
+        const beatmap = await res.json();
+        const data = await fetch(`https://catboy.best/d/${beatmap.set.id}`);
         const input = {
-            name: `${ids[i]}.osz`,
+            name: `${beatmap.set.id}.osz`,
             lastModified: new Date(),
             input: data.body
         };
