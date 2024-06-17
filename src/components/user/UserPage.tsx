@@ -68,7 +68,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             url={`/users/${user.id}/${mode}/panels/scores/best`} />
         <LazyPanel code="beatmaps" title="Beatmaps" icon={<i class="fa-solid fa-screwdriver-wrench" />}
             url={`/users/${user.id}/${mode}/panels/beatmaps/favourite`} />
-        <LazyPanel code="collections" title="Collections" icon={<i class="fa-solid fa-list" />}
+        <LazyPanel code="collections" title="Collections (testing, might break)" icon={<i class="fa-solid fa-list" />}
             url={`/users/${user.id}/${mode}/panels/collections`} />
         <LazyPanel code="most" title="Most Played" icon={<i class="fa-solid fa-rotate-left" />}
             url={`/users/${user.id}/0/panels/most`} />
