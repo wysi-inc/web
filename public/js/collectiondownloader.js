@@ -1,5 +1,7 @@
 import { downloadZip } from "https://unpkg.com/client-zip@2.4.5/index.js"
 
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
 async function downloadCollection(id) {
 
     console.log("starting download");
@@ -20,6 +22,10 @@ async function downloadCollection(id) {
         const res = await fetch(`https://catboy.best/api/v2/md5/${hashes[i]}`);
         const beatmap = await res.json();
         const data = await fetch(`https://catboy.best/d/${beatmap.set.id}`);
+        if (Number(data.headers.get("x-ratelimit-remaining")) <= 0) {
+            await delay(61000);
+            const data = await fetch(`https://catboy.best/d/${beatmap.set.id}`);
+        }
         const input = {
             name: `${beatmap.set.id}.osz`,
             lastModified: new Date(),
