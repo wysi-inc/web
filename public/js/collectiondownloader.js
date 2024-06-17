@@ -32,8 +32,11 @@ async function downloadCollection(id) {
             const beatmap = await res.json();
             let data = await fetch(`https://catboy.best/d/${beatmap.set.id}`);
             while (Number(data.headers.get("x-ratelimit-remaining")) <= 0) {
-                label.innerText = "Rate Limit Hit, waiting 60s...";
-                await delay(61000);
+                for (let s = 60; s >= 0; s--) {
+                    label.innerText = `Rate Limit Hit, waiting ${s}s...`;
+                    await delay(1000);
+                }
+                label.innerText = "Downloading...";
                 data = await fetch(`https://catboy.best/d/${beatmap.set.id}`);
             }
             try {
