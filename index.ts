@@ -3,7 +3,7 @@ import { html } from "@elysiajs/html";
 import { staticPlugin } from '@elysiajs/static'
 import { jwt } from "@elysiajs/jwt";
 
-import { auth } from "osu-api-extended";
+import { auth, v1 } from "osu-api-extended";
 import mongoose from "mongoose";
 
 import { baseRoutes } from "./src/routes/base";
@@ -20,6 +20,7 @@ const mongo_uri = process.env.MONGO_URI as string;
 export const osu_id = Number(process.env.OSU_ID as string);
 export const osu_secret = process.env.OSU_SECRET as string;
 export const osu_redirect = process.env.OSU_REDIRECT as string;
+export const osu_api_key = process.env.OSU_API_KEY as string;
 
 function connect(): void {
     mongoose.connect(mongo_uri)
@@ -31,6 +32,8 @@ function connect(): void {
             console.info("[ OK ] Connected to osu!API") :
             console.error("[ EE ] Couldn't connect to osu!API\n", res)
         ).catch((err) => console.error(err));
+
+    auth.set_v1(osu_api_key);
 
     updateMedals();
 }

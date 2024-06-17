@@ -1,4 +1,4 @@
-import { Elysia } from 'elysia'
+import { Elysia, t } from 'elysia'
 import type { BeatmapCategory, Mode, ScoreCategory } from '../types/osu';
 import type { ProfileMedal } from '../types/medals';
 import UserPage from '../components/user/UserPage';
@@ -14,7 +14,11 @@ import UserMostList from '../components/user/u_panels/u_components/UserMostList'
 import UserSetupPanel from '../components/user/u_panels/UserSetupPanel';
 import HtmxPage from '../libs/routes';
 import { verifyUser } from '../libs/auth';
-import { saveSetup } from '../db/users/update_user';
+import { saveCollection, saveSetup } from '../db/users/update_user';
+//@ts-ignore
+import OsuDBParser from "osu-db-parser";
+import type { CollectionDB } from '../models/CollectionDB';
+import UserCollectionsPanel from '../components/user/u_panels/UserCollectionsPanel';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
     //@ts-ignore
@@ -22,21 +26,53 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         const user = await verifyUser(jwt, cookie.auth.value);
         return <>
             <HtmxPage headers={request.headers} user={user}>
-                <UserPage
-                    id={params.id} logged_id={user?.id} />
+                <UserPage id={params.id} logged_id={user?.id} />
             </HtmxPage>
         </>
     })
     //@ts-ignore
-    .post("/setup", async ({ set, cookie: { auth }, body, jwt }) => {
+    .post("/setup", async ({ params, set, cookie: { auth }, body, jwt }) => {
         const user = await verifyUser(jwt, auth.value);
         if (!user) {
             set.status = 401;
             return "Unauthorized";
         }
+
+        if (Number(params.id) != user.id) return;
+
         const setup = await saveSetup(user.id, body);
         if (!setup) return "Failed to save setup, reload the page and try again.";
         return <UserSetupPanel setup={setup} logged_id={user.id} page_id={user.id} />
+    })
+    //@ts-ignore
+    .post("/collections", async ({ params, set, cookie: { auth }, body, jwt }) => {
+
+        const user = await verifyUser(jwt, auth.value);
+        if (!user) {
+            set.status = 401;
+            return "Unauthorized";
+        }
+
+        if (Number(params.id) != user.id) return;
+
+        let collectionBuffer = Buffer.from(await body.collection.arrayBuffer());
+        const collectionDB = new OsuDBParser(null, collectionBuffer); // Yeah, that's okay
+
+        let osuCollectionData = collectionDB.getCollectionData(); // This is collection.db data you can make with this all that you want.
+        const osuCollectionDB: CollectionDB = {
+            user_id: user.id,
+            collections: osuCollectionData.collection.map((c: any) => ({
+                name: c.name,
+                beatmapsMd5: c.beatmapsMd5
+            }))
+        };
+
+        saveCollection(osuCollectionDB);
+        return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} />
+    }, {
+        body: t.Object({
+            collection: t.Any()
+        })
     })
     .group("/:mode", (_) => _
         //@ts-ignore
@@ -71,6 +107,11 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                     mode={params.mode as Mode}
                 />
             ))
+            //@ts-ignore
+            .post("/collections", async ({ cookie: { auth }, params, jwt }) => {
+                const user = await verifyUser(jwt, auth.value);
+                return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user?.id} />
+            })
             .post("/most", ({ params }) => (
                 <UserMostPanel id={Number(params.id)} />
             ))
