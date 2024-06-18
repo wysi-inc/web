@@ -3,11 +3,16 @@ import { BeatmapCollectionCard } from "./BeatmapCollectionCard";
 
 type Props = {
     user_id: number,
-    collection_name: string,
-    offset: number
+    collection_name?: string,
+    offset?: number
 }
 
 async function BeatmapCollectionList({ user_id, collection_name, offset }: Props) {
+
+    if (!collection_name) return (<></>);
+    if (offset === undefined) return (<></>);
+
+    const LIMIT = 20;
 
     const db_collection = await CollectionsDBModel.findOne({ user_id });
 
@@ -26,8 +31,8 @@ async function BeatmapCollectionList({ user_id, collection_name, offset }: Props
 
     let hashes: string[] = [];
 
-    for (let i = offset; i < offset + 20; i++) {
-        if (collection.beatmapsMd5[i]) break;
+    for (let i = offset; i < offset + LIMIT; i++) {
+        if (!collection.beatmapsMd5[i]) break;
         hashes.push(collection.beatmapsMd5[i]);
     }
 
@@ -35,8 +40,8 @@ async function BeatmapCollectionList({ user_id, collection_name, offset }: Props
         {hashes.map((h) =>
             <BeatmapCollectionCard hash={h} />
         )}
-        {hashes.length >= 20 ?
-            <button hx-post={`/user/collections/list/${collection_name}?offset=${offset + 20}`}
+        {hashes.length >= LIMIT ?
+            <button hx-post={`/users/${user_id}/0/lists/collections?name=${collection_name}&offset=${offset + LIMIT}`}
                 hx-trigger="click" hx-swap="outerHTML"
                 hx-boost="false" hx-include="#search-form"
                 class="col-span-full btn btn-success btn-sm flex flex-row gap-2">

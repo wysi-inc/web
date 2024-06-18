@@ -22,7 +22,7 @@ const Peripherals = ({ peripherals, editable }: Props) => {
             <SetupInput editable={editable} type="text" id="peripherals_keypad" name="Keypad" value={peripherals?.keypad} icon={<i class="fa-solid fa-hockey-puck" />} />
             <SetupInput editable={editable} type="text" id="peripherals_headphones" name="Headphones" value={peripherals?.headphones} icon={<i class="fa-solid fa-headphones" />} />
             <SetupInput editable={editable} type="text" id="peripherals_camera" name="Camera" value={peripherals?.camera} icon={<i class="fa-solid fa-camera" />} />
-            <SetupInput editable={editable} type="text" id="peripherals_microphone" name="Microphpne" value={peripherals?.microphone} icon={<i class="fa-solid fa-microphone" />} />
+            <SetupInput editable={editable} type="text" id="peripherals_microphone" name="Microphone" value={peripherals?.microphone} icon={<i class="fa-solid fa-microphone" />} />
             <SetupInput editable={editable} type="text" id="peripherals_monitor" name="Monitor" value={peripherals?.monitor} icon={<i class="fa-solid fa-desktop" />} />
             <SetupInput editable={editable} type="text" id="peripherals_audio" name="Audio" value={peripherals?.audio} icon={<i class="fa-solid fa-sliders" />} />
             <SetupInput editable={editable} type="text" id="peripherals_desk" name="Desk" value={peripherals?.desk} icon={<i class="fa-solid fa-database" />} />

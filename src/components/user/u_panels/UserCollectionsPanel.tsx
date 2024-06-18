@@ -1,4 +1,5 @@
 import { CollectionsDBModel } from "@/src/models/CollectionDB";
+import BeatmapCollectionList from "../../beatmap/BeatmapCollectionList";
 
 type Props = {
     user_id: number,
@@ -50,11 +51,10 @@ async function UserCollectionsPanel({ user_id, logged_id }: Props) {
                             </div>
                             <div class="collapse-content p-0 m-0">
                                 <div class="flex flex-col gap-2 p-2">
-                                    {
-                                        // c.beatmaps.map((b) => (
-                                        //     <BeatmapCollectionCard beatmap={b} />
-                                        // ))
-                                    }
+                                    <BeatmapCollectionList
+                                        user_id={user_id}
+                                        collection_name={c.name as string}
+                                        offset={0} />
                                 </div>
                             </div>
                         </div>

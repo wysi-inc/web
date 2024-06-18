@@ -16,6 +16,7 @@ import HtmxPage from '../libs/routes';
 import { verifyUser } from '../libs/auth';
 import { saveCollection, saveSetup } from '../db/users/update_user';
 import UserCollectionsPanel from '../components/user/u_panels/UserCollectionsPanel';
+import BeatmapCollectionList from '../components/beatmap/BeatmapCollectionList';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
     //@ts-ignore
@@ -136,6 +137,12 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                     offset={Number(query.offset)}
                     limit={Number(query.limit)}
                 />
+            ))
+            .post("/collections", ({ params, query }) => (
+                <BeatmapCollectionList
+                    user_id={Number(params.id)}
+                    collection_name={query.name}
+                    offset={Number(query.offset)} />
             ))
         )
     )
