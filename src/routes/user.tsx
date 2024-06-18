@@ -15,9 +15,6 @@ import UserSetupPanel from '../components/user/u_panels/UserSetupPanel';
 import HtmxPage from '../libs/routes';
 import { verifyUser } from '../libs/auth';
 import { saveCollection, saveSetup } from '../db/users/update_user';
-//@ts-ignore
-import OsuDBParser from "osu-db-parser";
-import type { CollectionDB } from '../models/CollectionDB';
 import UserCollectionsPanel from '../components/user/u_panels/UserCollectionsPanel';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
@@ -55,19 +52,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
 
         if (Number(params.id) != user.id) return;
 
-        let collectionBuffer = Buffer.from(await body.collection.arrayBuffer());
-        const collectionDB = new OsuDBParser(null, collectionBuffer); // Yeah, that's okay
-
-        let osuCollectionData = collectionDB.getCollectionData(); // This is collection.db data you can make with this all that you want.
-        const osuCollectionDB: CollectionDB = {
-            user_id: user.id,
-            collections: osuCollectionData.collection.map((c: any) => ({
-                name: c.name,
-                beatmapsMd5: c.beatmapsMd5
-            }))
-        };
-
-        saveCollection(osuCollectionDB);
+        await saveCollection(body, user);
         return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} />
     }, {
         body: t.Object({

@@ -1,49 +1,27 @@
-import { CollectionDBModel } from "@/src/models/CollectionDB";
-import type { MinoBeatmap } from "@/src/types/beatmaps";
-import { BeatmapCollectionPlaceholderCard } from "../../beatmap/BeatmapCollectionCard";
+import { CollectionsDBModel } from "@/src/models/CollectionDB";
 
 type Props = {
     user_id: number,
     logged_id: number | undefined
 }
 
-type Collections2 = {
-    name: string,
-    beatmaps: MinoBeatmap[]
-}
-
 async function UserCollectionsPanel({ user_id, logged_id }: Props) {
 
-    const dbcollection = await CollectionDBModel.findOne({ user_id });
-
-    // const minocollections: Collections2[] = [];
-    // if (dbcollection) {
-    //     for (let i = 0; i < dbcollection.collections.length; i++) {
-    //         const c = dbcollection.collections[i];
-    //         const cbs: MinoBeatmap[] = [];
-    //         for (let j = 0; j < c.beatmapsMd5.length; j++) {
-    //             const h = c.beatmapsMd5[j];
-    //             const res = await fetch(`https://catboy.best/api/v2/md5/${h}`);
-    //             const beatmap = await res.json() as MinoBeatmap;
-    //             cbs.push(beatmap);
-    //         }
-    //         minocollections.push({
-    //             name: String(c.name),
-    //             beatmaps: cbs,
-    //         });
-    //     }
-    // }
+    const dbcollection = await CollectionsDBModel.findOne({ user_id });
 
     return (<div id="colpanel" class="max-h-96 overflow-y-scroll">
         <script type="module" src="/public/js/collectiondownloader.js" />
         {user_id === logged_id ?
-            <form class="flex flex-row items-center gap-2 mb-2" hx-indicator="#send-indicator" hx-swap="outerHTML" hx-target="#colpanel" hx-trigger="submit"
+            <form class="flex flex-row items-center gap-2 mb-2" hx-swap="outerHTML" hx-target="#colpanel" hx-trigger="submit"
                 hx-encoding='multipart/form-data' hx-post={`/users/${user_id}/collections`} >
                 <input type="file" name="collection" class="file-input file-input-bordered w-full max-w-xs" />
                 <button type="submit" class="btn btn-primary">
                     Send
                 </button>
-                <span class="loading loading-spinner htmx-indicator" id="send-indicator" />
+                <div class="htmx-indicator flex flex-row items-center gap-4">
+                    <span class="loading loading-spinner" />
+                    <span>Processing beatmaps (this might take a while)</span>
+                </div>
             </form> : <></>
         }
         <div class="flex flex-col gap-4">
@@ -73,9 +51,9 @@ async function UserCollectionsPanel({ user_id, logged_id }: Props) {
                             <div class="collapse-content p-0 m-0">
                                 <div class="flex flex-col gap-2 p-2">
                                     {
-                                        c.beatmapsMd5.map((h) => (
-                                            <BeatmapCollectionPlaceholderCard hash={h} />
-                                        ))
+                                        // c.beatmaps.map((b) => (
+                                        //     <BeatmapCollectionCard beatmap={b} />
+                                        // ))
                                     }
                                 </div>
                             </div>

@@ -23,7 +23,7 @@ const AudioPlayButton = (props: Props) => {
                       ${audio_title}.href = '/beatmaps/${props.set_id}/${props.beatmap_id}';
                       ${audio_artist}.innerText = 'by ${props.beatmap_artist}';
             `}>
-            <i class="fa-solid fa-headphones" />
+            <i class="fa-solid fa-play" />
         </button >
     );
 }

@@ -3,14 +3,14 @@ import DiffIcon from "./DiffIcon";
 import CardControls from "../web/CardControls";
 import HxA from "../web/HxA";
 import StatusBadge from "./StatusBadge";
+import AudioPlayButton from "../web/AudioPlayButton";
 
 type Props = {
     beatmapset: Beatmapset,
 }
 
-const BeatmapsetCard = (props: Props) => {
+const BeatmapsetCard = ({ beatmapset }: Props) => {
 
-    const beatmapset = props.beatmapset;
     const diffs = beatmapset.beatmaps;
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
 
@@ -25,16 +25,33 @@ const BeatmapsetCard = (props: Props) => {
                         backgroundRepeat: "no-repeat"
                     }}>
                     <div class="bg-base-300 bg-opacity-75 flex flex-row rounded-lg backdrop-blur-sm">
-                        <img src={cardImg} class="rounded-lg w-24 object-cover object-center" alt="cover" loading="lazy" />
+                        <div class="group rounded-lg w-24 flex items-center justify-center"
+                            style={{
+                                background: `url(${cardImg})`,
+                                backgroundSize: "cover",
+                                backgroundPosition: "center",
+                                backgroundRepeat: "no-repeat"
+                            }}>
+                            <AudioPlayButton css="hidden group-hover:flex btn btn-ghost btn-sm w-full h-full"
+                                beatmap_id={beatmapset.beatmaps[0].id}
+                                set_id={beatmapset.id}
+                                beatmap_title={beatmapset.title}
+                                beatmap_artist={beatmapset.artist}
+                            />
+                        </div>
                         <div class="flex flex-col py-2 w-72 px-4 ">
                             <HxA css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmaps/${beatmapset.id}`}>{beatmapset.title}</HxA>
                             <p class="text-neutral-content text-opacity-75 text-sm truncate"> by {beatmapset.artist}</p>
-                            <HxA css="text-neutral-content text-opacity-75 text-sm text-gray-400 truncate" url={`/users/${beatmapset.user_id}`}>mapped by {beatmapset.creator}</HxA>
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-row p-2 gap-2 items-center">
+                <div class="text-opacity-75 text-base-content flex flex-row py-1 px-2 gap-2 items-center">
                     <StatusBadge status={beatmapset.status as BeatmapsetStatus} />
+                    <HxA url={`/users/${beatmapset.user_id}`}>
+                        <div class="tooltip" data-tip={beatmapset.creator}>
+                            <i class="fa-solid fa-user-pen" />
+                        </div>
+                    </HxA>
                     {diffs.sort((a, b) =>
                         a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int)
                         .map((beatmap, i) => i < 9 &&
@@ -50,8 +67,6 @@ const BeatmapsetCard = (props: Props) => {
             <CardControls
                 beatmap_id={beatmapset.beatmaps[0].id}
                 set_id={beatmapset.id}
-                beatmap_title={beatmapset.title}
-                beatmap_artist={beatmapset.artist}
             />
         </div>
     )

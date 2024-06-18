@@ -5,13 +5,22 @@ import LazyPanel from "./LazyPanel";
 import Panel from "./Panel";
 import UserSetupPanel from "./u_panels/UserSetupPanel";
 import { getUser } from "@/src/db/users/get_user";
-import UserCollectionsPanel from "./u_panels/UserCollectionsPanel";
 
 type Props = {
     logged_id: number | undefined;
     id: string;
     mode?: Mode;
 }
+
+type Panel = {
+    title: string,
+    code: string,
+    icon: JSX.Element,
+    show_if: boolean,
+} & (
+        { jsx: JSX.Element, url?: never } |
+        { url: string, body?: object, jsx?: never }
+    );
 
 const UserPage = async ({ id, logged_id, mode }: Props) => {
 
@@ -23,61 +32,117 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
 
     mode = user.rank_history?.mode as Mode || "osu";
 
-    return <>
-        <UserTopPanel user={user} mode={mode} />
-        <div class="underline-offset-1 text-neutral-content sticky top-16 bg-base-300 rounded-lg shadow-lg p-2 z-50 flex flex-row justify-around">
-            <a class="hover:underline" href="#history">History</a>
-            <a class="hover:underline" href="#about">About me</a>
-            <a class="hover:underline" href="#setup">Setup</a>
-            <a class="hover:underline" href="#skins">Skins</a>
-            <a class="hover:underline" href="#summary">Scores Summary</a>
-            <a class="hover:underline" href="#scores">Scores</a>
-            <a class="hover:underline" href="#beatmaps">Beatmaps</a>
-            <a class="hover:underline" href="#most">Most Played</a>
-            <a class="hover:underline" href="#medals">Medals</a>
-        </div>
-        <Panel title="History" code="history" icon={<i class="fa-solid fa-chart-line" />}>
-            <UserHistoryPanel
-                db_ranks={user.db_ranks}
-                play_counts={user.monthly_playcounts}
-                replays_watched={user.replays_watched_counts}
-            />
-        </Panel>
-        {user.page?.html ?
-            <Panel title="About me" code="about" icon={<i class="fa-solid fa-user" />}>
+    const panels: Panel[] = [
+        {
+            title: "History",
+            code: "history",
+            icon: <i class="fa-solid fa-chart-line" />,
+            show_if: true,
+            jsx:
+                <UserHistoryPanel
+                    db_ranks={user.db_ranks}
+                    play_counts={user.monthly_playcounts}
+                    replays_watched={user.replays_watched_counts}
+                />
+        },
+        {
+            title: "About me",
+            code: "about",
+            icon: <i class="fa-solid fa-user" />,
+            show_if: user.page?.html !== "",
+            jsx:
                 <div class="p-4 rounded-lg bg-base-300">
                     <div class="h-96 overflow-y-scroll">
                         {user.page.html}
                     </div>
                 </div>
-            </Panel> : <></>
-        }
-        {editable && user.db_setup ?
-            <Panel title="Setup" code="setup" icon={<i class="fa-solid fa-computer" />}>
+        },
+        {
+            title: "Setup",
+            code: "setup",
+            icon: <i class="fa-solid fa-computer" />,
+            show_if: user.db_setup !== undefined || editable,
+            jsx:
                 <UserSetupPanel
                     setup={user.db_setup}
                     logged_id={logged_id}
                     page_id={user.id} />
-            </Panel> : <></>
+        },
+        {
+            title: "Sking (wip)",
+            code: "skins",
+            icon: <i class="fa-solid fa-palette" />,
+            show_if: true,
+            url: `/users/${user.id}/0/panels/skins`
+        },
+        {
+            title: "Scores Summary",
+            code: "summary",
+            icon: <i class="fa-solid fa-ranking-star" />,
+            show_if: true,
+            url: `/users/${user.id}/${mode}/panels/summary`
+        },
+        {
+            title: "Scores",
+            code: "scores",
+            icon: <i class="fa-solid fa-flag-checkered" />,
+            show_if: true,
+            url: `/users/${user.id}/${mode}/panels/scores/best`
+        },
+        {
+            title: "Beatmaps",
+            code: "beatmaps",
+            icon: <i class="fa-solid fa-screwdriver-wrench" />,
+            show_if: true,
+            url: `/users/${user.id}/${mode}/panels/beatmaps/favourite`
+        },
+        {
+            title: "Collections (beta)",
+            code: "collections",
+            icon: <i class="fa-solid fa-list" />,
+            show_if: true,
+            url: `/users/${user.id}/${mode}/panels/collections`
+        },
+        {
+            title: "Most Played",
+            code: "most",
+            icon: <i class="fa-solid fa-rotate-left" />,
+            show_if: true,
+            url: `/users/${user.id}/0/panels/most`
+        },
+        {
+            title: "Medals",
+            code: "medals",
+            icon: <img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" />,
+            url: `/users/${user.id}/0/panels/medals`,
+            show_if: true,
+            body: { medals: user.user_achievements }
         }
-        <LazyPanel code="skins" title="Skins (wip)" icon={<i class="fa-solid fa-palette" />}
-            url={`/users/${user.id}/0/panels/skins`} />
-        <LazyPanel code="summary" title="Scores Summary" icon={<i class="fa-solid fa-ranking-star" />}
-            url={`/users/${user.id}/${mode}/panels/summary`} />
-        <LazyPanel code="scores" title="Scores" icon={<i class="fa-solid fa-flag-checkered" />}
-            url={`/users/${user.id}/${mode}/panels/scores/best`} />
-        <LazyPanel code="beatmaps" title="Beatmaps" icon={<i class="fa-solid fa-screwdriver-wrench" />}
-            url={`/users/${user.id}/${mode}/panels/beatmaps/favourite`} />
-        <LazyPanel code="collections" title="Collections (testing, might break)" icon={<i class="fa-solid fa-list" />}
-            url={`/users/${user.id}/${mode}/panels/collections`} />
-        <LazyPanel code="most" title="Most Played" icon={<i class="fa-solid fa-rotate-left" />}
-            url={`/users/${user.id}/0/panels/most`} />
-        <LazyPanel code="medals" title="Medals" icon={<img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" />}
-            tooltip="powered by osekai.net"
-            url={`/users/${user.id}/0/panels/medals`}
-            body={{ medals: user.user_achievements }}
-        />
-    </>
+    ];
+
+    return (<>
+        <UserTopPanel user={user} mode={mode} />
+        <div class="underline-offset-1 text-neutral-content sticky top-16 bg-base-300 rounded-lg shadow-lg p-2 z-50 flex flex-row justify-around">
+            {panels.map((p) => (
+                <a class="hover:underline" href={`#${p.code}`}>{p.title}</a>
+            ))}
+        </div>
+        {panels.map((p) => {
+            if (!p.show_if) return <></>;
+            if (p.url) {
+                return (
+                    <LazyPanel title={p.title} code={p.code} icon={p.icon}
+                        url={p.url} body={p.body} />
+                );
+            } else {
+                return (
+                    <Panel title={p.title} code={p.code} icon={p.icon}>
+                        {p.jsx}
+                    </Panel>
+                );
+            }
+        })}
+    </>);
 }
 
 export default UserPage;

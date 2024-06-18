@@ -1,7 +1,9 @@
-import { CollectionDBModel, type CollectionDB } from "@/src/models/CollectionDB";
+import { type CollectionsDB, CollectionsDBModel } from "@/src/models/CollectionDB";
 import { type Rank, User, type Setup } from "../../models/User";
 import type { Mode } from "../../types/osu";
-import type { User as UserType } from "../../types/users";
+import type { UserCookie, User as UserType } from "../../types/users";
+//@ts-ignore
+import OsuDBParser from "osu-db-parser";
 
 export async function updateUser(user: UserType, mode: Mode): Promise<UserType> {
     const country_rank = user.statistics.country_rank;
@@ -166,12 +168,23 @@ export async function saveSetup(user_id: number, setup: any): Promise<Setup | nu
     }
 }
 
-export async function saveCollection(collection: CollectionDB) {
+export async function saveCollection(body: any, user: UserCookie) {
+    let collectionBuffer = Buffer.from(await body.collection.arrayBuffer());
+    const collectionDB = new OsuDBParser(null, collectionBuffer); // Yeah, that's okay
+
+    let osuCollectionData = collectionDB.getCollectionData(); // This is collection.db data you can make with this all that you want.
+    const collection: CollectionsDB = {
+        user_id: user.id,
+        collections: osuCollectionData.collection.map((c: any) => ({
+            name: c.name,
+            beatmapsMd5: c.beatmapsMd5
+        }))
+    };
     try {
-        const db_collection = await CollectionDBModel.findOne({ user_id: collection.user_id });
+        const db_collection = await CollectionsDBModel.findOne({ user_id: collection.user_id });
 
         if (!db_collection) {
-            const collectionDB = new CollectionDBModel(collection);
+            const collectionDB = new CollectionsDBModel(collection);
             collectionDB.save();
             return;
         }

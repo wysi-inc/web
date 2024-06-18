@@ -15,7 +15,9 @@ const Panel = ({ children, icon, tooltip, title, code }: Props) => (
             </div>
             <div>{title}</div>
         </div>
-        {children}
+        <div class="min-h-72">
+            {children}
+        </div>
     </div>
 );
 

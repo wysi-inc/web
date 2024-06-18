@@ -10,6 +10,7 @@ import type { BeatmapsetStatus } from "@/src/types/beatmaps";
 import ModIcon from "./ModIcon";
 import { getGradeColor, getGradeLetter, secondsToTime } from "@/src/libs/web_utils";
 import { colors } from "@/src/libs/colors";
+import AudioPlayButton from "../web/AudioPlayButton";
 
 type Props = {
     position: number;
@@ -63,17 +64,34 @@ const ScoreCard = async ({ score, position }: Props) => {
         <div class="group grow rounded-lg flex flex-row bg-base-300 shadow-lg">
             <div class="text-white bg-neutral flex flex-col grow rounded-lg shadow-lg">
                 <div class="bg-cover bg-center bg-no-repeat flex flex-col rounded-lg shadow-lg"
-                    style={{ background: `url(${cardImg})` }}>
-                    <div class="bg-base-300 bg-opacity-75 grid grid-cols-1 md:grid-cols-5 rounded-lg backdrop-blur-sm">
-                        <div class="flex flex-row md:col-span-3">
-                            <img src={cardImg} class="rounded-lg w-24 object-cover object-center" alt="cover" loading="lazy" />
+                    style={{
+                        background: `url(${cardImg})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat"
+                    }}>
+                    <div class="bg-base-300 bg-opacity-75 grid grid-cols-1 md:grid-cols-2 rounded-lg backdrop-blur-sm">
+                        <div class="flex flex-row">
+                            <div class="group rounded-lg w-24 flex items-center justify-center"
+                                style={{
+                                    background: `url(${cardImg})`,
+                                    backgroundSize: "cover",
+                                    backgroundPosition: "center",
+                                    backgroundRepeat: "no-repeat"
+                                }}>
+                                <AudioPlayButton css="hidden group-hover:flex btn btn-ghost btn-sm w-full h-full"
+                                    beatmap_id={beatmap.id}
+                                    set_id={beatmapset.id}
+                                    beatmap_title={beatmapset.title}
+                                    beatmap_artist={beatmapset.artist}
+                                />
+                            </div>
                             <div class="flex flex-col py-2 px-4 truncate">
                                 <HxA css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmaps/${beatmapset.id}`}>{beatmapset.title}</HxA>
                                 <p class="text-neutral-content text-opacity-75 text-sm truncate"> by {beatmapset.artist}</p>
-                                <HxA css="text-neutral-content text-opacity-75 text-sm text-gray-400 truncate" url={`/users/${beatmapset.user_id}`}>mapped by {beatmapset.creator}</HxA>
                             </div>
                         </div>
-                        <div class="flex flex-col gap-2 py-2 px-4 justify-between md:col-span-2 rounded-lg bg-base-content bg-opacity-15">
+                        <div class="flex flex-col gap-2 py-2 px-4 justify-between rounded-lg bg-base-content bg-opacity-15">
                             <div class="flex flex-row justify-between gap-4">
                                 <div class="flex flex-col gap-1 text-base-content">
                                     <div class="flex flex-row gap-4 items-center">
@@ -91,26 +109,38 @@ const ScoreCard = async ({ score, position }: Props) => {
                                         }
                                     </div>
                                     <div class="text-sm flex flex-row gap-4">
-                                        <div><i class="fa-solid fa-fire" /> {score.max_combo.toLocaleString()}x</div>
-                                        <div><i class="fa-solid fa-crosshairs" /> {acc}%</div>
-                                    </div>
-                                    <div class="flex flex-row gap-2 text-sm">
-                                        <span style={{ color: colors.judgements.x300 }}>{score.statistics.great || 0}</span>
-                                        <span style={{ color: colors.judgements.x100 }}>{score.statistics.ok || 0}</span>
-                                        <span style={{ color: colors.judgements.x50 }}>{score.statistics.meh || 0}</span>
-                                        <span style={{ color: colors.judgements.xMiss }}>{score.statistics.miss || 0}</span>
+                                        <div class="flex flex-row gap-1 items-center"><i class="fa-solid fa-fire" /> {score.max_combo.toLocaleString()}x</div>
+                                        <div class="flex flex-row gap-1 items-center"><i class="fa-solid fa-crosshairs" /> {acc}%</div>
                                     </div>
                                 </div>
-                                <div class="flex flex-col gap-1 text-end justify-between">
-                                    <div class="-mt-2 text-5xl" style={{
-                                        color: getGradeColor(score.rank)
-                                    }}>
-                                        {getGradeLetter(score.rank)}
+                                <div class="flex flex-row gap-4 items-center">
+                                    <div class="flex flex-col gap-1">
+                                        <div class="bg-opacity-40 flex flex-row gap-2 px-2 bg-base-300 rounded-full">
+                                            {score.statistics.great ?
+                                                <span style={{ color: colors.judgements.x300 }}>
+                                                    {score.statistics.great}
+                                                </span> : <></>}
+                                            {score.statistics.ok ?
+                                                <span style={{ color: colors.judgements.x100 }}>
+                                                    {score.statistics.ok}
+                                                </span> : <></>}
+                                            {score.statistics.meh ?
+                                                <span style={{ color: colors.judgements.x50 }}>
+                                                    {score.statistics.meh}
+                                                </span> : <></>}
+                                            {score.statistics.miss ?
+                                                <span style={{ color: colors.judgements.xMiss }}>
+                                                    {score.statistics.miss}
+                                                </span> : <></>}
+                                        </div>
+                                        <div class="ms-auto flex flex-wrap flex-row-reverse gap-1">
+                                            {score.mods.map((mod) =>
+                                                <ModIcon mod={mod.acronym} />
+                                            )}
+                                        </div>
                                     </div>
-                                    <div class="flex flex-wrap flex-row-reverse gap-1">
-                                        {score.mods.map((mod) =>
-                                            <ModIcon mod={mod.acronym} />
-                                        )}
+                                    <div class="text-5xl -mt-1" style={{ color: getGradeColor(score.rank) }}>
+                                        {getGradeLetter(score.rank)}
                                     </div>
                                 </div>
                             </div>
@@ -122,9 +152,14 @@ const ScoreCard = async ({ score, position }: Props) => {
                     <DiffIcon setId={beatmapset.id} diffId={score.beatmap.id}
                         diff={score.beatmap.difficulty_rating} size={20}
                         mode={score.beatmap.mode} name={score.beatmap.version} />
-                    <div class="tooltip hidden md:block" data-tip={moment(new Date(beatmap.last_updated)).format("DD/MM/YYYY")}>
+                    <HxA url={`/users/${beatmapset.user_id}`}>
+                        <div class="tooltip" data-tip={beatmapset.creator}>
+                            <i class="fa-solid fa-user-pen" />
+                        </div>
+                    </HxA>
+                    {/*<div class="tooltip hidden md:block" data-tip={moment(new Date(beatmap.last_updated)).format("DD/MM/YYYY")}>
                         {new Date(beatmap.last_updated).getFullYear()}
-                    </div>
+                    </div>*/}
                     <div class="hidden md:flex flex-row gap-1 items-center">
                         <i class="fa-solid fa-star fa-xs" />
                         {stats?.sr ?
@@ -139,7 +174,6 @@ const ScoreCard = async ({ score, position }: Props) => {
                         }
                     </div>
                     <div class="hidden md:flex flex-row gap-1 items-center">
-                        <i class="fa-solid fa-music fa-xs" />
                         {stats?.bpm ?
                             <span class={`text-opacity-75
                                     ${Math.round(stats.bpm) > Math.round(beatmap.bpm) && "text-error tooltip"}
@@ -164,8 +198,8 @@ const ScoreCard = async ({ score, position }: Props) => {
                             <span>{secondsToTime(beatmap.total_length)}</span>
                         }
                     </div>
+                    {/*
                     <div class="hidden md:flex flex-row gap-1 items-center">
-                        <span>ar:</span>
                         {stats?.ar ?
                             <span class={`text-opacity-75
                                     ${stats.ar > beatmap.ar && "text-error tooltip"}
@@ -174,11 +208,10 @@ const ScoreCard = async ({ score, position }: Props) => {
                                 data-tip={`ar:${beatmap.ar}`}>
                                 {stats.ar}
                             </span> :
-                            <span>{beatmap.ar}</span>
+                            <span class="tooltip" data-tip="ar">{beatmap.ar}</span>
                         }
                     </div>
                     <div class="hidden md:flex flex-row gap-1 items-center">
-                        <span>cs:</span>
                         {stats?.cs ?
                             <span class={`text-opacity-75
                                     ${stats.cs > beatmap.cs && "text-error tooltip"}
@@ -187,11 +220,10 @@ const ScoreCard = async ({ score, position }: Props) => {
                                 data-tip={`cs:${beatmap.cs}`}>
                                 {stats.cs}
                             </span> :
-                            <span>{beatmap.cs}</span>
+                            <span class="tooltip" data-tip="cs">{beatmap.cs}</span>
                         }
                     </div>
                     <div class="hidden md:flex flex-row gap-1 items-center">
-                        <span>od:</span>
                         {stats?.od ?
                             <span class={`text-opacity-75
                                     ${stats.od > beatmap.accuracy && "text-error tooltip"}
@@ -200,11 +232,10 @@ const ScoreCard = async ({ score, position }: Props) => {
                                 data-tip={`od:${beatmap.accuracy}`}>
                                 {stats.od}
                             </span> :
-                            <span>{beatmap.accuracy}</span>
+                            <span class="tooltip" data-tip="od">{beatmap.accuracy}</span>
                         }
                     </div>
                     <div class="hidden md:flex flex-row gap-1 items-center">
-                        <span>hp:</span>
                         {stats?.hp ?
                             <span class={`text-opacity-75
                                     ${stats.hp > beatmap.drain && "text-error tooltip"}
@@ -213,9 +244,10 @@ const ScoreCard = async ({ score, position }: Props) => {
                                 data-tip={`hp:${beatmap.drain}`}>
                                 {stats.hp}
                             </span> :
-                            <span>{beatmap.drain}</span>
+                            <span class="tooltip" data-tip="hp">{beatmap.drain}</span>
                         }
                     </div>
+                    */}
                     <div class="ms-auto tooltip" data-tip={moment(new Date(score.ended_at)).format("MMMM Do YYYY")}>
                         {moment(new Date(score.ended_at)).fromNow()}
                     </div>
@@ -225,8 +257,6 @@ const ScoreCard = async ({ score, position }: Props) => {
             <CardControls
                 beatmap_id={score.beatmap.id}
                 set_id={beatmapset.id}
-                beatmap_title={beatmapset.title}
-                beatmap_artist={beatmapset.artist}
             />
         </div>
     </>

@@ -27,16 +27,14 @@ const UserScoresPanel = ({ id, mode, category }: Props) => {
             />
             <div role="tabpanel" class="tab-content pt-4 col-span-full">
                 <div id={`scores-list-${cat}`} class="grid grid-cols-1 gap-4 col-span-full">
-                    {!current &&
-                        <span class="loading loading-spinner htmx-indicator" id={`scores-loading-${cat}`} />
-                    }
-                    {current &&
+                    {current ?
                         <UserScoresList id={id} mode={mode} category={category} offset={0} limit={5} />
+                        :
+                        <span class="loading loading-spinner htmx-indicator" id={`scores-loading-${cat}`} />
                     }
                 </div>
             </div>
-        </>
-        );
+        </>);
     }
 
     return (

@@ -1,14 +1,16 @@
 import * as mongoose from 'mongoose';
 
 const collectionDBSchema = new mongoose.Schema({
+    name: String,
+    beatmapsMd5: [String]
+}, { _id: false });
+
+const collectionsDBSchema = new mongoose.Schema({
     user_id: {
         required: true,
         type: Number
     },
-    collections: [{
-        name: String,
-        beatmapsMd5: [String]
-    }]
+    collections: [collectionDBSchema]
 });
 
 collectionDBSchema.methods.toJSON = function() {
@@ -17,4 +19,5 @@ collectionDBSchema.methods.toJSON = function() {
 };
 
 export type CollectionDB = mongoose.InferSchemaType<typeof collectionDBSchema>;
-export const CollectionDBModel = mongoose.model('CollectionDB', collectionDBSchema);
+export type CollectionsDB = mongoose.InferSchemaType<typeof collectionsDBSchema>;
+export const CollectionsDBModel = mongoose.model('CollectionsDB', collectionsDBSchema);

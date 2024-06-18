@@ -1,26 +1,17 @@
-import type { BeatmapsetStatus, MinoBeatmap } from "@/src/types/beatmaps";
 import DiffIcon from "./DiffIcon";
 import StatusBadge from "./StatusBadge";
 import HxA from "../web/HxA";
 import AudioPlayButton from "../web/AudioPlayButton";
+import type { BeatmapsetStatus, MinoBeatmap } from "@/src/types/beatmaps";
 
 type Props = {
     hash: string
-}
-
-export async function BeatmapCollectionPlaceholderCard({ hash }: Props) {
-    return (<>
-        <div hx-trigger="revealed" hx-post={`/beatmaps/collectioncard/${hash}`} hx-swap="outerHTML">
-            <span class="loading loading-spinner htmx-indicator" /> {hash}
-        </div>
-    </>);
 }
 
 export async function BeatmapCollectionCard({ hash }: Props) {
 
     const res = await fetch(`https://catboy.best/api/v2/md5/${hash}`);
     const beatmap = await res.json() as MinoBeatmap;
-
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmap.set.id}/covers/card.jpg?${beatmap.set.id}`;
 
     return (<>
@@ -40,8 +31,8 @@ export async function BeatmapCollectionCard({ hash }: Props) {
                     mode={beatmap.mode} name={beatmap.version} />
                 <img src={cardImg} class="h-6 w-8" />
                 <div class="flex flex-row gap-2 items-center">
-                    <HxA css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmaps/${beatmap.set.id}`}>{beatmap.set.title}</HxA>
-                    <p class="text-neutral-content text-opacity-75 text-sm truncate"> by {beatmap.set.artist}</p>
+                    <HxA css="max-w-72 text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmaps/${beatmap.set.id}`}>{beatmap.set.title}</HxA>
+                    <p class="max-w-72 text-neutral-content text-opacity-75 text-sm truncate"> by {beatmap.set.artist}</p>
                 </div>
             </div>
         </div>
