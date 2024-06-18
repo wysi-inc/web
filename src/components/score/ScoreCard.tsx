@@ -16,9 +16,10 @@ type Props = {
     score: Score;
 }
 
-const ScoreCard = async (props: Props) => {
+const ScoreCard = async ({ score, position }: Props) => {
 
-    const score = props.score;
+    console.log(score.id);
+
     const beatmap = score.beatmap;
     const beatmapset = score.beatmapset;
 
@@ -218,7 +219,7 @@ const ScoreCard = async (props: Props) => {
                     <div class="ms-auto tooltip" data-tip={moment(new Date(score.ended_at)).format("MMMM Do YYYY")}>
                         {moment(new Date(score.ended_at)).fromNow()}
                     </div>
-                    <div>#{props.position}</div>
+                    <div>#{position}</div>
                 </div>
             </div>
             <CardControls
