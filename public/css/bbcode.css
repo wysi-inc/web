@@ -2,9 +2,12 @@
 
     line-height: 1.5;
 
-    * {
+    img {
+        max-width: 533px;
         word-wrap: break-word !important;
+        word-break: break-all !important;
         overflow-wrap: break-word !important;
+        text-overflow: ellipsis !important;
     }
 
     .bbcode-spoilerbox {
@@ -28,6 +31,7 @@
 
     .imagemap {
 
+        max-width: max-content;
         position: relative;
         width: max-content;
 
