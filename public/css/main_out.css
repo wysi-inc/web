@@ -1672,6 +1672,12 @@ html {
   opacity: 1;
 }
 
+.modal-action {
+  display: flex;
+  margin-top: 1.5rem;
+  justify-content: flex-end;
+}
+
 :root:has(:is(.modal-open, .modal:target, .modal-toggle:checked + .modal, .modal[open])) {
   overflow: hidden;
   scrollbar-gutter: stable;
@@ -2780,6 +2786,12 @@ details.collapse summary::-webkit-details-marker {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.modal-action > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 @keyframes modal-pop {
   0% {
     opacity: 0;
@@ -3364,6 +3376,19 @@ details.collapse summary::-webkit-details-marker {
   padding: 0px;
 }
 
+.file-input-sm {
+  height: 2rem;
+  padding-inline-end: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  line-height: 2;
+}
+
+.file-input-sm::file-selector-button {
+  margin-right: 0.75rem;
+  font-size: 0.875rem;
+}
+
 .input-sm {
   height: 2rem;
   padding-left: 0.75rem;
@@ -3794,10 +3819,6 @@ details.collapse summary::-webkit-details-marker {
   bottom: auto;
 }
 
-.invisible {
-  visibility: hidden;
-}
-
 .collapse {
   visibility: collapse;
 }
@@ -3913,10 +3934,6 @@ details.collapse summary::-webkit-details-marker {
 
 .-mt-1 {
   margin-top: -0.25rem;
-}
-
-.-mt-10 {
-  margin-top: -2.5rem;
 }
 
 .mb-1 {
@@ -4217,10 +4234,6 @@ details.collapse summary::-webkit-details-marker {
 
 .flex-wrap {
   flex-wrap: wrap;
-}
-
-.flex-wrap-reverse {
-  flex-wrap: wrap-reverse;
 }
 
 .items-start {
@@ -4542,16 +4555,17 @@ details.collapse summary::-webkit-details-marker {
   padding-bottom: 0.5rem;
 }
 
-.pt-4 {
+.py-4 {
   padding-top: 1rem;
-}
-
-.pe-1 {
-  padding-inline-end: 0.25rem;
+  padding-bottom: 1rem;
 }
 
 .pe-2 {
   padding-inline-end: 0.5rem;
+}
+
+.pt-4 {
+  padding-top: 1rem;
 }
 
 .text-center {
@@ -4594,6 +4608,10 @@ details.collapse summary::-webkit-details-marker {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.font-bold {
+  font-weight: 700;
 }
 
 .leading-none {
@@ -4849,10 +4867,6 @@ details.collapse summary::-webkit-details-marker {
 }
 
 .peer:disabled ~ .peer-disabled\:hidden {
-  display: none;
-}
-
-.peerhidden ~ .peer-\[hidden\]\:hidden {
   display: none;
 }
 

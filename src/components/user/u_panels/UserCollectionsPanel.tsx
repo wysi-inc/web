@@ -1,33 +1,59 @@
-import { CollectionsDBModel } from "@/src/models/CollectionDB";
-import BeatmapCollectionList from "../../beatmap/BeatmapCollectionList";
+import { CollectionsDBModel, type CollectionsDB } from "@/src/models/CollectionDB";
 
 type Props = {
     user_id: number,
-    logged_id: number | undefined
+    logged_id: number | undefined,
+    collection?: CollectionsDB
 }
 
-async function UserCollectionsPanel({ user_id, logged_id }: Props) {
+async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
 
-    const dbcollection = await CollectionsDBModel.findOne({ user_id });
+    if (!collection) {
+        collection = await CollectionsDBModel.findOne({ user_id }) as any;
+    }
 
-    return (<div id="colpanel" class="max-h-96 overflow-y-scroll">
-        <script type="module" src="/public/js/collectiondownloader.js" />
+    return (<div id="colpanel" class="max-h-96 overflow-y-scroll flex flex-col gap-4">
         {user_id === logged_id ?
-            <form class="flex flex-row items-center gap-2 mb-2" hx-swap="outerHTML" hx-target="#colpanel" hx-trigger="submit"
-                hx-encoding='multipart/form-data' hx-post={`/users/${user_id}/collections`} >
-                <input type="file" name="collection" class="file-input file-input-bordered w-full max-w-xs" />
-                <button type="submit" class="btn btn-primary">
-                    Send
-                </button>
-                <div class="htmx-indicator flex flex-row items-center gap-4">
-                    <span class="loading loading-spinner" />
-                    <span>Processing beatmaps (this might take a while)</span>
+            <div class="flex flex-row flex-wrap items-center justify-between">
+                <form class="flex flex-row items-center gap-2" hx-swap="innerHTML" hx-target="#colpanel" hx-trigger="submit"
+                    hx-encoding='multipart/form-data' hx-post={`/users/${user_id}/collections/parse`} >
+                    <div class="join">
+                        <input type="file" name="collection" class="join-item file-input file-input-sm file-input-bordered w-full max-w-xs" />
+                        <button type="submit" class="join-item btn btn-sm btn-primary">
+                            Submit
+                            <div class="htmx-indicator flex flex-row items-center gap-4">
+                                <span class="loading loading-spinner" />
+                            </div>
+                        </button>
+                    </div>
+                </form>
+                <div>
+                    <button class="btn btn-sm btn-error flex flex-row gap-2 items-center" onclick="collections_delete_modal.showModal()">
+                        <i class="fa-regular fa-trash-can" />
+                        <span>Delete ALL</span>
+                    </button>
+                    <dialog id="collections_delete_modal" class="modal">
+                        <div class="modal-box">
+                            <h3 class="font-bold text-lg">Caution!</h3>
+                            <p class="py-4">You are about to DELETE your collections, this action cannot be undone!</p>
+                            <p class="py-4">Are you sure you want to proceed?</p>
+                            <div class="modal-action">
+                                <button class="btn btn-error" hx-swap="innerHTML" hx-target="#colpanel"
+                                    hx-post={`/users/${user_id}/collections/delete`}>
+                                    Yes, delete them
+                                </button>
+                                <form method="dialog">
+                                    <button class="btn btn-success">No, go back</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
                 </div>
-            </form> : <></>
+            </div> : <></>
         }
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-2">
             {
-                dbcollection?.collections.map((c) => (
+                collection?.collections.map((c) => (
                     <div class="flex flex-col items-start gap-1 p-2 bg-base-300 rounded-lg">
                         <button class="h-8 cursor-pointer link link-info flex flex-row gap-2 items-center" id={`btn_download_${c.name}`}
                             onclick="downloadCollection(this.id);" data-name={c.name}

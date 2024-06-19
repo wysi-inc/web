@@ -168,29 +168,45 @@ export async function saveSetup(user_id: number, setup: any): Promise<Setup | nu
     }
 }
 
-export async function saveCollection(body: any, user: UserCookie) {
-    let collectionBuffer = Buffer.from(await body.collection.arrayBuffer());
-    const collectionDB = new OsuDBParser(null, collectionBuffer); // Yeah, that's okay
-
-    let osuCollectionData = collectionDB.getCollectionData(); // This is collection.db data you can make with this all that you want.
-    const collection: CollectionsDB = {
-        user_id: user.id,
-        collections: osuCollectionData.collection.map((c: any) => ({
-            name: c.name,
-            beatmapsMd5: c.beatmapsMd5
-        }))
-    };
+export async function parseCollection(file: any) {
     try {
-        const db_collection = await CollectionsDBModel.findOne({ user_id: collection.user_id });
-
-        if (!db_collection) {
-            const collectionDB = new CollectionsDBModel(collection);
-            collectionDB.save();
-            return;
-        }
-        return;
+        let collectionBuffer = Buffer.from(await file.arrayBuffer());
+        const collectionDB = new OsuDBParser(null, collectionBuffer); // Yeah, that's okay
+        return collectionDB.getCollectionData(); // This is collection.db data you can make with this all that you want.
     } catch (err) {
-        console.error(err);
         return;
     }
+}
+
+export async function saveCollection(body: object, user_id: number): Promise<CollectionsDB> {
+
+    const collections: { name: string, beatmapsMd5: string[] }[] = [];
+
+    for (const [k, v] of Object.entries(body)) {
+        collections.push({
+            name: k,
+            beatmapsMd5: JSON.parse(v)
+        });
+    }
+
+    const collection = { user_id, collections };
+
+    console.log(collection);
+
+    const db_collection = await CollectionsDBModel.findOne({ user_id: collection.user_id });
+
+    if (!db_collection) {
+        const collectionDB = new CollectionsDBModel(collection);
+        collectionDB.save();
+        return collectionDB;
+    }
+
+    db_collection.collections = collections as any;
+    db_collection.save();
+    return db_collection;
+}
+
+
+export async function deleteCollection(user_id: number) {
+    await CollectionsDBModel.deleteOne({ user_id });
 }

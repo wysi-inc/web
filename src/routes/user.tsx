@@ -14,9 +14,10 @@ import UserMostList from '../components/user/u_panels/u_components/UserMostList'
 import UserSetupPanel from '../components/user/u_panels/UserSetupPanel';
 import HtmxPage from '../libs/routes';
 import { verifyUser } from '../libs/auth';
-import { saveCollection, saveSetup } from '../db/users/update_user';
+import { deleteCollection, saveCollection, saveSetup } from '../db/users/update_user';
 import UserCollectionsPanel from '../components/user/u_panels/UserCollectionsPanel';
 import BeatmapCollectionList from '../components/beatmap/BeatmapCollectionList';
+import CollectionsForm from '../components/user/u_panels/u_components/CollectionsForm';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
     //@ts-ignore
@@ -42,24 +43,49 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         if (!setup) return "Failed to save setup, reload the page and try again.";
         return <UserSetupPanel setup={setup} logged_id={user.id} page_id={user.id} />
     })
-    //@ts-ignore
-    .post("/collections", async ({ params, set, cookie: { auth }, body, jwt }) => {
+    .group("/collections", _ => _
+        //@ts-ignore
+        .post("/parse", async ({ params, set, cookie: { auth }, body, jwt }) => {
+            const user = await verifyUser(jwt, auth.value);
+            if (!user) {
+                set.status = 401;
+                return "Unauthorized";
+            }
 
-        const user = await verifyUser(jwt, auth.value);
-        if (!user) {
-            set.status = 401;
-            return "Unauthorized";
-        }
+            if (Number(params.id) != user.id) return;
 
-        if (Number(params.id) != user.id) return;
-
-        await saveCollection(body, user);
-        return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} />
-    }, {
-        body: t.Object({
-            collection: t.Any()
+            return <CollectionsForm file={body.collection} user_id={user.id} />;
+        }, {
+            body: t.Object({
+                collection: t.Any()
+            })
         })
-    })
+        //@ts-ignore
+        .post("/submit", async ({ params, set, cookie: { auth }, body, jwt }) => {
+            const user = await verifyUser(jwt, auth.value);
+            if (!user) {
+                set.status = 401;
+                return "Unauthorized";
+            }
+
+            if (Number(params.id) != user.id) return;
+            const collection = await saveCollection(body as any, user.id);
+            return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} collection={collection} />
+        })
+        //@ts-ignore
+        .post("/delete", async ({ params, set, cookie: { auth }, jwt }) => {
+            const user = await verifyUser(jwt, auth.value);
+            if (!user) {
+                set.status = 401;
+                return "Unauthorized";
+            }
+
+            if (Number(params.id) != user.id) return;
+            await deleteCollection(user.id);
+            return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} />
+        })
+    )
+    //@ts-ignore
     .group("/:mode", (_) => _
         //@ts-ignore
         .get("/", async ({ request, cookie: { auth }, params, jwt }) => {
