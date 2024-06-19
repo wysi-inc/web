@@ -52,7 +52,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             show_if: user.page?.html !== "",
             jsx:
                 <div class="p-4 rounded-lg bg-base-300">
-                    <div class="h-96 overflow-y-scroll" style={{ wordWrap: "break-word" }}>
+                    <div class="h-96 overflow-y-scroll [&>*]:break-words">
                         {user.page.html}
                     </div>
                 </div>

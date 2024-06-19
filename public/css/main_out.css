@@ -4276,6 +4276,10 @@ details.collapse summary::-webkit-details-marker {
   text-wrap: nowrap;
 }
 
+.break-words {
+  overflow-wrap: break-word;
+}
+
 .rounded-box {
   border-radius: var(--rounded-box, 1rem);
 }
@@ -4889,4 +4893,8 @@ details.collapse summary::-webkit-details-marker {
   .lg\:hidden {
     display: none;
   }
+}
+
+.\[\&\>\*\]\:break-words>* {
+  overflow-wrap: break-word;
 }
