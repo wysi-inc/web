@@ -3,7 +3,7 @@ import { html } from "@elysiajs/html";
 import { staticPlugin } from '@elysiajs/static'
 import { jwt } from "@elysiajs/jwt";
 
-import { auth, v1 } from "osu-api-extended";
+import { auth } from "osu-api-extended";
 import mongoose from "mongoose";
 
 import { baseRoutes } from "./src/routes/base";

@@ -40,22 +40,24 @@ const ScoreCard = async ({ score, position }: Props) => {
 
     if (score.mods.length > 0 || score.legacy_perfect === false) {
         const url = `https://catboy.best/api/meta/${beatmap.id}?misses=0&acc=${fc_acc}&mods=${score.mods_id}`;
-        const res: any = await (await fetch(url)).json();
-        if (res) {
-            stats.sr = res?.difficulty?.stars?.toFixed(2);
-            stats.bpm = res?.map?.bpm?.toFixed(0);
-            stats.ar = res?.map?.ar?.toFixed(1);
-            stats.cs = res?.map?.cs?.toFixed(1);
-            stats.od = res?.map?.od?.toFixed(1);
-            stats.hp = res?.map?.hp?.toFixed(1);
-            stats.pp = Math.round(res?.pp?.[Number(fc_acc)]?.pp);
+        const res = await fetch(url);
+        if (res.ok) {
+            const data = await res.json() as any;
+            stats.sr = data.difficulty?.stars?.toFixed(2);
+            stats.ar = data.map.ar?.toFixed(1);
+            stats.cs = data.map.cs?.toFixed(1);
+            stats.od = data.map.od?.toFixed(1);
+            stats.hp = data.map.hp?.toFixed(1);
+            stats.pp = Math.round(data?.pp?.[Number(fc_acc)]?.pp);
             if (stats.pp <= Number(score.pp) + 10) {
                 stats.pp = null;
             }
             if (score.mods.find((mod) => mod.acronym === "DT")) {
                 stats.length = Math.round(beatmap.total_length / 1.5);
+                stats.bpm = beatmap.bpm * 1.5;
             } else if (score.mods.find((mod) => mod.acronym === "HT")) {
                 stats.length = Math.round(beatmap.total_length / 0.75);
+                stats.bpm = beatmap.bpm * 0.75;
             }
         }
     }
