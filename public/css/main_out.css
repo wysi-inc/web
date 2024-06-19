@@ -4099,6 +4099,10 @@ details.collapse summary::-webkit-details-marker {
   max-width: 20rem;
 }
 
+.max-w-96 {
+  max-width: 24rem;
+}
+
 .grow {
   flex-grow: 1;
 }
