@@ -42,10 +42,10 @@ async function BeatmapCollectionList({ user_id, collection_name, offset }: Props
         )}
         {hashes.length >= LIMIT ?
             <button hx-post={`/users/${user_id}/0/lists/collections?name=${collection_name}&offset=${offset + LIMIT}`}
-                hx-trigger="click" hx-swap="outerHTML"
-                hx-boost="false" hx-include="#search-form"
+                hx-trigger="click" hx-swap="outerHTML" hx-boost="false"
                 class="col-span-full btn btn-success btn-sm flex flex-row gap-2">
-                Load more
+                <div>Load more</div>
+                <span class="htmx-indicator loading loading-spinner loading-md" />
             </button> : <></>
         }
     </>);

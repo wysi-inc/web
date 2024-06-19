@@ -52,8 +52,10 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             show_if: user.page?.html !== "",
             jsx:
                 <div class="p-4 rounded-lg bg-base-300">
-                    <div class="h-96 overflow-y-scroll [&>*]:break-words">
-                        {user.page.html}
+                    <div class="bbcode h-96 overflow-y-scroll">
+                        {
+                            user.page.html
+                        }
                     </div>
                 </div>
         },
@@ -122,7 +124,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
 
     return (<>
         <UserTopPanel user={user} mode={mode} />
-        <div class="underline-offset-1 text-neutral-content sticky top-16 bg-base-300 rounded-lg shadow-lg p-2 z-50 flex flex-row justify-around">
+        <div class="underline-offset-1 text-neutral-content sticky top-16 bg-base-300 rounded-lg shadow-lg p-2 z-40 flex flex-row gap-4 flex-wrap justify-around">
             {panels.map((p) => (
                 <a class="hover:underline" href={`#${p.code}`}>{p.title}</a>
             ))}

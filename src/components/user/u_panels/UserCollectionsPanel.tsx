@@ -51,10 +51,12 @@ async function UserCollectionsPanel({ user_id, logged_id }: Props) {
                             </div>
                             <div class="collapse-content p-0 m-0">
                                 <div class="flex flex-col gap-2 p-2">
-                                    <BeatmapCollectionList
-                                        user_id={user_id}
-                                        collection_name={c.name as string}
-                                        offset={0} />
+                                    <button hx-post={`/users/${user_id}/0/lists/collections?name=${c.name}&offset=${0}`}
+                                        hx-trigger="click" hx-swap="outerHTML" hx-boost="false"
+                                        class="col-span-full btn btn-success btn-sm flex flex-row gap-2">
+                                        <div>Load more</div>
+                                        <span class="htmx-indicator loading loading-spinner loading-md" />
+                                    </button>
                                 </div>
                             </div>
                         </div>

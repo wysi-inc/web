@@ -31,9 +31,9 @@ export async function BeatmapCollectionCard({ hash }: Props) {
                         diff={beatmap.difficulty_rating} size={20}
                         mode={beatmap.mode} name={beatmap.version} />
                     <img src={cardImg} class="h-6 w-8" />
-                    <div class="flex flex-row gap-2 items-center">
-                        <HxA css="max-w-72 text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmaps/${beatmap.set.id}`}>{beatmap.set.title}</HxA>
-                        <p class="max-w-72 text-neutral-content text-opacity-75 text-sm truncate"> by {beatmap.set.artist}</p>
+                    <div class="flex flex-row flex-wrap gap-2 items-center">
+                        <HxA css="text-base-content text-lg hover:underline underline-offset-2 break-words" url={`/beatmaps/${beatmap.set.id}`}>{beatmap.set.title}</HxA>
+                        <p class="text-neutral-content text-opacity-75 text-sm break-words"> by {beatmap.set.artist}</p>
                     </div>
                 </div>
             </div>

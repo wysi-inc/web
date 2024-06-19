@@ -30,7 +30,8 @@ const BeatmapsList = async (props: Props) => {
                 hx-trigger="click" hx-swap="outerHTML"
                 hx-boost="false" hx-include="#search-form"
                 class="col-span-full btn btn-success btn-sm flex flex-row gap-2">
-                Load more
+                <div>Load more</div>
+                <span class="htmx-indicator loading loading-spinner loading-md" />
             </button>
         }
     </>

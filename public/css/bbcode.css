@@ -1,12 +1,13 @@
 .bbcode {
-    word-wrap: break-word;
+
     line-height: 1.5;
 
-    .bbcode-spoilerbox {
+    * {
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
 
-        /* Spoilerbox */
-        /* when clicked, the spoilerbox toggle the content visibility*/
-        /* the content is hidden by default */
+    .bbcode-spoilerbox {
 
         .bbcode-spoilerbox__link {
             pointer-events: none;
@@ -15,8 +16,6 @@
         .bbcode-spoilerbox__link::before {
             content: '> ';
         }
-
-        .bbcode-spoilerbox__body {}
 
     }
 
@@ -35,8 +34,6 @@
         .imagemap__link {
             position: absolute;
         }
-
-        /* imagemap_link have a "title" attribute, show it as a tooltip on hover */
 
         .imagemap__link:hover::after {
             content: attr(title);
