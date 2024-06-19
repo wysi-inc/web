@@ -53,7 +53,15 @@ const KeyboardDisplay = ({ keyboard, editable }: Props) => {
     if (!editable && empty) return <></>;
 
     return <div class={`${empty ? "block group-disabled:hidden" : ""} bg-neutral rounded-lg flex flex-col`}>
-        <h1 class="py-1 px-2 text-neutral-content">Keyboard</h1>
+        <div class="flex flex-row justify-between items-center pe-2">
+            <h1 class="py-1 px-2 text-neutral-content">Keyboard</h1>
+            {editable ?
+                <div class="ms-auto tooltip tooltip-left"
+                    data-tip={`Click on the keys you use to highlight them.`}>
+                    <i class="fa-solid fa-circle-info" />
+                </div> : <></>
+            }
+        </div>
         <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
             <div class="flex justify-center items-center h-36" id="keyboard_display">
                 {keyboard?.layout === "k2" && <K2 keys={keyboard?.keys} />}

@@ -16,6 +16,8 @@ type Panel = {
     title: string,
     code: string,
     icon: JSX.Element,
+    tooltip?: string,
+    info?: string,
     show_if: boolean,
 } & (
         { jsx: JSX.Element, url?: never } |
@@ -73,6 +75,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
         {
             title: "Sking (wip)",
             code: "skins",
+            tooltip: "powered by skins.osuck.net",
             icon: <i class="fa-solid fa-palette" />,
             show_if: true,
             url: `/users/${user.id}/0/panels/skins`
@@ -81,6 +84,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             title: "Scores Summary",
             code: "summary",
             icon: <i class="fa-solid fa-ranking-star" />,
+            info: "this is a quick summary of your top 100 plays",
             show_if: true,
             url: `/users/${user.id}/${mode}/panels/summary`
         },
@@ -88,6 +92,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             title: "Scores",
             code: "scores",
             icon: <i class="fa-solid fa-flag-checkered" />,
+            info: "hover over a grayed out PP to see the (if FC) PP value",
             show_if: true,
             url: `/users/${user.id}/${mode}/panels/scores/best`
         },
@@ -101,6 +106,8 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
         {
             title: "Collections (beta)",
             code: "collections",
+            tooltip: "powered by catboy.best",
+            info: "this section is experimental, some functionality is still missing, like the abiltiy to remove collections",
             icon: <i class="fa-solid fa-list" />,
             show_if: true,
             url: `/users/${user.id}/${mode}/panels/collections`
@@ -115,6 +122,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
         {
             title: "Medals",
             code: "medals",
+            tooltip: "powered by osekai.net",
             icon: <img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" />,
             url: `/users/${user.id}/0/panels/medals`,
             show_if: true,
@@ -134,11 +142,11 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             if (p.url) {
                 return (
                     <LazyPanel title={p.title} code={p.code} icon={p.icon}
-                        url={p.url} body={p.body} />
+                        url={p.url} body={p.body} tooltip={p.tooltip} info={p.info} />
                 );
             } else {
                 return (
-                    <Panel title={p.title} code={p.code} icon={p.icon}>
+                    <Panel title={p.title} code={p.code} icon={p.icon} tooltip={p.tooltip} info={p.info}>
                         {p.jsx}
                     </Panel>
                 );

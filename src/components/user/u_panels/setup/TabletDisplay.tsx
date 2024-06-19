@@ -19,7 +19,18 @@ const TabletDisplay = async ({ tablet, editable }: Props) => {
     const custom: boolean = tablet?.name === "" || tablets.find((t) => t.name === tablet?.name) === undefined;
 
     return <div class={`${empty ? "block group-disabled:hidden" : ""} bg-neutral rounded-lg flex flex-col`}>
-        <h1 class="py-1 px-2 text-neutral-content">Tablet</h1>
+        <div class="flex flex-row justify-between items-center pe-2">
+            <h1 class="py-1 px-2 text-neutral-content">Tablet</h1>
+            {editable ?
+                <div class="ms-auto tooltip tooltip-left"
+                    data-tip={`Same values as OpenTabletDriver.
+                    The tablet area doesnt move on the preview, save the changes to see the tablet go into the right place (will be fixed in the future).
+                    If your tablet is not on the list, choose "custom" and insert the tablet name and its size before setting the area or the position.
+                    `}>
+                    <i class="fa-solid fa-circle-info" />
+                </div> : <></>
+            }
+        </div>
         <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
             <div class="flex justify-center items-center h-36">
                 <div class="relative outline outline-1 overflow-hidden rounded-lg"

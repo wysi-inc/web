@@ -23,7 +23,7 @@ const UserSetupPanel = ({ logged_id, page_id, setup }: Props) => {
     return <div id="setup_panel">
         <form id="setup_form" hx-post={`/users/${page_id}/setup`}
             hx-trigger="submit" hx-swap="outerHTML" hx-target="#setup_panel"
-            class="flex flex-wrap-reverse justify-end gap-2 -mt-10">
+            class="flex flex-col-reverse gap-2">
             <fieldset class="group peer w-full grid md:grid-cols-2 gap-4"
                 id="setup_fieldset" disabled>
                 <TabletDisplay editable={editable} tablet={setup?.tablet} />
@@ -32,7 +32,6 @@ const UserSetupPanel = ({ logged_id, page_id, setup }: Props) => {
                 <Peripherals editable={editable} peripherals={setup?.peripherals} />
                 <Computer editable={editable} computer={setup?.computer} />
             </fieldset>
-            <div class="h-8" />
             {editable && <>
                 <button type="submit" class="block peer-disabled:hidden btn btn-sm btn-success"
                     id="setup_form_submit">

@@ -14,7 +14,15 @@ const Peripherals = ({ peripherals, editable }: Props) => {
     if (!editable && empty) return <></>;
 
     return <div class={`${empty ? "block group-disabled:hidden" : ""} bg-neutral rounded-lg flex flex-col`}>
-        <h1 class="py-1 px-2 text-neutral-content">Peripherals</h1>
+        <div class="flex flex-row justify-between items-center pe-2">
+            <h1 class="py-1 px-2 text-neutral-content">Peripherals</h1>
+            {editable ?
+                <div class="ms-auto tooltip tooltip-left"
+                    data-tip={`Any empty fields won't be shown outside edit mode`}>
+                    <i class="fa-solid fa-circle-info" />
+                </div> : <></>
+            }
+        </div>
         <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
             <SetupInput editable={editable} type="text" id="peripherals_mouse" name="Mouse" value={peripherals?.mouse} icon={<i class="fa-solid fa-computer-mouse" />} />
             <SetupInput editable={editable} type="text" id="peripherals_mousepad" name="Mousepad" value={peripherals?.mousepad} icon={<i class="fa-solid fa-square" />} />

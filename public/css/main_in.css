@@ -35,3 +35,16 @@
         filter: opacity(1);
     }
 }
+
+.htmx-indicator {
+    display: none;
+    transition: opacity 500ms ease-in;
+}
+
+.htmx-request .htmx-indicator {
+    display: block;
+}
+
+.htmx-request.htmx-indicator {
+    display: block;
+}

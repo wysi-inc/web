@@ -2,6 +2,7 @@ import { v2 } from "osu-api-extended";
 import type { BeatmapCategory } from "@/src/types/osu";
 import type { Beatmapset } from "@/src/types/beatmaps";
 import BeatmapsetCard from "@/src/components/beatmap/BeatmapsetCard";
+import LoadMoreButton from "@/src/components/web/LoadMoreButton";
 
 type Props = {
     id: number;
@@ -23,15 +24,9 @@ const UserBeatmapsList = async ({ id, category, offset, limit }: Props) => {
         {beatmaps.map((beatmap) =>
             <BeatmapsetCard beatmapset={beatmap} />
         )}
-        {beatmaps.length < limit ? null :
-            <>
-                <button class="btn btn-success btn-sm flex flex-row gap-2 col-span-full"
-                    hx-post={`/users/${id}/0/lists/beatmaps/${category}?offset=${offset + limit}&limit=20`}
-                    hx-swap="outerHTML">
-                    <div>Load more</div>
-                    <span class="htmx-indicator loading loading-spinner loading-md" />
-                </button>
-            </>}
+        {beatmaps.length >= limit ?
+            <LoadMoreButton url={`/users/${id}/0/lists/beatmaps/${category}?offset=${offset + limit}&limit=20`} />
+            : <></>}
     </>)
 }
 

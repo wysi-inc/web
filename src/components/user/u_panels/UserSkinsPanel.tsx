@@ -4,7 +4,7 @@ type Props = {
     id: number;
 }
 
-const UserSkinsPanel = (props: Props) => {
+const UserSkinsPanel = ({ id }: Props) => {
 
     const skins = [
         {
@@ -33,7 +33,7 @@ const UserSkinsPanel = (props: Props) => {
 
     return (<>
         <h1>(Example)</h1>
-        <div class="flex flex-row flex-wrap items-center justify-center gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 flex-wrap items-center justify-center gap-4">
             {skins.map((skin) =>
                 <a href={`https://skins.osuck.net/skins/${skin.id}`} target="_blank" rel="noreferrer"
                     class="bg-neutral rounded-lg flex flex-col transform ease-in-out duration-150 hover:-translate-y-2">

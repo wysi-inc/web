@@ -1,5 +1,6 @@
 import { CollectionsDBModel, type CollectionDB } from "@/src/models/CollectionDB";
 import { BeatmapCollectionCard } from "./BeatmapCollectionCard";
+import LoadMoreButton from "../web/LoadMoreButton";
 
 type Props = {
     user_id: number,
@@ -41,12 +42,8 @@ async function BeatmapCollectionList({ user_id, collection_name, offset }: Props
             <BeatmapCollectionCard hash={h} />
         )}
         {hashes.length >= LIMIT ?
-            <button hx-post={`/users/${user_id}/0/lists/collections?name=${collection_name}&offset=${offset + LIMIT}`}
-                hx-trigger="click" hx-swap="outerHTML" hx-boost="false"
-                class="col-span-full btn btn-success btn-sm flex flex-row gap-2">
-                <div>Load more</div>
-                <span class="htmx-indicator loading loading-spinner loading-md" />
-            </button> : <></>
+            <LoadMoreButton url={`/users/${user_id}/0/lists/collections?name=${collection_name}&offset=${offset + LIMIT}`} />
+            : <></>
         }
     </>);
 }

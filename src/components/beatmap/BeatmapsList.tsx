@@ -1,6 +1,7 @@
 import { getBeatmaps } from "@/src/db/beatmaps/get_beatmaps";
 import BeatmapsetCard from "./BeatmapsetCard";
 import type { BeatmapQuery, Beatmapset } from "@/src/types/beatmaps";
+import LoadMoreButton from "../web/LoadMoreButton";
 
 type Props = {
     body?: BeatmapQuery,
@@ -26,13 +27,8 @@ const BeatmapsList = async (props: Props) => {
             <BeatmapsetCard beatmapset={set} />
         )}
         {sets.length < 50 ? null :
-            <button hx-post={`/beatmaps/list/${res.cursor_string}`}
-                hx-trigger="click" hx-swap="outerHTML"
-                hx-boost="false" hx-include="#search-form"
-                class="col-span-full btn btn-success btn-sm flex flex-row gap-2">
-                <div>Load more</div>
-                <span class="htmx-indicator loading loading-spinner loading-md" />
-            </button>
+            <LoadMoreButton url={`/beatmaps/list/${res.cursor_string}`}
+                include="#search-form" />
         }
     </>
     );

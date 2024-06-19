@@ -2,6 +2,7 @@ import { v2 } from "osu-api-extended";
 import type { Mode, ScoreCategory } from "@/src/types/osu";
 import type { Score } from "@/src/types/users";
 import ScoreCard from "@/src/components/score/ScoreCard";
+import LoadMoreButton from "@/src/components/web/LoadMoreButton";
 
 type Props = {
     id: number;
@@ -12,8 +13,6 @@ type Props = {
 }
 
 const UserScoresList = async ({ id, mode, category, offset, limit }: Props) => {
-
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 
     const scores: Score[] = await v2.scores.user.category(id, category, {
         mode: mode,
@@ -27,14 +26,9 @@ const UserScoresList = async ({ id, mode, category, offset, limit }: Props) => {
         {scores.map((score, i) =>
             <ScoreCard position={i + offset + 1} score={score} />
         )}
-        {scores.length < limit ? null : <>
-            <button class="btn btn-success btn-sm flex flex-row gap-2"
-                hx-post={`/users/${id}/${mode}/lists/scores/${category}?offset=${offset + limit}&limit=20`}
-                hx-swap="outerHTML">
-                <div>Load more</div>
-                <span class="htmx-indicator loading loading-spinner loading-md" />
-            </button>
-        </>}
+        {scores.length >= limit ?
+            <LoadMoreButton url={`/users/${id}/${mode}/lists/scores/${category}?offset=${offset + limit}&limit=20`} />
+            : <></>}
     </>
 }
 

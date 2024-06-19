@@ -1,5 +1,6 @@
 import { v2 } from "osu-api-extended";
 import MostCard from "./MostCard";
+import LoadMoreButton from "@/src/components/web/LoadMoreButton";
 
 type Props = {
     id: number;
@@ -22,15 +23,9 @@ const UserMostList = async (props: Props) => {
                 beatmap={play.beatmap as any}
                 beatmapset={play.beatmapset as any} />
         )}
-        {plays.length < props.limit ? null :
-            <>
-                <button class="btn btn-success btn-sm flex flex-row gap-2 col-span-full"
-                    hx-post={`/users/${props.id}/0/lists/most?offset=${props.offset + props.limit}&limit=20`}
-                    hx-swap="outerHTML">
-                    <div>Load more</div>
-                    <span class="htmx-indicator loading loading-spinner loading-md" />
-                </button>
-            </>}
+        {plays.length >= props.limit ?
+            <LoadMoreButton url={`/users/${props.id}/0/lists/most?offset=${props.offset + props.limit}&limit=20`} />
+            : <></>}
     </>)
 }
 
