@@ -43,7 +43,7 @@ const Navbar = ({ user }: Props) => {
                                 <div class="flex md:hidden">
                                     <div class="btn btn-ghost swap swap-off">
                                         <input type="checkbox" class="theme-controller"
-                                            data-toggle-theme="dracula,pastel" />
+                                            data-toggle-theme="dracula,pastel" aria-label="theme changer" />
                                         <i class="swap-on fa-solid fa-sun" />
                                         <i class="swap-off fa-solid fa-moon" />
                                     </div>
@@ -51,14 +51,14 @@ const Navbar = ({ user }: Props) => {
                             </li>
                             <li>
                                 <a href="https://github.com/wysi-inc" target="_blank"
-                                    class="flex md:hidden btn btn-ghost">
+                                    class="flex md:hidden btn btn-ghost" aria-label="Github">
                                     <i class="fa-brands fa-github fa-lg" />
                                     GitHub
                                 </a>
                             </li>
                             <li>
                                 <a href="https://discord.gg/QYVxgS2934" target="_blank"
-                                    class="flex md:hidden btn btn-ghost">
+                                    class="flex md:hidden btn btn-ghost" aria-label="Discord">
                                     <i class="fa-brands fa-discord" />
                                     Discord
                                 </a>
@@ -91,18 +91,18 @@ const Navbar = ({ user }: Props) => {
                     <div class="hidden md:flex">
                         <div class="btn btn-ghost swap swap-rotate">
                             <input type="checkbox" class="theme-controller"
-                                data-toggle-theme="dracula,pastel" />
+                                data-toggle-theme="dracula,pastel" aria-label="theme changer" />
                             <i class="swap-on fa-solid fa-sun" />
                             <i class="swap-off fa-solid fa-moon" />
                         </div>
                     </div>
                     <div class="hidden md:flex flex-row items-center justify-end">
                         <a href="https://github.com/wysi-inc" target="_blank"
-                            class="hidden md:flex btn btn-ghost">
+                            class="hidden md:flex btn btn-ghost" aria-label="Github">
                             <i class="fa-brands fa-github fa-lg" />
                         </a>
                         <a href="https://discord.gg/QYVxgS2934" target="_blank"
-                            class="hidden md:flex btn btn-ghost">
+                            class="hidden md:flex btn btn-ghost" aria-label="Discord">
                             <i class="fa-brands fa-discord" />
                         </a>
                     </div>

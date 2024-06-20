@@ -44,7 +44,7 @@ async function UserTopPanel({ user, mode }: Props) {
                 <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm justify-center flex flex-row flex-wrap gap-8 p-8 rounded-lg">
                     <div class="flex flex-col gap-4 items-center justify-between">
                         <div class="flex flex-col bg-base-300 rounded-lg">
-                            <img src={user.avatar_url} class="rounded-lg aspect-square size-40" />
+                            <img src={user.avatar_url} class="rounded-lg aspect-square size-40" alt={`${user.username}'s pfp`} />
                             <div class="flex flex-row gap-1 p-2 flex-wrap justify-around items-center">
                                 <div class="tooltip" data-tip="osu!">
                                     {mode === "osu" ?
