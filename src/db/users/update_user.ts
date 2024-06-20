@@ -191,8 +191,6 @@ export async function saveCollection(body: object, user_id: number): Promise<Col
 
     const collection = { user_id, collections };
 
-    console.log(collection);
-
     const db_collection = await CollectionsDBModel.findOne({ user_id: collection.user_id });
 
     if (!db_collection) {

@@ -12,8 +12,6 @@ async function downloadCollection(id) {
     const loading = button.getElementsByClassName("loading")[0];
 
     try {
-        console.log("starting download");
-
         const name = button.getAttribute("data-name");
         const hashes = JSON.parse(button.getAttribute("data-ids"));
         let count = 0;

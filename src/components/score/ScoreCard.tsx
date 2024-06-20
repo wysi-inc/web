@@ -19,8 +19,6 @@ type Props = {
 
 const ScoreCard = async ({ score, position }: Props) => {
 
-    console.log(score.id);
-
     const beatmap = score.beatmap;
     const beatmapset = score.beatmapset;
 
