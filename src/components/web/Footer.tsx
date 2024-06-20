@@ -6,7 +6,7 @@ const Footer = () => (
             <div class="chat chat-start">
                 <div class="chat-image avatar">
                     <HxA css="size-10 " url="/users/17018032">
-                        <img src="https://a.ppy.sh/17018032?1711362956.png" class="size-10 rounded-full" />
+                        <img src="/public/img/m4rti.webp" class="size-10 rounded-full" />
                     </HxA>
                 </div>
                 <div class="chat-bubble">All your feedback is appreciated!</div>

@@ -25,7 +25,7 @@ const BaseHtml = ({ user, children }: Props) => {
                 osu pp tracker, osu! pp tracker, osu! pp calculator, osu profile pp, 
                 pp profile, osu! profile pp, osu! profile, osu profile, 
                 osu! profile tracker, osu profile tracker, osu! profile search, osu profile search" />
-                <link rel="icon" href="/public/favicon.ico" />
+                <link rel="icon" href="favicon.ico" />
                 <link rel="stylesheet" href="/public/css/main_out.css" type="text/css" />
                 <link rel="stylesheet" href="/public/css/bbcode.css" type="text/css" />
                 <script src="https://kit.fontawesome.com/d5ab19acce.js" crossorigin="anonymous" />

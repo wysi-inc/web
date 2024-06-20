@@ -12,7 +12,6 @@ import { userRoutes } from "./src/routes/user";
 import { beatmapRoutes } from "./src/routes/beatmaps";
 import { jsonRoutes } from "./src/routes/json";
 import { updateMedals } from "./src/db/medals/update_medals";
-import { compression } from "elysia-compression";
 
 const port = Number(process.env.PORT as string);
 const mongo_uri = process.env.MONGO_URI as string;
@@ -61,6 +60,7 @@ new Elysia()
     }))
     .use(staticPlugin())
     .use(html())
+    .get("/favicon.ico", () => Bun.file("./public/favicon.ico"))
     .use(baseRoutes)
     .use(rankingRoutes)
     .use(userRoutes)
