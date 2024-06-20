@@ -133,24 +133,24 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
     return (<>
         <UserTopPanel user={user} mode={mode} />
         <div class="underline-offset-1 text-neutral-content sticky top-16 bg-base-300 rounded-lg shadow-lg p-2 z-40 flex flex-row gap-4 flex-wrap justify-around">
-            {panels.map((p) => (
-                <a class="hover:underline" href={`#${p.code}`}>{p.title}</a>
-            ))}
+            {panels.map((p) => {
+                if (!p.show_if) return <></>;
+                else return (
+                    <a class="hover:underline" href={`#${p.code}`}>{p.title}</a>
+                );
+            })}
         </div>
         {panels.map((p) => {
             if (!p.show_if) return <></>;
-            if (p.url) {
-                return (
-                    <LazyPanel title={p.title} code={p.code} icon={p.icon}
-                        url={p.url} body={p.body} tooltip={p.tooltip} info={p.info} />
-                );
-            } else {
-                return (
-                    <Panel title={p.title} code={p.code} icon={p.icon} tooltip={p.tooltip} info={p.info}>
-                        {p.jsx}
-                    </Panel>
-                );
-            }
+            if (p.url) return (
+                <LazyPanel title={p.title} code={p.code} icon={p.icon}
+                    url={p.url} body={p.body} tooltip={p.tooltip} info={p.info} />
+            );
+            else return (
+                <Panel title={p.title} code={p.code} icon={p.icon} tooltip={p.tooltip} info={p.info}>
+                    {p.jsx}
+                </Panel>
+            );
         })}
     </>);
 }
