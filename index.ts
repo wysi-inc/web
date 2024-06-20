@@ -52,7 +52,6 @@ new Elysia()
             path: '/',
         }
     }))
-    .use(compression())
     .use(html())
     .use(baseRoutes)
     .use(rankingRoutes)
