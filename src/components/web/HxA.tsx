@@ -2,9 +2,10 @@ type Props = {
     url: string;
     children: any;
     css?: string;
+    role?: string;
 }
 
-const HxA = ({ url, css, children }: Props) => {
+const HxA = ({ url, css, role, children }: Props) => {
     return <a href={url}
         // hx-get={url}
         // hx-push-url="true" hx-target="#main"
@@ -14,7 +15,7 @@ const HxA = ({ url, css, children }: Props) => {
             cursor-pointer 
             hover:underline 
             underline-offset-2
-        `}>
+        `} role={role}>
         {children}
     </a>
 }

@@ -9,28 +9,25 @@ type Props = {
 
 const Pagination = (props: Props) => {
     const ModeTab = (mode: Mode) => (
-        <button class={`tab ${props.mode == mode && "tab-active"}`} role="tab">
-            <HxA url={`/rankings/${mode}/${props.category}/${props.page}`}>
-                {mode}
-            </HxA>
-        </button>
+        <HxA url={`/rankings/${mode}/${props.category}/${props.page}`}
+            css={`tab ${props.mode == mode && "tab-active"}`} role="tab">
+            {mode}
+        </HxA>
     );
 
     const PageTab = (page: number) => (
         page >= 1 && page <= 200 &&
-        <button class={`tab ${props.page == page && "tab-active"}`} role="tab">
-            <HxA url={`/rankings/${props.mode}/${props.category}/${page}`}>
-                {page}
-            </HxA>
-        </button>
+        <HxA url={`/rankings/${props.mode}/${props.category}/${page}`}
+            css={`tab ${props.page == page && "tab-active"}`} role="tab">
+            {page}
+        </HxA>
     );
 
     const CategoryTab = (category: Category) => (
-        <button class={`tab ${props.category == category && "tab-active"}`} role="tab">
-            <HxA url={`/rankings/${props.mode}/${category}/${props.page}`}>
-                {category}
-            </HxA>
-        </button>
+        <HxA url={`/rankings/${props.mode}/${category}/${props.page}`}
+            css={`tab ${props.category == category && "tab-active"}`} role="tab">
+            {category}
+        </HxA>
     );
 
     return (
@@ -60,7 +57,7 @@ const Pagination = (props: Props) => {
                     </div>
                 }
             </div>
-            <div class="hidden md:flex tabs tabs-boxed bg-base-300" role="flex justify-center tablist">
+            <div class="hidden md:flex tabs tabs-boxed bg-base-300" role="tablist">
                 {CategoryTab("performance")}
                 {CategoryTab("score")}
             </div>

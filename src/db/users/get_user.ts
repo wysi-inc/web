@@ -2,7 +2,7 @@ import { v2 } from "osu-api-extended";
 import type { Category, Mode } from "@/src/types/osu";
 import type { User, UserList } from "@/src/types/users";
 import { updateUser } from "./update_user";
-// import { catalans } from "@/src/libs/constants";
+import { catalans } from "@/src/libs/constants";
 
 export async function getUser(id: string, mode: Mode | undefined): Promise<User | null> {
     try {
@@ -14,11 +14,9 @@ export async function getUser(id: string, mode: Mode | undefined): Promise<User 
 
         user = await updateUser(user, mode);
 
-        // if (catalans.includes(user.id)) {
-        //     console.log("Bon dia tu!");
-        //     user.country.code = "CAT";
-        //     user.country.name = "Catalunya";
-        // }
+        if (catalans.includes(user.id)) {
+            (user.country as any).cat = true;
+        }
 
         return user;
     } catch (err) {

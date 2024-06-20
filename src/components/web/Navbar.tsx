@@ -40,12 +40,14 @@ const Navbar = ({ user }: Props) => {
                             </li>
                             <div class="md:hidden divider" />
                             <li>
-                                <label class="flex sm:hidden btn btn-ghost flex-row gap-2 justify-between items-center">
-                                    <i class="fa-solid fa-moon" />
-                                    <input class="toggle" type="checkbox" checked
-                                        data-toggle-theme="dracula,pastel" />
-                                    <i class="fa-solid fa-sun" />
-                                </label>
+                                <div class="flex md:hidden">
+                                    <div class="btn btn-ghost swap swap-off">
+                                        <input type="checkbox" class="theme-controller"
+                                            data-toggle-theme="dracula,pastel" />
+                                        <i class="swap-on fa-solid fa-sun" />
+                                        <i class="swap-off fa-solid fa-moon" />
+                                    </div>
+                                </div>
                             </li>
                             <li>
                                 <a href="https://github.com/wysi-inc" target="_blank"
@@ -64,7 +66,7 @@ const Navbar = ({ user }: Props) => {
                         </ul>
                     </div>
                     <HxA url="/" css="hidden sm:flex gap-4 items-center btn btn-ghost px-2 text-xl">
-                        <img src="/public/wysi.svg" class="w-8 h-8 rounded-lg drop-shadow-lg shadow-lg" alt="wysi" />
+                        <img src="/public/wysi.svg" class="w-8 h-8 rounded-lg drop-shadow-lg shadow-lg" alt="wysi logo" />
                         <span>wysi</span>
                     </HxA>
                     <div class="hidden lg:flex flex-row text-sm">
@@ -87,12 +89,12 @@ const Navbar = ({ user }: Props) => {
                 </div>
                 <div class="flex flex-row items-center justify-end">
                     <div class="hidden md:flex">
-                        <label class="btn btn-ghost swap swap-rotate">
+                        <div class="btn btn-ghost swap swap-rotate">
                             <input type="checkbox" class="theme-controller"
                                 data-toggle-theme="dracula,pastel" />
                             <i class="swap-on fa-solid fa-sun" />
                             <i class="swap-off fa-solid fa-moon" />
-                        </label>
+                        </div>
                     </div>
                     <div class="hidden md:flex flex-row items-center justify-end">
                         <a href="https://github.com/wysi-inc" target="_blank"

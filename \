@@ -15,7 +15,6 @@ type Props = {
     user: User;
     mode: Mode;
 }
-
 async function UserTopPanel({ user, mode }: Props) {
 
     if (!user) return <></>;
@@ -104,7 +103,7 @@ async function UserTopPanel({ user, mode }: Props) {
                             </div>
                             <div class="flex flex-row gap-2 items-center">
                                 {(user.country as any).cat ?
-                                    <Country code={"CAT"} name={"Catalunya"} /> :
+                                    <Country code={user.country.code} name={user.country.name} /> :
                                     <Country code={user.country.code} name={user.country.name} />
                                 }
                                 <h2 class="text-xl tooltip" data-tip={`Peak rank: #${best_country?.rank?.toLocaleString()}`}>

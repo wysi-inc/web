@@ -1,7 +1,7 @@
 import { type CollectionsDB, CollectionsDBModel } from "@/src/models/CollectionDB";
 import { type Rank, User, type Setup } from "../../models/User";
 import type { Mode } from "../../types/osu";
-import type { UserCookie, User as UserType } from "../../types/users";
+import type { User as UserType } from "../../types/users";
 //@ts-ignore
 import OsuDBParser from "osu-db-parser";
 
