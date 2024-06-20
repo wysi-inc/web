@@ -24,23 +24,19 @@ async function Rankings({ mode, category, page }: Props) {
         <div class="flex flex-col gap-4">
             <Pagination mode={mode} category={category} page={page} />
             <table class="table p-4 bg-base-100 rounded-lg">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>User</th>
-                        <th class="hidden sm:table-cell">PP</th>
-                        <th class="hidden sm:table-cell">Ranked Score</th>
-                        <th class="hidden md:table-cell">Accuracy</th>
-                        <th class="hidden md:table-cell">Play Time</th>
-                        <th class="hidden md:table-cell">Play Count</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.ranking.map((row, i) =>
-                        <UserRankingCard row={row} page={page} index={i} subdivision={subdivisions.get(row.user.id)} />
-                    )}
-                </tbody>
+                <tr>
+                    <th></th>
+                    <th>User</th>
+                    <th class="hidden sm:table-cell">PP</th>
+                    <th class="hidden sm:table-cell">Ranked Score</th>
+                    <th class="hidden md:table-cell">Accuracy</th>
+                    <th class="hidden md:table-cell">Play Time</th>
+                    <th class="hidden md:table-cell">Play Count</th>
+                    <th>Status</th>
+                </tr>
+                {users.ranking.map((row, i) =>
+                    <UserRankingCard row={row} page={page} index={i} subdivision={subdivisions.get(row.user.id)} />
+                )}
             </table>
             <Pagination mode={mode} category={category} page={page} />
         </div>
