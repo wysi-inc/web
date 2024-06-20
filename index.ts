@@ -58,7 +58,7 @@ new Elysia()
     .use(userRoutes)
     .use(beatmapRoutes)
     .use(jsonRoutes)
-    .onError((err) => console.error(err.error))
+    .onError(() => "wtf")
     .onRequest(({ request, set }) => {
         const agent = request.headers.get("user-agent");
         for (let i = 0; i < blocked_agent_keywords.length; i++) {
