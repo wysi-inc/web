@@ -16,7 +16,7 @@ const Footer = () => (
         </div>
         <div class="flex justify-end">
             <a href='https://ko-fi.com/Z8Z0SPTRT' target='_blank'>
-                <img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' alt='Buy Me a Coffee at ko-fi.com' />
+                <img class="h-10" src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' alt='Buy Me a Coffee at ko-fi.com' />
             </a>
         </div>
     </footer>
