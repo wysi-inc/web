@@ -14,7 +14,7 @@ const Navbar = ({ user }: Props) => {
             <div class="grid grid-cols-3 p-2">
                 <div class="flex flex-row items-center justify-start">
                     <div class="dropdown lg:hidden">
-                        <button tabindex="0" role="button" class="btn btn-ghost flex items-center justify-center">
+                        <button tabindex="0" role="button" class="btn btn-ghost flex items-center justify-center" aria-label="dropdown menu">
                             <i class="fa-solid fa-bars fa-lg" />
                         </button>
                         <ul class="menu menu-sm dropdown-content mt-5 z-50 p-2 shadow bg-base-100 rounded-box w-40">
