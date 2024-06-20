@@ -6,7 +6,7 @@ export const catalans: number[] = [
 ];
 
 export const blocked_agent_keywords = [
-    "bot", "amazon", "facebook"
+    "bot", "amazon", "facebook", "python"
 ];
 
 export const blocked_agents = [

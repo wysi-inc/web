@@ -62,7 +62,7 @@ new Elysia()
     .onRequest(({ request, set }) => {
         const agent = request.headers.get("user-agent");
         for (let i = 0; i < blocked_agent_keywords.length; i++) {
-            if (!agent?.includes(blocked_agent_keywords[i])) continue;
+            if (!agent?.toLowerCase()?.includes(blocked_agent_keywords[i])) continue;
             set.status = 451;
             console.log("🖕");
             return "🖕";
