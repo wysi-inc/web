@@ -70,7 +70,7 @@ new Elysia()
         // current hour, minute, second
         const time = new Date().toTimeString().split(" ")[0];
         time.split(":").length === 2 && time.concat(":00");
-        console.log(`[ ${time} ] -> ${method}::/${route}`)
+        console.log(`[ ${time} ] -> ${method}::/${route} ${agent}`)
     })
     .onStart(() => console.info(`[ OK ] Listening on port ${port}`))
     .listen(port)
