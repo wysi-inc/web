@@ -63,9 +63,11 @@ new Elysia()
         const agent = request.headers.get("user-agent");
         if (agent?.includes("bot")) {
             set.status = 451;
+            console.log("🖕");
             return "🖕";
         } else if (agent && blocked_agents.includes(agent)) {
             set.status = 451;
+            console.log("🖕");
             return "🖕";
         }
         const route = request.url.split("/").slice(3).join("/");
