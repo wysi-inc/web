@@ -11,7 +11,7 @@ import { rankingRoutes } from "./src/routes/rankings";
 import { userRoutes } from "./src/routes/user";
 import { beatmapRoutes } from "./src/routes/beatmaps";
 import { jsonRoutes } from "./src/routes/json";
-import { blocked_agents } from "./src/libs/constants";
+import { blocked_agent_keywords, blocked_agents } from "./src/libs/constants";
 import { updateMedals } from "./src/db/medals/update_medals";
 
 const port = Number(process.env.PORT as string);
@@ -61,11 +61,14 @@ new Elysia()
     .onError((err) => console.error(err.error))
     .onRequest(({ request, set }) => {
         const agent = request.headers.get("user-agent");
-        if (agent?.includes("bot")) {
-            set.status = 451;
-            console.log("🖕");
-            return "🖕";
-        } else if (agent && blocked_agents.includes(agent)) {
+        blocked_agent_keywords.forEach(kw => {
+            if (agent?.includes(kw)) {
+                set.status = 451;
+                console.log("🖕");
+                return "🖕";
+            }
+        })
+        if (agent && blocked_agents.includes(agent)) {
             set.status = 451;
             console.log("🖕");
             return "🖕";
@@ -75,7 +78,7 @@ new Elysia()
         // current hour, minute, second
         const time = new Date().toTimeString().split(" ")[0];
         time.split(":").length === 2 && time.concat(":00");
-        console.log(`[ ${time} ] -> ${method}::/${route} ${agent}`)
+        console.log(`[ ${time} ] -> ${method}::/${route} --- ${agent}`)
     })
     .onStart(() => console.info(`[ OK ] Listening on port ${port}`))
     .listen(port)
