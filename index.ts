@@ -64,12 +64,12 @@ new Elysia()
         for (let i = 0; i < blocked_agent_keywords.length; i++) {
             if (!agent?.toLowerCase()?.includes(blocked_agent_keywords[i])) continue;
             set.status = 451;
-            console.log("🖕");
+            console.log(`🖕 ${agent}`);
             return "🖕";
         }
         if (agent && blocked_agents.includes(agent)) {
             set.status = 451;
-            console.log("🖕");
+            console.log(`🖕 ${agent}`);
             return "🖕";
         }
         const route = request.url.split("/").slice(3).join("/");
