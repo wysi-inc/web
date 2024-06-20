@@ -7,7 +7,7 @@ type Props = {
 const Logged = (props: Props) => {
     return (
         <div class="dropdown dropdown-end">
-            <button tabindex="0" role="button" class="drop-shadow-lg aspect-square shadow-lg btn p-0 btn-ghost">
+            <button aria-label="user logged menu" tabindex="0" role="button" class="drop-shadow-lg aspect-square shadow-lg btn p-0 btn-ghost">
                 <div class="avatar">
                     <div class="size-10 rounded-lg">
                         <img src={props.user.avatar} class="" alt="avatar" />
