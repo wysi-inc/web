@@ -5,22 +5,32 @@ function setup() {
 
     const form_edit = document.getElementById('setup_form_edit');
     const form_cancel = document.getElementById('setup_form_cancel');
-
-    form_cancel.addEventListener('click', () => {
-        setTimeout(() => {
-            fieldset.disabled = true;
-        }, 0);
-    });
+    const form_submit = document.getElementById('setup_form_submit');
 
     form_edit.addEventListener('click', () => {
         setTimeout(() => {
             fieldset.disabled = false;
+            form_edit.style.display = "none";
+            form_cancel.style.display = "block";
+            form_submit.style.display = "block";
+        }, 0);
+    });
+
+    form_cancel.addEventListener('click', () => {
+        setTimeout(() => {
+            fieldset.disabled = true;
+            form_cancel.style.display = "none";
+            form_submit.style.display = "none";
+            form_edit.style.display = "block";
         }, 0);
     });
 
     form.addEventListener('submit', () => {
         setTimeout(() => {
             fieldset.disabled = true;
+            form_cancel.style.display = "none";
+            form_submit.style.display = "none";
+            form_edit.style.display = "block";
         }, 0);
     });
 

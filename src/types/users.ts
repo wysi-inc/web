@@ -33,3 +33,16 @@ export type ColorCount = {
     count: number;
     color: string;
 }
+
+export type Subdivision = {
+    id: number
+    username: string
+    country_id: string
+    region_id: string
+}
+
+export type UserSubdivision = {
+    name: string,
+    nativeName: string,
+    flag: string
+}

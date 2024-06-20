@@ -1,8 +1,8 @@
 import type { Category, Mode } from "@/src/types/osu";
 import Pagination from "./u_panels/u_components/Pagination";
-import OnlineDot from "./u_panels/u_components/OnlineDot";
-import HxA from "../web/HxA";
+import UserRankingCard from "./UserRankingCard";
 import { getRankings } from "@/src/db/users/get_user";
+import { getSubdivision } from "@/src/libs/web_utils";
 
 type Props = {
     mode: Mode;
@@ -10,13 +10,15 @@ type Props = {
     page: number;
 }
 
-const Rankings = async ({ mode, category, page }: Props) => {
+async function Rankings({ mode, category, page }: Props) {
 
     const users = await getRankings(mode, category, page);
 
     if ((users as any).error) return <div>Rankings not found</div>;
     if (!users) return <div>Loading...</div>;
     if (!users.ranking) return <div>No users found</div>;
+
+    const subdivisions = await getSubdivision(users.ranking.map(u => u.user.id));
 
     return (
         <div class="flex flex-col gap-4">
@@ -36,31 +38,7 @@ const Rankings = async ({ mode, category, page }: Props) => {
                 </thead>
                 <tbody>
                     {users.ranking.map((row, i) =>
-                        <tr class={`hover:bg-base-300 hover:rounded-lg ${!row.user.is_active ? 'opacity-75 bg-base-300' : ''}
-                        `}>
-                            <th class="table-cell text-start">#{i + 1 + 50 * (page - 1)}</th>
-                            <td class="table-cell">
-                                <HxA url={`/users/${row.user.id}`}>
-                                    <div class="flex flex-row gap-4">
-                                        <img src={`https://flagcdn.com/h40/${row.user.country.code.toLowerCase()}.jpg`}
-                                            style="width: 32px; height: 24px;" class="rounded-sm" />
-                                        <span class="flex flex-row items-center gap-2">
-                                            {row.user.username}
-                                        </span>
-                                    </div>
-                                </HxA>
-                            </td>
-                            <td class="hidden sm:table-cell">{Number(row.pp?.toFixed()).toLocaleString()}pp</td>
-                            <td class="hidden sm:table-cell">{row.ranked_score.toLocaleString()}</td>
-                            <td class="hidden md:table-cell">{row.hit_accuracy?.toFixed(2)}%</td>
-                            <td class="hidden md:table-cell">{Number(((row.play_time || 0) / 60 / 60).toFixed()).toLocaleString()}h</td>
-                            <td class="hidden md:table-cell">{row.play_count.toLocaleString()}</td>
-                            <td class="table-cell">
-                                <div class="flex justify-center">
-                                    <OnlineDot size={24} online={row.user.is_online} />
-                                </div>
-                            </td>
-                        </tr>
+                        <UserRankingCard row={row} page={page} index={i} subdivision={subdivisions.get(row.user.id)} />
                     )}
                 </tbody>
             </table>

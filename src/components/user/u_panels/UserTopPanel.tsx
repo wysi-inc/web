@@ -8,12 +8,14 @@ import HxA from "../../web/HxA";
 import type { User } from "@/src/types/users";
 import type { Mode } from "@/src/types/osu";
 import { colors } from "@/src/libs/colors";
+import SubdivisionFlag from "./u_components/SubdivisionFlag";
+import { getSubdivision } from "@/src/libs/web_utils";
 
 type Props = {
     user: User;
     mode: Mode;
 }
-const UserTopPanel = ({ user, mode }: Props) => {
+async function UserTopPanel({ user, mode }: Props) {
 
     if (!user) return <></>;
 
@@ -25,6 +27,9 @@ const UserTopPanel = ({ user, mode }: Props) => {
     grade_counts.set("SH", { count: user.statistics.grade_counts.sh, color: colors.grades.sh });
     grade_counts.set("S", { count: user.statistics.grade_counts.s, color: colors.grades.s });
     grade_counts.set("A", { count: user.statistics.grade_counts.a, color: colors.grades.a });
+
+    const subdivisions = await getSubdivision([user.id]);
+    const subdivision = subdivisions.get(user.id);
 
     return (
         <div class="rounded-lg bg-base-100 shadow-lg">
@@ -102,6 +107,10 @@ const UserTopPanel = ({ user, mode }: Props) => {
                                     #{user.statistics?.country_rank?.toLocaleString() || "-"}
                                 </h2>
                                 <Flag name={user.country.name} code={user.country.code} />
+                                {subdivision !== undefined ?
+                                    <SubdivisionFlag name={subdivision.name} url={subdivision.flag} />
+                                    : <></>
+                                }
                             </div>
                             <div>
                                 <div class="text-sm">Performance:</div>

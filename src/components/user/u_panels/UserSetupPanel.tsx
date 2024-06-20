@@ -24,7 +24,7 @@ const UserSetupPanel = ({ logged_id, page_id, setup }: Props) => {
         <form id="setup_form" hx-post={`/users/${page_id}/setup`}
             hx-trigger="submit" hx-swap="outerHTML" hx-target="#setup_panel"
             class="flex flex-col-reverse gap-2">
-            <fieldset class="group peer w-full grid md:grid-cols-2 gap-4"
+            <fieldset class="group w-full grid md:grid-cols-2 gap-4"
                 id="setup_fieldset" disabled>
                 <TabletDisplay editable={editable} tablet={setup?.tablet} />
                 <KeyboardDisplay editable={editable} keyboard={setup?.keyboard} />
@@ -32,20 +32,22 @@ const UserSetupPanel = ({ logged_id, page_id, setup }: Props) => {
                 <Peripherals editable={editable} peripherals={setup?.peripherals} />
                 <Computer editable={editable} computer={setup?.computer} />
             </fieldset>
-            {editable && <>
-                <button type="submit" class="block peer-disabled:hidden btn btn-sm btn-success"
-                    id="setup_form_submit">
-                    <i class="fa-solid fa-check" />
-                </button>
-                <button type="reset" class="block peer-disabled:hidden btn btn-sm btn-error"
-                    id="setup_form_cancel">
-                    <i class="fa-solid fa-xmark" />
-                </button>
-                <button type="button" class="hidden peer-disabled:block btn btn-sm btn-accent"
-                    id="setup_form_edit">
-                    <i class="fa-solid fa-pen-to-square" />
-                </button>
-            </>}
+            {editable &&
+                <div class="flex flex-row-reverse gap-2">
+                    <button type="reset" class="hidden btn btn-sm btn-error"
+                        id="setup_form_cancel">
+                        <i class="fa-solid fa-xmark" />
+                    </button>
+                    <button type="submit" class="hidden btn btn-sm btn-success"
+                        id="setup_form_submit">
+                        <i class="fa-solid fa-check" />
+                    </button>
+                    <button type="button" class="block btn btn-sm btn-accent"
+                        id="setup_form_edit">
+                        <i class="fa-solid fa-pen-to-square" />
+                    </button>
+                </div>
+            }
         </form>
         <script src="/public/js/setup.js" />
     </div>;

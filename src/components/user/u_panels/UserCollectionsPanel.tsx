@@ -12,25 +12,24 @@ async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
         collection = await CollectionsDBModel.findOne({ user_id }) as any;
     }
 
+    const editable = user_id === logged_id;
+
     return (<div id="colpanel" class="max-h-96 overflow-y-scroll flex flex-col gap-4">
-        {user_id === logged_id ?
-            <div class="flex flex-row flex-wrap items-center justify-between">
-                <form class="flex flex-row items-center gap-2" hx-swap="innerHTML" hx-target="#colpanel" hx-trigger="submit"
-                    hx-encoding='multipart/form-data' hx-post={`/users/${user_id}/collections/parse`} >
-                    <div class="join">
-                        <input type="file" name="collection" class="join-item file-input file-input-sm file-input-bordered w-full max-w-xs" />
-                        <button type="submit" class="join-item btn btn-sm btn-primary">
-                            Submit
-                            <div class="htmx-indicator flex flex-row items-center gap-4">
-                                <span class="loading loading-spinner" />
-                            </div>
-                        </button>
-                    </div>
-                </form>
-                <div>
-                    <button class="btn btn-sm btn-error flex flex-row gap-2 items-center" onclick="collections_delete_modal.showModal()">
+        {editable ?
+            <div class="flex flex-row-reverse flex-wrap items-center justify-between">
+                <div class="flex flex-row gap-2">
+                    <button type="button" class="block btn btn-sm btn-accent"
+                        id="collections_form_edit">
+                        <i class="fa-solid fa-pen-to-square" />
+                    </button>
+                    <button type="button" class="hidden btn btn-sm flex-row gap-2 items-center"
+                        id="collections_form_delete" onclick="collections_delete_modal.showModal()">
                         <i class="fa-regular fa-trash-can" />
                         <span>Delete ALL</span>
+                    </button>
+                    <button type="reset" class="hidden btn btn-sm btn-error"
+                        id="collections_form_cancel">
+                        <i class="fa-solid fa-xmark" />
                     </button>
                     <dialog id="collections_delete_modal" class="modal">
                         <div class="modal-box">
@@ -49,46 +48,57 @@ async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
                         </div>
                     </dialog>
                 </div>
+                <form id="collections_form" class="hidden flex-row items-center gap-2" hx-swap="innerHTML" hx-target="#colpanel" hx-trigger="submit"
+                    hx-encoding='multipart/form-data' hx-post={`/users/${user_id}/collections/parse`} >
+                    <div class="join">
+                        <input type="file" name="collection" class="join-item file-input file-input-sm file-input-bordered w-full max-w-xs" />
+                        <button type="submit" class="join-item btn btn-sm btn-primary">
+                            Submit
+                            <div class="htmx-indicator flex flex-row items-center gap-4">
+                                <span class="loading loading-spinner" />
+                            </div>
+                        </button>
+                    </div>
+                </form>
+                <script src="/public/js/collections.js" />
             </div> : <></>
         }
         <div class="flex flex-col gap-2">
-            {
-                collection?.collections.map((c) => (
-                    <div class="flex flex-col items-start gap-1 p-2 bg-base-300 rounded-lg">
-                        <button class="h-8 cursor-pointer link link-info flex flex-row gap-2 items-center" id={`btn_download_${c.name}`}
-                            onclick="downloadCollection(this.id);" data-name={c.name}
-                            data-ids={JSON.stringify(c.beatmapsMd5.map(h => h))}>
-                            <i class="regular fa-regular fa-file-zipper" />
-                            <span class="loading loading-spinner loading-xs"
-                                style={{ display: "none" }} />
-                            <label class="cursor-pointer">
-                                Download
-                            </label>
-                            <progress class="progress progress-success w-56" value={0} max={c.beatmapsMd5.length}
-                                style={{ display: "none" }} />
-                            <span class="progress-indicator" style={{ display: "none" }}>
-                                0/{c.beatmapsMd5.length}
-                            </span>
-                        </button>
-                        <div class="collapse collapse-arrow bg-info bg-opacity-50 has-[:checked]:bg-gradient-to-b from-info to-base-200 p-0.5">
-                            <input type="checkbox" name="collections-acordion" />
-                            <div class="collapse-title bg-base-200 rounded-lg grow">
-                                {c.name} ({c.beatmapsMd5.length})
-                            </div>
-                            <div class="collapse-content p-0 m-0">
-                                <div class="flex flex-col gap-2 p-2">
-                                    <button hx-post={`/users/${user_id}/0/lists/collections?name=${c.name}&offset=${0}`}
-                                        hx-trigger="click" hx-swap="outerHTML" hx-boost="false"
-                                        class="col-span-full btn btn-success btn-sm flex flex-row gap-2">
-                                        <div>Load more</div>
-                                        <span class="htmx-indicator loading loading-spinner loading-md" />
-                                    </button>
-                                </div>
+            {collection?.collections.map((c) => (
+                <div class="flex flex-col items-start gap-1 p-2 bg-base-300 rounded-lg">
+                    <button class="h-8 cursor-pointer link link-info flex flex-row gap-2 items-center" id={`btn_download_${c.name}`}
+                        onclick="downloadCollection(this.id);" data-name={c.name}
+                        data-ids={JSON.stringify(c.beatmapsMd5.map(h => h))}>
+                        <i class="regular fa-regular fa-file-zipper" />
+                        <span class="loading loading-spinner loading-xs"
+                            style={{ display: "none" }} />
+                        <label class="cursor-pointer">
+                            Download
+                        </label>
+                        <progress class="progress progress-success w-56" value={0} max={c.beatmapsMd5.length}
+                            style={{ display: "none" }} />
+                        <span class="progress-indicator" style={{ display: "none" }}>
+                            0/{c.beatmapsMd5.length}
+                        </span>
+                    </button>
+                    <div class="collapse collapse-arrow bg-info bg-opacity-50 has-[:checked]:bg-gradient-to-b from-info to-base-200 p-0.5">
+                        <input type="checkbox" name="collections-acordion" />
+                        <div class="collapse-title bg-base-200 rounded-lg grow">
+                            {c.name} ({c.beatmapsMd5.length})
+                        </div>
+                        <div class="collapse-content p-0 m-0">
+                            <div class="flex flex-col gap-2 p-2">
+                                <button hx-post={`/users/${user_id}/0/lists/collections?name=${c.name}&offset=${0}`}
+                                    hx-trigger="click" hx-swap="outerHTML" hx-boost="false"
+                                    class="col-span-full btn btn-success btn-sm flex flex-row gap-2">
+                                    <div>Load more</div>
+                                    <span class="htmx-indicator loading loading-spinner loading-md" />
+                                </button>
                             </div>
                         </div>
                     </div>
-                ))
-            }
+                </div>
+            ))}
         </div>
     </div>)
 }

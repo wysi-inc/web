@@ -1,11 +1,11 @@
 type Props = {
-    name: string;
-    code: string;
+    name?: string;
+    url?: string;
 }
 
-const Flag = ({ name, code }: Props) => {
+const SubdivisionFlag = ({ name, url }: Props) => {
 
-    const url = `https://flagcdn.com/h40/${code.toLowerCase()}.jpg`;
+    if (!name) return (<></>);
 
     return (
         <div class="tooltip" data-tip={name}>
@@ -14,4 +14,4 @@ const Flag = ({ name, code }: Props) => {
     );
 }
 
-export default Flag;
+export default SubdivisionFlag;
