@@ -6910,7 +6910,7 @@ export const subdivisionFlags: any = {
             "US-MN": {
                 "name": "Minnesota",
                 "nativeName": "Minnesota",
-                "flag": "https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Minnesota_(2023_redesign).svg"
+                "flag": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Minnesota.svg"
             },
             "US-MS": {
                 "name": "Mississippi",

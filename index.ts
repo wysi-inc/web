@@ -42,7 +42,14 @@ connect();
 setInterval(() => connect(), 1000 * 60 * 60 * 23);
 
 new Elysia()
-    .use(staticPlugin())
+    .onRequest(({ request }) => {
+        const agent = request.headers.get("user-agent");
+        const route = request.url.split("/").slice(3).join("/");
+        const method = request.method;
+        const time = new Date().toTimeString().split(" ")[0];
+        time.split(":").length === 2 && time.concat(":00");
+        console.log(`[ ${time} ] -> ${method}::/${route} --- ${agent}`)
+    })
     .use(jwt({
         secret: process.env.OSU_SECRET as string,
         cookie: "auth",
@@ -52,6 +59,7 @@ new Elysia()
             path: '/',
         }
     }))
+    .use(staticPlugin())
     .use(html())
     .use(baseRoutes)
     .use(rankingRoutes)
@@ -59,13 +67,5 @@ new Elysia()
     .use(beatmapRoutes)
     .use(jsonRoutes)
     //.onError(() => "som")
-    .onRequest(({ request }) => {
-        const agent = request.headers.get("user-agent");
-        const route = request.url.split("/").slice(3).join("/");
-        const method = request.method;
-        const time = new Date().toTimeString().split(" ")[0];
-        time.split(":").length === 2 && time.concat(":00");
-        console.log(`[ ${time} ] -> ${method}::/${route} --- ${agent}`)
-    })
     .onStart(() => console.info(`[ OK ] Listening on port ${port}`))
     .listen(port)
