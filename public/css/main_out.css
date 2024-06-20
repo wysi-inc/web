@@ -4283,6 +4283,10 @@ details.collapse summary::-webkit-details-marker {
   width: min-content;
 }
 
+.w-44 {
+  width: 11rem;
+}
+
 .max-w-\[1000px\] {
   max-width: 1000px;
 }
