@@ -5110,6 +5110,10 @@ details.collapse summary::-webkit-details-marker {
     display: flex;
   }
 
+  .lg\:table-cell {
+    display: table-cell;
+  }
+
   .lg\:hidden {
     display: none;
   }
