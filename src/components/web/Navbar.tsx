@@ -33,6 +33,11 @@ const Navbar = ({ user }: Props) => {
                                     Beatmaps
                                 </HxA>
                             </li>
+                            <li>
+                                <HxA url="/about" css="btn btn-ghost">
+                                    About
+                                </HxA>
+                            </li>
                             <div class="md:hidden divider" />
                             <li>
                                 <label class="flex sm:hidden btn btn-ghost flex-row gap-2 justify-between items-center">
@@ -72,18 +77,23 @@ const Navbar = ({ user }: Props) => {
                         <HxA url="/beatmaps" css="btn btn-ghost">
                             Beatmaps
                         </HxA>
+                        <HxA url="/about" css="btn btn-ghost">
+                            About
+                        </HxA>
                     </div>
                 </div>
                 <div class="flex flex-row items-center justify-center">
                     <Search />
                 </div>
                 <div class="flex flex-row items-center justify-end">
-                    <label class="hidden sm:flex btn btn-ghost flex-row gap-2 justify-between items-center">
-                        <i class="fa-solid fa-moon" />
-                        <input class="toggle" type="checkbox"
-                            data-toggle-theme="dracula,pastel" />
-                        <i class="fa-solid fa-sun" />
-                    </label>
+                    <div class="hidden md:flex">
+                        <label class="btn btn-ghost swap swap-rotate">
+                            <input type="checkbox" class="theme-controller"
+                                data-toggle-theme="dracula,pastel" />
+                            <i class="swap-on fa-solid fa-sun" />
+                            <i class="swap-off fa-solid fa-moon" />
+                        </label>
+                    </div>
                     <div class="hidden md:flex flex-row items-center justify-end">
                         <a href="https://github.com/wysi-inc" target="_blank"
                             class="hidden md:flex btn btn-ghost">

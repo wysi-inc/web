@@ -3,6 +3,7 @@ import Home from "../components/web/Home";
 import SearchResults from "../components/web/SearchResults";
 import HtmxPage from "../libs/routes";
 import { userAuthData } from "../libs/auth";
+import About from "../components/web/About";
 
 const searchBody = {
     body: t.Object({
@@ -22,6 +23,12 @@ export const baseRoutes = new Elysia({ prefix: '' })
     .get("/", async ({ request, jwt, cookie }) => (
         <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
             <Home />
+        </HtmxPage>
+    ))
+    //@ts-ignore
+    .get("/about", async ({ request, jwt, cookie }) => (
+        <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
+            <About />
         </HtmxPage>
     ))
     .post("/search", ({ body }) => (
