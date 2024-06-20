@@ -61,7 +61,10 @@ new Elysia()
     .onError((err) => console.error(err.error))
     .onRequest(({ request, set }) => {
         const agent = request.headers.get("user-agent");
-        if (agent && blocked_agents.includes(agent)) {
+        if (agent?.includes("bot")) {
+            set.status = 451;
+            return "🖕";
+        } else if (agent && blocked_agents.includes(agent)) {
             set.status = 451;
             return "🖕";
         }
