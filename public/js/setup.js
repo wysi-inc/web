@@ -1,4 +1,5 @@
 setup();
+
 function setup() {
     const form = document.getElementById('setup_form');
     const fieldset = document.getElementById('setup_fieldset');

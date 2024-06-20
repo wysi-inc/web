@@ -66,9 +66,8 @@ async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
         <div class="flex flex-col gap-2">
             {collection?.collections.map((c) => (
                 <div class="flex flex-col items-start gap-1 p-2 bg-base-300 rounded-lg">
-                    <button class="h-8 cursor-pointer link link-info flex flex-row gap-2 items-center" id={`btn_download_${c.name}`}
-                        onclick="downloadCollection(this.id);" data-name={c.name}
-                        data-ids={JSON.stringify(c.beatmapsMd5.map(h => h))}>
+                    <button class="collection-download-button h-8 cursor-pointer link link-info flex flex-row gap-2 items-center"
+                        id={`btn_download_${c.name}`} data-name={c.name} data-ids={JSON.stringify(c.beatmapsMd5.map(h => h))}>
                         <i class="regular fa-regular fa-file-zipper" />
                         <span class="loading loading-spinner loading-xs"
                             style={{ display: "none" }} />
@@ -99,6 +98,7 @@ async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
                     </div>
                 </div>
             ))}
+            <script type="module" src="/public/js/collectiondownloader.js" />
         </div>
     </div>)
 }

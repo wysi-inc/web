@@ -48,8 +48,10 @@ const UserSetupPanel = ({ logged_id, page_id, setup }: Props) => {
                     </button>
                 </div>
             }
+            {editable ?
+                <script src="/public/js/setup.js" /> : <></>
+            }
         </form>
-        <script src="/public/js/setup.js" />
     </div>;
 }
 

@@ -2,6 +2,17 @@ import { downloadZip } from "https://unpkg.com/client-zip@2.4.5/index.js"
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
+getDownloadButtons();
+function getDownloadButtons() {
+    const buttons = document.getElementsByClassName("collection-download-button");
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener("click", (e) => {
+            e.preventDefault();
+            downloadCollection(buttons[i].id)
+        });
+    }
+}
+
 async function downloadCollection(id) {
 
     const button = document.getElementById(id);
@@ -86,5 +97,3 @@ async function getBeatmap(hash, label) {
     }
     throw new Error(data.statusText);
 }
-
-window.downloadCollection = downloadCollection;
