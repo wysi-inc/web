@@ -1,14 +1,12 @@
 
 const Home = () => {
     return <div class="flex flex-col gap-4">
-        <div class="flex flex-row justify-between items-center">
+        <div class="flex flex-col gap-2 items-center">
+            <h1 class="text-2xl text-center">Welcome to wysi727.com!</h1>
             <img src="/public/wysi.svg" class="rounded-xl size-24 shadow-lg" />
-            <div class="col-span-3">
-                <h1 class="text-2xl text-center">Welcome to wysi727.com!</h1>
-                <h2 class="text-lg text-center">An <b>open source</b> osu website <i>*alternative*</i></h2>
-                <h3 class="text-sm text-center">Built with bun and htmx</h3>
-            </div>
-            <img src="/public/osu.svg" class="rounded-full size-24 shadow-lg" />
+            <h2 class="text-lg text-center">An <b>open source</b> osu website <i>*alternative*</i></h2>
+            <h3 class="text-sm text-center">Built with bun and htmx</h3>
+            <div />
         </div>
         <div class="grid gird-cols-1 md:grid-cols-2 gap-4">
             <div class="bg-base-100 rounded-lg flex flex-col">

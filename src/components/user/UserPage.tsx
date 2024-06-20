@@ -73,7 +73,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
                     page_id={user.id} />
         },
         {
-            title: "Sking (wip)",
+            title: "Skins (wip)",
             code: "skins",
             tooltip: "powered by skins.osuck.net",
             icon: <i class="fa-solid fa-palette" />,
@@ -104,10 +104,10 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             url: `/users/${user.id}/${mode}/panels/beatmaps/favourite`
         },
         {
-            title: "Collections (beta)",
+            title: "Collections",
             code: "collections",
             tooltip: "powered by catboy.best",
-            info: "this section is experimental, some functionality is still missing, like the abiltiy to remove collections",
+            info: "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)",
             icon: <i class="fa-solid fa-list" />,
             show_if: true,
             url: `/users/${user.id}/${mode}/panels/collections`

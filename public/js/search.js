@@ -1,15 +1,33 @@
 const searchForm = document.getElementById("search_form");
+const searchButton = document.getElementById("search_button");
 const searchInput = document.getElementById("search_input");
 const searchResults = document.getElementById("search_results");
 const searchModal = document.getElementById("search_modal");
-searchModal.addEventListener("change", (e) => {
-    if (e.target.checked) {
-        searchInput.value = "";
-        searchResults.innerHTML = "";
-        searchInput.focus();
+
+searchForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let link = document.createElement("a");
+    link.href = `/users/${searchInput.value}`;
+    link.click();
+});
+
+searchButton.addEventListener("click", (e) => {
+    openDialog(e);
+});
+
+document.addEventListener('keypress', function(e) {
+    if (e.key === '/') {
+        openDialog(e);
     }
 });
-searchInput.addEventListener("change", (e) => {
-    console.log(e.target.value);
-    searchForm.setAttribute("hx-get", "/search/" + e.target.value);
-});
+
+function openDialog(e) {
+    if (searchModal.open) return;
+    e.preventDefault();
+    searchResults.innerHTML = "";
+    searchModal.showModal();
+    searchInput.value = "";
+    setTimeout(() => {
+        searchInput.focus();
+    }, 0);
+}
