@@ -58,23 +58,11 @@ new Elysia()
     .use(userRoutes)
     .use(beatmapRoutes)
     .use(jsonRoutes)
-    .onError(() => "wtf")
-    .onRequest(({ request, set }) => {
+    //.onError(() => "som")
+    .onRequest(({ request }) => {
         const agent = request.headers.get("user-agent");
-        for (let i = 0; i < blocked_agent_keywords.length; i++) {
-            if (!agent?.toLowerCase()?.includes(blocked_agent_keywords[i])) continue;
-            set.status = 451;
-            console.log(`🖕 ${agent}`);
-            return "🖕";
-        }
-        if (agent && blocked_agents.includes(agent)) {
-            set.status = 451;
-            console.log(`🖕 ${agent}`);
-            return "🖕";
-        }
         const route = request.url.split("/").slice(3).join("/");
         const method = request.method;
-        // current hour, minute, second
         const time = new Date().toTimeString().split(" ")[0];
         time.split(":").length === 2 && time.concat(":00");
         console.log(`[ ${time} ] -> ${method}::/${route} --- ${agent}`)
