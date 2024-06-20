@@ -10,7 +10,7 @@ const SubdivisionFlag = ({ name, url }: Props) => {
     return (
         <div class="tooltip" data-tip={name}>
             <img src={url} alt={`${name}'s flag`}
-                class="h-5 w-7 rounded-sm outline outline-1 outline-base-300" />
+                class="h-5 w-7 object-fill rounded-sm outline outline-1 outline-base-300" />
         </div>
     );
 }
