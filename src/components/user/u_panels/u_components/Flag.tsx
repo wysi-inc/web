@@ -5,7 +5,7 @@ type Props = {
 
 const Flag = ({ name, code }: Props) => {
 
-    const url = `https://flagcdn.com/w40/${code.toLowerCase()}.webp`;
+    const url = `https://flagcdn.com/h40/${code.toLowerCase()}.webp`;
 
     return (
         <div class="tooltip flex items-center justify-center h-5 w-7" data-tip={name}>
