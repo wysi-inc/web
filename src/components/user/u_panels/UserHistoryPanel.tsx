@@ -17,7 +17,7 @@ const UserHistoryPanel = (props: Props) => {
     function tab(type: string, title: string, data: Rank[] | MonthCount[] | undefined) {
         if (!data) return <></>;
         return (<>
-            <input type="radio" name="history_tabs" role="tab" class="tab text-nowrap"
+            <input role="tab" type="radio" name="history_tabs" class="tab text-nowrap"
                 aria-label={title} checked={type === "global"} />
             <div role="tabpanel" class="tab-content pt-4">
                 {data.length > 0 ?

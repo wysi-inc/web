@@ -49,7 +49,7 @@ async function UserTopPanel({ user, mode }: Props) {
                                 <div class="tooltip" data-tip="osu!">
                                     {mode === "osu" ?
                                         <ModeIcon mode="osu" size={24} css={`fill-secondary`} /> :
-                                        <HxA url={`/users/${user.id}/osu`}>
+                                        <HxA url={`/users/${user.id}/osu`} label="standard mode">
                                             <ModeIcon mode="osu" size={24} css={`fill-base-content`} />
                                         </HxA>
                                     }
@@ -57,7 +57,7 @@ async function UserTopPanel({ user, mode }: Props) {
                                 <div class="tooltip" data-tip="osu!taiko">
                                     {mode === "taiko" ?
                                         <ModeIcon mode="taiko" size={24} css={`fill-secondary`} /> :
-                                        <HxA url={`/users/${user.id}/taiko`}>
+                                        <HxA url={`/users/${user.id}/taiko`} label="taiko mode">
                                             <ModeIcon mode="taiko" size={24} css={`fill-base-content`} />
                                         </HxA>
                                     }
@@ -65,7 +65,7 @@ async function UserTopPanel({ user, mode }: Props) {
                                 <div class="tooltip" data-tip="osu!catch">
                                     {mode === "fruits" ?
                                         <ModeIcon mode="fruits" size={24} css={`fill-secondary`} /> :
-                                        <HxA url={`/users/${user.id}/fruits`}>
+                                        <HxA url={`/users/${user.id}/fruits`} label="fruits mode">
                                             <ModeIcon mode="fruits" size={24} css={`fill-base-content`} />
                                         </HxA>
                                     }
@@ -73,7 +73,7 @@ async function UserTopPanel({ user, mode }: Props) {
                                 <div class="tooltip" data-tip="osu!mania">
                                     {mode === "mania" ?
                                         <ModeIcon mode="mania" size={24} css={`fill-secondary`} /> :
-                                        <HxA url={`/users/${user.id}/mania`}>
+                                        <HxA url={`/users/${user.id}/mania`} label="mainia mode">
                                             <ModeIcon mode="mania" size={24} css={`fill-base-content`} />
                                         </HxA>
                                     }

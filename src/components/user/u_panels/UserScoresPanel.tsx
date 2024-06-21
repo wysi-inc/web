@@ -19,8 +19,8 @@ const UserScoresPanel = ({ id, mode, category }: Props) => {
     const Tab = ({ cat, title, col }: TabProps) => {
         const current = cat === category;
         return (<>
-            <input type="radio" name="score-tabs" role="tab" class={`tab text-nowrap ${col}`} aria-label={title} checked={current}
-                hx-trigger="click once"
+            <input role="tab" type="radio" name="score-tabs" class={`tab text-nowrap ${col}`}
+                hx-trigger="click once" aria-label={title} checked={current}
                 hx-post={`/users/${id}/${mode}/lists/scores/${cat}?offset=0&limit=5`}
                 hx-target={`#scores-list-${cat}`} hx-disable={current}
                 hx-indicator={`#scores-loading-${cat}`}
