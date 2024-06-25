@@ -130,6 +130,8 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
         }
     ];
 
+    const number = 123;
+
     return (<>
         <UserTopPanel user={user} mode={mode} />
         <div class="underline-offset-1 text-neutral-content sticky top-16 bg-base-300 rounded-lg shadow-lg p-2 z-40 flex flex-row gap-4 flex-wrap justify-around">
