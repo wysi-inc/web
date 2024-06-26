@@ -42,13 +42,14 @@ setInterval(() => connect(), 1000 * 60 * 60 * 23);
 
 new Elysia()
     .onRequest(({ request }) => {
-        const agent = request.headers.get("user-agent");
+        // const agent = request.headers.get("user-agent");
+        const ip = request.headers.get("x-forwarded-for");
         const route = request.url.split("/").slice(3).join("/");
         const method = request.method;
         const time = new Date().toTimeString().split(" ")[0];
         time.split(":").length === 2 && time.concat(":00");
         console.log(request.headers);
-        console.log(`[ ${time} ] -> ${method}::/${route} --- ${agent}`);
+        console.log(`[ ${time} ] -> ${ip}${method}::/${route}`);
     })
     .use(jwt({
         secret: process.env.OSU_SECRET as string,
