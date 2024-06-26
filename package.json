@@ -23,6 +23,7 @@
     "@elysiajs/jwt": "^0.8.0",
     "@elysiajs/static": "^0.8.1",
     "elysia": "^0.8.17",
+    "elysia-ip": "^1.0.7",
     "htmx": "^0.0.2",
     "moment": "^2.30.1",
     "mongoose": "^8.4.3",

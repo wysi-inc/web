@@ -47,7 +47,8 @@ new Elysia()
         const method = request.method;
         const time = new Date().toTimeString().split(" ")[0];
         time.split(":").length === 2 && time.concat(":00");
-        console.log(`[ ${time} ] -> ${method}::/${route} --- ${agent}`)
+        console.log(request.headers);
+        console.log(`[ ${time} ] -> ${method}::/${route} --- ${agent}`);
     })
     .use(jwt({
         secret: process.env.OSU_SECRET as string,
