@@ -76,9 +76,9 @@ new Elysia()
         const ip = request.headers.get("x-forwarded-for");
         const route = request.url.split("/").slice(3).join("/");
         const method = request.method;
-        const time = new Date().toTimeString().split(" ")[0];
-        time.split(":").length === 2 && time.concat(":00");
-        console.log(`[ ${time} ] ${(ip || "0.0.0.0").padStart(15, " ")} ${method.padStart(4, " ")}::/${route}`);
+        // const time = new Date().toTimeString().split(" ")[0];
+        // time.split(":").length === 2 && time.concat(":00");
+        console.log(`${(ip || "0.0.0.0").padStart(15, " ")} ${method.padStart(4, " ")}::/${route}`);
     })
     .use(jwtcfg)
     .use(staticPlugin())
