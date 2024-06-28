@@ -14,6 +14,8 @@ async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
 
     const editable = user_id === logged_id;
 
+    const collections = collection?.collections;
+
     return (<div id="colpanel" class="max-h-96 overflow-y-scroll flex flex-col gap-4">
         {editable ?
             <div class="flex flex-row-reverse flex-wrap items-center justify-between">
@@ -63,43 +65,60 @@ async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
                 <script src="/public/js/collections.js" />
             </div> : <></>
         }
-        <div class="flex flex-col gap-2">
-            {collection?.collections.map((c) => (
-                <div class="flex flex-col items-start gap-1 p-2 bg-base-300 rounded-lg">
-                    <button class="collection-download-button h-8 cursor-pointer link link-info flex flex-row gap-2 items-center"
-                        id={`btn_download_${c.name}`} data-name={c.name} data-ids={JSON.stringify(c.beatmapsMd5.map(h => h))}>
-                        <i class="regular fa-regular fa-file-zipper" />
-                        <span class="loading loading-spinner loading-xs"
-                            style={{ display: "none" }} />
-                        <label class="cursor-pointer">
-                            Download
-                        </label>
-                        <progress class="progress progress-success w-56" value={0} max={c.beatmapsMd5.length}
-                            style={{ display: "none" }} />
-                        <span class="progress-indicator" style={{ display: "none" }}>
-                            0/{c.beatmapsMd5.length}
-                        </span>
-                    </button>
-                    <div class="collapse collapse-arrow bg-info bg-opacity-50 has-[:checked]:bg-gradient-to-b from-info to-base-200 p-0.5">
-                        <input type="checkbox" name="collections-acordion" />
-                        <div class="collapse-title bg-base-200 rounded-lg grow">
-                            {c.name} ({c.beatmapsMd5.length})
-                        </div>
-                        <div class="collapse-content p-0 m-0">
-                            <div class="flex flex-col gap-2 p-2">
-                                <button hx-post={`/users/${user_id}/0/lists/collections?name=${c.name}&offset=${0}`}
-                                    hx-trigger="click" hx-swap="outerHTML" hx-boost="false"
-                                    class="col-span-full btn btn-success btn-sm flex flex-row gap-2">
-                                    <div>Load more</div>
-                                    <span class="htmx-indicator loading loading-spinner loading-md" />
-                                </button>
+        {collections ? <>
+            <button class="collection-download-button h-8 cursor-pointer link link-info flex flex-row-reverse gap-2 items-center"
+                id={`btn_download_${user_id}`} data-name={`all_collections_${user_id}`} data-ids={JSON.stringify(collections.map(c => c.beatmapsMd5.map(h => h)).flat())}>
+                <i class="regular fa-regular fa-file-zipper" />
+                <span class="loading loading-spinner loading-xs"
+                    style={{ display: "none" }} />
+                <label class="cursor-pointer" data-title="Download All">
+                    Download All
+                </label>
+                <progress class="progress progress-success w-56" value={0} max={collections.map(c => c.beatmapsMd5.length).reduce((total, c) => total + c, 0)}
+                    style={{ display: "none" }} />
+                <span class="progress-indicator" style={{ display: "none" }}>
+                    0/{collections.map(c => c.beatmapsMd5.length).reduce((total, c) => total + c, 0)}
+                </span>
+            </button>
+            <div class="flex flex-col gap-2">
+                {collections.map((c) => (
+                    <div class="flex flex-col items-start gap-1 p-2 bg-base-300 rounded-lg">
+                        <button class="collection-download-button h-8 cursor-pointer link link-info flex flex-row gap-2 items-center"
+                            id={`btn_download_${c.name}`} data-name={c.name} data-ids={JSON.stringify(c.beatmapsMd5.map(h => h))}>
+                            <i class="regular fa-regular fa-file-zipper" />
+                            <span class="loading loading-spinner loading-xs"
+                                style={{ display: "none" }} />
+                            <label class="cursor-pointer" data-title="Download">
+                                Download
+                            </label>
+                            <progress class="progress progress-success w-56" value={0} max={c.beatmapsMd5.length}
+                                style={{ display: "none" }} />
+                            <span class="progress-indicator" style={{ display: "none" }}>
+                                0/{c.beatmapsMd5.length}
+                            </span>
+                        </button>
+                        <div class="collapse collapse-arrow bg-info bg-opacity-50 has-[:checked]:bg-gradient-to-b from-info to-base-200 p-0.5">
+                            <input type="checkbox" name="collections-acordion" />
+                            <div class="collapse-title bg-base-200 rounded-lg grow">
+                                {c.name} ({c.beatmapsMd5.length})
+                            </div>
+                            <div class="collapse-content p-0 m-0">
+                                <div class="flex flex-col gap-2 p-2">
+                                    <button hx-post={`/users/${user_id}/0/lists/collections?name=${c.name}&offset=${0}`}
+                                        hx-trigger="click" hx-swap="outerHTML" hx-boost="false"
+                                        class="col-span-full btn btn-success btn-sm flex flex-row gap-2">
+                                        <div>Load more</div>
+                                        <span class="htmx-indicator loading loading-spinner loading-md" />
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            ))}
-            <script type="module" src="/public/js/collectiondownloader.js" />
-        </div>
+                ))}
+                <script type="module" src="/public/js/collectiondownloader.js" />
+            </div>
+        </> : <></>
+        }
     </div>)
 }
 

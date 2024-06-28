@@ -1,6 +1,6 @@
 import { downloadZip } from "https://unpkg.com/client-zip@2.4.5/index.js"
 
-const delay = ms => new Promise(res => setTimeout(res, ms));
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 getDownloadButtons();
 function getDownloadButtons() {
@@ -36,10 +36,12 @@ async function downloadCollection(id) {
         progress.style.display = "flex";
 
         const files = [];
+        const parsed_hashes = [];
+        const downloaded_set_ids = [];
         for (let i = 0; i < hashes.length; i++) {
-            const data = await getBeatmap(hashes[i], label);
+            const data = await getBeatmap(hashes[i], label, parsed_hashes, downloaded_set_ids);
+            count++;
             if (!data) continue;
-            label.innerText = "Downloading...";
             const name = decodeURIComponent(data.headers.get("content-disposition").split("filename=")[1]);
             const input = {
                 name: name.substring(1, name.length - 1),
@@ -47,7 +49,6 @@ async function downloadCollection(id) {
                 input: data.body
             };
             files.push(input);
-            count++;
             indicator.innerHTML = `${count}/${hashes.length}`;
             progress.value = count;
         }
@@ -62,7 +63,7 @@ async function downloadCollection(id) {
         link.download = `collection-${name}.zip`;
         link.click();
         link.remove();
-        label.innerText = "Download";
+        label.innerText = label.getAttribute("data-title");
     } catch (err) {
         console.error(err);
         label.innerText = "Error (try again later)";
@@ -77,23 +78,25 @@ async function downloadCollection(id) {
     progress.style.display = "none";
 }
 
-async function getBeatmap(hash, label) {
-    try {
-        const res = await fetch(`https://catboy.best/api/v2/md5/${hash}`);
-        if (!res.ok) return;
-        const beatmap = await res.json();
-        const data = await fetch(`https://catboy.best/d/${beatmap.set.id}`);
-        console.log(data.headers);
-        if (data.ok) return data;
-        if (data.status === 429) {
-            for (let s = 60; s >= 0; s--) {
-                label.innerText = `Rate limit hit, waiting ${s}s...`;
-                await delay(1000);
-            }
-            return await getBeatmap(...arguments);
+async function getBeatmap(hash, label, parsed_hashes, downloaded_set_ids) {
+    label.innerText = "Downloading...";
+    if (parsed_hashes.includes(hash)) return;
+    const res = await fetch(`https://catboy.best/api/v2/md5/${hash}`);
+    if (!res.ok) return;
+    const beatmap = await res.json();
+    if (downloaded_set_ids.includes(beatmap.set.id)) return;
+    const data = await fetch(`https://catboy.best/d/${beatmap.set.id}`);
+    if (data.ok) {
+        parsed_hashes.push(hash);
+        downloaded_set_ids.push(beatmap.set.id);
+        return data
+    };
+    if (data.status === 429) {
+        for (let s = 60; s >= 0; s--) {
+            label.innerText = `Rate limit hit, waiting ${s}s...`;
+            await delay(1000);
         }
-    } catch (err) {
-        return;
+        return await getBeatmap(...arguments);
     }
-    throw new Error(data.statusText);
+    return;
 }
