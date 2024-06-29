@@ -54,7 +54,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             show_if: user.page?.html !== "",
             jsx:
                 <div class="p-4 rounded-lg bg-base-300">
-                    <div class="bbcode h-96 overflow-y-scroll">
+                    <div class="bbcode h-96 overflow-y-scroll max-w-[400px]">
                         {
                             user.page.html
                         }
