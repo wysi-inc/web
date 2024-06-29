@@ -53,8 +53,8 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             icon: <i class="fa-solid fa-user" />,
             show_if: user.page?.html !== "",
             jsx:
-                <div class="p-4 rounded-lg bg-base-300">
-                    <div class="bbcode h-96 overflow-y-scroll max-w-[300px] md:max-w-[800px]">
+                <div class="p-4 rounded-lg bg-base-300 flex justify-center items-center">
+                    <div class="bbcode h-96 overflow-y-scroll grow">
                         {
                             user.page.html
                         }
@@ -73,15 +73,15 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
                     page_id={user.id} />
         },
         {
-            title: "Skins (wip)",
+            title: "Skins",
             code: "skins",
             tooltip: "powered by skins.osuck.net",
             icon: <i class="fa-solid fa-palette" />,
-            show_if: true,
+            show_if: false,
             url: `/users/${user.id}/0/panels/skins`
         },
         {
-            title: "Scores Summary",
+            title: "Summary",
             code: "summary",
             icon: <i class="fa-solid fa-ranking-star" />,
             info: "this is a quick summary of your top 100 plays",

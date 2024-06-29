@@ -79,7 +79,7 @@ const ScoreCard = async ({ score, position }: Props) => {
                                     backgroundPosition: "center",
                                     backgroundRepeat: "no-repeat"
                                 }}>
-                                <AudioPlayButton css="hidden group-hover:flex btn btn-ghost btn-sm w-full h-full"
+                                <AudioPlayButton css="hidden bg-opacity-50 hover:bg-opacity-75 border-none group-hover:flex btn btn-sm w-full h-full"
                                     beatmap_id={beatmap.id}
                                     set_id={beatmapset.id}
                                     beatmap_title={beatmapset.title}

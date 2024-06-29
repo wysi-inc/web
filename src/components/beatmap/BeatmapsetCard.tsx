@@ -15,7 +15,7 @@ const BeatmapsetCard = ({ beatmapset }: Props) => {
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
 
     return (
-        <div class="group flex flex-row bg-base-300 rounded-lg shadow-lg">
+        <div class="group flex flex-row bg-base-300 rounded-lg shadow-lg overflow-hidden">
             <div class="transition duration-300 ease-in-out text-white flex flex-col bg-neutral rounded-lg shadow-lg grow">
                 <div class="flex flex-col rounded-lg shadow-lg"
                     style={{
@@ -32,14 +32,14 @@ const BeatmapsetCard = ({ beatmapset }: Props) => {
                                 backgroundPosition: "center",
                                 backgroundRepeat: "no-repeat"
                             }}>
-                            <AudioPlayButton css="hidden group-hover:flex btn btn-ghost btn-sm w-full h-full"
+                            <AudioPlayButton css="hidden bg-opacity-50 hover:bg-opacity-75 border-none group-hover:flex btn btn-sm w-full h-full"
                                 beatmap_id={beatmapset.beatmaps[0].id}
                                 set_id={beatmapset.id}
                                 beatmap_title={beatmapset.title}
                                 beatmap_artist={beatmapset.artist}
                             />
                         </div>
-                        <div class="flex flex-col py-2 w-72 px-4 ">
+                        <div class="flex flex-col py-2 px-4 max-w-52 lg:max-w-72">
                             <HxA css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmaps/${beatmapset.id}`}>{beatmapset.title}</HxA>
                             <p class="text-neutral-content text-opacity-75 text-sm truncate"> by {beatmapset.artist}</p>
                         </div>

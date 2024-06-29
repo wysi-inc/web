@@ -161,9 +161,9 @@ const UserSummaryPanel = async (props: Props) => {
                             <span>{min_pp}pp</span>
                         </div>
                         <div class="flex flex-row items-center justify-between gap-2 px-2">
-                            <div class="h-2 border-b border-l grow" />
+                            <div class="h-2 border-base-content border-b border-l grow" />
                             <span>{max_pp - min_pp}pp</span>
-                            <div class="h-2 border-b border-r grow" />
+                            <div class="h-2 border-base-content border-b border-r grow" />
                         </div>
                     </div>
                 </div>

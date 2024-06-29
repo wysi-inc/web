@@ -88,7 +88,7 @@ async function UserTopPanel({ user, mode }: Props) {
                         </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 items-center justify-between grow">
-                        <div class="flex flex-col gap-2 items-center sm:items-start text-center sm:text-start">
+                        <div class="flex flex-col gap-2 items-start">
                             <div class="flex flex-row gap-2 items-center">
                                 <a href={`https://osu.ppy.sh/users/${user.id}`}
                                     target="_blank" class="text-2xl underline-offset-2 hover:underline">{user.username}</a>
@@ -129,50 +129,50 @@ async function UserTopPanel({ user, mode }: Props) {
                                 <h2 class="text-lg">{user.user_achievements.length} <i class="fa-solid fa-medal fa-xs" /></h2>
                             </div>
                         </div>
-                        <div class="flex flex-col gap-4 justify-between">
-                            <div class="grow text-sm flex flex-row gap-12 justify-between">
-                                <div class="flex flex-col gap-2 text-start">
-                                    <h2 class="flex gap-3 items-center">
-                                        <i class="fa-solid fa-angles-up w-4 text-center" />
-                                        <span>Ranked Score:</span>
-                                    </h2>
-                                    <h2 class="flex gap-3 items-center">
-                                        <i class="fa-solid fa-arrow-rotate-left w-4 text-center" />
-                                        <span>Play Count:</span>
-                                    </h2>
-                                    <h2 class="flex gap-3 items-center">
-                                        <i class="fa-regular fa-clock w-4 text-center" />
-                                        <span>Play Time:</span>
-                                    </h2>
-                                    <h2 class="flex gap-3 items-center">
-                                        <i class="fa-solid fa-fire w-4 text-center" />
-                                        <span>Max Combo:</span>
-                                    </h2>
-                                    <h2 class="flex gap-3 items-center">
-                                        <i class="fa-solid fa-keyboard w-4 text-center" />
-                                        <span>Total Hits:</span>
-                                    </h2>
-                                    <h2 class="flex gap-3 items-center">
-                                        <i class="fa-solid fa-calculator w-4 text-center" />
-                                        <span>Hits x Play:</span>
-                                    </h2>
-                                    <h2 class="flex gap-3 items-center">
-                                        <i class="fa-solid fa-eye w-4 text-center" />
-                                        <span>Replays Watched:</span>
-                                    </h2>
-                                </div>
-                                <div class="flex flex-col gap-2 text-end">
-                                    <h2>{user.statistics.ranked_score.toLocaleString()}</h2>
-                                    <h2>{user.statistics.play_count.toLocaleString()}</h2>
-                                    <h2>{Math.floor(user.statistics.play_time / 60 / 60).toLocaleString()}h</h2>
-                                    <h2>{user.statistics.maximum_combo.toLocaleString()}x</h2>
-                                    <h2>{user.statistics.total_hits.toLocaleString()}</h2>
-                                    <h2>{Math.round(user.statistics.total_hits / user.statistics.play_count || 0).toLocaleString()}</h2>
-                                    <h2>{user.statistics.replays_watched_by_others.toLocaleString()}</h2>
-                                </div>
+                    </div>
+                    <div class="flex flex-col gap-4 justify-between grow">
+                        <div class="grow text-sm flex flex-row gap-12 justify-between">
+                            <div class="flex flex-col gap-2 text-start">
+                                <h2 class="flex gap-3 items-center">
+                                    <i class="fa-solid fa-angles-up w-4 text-center" />
+                                    <span>Ranked Score:</span>
+                                </h2>
+                                <h2 class="flex gap-3 items-center">
+                                    <i class="fa-solid fa-arrow-rotate-left w-4 text-center" />
+                                    <span>Play Count:</span>
+                                </h2>
+                                <h2 class="flex gap-3 items-center">
+                                    <i class="fa-regular fa-clock w-4 text-center" />
+                                    <span>Play Time:</span>
+                                </h2>
+                                <h2 class="flex gap-3 items-center">
+                                    <i class="fa-solid fa-fire w-4 text-center" />
+                                    <span>Max Combo:</span>
+                                </h2>
+                                <h2 class="flex gap-3 items-center">
+                                    <i class="fa-solid fa-keyboard w-4 text-center" />
+                                    <span>Total Hits:</span>
+                                </h2>
+                                <h2 class="flex gap-3 items-center">
+                                    <i class="fa-solid fa-calculator w-4 text-center" />
+                                    <span>Hits x Play:</span>
+                                </h2>
+                                <h2 class="flex gap-3 items-center">
+                                    <i class="fa-solid fa-eye w-4 text-center" />
+                                    <span>Replays Watched:</span>
+                                </h2>
                             </div>
-                            <BarChart data={grade_counts} />
+                            <div class="flex flex-col gap-2 text-end">
+                                <h2>{user.statistics.ranked_score.toLocaleString()}</h2>
+                                <h2>{user.statistics.play_count.toLocaleString()}</h2>
+                                <h2>{Math.floor(user.statistics.play_time / 60 / 60).toLocaleString()}h</h2>
+                                <h2>{user.statistics.maximum_combo.toLocaleString()}x</h2>
+                                <h2>{user.statistics.total_hits.toLocaleString()}</h2>
+                                <h2>{Math.round(user.statistics.total_hits / user.statistics.play_count || 0).toLocaleString()}</h2>
+                                <h2>{user.statistics.replays_watched_by_others.toLocaleString()}</h2>
+                            </div>
                         </div>
+                        <BarChart data={grade_counts} />
                     </div>
                 </div>
             </div >

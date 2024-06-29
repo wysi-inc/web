@@ -1,1 +1,94 @@
-.bbcode{line-height:1.5;word-wrap:break-word!important;word-break:break-all!important;overflow-wrap:break-word!important;text-overflow:ellipsis!important}.bbcode .bbcode-spoilerbox__link::before{content:'> '}.bbcode .imagemap{max-width:max-content;position:relative;width:max-content}.bbcode .imagemap__link:hover::after{content:attr(title);position:absolute;top:0;left:50%;transform:translateX(-50%);background-color:rgba(0,0,0,.8);color:#fff;padding:5px;border-radius:5px;font-size:.8rem;white-space:nowrap;z-index:100}.bbcode a[class=""]{text-decoration:underline}.bbcode h2,h4{font-style:normal;font-weight:700}.bbcode h2{font-size:1.5em}.bbcode blockquote{padding:0;border:none;position:relative;border-radius:5px;font-size:1em}.bbcode blockquote::before{content:'';position:absolute;left:0;top:0;width:2px;height:100%;border-radius:10000px}.bbcode pre{white-space:pre-wrap;color:inherit;padding:10px;border:none;font-size:inherit}.bbcode .unordered{list-style-type:disc;padding-left:20px}.bbcode .spoiler{background-color:#000!important;color:#000!important}.bbcode .well{margin:0;background-color:rgba(0,0,0,.2);border:2px solid;border-radius:10px;padding:10px}.bbcode .bbcode__video-box{max-width:425px}
+.bbcode {
+    line-height: 1.5;
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    text-overflow: ellipsis !important
+}
+
+.bbcode img {
+    max-width: 300px;
+}
+
+.bbcode .imagemap {
+    max-width: max-content;
+    position: relative;
+    width: max-content
+}
+
+.bbcode .imagemap__link:hover::after {
+    content: attr(title);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, .8);
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: .8rem;
+    white-space: nowrap;
+    z-index: 100
+}
+
+.bbcode a[class=""] {
+    text-decoration: underline
+}
+
+.bbcode h2,
+h4 {
+    font-style: normal;
+    font-weight: 700
+}
+
+.bbcode h2 {
+    font-size: 1.5em
+}
+
+.bbcode blockquote {
+    padding: 0;
+    border: none;
+    position: relative;
+    border-radius: 5px;
+    font-size: 1em
+}
+
+.bbcode blockquote::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    border-radius: 10000px
+}
+
+.bbcode pre {
+    white-space: pre-wrap;
+    color: inherit;
+    padding: 10px;
+    border: none;
+    font-size: inherit
+}
+
+.bbcode .unordered {
+    list-style-type: disc;
+    padding-left: 20px
+}
+
+.bbcode .spoiler {
+    background-color: #000 !important;
+    color: #000 !important
+}
+
+.bbcode .well {
+    margin: 0;
+    background-color: rgba(0, 0, 0, .2);
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 10px
+}
+
+.bbcode .bbcode__video-box {
+    max-width: 425px
+}

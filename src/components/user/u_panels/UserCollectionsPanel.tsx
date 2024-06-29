@@ -66,7 +66,7 @@ async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
             </div> : <></>
         }
         {collections ? <>
-            <button class="collection-download-button h-8 cursor-pointer link link-info flex flex-row-reverse gap-2 items-center"
+            <button class="btn btn-sm btn-info collection-download-button h-8 cursor-pointer flex flex-row gap-2 items-center"
                 id={`btn_download_${user_id}`} data-name={`all_collections_${user_id}`} data-ids={JSON.stringify(collections.map(c => c.beatmapsMd5.map(h => h)).flat())}>
                 <i class="regular fa-regular fa-file-zipper" />
                 <span class="loading loading-spinner loading-xs"
@@ -82,8 +82,8 @@ async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
             </button>
             <div class="flex flex-col gap-2">
                 {collections.map((c) => (
-                    <div class="flex flex-col items-start gap-1 p-2 bg-base-300 rounded-lg">
-                        <button class="collection-download-button h-8 cursor-pointer link link-info flex flex-row gap-2 items-center"
+                    <div class="flex flex-col items-start gap-2 p-2 bg-base-300 rounded-lg">
+                        <button class="btn btn-sm btn-info collection-download-button h-8 cursor-pointer flex flex-row gap-2 items-center"
                             id={`btn_download_${c.name}`} data-name={c.name} data-ids={JSON.stringify(c.beatmapsMd5.map(h => h))}>
                             <i class="regular fa-regular fa-file-zipper" />
                             <span class="loading loading-spinner loading-xs"
@@ -97,13 +97,13 @@ async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
                                 0/{c.beatmapsMd5.length}
                             </span>
                         </button>
-                        <div class="collapse collapse-arrow bg-info bg-opacity-50 has-[:checked]:bg-gradient-to-b from-info to-base-200 p-0.5">
+                        <div class="collapse collapse-arrow">
                             <input type="checkbox" name="collections-acordion" />
-                            <div class="collapse-title bg-base-200 rounded-lg grow">
+                            <div class="collapse-title bg-neutral rounded-lg grow">
                                 {c.name} ({c.beatmapsMd5.length})
                             </div>
                             <div class="collapse-content p-0 m-0">
-                                <div class="flex flex-col gap-2 p-2">
+                                <div class="flex flex-col gap-2 pt-2">
                                     <button hx-post={`/users/${user_id}/0/lists/collections?name=${c.name}&offset=${0}`}
                                         hx-trigger="click" hx-swap="outerHTML" hx-boost="false"
                                         class="col-span-full btn btn-success btn-sm flex flex-row gap-2">
