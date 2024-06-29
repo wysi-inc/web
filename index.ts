@@ -60,7 +60,7 @@ new Elysia()
     .use(jwtcfg)
     .use(staticPlugin())
     .use(html())
-    .get("/favicon.ico", () => Bun.file("./public/favicon.ico"))
+    .get("/favicon.ico", Bun.file("./public/favicon.ico"))
     .get("/test", ({ jwt, set }) => {
     })
     .use(baseRoutes)
