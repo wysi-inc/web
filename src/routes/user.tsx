@@ -1,5 +1,5 @@
 import { Elysia, t } from 'elysia'
-import type { BeatmapCategory, Mode, ScoreCategory } from '../types/osu';
+import type { BeatmapCategory, Mode, Route, ScoreCategory } from '../types/osu';
 import type { ProfileMedal } from '../types/medals';
 import UserPage from '../components/user/UserPage';
 import UserScoresPanel from '../components/user/u_panels/UserScoresPanel';
@@ -20,8 +20,7 @@ import BeatmapCollectionList from '../components/beatmap/BeatmapCollectionList';
 import CollectionsForm from '../components/user/u_panels/u_components/CollectionsForm';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
-    //@ts-ignore
-    .get("/", async ({ request, cookie, params, jwt }) => {
+    .get("/", async ({ request, cookie, params, jwt }: Route) => {
         const user = await verifyUser(jwt, cookie.auth.value);
         return <>
             <HtmxPage headers={request.headers} user={user}>
@@ -29,9 +28,8 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             </HtmxPage>
         </>
     })
-    //@ts-ignore
-    .post("/setup", async ({ params, set, cookie: { auth }, body, jwt }) => {
-        const user = await verifyUser(jwt, auth.value);
+    .post("/setup", async ({ params, set, cookie, body, jwt }: Route) => {
+        const user = await verifyUser(jwt, cookie.auth.value);
         if (!user) {
             set.status = 401;
             return "Unauthorized";
@@ -44,9 +42,8 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         return <UserSetupPanel setup={setup} logged_id={user.id} page_id={user.id} />
     })
     .group("/collections", _ => _
-        //@ts-ignore
-        .post("/parse", async ({ params, set, cookie: { auth }, body, jwt }) => {
-            const user = await verifyUser(jwt, auth.value);
+        .post("/parse", async ({ params, set, cookie, body, jwt }: Route) => {
+            const user = await verifyUser(jwt, cookie.auth.value);
             if (!user) {
                 set.status = 401;
                 return "Unauthorized";
@@ -60,9 +57,8 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 collection: t.Any()
             })
         })
-        //@ts-ignore
-        .post("/submit", async ({ params, set, cookie: { auth }, body, jwt }) => {
-            const user = await verifyUser(jwt, auth.value);
+        .post("/submit", async ({ params, set, cookie, body, jwt }: Route) => {
+            const user = await verifyUser(jwt, cookie.auth.value);
             if (!user) {
                 set.status = 401;
                 return "Unauthorized";
@@ -72,9 +68,8 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             const collection = await saveCollection(body as any, user.id);
             return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} collection={collection} />
         })
-        //@ts-ignore
-        .post("/delete", async ({ params, set, cookie: { auth }, jwt }) => {
-            const user = await verifyUser(jwt, auth.value);
+        .post("/delete", async ({ params, set, cookie, jwt }: Route) => {
+            const user = await verifyUser(jwt, cookie.auth.value);
             if (!user) {
                 set.status = 401;
                 return "Unauthorized";
@@ -85,11 +80,9 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} />
         })
     )
-    //@ts-ignore
     .group("/:mode", (_) => _
-        //@ts-ignore
-        .get("/", async ({ request, cookie: { auth }, params, jwt }) => {
-            const user = await verifyUser(jwt, auth.value);
+        .get("/", async ({ request, cookie, params, jwt }: Route) => {
+            const user = await verifyUser(jwt, cookie.auth.value);
             return <>
                 <HtmxPage headers={request.headers} user={user}>
                     <UserPage
@@ -119,9 +112,8 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                     mode={params.mode as Mode}
                 />
             ))
-            //@ts-ignore
-            .post("/collections", async ({ cookie: { auth }, params, jwt }) => {
-                const user = await verifyUser(jwt, auth.value);
+            .post("/collections", async ({ cookie, params, jwt }: Route) => {
+                const user = await verifyUser(jwt, cookie.auth.value);
                 return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user?.id} />
             })
             .post("/most", ({ params }) => (

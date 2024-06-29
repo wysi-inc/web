@@ -1,4 +1,5 @@
 import BaseHtml from "../components/BaseHtml";
+import type { Jwt } from "../types/osu";
 import type { UserCookie } from "../types/users";
 import { verifyUser } from "./auth";
 
@@ -6,7 +7,7 @@ type Props = {
     headers: any;
     children: JSX.Element;
 } & (
-        { cookie: any; jwt: any; } |
+        { cookie: any; jwt: Jwt; } |
         { user: UserCookie | null; }
     );
 

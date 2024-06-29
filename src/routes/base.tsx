@@ -4,6 +4,7 @@ import SearchResults from "../components/web/SearchResults";
 import HtmxPage from "../libs/routes";
 import { userAuthData } from "../libs/auth";
 import About from "../components/web/About";
+import type { Route } from "../types/osu";
 
 const searchBody = {
     body: t.Object({
@@ -19,23 +20,20 @@ const oauthQuery = {
 }
 
 export const baseRoutes = new Elysia({ prefix: '' })
-    //@ts-ignore
-    .get("/", async ({ request, jwt, cookie }) => (
+    .get("/", async ({ request, jwt, cookie }: Route) => (
         <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
             <Home />
         </HtmxPage>
     ))
-    //@ts-ignore
-    .get("/about", async ({ request, jwt, cookie }) => (
+    .get("/about", async ({ request, jwt, cookie }: Route) => (
         <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
             <About />
         </HtmxPage>
     ))
-    .post("/search", ({ body }) => (
+    .post("/search", ({ body }: Route) => (
         <SearchResults query={body.q} />
     ), searchBody)
-    //@ts-ignore
-    .get("/oauth", async ({ request, jwt, cookie, query }) => {
+    .get("/oauth", async ({ request, jwt, cookie, query }: Route) => {
         const data = await userAuthData(query.code);
         if ((data as any).error) return "error";
         const user = {
@@ -55,7 +53,7 @@ export const baseRoutes = new Elysia({ prefix: '' })
             </HtmxPage>
         </>
     }, oauthQuery)
-    .get("/logout", ({ request, cookie }) => {
+    .get("/logout", ({ request, cookie }: Route) => {
         cookie.auth.remove();
         return <>
             <HtmxPage headers={request.headers} user={null}>

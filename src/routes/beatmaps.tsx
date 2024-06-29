@@ -1,5 +1,5 @@
 import { Elysia, t } from 'elysia'
-import type { Mode } from '../types/osu';
+import type { Mode, Route } from '../types/osu';
 import BeatmapsetSearch from '../components/beatmap/BeatmapsetSearch';
 import BeatmapsList from '../components/beatmap/BeatmapsList';
 import BeatmapsetPage from '../components/beatmap/BeatmapsetPage';
@@ -39,8 +39,7 @@ const queryBodyElysia = {
 }
 
 export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
-    //@ts-ignore
-    .get("/", async ({ request, jwt, cookie }) => (
+    .get("/", async ({ request, jwt, cookie }: Route) => (
         <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
             <BeatmapsetSearch />
         </HtmxPage>
@@ -51,14 +50,12 @@ export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
     .post("/list/:cursor", ({ body, params }) => (
         <BeatmapsList body={body} cursor={params.cursor} />
     ), queryBodyElysia)
-    //@ts-ignore
-    .get("/:set_id", async ({ request, jwt, cookie, params }) => (
+    .get("/:set_id", async ({ request, jwt, cookie, params }: Route) => (
         <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
             <BeatmapsetPage set_id={Number(params.set_id)} />
         </HtmxPage>
     ))
-    //@ts-ignore
-    .get("/:set_id/:beatmap_id", async ({ request, jwt, cookie, params }) => (
+    .get("/:set_id/:beatmap_id", async ({ request, jwt, cookie, params }: Route) => (
         <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
             <BeatmapsetPage set_id={Number(params.set_id)}
                 beatmap_id={Number(params.beatmap_id)} />

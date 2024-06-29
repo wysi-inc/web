@@ -1,8 +1,7 @@
-import { Elysia } from "elysia";
+import { Elysia, type UnwrapSchema } from "elysia";
 import { html } from "@elysiajs/html";
 import { staticPlugin } from '@elysiajs/static'
 import { jwt } from "@elysiajs/jwt";
-import { i18next } from "elysia-i18next";
 
 import { auth } from "osu-api-extended";
 import mongoose from "mongoose";
@@ -41,24 +40,6 @@ function connect(): void {
 connect();
 setInterval(() => connect(), 1000 * 60 * 60 * 23);
 
-const i18cfg = i18next({
-    initOptions: {
-        lng: "nl",
-        resources: {
-            en: {
-                translation: {
-                    greeting: "Hi",
-                },
-            },
-            nl: {
-                translation: {
-                    greeting: "Hallo",
-                },
-            },
-        },
-    },
-});
-
 const jwtcfg = jwt({
     secret: process.env.OSU_SECRET as string,
     cookie: "auth",
@@ -70,20 +51,18 @@ const jwtcfg = jwt({
 })
 
 new Elysia()
-    .use(i18cfg)
     .onRequest(({ request }) => {
-        // const agent = request.headers.get("user-agent");
         const ip = request.headers.get("x-forwarded-for");
         const route = request.url.split("/").slice(3).join("/");
         const method = request.method;
-        // const time = new Date().toTimeString().split(" ")[0];
-        // time.split(":").length === 2 && time.concat(":00");
         console.log(`${(ip || "0.0.0.0").padStart(15, " ")} ${method.padStart(4, " ")}::/${route}`);
     })
     .use(jwtcfg)
     .use(staticPlugin())
     .use(html())
     .get("/favicon.ico", () => Bun.file("./public/favicon.ico"))
+    .get("/test", ({ jwt, set }) => {
+    })
     .use(baseRoutes)
     .use(rankingRoutes)
     .use(userRoutes)

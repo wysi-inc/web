@@ -1,11 +1,10 @@
 import { Elysia } from 'elysia'
-import type { Category, Mode } from '../types/osu';
+import type { Category, Mode, Route } from '../types/osu';
 import Rankings from '../components/user/Rankings';
 import HtmxPage from '../libs/routes';
 
 export const rankingRoutes = new Elysia({ prefix: '/rankings' })
-    //@ts-ignore
-    .get("/", ({ request, jwt, cookie }) => (
+    .get("/", ({ request, jwt, cookie }: Route) => (
         <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
             <Rankings
                 mode={"osu"}
@@ -14,8 +13,7 @@ export const rankingRoutes = new Elysia({ prefix: '/rankings' })
             />
         </HtmxPage>
     ))
-    //@ts-ignore
-    .get("/:mode/:category/:page", ({ params, request, jwt, cookie }) => (
+    .get("/:mode/:category/:page", ({ params, request, jwt, cookie }: Route) => (
         <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
             <Rankings
                 mode={params.mode as Mode}

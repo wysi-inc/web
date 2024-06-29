@@ -1,6 +1,7 @@
 import { auth } from "osu-api-extended";
 import type { UserBasic, UserCookie } from "../types/users";
 import { osu_id, osu_redirect, osu_secret } from "@/index";
+import type { Jwt } from "../types/osu";
 
 export async function userAuthCode(code: string): Promise<any> {
     const res = await fetch("https://osu.ppy.sh/oauth/token", {
@@ -21,7 +22,7 @@ export async function userAuthData(code: string): Promise<UserBasic> {
     return user_data;
 }
 
-export async function verifyUser(jwt?: any, auth?: string): Promise<UserCookie | null> {
+export async function verifyUser(jwt?: Jwt, auth?: string): Promise<UserCookie | null> {
 
     const profile: UserCookie = await jwt?.verify(auth);
     if (!profile) {
