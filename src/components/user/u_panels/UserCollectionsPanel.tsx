@@ -104,7 +104,7 @@ async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
                             </div>
                             <div class="collapse-content p-0 m-0">
                                 <div class="flex flex-col gap-2 pt-2">
-                                    <button hx-post={`/users/${user_id}/0/lists/collections?name=${c.name}&offset=${0}`}
+                                    <button hx-post={`/users/${user_id}/0/lists/collections/${encodeURIComponent(c.name || "")}?offset=${0}`}
                                         hx-trigger="click" hx-swap="outerHTML" hx-boost="false"
                                         class="col-span-full btn btn-success btn-sm flex flex-row gap-2">
                                         <div>Load more</div>

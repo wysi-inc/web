@@ -156,11 +156,13 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                     limit={Number(query.limit)}
                 />
             ))
-            .post("/collections", ({ params, query }) => (
-                <BeatmapCollectionList
-                    user_id={Number(params.id)}
-                    collection_name={query.name}
-                    offset={Number(query.offset)} />
-            ))
+            .post("/collections/:name", ({ params, query }) => {
+                return (
+                    <BeatmapCollectionList
+                        user_id={Number(params.id)}
+                        collection_name={params.name}
+                        offset={Number(query.offset)} />
+                );
+            })
         )
     )

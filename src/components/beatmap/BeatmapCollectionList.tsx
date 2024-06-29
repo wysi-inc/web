@@ -13,6 +13,8 @@ async function BeatmapCollectionList({ user_id, collection_name, offset }: Props
     if (!collection_name) return (<></>);
     if (offset === undefined) return (<></>);
 
+    const decoded_collection_name = decodeURIComponent(collection_name);
+
     const LIMIT = 20;
 
     const db_collection = await CollectionsDBModel.findOne({ user_id });
@@ -23,7 +25,7 @@ async function BeatmapCollectionList({ user_id, collection_name, offset }: Props
 
     for (let i = 0; i < db_collection.collections.length; i++) {
         const c = db_collection.collections[i];
-        if (c.name === collection_name) {
+        if (c.name === decoded_collection_name) {
             collection = c;
         }
     }
@@ -42,7 +44,7 @@ async function BeatmapCollectionList({ user_id, collection_name, offset }: Props
             <BeatmapCollectionCard hash={h} />
         )}
         {hashes.length >= LIMIT ?
-            <LoadMoreButton url={`/users/${user_id}/0/lists/collections?name=${collection_name}&offset=${offset + LIMIT}`} />
+            <LoadMoreButton url={`/users/${user_id}/0/lists/collections/${collection_name}?offset=${offset + LIMIT}`} />
             : <></>
         }
     </>);
