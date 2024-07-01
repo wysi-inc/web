@@ -53,7 +53,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             icon: <i class="fa-solid fa-user" />,
             show_if: user.page?.html !== "",
             jsx:
-                <div class="p-4 rounded-lg bg-base-300 flex justify-center items-center">
+                <div class="rounded-lg bg-base-300 flex justify-center items-center">
                     <div class="bbcode h-96 overflow-y-scroll grow">
                         {
                             user.page.html
@@ -129,8 +129,6 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             body: { medals: user.user_achievements }
         }
     ];
-
-    const number = 123;
 
     return (<>
         <UserTopPanel user={user} mode={mode} />

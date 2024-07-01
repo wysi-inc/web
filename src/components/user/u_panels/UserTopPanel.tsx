@@ -41,7 +41,7 @@ async function UserTopPanel({ user, mode }: Props) {
                     backgroundPosition: `center`,
                     backgroundRepeat: "no-repeat"
                 }}>
-                <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm justify-center flex flex-row flex-wrap gap-8 p-8 rounded-lg">
+                <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm justify-center flex flex-row flex-wrap gap-4 p-4 rounded-lg">
                     <div class="flex flex-col gap-4 items-center justify-between">
                         <div class="flex flex-col bg-base-300 rounded-lg">
                             <img src={user.avatar_url} class="rounded-lg aspect-square size-40" alt={`${user.username}'s pfp`} />
@@ -87,50 +87,48 @@ async function UserTopPanel({ user, mode }: Props) {
                             <span>{user.statistics.level.current + 1}</span>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 items-center justify-between grow">
-                        <div class="flex flex-col gap-2 items-start">
-                            <div class="flex flex-row gap-2 items-center">
-                                <a href={`https://osu.ppy.sh/users/${user.id}`}
-                                    target="_blank" class="text-2xl underline-offset-2 hover:underline">{user.username}</a>
-                                {user.is_supporter &&
-                                    <Supporter level={user.support_level} />
-                                }
-                            </div>
-                            <div class="flex flex-row gap-2 items-center">
-                                <i class="fa-solid fa-earth-americas fa-xl" />
-                                <h2 class="text-xl tooltip" data-tip={`Peak rank: #${user?.rank_highest?.rank?.toLocaleString?.()}`}>
-                                    #{user.statistics?.global_rank?.toLocaleString() || "-"}
-                                </h2>
-                            </div>
-                            <div class="flex flex-row gap-2 items-center">
-                                {(user.country as any).cat ?
-                                    <Country code={"CAT"} name={"Catalunya"} /> :
-                                    <Country code={user.country.code} name={user.country.name} />
-                                }
-                                <h2 class="text-xl tooltip" data-tip={`Peak rank: #${best_country?.rank?.toLocaleString()}`}>
-                                    #{user.statistics?.country_rank?.toLocaleString() || "-"}
-                                </h2>
-                                <Flag name={user.country.name} code={user.country.code} />
-                                {subdivision !== undefined ?
-                                    <SubdivisionFlag name={subdivision.name} url={subdivision.flag} />
-                                    : <></>
-                                }
-                            </div>
-                            <div>
-                                <div class="text-sm">Performance:</div>
-                                <h2 class="text-lg">{Math.round(user.statistics.pp).toLocaleString()}pp</h2>
-                            </div>
-                            <div>
-                                <div class="text-sm">Accuracy:</div>
-                                <h2 class="text-lg">{(user.statistics.hit_accuracy).toFixed(2)}%</h2>
-                            </div>
-                            <div>
-                                <div class="text-sm">Medals:</div>
-                                <h2 class="text-lg">{user.user_achievements.length} <i class="fa-solid fa-medal fa-xs" /></h2>
-                            </div>
+                    <div class="flex flex-col gap-2 justify-between grow">
+                        <div class="flex flex-row gap-2 items-center">
+                            <a href={`https://osu.ppy.sh/users/${user.id}`}
+                                target="_blank" class="text-2xl underline-offset-2 hover:underline">{user.username}</a>
+                            {user.is_supporter &&
+                                <Supporter level={user.support_level} />
+                            }
+                        </div>
+                        <div class="flex flex-row gap-2 items-center">
+                            <i class="fa-solid fa-earth-americas fa-xl" />
+                            <h2 class="text-xl tooltip" data-tip={`Peak rank: #${user?.rank_highest?.rank?.toLocaleString?.()}`}>
+                                #{user.statistics?.global_rank?.toLocaleString() || "-"}
+                            </h2>
+                        </div>
+                        <div class="flex flex-row gap-2 items-center">
+                            {(user.country as any).cat ?
+                                <Country code={"CAT"} name={"Catalunya"} /> :
+                                <Country code={user.country.code} name={user.country.name} />
+                            }
+                            <h2 class="text-xl tooltip" data-tip={`Peak rank: #${best_country?.rank?.toLocaleString()}`}>
+                                #{user.statistics?.country_rank?.toLocaleString() || "-"}
+                            </h2>
+                            <Flag name={user.country.name} code={user.country.code} />
+                            {subdivision !== undefined ?
+                                <SubdivisionFlag name={subdivision.name} url={subdivision.flag} />
+                                : <></>
+                            }
+                        </div>
+                        <div>
+                            <div class="text-sm">Performance:</div>
+                            <h2 class="text-lg">{Math.round(user.statistics.pp).toLocaleString()}pp</h2>
+                        </div>
+                        <div>
+                            <div class="text-sm">Accuracy:</div>
+                            <h2 class="text-lg">{(user.statistics.hit_accuracy).toFixed(2)}%</h2>
+                        </div>
+                        <div>
+                            <div class="text-sm">Medals:</div>
+                            <h2 class="text-lg">{user.user_achievements.length} <i class="fa-solid fa-medal fa-xs" /></h2>
                         </div>
                     </div>
-                    <div class="flex flex-col gap-4 justify-between grow">
+                    <div class="flex flex-col gap-4 justify-between">
                         <div class="grow text-sm flex flex-row gap-12 justify-between">
                             <div class="flex flex-col gap-2 text-start">
                                 <h2 class="flex gap-3 items-center">

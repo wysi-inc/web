@@ -1,4 +1,4 @@
-import { Elysia, type UnwrapSchema } from "elysia";
+import { Elysia } from "elysia";
 import { html } from "@elysiajs/html";
 import { staticPlugin } from '@elysiajs/static'
 import { jwt } from "@elysiajs/jwt";
