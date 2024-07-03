@@ -1,16 +1,16 @@
 import moment from "moment";
-import { tools } from "osu-api-extended";
 import type { Score } from "@/src/types/users";
-import type { Mode } from "@/src/types/osu";
 import DiffIcon from "@/src/components/beatmap/DiffIcon";
 import CardControls from "@/src/components/web/CardControls";
-import HxA from "../web/HxA";
 import StatusBadge from "../beatmap/StatusBadge";
 import type { BeatmapsetStatus } from "@/src/types/beatmaps";
 import ModIcon from "./ModIcon";
 import { getGradeColor, getGradeLetter, secondsToTime } from "@/src/libs/web_utils";
 import { colors } from "@/src/libs/colors";
 import AudioPlayButton from "../web/AudioPlayButton";
+import Link from "../web/Link";
+import { tools } from "osu-api-extended";
+import type { Mode } from "@/src/types/osu";
 
 type Props = {
     position: number;
@@ -21,9 +21,6 @@ const ScoreCard = async ({ score, position }: Props) => {
 
     const beatmap = score.beatmap;
     const beatmapset = score.beatmapset;
-
-    const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
-
     const acc = (score.accuracy * 100).toFixed(2);
     const fc_acc = tools.accuracy({
         "300": (score.statistics.great + (score.statistics.miss || 0)).toString() || "0",
@@ -34,34 +31,11 @@ const ScoreCard = async ({ score, position }: Props) => {
         "katu": "0"
     }, beatmap.mode as Mode);
 
-    let stats = {} as any;
-
-    if (score.mods.length > 0 || score.legacy_perfect === false) {
-        const url = `https://catboy.best/api/meta/${beatmap.id}?misses=0&acc=${fc_acc}&mods=${score.mods_id}`;
-        const res = await fetch(url);
-        if (res.ok) {
-            const data = await res.json() as any;
-            stats.sr = data.difficulty?.stars?.toFixed(2);
-            stats.ar = data.map.ar?.toFixed(1);
-            stats.cs = data.map.cs?.toFixed(1);
-            stats.od = data.map.od?.toFixed(1);
-            stats.hp = data.map.hp?.toFixed(1);
-            stats.pp = Math.round(data?.pp?.[Number(fc_acc)]?.pp);
-            if (stats.pp <= Number(score.pp) + 10) {
-                stats.pp = null;
-            }
-            if (score.mods.find((mod) => mod.acronym === "DT")) {
-                stats.length = Math.round(beatmap.total_length / 1.5);
-                stats.bpm = beatmap.bpm * 1.5;
-            } else if (score.mods.find((mod) => mod.acronym === "HT")) {
-                stats.length = Math.round(beatmap.total_length / 0.75);
-                stats.bpm = beatmap.bpm * 0.75;
-            }
-        }
-    }
+    const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
 
     return <>
-        <div class="group grow rounded-lg flex flex-row bg-base-300 shadow-lg">
+        <div class="score_card group grow rounded-lg flex flex-row bg-base-300 shadow-lg"
+            data-score={JSON.stringify(score)} data-fc-acc={fc_acc}>
             <div class="text-white bg-neutral flex flex-col grow rounded-lg shadow-lg">
                 <div class="bg-cover bg-center bg-no-repeat flex flex-col rounded-lg shadow-lg"
                     style={{
@@ -87,7 +61,7 @@ const ScoreCard = async ({ score, position }: Props) => {
                                 />
                             </div>
                             <div class="flex flex-col py-2 px-4 truncate">
-                                <HxA css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmaps/${beatmapset.id}`}>{beatmapset.title}</HxA>
+                                <Link css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmapsets/${beatmapset.id}`}>{beatmapset.title}</Link>
                                 <p class="text-neutral-content text-opacity-75 text-sm truncate"> by {beatmapset.artist}</p>
                             </div>
                         </div>
@@ -99,14 +73,7 @@ const ScoreCard = async ({ score, position }: Props) => {
                                             <i class="fa-solid fa-flag-checkered" />
                                             <span>{score.total_score.toLocaleString()}</span>
                                         </div>
-                                        {stats?.pp ?
-                                            <div class="tooltip" data-tip={`${stats.pp}pp if FC`}>
-                                                <span class="text-base-content text-opacity-60">{Math.round(Number(score.pp))}pp</span>
-                                            </div> :
-                                            <div>
-                                                <span>{Math.round(Number(score.pp))}pp</span>
-                                            </div>
-                                        }
+                                        <span class="stats_pp">{Math.round(Number(score.pp))}pp</span>
                                     </div>
                                     <div class="text-sm flex flex-row gap-4">
                                         <div class="flex flex-row gap-1 items-center"><i class="fa-solid fa-fire" /> {score.max_combo.toLocaleString()}x</div>
@@ -115,7 +82,7 @@ const ScoreCard = async ({ score, position }: Props) => {
                                 </div>
                                 <div class="flex flex-row gap-4 items-center">
                                     <div class="flex flex-col gap-1">
-                                        <div class="bg-opacity-40 flex flex-row gap-2 px-2 bg-base-300 rounded-full">
+                                        <div class="bg-opacity-40 flex flex-row justify-between gap-2 px-2 bg-base-300 rounded-full">
                                             {score.statistics.great ?
                                                 <span style={{ color: colors.judgements.x300 }}>
                                                     {score.statistics.great}
@@ -152,102 +119,22 @@ const ScoreCard = async ({ score, position }: Props) => {
                     <DiffIcon setId={beatmapset.id} diffId={score.beatmap.id}
                         diff={score.beatmap.difficulty_rating} size={20}
                         mode={score.beatmap.mode} name={score.beatmap.version} />
-                    <HxA url={`/users/${beatmapset.user_id}`}>
+                    <Link url={`/users/${beatmapset.user_id}`}>
                         <div class="tooltip" data-tip={beatmapset.creator}>
                             <i class="fa-solid fa-user-pen" />
                         </div>
-                    </HxA>
-                    {/*<div class="tooltip hidden md:block" data-tip={moment(new Date(beatmap.last_updated)).format("DD/MM/YYYY")}>
-                        {new Date(beatmap.last_updated).getFullYear()}
-                    </div>*/}
+                    </Link>
                     <div class="hidden md:flex flex-row gap-1 items-center">
                         <i class="fa-solid fa-star fa-xs" />
-                        {stats?.sr ?
-                            <span class={`text-opacity-75
-                                    ${stats.sr > beatmap.difficulty_rating && "text-error tooltip"}
-                                    ${stats.sr < beatmap.difficulty_rating && "text-success tooltip"}
-                                `}
-                                data-tip={`★ ${beatmap.difficulty_rating}`}>
-                                {stats.sr}
-                            </span> :
-                            <span>{beatmap.difficulty_rating}</span>
-                        }
+                        <span class="stats_sr">{beatmap.difficulty_rating}</span>
                     </div>
                     <div class="hidden md:flex flex-row gap-1 items-center">
-                        {stats?.bpm ?
-                            <span class={`text-opacity-75
-                                    ${Math.round(stats.bpm) > Math.round(beatmap.bpm) && "text-error tooltip"}
-                                    ${Math.round(stats.bpm) < Math.round(beatmap.bpm) && "text-success tooltip"}
-                                `}
-                                data-tip={`${beatmap.bpm}bpm`}>
-                                {stats.bpm}bpm
-                            </span> :
-                            <span>{beatmap.bpm}bpm</span>
-                        }
+                        <span class="stats_bpm">{beatmap.bpm}bpm</span>
                     </div>
                     <div class="hidden md:flex flex-row gap-1 items-center">
                         <i class="fa-solid fa-stopwatch fa-xs" />
-                        {stats?.length ?
-                            <span class={`text-opacity-75
-                                    ${stats.length > beatmap.total_length && "text-error tooltip"}
-                                    ${stats.length < beatmap.total_length && "text-success tooltip"}
-                                `}
-                                data-tip={`${secondsToTime(beatmap.total_length)}`}>
-                                {secondsToTime(stats.length)}
-                            </span> :
-                            <span>{secondsToTime(beatmap.total_length)}</span>
-                        }
+                        <span class="stats_len">{secondsToTime(beatmap.total_length)}</span>
                     </div>
-                    {/*
-                    <div class="hidden md:flex flex-row gap-1 items-center">
-                        {stats?.ar ?
-                            <span class={`text-opacity-75
-                                    ${stats.ar > beatmap.ar && "text-error tooltip"}
-                                    ${stats.ar < beatmap.ar && "text-success tooltip"}
-                                `}
-                                data-tip={`ar:${beatmap.ar}`}>
-                                {stats.ar}
-                            </span> :
-                            <span class="tooltip" data-tip="ar">{beatmap.ar}</span>
-                        }
-                    </div>
-                    <div class="hidden md:flex flex-row gap-1 items-center">
-                        {stats?.cs ?
-                            <span class={`text-opacity-75
-                                    ${stats.cs > beatmap.cs && "text-error tooltip"}
-                                    ${stats.cs < beatmap.cs && "text-success tooltip"}
-                                `}
-                                data-tip={`cs:${beatmap.cs}`}>
-                                {stats.cs}
-                            </span> :
-                            <span class="tooltip" data-tip="cs">{beatmap.cs}</span>
-                        }
-                    </div>
-                    <div class="hidden md:flex flex-row gap-1 items-center">
-                        {stats?.od ?
-                            <span class={`text-opacity-75
-                                    ${stats.od > beatmap.accuracy && "text-error tooltip"}
-                                    ${stats.od < beatmap.accuracy && "text-success tooltip"}
-                                `}
-                                data-tip={`od:${beatmap.accuracy}`}>
-                                {stats.od}
-                            </span> :
-                            <span class="tooltip" data-tip="od">{beatmap.accuracy}</span>
-                        }
-                    </div>
-                    <div class="hidden md:flex flex-row gap-1 items-center">
-                        {stats?.hp ?
-                            <span class={`text-opacity-75
-                                    ${stats.hp > beatmap.drain && "text-error tooltip"}
-                                    ${stats.hp < beatmap.drain && "text-success tooltip"}
-                                `}
-                                data-tip={`hp:${beatmap.drain}`}>
-                                {stats.hp}
-                            </span> :
-                            <span class="tooltip" data-tip="hp">{beatmap.drain}</span>
-                        }
-                    </div>
-                    */}
                     <div class="ms-auto tooltip" data-tip={moment(new Date(score.ended_at)).format("MMMM Do YYYY")}>
                         {moment(new Date(score.ended_at)).fromNow()}
                     </div>

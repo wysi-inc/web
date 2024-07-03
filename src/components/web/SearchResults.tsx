@@ -1,9 +1,9 @@
 import { v2 } from "osu-api-extended";
 import OnlineDot from "../user/u_panels/u_components/OnlineDot";
-import HxA from "./HxA";
 import { getSubdivisions } from "@/src/libs/web_utils";
 import SubdivisionFlag from "../user/u_panels/u_components/SubdivisionFlag";
 import Flag from "../user/u_panels/u_components/Flag";
+import Link from "./Link";
 
 type Props = {
     query: string | undefined;
@@ -31,7 +31,7 @@ async function SearchResults({ query }: Props) {
 
     return (<>
         {users.map((user, i) => i < LIMIT ?
-            <HxA url={`/users/${user.id}`} css="flex hover:bg-base-200 bg-base-200 rounded-lg cursor-pointer">
+            <Link url={`/users/${user.id}`} css="flex hover:bg-base-200 bg-base-200 rounded-lg cursor-pointer">
                 <div class="grow flex flex-row justify-between p-2">
                     <div class="grow flex flex-row gap-4">
                         <div class="flex flex-row gap-2 items-center">
@@ -46,7 +46,7 @@ async function SearchResults({ query }: Props) {
                         <OnlineDot size={24} online={user.is_online} />
                     </div>
                 </div>
-            </HxA> : <></>
+            </Link> : <></>
         )}
     </>);
 }

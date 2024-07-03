@@ -25,7 +25,7 @@ const UserBeatmapsList = async ({ id, category, offset, limit }: Props) => {
             <BeatmapsetCard beatmapset={beatmap} />
         )}
         {beatmaps.length >= limit ?
-            <LoadMoreButton url={`/users/${id}/0/lists/beatmaps/${category}?offset=${offset + limit}&limit=20`} />
+            <LoadMoreButton url={`/users/${id}/0/lists/beatmapsets/${category}?offset=${offset + limit}&limit=20`} />
             : <></>}
     </>)
 }

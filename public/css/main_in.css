@@ -49,6 +49,7 @@
     display: block;
 }
 
-#reset-zoom {
-    display: none;
+.reset-zoom {
+    display: none !important;
+    opacity: 0;
 }

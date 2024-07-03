@@ -18,7 +18,6 @@ type Panel = {
     icon: JSX.Element,
     tooltip?: string,
     info?: string,
-    show_if: boolean,
 } & (
         { jsx: JSX.Element, url?: never } |
         { url: string, body?: object, jsx?: never }
@@ -39,7 +38,6 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             title: "History",
             code: "history",
             icon: <i class="fa-solid fa-chart-line" />,
-            show_if: true,
             jsx:
                 <UserHistoryPanel
                     db_ranks={user.db_ranks}
@@ -51,7 +49,6 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             title: "About me",
             code: "about",
             icon: <i class="fa-solid fa-user" />,
-            show_if: user.page?.html !== "",
             jsx:
                 <div class="rounded-lg bg-base-300 flex justify-center items-center">
                     <div class="bbcode h-96 overflow-y-scroll grow">
@@ -65,19 +62,13 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             title: "Setup",
             code: "setup",
             icon: <i class="fa-solid fa-computer" />,
-            show_if: user.db_setup !== undefined || editable,
-            jsx:
-                <UserSetupPanel
-                    setup={user.db_setup}
-                    logged_id={logged_id}
-                    page_id={user.id} />
+            url: `/users/${user.id}/0/panels/setup`
         },
         {
             title: "Skins",
             code: "skins",
             tooltip: "powered by skins.osuck.net",
             icon: <i class="fa-solid fa-palette" />,
-            show_if: false,
             url: `/users/${user.id}/0/panels/skins`
         },
         {
@@ -85,7 +76,6 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             code: "summary",
             icon: <i class="fa-solid fa-ranking-star" />,
             info: "this is a quick summary of your top 100 plays",
-            show_if: true,
             url: `/users/${user.id}/${mode}/panels/summary`
         },
         {
@@ -93,14 +83,12 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             code: "scores",
             icon: <i class="fa-solid fa-flag-checkered" />,
             info: "hover over a grayed out PP to see the (if FC) PP value",
-            show_if: true,
-            url: `/users/${user.id}/${mode}/panels/scores/best`
+            url: `/users/${user.id}/${mode}/panels/scores/best`,
         },
         {
             title: "Beatmaps",
             code: "beatmaps",
             icon: <i class="fa-solid fa-screwdriver-wrench" />,
-            show_if: true,
             url: `/users/${user.id}/${mode}/panels/beatmaps/favourite`
         },
         {
@@ -109,14 +97,12 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             tooltip: "powered by catboy.best",
             info: "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)",
             icon: <i class="fa-solid fa-list" />,
-            show_if: true,
             url: `/users/${user.id}/${mode}/panels/collections`
         },
         {
             title: "Most Played",
             code: "most",
             icon: <i class="fa-solid fa-rotate-left" />,
-            show_if: true,
             url: `/users/${user.id}/0/panels/most`
         },
         {
@@ -125,7 +111,6 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             tooltip: "powered by osekai.net",
             icon: <img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" />,
             url: `/users/${user.id}/0/panels/medals`,
-            show_if: true,
             body: { medals: user.user_achievements }
         }
     ];
@@ -133,15 +118,11 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
     return (<>
         <UserTopPanel user={user} mode={mode} editable={editable} />
         <div class="underline-offset-1 text-neutral-content sticky top-16 bg-base-300 md:rounded-lg shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-4 flex-wrap">
-            {panels.map((p) => {
-                if (!p.show_if) return <></>;
-                else return (
-                    <a class="hover:underline" href={`#${p.code}`}>{p.title}</a>
-                );
-            })}
+            {panels.map((p) =>
+                <a class="hover:underline" href={`#${p.code}`}>{p.title}</a>
+            )}
         </div>
         {panels.map((p) => {
-            if (!p.show_if) return <></>;
             if (p.url) return (
                 <LazyPanel title={p.title} code={p.code} icon={p.icon}
                     url={p.url} body={p.body} tooltip={p.tooltip} info={p.info} />

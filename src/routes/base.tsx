@@ -6,6 +6,7 @@ import { userAuthData } from "../libs/auth";
 import About from "../components/web/About";
 import type { Route } from "../types/osu";
 import Contributors from "../components/web/Contributors";
+import { save_donation } from "../db/web/save_donation";
 
 const searchBody = {
     body: t.Object({
@@ -41,12 +42,15 @@ export const baseRoutes = new Elysia({ prefix: '' })
     .post("/search", ({ body }: Route) => (
         <SearchResults query={body.q} />
     ), searchBody)
-    .post("/donations", ({ body, set }: Route) => {
-        if (body.verification_token !== kofi_token) {
+    .post("/donations", async ({ body, set }: Route) => {
+        if (body.data.verification_token !== kofi_token) {
             set.status = 401;
             return "Unauthorized";
         }
-        console.log(body);
+        if (!await save_donation(body.data)) {
+            set.status = 500;
+            return "Something went wrong";
+        }
         set.status = 200;
         return "tysm <3";
     })

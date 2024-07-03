@@ -8,14 +8,15 @@ type Props = {
     info?: string;
     url: string;
     body?: object;
+    after?: string;
 };
 
 
-const LazyPanel = ({ title, code, tooltip, icon, info, url, body }: Props) =>
-    <Panel icon={icon} title={title} tooltip={tooltip} code={code} info={info}>
-        <span hx-post={url} hx-trigger="revealed" hx-swap="outerHTML"
-            hx-vals={JSON.stringify(body)} hx-indicator={`#loading-${code}`}>
-            <span class="loading loading-spinner htmx-indicator" id={`loading-${code}`} />
+const LazyPanel = (p: Props) =>
+    <Panel icon={p.icon} title={p.title} tooltip={p.tooltip} code={p.code} info={p.info}>
+        <span hx-post={p.url} hx-trigger="revealed" hx-swap="outerHTML"
+            hx-vals={JSON.stringify(p.body)} hx-indicator={`#loading-${p.code}`}>
+            <span class="loading loading-spinner htmx-indicator" id={`loading-${p.code}`} />
         </span>
     </Panel>
 

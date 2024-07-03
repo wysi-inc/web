@@ -4,11 +4,11 @@ import Flag from "./u_components/Flag";
 import Country from "./u_components/Country";
 import Supporter from "./u_components/Supporter";
 import ModeIcon from "../../beatmap/ModeIcon";
-import HxA from "../../web/HxA";
 import type { User } from "@/src/types/users";
 import type { Mode } from "@/src/types/osu";
 import { colors } from "@/src/libs/colors";
 import SubdivisionFlag from "./u_components/SubdivisionFlag";
+import Link from "../../web/Link";
 
 type Props = {
     user: User,
@@ -46,33 +46,33 @@ async function UserTopPanel({ user, mode, editable }: Props) {
                                 <div class="tooltip" data-tip="osu!">
                                     {mode === "osu" ?
                                         <ModeIcon mode="osu" size={24} css={`fill-secondary`} /> :
-                                        <HxA url={`/users/${user.id}/osu`} label="standard mode">
+                                        <Link url={`/users/${user.id}/osu`} label="standard mode">
                                             <ModeIcon mode="osu" size={24} css={`fill-base-content`} />
-                                        </HxA>
+                                        </Link>
                                     }
                                 </div>
                                 <div class="tooltip" data-tip="osu!taiko">
                                     {mode === "taiko" ?
                                         <ModeIcon mode="taiko" size={24} css={`fill-secondary`} /> :
-                                        <HxA url={`/users/${user.id}/taiko`} label="taiko mode">
+                                        <Link url={`/users/${user.id}/taiko`} label="taiko mode">
                                             <ModeIcon mode="taiko" size={24} css={`fill-base-content`} />
-                                        </HxA>
+                                        </Link>
                                     }
                                 </div>
                                 <div class="tooltip" data-tip="osu!catch">
                                     {mode === "fruits" ?
                                         <ModeIcon mode="fruits" size={24} css={`fill-secondary`} /> :
-                                        <HxA url={`/users/${user.id}/fruits`} label="fruits mode">
+                                        <Link url={`/users/${user.id}/fruits`} label="fruits mode">
                                             <ModeIcon mode="fruits" size={24} css={`fill-base-content`} />
-                                        </HxA>
+                                        </Link>
                                     }
                                 </div>
                                 <div class="tooltip" data-tip="osu!mania">
                                     {mode === "mania" ?
                                         <ModeIcon mode="mania" size={24} css={`fill-secondary`} /> :
-                                        <HxA url={`/users/${user.id}/mania`} label="mainia mode">
+                                        <Link url={`/users/${user.id}/mania`} label="mainia mode">
                                             <ModeIcon mode="mania" size={24} css={`fill-base-content`} />
-                                        </HxA>
+                                        </Link>
                                     }
                                 </div>
                             </div>
@@ -179,7 +179,7 @@ async function UserTopPanel({ user, mode, editable }: Props) {
                 </div>
             </div >
             <div class="flex flex-col gap-4 p-4">
-                <div class="flex flex-row items-center justify-center flex-wrap gap-4">
+                <div class="flex flex-row items-center flex-wrap gap-4">
                     {user.location ?
                         <div class="flex flex-row items-center gap-1">
                             <i class="fa-solid fa-location-dot" />

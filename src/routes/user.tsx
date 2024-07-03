@@ -119,6 +119,10 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             .post("/most", ({ params }) => (
                 <UserMostPanel id={Number(params.id)} />
             ))
+            .post("/setup", async ({ params, cookie, jwt }: Route) => {
+                const user = await verifyUser(jwt, cookie.auth.value);
+                return <UserSetupPanel logged_id={user?.id} page_id={Number(params.id)} />
+            })
             .post("/skins", ({ params }) => (
                 <UserSkinsPanel id={Number(params.id)} />
             ))

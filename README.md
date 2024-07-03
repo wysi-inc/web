@@ -19,3 +19,4 @@ This project was created using `bun init` in bun v1.0.25. [Bun](https://bun.sh) 
 - allow to donwload all collections
 - collection.db file merger editor
 - contributor page <3
+- user social links

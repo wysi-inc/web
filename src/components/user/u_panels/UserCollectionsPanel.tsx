@@ -117,7 +117,7 @@ async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
                 ))}
                 <script type="module" src="/public/js/collectiondownloader.js" />
             </div>
-        </> : <></>
+        </> : <>This user hasn't uploaded their collections</>
         }
     </div>)
 }

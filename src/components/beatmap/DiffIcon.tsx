@@ -1,5 +1,5 @@
+import Link from "../web/Link";
 import ModeIcon from "./ModeIcon";
-import HxA from "../web/HxA";
 import { getDiffColor } from "@/src/libs/web_utils";
 
 interface Props {
@@ -12,11 +12,11 @@ interface Props {
 }
 
 const DiffIcon = ({ diff, mode, size, name, setId, diffId }: Props) => (
-    <HxA url={`/beatmaps/${setId}/${diffId}`} css="flex items-center">
+    <Link url={`/beatmapsets/${setId}/${diffId}`} css="flex items-center">
         <span data-tip={`★ ${diff} - [${name}]`} class="p-0 m-0 tooltip">
             <ModeIcon size={size} color={getDiffColor(diff)} mode={mode} />
         </span>
-    </HxA>
+    </Link>
 );
 
 export default DiffIcon;

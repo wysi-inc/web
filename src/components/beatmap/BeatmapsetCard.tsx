@@ -1,9 +1,9 @@
 import type { Beatmapset, BeatmapsetStatus } from "@/src/types/beatmaps";
 import DiffIcon from "./DiffIcon";
 import CardControls from "../web/CardControls";
-import HxA from "../web/HxA";
 import StatusBadge from "./StatusBadge";
 import AudioPlayButton from "../web/AudioPlayButton";
+import Link from "../web/Link";
 
 type Props = {
     beatmapset: Beatmapset,
@@ -41,18 +41,18 @@ const BeatmapsetCard = ({ beatmapset }: Props) => {
                             />
                         </div>
                         <div class="flex flex-col py-2 px-4 max-w-52 lg:max-w-72">
-                            <HxA css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmaps/${beatmapset.id}`}>{beatmapset.title}</HxA>
+                            <Link css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmapsets/${beatmapset.id}`}>{beatmapset.title}</Link>
                             <p class="text-neutral-content text-opacity-75 text-sm truncate"> by {beatmapset.artist}</p>
                         </div>
                     </div>
                 </div>
                 <div class="text-opacity-75 text-base-content flex flex-row py-1 px-2 gap-2 items-center">
                     <StatusBadge status={beatmapset.status as BeatmapsetStatus} />
-                    <HxA url={`/users/${beatmapset.user_id}`}>
+                    <Link url={`/users/${beatmapset.user_id}`}>
                         <div class="tooltip" data-tip={beatmapset.creator}>
                             <i class="fa-solid fa-user-pen" />
                         </div>
-                    </HxA>
+                    </Link>
                     {diffs.sort((a, b) =>
                         a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int)
                         .map((beatmap, i) => i < DIFF_LIMIT &&

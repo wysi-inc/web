@@ -2,7 +2,7 @@ import type { UserSubdivision } from "@/src/types/users";
 import OnlineDot from "./u_panels/u_components/OnlineDot";
 import SubdivisionFlag from "./u_panels/u_components/SubdivisionFlag";
 import Flag from "./u_panels/u_components/Flag";
-import HxA from "../web/HxA";
+import Link from "../web/Link";
 
 type Props = {
     index: number,
@@ -17,7 +17,7 @@ function UserRankingCard({ index, page, row, subdivision }: Props) {
                         `}>
             <th class="table-cell text-start">#{index + 1 + 50 * (page - 1)}</th>
             <td class="table-cell">
-                <HxA url={`/users/${row.user.id}`}>
+                <Link url={`/users/${row.user.id}`}>
                     <div class="flex flex-row gap-4">
                         <Flag name={row.user.country.name} code={row.user.country.code} />
                         {subdivision ?
@@ -27,7 +27,7 @@ function UserRankingCard({ index, page, row, subdivision }: Props) {
                             {row.user.username}
                         </span>
                     </div>
-                </HxA>
+                </Link>
             </td>
             <td class="hidden sm:table-cell">{Number(row.pp?.toFixed()).toLocaleString()}pp</td>
             <td class="hidden sm:table-cell">{row.ranked_score.toLocaleString()}</td>

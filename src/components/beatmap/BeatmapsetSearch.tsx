@@ -50,7 +50,7 @@ const Sort = ({ label }: SortingProps) => <>
 
 const BeatmapsetSearch = () => <>
     <form class="flex flex-col rounded-lg drop-shadow-lg bg-base-300" onsubmit=""
-        id="search-form" hx-post="/beatmaps/list"
+        id="search-form" hx-post="/beatmapsets/list"
         hx-trigger="load, keyup delay:500ms, change delay:500ms"
         hx-target="#beatmap-search-results">
         <div class="flex flex-col gap-4 p-4 bg-base-100 rounded-lg">

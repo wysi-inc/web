@@ -29,16 +29,14 @@ const BaseHtml = ({ user, children }: Props) => {
                 <link rel="stylesheet" href="/public/css/main_out.css" type="text/css" />
                 <link rel="stylesheet" href="/public/css/bbcode.css" type="text/css" />
                 <script src="https://kit.fontawesome.com/d5ab19acce.js" crossorigin="anonymous" />
-                <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js" />
-                <script src="https://unpkg.com/htmx.org@1.9.12" />
-                {/*<script src="/public/lib/htmx.js" />*/}
+                <script src="https://unpkg.com/htmx.org@2.0.0" />
                 <script src="/public/js/search.js" defer />
                 <script src="/public/js/audio.js" defer />
             </head>
             <body class="bg-base-300 flex flex-col justify-center items-center">
                 <Navbar user={user} />
                 <div class="w-screen mil:w-[1000px]">
-                    <main id="main" hx-history-elt class="md:p-4 flex flex-col gap-4 bg-neutral shadow-lg">
+                    <main id="main" class="md:p-4 flex flex-col gap-4 bg-neutral shadow-lg">
                         {children}
                     </main>
                 </div>

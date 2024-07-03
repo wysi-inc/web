@@ -38,7 +38,7 @@ const queryBodyElysia = {
     })
 }
 
-export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
+export const beatmapRoutes = new Elysia({ prefix: '/beatmapsets' })
     .get("/", async ({ request, jwt, cookie }: Route) => (
         <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
             <BeatmapsetSearch />

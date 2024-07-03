@@ -9,6 +9,10 @@ const donationDBSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    currency: {
+        type: String,
+        required: true
+    },
     timestamp: {
         required: true,
         type: Date

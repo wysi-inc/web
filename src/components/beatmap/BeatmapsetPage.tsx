@@ -1,11 +1,11 @@
 import moment from "moment";
-import HxA from "../web/HxA";
 import DiffIcon from "./DiffIcon";
 import StatusBadge from "./StatusBadge";
 import DiffStats from "./DiffStats";
 import AudioPlayButton from "../web/AudioPlayButton";
 import type { Beatmap, Beatmapset, BeatmapsetStatus } from "@/src/types/beatmaps";
 import { getBeatmapset } from "@/src/db/beatmaps/get_beatmaps";
+import Link from "../web/Link";
 
 type Props = {
     set_id: number,
@@ -55,9 +55,9 @@ const BeatmapsetPage = async (props: Props) => {
                                 class="rounded-lg size-12"
                                 alt="mapper" loading="lazy" />
                             <div class="flex flex-col gap-1 text-base-content ">
-                                <HxA url={`/users/${beatmapset.user_id}`}>
+                                <Link url={`/users/${beatmapset.user_id}`}>
                                     mapped by {beatmapset.user.username}
-                                </HxA>
+                                </Link>
                                 <div class="text-base-content">
                                     {moment(hasLeaderboards ? beatmapset.ranked_date : beatmapset.submitted_date).format("MMMM Do YYYY")}
                                 </div>
@@ -127,9 +127,9 @@ const BeatmapsetPage = async (props: Props) => {
                         <div class="px-2">Nominators:</div>
                         <div class="p-2 rounded-lg bg-base-300 flex flex-row flex-wrap gap-1">
                             {beatmapset.current_nominations.map(nom =>
-                                <HxA url={`/users/${nom.user_id}`}>
+                                <Link url={`/users/${nom.user_id}`}>
                                     {nom.user_id}
-                                </HxA>
+                                </Link>
                             )}
                         </div>
                     </div>

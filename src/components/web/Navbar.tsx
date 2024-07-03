@@ -1,8 +1,8 @@
 import type { UserCookie } from "@/src/types/users";
-import HxA from "./HxA";
 import Login from "./Login";
 import Search from "./Search";
 import Logged from "./Logged";
+import Link from "./Link";
 
 type Props = {
     user: UserCookie | null;
@@ -19,7 +19,7 @@ const pages = [
     },
     {
         title: "Beatmaps",
-        route: "/beatmaps"
+        route: "/beatmapsets"
     },
     {
         title: "Contributors",
@@ -40,9 +40,9 @@ const Navbar = ({ user }: Props) => {
                         <ul class="menu menu-sm dropdown-content mt-5 z-50 p-2 shadow bg-base-100 rounded-box w-40">
                             {pages.map(page =>
                                 <li>
-                                    <HxA url={page.route} css="btn btn-ghost">
+                                    <Link url={page.route} css="btn btn-ghost">
                                         {page.title}
-                                    </HxA>
+                                    </Link>
                                 </li>
                             )}
                             <div class="md:hidden divider" />
@@ -62,15 +62,15 @@ const Navbar = ({ user }: Props) => {
                             </li>
                         </ul>
                     </div>
-                    <HxA url="/" css="hidden sm:flex gap-4 items-center btn btn-ghost px-2 text-xl">
+                    <Link url="/" css="hidden sm:flex gap-4 items-center btn btn-ghost px-2 text-xl">
                         <img src="/public/wysi.svg" class="w-8 h-8 rounded-lg drop-shadow-lg shadow-lg" alt="wysi logo" />
                         <span>wysi</span>
-                    </HxA>
+                    </Link>
                     <div class="hidden lg:flex flex-row text-sm">
                         {pages.map(page =>
-                            <HxA url={page.route} css="btn btn-ghost">
+                            <Link url={page.route} css="btn btn-ghost">
                                 {page.title}
-                            </HxA>
+                            </Link>
                         )}
                     </div>
                 </div>

@@ -1,27 +1,26 @@
-import type { Setup } from "@/src/models/User";
 import TabletDisplay from "./setup/TabletDisplay";
 import KeyboardDisplay from "./setup/KeyboardDisplay";
 import Computer from "./setup/Computer";
 import MouseDisplay from "./setup/MouseDisplay";
 import Peripherals from "./setup/Peripherals";
+import { User } from "@/src/models/User";
 
 type Props = {
     logged_id?: number;
     page_id: number;
-    setup?: Setup;
 }
 
-const UserSetupPanel = ({ logged_id, page_id, setup }: Props) => {
+async function UserSetupPanel({ logged_id, page_id }: Props) {
 
-    let form_post = "";
-    let editable = false;
-    if (page_id === logged_id) {
-        form_post = `/users/${page_id}/setup`;
-        editable = true;
-    }
+    const editable = page_id === logged_id;
+
+    const user = await User.findOne({ user_id: page_id });
+    const setup = user?.setup;
+
+    if (!setup) return <>This user hasn't specified their setup</>;
 
     return <div id="setup_panel">
-        <form id="setup_form" hx-post={`/users/${page_id}/setup`}
+        <form id="setup_form" hx-post={editable ? `/users/${page_id}/setup` : ""}
             hx-trigger="submit" hx-swap="outerHTML" hx-target="#setup_panel"
             class="flex flex-col-reverse gap-2">
             <fieldset class="group w-full grid md:grid-cols-2 gap-4"
@@ -32,7 +31,7 @@ const UserSetupPanel = ({ logged_id, page_id, setup }: Props) => {
                 <Peripherals editable={editable} peripherals={setup?.peripherals} />
                 <Computer editable={editable} computer={setup?.computer} />
             </fieldset>
-            {editable &&
+            {editable ? <>
                 <div class="flex flex-row-reverse gap-2">
                     <button type="reset" class="hidden btn btn-sm btn-error"
                         id="setup_form_cancel">
@@ -47,9 +46,8 @@ const UserSetupPanel = ({ logged_id, page_id, setup }: Props) => {
                         <i class="fa-solid fa-pen-to-square" />
                     </button>
                 </div>
-            }
-            {editable ?
-                <script src="/public/js/setup.js" /> : <></>
+                <script src="/public/js/setup.js" />
+            </> : <></>
             }
         </form>
     </div>;

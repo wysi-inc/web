@@ -1,6 +1,5 @@
 import type { Mod, Mode } from "@/src/types/osu";
 import { v2 } from "osu-api-extended";
-import HxA from "../web/HxA";
 import type { response } from "osu-api-extended/dist/types/v2_scores_beatmap";
 import moment from "moment";
 import Grade from "../score/Grade";
@@ -9,6 +8,7 @@ import Flag from "../user/u_panels/u_components/Flag";
 import { colors } from "@/src/libs/colors";
 import { getSubdivisions } from "@/src/libs/web_utils";
 import SubdivisionFlag from "../user/u_panels/u_components/SubdivisionFlag";
+import Link from "../web/Link";
 
 type Props = {
     id: number;
@@ -58,7 +58,7 @@ const BeatmapScoreTable = async (props: Props) => {
                     <tr class="hover:bg-base-300 hover:rounded-lg">
                         <th class="table-cell text-start">#{i + 1}</th>
                         <td class="table-cell">
-                            <HxA url={`/users/${score.user.id}`}>
+                            <Link url={`/users/${score.user.id}`}>
                                 <div class="flex flex-row gap-2 items-center">
                                     <Flag name={score.user.country.name} code={score.user.country.code} />
                                     {subdivisions.get(score.user.id) ?
@@ -68,7 +68,7 @@ const BeatmapScoreTable = async (props: Props) => {
                                         {score.user.username}
                                     </span>
                                 </div>
-                            </HxA>
+                            </Link>
                         </td>
                         <td class="hidden sm:table-cell">
                             {Number(score.pp?.toFixed()).toLocaleString()}pp</td>

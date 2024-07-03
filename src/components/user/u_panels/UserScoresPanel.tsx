@@ -37,13 +37,15 @@ const UserScoresPanel = ({ id, mode, category }: Props) => {
         </>);
     }
 
-    return (
-        <div role="tablist" class="tabs tabs-bordered grid grid-cols-4">
+    return (<>
+        <div id="user_scores_panel" role="tablist" class="tabs tabs-bordered grid grid-cols-4">
             <Tab cat="pinned" title="Pinned" col="col-start-1 col-end-1" />
             <Tab cat="best" title="Best" col="col-start-2 col-end-2" />
             <Tab cat="firsts" title="First" col="col-start-3 col-end-3" />
             <Tab cat="recent" title="Recent" col="col-start-4 col-end-4" />
         </div>
+        <script type="module" src="/public/js/choke.js" />
+    </>
     )
 }
 

@@ -27,8 +27,7 @@ const BeatmapsList = async (props: Props) => {
             <BeatmapsetCard beatmapset={set} />
         )}
         {sets.length < 50 ? null :
-            <LoadMoreButton url={`/beatmaps/list/${res.cursor_string}`}
-                include="#search-form" />
+            <LoadMoreButton url={`/beatmapsets/list/${res.cursor_string}`} include="#search-form" />
         }
     </>
     );
