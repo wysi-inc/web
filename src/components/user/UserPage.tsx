@@ -1,10 +1,10 @@
-import type { Mode } from "@/src/types/osu";
 import UserTopPanel from "./u_panels/UserTopPanel";
 import UserHistoryPanel from "./u_panels/UserHistoryPanel";
 import LazyPanel from "./LazyPanel";
 import Panel from "./Panel";
 import UserSetupPanel from "./u_panels/UserSetupPanel";
 import { getUser } from "@/src/db/users/get_user";
+import { type Mode } from "../../types/osu";
 
 type Props = {
     logged_id: number | undefined;

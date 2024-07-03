@@ -88,7 +88,7 @@ export function isEmpty(obj: any): boolean {
     return true;
 }
 
-export async function getSubdivision(ids: number[]): Promise<Map<number, UserSubdivision>> {
+export async function getSubdivisions(ids: number[]): Promise<Map<number, UserSubdivision>> {
     const res = await fetch(`https://osuworld.octo.moe/api/subdiv/users?ids=${ids.map(i => i).join(",")}`);
     if (!res.ok) return new Map();
     const data = await res.json() as Subdivision[];
@@ -97,7 +97,7 @@ export async function getSubdivision(ids: number[]): Promise<Map<number, UserSub
         const user = data[i];
         const subdivision = subdivisionFlags[user.country_id]?.regions[user.region_id]
         if (!subdivision) continue;
-        subdivisionsMap.set(Number(user.id), subdivision);
+        subdivisionsMap.set(Number(user.id), { ...subdivision, code: user.region_id });
     }
     return subdivisionsMap;
 }

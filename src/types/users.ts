@@ -1,4 +1,4 @@
-import type { Rank, Setup } from "../models/User";
+import type { Rank, Setup, UserFlag } from "../models/User";
 import type { response as v2User } from "osu-api-extended/dist/types/v2_user_details";
 import type { response as v2Score } from "osu-api-extended/dist/types/v2_scores_user_category";
 import type { response as v2UserList } from "osu-api-extended/dist/types/v2_site_ranking_details";
@@ -19,6 +19,7 @@ export type UserBasic = v2User;
 export type User = UserBasic & {
     db_ranks: RankHistory;
     db_setup: Setup;
+    flag: UserFlag;
 };
 
 export type UserList = v2UserList;
@@ -44,5 +45,6 @@ export type Subdivision = {
 export type UserSubdivision = {
     name: string,
     nativeName: string,
+    code: string,
     flag: string
 }

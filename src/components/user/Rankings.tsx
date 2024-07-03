@@ -2,7 +2,7 @@ import type { Category, Mode } from "@/src/types/osu";
 import Pagination from "./u_panels/u_components/Pagination";
 import UserRankingCard from "./UserRankingCard";
 import { getRankings } from "@/src/db/users/get_user";
-import { getSubdivision } from "@/src/libs/web_utils";
+import { getSubdivisions } from "@/src/libs/web_utils";
 
 type Props = {
     mode: Mode;
@@ -18,7 +18,7 @@ async function Rankings({ mode, category, page }: Props) {
     if (!users) return <div>Loading...</div>;
     if (!users.ranking) return <div>No users found</div>;
 
-    const subdivisions = await getSubdivision(users.ranking.map(u => u.user.id));
+    const subdivisions = await getSubdivisions(users.ranking.map(u => u.user.id));
 
     return (<>
         <Pagination mode={mode} category={category} page={page} />

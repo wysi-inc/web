@@ -54,7 +54,7 @@ const setup = new mongoose.Schema({
         motherboard: String,
         case: String,
     }
-}, { _id: false })
+}, { _id: false });
 
 
 const rank = new mongoose.Schema({
@@ -66,7 +66,7 @@ const rank = new mongoose.Schema({
         type: Number,
         required: true,
     }
-}, { _id: false })
+}, { _id: false });
 
 const modeRanks = new mongoose.Schema({
     global_ranks: {
@@ -77,14 +77,46 @@ const modeRanks = new mongoose.Schema({
         type: [rank],
         required: true,
     },
-}, { _id: false })
+}, { _id: false });
 
 const modes = new mongoose.Schema({
     osu: modeRanks,
     taiko: modeRanks,
     fruits: modeRanks,
     mania: modeRanks,
-}, { _id: false })
+}, { _id: false });
+
+const userFlag = new mongoose.Schema({
+    country: {
+        type: {
+            name: {
+                type: String,
+                required: true
+            },
+            code: {
+                type: String,
+                required: true
+            },
+        },
+        required: true,
+        _id: false
+    },
+    subdivision: {
+        type: {
+            name: {
+                type: String,
+                required: true
+            },
+            code: {
+                type: String,
+                required: true
+
+            },
+        },
+        required: true,
+        _id: false
+    }
+}, { _id: false });
 
 const userSchema = new mongoose.Schema({
     user_id: {
@@ -97,6 +129,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    flag: userFlag,
     modes: {
         type: modes,
         required: true,
@@ -113,5 +146,6 @@ userSchema.methods.toJSON = function() {
 export type Rank = mongoose.InferSchemaType<typeof rank>;
 export type ModeRanks = mongoose.InferSchemaType<typeof modeRanks>;
 export type Setup = mongoose.InferSchemaType<typeof setup>;
+export type UserFlag = mongoose.InferSchemaType<typeof userFlag>;
 export type User = mongoose.InferSchemaType<typeof userSchema>;
 export const User = mongoose.model('User', userSchema);

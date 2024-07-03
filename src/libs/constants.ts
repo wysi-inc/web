@@ -5,7 +5,31 @@ export const catalans: number[] = [
     20661304 // Japii
 ];
 
-export const subdivisionFlags: any = {
+export type Country = {
+    name: string,
+    nativeName: string,
+    regions: Subdivision[]
+};
+
+export type Subdivision = {
+    name: string,
+    nativeName: string,
+    flag: string
+};
+
+
+export type SubdivisionFlags = {
+    [countryCode: string]: {
+        name: string,
+        nativename?: string,
+        nativeName: string,
+        regions: {
+            [regionCode: string]: Subdivision
+        }
+    }
+};
+
+export const subdivisionFlags: SubdivisionFlags = {
     "AL": {
         "name": "Albania",
         "nativeName": "Shqipëria",
@@ -20,56 +44,6 @@ export const subdivisionFlags: any = {
                 "nativeName": "Qarku i Durrësit",
                 "flag": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Flag_of_Durrës.svg"
             },
-            "AL-03": {
-                "name": "Elbasan County",
-                "nativeName": "Qarku i Elbasanit",
-                "flag": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Flag_of_Elbasan.svg"
-            },
-            "AL-06": {
-                "name": "Korçë County",
-                "nativeName": "Qarku i Korçës",
-                "flag": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Flag_of_Korçë.svg"
-            },
-            "AL-07": {
-                "name": "Kukës County",
-                "nativeName": "Qarku i Kukësit",
-                "flag": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Flag_of_Kukës.svg"
-            },
-            "AL-11": {
-                "name": "Tirana County",
-                "nativeName": "Qarku i Tiranës",
-                "flag": "https://upload.wikimedia.org/wikipedia/commons/1/13/Flag_of_Tiranë.svg"
-            },
-            "AL-12": {
-                "name": "Vlorë County",
-                "nativeName": "Qarku i Vlorës",
-                "flag": "https://upload.wikimedia.org/wikipedia/commons/3/30/Flag_of_Vlorë.svg"
-            },
-            "AL-09": {
-                "name": "Dibër County",
-                "nativeName": "Qarku i Dibrës",
-                "flag": "https://upload.wikimedia.org/wikipedia/commons/6/69/ALB_Qarku_i_Dibrës_COA.png"
-            },
-            "AL-04": {
-                "name": "Fier County",
-                "nativeName": "Qarku i Fierit",
-                "flag": "https://upload.wikimedia.org/wikipedia/commons/2/29/Stema_e_Qarkut_Fier.svg"
-            },
-            "AL-05": {
-                "name": "Gjirokastër County",
-                "nativeName": "Qarku i Gjirokastrës",
-                "flag": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Stema_e_Qarkut_Gjirokastër.svg"
-            },
-            "AL-08": {
-                "name": "Lezhë County",
-                "nativeName": "Qarku i Lezhës",
-                "flag": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Stema_e_Qarkut_Lezhë.svg"
-            },
-            "AL-10": {
-                "name": "Shkodër County",
-                "nativeName": "Qarku i Shkodrës",
-                "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Stema_e_Qarkut_Shkodër.svg/128px-Stema_e_Qarkut_Shkodër.svg.png"
-            }
         }
     },
     "AD": {
@@ -91,26 +65,6 @@ export const subdivisionFlags: any = {
                 "nativeName": "Encamp",
                 "flag": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Flag_of_Encamp.svg"
             },
-            "AD-08": {
-                "name": "Escaldes-Engordany",
-                "nativeName": "Escaldes-Engordany",
-                "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Bandera_de_Escaldes-Engordany.svg/128px-Bandera_de_Escaldes-Engordany.svg.png"
-            },
-            "AD-04": {
-                "name": "La Massana",
-                "nativeName": "La Massana",
-                "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Flag_of_La_Massana.svg/128px-Flag_of_La_Massana.svg.png"
-            },
-            "AD-05": {
-                "name": "Ordino",
-                "nativeName": "Ordino",
-                "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Flag_of_Ordino.svg/128px-Flag_of_Ordino.svg.png"
-            },
-            "AD-06": {
-                "name": "Sant Julia de Loria",
-                "nativeName": "Sant Julià de Lòria",
-                "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Bandera_de_San_Julián_de_Loria.svg/128px-Bandera_de_San_Julián_de_Loria.svg.png"
-            }
         }
     },
     "AR": {

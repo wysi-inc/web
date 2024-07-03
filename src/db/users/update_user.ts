@@ -4,6 +4,7 @@ import type { Mode } from "../../types/osu";
 import type { User as UserType } from "../../types/users";
 //@ts-ignore
 import OsuDBParser from "osu-db-parser";
+import { getSubdivisions } from "@/src/libs/web_utils";
 
 export async function updateUser(user: UserType, mode: Mode): Promise<UserType> {
     const country_rank = user.statistics.country_rank;
@@ -23,6 +24,20 @@ export async function updateUser(user: UserType, mode: Mode): Promise<UserType> 
                 username: user.username,
                 modes: { [mode]: new_ranks },
             });
+            const subdivisions = await getSubdivisions([user.id]);
+            const subdivision = subdivisions.get(user.id);
+            if (subdivision) {
+                db_user.flag = {
+                    country: {
+                        name: user.country.name,
+                        code: user.country.code
+                    },
+                    subdivision: {
+                        name: subdivision.name,
+                        code: subdivision.code
+                    }
+                };
+            }
             db_user.save();
             user.db_ranks = new_ranks;
             user.db_setup = db_user.setup as any;
@@ -36,6 +51,22 @@ export async function updateUser(user: UserType, mode: Mode): Promise<UserType> 
             await db_user.save();
             return user;
         }
+        if (!db_user.flag) {
+            const subdivisions = await getSubdivisions([user.id]);
+            const subdivision = subdivisions.get(user.id);
+            if (subdivision) {
+                db_user.flag = {
+                    country: {
+                        name: user.country.name,
+                        code: user.country.code
+                    },
+                    subdivision: {
+                        name: subdivision.name,
+                        code: subdivision.code
+                    }
+                };
+            }
+        }
         const user_mode = db_user.modes[mode] as any;
         new_ranks = getNewMerge(
             user_mode.global_ranks,
@@ -46,6 +77,7 @@ export async function updateUser(user: UserType, mode: Mode): Promise<UserType> 
         db_user.modes[mode] = new_ranks as any;
         user.db_ranks = new_ranks;
         user.db_setup = db_user.setup as any;
+        user.flag = db_user.flag as any;
         await db_user.save();
         return user;
     } catch (err) {

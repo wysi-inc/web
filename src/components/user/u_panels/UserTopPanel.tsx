@@ -9,7 +9,6 @@ import type { User } from "@/src/types/users";
 import type { Mode } from "@/src/types/osu";
 import { colors } from "@/src/libs/colors";
 import SubdivisionFlag from "./u_components/SubdivisionFlag";
-import { getSubdivision } from "@/src/libs/web_utils";
 
 type Props = {
     user: User;
@@ -28,9 +27,6 @@ async function UserTopPanel({ user, mode }: Props) {
     grade_counts.set("SH", { count: user.statistics.grade_counts.sh, color: colors.grades.sh });
     grade_counts.set("S", { count: user.statistics.grade_counts.s, color: colors.grades.s });
     grade_counts.set("A", { count: user.statistics.grade_counts.a, color: colors.grades.a });
-
-    const subdivisions = await getSubdivision([user.id]);
-    const subdivision = subdivisions.get(user.id);
 
     return (
         <div class="rounded-lg bg-base-100 shadow-lg">
@@ -109,10 +105,10 @@ async function UserTopPanel({ user, mode }: Props) {
                             <h2 class="text-xl tooltip" data-tip={`Peak rank: #${best_country?.rank?.toLocaleString()}`}>
                                 #{user.statistics?.country_rank?.toLocaleString() || "-"}
                             </h2>
-                            <Flag name={user.country.name} code={user.country.code} />
-                            {subdivision !== undefined ?
-                                <SubdivisionFlag name={subdivision.name} url={subdivision.flag} />
-                                : <></>
+                            {user.flag ? <>
+                                <Flag name={user.flag.country.name} code={user.flag.country.code} />
+                                <SubdivisionFlag name={user.flag.subdivision.name} country_code={user.flag.country.code} subdivision_code={user.flag.subdivision.code} />
+                            </> : <></>
                             }
                         </div>
                         <div>
