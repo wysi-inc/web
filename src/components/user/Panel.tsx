@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Panel = ({ children, icon, tooltip, title, code, info }: Props) => (
-    <div class="scroll-mt-32 shadow-lg rounded-lg bg-base-100 p-4 flex flex-col gap-4" id={code}>
+    <div class="scroll-mt-36 shadow-lg md:rounded-lg bg-base-100 p-4 flex flex-col gap-4" id={code}>
         <div class="flex flex-row items-center gap-2">
             <div class="tooltip tooltip-right" data-tip={tooltip}>
                 {icon}

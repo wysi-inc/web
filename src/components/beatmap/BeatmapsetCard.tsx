@@ -13,6 +13,7 @@ const BeatmapsetCard = ({ beatmapset }: Props) => {
 
     const diffs = beatmapset.beatmaps;
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
+    const DIFF_LIMIT = 7;
 
     return (
         <div class="group flex flex-row bg-base-300 rounded-lg shadow-lg overflow-hidden">
@@ -54,13 +55,13 @@ const BeatmapsetCard = ({ beatmapset }: Props) => {
                     </HxA>
                     {diffs.sort((a, b) =>
                         a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int)
-                        .map((beatmap, i) => i < 9 &&
+                        .map((beatmap, i) => i < DIFF_LIMIT &&
                             <DiffIcon setId={beatmapset.id} diffId={beatmap.id}
                                 diff={beatmap.difficulty_rating} size={20}
                                 mode={beatmap.mode} name={beatmap.version} />)
                     }
-                    {diffs.length > 9 &&
-                        <div class="badge badge-info">+{beatmapset.beatmaps.length - 9}</div>
+                    {diffs.length > DIFF_LIMIT &&
+                        <div class="badge badge-info">+{beatmapset.beatmaps.length - DIFF_LIMIT}</div>
                     }
                 </div>
             </div>

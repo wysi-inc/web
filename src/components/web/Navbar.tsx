@@ -80,7 +80,7 @@ const Navbar = ({ user }: Props) => {
                 <div class="flex flex-row items-center justify-end">
                     <div class="flex">
                         <label class="btn btn-ghost swap swap-rotate">
-                            <input type="checkbox" class="theme-controller" value="pastel" />
+                            <input aria-label="theme switch" type="checkbox" class="theme-controller" value="pastel" />
                             <i class="swap-on fa-solid fa-sun" />
                             <i class="swap-off fa-solid fa-moon" />
                         </label>

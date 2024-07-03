@@ -4343,6 +4343,10 @@ details.collapse summary::-webkit-details-marker {
   scroll-margin-top: 8rem;
 }
 
+.scroll-mt-36 {
+  scroll-margin-top: 9rem;
+}
+
 .list-disc {
   list-style-type: disc;
 }
@@ -5068,12 +5072,30 @@ details.collapse summary::-webkit-details-marker {
     display: none;
   }
 
+  .md\:shrink {
+    flex-shrink: 1;
+  }
+
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .md\:grid-cols-5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .md\:rounded-lg {
+    border-radius: 0.5rem;
+  }
+
+  .md\:p-4 {
+    padding: 1rem;
+  }
+
+  .md\:shadow-lg {
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   }
 }
 

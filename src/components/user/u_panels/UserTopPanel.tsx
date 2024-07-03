@@ -29,7 +29,7 @@ async function UserTopPanel({ user, mode }: Props) {
     grade_counts.set("A", { count: user.statistics.grade_counts.a, color: colors.grades.a });
 
     return (
-        <div class="rounded-lg bg-base-100 shadow-lg">
+        <div class="md:rounded-lg bg-base-100 shadow-lg">
             <div class="rounded-lg"
                 style={{
                     backgroundImage: `url(${user.cover_url})`,
@@ -124,7 +124,7 @@ async function UserTopPanel({ user, mode }: Props) {
                             <h2 class="text-lg">{user.user_achievements.length} <i class="fa-solid fa-medal fa-xs" /></h2>
                         </div>
                     </div>
-                    <div class="flex flex-col gap-4 justify-between">
+                    <div class="flex flex-col gap-4 justify-between grow">
                         <div class="grow text-sm flex flex-row gap-12 justify-between">
                             <div class="flex flex-col gap-2 text-start">
                                 <h2 class="flex gap-3 items-center">
@@ -171,7 +171,7 @@ async function UserTopPanel({ user, mode }: Props) {
                 </div>
             </div >
             <div class="flex flex-col gap-4 p-4">
-                <div class="flex flex-row flex-wrap gap-4">
+                <div class="flex flex-row items-center justify-center flex-wrap gap-4">
                     {user.location ?
                         <div class="flex flex-row items-center gap-1">
                             <i class="fa-solid fa-location-dot" />
