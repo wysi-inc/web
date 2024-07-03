@@ -8,6 +8,26 @@ type Props = {
     user: UserCookie | null;
 }
 
+const pages = [
+    {
+        title: "Home",
+        route: "/"
+    },
+    {
+        title: "Rankings",
+        route: "/rankings"
+    },
+    {
+        title: "Beatmaps",
+        route: "/beatmaps"
+    },
+    {
+        title: "Contributors",
+        route: "/contributors"
+    }
+
+];
+
 const Navbar = ({ user }: Props) => {
     return <>
         <nav class="flex flex-col bg-base-100 shadow-lg sticky top-0 z-50 w-full">
@@ -18,26 +38,13 @@ const Navbar = ({ user }: Props) => {
                             <i class="fa-solid fa-bars fa-lg" />
                         </button>
                         <ul class="menu menu-sm dropdown-content mt-5 z-50 p-2 shadow bg-base-100 rounded-box w-40">
-                            <li>
-                                <HxA url="/" css="btn btn-ghost">
-                                    Home
-                                </HxA>
-                            </li>
-                            <li>
-                                <HxA url="/rankings" css="btn btn-ghost">
-                                    Rankings
-                                </HxA>
-                            </li>
-                            <li>
-                                <HxA url="/beatmaps" css="btn btn-ghost">
-                                    Beatmaps
-                                </HxA>
-                            </li>
-                            <li>
-                                <HxA url="/about" css="btn btn-ghost">
-                                    About
-                                </HxA>
-                            </li>
+                            {pages.map(page =>
+                                <li>
+                                    <HxA url={page.route} css="btn btn-ghost">
+                                        {page.title}
+                                    </HxA>
+                                </li>
+                            )}
                             <div class="md:hidden divider" />
                             <li class="flex md:hidden">
                                 <a href="https://github.com/wysi-inc" target="_blank"
@@ -60,18 +67,11 @@ const Navbar = ({ user }: Props) => {
                         <span>wysi</span>
                     </HxA>
                     <div class="hidden lg:flex flex-row text-sm">
-                        <HxA url="/" css="btn btn-ghost">
-                            Home
-                        </HxA>
-                        <HxA url="/rankings" css="btn btn-ghost">
-                            Rankings
-                        </HxA>
-                        <HxA url="/beatmaps" css="btn btn-ghost">
-                            Beatmaps
-                        </HxA>
-                        <HxA url="/about" css="btn btn-ghost">
-                            About
-                        </HxA>
+                        {pages.map(page =>
+                            <HxA url={page.route} css="btn btn-ghost">
+                                {page.title}
+                            </HxA>
+                        )}
                     </div>
                 </div>
                 <div class="flex flex-row items-center justify-center">

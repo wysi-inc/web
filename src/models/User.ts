@@ -98,7 +98,7 @@ const userFlag = new mongoose.Schema({
                 required: true
             },
         },
-        required: true,
+        required: false,
         _id: false
     },
     subdivision: {
@@ -113,7 +113,7 @@ const userFlag = new mongoose.Schema({
 
             },
         },
-        required: true,
+        required: false,
         _id: false
     }
 }, { _id: false });

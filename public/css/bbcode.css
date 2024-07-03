@@ -7,7 +7,7 @@
 }
 
 .bbcode img {
-    max-width: 300px;
+    width: min(calc(1000px - 100px), calc((100vw - 100px)));
 }
 
 .bbcode .imagemap {

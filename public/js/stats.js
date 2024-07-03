@@ -104,9 +104,7 @@ async function getStats(form) {
 
     const formData = new FormData(form);
 
-    // get all the entries from formData that start with "mod"
     const mods = Array.from(formData.entries()).filter(([name, _]) => name.startsWith('mod'));
-    // because they are checkboxes, we only want the second part of the name if theyir value is "on"
 
     const mod_names = mods.map(([name, value]) => value === 'on' ? name.split("-")[1] : null).filter(v => v !== null);
 
@@ -129,16 +127,23 @@ async function getStats(form) {
     setNewStats(stats_od, data.map.od.toFixed(1));
     setNewStats(stats_hp, data.map.hp.toFixed(1));
 
-    const stats_sr = document.getElementById("stats_sr");
     const stats_bpm = document.getElementById("stats_bpm");
+    const stats_sr = document.getElementById("stats_sr");
     const stats_len = document.getElementById("stats_len");
     const stats_pp = document.getElementById("stats_pp");
 
+    let new_bpm = Number(stats_bpm.getAttribute("data-original-value"));
+    if (mod_names.includes("DT") || mod_names.includes("NC")) {
+        new_bpm *= 1.5;
+    }
+    if (mod_names.includes("EZ")) {
+        new_bpm *= 0.75;
+    }
+    stats_bpm.innerHTML = Math.round(new_bpm);
     stats_sr.innerHTML = data.difficulty.stars.toFixed(2);
-    stats_bpm.innerHTML = Math.round(data.map.bpm);
     stats_pp.innerHTML = Math.round(data.pp[acc.acc].pp) + "pp";
 
-    const length = parseInt(stats_len.getAttribute("data-len"));
+    const length = parseInt(stats_len.getAttribute("data-original-value"));
     const new_len = length / data.map.clockRate;
 
     stats_len.innerHTML = secondsToTime(new_len);

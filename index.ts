@@ -16,10 +16,10 @@ import { updateMedals } from "./src/db/medals/update_medals";
 const port = Number(process.env.PORT as string);
 const mongo_uri = process.env.MONGO_URI as string;
 
-export const osu_id = Number(process.env.OSU_ID as string);
-export const osu_secret = process.env.OSU_SECRET as string;
-export const osu_redirect = process.env.OSU_REDIRECT as string;
-export const osu_api_key = process.env.OSU_API_KEY as string;
+export const osu_id = Number(process.env.OSU_ID);
+export const osu_secret = String(process.env.OSU_SECRET);
+export const osu_redirect = String(process.env.OSU_REDIRECT);
+export const osu_api_key = String(process.env.OSU_API_KEY);
 
 function connect(): void {
     mongoose.connect(mongo_uri)
@@ -61,8 +61,6 @@ new Elysia()
     .use(staticPlugin())
     .use(html())
     .get("/favicon.ico", Bun.file("./public/favicon.ico"))
-    .get("/test", ({ jwt, set }) => {
-    })
     .use(baseRoutes)
     .use(rankingRoutes)
     .use(userRoutes)

@@ -131,7 +131,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
     ];
 
     return (<>
-        <UserTopPanel user={user} mode={mode} />
+        <UserTopPanel user={user} mode={mode} editable={editable} />
         <div class="underline-offset-1 text-neutral-content sticky top-16 bg-base-300 md:rounded-lg shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-4 flex-wrap">
             {panels.map((p) => {
                 if (!p.show_if) return <></>;

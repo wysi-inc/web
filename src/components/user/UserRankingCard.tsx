@@ -21,7 +21,7 @@ function UserRankingCard({ index, page, row, subdivision }: Props) {
                     <div class="flex flex-row gap-4">
                         <Flag name={row.user.country.name} code={row.user.country.code} />
                         {subdivision ?
-                            <SubdivisionFlag name={subdivision.name} url={subdivision.flag} />
+                            <SubdivisionFlag name={subdivision.name} flag={subdivision.flag} />
                             : <></>}
                         <span class="flex flex-row items-center gap-2">
                             {row.user.username}

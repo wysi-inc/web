@@ -11,11 +11,12 @@ import { colors } from "@/src/libs/colors";
 import SubdivisionFlag from "./u_components/SubdivisionFlag";
 
 type Props = {
-    user: User;
-    mode: Mode;
+    user: User,
+    mode: Mode,
+    editable: boolean
 }
 
-async function UserTopPanel({ user, mode }: Props) {
+async function UserTopPanel({ user, mode, editable }: Props) {
 
     if (!user) return <></>;
 
@@ -105,10 +106,17 @@ async function UserTopPanel({ user, mode }: Props) {
                             <h2 class="text-xl tooltip" data-tip={`Peak rank: #${best_country?.rank?.toLocaleString()}`}>
                                 #{user.statistics?.country_rank?.toLocaleString() || "-"}
                             </h2>
-                            {user.flag ? <>
+                            {user.flag.country ? <>
                                 <Flag name={user.flag.country.name} code={user.flag.country.code} />
-                                <SubdivisionFlag name={user.flag.subdivision.name} country_code={user.flag.country.code} subdivision_code={user.flag.subdivision.code} />
-                            </> : <></>
+                            </> : <></>}
+                            {user.flag.subdivision ? <>
+                                <SubdivisionFlag name={user.flag.subdivision.name} country_code={user.country.code} subdivision_code={user.flag.subdivision.code} />
+                            </> :
+                                editable ?
+                                    <a href="https://osuworld.octo.moe/" target="_blank">
+                                        <SubdivisionFlag name="Login and select your region on osuworld.octo.moe" country_code={"Unknown"} subdivision_code={"Unknown"} />
+                                    </a>
+                                    : <></>
                             }
                         </div>
                         <div>

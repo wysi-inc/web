@@ -48,3 +48,7 @@
 .htmx-request.htmx-indicator {
     display: block;
 }
+
+#reset-zoom {
+    display: none;
+}

@@ -5,6 +5,7 @@ import HtmxPage from "../libs/routes";
 import { userAuthData } from "../libs/auth";
 import About from "../components/web/About";
 import type { Route } from "../types/osu";
+import Contributors from "../components/web/Contributors";
 
 const searchBody = {
     body: t.Object({
@@ -19,6 +20,8 @@ const oauthQuery = {
     })
 }
 
+const kofi_token = String(process.env.KOFI_TOKEN);
+
 export const baseRoutes = new Elysia({ prefix: '' })
     .get("/", async ({ request, jwt, cookie }: Route) => (
         <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
@@ -30,9 +33,23 @@ export const baseRoutes = new Elysia({ prefix: '' })
             <About />
         </HtmxPage>
     ))
+    .get("/contributors", async ({ request, jwt, cookie }: Route) => (
+        <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
+            <Contributors />
+        </HtmxPage>
+    ))
     .post("/search", ({ body }: Route) => (
         <SearchResults query={body.q} />
     ), searchBody)
+    .post("/donations", ({ body, set }: Route) => {
+        if (body.verification_token !== kofi_token) {
+            set.status = 401;
+            return "Unauthorized";
+        }
+        console.log(body);
+        set.status = 200;
+        return "tysm <3";
+    })
     .get("/oauth", async ({ request, jwt, cookie, query }: Route) => {
         const data = await userAuthData(query.code);
         if ((data as any).error) return "error";

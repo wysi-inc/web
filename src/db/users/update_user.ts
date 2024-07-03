@@ -26,16 +26,16 @@ export async function updateUser(user: UserType, mode: Mode): Promise<UserType> 
             });
             const subdivisions = await getSubdivisions([user.id]);
             const subdivision = subdivisions.get(user.id);
+            db_user.flag = {
+                country: {
+                    name: user.country.name,
+                    code: user.country.code
+                }
+            };
             if (subdivision) {
-                db_user.flag = {
-                    country: {
-                        name: user.country.name,
-                        code: user.country.code
-                    },
-                    subdivision: {
-                        name: subdivision.name,
-                        code: subdivision.code
-                    }
+                db_user.flag.subdivision = {
+                    name: subdivision.name,
+                    code: subdivision.code
                 };
             }
             db_user.save();
@@ -54,16 +54,16 @@ export async function updateUser(user: UserType, mode: Mode): Promise<UserType> 
         if (!db_user.flag) {
             const subdivisions = await getSubdivisions([user.id]);
             const subdivision = subdivisions.get(user.id);
+            db_user.flag = {
+                country: {
+                    name: user.country.name,
+                    code: user.country.code
+                }
+            };
             if (subdivision) {
-                db_user.flag = {
-                    country: {
-                        name: user.country.name,
-                        code: user.country.code
-                    },
-                    subdivision: {
-                        name: subdivision.name,
-                        code: subdivision.code
-                    }
+                db_user.flag.subdivision = {
+                    name: subdivision.name,
+                    code: subdivision.code
                 };
             }
         }

@@ -30,6 +30,17 @@ export type SubdivisionFlags = {
 };
 
 export const subdivisionFlags: SubdivisionFlags = {
+    "Unknown": {
+        "name": "Unknown",
+        "nativeName": "Unknown",
+        "regions": {
+            "Unknown": {
+                "name": "Unknown",
+                "nativeName": "Unknown",
+                "flag": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Missing_flag.png"
+            }
+        }
+    },
     "AL": {
         "name": "Albania",
         "nativeName": "Shqipëria",

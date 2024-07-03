@@ -4,7 +4,11 @@ module.exports = {
         './src/components/**/*.tsx'
     ],
     theme: {
-        extend: {},
+        extend: {
+            screens: {
+                'mil': '1000px',
+            },
+        },
     },
     plugins: [require("daisyui")],
     daisyui: {

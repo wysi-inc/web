@@ -35,10 +35,10 @@ const BaseHtml = ({ user, children }: Props) => {
                 <script src="/public/js/search.js" defer />
                 <script src="/public/js/audio.js" defer />
             </head>
-            <body class="bg-base-300 flex flex-col items-center">
+            <body class="bg-base-300 flex flex-col justify-center items-center">
                 <Navbar user={user} />
-                <div class="flex justify-center items-center max-w-[1000px]">
-                    <main id="main" hx-history-elt class="m-0 p-0 md:p-4 flex flex-col gap-4 bg-neutral shadow-lg">
+                <div class="w-screen mil:w-[1000px]">
+                    <main id="main" hx-history-elt class="md:p-4 flex flex-col gap-4 bg-neutral shadow-lg">
                         {children}
                     </main>
                 </div>

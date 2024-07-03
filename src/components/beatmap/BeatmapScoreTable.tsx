@@ -7,6 +7,8 @@ import Grade from "../score/Grade";
 import ModIcon from "../score/ModIcon";
 import Flag from "../user/u_panels/u_components/Flag";
 import { colors } from "@/src/libs/colors";
+import { getSubdivisions } from "@/src/libs/web_utils";
+import SubdivisionFlag from "../user/u_panels/u_components/SubdivisionFlag";
 
 type Props = {
     id: number;
@@ -34,6 +36,8 @@ const BeatmapScoreTable = async (props: Props) => {
         type: "global",
     }) as any;
 
+    const subdivisions = await getSubdivisions(scores.map(s => s.user.id));
+
     return (
         <table class="table table-sm p-4 bg-base-100 rounded-lg">
             <thead>
@@ -42,7 +46,7 @@ const BeatmapScoreTable = async (props: Props) => {
                     <th>User</th>
                     <th class="hidden sm:table-cell">PP</th>
                     <th class="hidden md:table-cell">Acc</th>
-                    <th class="hidden md:table-cell">Hits</th>
+                    {/*<th class="hidden md:table-cell">Hits</th>*/}
                     <th class="hidden md:table-cell">Combo</th>
                     <th class="hidden md:table-cell">Grade</th>
                     <th class="hidden md:table-cell">Mods</th>
@@ -55,9 +59,12 @@ const BeatmapScoreTable = async (props: Props) => {
                         <th class="table-cell text-start">#{i + 1}</th>
                         <td class="table-cell">
                             <HxA url={`/users/${score.user.id}`}>
-                                <div class="flex flex-row gap-4 items-center">
+                                <div class="flex flex-row gap-2 items-center">
                                     <Flag name={score.user.country.name} code={score.user.country.code} />
-                                    <span class="flex flex-row items-center gap-2">
+                                    {subdivisions.get(score.user.id) ?
+                                        <SubdivisionFlag name={subdivisions.get(score.user.id)?.name || ""} flag={subdivisions.get(score.user.id)?.flag || ""} />
+                                        : <></>}
+                                    <span>
                                         {score.user.username}
                                     </span>
                                 </div>
@@ -68,7 +75,7 @@ const BeatmapScoreTable = async (props: Props) => {
                         <td class="hidden md:table-cell">
                             {(score.accuracy * 100).toFixed(2)}%
                         </td>
-                        <td class="hidden md:table-cell">
+                        {/*<td class="hidden md:table-cell">
                             <div class="grid grid-cols-4 gap-4 px-2 bg-base-300 rounded-full">
                                 <span class={`text-base-content ${score.statistics.great ? "" : "text-opacity-50"}`}
                                     style={{ color: score.statistics.great ? colors.judgements.x300 : "" }}>
@@ -87,27 +94,33 @@ const BeatmapScoreTable = async (props: Props) => {
                                     {score.statistics.miss || 0}
                                 </span>
                             </div>
-                        </td>
+                        </td>*/}
                         <td class="hidden md:table-cell">
                             {score.is_perfect_combo ?
                                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-sky-500">
                                     {score.max_combo}x
                                 </span> :
-                                <span>{score.max_combo}x</span>
+                                <span>
+                                    {score.max_combo}x
+                                </span>
                             }
                         </td>
                         <td class="hidden md:table-cell" >
-                            <Grade grade={score.rank} />
+                            <div class="flex">
+                                <Grade grade={score.rank} />
+                            </div>
                         </td>
                         <td class="hidden md:table-cell">
-                            <div class="flex flex-row gap-1">
+                            <div class="flex flex-row flex-wrap gap-1">
                                 {score.mods.map((mod) =>
                                     <ModIcon mod={(mod as any).acronym} />
                                 )}
                             </div>
                         </td>
-                        <td class="text-start hidden md:table-cell tooltip" data-tip={moment(score.created_at).format("MMMM Do YYYY")}>
-                            {moment(score.ended_at).fromNow()}
+                        <td class="text-end hidden md:table-cell">
+                            <span class="tooltip tooltip-left" data-tip={`${moment(score.created_at).format("MMMM Do YYYY")} | ${moment(score.ended_at).fromNow()}`}>
+                                <i class="fa-regular fa-clock" />
+                            </span>
                         </td>
                     </tr>
                 )}

@@ -8,11 +8,11 @@ type Props = {
     diff: Beatmap,
 }
 
-const DiffStats = (props: Props) => {
+const DiffStats = ({ diff }: Props) => {
 
     function getProgress(label: string, value: number): JSX.Element {
         return (
-            <div id={`stats_${label.toLowerCase()}`} class="flex flex-row items-center gap-3">
+            <div id={`stats_${label.toLowerCase()}`} class="flex flex-row items-center gap-3" data-original-value={value}>
                 <label class="w-10 text-start">{label.toUpperCase()}:</label>
                 <progress class="justify-between progress progress-accent"
                     value={value} max="11" />
@@ -23,46 +23,49 @@ const DiffStats = (props: Props) => {
         )
     }
 
-    const total_hits = props.diff.count_circles + props.diff.count_sliders + props.diff.count_spinners;
+    const total_hits = diff.count_circles + diff.count_sliders + diff.count_spinners;
 
     const mods: string[] = ['HR', 'DT', 'HD', 'FL', 'EZ', 'HT'];
 
     return (
         <div class="flex flex-col gap-4 p-4 rounded-xl bg-base-100">
             <div class="flex flex-row gap-2">
-                <DiffIcon setId={props.diff.beatmapset_id} diffId={props.diff.id}
-                    size={24} mode={props.diff.mode}
-                    diff={props.diff.difficulty_rating}
-                    name={props.diff.version} />
-                <div>{props.diff.version}</div>
+                <DiffIcon setId={diff.beatmapset_id} diffId={diff.id}
+                    size={24} mode={diff.mode}
+                    diff={diff.difficulty_rating}
+                    name={diff.version} />
+                <div>{diff.version}</div>
             </div>
             <div class="flex flex-col gap-2 rounded-lg drop-shadow-md">
                 <div class="flex flex-row flex-wrap items-center justify-around gap-2 rounded-lg p-2 bg-neutral">
                     <div class="flex flex-row items-center gap-1">
                         <i class="fa-solid fa-star" />
-                        <div id="stats_sr">{props.diff.difficulty_rating}</div>
+                        <div id="stats_sr" data-original-value={diff.difficulty_rating}>
+                            {diff.difficulty_rating}
+                        </div>
                     </div>
                     <div class="flex flex-row items-center gap-1">
                         <i class="fa-solid fa-clock" />
-                        <div id="stats_len"
-                            data-len={props.diff.total_length}>
-                            {secondsToTime(props.diff.total_length)}
+                        <div id="stats_len" data-original-value={diff.total_length}>
+                            {secondsToTime(diff.total_length)}
                         </div>
                     </div>
                     <div class="flex flex-row items-center gap-1">
                         <i class="fa-solid fa-music" />
-                        <div id="stats_bpm">{props.diff.bpm}</div>
+                        <div id="stats_bpm" data-original-value={diff.bpm}>
+                            {diff.bpm}
+                        </div>
                     </div>
                     <div id="stats_pp"><span class="loading loading-spinner loading-xs" />pp</div>
                 </div>
                 <div class="flex flex-col p-2 gap-2">
-                    {getProgress("AR", props.diff.ar)}
-                    {getProgress("CS", props.diff.cs)}
-                    {getProgress("OD", props.diff.accuracy)}
-                    {getProgress("HP", props.diff.drain)}
+                    {getProgress("AR", diff.ar)}
+                    {getProgress("CS", diff.cs)}
+                    {getProgress("OD", diff.accuracy)}
+                    {getProgress("HP", diff.drain)}
                 </div>
             </div>
-            <form id="stats_form" data-beatmap-id={props.diff.id}
+            <form id="stats_form" data-beatmap-id={diff.id}
                 class="flex flex-col gap-2"
                 data-total-hits={total_hits}>
                 <div class="flex flex-row items-center justify-between p-2 gap-2 rounded-lg bg-neutral">

@@ -21,7 +21,7 @@ const UserHistoryPanel = (props: Props) => {
                 aria-label={title} checked={type === "global"} />
             <div role="tabpanel" class="tab-content pt-4">
                 {data.length > 0 ?
-                    <div class="h-64 w-full relative">
+                    <div class="h-64 w-full relative cursor-move">
                         <canvas id={`chart-${type}`} class="absolute" data-vals={JSON.stringify(data)} />
                     </div> :
                     "No data found"

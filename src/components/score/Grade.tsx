@@ -6,11 +6,9 @@ type Props = {
 
 const Grade = ({ grade }: Props) => {
     return <>
-        <div class="px-4 py-1 flex items-center justify-center text-black rounded-full"
+        <div class="leading-none px-4 py-1 flex items-center justify-center text-black rounded-full"
             style={{ backgroundColor: getGradeColor(grade) }}>
-            <div class="leading-none">
-                {getGradeLetter(grade)}
-            </div>
+            {getGradeLetter(grade)}
         </div>
     </>;
 }
