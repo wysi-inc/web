@@ -82,7 +82,7 @@ const ScoreCard = async ({ score, position }: Props) => {
                                 </div>
                                 <div class="flex flex-row gap-4 items-center">
                                     <div class="flex flex-col gap-1">
-                                        <div class="bg-opacity-40 flex flex-row justify-between gap-2 px-2 bg-base-300 rounded-full">
+                                        <div class="ms-auto bg-opacity-40 flex flex-row justify-between gap-2 px-2 bg-base-300 rounded-full">
                                             {score.statistics.great ?
                                                 <span style={{ color: colors.judgements.x300 }}>
                                                     {score.statistics.great}
