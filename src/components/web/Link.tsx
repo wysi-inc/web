@@ -13,11 +13,8 @@ function Link({ url, css, role, label, children }: Props) {
         // hx-push-url="true" hx-target="#main"
         // hx-swap="innerHTML show:window:top"
         // hx-indicator="#page-loading"
-        class={`${css} 
-            cursor-pointer 
-            hover:underline 
-            underline-offset-2
-        `} role={role} aria-label={label}>
+        class={`${css || "hover:underline underline-offset-2"} cursor-pointer `}
+        role={role} aria-label={label}>
         {children}
     </a>
 }

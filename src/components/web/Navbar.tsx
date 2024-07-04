@@ -11,23 +11,28 @@ type Props = {
 const routes = [
     {
         title: "Home",
-        url: "/"
+        url: "/",
+        icon: <i class="fa-solid fa-house" />
     },
     {
         title: "Rankings",
-        url: "/rankings"
+        url: "/rankings",
+        icon: <i class="fa-solid fa-ranking-star" />
     },
     {
         title: "Beatmaps",
-        url: "/beatmapsets"
-    },
-    {
-        title: "About",
-        url: "/about"
+        url: "/beatmapsets",
+        icon: <i class="fa-solid fa-music" />
     },
     {
         title: "Support",
-        url: "/support"
+        url: "/support",
+        icon: <i class="fa-solid fa-heart" />
+    },
+    {
+        title: "About",
+        url: "/about",
+        icon: <i class="fa-regular fa-circle-question" />
     },
 ];
 
@@ -44,6 +49,7 @@ const Navbar = ({ user }: Props) => {
                             {routes.map(route =>
                                 <li>
                                     <Link url={route.url} css="btn btn-ghost">
+                                        {route.icon}
                                         {route.title}
                                     </Link>
                                 </li>
