@@ -23,21 +23,19 @@ async function SearchResults({ query }: Props) {
 
     return (<>
         {users.map((user, i) => i < LIMIT ?
-            <Link url={`/users/${user.id}`} css="flex hover:bg-base-200 bg-base-200 rounded-lg cursor-pointer">
-                <div class="grow flex flex-row justify-between p-2">
-                    <div class="grow flex flex-row gap-4">
-                        <div class="flex flex-row gap-2 items-center">
-                            <Flag name={""} code={user.country_code} />
-                            <SubdivisionFlag user_id={user.id} />
-                            <Clan user_id={user.id} />
-                            <span>{user.username}</span>
-                        </div>
-                    </div>
-                    <div class="flex justify-center">
-                        <OnlineDot size={24} online={user.is_online} />
-                    </div>
+            <div class="flex flex-row justify-between p-2 gap-2 bg-base-300 rounded-lg">
+                <div class="flex flex-row gap-2 items-center">
+                    <Flag name={""} code={user.country_code} />
+                    <SubdivisionFlag user_id={user.id} />
+                    <Clan user_id={user.id} />
+                    <Link url={`/users/${user.id}`}>
+                        {user.username}
+                    </Link>
                 </div>
-            </Link> : <></>
+                <div class="flex justify-center">
+                    <OnlineDot size={24} online={user.is_online} />
+                </div>
+            </div> : <></>
         )}
         <script>getUserStuff()</script>
     </>);
