@@ -26,7 +26,7 @@ const BeatmapsetPage = async (props: Props) => {
     return (<>
         <div class="flex flex-col rounded-lg shadow-lg"
             style={{
-                background: `url(${cardImg})`,
+                backgroundImage: `url(${cardImg}), url('/public/img/fallback.webp')`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat"

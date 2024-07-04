@@ -21,7 +21,7 @@ const MostCard = ({ beatmap, beatmapset, position, plays }: Props) => {
             <div class="text-white bg-neutral flex flex-col grow rounded-lg shadow-lg">
                 <div class="flex flex-col rounded-lg shadow-lg"
                     style={{
-                        background: `url(${cardImg})`,
+                        backgroundImage: `url(${cardImg}), url('/public/img/fallback.webp')`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat"
@@ -29,7 +29,7 @@ const MostCard = ({ beatmap, beatmapset, position, plays }: Props) => {
                     <div class="bg-base-300 bg-opacity-75 flex flex-row rounded-lg backdrop-blur-sm">
                         <div class="group rounded-lg w-24 flex items-center justify-center"
                             style={{
-                                background: `url(${cardImg})`,
+                                backgroundImage: `url(${cardImg}), url('/public/img/fallback.webp')`,
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                                 backgroundRepeat: "no-repeat"

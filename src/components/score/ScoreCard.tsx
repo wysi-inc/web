@@ -39,7 +39,7 @@ const ScoreCard = async ({ score, position }: Props) => {
             <div class="text-white bg-neutral flex flex-col grow rounded-lg shadow-lg">
                 <div class="bg-cover bg-center bg-no-repeat flex flex-col rounded-lg shadow-lg"
                     style={{
-                        background: `url(${cardImg})`,
+                        backgroundImage: `url(${cardImg}), url('/public/img/fallback.webp')`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat"
@@ -48,7 +48,7 @@ const ScoreCard = async ({ score, position }: Props) => {
                         <div class="flex flex-row">
                             <div class="group rounded-lg w-24 flex items-center justify-center"
                                 style={{
-                                    background: `url(${cardImg})`,
+                                    backgroundImage: `url(${cardImg}), url('/public/img/fallback.webp')`,
                                     backgroundSize: "cover",
                                     backgroundPosition: "center",
                                     backgroundRepeat: "no-repeat"

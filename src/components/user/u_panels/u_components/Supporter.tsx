@@ -3,8 +3,7 @@ type Props = {
 }
 const Supporter = ({ level }: Props) => {
     return <>
-        <div class="badge text-white border-none flex flex-row" style={{
-            backgroundColor: "#fe78c7",
+        <div class="badge bg-pink-400 text-white border-none flex flex-row" style={{
             gap: ".08rem",
         }}>
             {[...Array(level)].map(() =>

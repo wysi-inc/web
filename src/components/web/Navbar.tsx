@@ -8,24 +8,27 @@ type Props = {
     user: UserCookie | null;
 }
 
-const pages = [
+const routes = [
     {
         title: "Home",
-        route: "/"
+        url: "/"
     },
     {
         title: "Rankings",
-        route: "/rankings"
+        url: "/rankings"
     },
     {
         title: "Beatmaps",
-        route: "/beatmapsets"
+        url: "/beatmapsets"
     },
     {
-        title: "Contributors",
-        route: "/contributors"
-    }
-
+        title: "About",
+        url: "/about"
+    },
+    {
+        title: "Support",
+        url: "/support"
+    },
 ];
 
 const Navbar = ({ user }: Props) => {
@@ -38,10 +41,10 @@ const Navbar = ({ user }: Props) => {
                             <i class="fa-solid fa-bars fa-lg" />
                         </button>
                         <ul class="menu menu-sm dropdown-content mt-5 z-50 p-2 shadow bg-base-100 rounded-box w-40">
-                            {pages.map(page =>
+                            {routes.map(route =>
                                 <li>
-                                    <Link url={page.route} css="btn btn-ghost">
-                                        {page.title}
+                                    <Link url={route.url} css="btn btn-ghost">
+                                        {route.title}
                                     </Link>
                                 </li>
                             )}
@@ -67,9 +70,9 @@ const Navbar = ({ user }: Props) => {
                         <span>wysi</span>
                     </Link>
                     <div class="hidden lg:flex flex-row text-sm">
-                        {pages.map(page =>
-                            <Link url={page.route} css="btn btn-ghost">
-                                {page.title}
+                        {routes.map(route =>
+                            <Link url={route.url} css="btn btn-ghost">
+                                {route.title}
                             </Link>
                         )}
                     </div>

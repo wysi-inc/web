@@ -6,6 +6,8 @@ export async function save_donation(data: any): Promise<boolean> {
             from_name: data.from_name,
             amount: Number(data.amount),
             currency: data.currency,
+            is_public: data.is_public,
+            message: data.message,
             timestamp: data.timestamp
         });
         donation.save();

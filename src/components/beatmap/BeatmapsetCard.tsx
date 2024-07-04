@@ -20,7 +20,7 @@ const BeatmapsetCard = ({ beatmapset }: Props) => {
             <div class="transition duration-300 ease-in-out text-white flex flex-col bg-neutral rounded-lg shadow-lg grow">
                 <div class="flex flex-col rounded-lg shadow-lg"
                     style={{
-                        background: `url(${cardImg})`,
+                        backgroundImage: `url(${cardImg}), url('/public/img/fallback.webp')`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat"
@@ -28,7 +28,7 @@ const BeatmapsetCard = ({ beatmapset }: Props) => {
                     <div class="bg-base-300 bg-opacity-75 flex flex-row rounded-lg backdrop-blur-sm">
                         <div class="group rounded-lg w-24 flex items-center justify-center"
                             style={{
-                                background: `url(${cardImg})`,
+                                backgroundImage: `url(${cardImg}), url('/public/img/fallback.webp')`,
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                                 backgroundRepeat: "no-repeat"

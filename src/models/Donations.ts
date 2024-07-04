@@ -13,6 +13,11 @@ const donationDBSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    message: String,
+    is_public: {
+        type: Boolean,
+        required: true
+    },
     timestamp: {
         required: true,
         type: Date

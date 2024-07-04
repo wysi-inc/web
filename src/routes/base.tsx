@@ -5,8 +5,8 @@ import HtmxPage from "../libs/routes";
 import { userAuthData } from "../libs/auth";
 import About from "../components/web/About";
 import type { Route } from "../types/osu";
-import Contributors from "../components/web/Contributors";
 import { save_donation } from "../db/web/save_donation";
+import Support from "../components/web/Support";
 
 const searchBody = {
     body: t.Object({
@@ -34,20 +34,21 @@ export const baseRoutes = new Elysia({ prefix: '' })
             <About />
         </HtmxPage>
     ))
-    .get("/contributors", async ({ request, jwt, cookie }: Route) => (
+    .get("/support", async ({ request, jwt, cookie }: Route) => (
         <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
-            <Contributors />
+            <Support />
         </HtmxPage>
     ))
     .post("/search", ({ body }: Route) => (
         <SearchResults query={body.q} />
     ), searchBody)
     .post("/donations", async ({ body, set }: Route) => {
-        if (body.data.verification_token !== kofi_token) {
+        const data = JSON.parse(body.data);
+        if (data.verification_token !== kofi_token) {
             set.status = 401;
             return "Unauthorized";
         }
-        if (!await save_donation(body.data)) {
+        if (!await save_donation(data)) {
             set.status = 500;
             return "Something went wrong";
         }
