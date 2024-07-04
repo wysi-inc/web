@@ -35,7 +35,7 @@ const BaseHtml = ({ user, children }: Props) => {
                 <script async src="/public/js/audio.js" defer />
                 <script async src="/public/js/after.js" defer />
             </head>
-            <body class="bg-base-300 flex flex-col justify-center items-center">
+            <body class="bg-base-300 flex-col justify-center items-center">
                 <Navbar user={user} />
                 <div class="w-screen overflow-x-hidden mil:w-[1000px]">
                     <main id="main" class="md:p-4 flex flex-col gap-4 bg-neutral shadow-lg">
