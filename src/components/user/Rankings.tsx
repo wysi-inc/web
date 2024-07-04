@@ -2,7 +2,6 @@ import type { Category, Mode } from "@/src/types/osu";
 import Pagination from "./u_panels/u_components/Pagination";
 import UserRankingCard from "./UserRankingCard";
 import { getRankings } from "@/src/db/users/get_user";
-import { getSubdivisions } from "@/src/libs/web_utils";
 
 type Props = {
     mode: Mode;
@@ -18,8 +17,6 @@ async function Rankings({ mode, category, page }: Props) {
     if (!users) return <div>Loading...</div>;
     if (!users.ranking) return <div>No users found</div>;
 
-    const subdivisions = await getSubdivisions(users.ranking.map(u => u.user.id));
-
     return (<>
         <Pagination mode={mode} category={category} page={page} />
         <table class="table p-4 bg-base-100 rounded-lg">
@@ -34,7 +31,7 @@ async function Rankings({ mode, category, page }: Props) {
                 <th>Status</th>
             </tr>
             {users.ranking.map((row, i) =>
-                <UserRankingCard row={row} page={page} index={i} subdivision={subdivisions.get(row.user.id)} />
+                <UserRankingCard row={row} page={page} index={i} />
             )}
         </table>
         <Pagination mode={mode} category={category} page={page} />

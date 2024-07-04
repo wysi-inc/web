@@ -7,6 +7,7 @@ import About from "../components/web/About";
 import type { Route } from "../types/osu";
 import { save_donation } from "../db/web/save_donation";
 import Support from "../components/web/Support";
+// import Testing from "../components/web/Testing";
 
 const searchBody = {
     body: t.Object({
@@ -42,6 +43,11 @@ export const baseRoutes = new Elysia({ prefix: '' })
     .post("/search", ({ body }: Route) => (
         <SearchResults query={body.q} />
     ), searchBody)
+    // .get("/testing", async ({ request, jwt, cookie }: Route) => (
+    //     <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
+    //         <Testing />
+    //     </HtmxPage>
+    // ))
     .post("/donations", async ({ body, set }: Route) => {
         const data = JSON.parse(body.data);
         if (data.verification_token !== kofi_token) {

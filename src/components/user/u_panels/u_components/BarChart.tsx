@@ -16,7 +16,7 @@ const BarChart = (p: Props) => {
     const total = Array.from(p.data.values()).reduce((acc, val) => acc + val.count, 0);
 
     return <>
-        <div class="flex flex-col gap-4" id={p.name} data-user={JSON.stringify(p.user)}>
+        <div class="grow flex flex-col gap-1" id={p.name} data-user={JSON.stringify(p.user)}>
             <div class="flex flex-row flex-wrap gap-2 justify-around">
                 {Array.from(p.data.entries()).map(([label, count]) => (
                     count.count === 0 ? null : <div>

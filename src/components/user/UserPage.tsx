@@ -7,7 +7,7 @@ import { type Mode } from "../../types/osu";
 
 type Props = {
     logged_id: number | undefined;
-    id: string;
+    user_id: string;
     mode?: Mode;
 }
 
@@ -19,18 +19,18 @@ type Panel = {
     info?: string,
 } & (
         { jsx: JSX.Element, url?: never } |
-        { url: string, body?: string, jsx?: never }
+        { url: string, body?: string, jsx?: never, manual?: boolean }
     );
 
-const UserPage = async ({ id, logged_id, mode }: Props) => {
+const UserPage = async (p: Props) => {
 
-    const user = await getUser(id, mode);
+    const user = await getUser(p.user_id, p.mode);
 
     if (!user || (user as any).error) return <div>User not found</div>;
 
-    const editable = logged_id === user.id;
+    const editable = p.logged_id === user.id;
 
-    mode = user.rank_history?.mode as Mode || "osu";
+    p.mode = user.rank_history?.mode as Mode || "osu";
 
     const panels: Panel[] = [
         {
@@ -45,7 +45,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
                 />
         },
         {
-            title: "About me",
+            title: "About",
             code: "about",
             icon: <i class="fa-solid fa-user" />,
             jsx:
@@ -73,24 +73,33 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             url: `/users/${user.id}/0/panels/skins`
         },
         {
+            title: "Year",
+            code: "year",
+            info: `This is a recap of this year so far, the data will be reset at Jaunary 1st ${new Date().getFullYear() + 1}`,
+            tooltip: "powered by advance.catboy.best",
+            icon: <i class="fa-solid fa-calendar-days" />,
+            manual: true,
+            url: `/users/${user.id}/0/panels/year`
+        },
+        {
             title: "Summary",
             code: "summary",
             icon: <i class="fa-solid fa-ranking-star" />,
             info: "this is a quick summary of your top 100 plays",
-            url: `/users/${user.id}/${mode}/panels/summary`
+            url: `/users/${user.id}/${p.mode}/panels/summary`
         },
         {
             title: "Scores",
             code: "scores",
             icon: <i class="fa-solid fa-flag-checkered" />,
             info: "hover over a grayed out PP to see the (if FC) PP value",
-            url: `/users/${user.id}/${mode}/panels/scores/best`,
+            url: `/users/${user.id}/${p.mode}/panels/scores/best`,
         },
         {
             title: "Beatmaps",
             code: "beatmaps",
             icon: <i class="fa-solid fa-screwdriver-wrench" />,
-            url: `/users/${user.id}/${mode}/panels/beatmaps/favourite`
+            url: `/users/${user.id}/${p.mode}/panels/beatmaps/favourite`
         },
         {
             title: "Collections",
@@ -98,7 +107,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             tooltip: "powered by catboy.best",
             info: "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)",
             icon: <i class="fa-solid fa-list" />,
-            url: `/users/${user.id}/${mode}/panels/collections`
+            url: `/users/${user.id}/${p.mode}/panels/collections`
         },
         {
             title: "Most Played",
@@ -116,15 +125,15 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
     ];
 
     return (<>
-        <UserTopPanel user={user} mode={mode} editable={editable} />
-        <div class="underline-offset-1 text-neutral-content sticky top-16 bg-base-300 md:rounded-lg shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-4 flex-wrap">
+        <UserTopPanel user={user} mode={p.mode} />
+        <div class="underline-offset-1 text-neutral-content sticky top-16 bg-base-300 md:rounded-lg shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-6 flex-wrap">
             {panels.map((p) =>
                 <a class="hover:underline" href={`#${p.code}`}>{p.title}</a>
             )}
         </div>
         {panels.map((p) => {
             if (p.url) return (
-                <LazyPanel title={p.title} code={p.code} icon={p.icon}
+                <LazyPanel title={p.title} code={p.code} icon={p.icon} manual={p.manual}
                     url={p.url} body={p.body} tooltip={p.tooltip} info={p.info} />
             );
             else return (

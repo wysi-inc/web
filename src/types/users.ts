@@ -54,6 +54,7 @@ export type Subdivision = {
 }
 
 export type UserSubdivision = {
+    user_id: number,
     name: string,
     nativeName: string,
     code: string,

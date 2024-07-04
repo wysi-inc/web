@@ -1,10 +1,10 @@
 import ModeIcon from "../../beatmap/ModeIcon";
 
 type Props = {
-    id: number;
+    user_id: number;
 }
 
-const UserSkinsPanel = ({ id }: Props) => {
+const UserSkinsPanel = (p: Props) => {
 
     const skins = [
         {

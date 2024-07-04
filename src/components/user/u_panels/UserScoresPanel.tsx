@@ -3,7 +3,7 @@ import type { ScoreCategory } from "@/src/types/osu";
 import UserScoresList from "./u_components/UserScoresList";
 
 type Props = {
-    id: number;
+    user_id: number;
     mode: Mode;
     category: ScoreCategory;
 }
@@ -14,21 +14,21 @@ type TabProps = {
     col: string
 }
 
-const UserScoresPanel = ({ id, mode, category }: Props) => {
+const UserScoresPanel = (p: Props) => {
 
     const Tab = ({ cat, title, col }: TabProps) => {
-        const current = cat === category;
+        const current = cat === p.category;
         return (<>
             <input role="tab" type="radio" name="score-tabs" class={`tab text-nowrap ${col}`}
                 hx-trigger="click once" aria-label={title} checked={current}
-                hx-post={`/users/${id}/${mode}/lists/scores/${cat}?offset=0&limit=5`}
+                hx-post={`/users/${p.user_id}/${p.mode}/lists/scores/${cat}?offset=0&limit=5`}
                 hx-target={`#scores-list-${cat}`} hx-disable={current}
                 hx-indicator={`#scores-loading-${cat}`}
             />
             <div role="tabpanel" class="tab-content pt-4 col-span-full">
                 <div id={`scores-list-${cat}`} class="grid grid-cols-1 gap-4 col-span-full">
                     {current ?
-                        <UserScoresList id={id} mode={mode} category={category} offset={0} limit={5} />
+                        <UserScoresList id={p.user_id} mode={p.mode} category={p.category} offset={0} limit={5} />
                         :
                         <span class="loading loading-spinner htmx-indicator" id={`scores-loading-${cat}`} />
                     }

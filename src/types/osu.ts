@@ -125,3 +125,136 @@ export type InspectorRes = {
         }
     }
 }
+
+export type AdvanceUser = {
+    id: number
+    userid: number
+    username: string
+    username_safe: string
+    country: string
+    added: string
+    restricted: number
+    available: number
+    rank: {
+        start: number
+        current: number
+        peak: number
+    }
+    level: number
+    progress: number
+    playtime: number
+    score: number
+    hits: number
+    pp: {
+        ranked: number
+        total: number
+    }
+    accuracy: number
+    grades: {
+        XH: number
+        X: number
+        SH: number
+        S: number
+        A: number
+        B: number
+        C: number
+        D: number
+    }
+    ranks: {
+        ranked: number
+        unranked: number
+    }
+    tags: {
+        name: string
+        type: number
+    }[],
+    favourite: {
+        mod: string
+        mapper: {
+            id: number
+            name: string
+            count: number
+        }[],
+        songs: {
+            id: number
+            name: string
+            count: number
+        }[],
+    }
+    scores: {
+        total: number
+        passed: number
+        recent: {
+            id: number
+            user: number
+            beatmap: string
+            scoreid?: string
+            score: number
+            accuracy: number
+            maxcombo: number
+            count50: number
+            count100: number
+            count300: number
+            countmiss: number
+            countkatu: any
+            countgeki: any
+            fc: number
+            mods: number
+            time: number
+            rank: string
+            passed: number
+            pp: number
+            mode: number
+            calculated: number
+            added: number
+            beatmapid: number
+            beatmapsetid: number
+            playcount: number
+            passcount: number
+            title: string
+            artist: string
+            creator: string
+            creatorid: number
+            version: string
+            length: number
+            ranked: number
+            last_update: number
+        }[],
+        best: {
+            id: number
+            user: number
+            beatmap: string
+            scoreid: string
+            score: number
+            accuracy: number
+            maxcombo: number
+            count50: number
+            count100: number
+            count300: number
+            countmiss: number
+            countkatu?: number
+            countgeki?: number
+            fc: number
+            mods: number
+            time: number
+            rank: string
+            passed: number
+            pp: number
+            mode: number
+            calculated: number
+            added: number
+            beatmapid: number
+            beatmapsetid: number
+            playcount: number
+            passcount: number
+            title: string
+            artist: string
+            creator: string
+            creatorid: number
+            version: string
+            length: number
+            ranked: number
+            last_update: number
+        }[],
+    }
+}

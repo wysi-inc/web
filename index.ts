@@ -10,8 +10,8 @@ import { baseRoutes } from "./src/routes/base";
 import { rankingRoutes } from "./src/routes/rankings";
 import { userRoutes } from "./src/routes/user";
 import { beatmapRoutes } from "./src/routes/beatmaps";
-import { jsonRoutes } from "./src/routes/json";
 import { updateMedals } from "./src/db/medals/update_medals";
+import { apiRoutes } from "./src/routes/api";
 
 const port = Number(process.env.PORT as string);
 const mongo_uri = process.env.MONGO_URI as string;
@@ -58,13 +58,13 @@ new Elysia()
         console.log(`${(ip || "0.0.0.0").padStart(15, " ")} ${method.padStart(4, " ")}::/${route}`);
     })
     .use(jwtcfg)
-    .use(html())
     .get("/favicon.ico", Bun.file("./public/favicon.ico"))
+    .use(apiRoutes)
+    .use(html())
     .use(baseRoutes)
     .use(rankingRoutes)
     .use(userRoutes)
     .use(beatmapRoutes)
-    .use(jsonRoutes)
     //.onError(() => "some")
     .use(staticPlugin())
     .onStart(() => console.info(`[ OK ] Listening on port ${port}`))

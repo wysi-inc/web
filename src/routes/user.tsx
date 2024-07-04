@@ -1,5 +1,8 @@
 import { Elysia, t } from 'elysia'
+import { verifyUser } from '../libs/auth';
+import { deleteCollection, saveCollection, saveSetup } from '../db/users/update_user';
 import type { BeatmapCategory, Mode, Route, ScoreCategory } from '../types/osu';
+import HtmxPage from '../libs/routes';
 import UserPage from '../components/user/UserPage';
 import UserScoresPanel from '../components/user/u_panels/UserScoresPanel';
 import UserBeatmapsPanel from '../components/user/u_panels/UserBeatmapsPanel';
@@ -11,19 +14,17 @@ import UserScoresList from '../components/user/u_panels/u_components/UserScoresL
 import UserBeatmapsList from '../components/user/u_panels/u_components/UserBeatmapsList';
 import UserMostList from '../components/user/u_panels/u_components/UserMostList';
 import UserSetupPanel from '../components/user/u_panels/UserSetupPanel';
-import HtmxPage from '../libs/routes';
-import { verifyUser } from '../libs/auth';
-import { deleteCollection, saveCollection, saveSetup } from '../db/users/update_user';
 import UserCollectionsPanel from '../components/user/u_panels/UserCollectionsPanel';
 import BeatmapCollectionList from '../components/beatmap/BeatmapCollectionList';
 import CollectionsForm from '../components/user/u_panels/u_components/CollectionsForm';
+import UserYearPanel from '../components/user/u_panels/UserYearPanel';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
     .get("/", async ({ request, cookie, params, jwt }: Route) => {
         const user = await verifyUser(jwt, cookie.auth.value);
         return <>
             <HtmxPage headers={request.headers} user={user}>
-                <UserPage id={params.id} logged_id={user?.id} />
+                <UserPage user_id={params.id} logged_id={user?.id} />
             </HtmxPage>
         </>
     })
@@ -86,7 +87,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 <HtmxPage headers={request.headers} user={user}>
                     <UserPage
                         logged_id={user?.id}
-                        id={params.id}
+                        user_id={params.id}
                         mode={params.mode as Mode} />
                 </HtmxPage>
             </>
@@ -94,7 +95,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         .group("/panels", (_) => _
             .post("/scores/:category", ({ params }) => (
                 <UserScoresPanel
-                    id={Number(params.id)}
+                    user_id={Number(params.id)}
                     mode={params.mode as Mode}
                     category={params.category as ScoreCategory}
                 />)
@@ -107,7 +108,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             ))
             .post("/summary", ({ params }) => (
                 <UserSummaryPanel
-                    id={Number(params.id)}
+                    user_id={Number(params.id)}
                     mode={params.mode as Mode}
                 />
             ))
@@ -116,14 +117,17 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user?.id} />
             })
             .post("/most", ({ params }) => (
-                <UserMostPanel id={Number(params.id)} />
+                <UserMostPanel user_id={Number(params.id)} />
+            ))
+            .post("/year", ({ params }) => (
+                <UserYearPanel user_id={Number(params.id)} />
             ))
             .post("/setup", async ({ params, cookie, jwt }: Route) => {
                 const user = await verifyUser(jwt, cookie.auth.value);
                 return <UserSetupPanel logged_id={user?.id} page_id={Number(params.id)} />
             })
             .post("/skins", ({ params }) => (
-                <UserSkinsPanel id={Number(params.id)} />
+                <UserSkinsPanel user_id={Number(params.id)} />
             ))
             .post("/medals", async ({ params }) => (
                 <UserMedalsPanel user_id={Number(params.id)} />

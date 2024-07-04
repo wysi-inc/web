@@ -9,6 +9,7 @@ import { colors } from "@/src/libs/colors";
 import { getSubdivisions } from "@/src/libs/web_utils";
 import SubdivisionFlag from "../user/u_panels/u_components/SubdivisionFlag";
 import Link from "../web/Link";
+import Clan from "../user/u_panels/u_components/Clan";
 
 type Props = {
     id: number;
@@ -60,10 +61,8 @@ const BeatmapScoreTable = async (props: Props) => {
                         <td class="table-cell">
                             <div class="flex flex-row gap-2 items-center">
                                 <Flag name={score.user.country.name} code={score.user.country.code} />
-                                {subdivisions.get(score.user.id) ?
-                                    <SubdivisionFlag name={subdivisions.get(score.user.id)?.name || ""} flag={subdivisions.get(score.user.id)?.flag || ""} />
-                                    : <></>}
-                                <a class="hidden clan_tag" aria-label="clan tag" data-user-id={score.user.id} target="_blank" />
+                                <SubdivisionFlag user_id={score.user.id} />
+                                <Clan user_id={score.user.id} />
                                 <Link url={`/users/${score.user.id}`}>
                                     {score.user.username}
                                 </Link>
@@ -124,7 +123,7 @@ const BeatmapScoreTable = async (props: Props) => {
                     </tr>
                 )}
             </tbody>
-            <script>getClans()</script>
+            <script>getUserStuff()</script>
         </table>
     );
 };

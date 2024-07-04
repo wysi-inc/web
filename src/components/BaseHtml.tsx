@@ -33,11 +33,11 @@ const BaseHtml = ({ user, children }: Props) => {
                 <script async src="https://kit.fontawesome.com/d5ab19acce.js" crossorigin="anonymous" />
                 <script async src="/public/js/search.js" defer />
                 <script async src="/public/js/audio.js" defer />
-                <script async src="/public/js/clans.js" defer />
+                <script async src="/public/js/after.js" defer />
             </head>
             <body class="bg-base-300 flex flex-col justify-center items-center">
                 <Navbar user={user} />
-                <div class="w-screen mil:w-[1000px]">
+                <div class="w-screen overflow-x-hidden mil:w-[1000px]">
                     <main id="main" class="md:p-4 flex flex-col gap-4 bg-neutral shadow-lg">
                         {children}
                     </main>

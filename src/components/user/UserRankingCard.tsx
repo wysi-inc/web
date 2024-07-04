@@ -1,17 +1,16 @@
-import type { UserSubdivision } from "@/src/types/users";
 import OnlineDot from "./u_panels/u_components/OnlineDot";
 import SubdivisionFlag from "./u_panels/u_components/SubdivisionFlag";
 import Flag from "./u_panels/u_components/Flag";
 import Link from "../web/Link";
+import Clan from "./u_panels/u_components/Clan";
 
 type Props = {
     index: number,
     page: number,
-    subdivision?: UserSubdivision,
     row: any,
 }
 
-function UserRankingCard({ index, page, row, subdivision }: Props) {
+function UserRankingCard({ index, page, row }: Props) {
     return (<>
         <tr class={`hover:bg-base-300 hover:rounded-lg ${!row.user.is_active ? 'opacity-75 bg-base-300' : ''}
                         `}>
@@ -19,10 +18,8 @@ function UserRankingCard({ index, page, row, subdivision }: Props) {
             <td class="table-cell">
                 <div class="flex flex-row items-center gap-2">
                     <Flag name={row.user.country.name} code={row.user.country.code} />
-                    {subdivision ?
-                        <SubdivisionFlag name={subdivision.name} flag={subdivision.flag} />
-                        : <></>}
-                    <a class="hidden clan_tag" aria-label="clan tag" data-user-id={row.user.id} target="_blank" />
+                    <SubdivisionFlag user_id={row.user.id} />
+                    <Clan user_id={row.user.id} />
                     <Link url={`/users/${row.user.id}`}>
                         {row.user.username}
                     </Link>

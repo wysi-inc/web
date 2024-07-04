@@ -9,53 +9,25 @@ import type { InspectorRes, Mode } from "@/src/types/osu";
 import { colors } from "@/src/libs/colors";
 import SubdivisionFlag from "./u_components/SubdivisionFlag";
 import Link from "../../web/Link";
+import Clan from "./u_components/Clan";
 
 type Props = {
     user: User,
     mode: Mode,
-    editable: boolean
 }
 
-const INSPECTOR = false;
-
-async function UserTopPanel({ user, mode, editable }: Props) {
+async function UserTopPanel({ user, mode }: Props) {
 
     if (!user) return <></>;
 
     const best_country = user?.db_ranks?.country_ranks?.sort?.((a, b) => a.rank - b.rank)[0];
     const grade_counts = new Map<string, { count: number, color: string }>();
 
-    if (INSPECTOR) {
-        const res = await fetch(`https://api.kirino.sh/inspector/extension/profile`, {
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Content-Type": "application/json"
-            },
-            method: "POST",
-            body: JSON.stringify({
-                user_id: user.id,
-                mode: 0,
-                username: user.username
-            })
-        });
-        const inspector = await res.json() as InspectorRes;
-        grade_counts.set("XH", { count: inspector.user.ssh_count, color: colors.grades.xh });
-        grade_counts.set("X", { count: inspector.user.ss_count, color: colors.grades.x });
-        grade_counts.set("SH", { count: inspector.user.sh_count, color: colors.grades.sh });
-        grade_counts.set("S", { count: inspector.user.s_count, color: colors.grades.s });
-        grade_counts.set("A", { count: inspector.user.a_count, color: colors.grades.a });
-        grade_counts.set("B", { count: inspector.user.b_count, color: colors.grades.b });
-        grade_counts.set("C", { count: inspector.user.c_count, color: colors.grades.c });
-        grade_counts.set("D", { count: inspector.user.d_count, color: colors.grades.d });
-    } else {
-        grade_counts.set("XH", { count: user.statistics.grade_counts.ssh, color: colors.grades.xh });
-        grade_counts.set("X", { count: user.statistics.grade_counts.ss, color: colors.grades.x });
-        grade_counts.set("SH", { count: user.statistics.grade_counts.sh, color: colors.grades.sh });
-        grade_counts.set("S", { count: user.statistics.grade_counts.s, color: colors.grades.s });
-        grade_counts.set("A", { count: user.statistics.grade_counts.a, color: colors.grades.a });
-    }
-
-    console.log(user.groups);
+    grade_counts.set("XH", { count: user.statistics.grade_counts.ssh, color: colors.grades.xh });
+    grade_counts.set("X", { count: user.statistics.grade_counts.ss, color: colors.grades.x });
+    grade_counts.set("SH", { count: user.statistics.grade_counts.sh, color: colors.grades.sh });
+    grade_counts.set("S", { count: user.statistics.grade_counts.s, color: colors.grades.s });
+    grade_counts.set("A", { count: user.statistics.grade_counts.a, color: colors.grades.a });
 
     return (
         <div class="md:rounded-lg bg-base-100 shadow-lg">
@@ -114,7 +86,7 @@ async function UserTopPanel({ user, mode, editable }: Props) {
                     </div>
                     <div class="flex flex-col gap-2 justify-between items-start grow">
                         <div class="flex flex-row gap-2 items-center">
-                            <a class="hidden clan_tag" aria-label="clan tag" data-user-id={user.id} target="_blank" />
+                            <Clan user_id={user.id} />
                             <a href={`https://osu.ppy.sh/users/${user.id}`}
                                 target="_blank" class="text-2xl underline-offset-2 hover:underline">{user.username}</a>
                             {user.is_supporter &&
@@ -150,15 +122,7 @@ async function UserTopPanel({ user, mode, editable }: Props) {
                             {user.flag?.country ? <>
                                 <Flag name={user.flag.country.name} code={user.flag.country.code} />
                             </> : <></>}
-                            {user.flag?.subdivision ? <>
-                                <SubdivisionFlag name={user.flag.subdivision.name} country_code={user.country.code} subdivision_code={user.flag.subdivision.code} />
-                            </> :
-                                editable ?
-                                    <a href="https://osuworld.octo.moe/" target="_blank">
-                                        <SubdivisionFlag name="Login and select your region on osuworld.octo.moe" country_code={"Unknown"} subdivision_code={"Unknown"} />
-                                    </a>
-                                    : <></>
-                            }
+                            <SubdivisionFlag user_id={user.id} />
                         </div>
                         <div>
                             <div class="text-sm">Performance:</div>

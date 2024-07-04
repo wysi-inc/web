@@ -8,15 +8,15 @@ import { colors } from "@/src/libs/colors";
 import { secondsToTime } from "@/src/libs/web_utils";
 
 type Props = {
-    id: number;
+    user_id: number;
     mode: Mode;
 }
 
-const UserSummaryPanel = async (props: Props) => {
+const UserSummaryPanel = async (p: Props) => {
 
     const scores: Score[] = await v2.scores.user.category(
-        props.id, "best", {
-        mode: props.mode,
+        p.user_id, "best", {
+        mode: p.mode,
         offset: '0',
         limit: '100'
     });
@@ -186,7 +186,7 @@ const UserSummaryPanel = async (props: Props) => {
                     <div class="py-1 px-2 flex flex-row text-neutral-content justify-between">
                         <div>Grades:</div>
                     </div>
-                    <div class="grow p-4 rounded-lg bg-base-300">
+                    <div class="grow p-4 rounded-lg bg-base-300 flex items-center">
                         <BarChart name="top_grades" data={grade_counts} />
                     </div>
                 </div>
@@ -194,7 +194,7 @@ const UserSummaryPanel = async (props: Props) => {
                     <div class="py-1 px-2 flex flex-row text-neutral-content justify-between">
                         <div>Hits:</div>
                     </div>
-                    <div class="grow p-4 rounded-lg bg-base-300">
+                    <div class="grow p-4 rounded-lg bg-base-300 flex items-center">
                         <BarChart name="top_hits" data={hit_counts} />
                     </div>
                 </div>
