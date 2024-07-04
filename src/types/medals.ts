@@ -18,9 +18,3 @@ export type UserMedal = Medal & {
     achieved: boolean;
     achieved_at: Date | null;
 }
-
-export type ProfileMedal = {
-    achievement_id: number,
-    achieved_at: string
-}
-

@@ -3,33 +3,38 @@ import KeyboardDisplay from "./setup/KeyboardDisplay";
 import Computer from "./setup/Computer";
 import MouseDisplay from "./setup/MouseDisplay";
 import Peripherals from "./setup/Peripherals";
-import { User } from "@/src/models/User";
+import { User, type Setup } from "@/src/models/User";
+import { assert } from "@/src/libs/web_utils";
 
 type Props = {
-    logged_id?: number;
-    page_id: number;
+    logged_id?: number,
+    page_id: number,
+    setup?: Setup,
 }
 
-async function UserSetupPanel({ logged_id, page_id }: Props) {
+async function UserSetupPanel(p: Props) {
 
-    const editable = page_id === logged_id;
+    const editable = p.page_id === p.logged_id;
 
-    const user = await User.findOne({ user_id: page_id });
-    const setup = user?.setup;
+    if (!p.setup) {
+        const user = await User.findOne({ user_id: p.page_id });
+        if (!user || !user.setup) return <>This user hasn't specified their setup</>;
+        p.setup = user.setup as any;
+    }
 
-    if (!setup) return <>This user hasn't specified their setup</>;
+    assert(typeof p.setup !== "undefined");
 
     return <div id="setup_panel">
-        <form id="setup_form" hx-post={editable ? `/users/${page_id}/setup` : ""}
+        <form id="setup_form" hx-post={editable ? `/users/${p.page_id}/setup` : ""}
             hx-trigger="submit" hx-swap="outerHTML" hx-target="#setup_panel"
             class="flex flex-col-reverse gap-2">
             <fieldset class="group w-full grid md:grid-cols-2 gap-4"
                 id="setup_fieldset" disabled>
-                <TabletDisplay editable={editable} tablet={setup?.tablet} />
-                <KeyboardDisplay editable={editable} keyboard={setup?.keyboard} />
-                <MouseDisplay editable={editable} mouse={setup?.mouse} />
-                <Peripherals editable={editable} peripherals={setup?.peripherals} />
-                <Computer editable={editable} computer={setup?.computer} />
+                <TabletDisplay editable={editable} tablet={p.setup.tablet} />
+                <KeyboardDisplay editable={editable} keyboard={p.setup.keyboard} />
+                <MouseDisplay editable={editable} mouse={p.setup.mouse} />
+                <Peripherals editable={editable} peripherals={p.setup.peripherals} />
+                <Computer editable={editable} computer={p.setup.computer} />
             </fieldset>
             {editable ? <>
                 <div class="flex flex-row-reverse gap-2">

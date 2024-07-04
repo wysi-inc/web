@@ -101,3 +101,9 @@ export async function getSubdivisions(ids: number[]): Promise<Map<number, UserSu
     }
     return subdivisionsMap;
 }
+
+export function assert(condition: any, msg?: string): asserts condition {
+    if (!condition) {
+        throw new Error(msg);
+    }
+}

@@ -1,9 +1,10 @@
-import { Medal } from "@/src/models/Medal";
 import MedalBadge from "./u_components/Medal";
-import type { ProfileMedal, UserMedal } from "@/src/types/medals";
+import { Medal } from "@/src/models/Medal";
+import { User, type ProfileMedal } from "@/src/models/User";
+import type { UserMedal } from "@/src/types/medals";
 
 type Props = {
-    user_medals: ProfileMedal[]
+    user_id: number
 }
 
 type Group = {
@@ -13,37 +14,24 @@ type Group = {
     }
 }
 
-const UserMedalsPanel = async (props: Props) => {
+async function UserMedalsPanel(p: Props) {
 
-    if (!props.user_medals) props.user_medals = [];
+    const user = await User.findOne({ user_id: p.user_id });
+    if (!user) return <>This user doesnt exist</>;
 
-    const user_medals = props.user_medals;
+    const db_medals = await Medal.find().lean();
 
-    const db_medals: Medal[] = await Medal.find().lean();
-
-    // make a map of user_medals keyed by achievement_id
-    const user_medal_map = new Map<number, ProfileMedal>();
-    user_medals.forEach((um) => {
-        user_medal_map.set(um.achievement_id, um);
-    });
-
-    // iterate over db_medals, if user_medal_map has a key for the medal,
-    // add it to a new array called medals that will be typed as UserMedal[]
-    // with the achieved_at property set to the value from user_medal_map and achieved set to true
-    // if the key is not found, add the medal to the array with achieved_at set to null and achieved set to false
+    const user_medals_map = new Map<number, ProfileMedal>();
+    user.medals?.forEach(um => user_medals_map.set(um.achievement_id, um));
 
     const medals: UserMedal[] = db_medals.map((m) => {
-        const um = user_medal_map.get(m.medal_id);
-        if (um) {
-            return { ...m, achieved: true, achieved_at: new Date(um.achieved_at) } as UserMedal;
+        const user_medal = user_medals_map.get(m.medal_id);
+        if (user_medal) {
+            return { ...m, achieved: true, achieved_at: new Date(user_medal.achieved_at) };
         } else {
-            return { ...m, achieved: false, achieved_at: null } as UserMedal;
+            return { ...m, achieved: false, achieved_at: null };
         }
     });
-
-    // group the medals by category to an objet of type Group
-    // the category is the key and the value is an object with a count and an array of medals
-    // the count is the number of medals in the category that the user has achieved
 
     const categories: Group = {};
     medals.forEach((m) => {
@@ -56,8 +44,6 @@ const UserMedalsPanel = async (props: Props) => {
         categories[m.category].medals.push(m);
     });
 
-    // get a list of the 10 most recent medals achieved by the user
-
     const recent_medals = medals.filter((m) => m.achieved).sort((a, b) => {
         if (a.achieved_at && b.achieved_at) {
             return b.achieved_at.getTime() - a.achieved_at.getTime();
@@ -65,8 +51,6 @@ const UserMedalsPanel = async (props: Props) => {
             return 0;
         }
     }).slice(0, 10);
-
-    // get rarest medal that the user has achieved
 
     const rarest_medal = medals.filter((m) => m.achieved).sort((a, b) => {
         return a.rarity - b.rarity;

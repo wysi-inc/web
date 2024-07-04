@@ -2,7 +2,6 @@ import UserTopPanel from "./u_panels/UserTopPanel";
 import UserHistoryPanel from "./u_panels/UserHistoryPanel";
 import LazyPanel from "./LazyPanel";
 import Panel from "./Panel";
-import UserSetupPanel from "./u_panels/UserSetupPanel";
 import { getUser } from "@/src/db/users/get_user";
 import { type Mode } from "../../types/osu";
 
@@ -20,7 +19,7 @@ type Panel = {
     info?: string,
 } & (
         { jsx: JSX.Element, url?: never } |
-        { url: string, body?: object, jsx?: never }
+        { url: string, body?: string, jsx?: never }
     );
 
 const UserPage = async ({ id, logged_id, mode }: Props) => {
@@ -111,7 +110,6 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             tooltip: "powered by osekai.net",
             icon: <img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" />,
             url: `/users/${user.id}/0/panels/medals`,
-            body: { medals: user.user_achievements }
         }
     ];
 

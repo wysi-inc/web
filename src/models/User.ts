@@ -86,6 +86,17 @@ const modes = new mongoose.Schema({
     mania: modeRanks,
 }, { _id: false });
 
+const medal = new mongoose.Schema({
+    achievement_id: {
+        type: Number,
+        required: true,
+    },
+    achieved_at: {
+        type: Date,
+        required: true,
+    }
+}, { _id: false });
+
 const userFlag = new mongoose.Schema({
     country: {
         type: {
@@ -136,6 +147,7 @@ const userSchema = new mongoose.Schema({
     },
     skins: [String],
     setup: setup,
+    medals: [medal]
 });
 
 userSchema.methods.toJSON = function() {
@@ -143,9 +155,10 @@ userSchema.methods.toJSON = function() {
     return user;
 };
 
+export type ProfileMedal = mongoose.InferSchemaType<typeof medal>;
 export type Rank = mongoose.InferSchemaType<typeof rank>;
-export type ModeRanks = mongoose.InferSchemaType<typeof modeRanks>;
 export type Setup = mongoose.InferSchemaType<typeof setup>;
+export type ModeRanks = mongoose.InferSchemaType<typeof modeRanks>;
 export type UserFlag = mongoose.InferSchemaType<typeof userFlag>;
 export type User = mongoose.InferSchemaType<typeof userSchema>;
 export const User = mongoose.model('User', userSchema);

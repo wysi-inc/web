@@ -23,6 +23,7 @@ export async function updateUser(user: UserType, mode: Mode): Promise<UserType> 
                 user_id: user.id,
                 username: user.username,
                 modes: { [mode]: new_ranks },
+                medals: user.user_achievements
             });
             const subdivisions = await getSubdivisions([user.id]);
             const subdivision = subdivisions.get(user.id);
@@ -44,6 +45,7 @@ export async function updateUser(user: UserType, mode: Mode): Promise<UserType> 
             return user;
         }
         db_user.username = user.username;
+        db_user.medals = user.user_achievements as any;
         if (!db_user.modes[mode]) {
             db_user.modes[mode] = new_ranks as any;
             user.db_ranks = new_ranks;

@@ -1,15 +1,15 @@
+import { getGradeColor, getGradeLetter, secondsToTime } from "@/src/libs/web_utils";
+import { colors } from "@/src/libs/colors";
+import { tools } from "osu-api-extended";
 import moment from "moment";
-import type { Score } from "@/src/types/users";
 import DiffIcon from "@/src/components/beatmap/DiffIcon";
 import CardControls from "@/src/components/web/CardControls";
 import StatusBadge from "../beatmap/StatusBadge";
-import type { BeatmapsetStatus } from "@/src/types/beatmaps";
 import ModIcon from "./ModIcon";
-import { getGradeColor, getGradeLetter, secondsToTime } from "@/src/libs/web_utils";
-import { colors } from "@/src/libs/colors";
 import AudioPlayButton from "../web/AudioPlayButton";
 import Link from "../web/Link";
-import { tools } from "osu-api-extended";
+import type { Score } from "@/src/types/users";
+import type { BeatmapsetStatus } from "@/src/types/beatmaps";
 import type { Mode } from "@/src/types/osu";
 
 type Props = {

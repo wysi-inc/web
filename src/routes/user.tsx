@@ -1,6 +1,5 @@
 import { Elysia, t } from 'elysia'
 import type { BeatmapCategory, Mode, Route, ScoreCategory } from '../types/osu';
-import type { ProfileMedal } from '../types/medals';
 import UserPage from '../components/user/UserPage';
 import UserScoresPanel from '../components/user/u_panels/UserScoresPanel';
 import UserBeatmapsPanel from '../components/user/u_panels/UserBeatmapsPanel';
@@ -126,13 +125,8 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             .post("/skins", ({ params }) => (
                 <UserSkinsPanel id={Number(params.id)} />
             ))
-            .post("/medals", async ({ body }) => (
-                <UserMedalsPanel
-                    user_medals={
-                        (body as any)?.medals?.map((m: string) =>
-                            JSON.parse(m) as ProfileMedal)
-                    }
-                />
+            .post("/medals", async ({ params }) => (
+                <UserMedalsPanel user_id={Number(params.id)} />
             ))
         )
         .group("/lists", (_) => _
