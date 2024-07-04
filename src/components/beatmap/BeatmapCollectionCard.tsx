@@ -1,8 +1,8 @@
 import DiffIcon from "./DiffIcon";
 import StatusBadge from "./StatusBadge";
-import HxA from "../web/HxA";
 import AudioPlayButton from "../web/AudioPlayButton";
 import type { BeatmapsetStatus, MinoBeatmap } from "@/src/types/beatmaps";
+import Link from "../web/Link";
 
 type Props = {
     hash: string
@@ -33,7 +33,7 @@ export async function BeatmapCollectionCard({ hash }: Props) {
                     mode={beatmap.mode} name={beatmap.version} />
                 {/*<img src={cardImg} class="h-6 w-8" />*/}
                 <div class="flex flex-row flex-wrap gap-2 items-center">
-                    <HxA css="text-base-content text-lg hover:underline underline-offset-2 break-words" url={`/beatmaps/${beatmap.set.id}`}>{beatmap.set.title}</HxA>
+                    <Link css="text-base-content text-lg hover:underline underline-offset-2 break-words" url={`/beatmaps/${beatmap.set.id}`}>{beatmap.set.title}</Link>
                     <p class="text-neutral-content text-opacity-75 text-sm break-words"> by {beatmap.set.artist}</p>
                 </div>
             </div>

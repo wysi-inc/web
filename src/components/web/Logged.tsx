@@ -1,5 +1,5 @@
 import type { UserCookie } from "@/src/types/users";
-import HxA from "./HxA";
+import Link from "./Link";
 
 type Props = {
     user: UserCookie;
@@ -10,16 +10,16 @@ const Logged = (props: Props) => {
             <button aria-label="user logged menu" tabindex="0" role="button" class="drop-shadow-lg aspect-square shadow-lg btn p-0 btn-ghost">
                 <div class="avatar">
                     <div class="size-10 rounded-lg">
-                        <img src={props.user.avatar} class="" alt="avatar" />
+                        <img loading="lazy" src={props.user.avatar} class="" alt="avatar" />
                     </div>
                 </div>
             </button>
             <ul tabindex="0" class="menu menu-sm dropdown-content mt-5 z-50 p-2 shadow-lg bg-base-100 rounded-box w-40">
                 <li>
-                    <HxA url={`/users/${props.user.id}`} css="btn btn-ghost flex">
+                    <Link url={`/users/${props.user.id}`} css="btn btn-ghost flex">
                         <i class="fa-solid fa-user" />
                         wysi!profile
-                    </HxA>
+                    </Link>
                 </li>
                 <li>
                     <a href={`https://osu.ppy.sh/users/${props.user.id}`}
@@ -30,10 +30,10 @@ const Logged = (props: Props) => {
                     </a>
                 </li>
                 <li>
-                    <HxA url="/logout" css="btn btn-ghost flex">
+                    <Link url="/logout" css="btn btn-ghost flex">
                         <i class="fa-solid fa-right-from-bracket" />
                         logout
-                    </HxA>
+                    </Link>
                 </li>
             </ul>
         </div>

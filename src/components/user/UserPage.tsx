@@ -108,7 +108,7 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             title: "Medals",
             code: "medals",
             tooltip: "powered by osekai.net",
-            icon: <img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" />,
+            icon: <img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" loading="lazy" />,
             url: `/users/${user.id}/0/panels/medals`,
         }
     ];

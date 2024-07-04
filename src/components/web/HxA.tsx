@@ -6,19 +6,19 @@ type Props = {
     label?: string,
 }
 
-function Link({ url, css, role, label, children }: Props) {
+function Link(p: Props) {
     return <a
-        href={url}
+        href={p.url}
         // hx-get={url}
         // hx-push-url="true" hx-target="#main"
         // hx-swap="innerHTML show:window:top"
         // hx-indicator="#page-loading"
-        class={`${css} 
+        class={`${p.css} 
             cursor-pointer 
             hover:underline 
             underline-offset-2
-        `} role={role} aria-label={label}>
-        {children}
+        `} role={p.role} aria-label={p.label}>
+        {p.children}
     </a>
 }
 

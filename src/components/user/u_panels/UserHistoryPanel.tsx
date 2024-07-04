@@ -38,7 +38,7 @@ const UserHistoryPanel = (props: Props) => {
             {tab('plays', 'Play Count', props.play_counts)}
             {tab('replays', 'Replays Watched', props.replays_watched)}
         </div>
-        <script type="module" src="/public/js/history.js" />
+        <script async defer type="module" src="/public/js/history.js" />
     </>);
 
 }

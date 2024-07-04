@@ -63,7 +63,7 @@ const Navbar = ({ user }: Props) => {
                         </ul>
                     </div>
                     <Link url="/" css="hidden sm:flex gap-4 items-center btn btn-ghost px-2 text-xl">
-                        <img src="/public/wysi.svg" class="w-8 h-8 rounded-lg drop-shadow-lg shadow-lg" alt="wysi logo" />
+                        <img loading="lazy" src="/public/wysi.svg" class="w-8 h-8 rounded-lg drop-shadow-lg shadow-lg" alt="wysi logo" />
                         <span>wysi</span>
                     </Link>
                     <div class="hidden lg:flex flex-row text-sm">

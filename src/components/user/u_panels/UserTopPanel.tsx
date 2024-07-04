@@ -229,7 +229,7 @@ async function UserTopPanel({ user, mode, editable }: Props) {
                     <div class="flex flex-row flex-wrap gap-2">
                         {user.badges.map(badge =>
                             <div class="tooltip" data-tip={badge.description}>
-                                <img width="86" height="40" src={badge.image_url} />
+                                <img loading="lazy" width="86" height="40" src={badge.image_url} />
                             </div>
                         )}
                     </div>
