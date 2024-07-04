@@ -160,7 +160,7 @@ const BeatmapsetPage = async (props: Props) => {
             </div>
         </div>
         {hasLeaderboards &&
-            <div hx-post={`/beatmaps/${props.set_id}/${diff.id}/scores/${diff.mode}`} hx-trigger="load" />
+            <div hx-post={`/beatmapsets/${props.set_id}/${diff.id}/scores/${diff.mode}`} hx-trigger="load" />
         }
         <script type="module" src="/public/js/beatmapset.js" />
     </>);

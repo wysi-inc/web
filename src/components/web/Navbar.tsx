@@ -88,10 +88,9 @@ const Navbar = ({ user }: Props) => {
                 </div>
                 <div class="flex flex-row items-center justify-end">
                     <div class="flex">
-                        <label class="btn btn-ghost swap swap-rotate">
-                            <input aria-label="theme switch" type="checkbox" class="theme-controller" value="pastel" />
-                            <i class="swap-on fa-solid fa-sun" />
-                            <i class="swap-off fa-solid fa-moon" />
+                        <label class="btn btn-ghost">
+                            <button class="hidden" aria-label="theme switch" data-toggle-theme="dracula,pastel" data-act-class="ACTIVECLASS" />
+                            <i class="fa-solid fa-circle-half-stroke" />
                         </label>
                     </div>
                     <div class="hidden md:flex flex-row items-center justify-end">

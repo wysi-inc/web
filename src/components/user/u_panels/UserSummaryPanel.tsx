@@ -187,7 +187,7 @@ const UserSummaryPanel = async (props: Props) => {
                         <div>Grades:</div>
                     </div>
                     <div class="grow p-4 rounded-lg bg-base-300">
-                        <BarChart data={grade_counts} />
+                        <BarChart name="top_grades" data={grade_counts} />
                     </div>
                 </div>
                 <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
@@ -195,7 +195,7 @@ const UserSummaryPanel = async (props: Props) => {
                         <div>Hits:</div>
                     </div>
                     <div class="grow p-4 rounded-lg bg-base-300">
-                        <BarChart data={hit_counts} />
+                        <BarChart name="top_hits" data={hit_counts} />
                     </div>
                 </div>
             </div>

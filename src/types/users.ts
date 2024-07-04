@@ -20,6 +20,17 @@ export type User = UserBasic & {
     db_ranks: RankHistory;
     db_setup: Setup;
     flag: UserFlag;
+    groups: {
+        colour: string;
+        has_listing: boolean;
+        has_playmodes: boolean;
+        id: number;
+        identifier: string;
+        is_probationary: boolean;
+        name: string;
+        short_name: string;
+        playmodes: string[];
+    }[];
 };
 
 export type UserList = v2UserList;

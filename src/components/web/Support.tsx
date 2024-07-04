@@ -76,7 +76,7 @@ async function Support() {
                     <span>No donations have been made yet :(</span> :
                     donations.map(d => (
                         <div role="alert" class="alert flex flex-row items-center bg-base-300 shadow-lg">
-                            <div class="size-8 rounded-full flex items-center justify-center bg-pink-400">
+                            <div class="size-8 rounded-full flex items-center justify-center bg-secondary">
                                 <i class="fa-solid fa-heart" />
                             </div>
                             <div class="me-auto">

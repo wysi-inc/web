@@ -30,6 +30,7 @@ function history() {
 
     function render_chart(id, type) {
         const ctx = document.getElementById(`chart-${id}`);
+        if (!ctx) return;
         const vals = JSON.parse(ctx.attributes['data-vals'].value);
 
         const data_labels = type === 'rank' ?

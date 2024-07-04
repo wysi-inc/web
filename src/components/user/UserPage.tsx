@@ -50,11 +50,13 @@ const UserPage = async ({ id, logged_id, mode }: Props) => {
             icon: <i class="fa-solid fa-user" />,
             jsx:
                 <div class="rounded-lg bg-base-300 flex justify-center items-center">
-                    <div class="bbcode h-96 overflow-y-scroll grow">
-                        {
-                            user.page.html
-                        }
-                    </div>
+                    {user.page.html ?
+                        <div class="bbcode h-96 overflow-y-scroll grow">
+                            {
+                                user.page.html
+                            }
+                        </div> : <></>
+                    }
                 </div>
         },
         {

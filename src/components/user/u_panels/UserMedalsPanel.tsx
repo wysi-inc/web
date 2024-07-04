@@ -17,7 +17,7 @@ type Group = {
 async function UserMedalsPanel(p: Props) {
 
     const user = await User.findOne({ user_id: p.user_id });
-    if (!user) return <>This user doesnt exist</>;
+    if (!user) return <>This user hasn't gotten any yet. ;_;</>;
 
     const db_medals = await Medal.find().lean();
 

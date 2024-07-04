@@ -12,22 +12,22 @@ type Props = {
     limit: number;
 }
 
-const UserScoresList = async ({ id, mode, category, offset, limit }: Props) => {
+const UserScoresList = async (p: Props) => {
 
-    const scores: Score[] = await v2.scores.user.category(id, category, {
-        mode: mode,
-        offset: String(offset),
-        limit: String(limit)
+    const scores: Score[] = await v2.scores.user.category(p.id, p.category, {
+        mode: p.mode,
+        offset: String(p.offset),
+        limit: String(p.limit)
     });
 
-    if (!scores || scores.length === 0) return <div>No {category} scores found</div>;
+    if (scores.length === 0 && p.offset === 0) return <div>This user hasn't set any scores yet</div>;
 
     return <>
         {scores.map((score, i) =>
-            <ScoreCard position={i + offset + 1} score={score} />
+            <ScoreCard position={i + p.offset + 1} score={score} />
         )}
-        {scores.length >= limit ?
-            <LoadMoreButton url={`/users/${id}/${mode}/lists/scores/${category}?offset=${offset + limit}&limit=20`} />
+        {scores.length >= p.limit ?
+            <LoadMoreButton url={`/users/${p.id}/${p.mode}/lists/scores/${p.category}?offset=${p.offset + p.limit}&limit=20`} />
             : <></>}
     </>
 }
