@@ -114,6 +114,7 @@ async function UserTopPanel({ user, mode, editable }: Props) {
                     </div>
                     <div class="flex flex-col gap-2 justify-between items-start grow">
                         <div class="flex flex-row gap-2 items-center">
+                            <a class="hidden clan_tag" aria-label="clan tag" data-user-id={user.id} target="_blank" />
                             <a href={`https://osu.ppy.sh/users/${user.id}`}
                                 target="_blank" class="text-2xl underline-offset-2 hover:underline">{user.username}</a>
                             {user.is_supporter &&

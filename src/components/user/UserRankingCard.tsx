@@ -17,17 +17,16 @@ function UserRankingCard({ index, page, row, subdivision }: Props) {
                         `}>
             <th class="table-cell text-start">#{index + 1 + 50 * (page - 1)}</th>
             <td class="table-cell">
-                <Link url={`/users/${row.user.id}`}>
-                    <div class="flex flex-row gap-4">
-                        <Flag name={row.user.country.name} code={row.user.country.code} />
-                        {subdivision ?
-                            <SubdivisionFlag name={subdivision.name} flag={subdivision.flag} />
-                            : <></>}
-                        <span class="flex flex-row items-center gap-2">
-                            {row.user.username}
-                        </span>
-                    </div>
-                </Link>
+                <div class="flex flex-row items-center gap-2">
+                    <Flag name={row.user.country.name} code={row.user.country.code} />
+                    {subdivision ?
+                        <SubdivisionFlag name={subdivision.name} flag={subdivision.flag} />
+                        : <></>}
+                    <a class="hidden clan_tag" aria-label="clan tag" data-user-id={row.user.id} target="_blank" />
+                    <Link url={`/users/${row.user.id}`}>
+                        {row.user.username}
+                    </Link>
+                </div>
             </td>
             <td class="hidden sm:table-cell">{Number(row.pp?.toFixed()).toLocaleString()}pp</td>
             <td class="hidden sm:table-cell">{row.ranked_score.toLocaleString()}</td>

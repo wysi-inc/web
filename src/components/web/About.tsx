@@ -1,24 +1,30 @@
 const thanks = [
     {
         url: "https://osu.ppy.sh",
-        title: "osu.ppy.sh",
-        description: "the official osu! website where we get most of the user data"
+        title: "osu!",
+        description: "uhm... you know... the game which that this whole site is based around"
     },
     {
         url: "https://catboy.best",
-        title: "catboy.best",
+        title: "Mino",
         description: "the mirror we use to get all the beatmaps and pp calculations"
     },
     {
         url: "https://osekai.net",
-        title: "osekai.net",
+        title: "Osekai",
         description: "where we get all the medals for the userpages"
     },
     {
         url: "https://osuworld.octo.moe",
-        title: "osuworld.octo.moe",
+        title: "osu! World",
         description: "to get user region flags and region rankings"
     },
+    {
+        url: "https://score.kirino.sh",
+        title: "osu! scores inspector",
+        description: "for providing the API to get user grade history"
+
+    }
 ];
 
 function About() {

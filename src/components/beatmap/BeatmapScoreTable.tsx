@@ -58,17 +58,16 @@ const BeatmapScoreTable = async (props: Props) => {
                     <tr class="hover:bg-base-300 hover:rounded-lg">
                         <th class="table-cell text-start">#{i + 1}</th>
                         <td class="table-cell">
-                            <Link url={`/users/${score.user.id}`}>
-                                <div class="flex flex-row gap-2 items-center">
-                                    <Flag name={score.user.country.name} code={score.user.country.code} />
-                                    {subdivisions.get(score.user.id) ?
-                                        <SubdivisionFlag name={subdivisions.get(score.user.id)?.name || ""} flag={subdivisions.get(score.user.id)?.flag || ""} />
-                                        : <></>}
-                                    <span>
-                                        {score.user.username}
-                                    </span>
-                                </div>
-                            </Link>
+                            <div class="flex flex-row gap-2 items-center">
+                                <Flag name={score.user.country.name} code={score.user.country.code} />
+                                {subdivisions.get(score.user.id) ?
+                                    <SubdivisionFlag name={subdivisions.get(score.user.id)?.name || ""} flag={subdivisions.get(score.user.id)?.flag || ""} />
+                                    : <></>}
+                                <a class="hidden clan_tag" aria-label="clan tag" data-user-id={score.user.id} target="_blank" />
+                                <Link url={`/users/${score.user.id}`}>
+                                    {score.user.username}
+                                </Link>
+                            </div>
                         </td>
                         <td class="hidden sm:table-cell">
                             {Number(score.pp?.toFixed()).toLocaleString()}pp</td>
@@ -125,6 +124,7 @@ const BeatmapScoreTable = async (props: Props) => {
                     </tr>
                 )}
             </tbody>
+            <script>getClans()</script>
         </table>
     );
 };
