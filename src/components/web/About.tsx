@@ -23,7 +23,10 @@ const thanks = [
 
 function About() {
     return (<>
-        <div>a</div>
+        <div role="alert" class="alert alert-warning">
+            <i class="fa-solid fa-triangle-exclamation" />
+            <span><b>This website is still under heavy development</b>, some stuff might not be 100% there yet! We'd appreciate it if you reported any bugs on our discord <i>#suggestions-issues</i> channel</span>
+        </div>
         <div>Special Thanks:</div>
         <ul class="list-disc">
             {thanks.map(t =>

@@ -45,7 +45,7 @@ async function Support() {
             <div class="flex flex-col items-center justify-center gap-2">
                 <span>Support the website's development throught Ko-fi</span>
                 <a href='https://ko-fi.com/Z8Z0SPTRT' target='_blank'>
-                    <img loading="lazy" class="w-44" src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' alt='Buy Me a Coffee at ko-fi.com' />
+                    <img loading="lazy" class="shadow-lg rounded-full hover:-translate-y-1 ease-in-out duration-100 transform w-44" src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' alt='Buy Me a Coffee at ko-fi.com' />
                 </a>
             </div>
         </div>
@@ -70,7 +70,7 @@ async function Support() {
             </div>
         </div>
         <div class="bg-base-100 rounded-lg p-4 flex flex-col gap-4">
-            <h3 class="text-xl">Donators</h3>
+            <h3 class="text-xl">Donations</h3>
             <div class="flex flex-col gap-4">
                 {donations.length === 0 ?
                     <span>No donations have been made yet :(</span> :

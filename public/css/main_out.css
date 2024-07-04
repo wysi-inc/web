@@ -2118,6 +2118,14 @@ input.tab:checked + .tab-content,
     var(--togglehandleborder);
 }
 
+.alert-warning {
+  border-color: var(--fallback-wa,oklch(var(--wa)/0.2));
+  --tw-text-opacity: 1;
+  color: var(--fallback-wac,oklch(var(--wac)/var(--tw-text-opacity)));
+  --alert-bg: var(--fallback-wa,oklch(var(--wa)/1));
+  --alert-bg-mix: var(--fallback-b1,oklch(var(--b1)/1));
+}
+
 .avatar-group :where(.avatar) {
   overflow: hidden;
   border-radius: 9999px;
@@ -5008,6 +5016,10 @@ details.collapse summary::-webkit-details-marker {
 
 .stroke-info {
   stroke: var(--fallback-in,oklch(var(--in)/1));
+}
+
+.stroke-current {
+  stroke: currentColor;
 }
 
 .p-0 {
