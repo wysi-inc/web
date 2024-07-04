@@ -16,7 +16,7 @@
 
 # production
 /build
-public/css/main_out.css
+./public/css/main_out.css
 
 .pnp.js
 np.js
