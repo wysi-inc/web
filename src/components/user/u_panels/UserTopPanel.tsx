@@ -84,7 +84,7 @@ async function UserTopPanel({ user, mode, editable }: Props) {
                             <span>{user.statistics.level.current + 1}</span>
                         </div>
                     </div>
-                    <div class="flex flex-col gap-2 justify-between grow">
+                    <div class="flex flex-col gap-2 justify-between items-start grow">
                         <div class="flex flex-row gap-2 items-center">
                             <a href={`https://osu.ppy.sh/users/${user.id}`}
                                 target="_blank" class="text-2xl underline-offset-2 hover:underline">{user.username}</a>

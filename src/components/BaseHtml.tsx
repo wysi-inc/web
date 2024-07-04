@@ -36,7 +36,7 @@ const BaseHtml = ({ user, children }: Props) => {
             <body class="bg-base-300 flex flex-col justify-center items-center">
                 <Navbar user={user} />
                 <div class="w-screen mil:w-[1000px]">
-                    <main id="main" class="text-center md:p-4 flex flex-col gap-4 bg-neutral shadow-lg">
+                    <main id="main" class="md:p-4 flex flex-col gap-4 bg-neutral shadow-lg">
                         {children}
                     </main>
                 </div>
