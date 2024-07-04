@@ -6,18 +6,20 @@ async function Support() {
     return (<>
         <div>We appreciate your support!</div>
         <p>This website doesnt (and won't) have any paid features</p>
-        {donations.map(d => (
-            <div role="alert" class="alert shadow-lg">
-                <div class="size-8 rounded-full flex items-center justify-center bg-pink-400">
-                    <i class="fa-solid fa-heart" />
+        {donations.length === 0 ?
+            <span>No donations have been made yet :(</span> :
+            donations.map(d => (
+                <div role="alert" class="alert shadow-lg">
+                    <div class="size-8 rounded-full flex items-center justify-center bg-pink-400">
+                        <i class="fa-solid fa-heart" />
+                    </div>
+                    <div>
+                        <h3 class="font-bold">{d.is_public ? d.from_name : "Anonym"} ({d.amount} {d.currency})</h3>
+                        <div class="text-xs">{d.is_public ? d.message : ""}</div>
+                    </div>
+                    <span>{moment(d.timestamp).fromNow()}</span>
                 </div>
-                <div>
-                    <h3 class="font-bold">{d.is_public ? d.from_name : "Anonym"} ({d.amount} {d.currency})</h3>
-                    <div class="text-xs">{d.is_public ? d.message : ""}</div>
-                </div>
-                <span>{moment(d.timestamp).fromNow()}</span>
-            </div>
-        ))}
+            ))}
     </>);
 }
 
