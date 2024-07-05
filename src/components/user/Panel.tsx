@@ -14,7 +14,7 @@ const Panel = ({ children, icon, tooltip, title, code, info }: Props) => (
             <div class="tooltip tooltip-right" data-tip={tooltip}>
                 {icon}
             </div>
-            <h4>{title}</h4>
+            <span>{title}</span>
             {info ?
                 <div class="ms-auto tooltip tooltip-left cursor-help" data-tip={info}>
                     <i class="fa-solid fa-circle-info" />
