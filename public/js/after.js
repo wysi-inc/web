@@ -114,7 +114,7 @@ async function getClans() {
         div.setAttribute("data-tip", user.clan.name);
         div.classList.remove("hidden");
         div.classList.add("tooltip");
-        a.className = "drop-shadow-solid";
+        a.className = "p-1 drop-shadow-solid";
         a.style = `color: #${user.clan.color};`;
         a.href = `https://score.kirino.sh/clan/${user.clan.id}`;
         a.target = "_blank";

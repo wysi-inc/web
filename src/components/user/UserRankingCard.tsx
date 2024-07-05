@@ -20,7 +20,7 @@ function UserRankingCard({ index, page, row }: Props) {
                     <Flag name={row.user.country.name} code={row.user.country.code} />
                     <SubdivisionFlag user_id={row.user.id} />
                     <Clan user_id={row.user.id} />
-                    <Link url={`/users/${row.user.id}`}>
+                    <Link url={`/users/${row.user.id}`} css="p-1 hover:underline underline-1">
                         {row.user.username}
                     </Link>
                 </div>

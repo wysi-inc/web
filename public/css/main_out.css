@@ -5095,6 +5095,10 @@ details.collapse summary::-webkit-details-marker {
   --tw-text-opacity: 0.75;
 }
 
+.underline {
+  text-decoration-line: underline;
+}
+
 .underline-offset-1 {
   text-underline-offset: 1px;
 }
