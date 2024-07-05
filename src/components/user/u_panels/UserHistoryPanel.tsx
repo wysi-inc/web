@@ -18,9 +18,9 @@ const UserHistoryPanel = (props: Props) => {
         if (!data) return <></>;
         if (data.length === 0) return <></>;
         return (<>
-            <input aria-role="tab" role="tab" type="radio" id={`${type}_tab`} aria-controls={`${type}_tabpannel`} name="history_tabs" class="tab text-nowrap"
-                aria-label={title} checked={type === "global"} />
-            <div role="tabpanel" aria-role="tabpanel" class="tab-content pt-4" id={`${type}_tabpannel`} aria-labelledby={`${type}_tab`}>
+            <input role="tab" type="radio" id={`${type}_tab`} aria-controls={`${type}_tabpannel`} name="history_tabs" class="tab text-nowrap"
+                aria-label={title} checked={type === "global"} aria-selected={type === "global"} />
+            <div role="tabpanel" class="tab-content pt-4" id={`${type}_tabpannel`} aria-labelledby={`${type}_tab`}>
                 {data.length > 0 ?
                     <div class="h-64 w-full relative cursor-move">
                         <canvas id={`chart-${type}`} class="absolute" data-vals={JSON.stringify(data)} />
