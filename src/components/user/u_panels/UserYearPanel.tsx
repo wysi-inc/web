@@ -7,7 +7,7 @@ import UserCard from "../UserCard";
 
 type Props = {
     user_id: number,
-    logged_id: number,
+    logged_id?: number,
 }
 async function UserYearPanel(p: Props) {
 
