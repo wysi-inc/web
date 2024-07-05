@@ -5,11 +5,12 @@ import Country from "./u_components/Country";
 import Supporter from "./u_components/Supporter";
 import ModeIcon from "../../beatmap/ModeIcon";
 import type { User } from "@/src/types/users";
-import type { InspectorRes, Mode } from "@/src/types/osu";
+import type { Mode } from "@/src/types/osu";
 import { colors } from "@/src/libs/colors";
 import SubdivisionFlag from "./u_components/SubdivisionFlag";
 import Link from "../../web/Link";
 import Clan from "./u_components/Clan";
+import SubdivisionRanking from "./u_components/SubdivisionRanking";
 
 type Props = {
     user: User,
@@ -30,7 +31,7 @@ async function UserTopPanel({ user, mode }: Props) {
     grade_counts.set("A", { count: user.statistics.grade_counts.a, color: colors.grades.a });
 
     return (
-        <div class="md:rounded-lg bg-base-100 shadow-lg">
+        <div class="pb-4 bg-base-300 md:rounded-lg shadow-lg">
             <div class="rounded-lg"
                 style={{
                     backgroundImage: `url(${user.cover_url})`,
@@ -119,9 +120,11 @@ async function UserTopPanel({ user, mode }: Props) {
                             <h2 class="text-xl tooltip" data-tip={`Peak rank: #${best_country?.rank?.toLocaleString()}`}>
                                 #{user.statistics?.country_rank?.toLocaleString() || "-"}
                             </h2>
-                            {user.flag?.country ? <>
-                                <Flag name={user.flag.country.name} code={user.flag.country.code} />
-                            </> : <></>}
+                            <Flag name={user.country.name} code={user.country.code} />
+                        </div>
+                        <div class="hidden group flex-row gap-2 items-center">
+                            <i class="hidden group-has[.flex]:flex w-6 fa-solid fa-city" />
+                            <SubdivisionRanking user_id={user.id} mode={mode} />
                             <SubdivisionFlag user_id={user.id} />
                         </div>
                         <div>
@@ -189,8 +192,8 @@ async function UserTopPanel({ user, mode }: Props) {
                         </div>
                     </div>
                 </div>
-            </div >
-            <div class="flex flex-col gap-4 p-4">
+            </div>
+            <div class="bg-base-100 flex flex-col gap-4 p-4">
                 <div class="flex flex-row items-center flex-wrap gap-4">
                     {user.location ?
                         <div class="flex flex-row items-center gap-1">
@@ -247,7 +250,6 @@ async function UserTopPanel({ user, mode }: Props) {
                     </div>
                 }
             </div>
-            <script defer type="module" src="/public/js/inspector.js" />
         </div>
     );
 }

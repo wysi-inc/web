@@ -97,38 +97,6 @@ const medal = new mongoose.Schema({
     }
 }, { _id: false });
 
-const userFlag = new mongoose.Schema({
-    country: {
-        type: {
-            name: {
-                type: String,
-                required: true
-            },
-            code: {
-                type: String,
-                required: true
-            },
-        },
-        required: false,
-        _id: false
-    },
-    subdivision: {
-        type: {
-            name: {
-                type: String,
-                required: true
-            },
-            code: {
-                type: String,
-                required: true
-
-            },
-        },
-        required: false,
-        _id: false
-    }
-}, { _id: false });
-
 const userSchema = new mongoose.Schema({
     user_id: {
         type: Number,
@@ -140,7 +108,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    flag: userFlag,
     modes: {
         type: modes,
         required: true,
@@ -159,6 +126,5 @@ export type ProfileMedal = mongoose.InferSchemaType<typeof medal>;
 export type Rank = mongoose.InferSchemaType<typeof rank>;
 export type Setup = mongoose.InferSchemaType<typeof setup>;
 export type ModeRanks = mongoose.InferSchemaType<typeof modeRanks>;
-export type UserFlag = mongoose.InferSchemaType<typeof userFlag>;
 export type User = mongoose.InferSchemaType<typeof userSchema>;
 export const User = mongoose.model('User', userSchema);

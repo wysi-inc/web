@@ -34,10 +34,10 @@ const UserHistoryPanel = (props: Props) => {
 
     return (<>
         <div role="tablist" class="tabs tabs-bordered grid grid-cols-4">
-            {tab('global', 'Global Rank', props.db_ranks?.global_ranks)}
-            {tab('country', 'Country Rank', props.db_ranks?.country_ranks)}
-            {tab('plays', 'Play Count', props.play_counts)}
-            {tab('replays', 'Replays Watched', props.replays_watched)}
+            {tab('global', 'Global', props.db_ranks?.global_ranks)}
+            {tab('country', 'Country', props.db_ranks?.country_ranks)}
+            {tab('plays', 'Plays', props.play_counts)}
+            {tab('replays', 'Replays', props.replays_watched)}
         </div>
         <script async defer type="module" src="/public/js/history.js" />
     </>);

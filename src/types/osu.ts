@@ -17,6 +17,18 @@ export interface JWTPayloadSpec {
     exp?: number;
     iat?: number;
 }
+
+export type PanelType = {
+    title: string,
+    code: string,
+    icon: JSX.Element,
+    tooltip?: string,
+    info?: string,
+} & (
+        { jsx: JSX.Element, url?: never } |
+        { url: string, body?: string, jsx?: never, manual?: boolean }
+    );
+
 export interface JWTOption<Name extends string | undefined = 'jwt', Schema extends TSchema | undefined = undefined> extends JWSHeaderParameters, Omit<JWTPayload, 'nbf' | 'exp'> {
     name?: Name;
     secret: string | Uint8Array | KeyLike;

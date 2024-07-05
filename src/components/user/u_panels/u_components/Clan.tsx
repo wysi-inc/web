@@ -4,7 +4,7 @@ type Props = {
 
 function Clan(p: Props) {
     return (
-        <a class="hidden clan_tag" aria-label="clan tag" data-user-id={p.user_id} target="_blank" />
+        <a class="hidden clan_tag drop-shadow-solid" aria-label="clan tag" data-user-id={p.user_id} target="_blank" />
     );
 }
 

@@ -1,26 +1,15 @@
 import UserTopPanel from "./u_panels/UserTopPanel";
 import UserHistoryPanel from "./u_panels/UserHistoryPanel";
 import LazyPanel from "./LazyPanel";
-import Panel from "./Panel";
 import { getUser } from "@/src/db/users/get_user";
-import { type Mode } from "../../types/osu";
+import { type Mode, type PanelType } from "../../types/osu";
+import Panel from "./Panel";
 
 type Props = {
     logged_id: number | undefined;
     user_id: string;
     mode?: Mode;
 }
-
-type Panel = {
-    title: string,
-    code: string,
-    icon: JSX.Element,
-    tooltip?: string,
-    info?: string,
-} & (
-        { jsx: JSX.Element, url?: never } |
-        { url: string, body?: string, jsx?: never, manual?: boolean }
-    );
 
 const UserPage = async (p: Props) => {
 
@@ -32,7 +21,7 @@ const UserPage = async (p: Props) => {
 
     p.mode = user.rank_history?.mode as Mode || "osu";
 
-    const panels: Panel[] = [
+    const panels: PanelType[] = [
         {
             title: "History",
             code: "history",
@@ -65,13 +54,13 @@ const UserPage = async (p: Props) => {
             icon: <i class="fa-solid fa-computer" />,
             url: `/users/${user.id}/0/panels/setup`
         },
-        {
-            title: "Skins",
-            code: "skins",
-            tooltip: "powered by skins.osuck.net",
-            icon: <i class="fa-solid fa-palette" />,
-            url: `/users/${user.id}/0/panels/skins`
-        },
+        // {
+        //     title: "Skins",
+        //     code: "skins",
+        //     tooltip: "powered by skins.osuck.net",
+        //     icon: <i class="fa-solid fa-palette" />,
+        //     url: `/users/${user.id}/0/panels/skins`
+        // },
         {
             title: "Year",
             code: "year",
@@ -126,7 +115,8 @@ const UserPage = async (p: Props) => {
 
     return (<>
         <UserTopPanel user={user} mode={p.mode} />
-        <div class="underline-offset-1 text-neutral-content sticky top-16 bg-base-300 md:rounded-lg shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-6 flex-wrap">
+        <div class="underline-offset-1 text-neutral-content sticky -mt-8 top-16 bg-base-300 md:rounded-lg shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-6 flex-wrap">
+            <a class="hover:underline" href="#top">Top</a>
             {panels.map((p) =>
                 <a class="hover:underline" href={`#${p.code}`}>{p.title}</a>
             )}

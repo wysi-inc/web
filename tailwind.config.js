@@ -12,6 +12,12 @@ module.exports = {
             screens: {
                 'mil': '1000px',
             },
+            dropShadow: {
+                'solid': [
+                    '0 1px 1px rgba(0, 0, 0, .5)',
+                    '0 1px 1px rgba(0, 0, 0, .5)'
+                ]
+            },
         },
     },
     plugins: [require("daisyui")],

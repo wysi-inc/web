@@ -10,7 +10,7 @@ const Flag = ({ name, code }: Props) => {
     return (
         <div class="tooltip flex items-center justify-center h-5 w-7" data-tip={name}>
             <img src={url} alt={`${name}'s flag`} loading="lazy"
-                class="max-h-5 max-w-7 rounded-sm outline outline-1 outline-base-300" />
+                class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
         </div>
     );
 }

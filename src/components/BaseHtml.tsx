@@ -28,6 +28,7 @@ const BaseHtml = ({ user, children }: Props) => {
                 <link rel="icon" href="favicon.ico" />
                 <link rel="stylesheet" href="/public/css/main_out.css" type="text/css" />
                 <link rel="stylesheet" href="/public/css/bbcode.css" type="text/css" />
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.6.1/github-markdown.min.css" type="text/css" />
                 <script src="https://unpkg.com/htmx.org@2.0.0" />
                 <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js" />
                 <script async src="https://kit.fontawesome.com/d5ab19acce.js" crossorigin="anonymous" />
@@ -35,9 +36,9 @@ const BaseHtml = ({ user, children }: Props) => {
                 <script async src="/public/js/audio.js" defer />
                 <script async src="/public/js/after.js" defer />
             </head>
-            <body class="bg-base-300 flex-col justify-center items-center">
+            <body class="bg-base-300 flex flex-col justify-center items-center" id="top">
                 <Navbar user={user} />
-                <div class="w-screen overflow-x-hidden mil:w-[1000px]">
+                <div class="w-screen mil:w-[1000px]">
                     <main id="main" class="md:p-4 flex flex-col gap-4 bg-neutral shadow-lg">
                         {children}
                     </main>

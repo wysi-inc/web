@@ -7,7 +7,7 @@ import About from "../components/web/About";
 import type { Route } from "../types/osu";
 import { save_donation } from "../db/web/save_donation";
 import Support from "../components/web/Support";
-// import Testing from "../components/web/Testing";
+import Testing from "../components/web/Testing";
 
 const searchBody = {
     body: t.Object({
@@ -23,6 +23,7 @@ const oauthQuery = {
 }
 
 const kofi_token = String(process.env.KOFI_TOKEN);
+const state = process.env.STATE;
 
 export const baseRoutes = new Elysia({ prefix: '' })
     .get("/", async ({ request, jwt, cookie }: Route) => (
@@ -43,11 +44,16 @@ export const baseRoutes = new Elysia({ prefix: '' })
     .post("/search", ({ body }: Route) => (
         <SearchResults query={body.q} />
     ), searchBody)
-    // .get("/testing", async ({ request, jwt, cookie }: Route) => (
-    //     <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
-    //         <Testing />
-    //     </HtmxPage>
-    // ))
+    .get("/wiki/*", async ({ params, request, jwt, cookie }: Route) => {
+        if (state === "dev") {
+            return (
+                <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
+                    <Testing params={Object.values(params)} />
+                </HtmxPage>
+            )
+        }
+        return <>Page not available</>;
+    })
     .post("/donations", async ({ body, set }: Route) => {
         const data = JSON.parse(body.data);
         if (data.verification_token !== kofi_token) {
