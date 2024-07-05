@@ -20,7 +20,7 @@ const UserHistoryPanel = (props: Props) => {
         return (<>
             <input role="tab" type="radio" id={`${type}_tab`} aria-controls={`${type}_tabpannel`} name="history_tabs" class="tab text-nowrap"
                 aria-label={title} checked={type === "global"} />
-            <div role="tabpanel" class="tab-content pt-4" id={`${type}_tabpannel`} aria-labeled-by={`${type}_tab`}>
+            <div role="tabpanel" class="tab-content pt-4" id={`${type}_tabpannel`} aria-labeledby={`${type}_tab`}>
                 {data.length > 0 ?
                     <div class="h-64 w-full relative cursor-move">
                         <canvas id={`chart-${type}`} class="absolute" data-vals={JSON.stringify(data)} />
