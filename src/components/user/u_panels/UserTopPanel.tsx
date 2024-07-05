@@ -244,7 +244,7 @@ async function UserTopPanel({ user, mode }: Props) {
                     <div class="flex flex-row flex-wrap gap-2">
                         {user.badges.map(badge =>
                             <div class="tooltip" data-tip={badge.description}>
-                                <img loading="lazy" width="86" height="40" src={badge.image_url} />
+                                <img loading="lazy" width="86" height="40" alt={badge.description} src={badge.image_url} />
                             </div>
                         )}
                     </div>

@@ -28,8 +28,7 @@ const UserHistoryPanel = (props: Props) => {
                     "No data found"
                 }
             </div>
-        </>
-        );
+        </>);
     }
 
     return (<>
