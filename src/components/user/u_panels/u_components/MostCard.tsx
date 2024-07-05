@@ -42,7 +42,7 @@ const MostCard = ({ beatmap, beatmapset, position, plays }: Props) => {
                             />
                         </div>
                         <div class="flex flex-col py-2 px-4 max-w-52 lg:max-w-72">
-                            <HxA css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmaps/${beatmapset.id}`}>{beatmapset.title}</HxA>
+                            <HxA css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmapsets/${beatmapset.id}`}>{beatmapset.title}</HxA>
                             <p class="text-neutral-content text-opacity-75 text-sm truncate">by {beatmapset.artist}</p>
                         </div>
                     </div>

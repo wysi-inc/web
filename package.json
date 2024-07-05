@@ -9,10 +9,9 @@
   },
   "scripts": {
     "dev": "bun run --watch index.ts",
-    "prod": "bun run index.ts",
-    "css": "tailwindcss -i ./public/css/main_in.css -o ./public/css/main_out.css --watch",
-    "cssprod": "tailwindcss -o ./public/css/main_out.css --minify",
-    "compile": "bun build --compile --minify --sourcemap index.ts --outfile wysi"
+    "prod": "bun run cssprod && bun run index.ts",
+    "css": "tailwindcss -i ./private/css/main_in.css -o ./public/css/main_out.css --watch",
+    "cssprod": "tailwindcss -i ./private/css/main_in.css -o ./public/css/main_out.css --minify"
   },
   "peerDependencies": {
     "typescript": "^5.3.3"

@@ -3,8 +3,8 @@ import "https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js";
 import "https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js";
 import "https://cdn.jsdelivr.net/npm/chartjs-plugin-crosshair@2.0.0/dist/chartjs-plugin-crosshair.min.js";
 
-history();
-function history() {
+History();
+function History() {
 
     render_chart('global', 'rank');
     render_chart('country', 'rank');

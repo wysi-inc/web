@@ -196,11 +196,9 @@ async function getSubdivisionRankings() {
         // div.setAttribute("data-tip", subdivision.name);
     }
 }
-
 function getUserStuff() {
     getSubdivisions();
     getSubdivisionRankings();
     getClans();
 }
-
 getUserStuff();
