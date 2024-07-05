@@ -44,7 +44,7 @@ const BarChart = (p: Props) => {
             </div>
         </div>
         {p.user ?
-            <button class="btn btn-secondary btn-sm size-8" onclick="getGrades(); this.classList.add('hidden')">
+            <button class="btn btn-secondary btn-sm size-8" aria-label="get grades" onclick="getGrades(); this.classList.add('hidden')">
                 <i class="fa-solid fa-magnifying-glass" />
             </button>
             : <></>}
