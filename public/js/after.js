@@ -107,14 +107,18 @@ async function getClans() {
     const data = await res.json();
     for (let i = 0; i < data.length; i++) {
         const user = data[i];
-        const a = user_map.get(user.osu_id);
-        if (!a) continue;
+        const div = user_map.get(user.osu_id);
+        if (!div) continue;
+        const a = document.createElement("a");
         a.innerText = `[${user.clan.tag}]`;
-        a.classList.remove("hidden");
-        a.classList.add("tooltip");
-        a.setAttribute("data-tip", user.clan.name);
-        a.href = `https://score.kirino.sh/clan/${user.clan.id}`;
+        div.setAttribute("data-tip", user.clan.name);
+        div.classList.remove("hidden");
+        div.classList.add("tooltip");
+        a.className = "drop-shadow-solid";
         a.style = `color: #${user.clan.color};`;
+        a.href = `https://score.kirino.sh/clan/${user.clan.id}`;
+        a.target = "_blank";
+        div.appendChild(a);
     }
 }
 
