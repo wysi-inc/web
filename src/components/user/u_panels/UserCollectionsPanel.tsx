@@ -82,27 +82,29 @@ async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
             </button>
             <div class="flex flex-col gap-2">
                 {collections.map((c) => (
-                    <div class="flex flex-col items-start gap-2 p-2 bg-base-300 rounded-lg">
-                        <button class="btn btn-sm btn-info collection-download-button h-8 cursor-pointer flex flex-row gap-2 items-center"
-                            id={`btn_download_${c.name}`} data-name={c.name} data-ids={JSON.stringify(c.beatmapsMd5.map(h => h))}>
-                            <i class="regular fa-regular fa-file-zipper" />
-                            <span class="loading loading-spinner loading-xs"
-                                style={{ display: "none" }} />
-                            <label class="cursor-pointer" data-title="Download">
-                                Download
-                            </label>
-                            <progress class="progress progress-success w-56" value={0} max={c.beatmapsMd5.length}
-                                style={{ display: "none" }} />
-                            <span class="progress-indicator" style={{ display: "none" }}>
-                                0/{c.beatmapsMd5.length}
-                            </span>
-                        </button>
-                        <div class="collapse collapse-arrow">
-                            <input type="checkbox" name="collections-acordion" />
-                            <div class="collapse-title bg-neutral rounded-lg grow">
-                                {c.name} ({c.beatmapsMd5.length})
-                            </div>
-                            <div class="collapse-content p-0 m-0">
+                    <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg">
+                        <details class="group">
+                            <summary class="cursor-pointer bg-neutral rounded-lg flex flex-row gap-4 items-center justify-between ps-4">
+                                <div class="flex flex-row gap-4 items-center">
+                                    <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
+                                    <h6>{c.name} ({c.beatmapsMd5.length})</h6>
+                                </div>
+                                <button class="btn btn-sm btn-info collection-download-button h-8 cursor-pointer flex flex-row gap-2 items-center"
+                                    id={`btn_download_${c.name}`} data-name={c.name} data-ids={JSON.stringify(c.beatmapsMd5.map(h => h))}>
+                                    <i class="regular fa-regular fa-file-zipper" />
+                                    <span class="loading loading-spinner loading-xs"
+                                        style={{ display: "none" }} />
+                                    <label class="cursor-pointer" data-title="Download">
+                                        Download
+                                    </label>
+                                    <progress class="progress progress-success w-56" value={0} max={c.beatmapsMd5.length}
+                                        style={{ display: "none" }} />
+                                    <span class="progress-indicator" style={{ display: "none" }}>
+                                        0/{c.beatmapsMd5.length}
+                                    </span>
+                                </button>
+                            </summary>
+                            <div class="p-0 m-0">
                                 <div class="flex flex-col gap-2 pt-2">
                                     <button hx-post={`/users/${user_id}/0/lists/collections/${encodeURIComponent(c.name || "")}?offset=${0}`}
                                         hx-trigger="click" hx-swap="outerHTML" hx-boost="false"
@@ -112,7 +114,7 @@ async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </details>
                     </div>
                 ))}
                 <script type="module" src="/public/js/collectiondownloader.js" />

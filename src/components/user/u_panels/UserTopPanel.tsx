@@ -141,47 +141,45 @@ async function UserTopPanel({ user, mode }: Props) {
                         </div>
                     </div>
                     <div class="flex flex-col gap-4 justify-between grow">
-                        <div class="grow text-sm flex flex-row gap-12 justify-between">
-                            <div class="flex flex-col gap-2 text-start">
-                                <h2 class="flex gap-3 items-center">
-                                    <i class="fa-solid fa-angles-up w-4 text-center" />
-                                    <span>Ranked Score:</span>
-                                </h2>
-                                <h2 class="flex gap-3 items-center">
-                                    <i class="fa-solid fa-arrow-rotate-left w-4 text-center" />
-                                    <span>Play Count:</span>
-                                </h2>
-                                <h2 class="flex gap-3 items-center">
-                                    <i class="fa-regular fa-clock w-4 text-center" />
-                                    <span>Play Time:</span>
-                                </h2>
-                                <h2 class="flex gap-3 items-center">
-                                    <i class="fa-solid fa-fire w-4 text-center" />
-                                    <span>Max Combo:</span>
-                                </h2>
-                                <h2 class="flex gap-3 items-center">
-                                    <i class="fa-solid fa-keyboard w-4 text-center" />
-                                    <span>Total Hits:</span>
-                                </h2>
-                                <h2 class="flex gap-3 items-center">
-                                    <i class="fa-solid fa-calculator w-4 text-center" />
-                                    <span>Hits x Play:</span>
-                                </h2>
-                                <h2 class="flex gap-3 items-center">
-                                    <i class="fa-solid fa-eye w-4 text-center" />
-                                    <span>Replays Watched:</span>
-                                </h2>
-                            </div>
-                            <div class="flex flex-col gap-2 text-end">
-                                <h2>{user.statistics.ranked_score.toLocaleString()}</h2>
-                                <h2>{user.statistics.play_count.toLocaleString()}</h2>
-                                <h2>{Math.floor(user.statistics.play_time / 60 / 60).toLocaleString()}h</h2>
-                                <h2>{user.statistics.maximum_combo.toLocaleString()}x</h2>
-                                <h2>{user.statistics.total_hits.toLocaleString()}</h2>
-                                <h2>{Math.round(user.statistics.total_hits / user.statistics.play_count || 0).toLocaleString()}</h2>
-                                <h2>{user.statistics.replays_watched_by_others.toLocaleString()}</h2>
-                            </div>
-                        </div>
+                        <table class="table table-sm">
+                            <tbody>
+                                <tr class="h-6 border-none">
+                                    <th><i class="fa-solid fa-angles-up w-4 text-center" /></th>
+                                    <td>Ranked Score:</td>
+                                    <td class="text-end">{user.statistics.ranked_score.toLocaleString()}</td>
+                                </tr>
+                                <tr class="h-6 border-none">
+                                    <th><i class="fa-solid fa-arrow-rotate-left w-4 text-center" /></th>
+                                    <td>Play Count:</td>
+                                    <td class="text-end">{user.statistics.play_count.toLocaleString()}</td>
+                                </tr>
+                                <tr class="h-6 border-none">
+                                    <th><i class="fa-regular fa-clock w-4 text-center" /></th>
+                                    <td>Play Time:</td>
+                                    <td class="text-end">{Math.floor(user.statistics.play_time / 60 / 60).toLocaleString()}h</td>
+                                </tr>
+                                <tr class="h-6 border-none">
+                                    <th><i class="fa-solid fa-fire w-4 text-center" /></th>
+                                    <td>Max Combo:</td>
+                                    <td class="text-end">{user.statistics.maximum_combo.toLocaleString()}x</td>
+                                </tr>
+                                <tr class="h-6 border-none">
+                                    <th><i class="fa-solid fa-keyboard w-4 text-center" /></th>
+                                    <td>Total Hits:</td>
+                                    <td class="text-end">{user.statistics.total_hits.toLocaleString()}</td>
+                                </tr>
+                                <tr class="h-6 border-none">
+                                    <th><i class="fa-solid fa-calculator w-4 text-center" /></th>
+                                    <td>Hits x Play:</td>
+                                    <td class="text-end">{Math.round(user.statistics.total_hits / user.statistics.play_count || 0).toLocaleString()}</td>
+                                </tr>
+                                <tr class="h-6 border-none">
+                                    <th><i class="fa-solid fa-eye w-4 text-center" /></th>
+                                    <td>Replays Watched:</td>
+                                    <td class="text-end">{user.statistics.replays_watched_by_others.toLocaleString()}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <div class="flex flex-row gap-4 items-center justify-end">
                             <BarChart name="total_grades" data={grade_counts} user={{
                                 user_id: user.id,
