@@ -52,19 +52,6 @@ const jwtcfg = jwt({
     }
 })
 
-async function migrateUserCollections() {
-    const cs = await CollectionsDB2Model.find();
-    for (let i = 0; i < cs.length; i++) {
-        const c = cs[i];
-        const user = await User.findOne({ user_id: c.user_id });
-        if (!user) continue;
-        user.collections = c.collections;
-        user.save();
-    }
-}
-
-await migrateUserCollections();
-
 new Elysia()
     .onRequest(({ request }) => {
         const ip = request.headers.get("x-forwarded-for");
