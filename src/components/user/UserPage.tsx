@@ -26,6 +26,7 @@ const UserPage = async (p: Props) => {
             title: "History",
             code: "history",
             icon: <i class="fa-solid fa-chart-line" />,
+            show_if: true,
             jsx:
                 <UserHistoryPanel
                     db_ranks={user.db_ranks}
@@ -37,6 +38,7 @@ const UserPage = async (p: Props) => {
             title: "About",
             code: "about",
             icon: <i class="fa-solid fa-user" />,
+            show_if: user.page?.html !== undefined,
             jsx:
                 <div class="rounded-lg bg-base-300 flex justify-center items-center">
                     {user.page.html ?
@@ -52,7 +54,8 @@ const UserPage = async (p: Props) => {
             title: "Setup",
             code: "setup",
             icon: <i class="fa-solid fa-computer" />,
-            url: `/users/${user.id}/0/panels/setup`
+            url: `/users/${user.id}/0/panels/setup`,
+            show_if: user.db_setup !== undefined || editable,
         },
         // {
         //     title: "Skins",
@@ -69,6 +72,7 @@ const UserPage = async (p: Props) => {
             icon: <i class="fa-solid fa-calendar-days" />,
             url: `/users/${user.id}/0/panels/year`,
             manual: true,
+            show_if: true,
         },
         {
             title: "Summary",
@@ -77,6 +81,7 @@ const UserPage = async (p: Props) => {
             info: "this is a quick summary of your top 100 plays",
             url: `/users/${user.id}/${p.mode}/panels/summary`,
             manual: true,
+            show_if: true,
         },
         {
             title: "Scores",
@@ -84,12 +89,14 @@ const UserPage = async (p: Props) => {
             icon: <i class="fa-solid fa-flag-checkered" />,
             info: "hover over a grayed out PP to see the (if FC) PP value",
             url: `/users/${user.id}/${p.mode}/panels/scores/best`,
+            show_if: true
         },
         {
-            title: "Beatmaps",
-            code: "beatmaps",
+            title: "Beatmapsets",
+            code: "beatmapsets",
             icon: <i class="fa-solid fa-screwdriver-wrench" />,
-            url: `/users/${user.id}/${p.mode}/panels/beatmaps/favourite`
+            url: `/users/${user.id}/${p.mode}/panels/beatmapsets/favourite`,
+            show_if: true
         },
         {
             title: "Collections",
@@ -97,13 +104,15 @@ const UserPage = async (p: Props) => {
             tooltip: "powered by catboy.best",
             info: "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)",
             icon: <i class="fa-solid fa-list" />,
-            url: `/users/${user.id}/${p.mode}/panels/collections`
+            url: `/users/${user.id}/${p.mode}/panels/collections`,
+            show_if: user.collections !== undefined || editable
         },
         {
             title: "Most Played",
             code: "most",
             icon: <i class="fa-solid fa-rotate-left" />,
-            url: `/users/${user.id}/0/panels/most`
+            url: `/users/${user.id}/0/panels/most`,
+            show_if: true,
         },
         {
             title: "Medals",
@@ -111,6 +120,7 @@ const UserPage = async (p: Props) => {
             tooltip: "powered by osekai.net",
             icon: <img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" loading="lazy" />,
             url: `/users/${user.id}/0/panels/medals`,
+            show_if: user.user_achievements.length > 0
         }
     ];
 
@@ -118,11 +128,13 @@ const UserPage = async (p: Props) => {
         <UserTopPanel user={user} mode={p.mode} />
         <div class="underline-offset-1 text-neutral-content sticky -mt-8 top-16 bg-base-300 md:rounded-lg shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-6 flex-wrap">
             <a class="hover:underline" href="#top">Top</a>
-            {panels.map((p) =>
-                <a class="hover:underline" href={`#${p.code}`}>{p.title}</a>
-            )}
+            {panels.map((p) => {
+                if (!p.show_if) return <></>;
+                return <a class="hover:underline" href={`#${p.code}`}>{p.title}</a>
+            })}
         </div>
         {panels.map((p) => {
+            if (!p.show_if) return <></>;
             if (p.url) return (
                 <LazyPanel title={p.title} code={p.code} icon={p.icon} manual={p.manual}
                     url={p.url} body={p.body} tooltip={p.tooltip} info={p.info} />
@@ -133,6 +145,7 @@ const UserPage = async (p: Props) => {
                 </Panel>
             );
         })}
+        <script>getUserStuff()</script>
     </>);
 }
 

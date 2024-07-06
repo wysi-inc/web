@@ -1,5 +1,4 @@
-import { type CollectionsDB, CollectionsDBModel } from "@/src/models/CollectionDB";
-import { type Rank, User, type Setup } from "../../models/User";
+import { type Rank, User, type Setup, type CollectionDB } from "../../models/User";
 import type { Mode } from "../../types/osu";
 import type { User as UserType } from "../../types/users";
 //@ts-ignore
@@ -35,6 +34,7 @@ export async function updateUser(user: UserType, mode: Mode): Promise<UserType> 
             db_user.modes[mode] = new_ranks as any;
             user.db_ranks = new_ranks;
             user.db_setup = db_user.setup as any;
+            user.collections = db_user.collections as any;
             await db_user.save();
             return user;
         }
@@ -48,7 +48,7 @@ export async function updateUser(user: UserType, mode: Mode): Promise<UserType> 
         db_user.modes[mode] = new_ranks as any;
         user.db_ranks = new_ranks;
         user.db_setup = db_user.setup as any;
-        delete user.flag;
+        user.collections = db_user.collections as any;
         await db_user.save();
         return user;
     } catch (err) {
@@ -181,9 +181,9 @@ export async function parseCollection(file: any) {
     }
 }
 
-export async function saveCollection(body: object, user_id: number): Promise<CollectionsDB> {
+export async function saveCollection(body: object, user_id: number) {
 
-    const collections: { name: string, beatmapsMd5: string[] }[] = [];
+    const collections: CollectionDB[] = [];
 
     for (const [k, v] of Object.entries(body)) {
         collections.push({
@@ -191,23 +191,17 @@ export async function saveCollection(body: object, user_id: number): Promise<Col
             beatmapsMd5: JSON.parse(v)
         });
     }
-
-    const collection = { user_id, collections };
-
-    const db_collection = await CollectionsDBModel.findOne({ user_id: collection.user_id });
-
-    if (!db_collection) {
-        const collectionDB = new CollectionsDBModel(collection);
-        collectionDB.save();
-        return collectionDB;
-    }
-
-    db_collection.collections = collections as any;
-    db_collection.save();
-    return db_collection;
+    const user = await User.findOne({ user_id });
+    if (!user) throw new Error("User doesnt exist");
+    user.collections = collections as any;
+    user.save();
 }
 
 
 export async function deleteCollection(user_id: number) {
-    await CollectionsDBModel.deleteOne({ user_id });
+    const user = await User.findOne({ user_id });
+    if (!user) return;
+    if (!user.collections) return;
+    delete user.collections;
+    user.save();
 }

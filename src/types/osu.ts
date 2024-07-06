@@ -24,6 +24,7 @@ export type PanelType = {
     icon: JSX.Element,
     tooltip?: string,
     info?: string,
+    show_if: boolean,
 } & (
         { jsx: JSX.Element, url?: never } |
         { url: string, body?: string, jsx?: never, manual?: boolean }

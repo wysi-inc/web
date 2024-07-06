@@ -22,7 +22,7 @@ async function UserSetupPanel(p: Props) {
     }
 
     return <div id="setup_panel">
-        <form id="setup_form" hx-post={editable ? `/users/${p.page_id}/setup` : ""}
+        <form id="setup_form" hx-put={editable ? `/users/${p.page_id}/setup/submit` : undefined}
             hx-trigger="submit" hx-swap="outerHTML" hx-target="#setup_panel"
             class="flex flex-col-reverse gap-2">
             <fieldset class="group w-full grid md:grid-cols-2 gap-4"

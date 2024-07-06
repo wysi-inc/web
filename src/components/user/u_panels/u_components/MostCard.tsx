@@ -1,7 +1,7 @@
 import DiffIcon from "@/src/components/beatmap/DiffIcon";
 import AudioPlayButton from "@/src/components/web/AudioPlayButton";
 import CardControls from "@/src/components/web/CardControls";
-import HxA from "@/src/components/web/HxA";
+import Link from "@/src/components/web/Link";
 import { colors } from "@/src/libs/colors";
 import type { Beatmap, Beatmapset } from "@/src/types/beatmaps";
 
@@ -42,7 +42,7 @@ const MostCard = ({ beatmap, beatmapset, position, plays }: Props) => {
                             />
                         </div>
                         <div class="flex flex-col py-2 px-4 max-w-52 lg:max-w-72">
-                            <HxA css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmapsets/${beatmapset.id}`}>{beatmapset.title}</HxA>
+                            <Link css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmapsets/${beatmapset.id}`}>{beatmapset.title}</Link>
                             <p class="text-neutral-content text-opacity-75 text-sm truncate">by {beatmapset.artist}</p>
                         </div>
                     </div>
@@ -52,11 +52,11 @@ const MostCard = ({ beatmap, beatmapset, position, plays }: Props) => {
                         <div class="badge" style={`color: #000; background-color: ${(colors.beatmap as any)[beatmapset.status]}`}>
                             {beatmapset.status}
                         </div>
-                        <HxA url={`/users/${beatmapset.user_id}`}>
+                        <Link url={`/users/${beatmapset.user_id}`}>
                             <div class="tooltip" data-tip={beatmapset.creator}>
                                 <i class="fa-solid fa-user-pen" />
                             </div>
-                        </HxA>
+                        </Link>
                         <DiffIcon setId={beatmapset.id} diffId={beatmap.id}
                             diff={beatmap.difficulty_rating} size={20}
                             mode={beatmap.mode} name={beatmap.version} />

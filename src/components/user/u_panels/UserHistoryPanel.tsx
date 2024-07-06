@@ -7,12 +7,12 @@ type MonthCount = {
 }
 
 type Props = {
-    db_ranks: RankHistory
-    play_counts: MonthCount[]
-    replays_watched: MonthCount[]
+    db_ranks?: RankHistory,
+    play_counts: MonthCount[],
+    replays_watched: MonthCount[],
 }
 
-const UserHistoryPanel = (props: Props) => {
+function UserHistoryPanel(props: Props) {
 
     function tab(type: string, title: string, data: Rank[] | MonthCount[] | undefined) {
         if (!data) return <></>;
@@ -23,7 +23,7 @@ const UserHistoryPanel = (props: Props) => {
             <div role="tabpanel" class="tab-content pt-4" id={`${type}_tabpannel`} aria-labelledby={`${type}_tab`}>
                 {data.length > 0 ?
                     <div class="h-64 w-full relative cursor-move">
-                        <canvas id={`chart-${type}`} class="absolute" data-vals={JSON.stringify(data)} />
+                        <canvas id={`chart-${type}`} class="absolute select-none" data-vals={JSON.stringify(data)} />
                     </div> :
                     "No data found"
                 }
@@ -38,7 +38,7 @@ const UserHistoryPanel = (props: Props) => {
             {tab('plays', 'Plays', props.play_counts)}
             {tab('replays', 'Replays', props.replays_watched)}
         </div>
-        <script async defer type="module" src="/public/js/history.js" />
+        <script type="module" src={`/public/js/history.js?v=${Date.now()}`} />
     </>);
 
 }

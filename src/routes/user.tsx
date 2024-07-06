@@ -28,19 +28,21 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             </HtmxPage>
         </>
     })
-    .post("/setup", async ({ params, set, cookie, body, jwt }: Route) => {
-        const user = await verifyUser(jwt, cookie.auth.value);
-        if (!user) {
-            set.status = 401;
-            return "Unauthorized";
-        }
+    .group("/setup", _ => _
+        .put("/submit", async ({ params, set, cookie, body, jwt }: Route) => {
+            const user = await verifyUser(jwt, cookie.auth.value);
+            if (!user) {
+                set.status = 401;
+                return "Unauthorized";
+            }
 
-        if (Number(params.id) != user.id) return;
+            if (Number(params.id) != user.id) return;
 
-        const setup = await saveSetup(user.id, body);
-        if (!setup) return "Failed to save setup, reload the page and try again.";
-        return <UserSetupPanel setup={setup} logged_id={user.id} page_id={user.id} />
-    })
+            const setup = await saveSetup(user.id, body);
+            if (!setup) return "Failed to save setup, reload the page and try again.";
+            return <UserSetupPanel setup={setup} logged_id={user.id} page_id={user.id} />
+        })
+    )
     .group("/collections", _ => _
         .post("/parse", async ({ params, set, cookie, body, jwt }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);
@@ -57,7 +59,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 collection: t.Any()
             })
         })
-        .post("/submit", async ({ params, set, cookie, body, jwt }: Route) => {
+        .put("/submit", async ({ params, set, cookie, body, jwt }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);
             if (!user) {
                 set.status = 401;
@@ -65,10 +67,10 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             }
 
             if (Number(params.id) != user.id) return;
-            const collection = await saveCollection(body as any, user.id);
-            return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} collection={collection} />
+            const collections = await saveCollection(body as any, user.id);
+            return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} collections={collections as any} />
         })
-        .post("/delete", async ({ params, set, cookie, jwt }: Route) => {
+        .delete("/delete", async ({ params, set, cookie, jwt }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);
             if (!user) {
                 set.status = 401;
@@ -100,7 +102,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                     category={params.category as ScoreCategory}
                 />)
             )
-            .post("/beatmaps/:category", ({ params }) => (
+            .post("/beatmapsets/:category", ({ params }) => (
                 <UserBeatmapsPanel
                     id={Number(params.id)}
                     category={params.category as BeatmapCategory}
@@ -144,7 +146,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                     limit={Number(query.limit)}
                 />
             ))
-            .post("/beatmaps/:category", ({ params, query }) => (
+            .post("/beatmapsets/:category", ({ params, query }) => (
                 <UserBeatmapsList
                     id={Number(params.id)}
                     category={params.category as BeatmapCategory}

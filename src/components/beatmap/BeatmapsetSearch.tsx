@@ -119,7 +119,7 @@ const BeatmapsetSearch = () => <>
             </div>
         </div>
     </form>
-    <script async type="module" src="/public/js/sliders.js" />
+    <script async type="module" src={`/public/js/sliders.js?v=${Date.now()}`} />
     <div id="beatmap-search-results"
         class="bg-base-100 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg" />
 </>

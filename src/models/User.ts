@@ -1,5 +1,15 @@
 import * as mongoose from "mongoose";
 
+const collectionDBSchema = new mongoose.Schema({
+    name: String,
+    beatmapsMd5: [String]
+}, { _id: false });
+
+collectionDBSchema.methods.toJSON = function() {
+    const { __v, _id, ...user } = this.toObject();
+    return user;
+};
+
 const setup = new mongoose.Schema({
     keyboard: {
         name: String,
@@ -112,8 +122,13 @@ const userSchema = new mongoose.Schema({
         type: modes,
         required: true,
     },
+    extra_panels: [String],
     skins: [String],
     setup: setup,
+    collections: {
+        type: [collectionDBSchema],
+        required: false,
+    },
     medals: [medal]
 });
 
@@ -122,6 +137,7 @@ userSchema.methods.toJSON = function() {
     return user;
 };
 
+export type CollectionDB = mongoose.InferSchemaType<typeof collectionDBSchema>;
 export type ProfileMedal = mongoose.InferSchemaType<typeof medal>;
 export type Rank = mongoose.InferSchemaType<typeof rank>;
 export type Setup = mongoose.InferSchemaType<typeof setup>;

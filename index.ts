@@ -12,6 +12,8 @@ import { userRoutes } from "./src/routes/user";
 import { beatmapRoutes } from "./src/routes/beatmaps";
 import { updateMedals } from "./src/db/medals/update_medals";
 import { apiRoutes } from "./src/routes/api";
+import { User } from "./src/models/User";
+import { CollectionsDB2Model } from "./src/models/CollectionDB";
 
 const port = Number(process.env.PORT as string);
 const mongo_uri = process.env.MONGO_URI as string;
@@ -49,6 +51,19 @@ const jwtcfg = jwt({
         path: '/',
     }
 })
+
+async function migrateUserCollections() {
+    const cs = await CollectionsDB2Model.find();
+    for (let i = 0; i < cs.length; i++) {
+        const c = cs[i];
+        const user = await User.findOne({ user_id: c.user_id });
+        if (!user) continue;
+        user.collections = c.collections;
+        user.save();
+    }
+}
+
+await migrateUserCollections();
 
 new Elysia()
     .onRequest(({ request }) => {

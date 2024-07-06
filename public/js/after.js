@@ -201,4 +201,3 @@ function getUserStuff() {
     getSubdivisionRankings();
     getClans();
 }
-getUserStuff();

@@ -1,4 +1,4 @@
-import type { Rank, Setup, UserFlag } from "../models/User";
+import type { CollectionDB, Rank, Setup } from "../models/User";
 import type { response as v2User } from "osu-api-extended/dist/types/v2_user_details";
 import type { response as v2Score } from "osu-api-extended/dist/types/v2_scores_user_category";
 import type { response as v2UserList } from "osu-api-extended/dist/types/v2_site_ranking_details";
@@ -17,9 +17,9 @@ export type RankHistory = {
 export type UserBasic = v2User;
 
 export type User = UserBasic & {
-    db_ranks: RankHistory;
-    db_setup: Setup;
-    flag: UserFlag;
+    db_ranks?: RankHistory;
+    db_setup?: Setup;
+    collections?: CollectionDB[];
     groups: {
         colour: string;
         has_listing: boolean;

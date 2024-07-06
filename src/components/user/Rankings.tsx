@@ -35,6 +35,7 @@ async function Rankings({ mode, category, page }: Props) {
             )}
         </table>
         <Pagination mode={mode} category={category} page={page} />
+        <script>getUserStuff()</script>
     </>);
 }
 

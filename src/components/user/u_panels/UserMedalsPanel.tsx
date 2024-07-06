@@ -84,9 +84,17 @@ async function UserMedalsPanel(p: Props) {
                 </div>
             </div>
             <details class="group">
-                <summary class="group-open:mb-4 cursor-pointer bg-neutral rounded-lg flex flex-row gap-4 items-center px-4 py-2">
-                    <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
-                    <span>Show all</span>
+                <summary class="group-open:mb-4 cursor-pointer bg-neutral rounded-lg flex flex-row gap-4 justify-between items-center px-4 py-2">
+                    <div class="flex flex-row items-center gap-4">
+                        <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
+                        <span>Show all</span>
+                    </div>
+                    <div class="flex flex-row items-center gap-2">
+                        <progress class="hidden sm:inline-block progress progress-accent w-52" value={user.medals?.length} max={db_medals.length} />
+                        <div>
+                            {user.medals?.length} / {db_medals.length}
+                        </div>
+                    </div>
                 </summary>
                 {Object.entries(categories).map(([key, vals]) =>
                     <div class="rounded-lg bg-neutral shadow-lg">

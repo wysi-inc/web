@@ -1,20 +1,20 @@
-import { CollectionsDBModel, type CollectionsDB } from "@/src/models/CollectionDB";
+import LoadMoreButton from "../../web/LoadMoreButton";
+import { User, type CollectionDB } from "@/src/models/User";
 
 type Props = {
     user_id: number,
     logged_id: number | undefined,
-    collection?: CollectionsDB
+    collections?: CollectionDB[]
 }
 
-async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
-
-    if (!collection) {
-        collection = await CollectionsDBModel.findOne({ user_id }) as any;
-    }
+async function UserCollectionsPanel({ user_id, logged_id, collections }: Props) {
 
     const editable = user_id === logged_id;
 
-    const collections = collection?.collections;
+    if (!collections) {
+        const user = await User.findOne({ user_id });
+        collections = user?.collections as any;
+    }
 
     return (<div id="colpanel" class="max-h-96 overflow-y-scroll flex flex-col gap-4">
         {editable ?
@@ -40,7 +40,7 @@ async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
                             <p class="py-4">Are you sure you want to proceed?</p>
                             <div class="modal-action">
                                 <button class="btn btn-error" hx-swap="innerHTML" hx-target="#colpanel"
-                                    hx-post={`/users/${user_id}/collections/delete`}>
+                                    hx-delete={`/users/${user_id}/collections/delete`}>
                                     Yes, delete them
                                 </button>
                                 <form method="dialog">
@@ -104,15 +104,8 @@ async function UserCollectionsPanel({ user_id, logged_id, collection }: Props) {
                                     </span>
                                 </button>
                             </summary>
-                            <div class="p-0 m-0">
-                                <div class="flex flex-col gap-2 pt-2">
-                                    <button hx-post={`/users/${user_id}/0/lists/collections/${encodeURIComponent(c.name || "")}?offset=${0}`}
-                                        hx-trigger="click" hx-swap="outerHTML" hx-boost="false"
-                                        class="col-span-full btn btn-success btn-sm flex flex-row gap-2">
-                                        <div>Load more</div>
-                                        <span class="htmx-indicator loading loading-spinner loading-md" />
-                                    </button>
-                                </div>
+                            <div class="flex flex-col gap-2 pt-2">
+                                <LoadMoreButton url={`/users/${user_id}/0/lists/collections/${encodeURIComponent(c.name || "")}?offset=0`} />
                             </div>
                         </details>
                     </div>

@@ -18,6 +18,6 @@ collectionDBSchema.methods.toJSON = function() {
     return user;
 };
 
-export type CollectionDB = mongoose.InferSchemaType<typeof collectionDBSchema>;
-export type CollectionsDB = mongoose.InferSchemaType<typeof collectionsDBSchema>;
-export const CollectionsDBModel = mongoose.model('CollectionsDB', collectionsDBSchema);
+export type CollectionDB2 = mongoose.InferSchemaType<typeof collectionDBSchema>;
+export type CollectionsDB2 = mongoose.InferSchemaType<typeof collectionsDBSchema>;
+export const CollectionsDB2Model = mongoose.model('CollectionsDB', collectionsDBSchema);

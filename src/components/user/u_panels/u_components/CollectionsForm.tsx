@@ -12,7 +12,7 @@ async function CollectionsForm({ file, user_id }: Props) {
 
     return (<>
         <form class="flex flex-col gap-4" hx-swap="innerHTML" hx-target="#colpanel" hx-trigger="submit"
-            hx-post={`/users/${user_id}/collections/submit`} id="collections_form">
+            hx-put={`/users/${user_id}/collections/submit`} id="collections_form">
             <div class="flex flex-row justify-between">
                 <div class="join">
                     <button id="collections-form-selectall" type="button" class="join-item btn btn-sm btn-secondary">
@@ -23,12 +23,10 @@ async function CollectionsForm({ file, user_id }: Props) {
                     </button>
                 </div>
                 <div class="flex flex-row gap-2">
-                    <button class="btn btn-sm btn-success"
-                        type="submit">
+                    <button class="btn btn-sm btn-success" type="submit">
                         <i class="fa-solid fa-check" />
                     </button>
-                    <button class="btn btn-sm btn-error"
-                        hx-post={`/users/${user_id}/0/panels/collections`} hx-swap="innerHTML" hx-target="#colpanel" >
+                    <button class="btn btn-sm btn-error" type="button" hx-post={`/users/${user_id}/panels/collections`}>
                         <i class="fa-solid fa-xmark" />
                     </button>
                 </div>

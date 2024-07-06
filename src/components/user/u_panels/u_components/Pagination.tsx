@@ -1,5 +1,5 @@
+import Link from "@/src/components/web/Link";
 import type { Category, Mode } from "@/src/types/osu";
-import HxA from "@/src/components/web/HxA";
 
 type Props = {
     mode: string;
@@ -9,25 +9,25 @@ type Props = {
 
 const Pagination = (props: Props) => {
     const ModeTab = (mode: Mode) => (
-        <HxA url={`/rankings/${mode}/${props.category}/${props.page}`}
+        <Link url={`/rankings/${mode}/${props.category}/${props.page}`}
             css={`tab ${props.mode == mode && "tab-active"}`} role="tab">
             {mode}
-        </HxA>
+        </Link>
     );
 
     const PageTab = (page: number) => (
         page >= 1 && page <= 200 &&
-        <HxA url={`/rankings/${props.mode}/${props.category}/${page}`}
+        <Link url={`/rankings/${props.mode}/${props.category}/${page}`}
             css={`tab ${props.page == page && "tab-active"}`} role="tab">
             {page}
-        </HxA>
+        </Link>
     );
 
     const CategoryTab = (category: Category) => (
-        <HxA url={`/rankings/${props.mode}/${category}/${props.page}`}
+        <Link url={`/rankings/${props.mode}/${category}/${props.page}`}
             css={`tab ${props.category == category && "tab-active"}`} role="tab">
             {category}
-        </HxA>
+        </Link>
     );
 
     return (

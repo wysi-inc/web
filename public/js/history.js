@@ -1,10 +1,10 @@
 import "https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js";
-import "https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js";
-import "https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js";
-import "https://cdn.jsdelivr.net/npm/chartjs-plugin-crosshair@2.0.0/dist/chartjs-plugin-crosshair.min.js";
+// import "https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js";
+// import "https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js";
+// import "https://cdn.jsdelivr.net/npm/chartjs-plugin-crosshair@2.0.0/dist/chartjs-plugin-crosshair.min.js";
 
-History();
-function History() {
+history();
+function history() {
 
     render_chart('global', 'rank');
     render_chart('country', 'rank');
@@ -62,30 +62,30 @@ function History() {
                 legend: {
                     display: false
                 },
-                zoom: {
-                    pan: {
-                        enabled: true,
-                        mode: 'x',
-                    },
-                    zoom: {
-                        wheel: {
-                            enabled: true,
-                        },
-                        pinch: {
-                            enabled: true
-                        },
-                        mode: 'x',
-                    }
-                },
-                crosshair: {
-                    line: {
-                        color: '#ffb86b',
-                        width: 1
-                    },
-                    sync: {
-                        enabled: false,
-                    },
-                },
+                // zoom: {
+                //     pan: {
+                //         enabled: true,
+                //         mode: 'x',
+                //     },
+                //     zoom: {
+                //         wheel: {
+                //             enabled: true,
+                //         },
+                //         pinch: {
+                //             enabled: true
+                //         },
+                //         mode: 'x',
+                //     }
+                // },
+                // crosshair: {
+                //     line: {
+                //         color: '#ffb86b',
+                //         width: 1
+                //     },
+                //     sync: {
+                //         enabled: false,
+                //     },
+                // },
             },
             responsive: true,
             maintainAspectRatio: false,
