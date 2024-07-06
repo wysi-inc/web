@@ -5320,6 +5320,10 @@ details.collapse summary::-webkit-details-marker {
   visibility: hidden;
 }
 
+.group[open] .group-open\:mb-4 {
+  margin-bottom: 1rem;
+}
+
 .group[open] .group-open\:block {
   display: block;
 }
@@ -5335,6 +5339,10 @@ details.collapse summary::-webkit-details-marker {
 .group[open] .group-open\:rotate-180 {
   --tw-rotate: 180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.group[open] .group-open\:pb-4 {
+  padding-bottom: 1rem;
 }
 
 .group:hover .group-hover\:flex {

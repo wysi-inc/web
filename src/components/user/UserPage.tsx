@@ -67,15 +67,16 @@ const UserPage = async (p: Props) => {
             info: `This is a recap of this year so far, the data will be reset at Jaunary 1st ${new Date().getFullYear() + 1}`,
             tooltip: "powered by advance.catboy.best",
             icon: <i class="fa-solid fa-calendar-days" />,
+            url: `/users/${user.id}/0/panels/year`,
             manual: true,
-            url: `/users/${user.id}/0/panels/year`
         },
         {
             title: "Summary",
             code: "summary",
             icon: <i class="fa-solid fa-ranking-star" />,
             info: "this is a quick summary of your top 100 plays",
-            url: `/users/${user.id}/${p.mode}/panels/summary`
+            url: `/users/${user.id}/${p.mode}/panels/summary`,
+            manual: true,
         },
         {
             title: "Scores",

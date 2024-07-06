@@ -21,8 +21,7 @@ const LazyPanel = (p: Props) => {
                         hx-vals={p.body} hx-indicator={`#loading-${p.code}`} hx-target={`#lazy_panel_${p.code}`}>
                         <span class="loading loading-spinner htmx-indicator" id={`loading-${p.code}`} />
                         Load
-                    </button>
-                    :
+                    </button> :
                     <span hx-post={p.url} hx-trigger="revealed" hx-swap="outerHTML"
                         hx-vals={p.body} hx-indicator={`#loading-${p.code}`} hx-target={`#lazy_panel_${p.code}`}>
                         <span class="loading loading-spinner htmx-indicator" id={`loading-${p.code}`} />

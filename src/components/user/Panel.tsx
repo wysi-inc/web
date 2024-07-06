@@ -21,7 +21,7 @@ const Panel = ({ children, icon, tooltip, title, code, info }: Props) => (
                 </div> : <></>
             }
         </div>
-        <div class="min-h-72 flex flex-col">
+        <div class="flex flex-col">
             {children}
         </div>
     </section>

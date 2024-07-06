@@ -83,31 +83,37 @@ async function UserMedalsPanel(p: Props) {
                     </div>
                 </div>
             </div>
-            {Object.entries(categories).map(([key, vals]) =>
-                <div class="rounded-lg bg-neutral shadow-lg">
-                    <div class="text-neutral-content py-1 px-2 flex flex-row justify-between items-center">
-                        <div>
-                            {key}
-                        </div>
-                        <div class="flex flex-row items-center gap-2">
-                            <progress class="hidden sm:inline-block progress progress-accent w-52" value={vals.count} max={vals.medals.length} />
+            <details class="group">
+                <summary class="group-open:mb-4 cursor-pointer bg-neutral rounded-lg flex flex-row gap-4 items-center px-4 py-2">
+                    <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
+                    <span>Show all</span>
+                </summary>
+                {Object.entries(categories).map(([key, vals]) =>
+                    <div class="rounded-lg bg-neutral shadow-lg">
+                        <div class="text-neutral-content py-1 px-2 flex flex-row justify-between items-center">
                             <div>
-                                {vals.count} / {vals.medals.length}
+                                {key}
+                            </div>
+                            <div class="flex flex-row items-center gap-2">
+                                <progress class="hidden sm:inline-block progress progress-accent w-52" value={vals.count} max={vals.medals.length} />
+                                <div>
+                                    {vals.count} / {vals.medals.length}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rounded-lg flex flex-row justify-between grow bg-base-300">
+                            <div class="p-4 flex flex-row grow justify-center flex-wrap gap-2">
+                                {vals.medals.sort((m) => m.ordering - m.ordering).map((m) =>
+                                    <MedalBadge medal={m} />
+                                )}
+                            </div>
+                            <div class="flex items-end">
                             </div>
                         </div>
                     </div>
-                    <div class="rounded-lg flex flex-row justify-between grow bg-base-300">
-                        <div class="p-4 flex flex-row grow justify-center flex-wrap gap-2">
-                            {vals.medals.sort((m) => m.ordering - m.ordering).map((m) =>
-                                <MedalBadge medal={m} />
-                            )}
-                        </div>
-                        <div class="flex items-end">
-                        </div>
-                    </div>
-                </div>
-            )}
-        </div >
+                )}
+            </details>
+        </div>
     );
 }
 
