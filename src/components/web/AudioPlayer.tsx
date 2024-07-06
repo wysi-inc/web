@@ -1,6 +1,6 @@
 const AudioPlayer = () => {
     return (
-        <div class="p-2 sticky bottom-2 left-2 z-50 bg-base-300 shadow-lg rounded-lg" id="audio_box">
+        <div class="hidden p-2 sticky bottom-2 left-2 z-50 bg-base-300 shadow-lg rounded-lg" id="audio_box">
             <div class="flex flex-row gap-2">
                 <div class="flex flex-col gap-2 w-96">
                     <div class="flex flex-row gap-2 justify-between">
@@ -35,7 +35,7 @@ const AudioPlayer = () => {
                     </div>
                 </div>
             </div>
-            <audio id="audio_player" autoplay />
+            <audio id="audio_player" preload="none" />
         </div>
     );
 }
