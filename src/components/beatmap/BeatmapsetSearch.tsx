@@ -14,16 +14,16 @@ type SortingProps = {
 }
 
 type RadioProps = {
-    name: string;
-    label: string;
-    code: number;
+    name: string,
+    label: string,
+    code: number,
 }
 
 const Radio = (p: RadioProps) => <>
     <input class="btn" type="radio"
         name={p.name} value={String(p.code)}
         aria-label={p.label}
-        checked={p.code === -1} />
+        checked={p.label === "any"} />
 </>
 
 const Sort = ({ label, code }: SortingProps) => <>
@@ -129,7 +129,7 @@ const BeatmapsetSearch = () => <>
         </div>
     </form>
     <script async type="module" src={`/public/js/sliders.js?v=${Date.now()}`} />
-    <span id="beatmap-search-indicator" class="htmx-indicator mx-auto loading loading-spinner loading-xs" />
+    <span id="beatmap-search-indicator" class="hidden htmx-indicator mx-auto loading loading-spinner loading-xs" />
     <output id="beatmap-search-results" class="empty:hidden bg-base-100 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg" />
 </>
 
