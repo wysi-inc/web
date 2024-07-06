@@ -9,17 +9,15 @@ import { BeatmapCollectionCard } from '../components/beatmap/BeatmapCollectionCa
 
 const queryBodyElysia = {
     body: t.Object({
-        // Search
         title: t.Optional(t.String()),
         artist: t.Optional(t.String()),
         mapper: t.Optional(t.String()),
-        // Filters
         bpm_min: t.Optional(t.String()),
         bpm_max: t.Optional(t.String()),
-        stars_min: t.Optional(t.String()),
-        stars_max: t.Optional(t.String()),
-        length_min: t.Optional(t.String()),
-        length_max: t.Optional(t.String()),
+        sr_min: t.Optional(t.String()),
+        sr_max: t.Optional(t.String()),
+        len_min: t.Optional(t.String()),
+        len_max: t.Optional(t.String()),
         year_min: t.Optional(t.String()),
         year_max: t.Optional(t.String()),
         ar_min: t.Optional(t.String()),

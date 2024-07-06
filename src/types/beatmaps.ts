@@ -13,10 +13,10 @@ export type BeatmapQuery = {
     mapper?: string;
     bpm_min?: string;
     bpm_max?: string;
-    stars_min?: string;
-    stars_max?: string;
-    length_min?: string;
-    length_max?: string;
+    sr_min?: string;
+    sr_max?: string;
+    len_min?: string;
+    len_max?: string;
     year_min?: string;
     year_max?: string;
     ar_min?: string;

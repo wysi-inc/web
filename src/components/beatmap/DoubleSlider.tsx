@@ -1,5 +1,6 @@
 type Props = {
     name: string;
+    code: string;
     min: number;
     max: number;
     min_label: string;
@@ -7,26 +8,24 @@ type Props = {
     step: number;
 }
 
-const DoubleSlider = (props: Props) => {
-
-    const name = props.name.toLowerCase();
+const DoubleSlider = (p: Props) => {
 
     return (
         <div class="flex flex-col gap-2">
             <div class="grid grid-cols-3">
-                <span class="label-text-alt text-start" id={name + "_min_label"}>
-                    {props.min_label}
-                </span>
-                <label class="label-text text-center">{props.name}</label>
-                <span class="label-text-alt text-end" id={name + "_max_label"}>
-                    {props.max_label}
-                </span>
+                <label class="label-text-alt text-start" id={p.code + "_min_label"}>
+                    {p.min_label}
+                </label>
+                <label class="label-text text-center">{p.name}</label>
+                <label class="label-text-alt text-end" id={p.code + "_max_label"}>
+                    {p.max_label}
+                </label>
             </div>
-            <div class="w-full">
-                <input type="range" class="range" name={name + "_min"} id={name + "_min"}
-                    min={props.min} max={props.max} value={`${props.min}`} step={`${props.step}`} />
-                <input type="range" class="range" name={name + "_max"} id={name + "_max"}
-                    min={props.min} max={props.max} value={`${props.max}`} step={`${props.step}`} />
+            <div class="w-full relative h-6">
+                <input type="range" class="double_slider range pointer-events-none absolute w-full [--range-shdw:none]" name={p.code + "_min"} id={p.code + "_min_slider"}
+                    min={p.min} max={p.max} value={`${p.min}`} step={`${p.step}`} />
+                <input type="range" class="double_slider range pointer-events-none absolute w-full [--range-shdw:none]" name={p.code + "_max"} id={p.code + "_max_slider"}
+                    min={p.min} max={p.max} value={`${p.max}`} step={`${p.step}`} />
             </div>
         </div>
     );

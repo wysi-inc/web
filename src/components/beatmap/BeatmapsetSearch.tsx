@@ -50,8 +50,9 @@ const Sort = ({ label }: SortingProps) => <>
 
 const BeatmapsetSearch = () => <>
     <form class="flex flex-col rounded-lg drop-shadow-lg bg-base-300" onsubmit=""
-        id="search-form" hx-post="/beatmapsets/list"
-        hx-trigger="load, input delay:500ms"
+        id="search-form"
+        hx-post="/beatmapsets/list"
+        hx-trigger="load, input delay:1000ms"
         hx-target="#beatmap-search-results">
         <div class="flex flex-col gap-4 p-4 bg-base-100 rounded-lg">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -59,23 +60,22 @@ const BeatmapsetSearch = () => <>
                 <Input name="Mapper" placeholder="Beatmap Mapper" />
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <DoubleSlider name="Stars" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
-                <DoubleSlider name="BPM" min={0} max={300} step={5} min_label="0" max_label="∞" />
-                <div tabindex="0" class="collapse collapse-arrow bg-base-300 col-span-full">
-                    <input type="checkbox" />
-                    <div class="collapse-title flex flex-row gap-2 items-center">
-                        <i class="fa-solid fa-sliders" />
-                        <div>Advanced Filters</div>
+                <DoubleSlider code="sr" name="Stars" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
+                <DoubleSlider code="bpm" name="BPM" min={0} max={300} step={5} min_label="0" max_label="∞" />
+                <details class="group bg-base-300 rounded-lg col-span-full">
+                    <summary class="cursor-pointer rounded-lg flex flex-row gap-4 px-4 py-2 items-center">
+                        <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
+                        <span>Advanced Filters</span>
+                    </summary>
+                    <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <DoubleSlider code="len" name="Length" min={0} max={600} step={30} min_label="0s" max_label="∞" />
+                        <DoubleSlider code="year" name="Year" min={2007} max={new Date().getFullYear()} step={1} min_label="2007" max_label="now" />
+                        <DoubleSlider code="ar" name="AR" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
+                        <DoubleSlider code="cs" name="CS" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
+                        <DoubleSlider code="od" name="OD" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
+                        <DoubleSlider code="hp" name="HP" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
                     </div>
-                    <div class="collapse-content grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <DoubleSlider name="Length" min={0} max={600} step={30} min_label="0s" max_label="∞" />
-                        <DoubleSlider name="Year" min={2007} max={new Date().getFullYear()} step={1} min_label="2007" max_label="now" />
-                        <DoubleSlider name="AR" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
-                        <DoubleSlider name="CS" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
-                        <DoubleSlider name="OD" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
-                        <DoubleSlider name="HP" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
-                    </div>
-                </div>
+                </details>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
                 <div class="md:col-span-2">

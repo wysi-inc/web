@@ -53,3 +53,23 @@
     display: none !important;
     opacity: 0;
 }
+
+.double_slider::-webkit-slider-thumb,
+.double_slider::-moz-range-thumb {
+    pointer-events: all;
+    background-color: #fff;
+    z-index: 10;
+}
+
+.double_slider::-webkit-inner-spin-button,
+.double_slider::-webkit-outer-spin-button {
+    opacity: 1;
+}
+
+.double_slider {
+    z-index: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    pointer-events: none !important;
+}
