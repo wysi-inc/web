@@ -128,13 +128,13 @@ const UserPage = async (p: Props) => {
 
     return (<>
         <UserTopPanel user={user} mode={p.mode} />
-        <div class="underline-offset-1 text-neutral-content sticky -mt-8 top-16 bg-base-300 md:rounded-lg shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-6 flex-wrap">
+        <nav class="underline-offset-1 text-neutral-content sticky -mt-8 top-16 bg-base-300 md:rounded-lg shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-6 flex-wrap">
             <a class="hover:underline" href="#top">Top</a>
             {panels.map((p) => {
                 if (!p.show_if) return <></>;
                 return <a class="hover:underline" href={`#${p.code}`}>{p.title}</a>
             })}
-        </div>
+        </nav>
         {panels.map((p) => {
             if (!p.show_if) return <></>;
             if (p.url) return (

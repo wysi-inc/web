@@ -43,10 +43,10 @@ export const beatmapRoutes = new Elysia({ prefix: '/beatmapsets' })
         </HtmxPage>
     ))
     .post("/list", ({ body }) => (
-        <BeatmapsList body={body} />
+        <BeatmapsList body={body} offset={"0"} />
     ), queryBodyElysia)
-    .post("/list/:cursor", ({ body, params }) => (
-        <BeatmapsList body={body} cursor={params.cursor} />
+    .post("/list/:offset", ({ body, params }) => (
+        <BeatmapsList body={body} offset={params.offset} />
     ), queryBodyElysia)
     .get("/:set_id", async ({ request, jwt, cookie, params }: Route) => (
         <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>

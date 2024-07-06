@@ -10,17 +10,17 @@ type Props = {
 
 const Panel = ({ children, icon, tooltip, title, code, info }: Props) => (
     <section class="scroll-mt-36 shadow-lg md:rounded-lg bg-base-100 p-4 flex flex-col gap-4" id={code}>
-        <div class="flex flex-row items-center gap-2">
+        <header class="flex flex-row items-center gap-2">
             <div class="tooltip tooltip-right" data-tip={tooltip}>
                 {icon}
             </div>
-            <span>{title}</span>
+            <h2>{title}</h2>
             {info ?
                 <div class="ms-auto tooltip tooltip-left cursor-help" data-tip={info}>
                     <i class="fa-solid fa-circle-info" />
                 </div> : <></>
             }
-        </div>
+        </header>
         <div class="flex flex-col">
             {children}
         </div>

@@ -1,7 +1,7 @@
 import { Empty, Key, type KeyboardProps } from "../KeyboardDisplay";
 
 function KTkl(p: KeyboardProps) {
-    return <div class="p-1 outline outline-1 rounded-lg w-min ktkl">
+    return <div class="p-1 outline outline-1 rounded-lg w-min">
         <div class="flex flex-row gap-1">
             <div class="flex flex-col">
                 <div class="flex flex-row justify-between mb-1">

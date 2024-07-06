@@ -1,56 +1,87 @@
-import type { BeatmapQuery, BeatmapSearch, BeatmapSort, Beatmapset } from "@/src/types/beatmaps";
+import type { BeatmapQuery, BeatmapSort, Beatmapset } from "@/src/types/beatmaps";
 import { v2 } from "osu-api-extended";
 
-export async function getBeatmaps(q: BeatmapQuery | undefined, cursor_string: string | undefined): Promise<BeatmapSearch | null> {
-
-    if (!q) {
-        const res = (await v2.beatmaps.search({}) as any) as BeatmapSearch;
-        if ((res as any).error) {
-            return null;
+export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ sets: Beatmapset[], offset: number }> {
+    const url = new URL("https://catboy.best/api/v2/search");
+    if (q) {
+        let sorting: BeatmapSort;
+        if (!q.sorting_title) {
+            sorting = "ranked_desc";
+        } else if (q.sorting?.includes(q.sorting_title)) {
+            sorting = q.sorting as BeatmapSort;
+        } else {
+            sorting = `${q.sorting_title}_desc` as BeatmapSort;
         }
-        return res;
+        const min_date = new Date();
+        min_date.setFullYear(Number(q.year_min));
+        const max_date = new Date();
+        max_date.setFullYear(Number(q.year_max) + 1);
+        const query = [];
+        if (q.mapper) {
+            query.push(`creator=${q.mapper}`);
+        }
+        if (q.bpm_min && Number(q.bpm_min) > 0) {
+            query.push(`bpm>=${q.bpm_min}`);
+        }
+        if (q.bpm_max && Number(q.bpm_max) < 300) {
+            query.push(`bpm>=${q.bpm_min}`);
+        }
+        if (q.sr_min && Number(q.sr_min) > 0) {
+            query.push(`beatmaps.difficulty_rating>=${q.sr_min}`);
+        }
+        if (q.sr_max && Number(q.sr_max) < 10) {
+            query.push(`beatmaps.difficulty_rating<=${q.sr_max}`);
+        }
+        if (q.year_min && Number(q.year_min) > 2007) {
+            query.push(`submitted_date>=${min_date.getTime()}`);
+        }
+        if (q.year_max && Number(q.year_max) < new Date().getFullYear()) {
+            query.push(`submitted_date<=${max_date.getTime()}`);
+        }
+        if (q.ar_min && Number(q.ar_min) > 0) {
+            query.push(`beatmaps.ar>=${q.ar_min}`);
+        }
+        if (q.ar_max && Number(q.ar_max) < 10) {
+            query.push(`beatmaps.ar<=${q.ar_max}`);
+        }
+        if (q.cs_min && Number(q.cs_min) > 0) {
+            query.push(`beatmaps.cs>=${q.cs_min}`);
+        }
+        if (q.cs_max && Number(q.cs_max) < 10) {
+            query.push(`beatmaps.cs<=${q.cs_max}`);
+        }
+        if (q.hp_min && Number(q.hp_min) > 0) {
+            query.push(`beatmaps.hp>=${q.hp_min}`);
+        }
+        if (q.hp_max && Number(q.hp_max) < 10) {
+            query.push(`beatmaps.hp<=${q.hp_max}`);
+        }
+        if (q.od_min && Number(q.od_min) > 0) {
+            query.push(`beatmaps.od>=${q.od_min}`);
+        }
+        if (q.od_max && Number(q.od_max) < 10) {
+            query.push(`beatmaps.od<=${q.od_max}`);
+        }
+        let query_string = "";
+        if (q.title) {
+            query_string += q.title;
+        }
+        if (query.length > 0) {
+            query_string += `[${query.join(" AND ")}]`;
+        }
+        if (query_string) {
+            url.searchParams.set("query", query_string);
+        }
+        url.searchParams.set("limit", "50");
+        url.searchParams.set("offset", offset || "0");
+        url.searchParams.set("mode", q.mode || "-1");
+        url.searchParams.set("status", q.status || "-3");
+        url.searchParams.set("sort", q.sorting || "ranked_date;desc");
     }
-
-    let sorting: BeatmapSort;
-    if (!q.sorting_title) {
-        sorting = "ranked_desc";
-    } else if (q.sorting?.includes(q.sorting_title)) {
-        sorting = q.sorting as BeatmapSort;
-    } else {
-        sorting = `${q.sorting_title}_desc` as BeatmapSort;
-    }
-
-    const res: BeatmapSearch = (await v2.beatmaps.search({
-        query: [
-            q.title && q.title,
-            // q.artist && `artist=${q.artist}`,
-            q.mapper && `creator=${q.mapper}`,
-            q.bpm_min === "0" ? null : `bpm>=${q.bpm_min}`,
-            q.bpm_max === "300" ? null : `bpm<=${q.bpm_max}`,
-            q.sr_min === "0" ? null : `stars>=${q.sr_min}`,
-            q.sr_max === "10" ? null : `stars<=${q.sr_max}`,
-            q.len_min === "0" ? null : `length>=${q.len_min}`,
-            q.len_max === "600" ? null : `length<=${q.len_max}`,
-            q.year_min === "2007" ? null : `created>=${q.year_min}`,
-            q.year_max === new Date().getFullYear().toString() ? null : `created<=${q.year_max}`,
-            q.ar_min === "0" ? null : `ar>=${q.ar_min}`,
-            q.ar_max === "10" ? null : `ar<=${q.ar_max}`,
-            q.cs_min === "0" ? null : `cs>=${q.cs_min}`,
-            q.cs_max === "10" ? null : `cs<=${q.cs_max}`,
-            q.hp_min === "0" ? null : `hp>=${q.hp_min}`,
-            q.hp_max === "10" ? null : `hp<=${q.hp_max}`,
-            q.od_min === "0" ? null : `od>=${q.od_min}`,
-            q.od_max === "10" ? null : `od<=${q.od_max}`,
-        ].filter(Boolean).join(" "),
-        sort: sorting,
-        section: q.status as any,
-        mode: q.mode as any,
-        cursor_string
-    }) as any) as BeatmapSearch;
-    if ((res as any).error) {
-        return null;
-    }
-    return res;
+    const res = await fetch(url.toString());
+    if (!res.ok) return { sets: [], offset: 0 };
+    const sets = await res.json() as any;
+    return { sets, offset: Number(offset) + sets.length };
 }
 
 export async function getBeatmapset(id: number): Promise<Beatmapset> {

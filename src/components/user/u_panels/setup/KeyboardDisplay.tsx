@@ -46,6 +46,16 @@ type Props = {
     editable: boolean
 }
 
+const layoutText = {
+    k2: "2 Keys",
+    k3: "3 Keys",
+    k4: "4 Keys",
+    k60: "60% Keyboard",
+    k75: "75% Keyboard",
+    ktkl: "Tenkeyless Keyboard",
+    kfull: "Full Keyboard",
+};
+
 const KeyboardDisplay = ({ keyboard, editable }: Props) => {
 
     const empty = isEmpty(keyboard);
@@ -97,25 +107,35 @@ const KeyboardDisplay = ({ keyboard, editable }: Props) => {
                         <option value="kfull" selected={keyboard?.layout === "kfull"}>Full Keyboard</option>
                     </select>
                     <span class="input input-sm bg-base-300 hidden peer-disabled:block">
-                        {keyboard?.layout === "k2" && "2 Keys"}
-                        {keyboard?.layout === "k3" && "3 Keys"}
-                        {keyboard?.layout === "k4" && "4 Keys"}
-                        {keyboard?.layout === "k60" && "60% Keyboard"}
-                        {keyboard?.layout === "k75" && "75% Keyboard"}
-                        {keyboard?.layout === "ktkl" && "Tenkeyless Keyboard"}
-                        {keyboard?.layout === "kfull" && "Full Keyboard"}
+                        {keyboard?.layout ? layoutText[keyboard?.layout] : undefined}
                     </span>
                 </label>
-                <fieldset disabled class="hidden" id="keyboard_store">
-                    <div class="k0" />
-                    <K2 keys={[]} />
-                    <K3 keys={[]} />
-                    <K4 keys={[]} />
-                    <K60 keys={[]} />
-                    <K75 keys={[]} />
-                    <KTkl keys={[]} />
-                    <KFull keys={[]} />
-                </fieldset>
+                <div class="hidden" id="keyboard_store">
+                    <template id="k0_temp">
+                        <div />
+                    </template>
+                    <template id="k2_temp">
+                        <K2 keys={[]} />
+                    </template>
+                    <template id="k3_temp">
+                        <K3 keys={[]} />
+                    </template>
+                    <template id="k4_temp">
+                        <K4 keys={[]} />
+                    </template>
+                    <template id="k60_temp">
+                        <K60 keys={[]} />
+                    </template>
+                    <template id="k75_temp">
+                        <K75 keys={[]} />
+                    </template>
+                    <template id="ktkl_temp">
+                        <KTkl keys={[]} />
+                    </template>
+                    <template id="kfull_temp">
+                        <KFull keys={[]} />
+                    </template>
+                </div>
             </div>
         </div>
     </div>;

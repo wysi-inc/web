@@ -98,10 +98,10 @@ function formChange(e) {
             tablet_area.style.transform = `translate(-50%, -50%) rotate(${value}deg)`;
             break;
         case 'keyboard_layout':
-            const store = document.getElementById('keyboard_store');
-            const keyboard = store.getElementsByClassName(value)[0];
+            const keeb_template = document.getElementById(`${value}_temp`);
             const keyboard_display = document.getElementById('keyboard_display');
-            keyboard_display.innerHTML = keyboard.outerHTML;
+            keyboard_display.innerHTML = "";
+            keyboard_display.appendChild(keeb_template.content.cloneNode(true));
             break;
         default:
             break;

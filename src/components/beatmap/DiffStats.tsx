@@ -61,7 +61,7 @@ const DiffStats = ({ diff }: Props) => {
                     </div>
                     <div id="stats_pp"><span class="loading loading-spinner loading-xs" />pp</div>
                 </div>
-                <table class="">
+                <table>
                     {getProgress("AR", diff.ar)}
                     {getProgress("CS", diff.cs)}
                     {getProgress("OD", diff.accuracy)}

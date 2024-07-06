@@ -29,7 +29,6 @@ export type BeatmapQuery = {
     od_max?: string;
     mode?: string;
     status?: string;
-    offset?: string;
     sorting?: string;
     sorting_title?: string;
 }

@@ -1,5 +1,4 @@
-const Search = () => {
-
+function Search() {
     return (<>
         <button id="search_button" class="grid grid-cols-3 btn btn-wide bg-base-300">
             <div class="col-start-2 flex flex-row gap-2">
