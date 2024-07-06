@@ -4136,6 +4136,14 @@ input.tab:checked + .tab-content,
   margin-top: auto;
 }
 
+.-ms-4 {
+  margin-inline-start: -1rem;
+}
+
+.-ms-2 {
+  margin-inline-start: -0.5rem;
+}
+
 .block {
   display: block;
 }
@@ -4836,6 +4844,11 @@ input.tab:checked + .tab-content,
   line-height: 1rem;
 }
 
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -5100,6 +5113,32 @@ input.tab:checked + .tab-content,
        appearance: none;
   position: absolute;
   pointer-events: none !important;
+}
+
+.hover\:mx-4:hover {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.hover\:mx-1:hover {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.hover\:me-3:hover {
+  margin-inline-end: 0.75rem;
+}
+
+.hover\:ms-1:hover {
+  margin-inline-start: 0.25rem;
+}
+
+.hover\:me-2:hover {
+  margin-inline-end: 0.5rem;
+}
+
+.hover\:ms-0:hover {
+  margin-inline-start: 0px;
 }
 
 .hover\:-translate-y-1:hover {

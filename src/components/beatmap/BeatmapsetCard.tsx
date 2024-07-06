@@ -12,7 +12,8 @@ type Props = {
 const BeatmapsetCard = ({ beatmapset }: Props) => {
 
     const diffs = beatmapset.beatmaps;
-    const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
+    // const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
+    const cardImg = `https://b.ppy.sh/thumb/${beatmapset.id}l.jpg`;
     const DIFF_LIMIT = 7;
 
     return (

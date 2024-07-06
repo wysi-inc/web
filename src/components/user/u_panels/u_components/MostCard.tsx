@@ -14,7 +14,8 @@ type Props = {
 
 const MostCard = ({ beatmap, beatmapset, position, plays }: Props) => {
 
-    const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
+    // const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
+    const cardImg = `https://b.ppy.sh/thumb/${beatmapset.id}l.jpg`;
 
     return (
         <div class="group rounded-lg flex flex-row bg-base-300 shadow-lg">

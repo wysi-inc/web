@@ -18,6 +18,7 @@ const BeatmapsetPage = async (props: Props) => {
 
     if ((beatmapset as any).error === null) return <h1>Not found</h1>;
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
+    // const cardImg = `https://b.ppy.sh/thumb/${beatmapset.id}l.jpg`;
 
     const diff: Beatmap = (beatmapset.beatmaps?.find(b => b.id === props.beatmap_id) || beatmapset.beatmaps[0]) as any;
 
@@ -40,7 +41,7 @@ const BeatmapsetPage = async (props: Props) => {
                         }} />
                     <div class="flex flex-row gap-4">
                         <div class="flex flex-col gap-1 justify-between">
-                            <h1 class="text-lg text-base-content">
+                            <h1 class="text-2xl text-base-content">
                                 {beatmapset.title}
                             </h1>
                             <p class="text-md text-neutral-content text-opacity-75">
@@ -162,7 +163,7 @@ const BeatmapsetPage = async (props: Props) => {
         {hasLeaderboards &&
             <div hx-post={`/beatmapsets/${props.set_id}/${diff.id}/scores/${diff.mode}`} hx-trigger="load" />
         }
-        <script type="module" src="/public/js/beatmapset.js" />
+        <script type="module" src={`/public/js/beatmapset.js?v=${Date.now()}`} />
     </>);
 }
 

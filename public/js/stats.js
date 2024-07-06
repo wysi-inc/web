@@ -1,5 +1,4 @@
-stats();
-function stats() {
+function Stats() {
     const form = document.getElementById('stats_form');
     getStats(form);
     form.addEventListener('change', (e) => {
@@ -39,15 +38,6 @@ function getAcc(form) {
     let acc = score / max_possible_score * 100;
     acc = acc.toFixed(2).replace(/\.?0+$/, '');
     return { acc, misses: hits.xmiss };
-}
-
-function secondsToTime(secs) {
-    let hours = Math.floor(secs / 3600);
-    let minutes = Math.floor(secs / 60) % 60;
-    let seconds = secs % 60;
-    let h = hours > 0 ? hours + 'h ' : '';
-    let m = minutes > 0 ? minutes + 'm ' : '';
-    return `${h}${m}${seconds}s`;
 }
 
 function setNewStats(html, val) {

@@ -31,7 +31,8 @@ const ScoreCard = async ({ score, position }: Props) => {
         "katu": "0"
     }, beatmap.mode as Mode);
 
-    const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
+    // const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
+    const cardImg = `https://b.ppy.sh/thumb/${beatmapset.id}l.jpg`;
 
     return <>
         <div class="score_card group grow rounded-lg flex flex-row bg-base-300 shadow-lg"

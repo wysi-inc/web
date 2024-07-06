@@ -12,14 +12,17 @@ const DiffStats = ({ diff }: Props) => {
 
     function getProgress(label: string, value: number): JSX.Element {
         return (
-            <div id={`stats_${label.toLowerCase()}`} class="flex flex-row items-center gap-3" data-original-value={value}>
-                <label class="w-10 text-start">{label.toUpperCase()}:</label>
-                <progress class="justify-between progress progress-accent"
-                    value={value} max="11" />
-                <span class="w-10 text-end">
+            <tr id={`stats_${label.toLowerCase()}`} data-original-value={value}>
+                <td>
+                    <label class="w-10 text-start">{label.toUpperCase()}:</label>
+                </td>
+                <td>
+                    <progress class="justify-between progress progress-accent" value={value} max="11" />
+                </td>
+                <td class="text-end">
                     {value}
-                </span>
-            </div>
+                </td>
+            </tr>
         )
     }
 
@@ -58,16 +61,14 @@ const DiffStats = ({ diff }: Props) => {
                     </div>
                     <div id="stats_pp"><span class="loading loading-spinner loading-xs" />pp</div>
                 </div>
-                <div class="flex flex-col p-2 gap-2">
+                <table>
                     {getProgress("AR", diff.ar)}
                     {getProgress("CS", diff.cs)}
                     {getProgress("OD", diff.accuracy)}
                     {getProgress("HP", diff.drain)}
-                </div>
+                </table>
             </div>
-            <form id="stats_form" data-beatmap-id={diff.id}
-                class="flex flex-col gap-2"
-                data-total-hits={total_hits}>
+            <form id="stats_form" data-beatmap-id={diff.id} class="flex flex-col gap-2" data-total-hits={total_hits}>
                 <div class="flex flex-row items-center justify-between p-2 gap-2 rounded-lg bg-neutral">
                     <div>Accuracy:</div>
                     <span id="acc_label">100%</span>
@@ -120,7 +121,7 @@ const DiffStats = ({ diff }: Props) => {
                     </button>
                 </div>
             </form>
-            <script src="/public/js/stats.js" />
+            <script defer type="module">Stats()</script>
         </div>
     );
 }
