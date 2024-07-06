@@ -1,6 +1,6 @@
 import { Elysia, t } from 'elysia'
 import { verifyUser } from '../libs/auth';
-import { deleteCollection, saveCollection, saveSetup } from '../db/users/update_user';
+import { deleteCollections, saveCollection, saveSetup } from '../db/users/update_user';
 import type { BeatmapCategory, Mode, Route, ScoreCategory } from '../types/osu';
 import HtmxPage from '../libs/routes';
 import UserPage from '../components/user/UserPage';
@@ -78,7 +78,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             }
 
             if (Number(params.id) != user.id) return;
-            await deleteCollection(user.id);
+            await deleteCollections(user.id);
             return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} />
         })
     )

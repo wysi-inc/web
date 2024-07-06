@@ -18,7 +18,23 @@ async function UserCollectionsPanel({ user_id, logged_id, collections }: Props) 
 
     return (<div id="colpanel" class="max-h-96 overflow-y-scroll flex flex-col gap-4">
         {editable ?
-            <div class="flex flex-row-reverse flex-wrap items-center justify-between">
+            <form id="collections_form" class="flex flex-row items-center justify-between gap-2" hx-swap="innerHTML" hx-target="#colpanel" hx-trigger="submit"
+                hx-encoding='multipart/form-data' hx-post={`/users/${user_id}/collections/parse`} >
+                <fieldset id="collections_fieldset" class="join group" disabled>
+                    <input type="file" accept=".db" name="collection" required class="peer group-disabled:hidden join-item file-input file-input-sm file-input-bordered w-full max-w-xs" />
+                    <button type="submit" class="group-disabled:hidden peer-invalid:hidden join-item btn btn-sm btn-primary">
+                        <div class="htmx-indicator flex flex-row items-center gap-4">
+                            <span class="loading loading-spinner" />
+                        </div>
+                        Submit
+                        <i class="fa-solid fa-arrow-up-from-bracket" />
+                    </button>
+                    {!collections || collections.length === 0 ?
+                        <span class="hidden group-disabled:block">
+                            Upload your <em>collection.db</em> file from your osu! folder
+                        </span> : null
+                    }
+                </fieldset>
                 <div class="flex flex-row gap-2">
                     <button type="button" class="block btn btn-sm btn-accent"
                         id="collections_form_edit">
@@ -50,22 +66,11 @@ async function UserCollectionsPanel({ user_id, logged_id, collections }: Props) 
                         </div>
                     </dialog>
                 </div>
-                <form id="collections_form" class="hidden flex-row items-center gap-2" hx-swap="innerHTML" hx-target="#colpanel" hx-trigger="submit"
-                    hx-encoding='multipart/form-data' hx-post={`/users/${user_id}/collections/parse`} >
-                    <div class="join">
-                        <input type="file" name="collection" class="join-item file-input file-input-sm file-input-bordered w-full max-w-xs" />
-                        <button type="submit" class="join-item btn btn-sm btn-primary">
-                            Submit
-                            <div class="htmx-indicator flex flex-row items-center gap-4">
-                                <span class="loading loading-spinner" />
-                            </div>
-                        </button>
-                    </div>
-                </form>
                 <script src="/public/js/collections.js" />
-            </div> : <></>
+            </form>
+            : <></>
         }
-        {collections ? <>
+        {collections && collections.length > 0 ? <>
             <button class="btn btn-sm btn-info collection-download-button h-8 cursor-pointer flex flex-row gap-2 items-center"
                 id={`btn_download_${user_id}`} data-name={`all_collections_${user_id}`} data-ids={JSON.stringify(collections.map(c => c.beatmapsMd5.map(h => h)).flat())}>
                 <i class="regular fa-regular fa-file-zipper" />
@@ -112,8 +117,7 @@ async function UserCollectionsPanel({ user_id, logged_id, collections }: Props) 
                 ))}
                 <script type="module" src="/public/js/collectiondownloader.js" />
             </div>
-        </> : <>This user hasn't uploaded their collections</>
-        }
+        </> : <></>}
     </div>)
 }
 

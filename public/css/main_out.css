@@ -4982,6 +4982,10 @@ details.collapse summary::-webkit-details-marker {
   padding-top: 1rem;
 }
 
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -5315,7 +5319,15 @@ details.collapse summary::-webkit-details-marker {
   display: flex;
 }
 
+.group:disabled .group-disabled\:block {
+  display: block;
+}
+
 .group:disabled .group-disabled\:hidden {
+  display: none;
+}
+
+.peer:invalid ~ .peer-invalid\:hidden {
   display: none;
 }
 

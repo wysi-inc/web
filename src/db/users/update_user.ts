@@ -23,7 +23,7 @@ export async function updateUser(user: UserType, mode: Mode): Promise<UserType> 
                 modes: { [mode]: new_ranks },
                 medals: user.user_achievements
             });
-            db_user.save();
+            await db_user.save();
             user.db_ranks = new_ranks;
             user.db_setup = db_user.setup as any;
             return user;
@@ -163,7 +163,7 @@ export async function saveSetup(user_id: number, setup: any): Promise<Setup | nu
             computer,
         };
 
-        user.save();
+        await user.save();
         return user.setup;
     } catch (err) {
         console.error(err);
@@ -174,8 +174,8 @@ export async function saveSetup(user_id: number, setup: any): Promise<Setup | nu
 export async function parseCollection(file: any) {
     try {
         let collectionBuffer = Buffer.from(await file.arrayBuffer());
-        const collectionDB = new OsuDBParser(null, collectionBuffer); // Yeah, that's okay
-        return collectionDB.getCollectionData(); // This is collection.db data you can make with this all that you want.
+        const collectionDB = new OsuDBParser(null, collectionBuffer);
+        return collectionDB.getCollectionData();
     } catch (err) {
         return;
     }
@@ -194,14 +194,14 @@ export async function saveCollection(body: object, user_id: number) {
     const user = await User.findOne({ user_id });
     if (!user) throw new Error("User doesnt exist");
     user.collections = collections as any;
-    user.save();
+    await user.save();
 }
 
 
-export async function deleteCollection(user_id: number) {
+export async function deleteCollections(user_id: number) {
     const user = await User.findOne({ user_id });
     if (!user) return;
     if (!user.collections) return;
-    delete user.collections;
-    user.save();
+    user.collections = [] as any;
+    await user.save();
 }

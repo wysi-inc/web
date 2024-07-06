@@ -12,8 +12,6 @@ import { userRoutes } from "./src/routes/user";
 import { beatmapRoutes } from "./src/routes/beatmaps";
 import { updateMedals } from "./src/db/medals/update_medals";
 import { apiRoutes } from "./src/routes/api";
-import { User } from "./src/models/User";
-import { CollectionsDB2Model } from "./src/models/CollectionDB";
 
 const port = Number(process.env.PORT as string);
 const mongo_uri = process.env.MONGO_URI as string;
@@ -57,7 +55,7 @@ new Elysia()
         const ip = request.headers.get("x-forwarded-for");
         const route = request.url.split("/").slice(3).join("/");
         const method = request.method;
-        console.log(`${(ip || "0.0.0.0").padStart(15, " ")} ${method.padStart(4, " ")}::/${route}`);
+        console.log(`${(ip || "0.0.0.0").padStart(15, " ")} ${method.padStart(6, " ")}::/${route}`);
     })
     .use(jwtcfg)
     .get("/favicon.ico", Bun.file("./public/favicon.ico"))

@@ -11,9 +11,9 @@ async function CollectionsForm({ file, user_id }: Props) {
     if (!collections) return <></>;
 
     return (<>
-        <form class="flex flex-col gap-4" hx-swap="innerHTML" hx-target="#colpanel" hx-trigger="submit"
+        <form class="flex flex-col relative" hx-swap="innerHTML" hx-target="#colpanel" hx-trigger="submit"
             hx-put={`/users/${user_id}/collections/submit`} id="collections_form">
-            <div class="flex flex-row justify-between">
+            <div class="flex flex-row justify-between sticky top-0 bg-base-100 pb-4">
                 <div class="join">
                     <button id="collections-form-selectall" type="button" class="join-item btn btn-sm btn-secondary">
                         Select All

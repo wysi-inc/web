@@ -21,6 +21,8 @@ const UserPage = async (p: Props) => {
 
     p.mode = user.rank_history?.mode as Mode || "osu";
 
+    console.log(user.username, user.collections);
+
     const panels: PanelType[] = [
         {
             title: "History",
@@ -55,7 +57,7 @@ const UserPage = async (p: Props) => {
             code: "setup",
             icon: <i class="fa-solid fa-computer" />,
             url: `/users/${user.id}/0/panels/setup`,
-            show_if: user.db_setup !== undefined || editable,
+            show_if: editable || user.db_setup !== undefined,
         },
         // {
         //     title: "Skins",
@@ -105,7 +107,7 @@ const UserPage = async (p: Props) => {
             info: "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)",
             icon: <i class="fa-solid fa-list" />,
             url: `/users/${user.id}/${p.mode}/panels/collections`,
-            show_if: user.collections !== undefined || editable
+            show_if: editable || (user.collections !== undefined && user.collections.length > 0)
         },
         {
             title: "Most Played",
