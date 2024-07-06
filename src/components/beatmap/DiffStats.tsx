@@ -12,14 +12,14 @@ const DiffStats = ({ diff }: Props) => {
 
     function getProgress(label: string, value: number): JSX.Element {
         return (
-            <tr id={`stats_${label.toLowerCase()}`} data-original-value={value}>
-                <td>
+            <tr id={`stats_${label.toLowerCase()}`} data-original-value={value} class="border-none">
+                <td class="p-1">
                     <label class="w-10 text-start">{label.toUpperCase()}:</label>
                 </td>
-                <td>
+                <td class="p-1">
                     <progress class="justify-between progress progress-accent" value={value} max="11" />
                 </td>
-                <td class="text-end">
+                <td class="p-1 text-end">
                     {value}
                 </td>
             </tr>
@@ -31,7 +31,7 @@ const DiffStats = ({ diff }: Props) => {
     const mods: string[] = ['HR', 'DT', 'HD', 'FL', 'EZ', 'HT'];
 
     return (
-        <div class="flex flex-col gap-4 p-4 rounded-xl bg-base-100">
+        <div class="flex flex-col gap-2 p-4 rounded-xl bg-base-100">
             <div class="flex flex-row gap-2">
                 <DiffIcon setId={diff.beatmapset_id} diffId={diff.id}
                     size={24} mode={diff.mode}
@@ -61,7 +61,7 @@ const DiffStats = ({ diff }: Props) => {
                     </div>
                     <div id="stats_pp"><span class="loading loading-spinner loading-xs" />pp</div>
                 </div>
-                <table>
+                <table class="">
                     {getProgress("AR", diff.ar)}
                     {getProgress("CS", diff.cs)}
                     {getProgress("OD", diff.accuracy)}
@@ -112,7 +112,7 @@ const DiffStats = ({ diff }: Props) => {
                     )}
                 </div>
                 <div class="flex flex-row gap-2">
-                    <button type="reset" class="btn btn-secondary" value="reset">
+                    <button type="reset" class="btn btn-secondary btn-square" value="reset">
                         <i class="fa-solid fa-trash-can" />
                     </button>
                     <button type="submit" class="grow btn btn-primary">

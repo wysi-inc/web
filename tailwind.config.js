@@ -30,6 +30,8 @@ module.exports = {
         }, {
             pastel: {
                 ...require("daisyui/src/theming/themes")["pastel"],
+                // "--rounded-box": "0.5rem", // border radius rounded-box utility class, used in card and other large boxes
+                "--rounded-btn": "0.5rem",
                 "accent": "#ffb86c",
                 "neutral": "#f0f0f0",
                 "primary": "#ff79c6",
