@@ -58,9 +58,8 @@ const Sort = ({ label, code }: SortingProps) => <>
 </>
 
 const BeatmapsetSearch = () => <>
-    <form class="flex flex-col rounded-lg drop-shadow-lg bg-base-300"
-        id="search-form" hx-post="/beatmapsets/list" hx-trigger="load, input delay:500ms"
-        hx-target="#beatmap-search-results" hx-indicator="#beatmap-search-indicator"
+    <form class="flex flex-col rounded-lg drop-shadow-lg bg-base-300" id="search-form"
+        hx-post="/beatmapsets/list" hx-trigger="load, input delay:500ms" hx-target="#beatmap-search-results"
         hx-on--before-request="document.getElementById('beatmap-search-results').innerHTML='';">
         <div class="flex flex-col gap-4 p-4 bg-base-100 rounded-lg">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -129,8 +128,7 @@ const BeatmapsetSearch = () => <>
         </div>
     </form>
     <script async type="module" src={`/public/js/sliders.js?v=${Date.now()}`} />
-    <span id="beatmap-search-indicator" class="hidden htmx-indicator mx-auto loading loading-spinner loading-xs" />
-    <output id="beatmap-search-results" class="empty:hidden bg-base-100 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg" />
+    <output id="beatmap-search-results" class="empty:hidden peer bg-base-100 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg" />
 </>
 
 export default BeatmapsetSearch;

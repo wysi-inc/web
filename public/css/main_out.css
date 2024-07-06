@@ -5248,6 +5248,10 @@ input.tab:checked + .tab-content,
   display: none;
 }
 
+.peer:empty ~ .peer-empty\:hidden {
+  display: none;
+}
+
 .peer:disabled ~ .peer-disabled\:block {
   display: block;
 }
