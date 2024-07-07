@@ -73,3 +73,7 @@
     position: absolute;
     pointer-events: none !important;
 }
+
+.truncated {
+    max-width: calc(100% - 100px);
+}

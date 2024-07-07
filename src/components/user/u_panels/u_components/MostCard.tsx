@@ -27,8 +27,8 @@ const MostCard = ({ beatmap, beatmapset, position, plays }: Props) => {
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat"
                     }}>
-                    <div class="bg-base-300 bg-opacity-75 flex flex-row rounded-lg backdrop-blur-sm">
-                        <div class="group rounded-lg w-24 flex items-center justify-center"
+                    <div class="bg-base-300 bg-opacity-75 grid grid-cols-4 rounded-lg backdrop-blur-sm">
+                        <div class="group rounded-lg flex items-center justify-center"
                             style={{
                                 backgroundImage: `url(${cardImg}), url('/public/img/fallback.webp')`,
                                 backgroundSize: "cover",
@@ -42,7 +42,7 @@ const MostCard = ({ beatmap, beatmapset, position, plays }: Props) => {
                                 beatmap_artist={beatmapset.artist}
                             />
                         </div>
-                        <div class="flex flex-col py-2 px-4 max-w-52 lg:max-w-72">
+                        <div class="flex flex-col px-4 py-2 grow col-span-3">
                             <Link css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmapsets/${beatmapset.id}`}>{beatmapset.title}</Link>
                             <p class="text-neutral-content text-opacity-75 text-sm truncate">by {beatmapset.artist}</p>
                         </div>
