@@ -1,8 +1,29 @@
+import type { Mode } from "../types/osu";
+
 export const catalans: number[] = [
     17018032, // M4rti_
     17897192, // Siirius
     13817790, // -Yasai-
     20661304 // Japii
+];
+
+export const modes: { name: string, code: Mode }[] = [
+    {
+        name: "osu!",
+        code: "osu",
+    },
+    {
+        name: "osu!taiko",
+        code: "taiko",
+    },
+    {
+        name: "osu!catch",
+        code: "fruits",
+    },
+    {
+        name: "osu!mania",
+        code: "mania",
+    }
 ];
 
 export type Country = {

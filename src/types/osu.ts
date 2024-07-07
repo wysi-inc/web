@@ -25,9 +25,10 @@ export type PanelType = {
     tooltip?: string,
     info?: string,
     show_if: boolean,
+    manual?: boolean,
 } & (
         { jsx: JSX.Element, url?: never } |
-        { url: string, body?: string, jsx?: never, manual?: boolean }
+        { url: string, body?: string, jsx?: never }
     );
 
 export interface JWTOption<Name extends string | undefined = 'jwt', Schema extends TSchema | undefined = undefined> extends JWSHeaderParameters, Omit<JWTPayload, 'nbf' | 'exp'> {

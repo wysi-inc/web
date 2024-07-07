@@ -4,6 +4,7 @@ import LazyPanel from "./LazyPanel";
 import { getUser } from "@/src/db/users/get_user";
 import { type Mode, type PanelType } from "../../types/osu";
 import Panel from "./Panel";
+import UserSetupPanel from "./u_panels/UserSetupPanel";
 
 type Props = {
     logged_id: number | undefined;
@@ -29,19 +30,20 @@ const UserPage = async (p: Props) => {
             code: "history",
             icon: <i class="fa-solid fa-chart-line" />,
             show_if: true,
-            jsx:
+            jsx: (
                 <UserHistoryPanel
                     db_ranks={user.db_ranks}
                     play_counts={user.monthly_playcounts}
                     replays_watched={user.replays_watched_counts}
                 />
+            )
         },
         {
             title: "About",
             code: "about",
             icon: <i class="fa-solid fa-user" />,
             show_if: user.page?.html !== undefined,
-            jsx:
+            jsx: (
                 <div class="rounded-lg bg-base-300 flex justify-center items-center">
                     {user.page.html ?
                         <div class="bbcode h-96 overflow-y-scroll grow">
@@ -51,13 +53,15 @@ const UserPage = async (p: Props) => {
                         </div> : <></>
                     }
                 </div>
+            )
         },
         {
             title: "Setup",
             code: "setup",
             icon: <i class="fa-solid fa-computer" />,
-            url: `/users/${user.id}/0/panels/setup`,
             show_if: editable || user.db_setup !== undefined,
+            manual: true,
+            jsx: (<UserSetupPanel setup={user.db_setup} page_id={user.id} logged_id={p.logged_id} />)
         },
         // {
         //     title: "Skins",
@@ -107,6 +111,7 @@ const UserPage = async (p: Props) => {
             info: "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)",
             icon: <i class="fa-solid fa-list" />,
             url: `/users/${user.id}/${p.mode}/panels/collections`,
+            manual: true,
             show_if: editable || (user.collections !== undefined && user.collections.length > 0)
         },
         {
@@ -142,7 +147,7 @@ const UserPage = async (p: Props) => {
                     url={p.url} body={p.body} tooltip={p.tooltip} info={p.info} />
             );
             else return (
-                <Panel title={p.title} code={p.code} icon={p.icon} tooltip={p.tooltip} info={p.info}>
+                <Panel title={p.title} code={p.code} icon={p.icon} tooltip={p.tooltip} info={p.info} manual={p.manual}>
                     {p.jsx}
                 </Panel>
             );

@@ -1,3 +1,4 @@
+import type { Mode } from "../types/osu";
 import type { Subdivision, UserSubdivision } from "../types/users";
 import { colors } from "./colors";
 import { subdivisionFlags } from "./constants";
@@ -19,6 +20,21 @@ export function getGradeLetter(grade: string): string {
             return "S";
         default:
             return grade.toUpperCase();
+    }
+}
+
+export function ModeToCode(mode: Mode) {
+    switch (mode) {
+        case 'osu':
+            return 0;
+        case 'taiko':
+            return 1;
+        case 'fruits':
+            return 2;
+        case 'mania':
+            return 3;
+        default:
+            return -1;
     }
 }
 
