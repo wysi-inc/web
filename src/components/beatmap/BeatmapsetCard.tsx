@@ -1,9 +1,10 @@
 import type { Beatmapset, BeatmapsetStatus } from "@/src/types/beatmaps";
-import DiffIcon from "./DiffIcon";
+import { DiffIconLink } from "./DiffIcon";
 import CardControls from "../web/CardControls";
 import StatusBadge from "./StatusBadge";
 import AudioPlayButton from "../web/AudioPlayButton";
 import Link from "../web/Link";
+import type { Mode } from "@/src/types/osu";
 
 type Props = {
     beatmapset: Beatmapset,
@@ -57,19 +58,16 @@ const BeatmapsetCard = ({ beatmapset }: Props) => {
                     {diffs.sort((a, b) =>
                         a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int)
                         .map((beatmap, i) => i < DIFF_LIMIT &&
-                            <DiffIcon setId={beatmapset.id} diffId={beatmap.id}
+                            <DiffIconLink setId={beatmapset.id} diffId={beatmap.id}
                                 diff={beatmap.difficulty_rating} size={20}
-                                mode={beatmap.mode} name={beatmap.version} />)
+                                mode={beatmap.mode as Mode} name={beatmap.version} />)
                     }
                     {diffs.length > DIFF_LIMIT &&
                         <div class="badge badge-info">+{beatmapset.beatmaps.length - DIFF_LIMIT}</div>
                     }
                 </div>
             </div>
-            <CardControls
-                beatmap_id={beatmapset.beatmaps[0].id}
-                set_id={beatmapset.id}
-            />
+            <CardControls set_id={beatmapset.id} />
         </div>
     )
 }

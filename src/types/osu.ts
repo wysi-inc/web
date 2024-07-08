@@ -1,5 +1,6 @@
 export type Mode = "osu" | "taiko" | "fruits" | "mania";
-export type Mod = "NF" | "EZ" | "HD" | "HR" | "SD" | "DT" | "HT" | "NC" | "FL" | "SO" | "PF" | "4K" | "5K" | "6K" | "7K" | "8K" | "FI" | "RD" | "LM" | "9K" | "10K" | "1K" | "3K" | "2K" | "V2" | "MR";
+export type Mod = "1K" | "2K" | "3K" | "4K" | "5K" | "6K" | "7K" | "8K" | "9K" | "AC" | "AD" | "AL" | "AP" | "AS" | "AT" | "BL" | "BR" | "BU" | "CL" | "CN" | "DA" | "DC" | "DF" | "DP" | "DT" | "EZ" | "FL" | "FR" | "GR" | "HD" | "HR" | "HT" | "MG" | "MR" | "MU" | "NC" | "NF" | "NM" | "NS" | "PF" | "RD" | "RP" | "RX" | "SD" | "SG" | "SI" | "SO" | "ST" | "SY" | "TC" | "TD" | "TP" | "TR" | "WD" | "WG" | "WU";
+
 export type Category = "score" | "performance";
 export type ScoreCategory = "best" | "recent" | "firsts" | "pinned";
 export type BeatmapCategory = "favourite" | "ranked" | "loved" | "pending" | "graveyard";

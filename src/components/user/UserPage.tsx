@@ -5,6 +5,7 @@ import { getUser } from "@/src/db/users/get_user";
 import { type Mode, type PanelType } from "../../types/osu";
 import Panel from "./Panel";
 import UserSetupPanel from "./u_panels/UserSetupPanel";
+import Title from "../web/Title";
 
 type Props = {
     logged_id: number | undefined;
@@ -30,6 +31,7 @@ const UserPage = async (p: Props) => {
             code: "history",
             icon: <i class="fa-solid fa-chart-line" />,
             show_if: true,
+            info: "ALT + Mouse Scroll to zoom",
             jsx: (
                 <UserHistoryPanel
                     db_ranks={user.db_ranks}
@@ -98,13 +100,6 @@ const UserPage = async (p: Props) => {
             show_if: true
         },
         {
-            title: "Beatmapsets",
-            code: "beatmapsets",
-            icon: <i class="fa-solid fa-screwdriver-wrench" />,
-            url: `/users/${user.id}/${p.mode}/panels/beatmapsets/favourite`,
-            show_if: true
-        },
-        {
             title: "Collections",
             code: "collections",
             tooltip: "powered by catboy.best",
@@ -115,10 +110,18 @@ const UserPage = async (p: Props) => {
             show_if: editable || (user.collections !== undefined && user.collections.length > 0)
         },
         {
+            title: "Beatmapsets",
+            code: "beatmapsets",
+            icon: <i class="fa-solid fa-screwdriver-wrench" />,
+            url: `/users/${user.id}/${p.mode}/panels/beatmapsets/favourite`,
+            show_if: true
+        },
+        {
             title: "Most Played",
             code: "most",
             icon: <i class="fa-solid fa-rotate-left" />,
             url: `/users/${user.id}/0/panels/most`,
+            manual: true,
             show_if: true,
         },
         {
@@ -132,6 +135,7 @@ const UserPage = async (p: Props) => {
     ];
 
     return (<>
+        <Title title={user.username} />
         <UserTopPanel user={user} mode={p.mode} />
         <nav class="underline-offset-1 text-neutral-content sticky -mt-8 top-16 bg-base-300 md:rounded-lg shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-6 flex-wrap">
             <a class="hover:underline" href="#top">Top</a>

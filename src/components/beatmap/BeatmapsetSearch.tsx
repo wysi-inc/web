@@ -1,6 +1,7 @@
 import type { MinoBeatmapSort } from "@/src/types/beatmaps";
 import DoubleSlider from "./DoubleSlider";
 import Input from "./Input";
+import Title from "../web/Title";
 
 const Radio = (p: { name: string, label: string, code: number }) => (
     <input class="btn" type="radio"
@@ -42,6 +43,7 @@ const Sort = (p: { label: string, code: MinoBeatmapSort }) => (
 
 function BeatmapsetSearch() {
     return (<>
+        <Title title="Beatmap Listing" />
         <form class="flex flex-col rounded-lg drop-shadow-lg bg-base-300" id="search-form"
             hx-post="/beatmapsets/list" hx-trigger="load, input delay:500ms" hx-target="#beatmap-search-results"
             hx-on--before-request="document.getElementById('beatmap-search-results').innerHTML='';">

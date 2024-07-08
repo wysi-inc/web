@@ -21,7 +21,7 @@ const UserBeatmapsPanel = ({ id, category }: Props) => {
                 class={`tab text-nowrap ${col}`}
                 aria-label={title} checked={current} aria-selected={current}
                 hx-trigger="click once"
-                hx-post={`/users/${id}/0/lists/beatmaps/${type}?offset=0&limit=6`}
+                hx-post={`/users/${id}/0/lists/beatmapsets/${type}?offset=0&limit=6`}
                 hx-target={`#beatmaps-list-${type}`} hx-disable={current}
                 hx-indicator={`#beatmaps-loading-${type}`} id={`${type}_tab`} aria-controls={`${type}_tabpannel`}
             />

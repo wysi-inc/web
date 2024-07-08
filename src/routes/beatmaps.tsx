@@ -1,5 +1,5 @@
 import { Elysia, t } from 'elysia'
-import type { Mode, Route } from '../types/osu';
+import type { Mod, Mode, Route } from '../types/osu';
 import BeatmapsetSearch from '../components/beatmap/BeatmapsetSearch';
 import BeatmapsList from '../components/beatmap/BeatmapsList';
 import BeatmapsetPage from '../components/beatmap/BeatmapsetPage';
@@ -59,12 +59,16 @@ export const beatmapRoutes = new Elysia({ prefix: '/beatmapsets' })
                 beatmap_id={Number(params.beatmap_id)} />
         </HtmxPage>
     ))
-    .post("/:set_id/:beatmap_id/scores/:mode", ({ params }) => (
-        <BeatmapScoreTable
-            id={Number(params.beatmap_id)}
-            mode={params.mode as Mode}
-        />
-    ), queryBodyElysia)
+    .post("/:set_id/:beatmap_id/scores/:mode", ({ params, body }) => {
+        console.log(body);
+        return (
+            <BeatmapScoreTable
+                id={Number(params.beatmap_id)}
+                mode={params.mode as Mode}
+                body={body}
+            />
+        );
+    })
     .post("/collectioncard/:hash", ({ params }) => (
         <BeatmapCollectionCard hash={params.hash} />
     ))

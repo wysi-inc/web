@@ -17,7 +17,7 @@ const LazyPanel = (p: Props) => {
         <Panel icon={p.icon} title={p.title} tooltip={p.tooltip} code={p.code} info={p.info}>
             {p.manual ?
                 <details class="group">
-                    <summary class="cursor-pointer bg-base-300 rounded-lg flex flex-row gap-4 items-center justify-between py-2 px-4"
+                    <summary class="cursor-pointer bg-neutral rounded-lg flex flex-row gap-4 items-center justify-between py-2 px-4"
                         hx-post={p.url} hx-trigger="click once" hx-swap="innerHTML" hx-vals={p.body} hx-indicator={`#loading-${p.code}`} hx-target={`#${p.code}_manual_lazy_panel`}>
                         <div class="flex flex-row gap-4 items-center">
                             <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />

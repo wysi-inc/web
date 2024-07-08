@@ -3,14 +3,15 @@ import DiffIcon from "./DiffIcon";
 import ModIcon from "../score/ModIcon";
 import { secondsToTime } from "@/src/libs/web_utils";
 import { colors } from "@/src/libs/colors";
+import type { Mod, Mode } from "@/src/types/osu";
 
 type Props = {
     diff: Beatmap,
 }
 
-const DiffStats = ({ diff }: Props) => {
+function DiffStats({ diff }: Props) {
 
-    function getProgress(label: string, value: number): JSX.Element {
+    function getProgress(label: string, value: number) {
         return (
             <tr id={`stats_${label.toLowerCase()}`} data-original-value={value} class="border-none">
                 <td class="p-1">
@@ -28,16 +29,15 @@ const DiffStats = ({ diff }: Props) => {
 
     const total_hits = diff.count_circles + diff.count_sliders + diff.count_spinners;
 
-    const mods: string[] = ['HR', 'DT', 'HD', 'FL', 'EZ', 'HT'];
+    const mods: Mod[] = ['HR', 'DT', 'HD', 'FL', 'EZ', 'HT'];
 
     return (
         <div class="flex flex-col gap-2 p-4 rounded-xl bg-base-100">
             <div class="flex flex-row gap-2">
-                <DiffIcon setId={diff.beatmapset_id} diffId={diff.id}
-                    size={24} mode={diff.mode}
-                    diff={diff.difficulty_rating}
-                    name={diff.version} />
-                <div>{diff.version}</div>
+                <div id="diff_icon">
+                    <DiffIcon size={24} mode={diff.mode as Mode} sr={diff.difficulty_rating} />
+                </div>
+                <div id="diff_version">{diff.version}</div>
             </div>
             <div class="flex flex-col gap-2 rounded-lg drop-shadow-md">
                 <div class="flex flex-row flex-wrap items-center justify-around gap-2 rounded-lg p-2 bg-neutral">
@@ -121,7 +121,6 @@ const DiffStats = ({ diff }: Props) => {
                     </button>
                 </div>
             </form>
-            <script defer type="module">Stats()</script>
         </div>
     );
 }

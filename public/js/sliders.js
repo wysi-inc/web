@@ -54,12 +54,3 @@ function sliders() {
     }
 
 }
-
-function secondsToTime(secs) {
-    let hours = Math.floor(secs / 3600);
-    let minutes = Math.floor(secs / 60) % 60;
-    let seconds = secs % 60;
-    let h = hours > 0 ? hours + 'h ' : '';
-    let m = minutes > 0 ? minutes + 'm ' : '';
-    return `${h}${m}${seconds}s`;
-}

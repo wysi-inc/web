@@ -1,3 +1,5 @@
+import Title from "./Title";
+
 const content = [
     {
         title: "User Profiles",
@@ -27,6 +29,7 @@ const content = [
 
 function Home() {
     return (<>
+        <Title title="Home" />
         <div class="flex flex-col gap-2 items-center">
             <h1 class="text-2xl text-center">Welcome to wysi727.com!</h1>
             <img loading="lazy" src="/public/wysi.svg" class="rounded-xl size-24 shadow-lg" alt="wysi logo" />

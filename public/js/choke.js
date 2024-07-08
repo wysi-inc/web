@@ -1,12 +1,3 @@
-function secondsToTime(secs) {
-    let hours = Math.floor(secs / 3600);
-    let minutes = Math.floor(secs / 60) % 60;
-    let seconds = secs % 60;
-    let h = hours > 0 ? hours + 'h ' : '';
-    let m = minutes > 0 ? minutes + 'm ' : '';
-    return `${h}${m}${seconds}s`;
-}
-
 function getChokes() {
     const ids = document.getElementsByClassName("score_card");
     const new_scores = [];
@@ -45,7 +36,7 @@ async function getChoke(score_card) {
             if (stats.pp <= Number(score.pp) + 10) {
                 stats.pp = null;
             }
-            if (score.mods.find((mod) => mod.acronym === "DT")) {
+            if (score.mods.find((mod) => mod.acronym === "DT") || score.mods.find((mod) => mod.acronym === "NC")) {
                 stats.len = Math.round(beatmap.total_length / 1.5);
                 stats.bpm = beatmap.bpm * 1.5;
             } else if (score.mods.find((mod) => mod.acronym === "HT")) {

@@ -1,9 +1,10 @@
-import DiffIcon from "@/src/components/beatmap/DiffIcon";
+import { DiffIconLink } from "@/src/components/beatmap/DiffIcon";
 import AudioPlayButton from "@/src/components/web/AudioPlayButton";
 import CardControls from "@/src/components/web/CardControls";
 import Link from "@/src/components/web/Link";
 import { colors } from "@/src/libs/colors";
 import type { Beatmap, Beatmapset } from "@/src/types/beatmaps";
+import type { Mode } from "@/src/types/osu";
 
 type Props = {
     position: number;
@@ -58,9 +59,9 @@ const MostCard = ({ beatmap, beatmapset, position, plays }: Props) => {
                                 <i class="fa-solid fa-user-pen" />
                             </div>
                         </Link>
-                        <DiffIcon setId={beatmapset.id} diffId={beatmap.id}
+                        <DiffIconLink setId={beatmapset.id} diffId={beatmap.id}
                             diff={beatmap.difficulty_rating} size={20}
-                            mode={beatmap.mode} name={beatmap.version} />
+                            mode={beatmap.mode as Mode} name={beatmap.version} />
                     </div>
                     <div class="flex flex-row items-center gap-2 text-base-content">
                         <div class="flex flex-row items-center gap-2">
@@ -71,10 +72,7 @@ const MostCard = ({ beatmap, beatmapset, position, plays }: Props) => {
                     </div>
                 </div>
             </div>
-            <CardControls
-                beatmap_id={beatmap.id}
-                set_id={beatmapset.id}
-            />
+            <CardControls set_id={beatmapset.id} />
         </div>
     )
 }

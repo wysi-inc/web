@@ -2,7 +2,7 @@ import { getGradeColor, getGradeLetter, secondsToTime } from "@/src/libs/web_uti
 import { colors } from "@/src/libs/colors";
 import { tools } from "osu-api-extended";
 import moment from "moment";
-import DiffIcon from "@/src/components/beatmap/DiffIcon";
+import { DiffIconLink } from "@/src/components/beatmap/DiffIcon";
 import CardControls from "@/src/components/web/CardControls";
 import StatusBadge from "../beatmap/StatusBadge";
 import ModIcon from "./ModIcon";
@@ -117,9 +117,9 @@ const ScoreCard = async ({ score, position }: Props) => {
                 </div>
                 <div class="text-opacity-75 text-base-content py-1 px-2 flex flex-row flex-wrap gap-4 items-center">
                     <StatusBadge status={beatmapset.status as BeatmapsetStatus} />
-                    <DiffIcon setId={beatmapset.id} diffId={score.beatmap.id}
+                    <DiffIconLink setId={beatmapset.id} diffId={score.beatmap.id}
                         diff={score.beatmap.difficulty_rating} size={20}
-                        mode={score.beatmap.mode} name={score.beatmap.version} />
+                        mode={score.beatmap.mode as Mode} name={score.beatmap.version} />
                     <Link url={`/users/${beatmapset.user_id}`}>
                         <div class="tooltip" data-tip={beatmapset.creator}>
                             <i class="fa-solid fa-user-pen" />
@@ -142,10 +142,7 @@ const ScoreCard = async ({ score, position }: Props) => {
                     <div>#{position}</div>
                 </div>
             </div>
-            <CardControls
-                beatmap_id={score.beatmap.id}
-                set_id={beatmapset.id}
-            />
+            <CardControls set_id={beatmapset.id} />
         </div>
     </>
 }

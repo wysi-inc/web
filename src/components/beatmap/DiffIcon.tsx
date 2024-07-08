@@ -1,22 +1,25 @@
+import type { Mode } from "@/src/types/osu";
 import Link from "../web/Link";
 import ModeIcon from "./ModeIcon";
 import { getDiffColor } from "@/src/libs/web_utils";
 
-type Props = {
+export const DiffIconLink = (p: {
     diff: number,
-    mode: string,
+    mode: Mode,
     size: number,
     name: string,
     setId: number,
     diffId: number,
-}
-
-const DiffIcon = (p: Props) => (
+}) => (
     <Link url={`/beatmapsets/${p.setId}/${p.diffId}`} css="flex items-center">
         <span data-tip={`★ ${p.diff} - [${p.name}]`} class="p-0 m-0 tooltip">
             <ModeIcon size={p.size} color={getDiffColor(p.diff)} mode={p.mode} />
         </span>
     </Link>
 );
+
+const DiffIcon = (p: { size: number, sr: number, mode: Mode }) => (
+    <ModeIcon size={p.size} color={getDiffColor(p.sr)} mode={p.mode} />
+)
 
 export default DiffIcon;

@@ -22,7 +22,7 @@ const Panel = (p: {
         </header>
         {p.manual ?
             <details class="group">
-                <summary class="cursor-pointer bg-base-300 rounded-lg flex flex-row gap-4 items-center justify-between py-2 px-4">
+                <summary class="cursor-pointer bg-neutral rounded-lg flex flex-row gap-4 items-center justify-between py-2 px-4">
                     <div class="flex flex-row gap-4 items-center">
                         <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
                         <h6>Expand</h6>

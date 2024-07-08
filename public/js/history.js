@@ -70,6 +70,7 @@ function history() {
                     zoom: {
                         wheel: {
                             enabled: true,
+                            modifierKey: "alt"
                         },
                         pinch: {
                             enabled: true

@@ -4,7 +4,7 @@ type Props = {
 
 function Clan(p: Props) {
     return (
-        <div class="hidden clan_tag drop-shadow-solid" data-user-id={p.user_id} />
+        <div class="clan_tag hidden drop-shadow-solid" data-user-id={p.user_id} />
     );
 }
 

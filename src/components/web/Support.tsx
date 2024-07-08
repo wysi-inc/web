@@ -1,5 +1,6 @@
 import { DonationModel } from "@/src/models/Donations";
 import moment from "moment";
+import Title from "./Title";
 
 export type Contributor = {
     login: string;
@@ -30,6 +31,7 @@ async function Support() {
     const contributors = await res.json() as Contributor[];
 
     return (<>
+        <Title title="Support <3" />
         <h1 class="text-2xl text-center">We appreciate your support! {'<'}3</h1>
         <div class="p-4 flex flex-col gap-4 text-center items-center">
             <p class="italic text-sm text-neutral-content">
