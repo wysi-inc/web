@@ -4509,6 +4509,10 @@ input.tab:checked + .tab-content,
   cursor: pointer;
 }
 
+.cursor-default {
+  cursor: default;
+}
+
 .select-none {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -4748,6 +4752,11 @@ input.tab:checked + .tab-content,
   background-color: rgb(100 65 165 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#cc3700\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(204 55 0 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#e20a1f\] {
   --tw-bg-opacity: 1;
   background-color: rgb(226 10 31 / var(--tw-bg-opacity));
@@ -4761,6 +4770,11 @@ input.tab:checked + .tab-content,
 .bg-\[\#ff0000\] {
   --tw-bg-opacity: 1;
   background-color: rgb(255 0 0 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#fffc00\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 252 0 / var(--tw-bg-opacity));
 }
 
 .bg-accent {
@@ -4808,6 +4822,21 @@ input.tab:checked + .tab-content,
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#0866c2\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(8 102 194 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#E2231A\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 35 26 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#107c10\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(16 124 16 / var(--tw-bg-opacity));
+}
+
 .bg-opacity-0 {
   --tw-bg-opacity: 0;
 }
@@ -4850,6 +4879,12 @@ input.tab:checked + .tab-content,
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
+.from-\[\#fd3277\] {
+  --tw-gradient-from: #fd3277 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(253 50 119 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .from-blue-600 {
   --tw-gradient-from: #2563eb var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(37 99 235 / 0) var(--tw-gradient-to-position);
@@ -4865,6 +4900,10 @@ input.tab:checked + .tab-content,
 .via-\[\#f80d68\] {
   --tw-gradient-to: rgb(248 13 104 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), #f80d68 var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+.to-\[\#fd7456\] {
+  --tw-gradient-to: #fd7456 var(--tw-gradient-to-position);
 }
 
 .to-\[\#ff7a00\] {
@@ -4906,6 +4945,10 @@ input.tab:checked + .tab-content,
 
 .fill-secondary {
   fill: var(--fallback-s,oklch(var(--s)/1));
+}
+
+.fill-white {
+  fill: #fff;
 }
 
 .p-0 {

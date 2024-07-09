@@ -17,18 +17,44 @@ export type Social =
     "instagram" |
     "youtube" |
     "tiktok" |
-    "pinterest";
+    "pinterest" |
+    "snapchat" |
+    "reddit" |
+    "tinder" |
+    "linkedin" |
+    "roblox" |
+    "microsoft"
 
-export const socials: Social[] = ["youtube", "twitch", "instagram", "tiktok", "pinterest", "github", "gitlab"];
+export const socials: Social[] = [
+    "github",
+    "gitlab",
+    "twitch",
+    "instagram",
+    "youtube",
+    "tiktok",
+    "pinterest",
+    "snapchat",
+    "reddit",
+    "tinder",
+    "linkedin",
+    "roblox",
+    "microsoft"
+]
 
 const userSocials = new mongoose.Schema({
     github: String,
     gitlab: String,
+    twitch: String,
     instagram: String,
     youtube: String,
-    twitch: String,
-    pinterest: String,
     tiktok: String,
+    pinterest: String,
+    snapchat: String,
+    reddit: String,
+    tinder: String,
+    linkedin: String,
+    roblox: String,
+    microsoft: String
 }, { _id: false });
 
 const setup = new mongoose.Schema({

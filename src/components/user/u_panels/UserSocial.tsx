@@ -1,6 +1,6 @@
 import type { Social } from "@/src/models/User";
 
-type Socials = { [key in Social]: { icon: JSX.Element, bg: string, url: string } };
+type Socials = { [key in Social]: { icon: JSX.Element, bg: string, url?: string, black?: boolean } };
 function UserSocial(p: { social: Social, username: string, user_id: number, editable?: boolean }) {
 
     const socials_data: Socials = {
@@ -39,6 +39,35 @@ function UserSocial(p: { social: Social, username: string, user_id: number, edit
             bg: "bg-[#000000]",
             url: `https://tiktok.com/@${p.username}`,
         },
+        "snapchat": {
+            icon: <i class="fa-brands fa-snapchat" />,
+            bg: "bg-[#fffc00]",
+            url: `https://www.snapchat.com/add/${p.username}`,
+            black: true,
+        },
+        "reddit": {
+            icon: <i class="fa-brands fa-reddit-alien" />,
+            bg: "bg-[#cc3700]",
+            url: `https://reddit.com/user/${p.username}`
+        },
+        "tinder": {
+            icon: <i class="fa-solid fa-fire" />,
+            bg: "bg-gradient-to-br from-[#fd3277] to-[#fd7456]",
+            url: `https://tinder.com/@${p.username}`
+        },
+        "roblox": {
+            icon: <img loading="lazy" alt="roblox" class="size-4" src="/public/img/roblox.svg" />,
+            bg: "bg-[#E2231A]",
+        },
+        "microsoft": {
+            icon: <i class="fa-brands fa-xbox" />,
+            bg: "bg-[#107c10]",
+        },
+        "linkedin": {
+            icon: <i class="fa-brands fa-linkedin" />,
+            bg: "bg-[#0866c2]",
+            url: `https://www.linkedin.com/in/${p.username}`
+        }
     };
 
     const social = socials_data[p.social];
@@ -46,11 +75,16 @@ function UserSocial(p: { social: Social, username: string, user_id: number, edit
     if (!social) return <>no</>;
 
     return (
-        <button class={`p-1 px-2 flex text-white flex-row gap-2 text-sm items-center rounded-full ${social.bg}`} type="button" hx-target="this" hx-swap="outerHTML">
-            <a target="_blank" class="hover:underline underline-offset-1 flex flex-row gap-2 items-center" href={social.url}>
-                {social.icon}
-                <span>{p.username}</span>
-            </a>
+        <button class={`p-1 px-2 flex ${social.black ? "text-black" : "text-white"} flex-row gap-2 text-sm items-center rounded-full ${social.bg}`} type="button" hx-target="this" hx-swap="outerHTML">
+            {social.url ?
+                <a target="_blank" class="flex flex-row gap-2 items-center" href={social.url}>
+                    {social.icon}
+                    <span>{p.username}</span>
+                </a> :
+                <span class="cursor-default flex flex-row gap-2 items-center">
+                    {social.icon}
+                    <span>{p.username}</span>
+                </span>}
             {p.editable ?
                 <a class="bg-white hover:bg-opacity-30 bg-opacity-0 text-xs rounded-full size-4 flex items-center justify-center" hx-delete={`/users/${p.user_id}/socials/delete/${p.social}`} hx-trigger="click" hx-target>
                     <i class="fa-solid fa-xmark" />

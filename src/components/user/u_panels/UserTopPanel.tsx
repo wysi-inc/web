@@ -234,24 +234,26 @@ async function UserTopPanel(p: {
                             <UserSocial user_id={p.user.id} social={social as Social} username={String(username)} editable={p.editable} />
                         )) : <></>
                     }
-                    <fieldset class="peer disabled:hidden join group-disabled:hidden" id="socials_fieldset" disabled>
-                        <select required class="join-item select select-bordered select-sm" name="social">
-                            <option disabled selected>Choose</option>
-                            {socials.map(s => <option value={s}>{s}</option>)}
-                        </select>
-                        <label class="join-item input input-sm input-bordered flex items-center gap-2">
-                            @ <input required name="username" type="text" class="grow" placeholder="Username" />
-                        </label>
-                        <button class="join-item btn btn-sm btn-primary" type="submit">
-                            Add
+                    {p.editable ? <>
+                        <fieldset class="peer disabled:hidden join group-disabled:hidden" id="socials_fieldset" disabled>
+                            <select required class="join-item select select-bordered select-sm" name="social">
+                                <option disabled selected>Choose</option>
+                                {socials.map(s => <option value={s}>{s}</option>)}
+                            </select>
+                            <label class="join-item input input-sm input-bordered flex items-center gap-2">
+                                @ <input required name="username" type="text" class="grow" placeholder="Username" />
+                            </label>
+                            <button class="join-item btn btn-sm btn-primary" type="submit">
+                                Add
+                            </button>
+                        </fieldset>
+                        <button class="btn btn-ghost btn-circle btn-sm peer-enabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = false" type="button">
+                            <i class="fa-solid fa-plus" />
                         </button>
-                    </fieldset>
-                    <button class="btn btn-ghost btn-circle btn-sm peer-enabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = false" type="button">
-                        <i class="fa-solid fa-plus" />
-                    </button>
-                    <button class="btn btn-ghost btn-circle btn-sm peer-disabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = true" type="button">
-                        <i class="fa-solid fa-check" />
-                    </button>
+                        <button class="btn btn-ghost btn-circle btn-sm peer-disabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = true" type="button">
+                            <i class="fa-solid fa-check" />
+                        </button> </> : <></>
+                    }
                 </form>
                 {p.user.badges.length > 0 &&
                     <div class="flex flex-row flex-wrap gap-2">
