@@ -9,7 +9,6 @@ type Props = {
 }
 
 const DoubleSlider = (p: Props) => {
-
     return (
         <div class="flex flex-col gap-2">
             <div class="grid grid-cols-3">
@@ -22,9 +21,9 @@ const DoubleSlider = (p: Props) => {
                 </label>
             </div>
             <div class="w-full relative h-6">
-                <input type="range" class="double_slider range pointer-events-none absolute w-full [--range-shdw:none]" name={p.code + "_min"} id={p.code + "_min_slider"}
+                <input type="range" class="double_slider range absolute w-full [--range-shdw:none]" name={p.code + "_min"} id={p.code + "_min_slider"}
                     min={p.min} max={p.max} value={`${p.min}`} step={`${p.step}`} />
-                <input type="range" class="double_slider range pointer-events-none absolute w-full [--range-shdw:none]" name={p.code + "_max"} id={p.code + "_max_slider"}
+                <input type="range" class="double_slider range absolute w-full [--range-shdw:none]" name={p.code + "_max"} id={p.code + "_max_slider"}
                     min={p.min} max={p.max} value={`${p.max}`} step={`${p.step}`} />
             </div>
         </div>

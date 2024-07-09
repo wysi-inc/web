@@ -4078,10 +4078,6 @@ input.tab:checked + .tab-content,
   bottom: auto;
 }
 
-.pointer-events-none {
-  pointer-events: none;
-}
-
 .fixed {
   position: fixed;
 }
@@ -5278,18 +5274,6 @@ input.tab:checked + .tab-content,
   opacity: 0;
 }
 
-.double_slider::-webkit-slider-thumb,
-.double_slider::-moz-range-thumb {
-  pointer-events: all;
-  background-color: #fff;
-  z-index: 10;
-}
-
-.double_slider::-webkit-inner-spin-button,
-.double_slider::-webkit-outer-spin-button {
-  opacity: 1;
-}
-
 .double_slider {
   z-index: 0;
   -webkit-appearance: none;
@@ -5297,6 +5281,45 @@ input.tab:checked + .tab-content,
        appearance: none;
   position: absolute;
   pointer-events: none !important;
+  color: #fff;
+}
+
+.double_slider::-webkit-slider-thumb,
+.double_slider::-moz-range-thumb {
+  pointer-events: all !important;
+  background-color: #fff;
+  z-index: 10;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.double_slider::-webkit-slider-thumb {
+  pointer-events: all !important;
+  -webkit-appearance: none;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+/* All the same stuff for Firefox */
+
+.double_slider::-moz-range-thumb {
+  pointer-events: all !important;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+/* All the same stuff for IE */
+
+.double_slider::-ms-thumb {
+  pointer-events: all !important;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.double_slider::-webkit-inner-spin-button,
+.double_slider::-webkit-outer-spin-button {
+  opacity: 1;
 }
 
 .truncated {
