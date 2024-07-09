@@ -18,6 +18,8 @@ const UserPage = async (p: Props) => {
 
     const user = await getUser(p.user_id, p.mode);
 
+    const no_chosen_mode = p.mode === undefined;
+
     if (!user || (user as any).error) return <div>User not found</div>;
 
     const editable = p.logged_id === user.id;
@@ -156,7 +158,10 @@ const UserPage = async (p: Props) => {
                 </Panel>
             );
         })}
-        <script>getUserStuff()</script>
+        <script>{`
+            history.replaceState({}, null, '/users/${user.id}${no_chosen_mode ? "" : `/${p.mode}`}');
+            getUserStuff();
+        `}</script>
     </>);
 }
 

@@ -117,6 +117,12 @@ function UserSocial(p: { social: Social, username: string, user_id: number, edit
         "playstation": {
             icon: <i class="fa-brands fa-playstation" />,
             bg: "bg-[#003087]",
+        },
+        "linktree": {
+            icon: <img src="/public/img/linktree.svg" class="size-4" loading="lazy" alt="ico" />,
+            bg: "bg-[#43e660]",
+            url: `https://linktr.ee/${p.username}`,
+            black: true
         }
     };
 

@@ -4195,6 +4195,16 @@ input.tab:checked + .tab-content,
   margin-right: auto;
 }
 
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .-mt-1 {
   margin-top: -0.25rem;
 }
@@ -4698,6 +4708,11 @@ input.tab:checked + .tab-content,
   border-radius: 0.75rem;
 }
 
+.rounded-s-full {
+  border-start-start-radius: 9999px;
+  border-end-start-radius: 9999px;
+}
+
 .border {
   border-width: 1px;
 }
@@ -4890,6 +4905,16 @@ input.tab:checked + .tab-content,
 .bg-\[\#003087\] {
   --tw-bg-opacity: 1;
   background-color: rgb(0 48 135 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#43e660\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(67 230 96 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#43e566\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(67 229 102 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-0 {
@@ -5574,6 +5599,14 @@ input.tab:checked + .tab-content,
 
 .peer:has(:checked) ~ .peer-has-\[\:checked\]\:grid {
   display: grid;
+}
+
+.peer:has(:disabled) ~ .peer-has-\[\:disabled\]\:hidden {
+  display: none;
+}
+
+.peer:has(:enabled) ~ .peer-has-\[\:enabled\]\:hidden {
+  display: none;
 }
 
 @media (min-width: 640px) {

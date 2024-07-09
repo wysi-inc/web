@@ -34,7 +34,8 @@ export type Social =
     "riot" |
     "epic" |
     "anilist" |
-    "playstation"
+    "playstation" |
+    "linktree"
 
 export const socials: Social[] = [
     "github",
@@ -61,6 +62,7 @@ export const socials: Social[] = [
     "epic",
     "anilist",
     "playstation",
+    "linktree",
 ]
 
 const userSocials = new mongoose.Schema({
@@ -88,6 +90,7 @@ const userSocials = new mongoose.Schema({
     epic: String,
     anilist: String,
     playstation: String,
+    linktree: String,
 }, { _id: false });
 
 const setup = new mongoose.Schema({

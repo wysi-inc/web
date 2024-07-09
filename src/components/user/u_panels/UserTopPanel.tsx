@@ -174,51 +174,14 @@ async function UserTopPanel(p: {
                 </div>
             </div>
             <div class="bg-base-100 flex flex-col gap-4 p-4">
-                <div class="flex flex-row items-center flex-wrap gap-4">
-                    {p.user.location ?
-                        <div class="flex flex-row items-center gap-1">
-                            <i class="fa-solid fa-location-dot" />
-                            <span>{p.user.location}</span>
-                        </div>
-                        : <></>
-                    }
-                    {p.user.interests ?
-                        <div class="flex flex-row items-center gap-1">
-                            <i class="fa-solid fa-heart" />
-                            <span>{p.user.interests}</span>
-                        </div>
-                        : <></>
-                    }
-                    {p.user.occupation ?
-                        <div class="flex flex-row items-center gap-1">
-                            <i class="fa-solid fa-building" />
-                            <span>{p.user.occupation}</span>
-                        </div>
-                        : <></>
-                    }
-                    {p.user.website ?
-                        <div class="flex flex-row items-center gap-1">
-                            <i class="fa-solid fa-globe"></i>
-                            <a href={p.user.website} target="_blank" class="hover:underline">{p.user.website}</a>
-                        </div>
-                        : <></>
-                    }
-                </div>
-                <form class="group flex flex-row flex-wrap gap-2 items-center" hx-put={`/users/${p.user.id}/socials/submit`} hx-target="#socials_fieldset" hx-swap="beforebegin">
-                    <a href={`https://osu.ppy.sh/users/${p.user.id}/${p.mode}`} target="_blank" data-tip="osu!" class="tooltip p-1 text-sm text-white px-2 rounded-full bg-[#f067a4]">
-                        <button class="flex flex-row gap-2 items-center " type="button">
-                            <img loading="lazy" alt="osu!logo" src="/public/img/osu.svg" class="size-4" />
-                            <span>{p.user.username}</span>
-                        </button>
-                    </a>
+                <div class="flex flex-row items-center flex-wrap gap-2">
                     {p.user.twitter ?
                         <a href={`https://twitter.com/${p.user.twitter}`} target="_blank" data-tip="twitter" class="tooltip p-1 text-sm text-white px-2 rounded-full bg-[#1DA1F2]">
                             <button class="flex flex-row gap-2 items-center " type="button">
                                 <i class="fa-brands fa-twitter" />
                                 <span>{p.user.twitter}</span>
                             </button>
-                        </a>
-                        : <></>
+                        </a> : <></>
                     }
                     {p.user.discord ?
                         <div data-tip="discord" class="tooltip p-1 text-sm text-white px-2 rounded-full bg-[#5865F2]">
@@ -226,35 +189,62 @@ async function UserTopPanel(p: {
                                 <i class="fa-brands fa-discord" />
                                 <span>{p.user.discord}</span>
                             </button>
-                        </div>
-                        : <></>
+                        </div> : <></>
                     }
                     {p.user?.socials ?
                         Object.entries((p.user.socials as any)["_doc"]).map(([social, username]) => (
                             <UserSocial user_id={p.user.id} social={social as Social} username={String(username)} editable={p.editable} />
                         )) : <></>
                     }
-                    {p.editable ? <>
-                        <fieldset class="peer disabled:hidden join group-disabled:hidden" id="socials_fieldset" disabled>
-                            <select required class="join-item select select-bordered select-sm" name="social">
-                                <option disabled selected>Choose</option>
-                                {socials.sort().map(s => <option value={s}>{s}</option>)}
-                            </select>
-                            <label class="join-item input input-sm input-bordered flex items-center gap-2">
-                                @ <input required name="username" type="text" class="grow" placeholder="Username" />
-                            </label>
-                            <button class="join-item btn btn-sm btn-primary" type="submit">
-                                Add
+                    {p.editable ?
+                        <form class="group flex flex-row flex-wrap gap-2 items-center" hx-put={`/users/${p.user.id}/socials/submit`} hx-target="#socials_fieldset" hx-swap="beforebegin">
+                            <fieldset class="peer rounded-full peer disabled:hidden join group-disabled:hidden" id="socials_fieldset" disabled>
+                                <select required class="rounded-s-full join-item select select-bordered select-sm" name="social">
+                                    <option disabled selected>Choose</option>
+                                    {socials.sort().map(s => <option value={s}>{s}</option>)}
+                                </select>
+                                <label class="join-item input input-sm input-bordered flex items-center gap-2">
+                                    @ <input required name="username" type="text" class="grow" placeholder="Username" />
+                                </label>
+                            </fieldset>
+                            <button class="peer-disabled:hidden btn btn-sm btn-circle btn-primary" type="submit">
+                                <i class="fa-solid fa-plus" />
                             </button>
-                        </fieldset>
-                        <button class="btn btn-ghost btn-circle btn-sm peer-enabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = false" type="button">
-                            <i class="fa-solid fa-plus" />
-                        </button>
-                        <button class="btn btn-ghost btn-circle btn-sm peer-disabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = true" type="button">
-                            <i class="fa-solid fa-xmark" />
-                        </button> </> : <></>
+                            <button class="btn btn-ghost btn-circle btn-sm peer-enabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = false" type="button">
+                                <i class="fa-solid fa-plus" />
+                            </button>
+                            <button class="btn btn-ghost btn-circle btn-sm peer-disabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = true" type="button">
+                                <i class="fa-solid fa-xmark" />
+                            </button>
+                        </form> : <></>
                     }
-                </form>
+                </div>
+                <div class="flex flex-row gap-4">
+                    {p.user.location ?
+                        <div class="flex flex-row items-center gap-2">
+                            <i class="fa-solid fa-location-dot" />
+                            <span>{p.user.location}</span>
+                        </div> : <></>
+                    }
+                    {p.user.interests ?
+                        <div class="flex flex-row items-center gap-2">
+                            <i class="fa-solid fa-heart" />
+                            <span>{p.user.interests}</span>
+                        </div> : <></>
+                    }
+                    {p.user.occupation ?
+                        <div class="flex flex-row items-center gap-2">
+                            <i class="fa-solid fa-building" />
+                            <span>{p.user.occupation}</span>
+                        </div> : <></>
+                    }
+                    {p.user.website ?
+                        <div class="flex flex-row items-center gap-2">
+                            <i class="fa-solid fa-globe"></i>
+                            <a href={p.user.website} target="_blank" class="hover:underline">{p.user.website}</a>
+                        </div> : <></>
+                    }
+                </div>
                 {p.user.badges.length > 0 &&
                     <div class="flex flex-row flex-wrap gap-2">
                         {p.user.badges.map(badge =>
