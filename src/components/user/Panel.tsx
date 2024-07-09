@@ -16,7 +16,7 @@ const Panel = (p: {
             <h2>{p.title}</h2>
             {p.info ?
                 <div class="ms-auto tooltip tooltip-left cursor-help" data-tip={p.info}>
-                    <i class="fa-solid fa-circle-info" />
+                    <i class="fa-solid fa-circle-question" />
                 </div> : <></>
             }
         </header>

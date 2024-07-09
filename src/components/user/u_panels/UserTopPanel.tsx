@@ -13,8 +13,14 @@ import Clan from "./u_components/Clan";
 import SubdivisionRanking from "./u_components/SubdivisionRanking";
 import { modes } from "@/src/libs/constants";
 import { ModeToCode } from "@/src/libs/web_utils";
+import { socials, type Social } from "@/src/models/User";
+import UserSocial from "./UserSocial";
 
-async function UserTopPanel(p: { user: User, mode: Mode }) {
+async function UserTopPanel(p: {
+    user: User,
+    mode: Mode,
+    editable?: boolean
+}) {
 
     if (!p.user) return <></>;
 
@@ -190,22 +196,6 @@ async function UserTopPanel(p: { user: User, mode: Mode }) {
                         </div>
                         : <></>
                     }
-                    {p.user.twitter ?
-                        <div class="flex flex-row items-center gap-1">
-                            <i class="fa-brands fa-twitter" />
-                            <a href={`https://twitter.com/${p.user.twitter}`} target="_blank" class="hover:underline">
-                                {p.user.twitter}
-                            </a>
-                        </div>
-                        : <></>
-                    }
-                    {p.user.discord ?
-                        <div class="flex flex-row items-center gap-1">
-                            <i class="fa-brands fa-discord" />
-                            <span>{p.user.discord}</span>
-                        </div>
-                        : <></>
-                    }
                     {p.user.website ?
                         <div class="flex flex-row items-center gap-1">
                             <i class="fa-solid fa-globe"></i>
@@ -214,6 +204,55 @@ async function UserTopPanel(p: { user: User, mode: Mode }) {
                         : <></>
                     }
                 </div>
+                <form class="group flex flex-row flex-wrap gap-2 items-center" hx-put={`/users/${p.user.id}/socials/submit`} hx-target="#socials_fieldset" hx-swap="beforebegin">
+                    <a href={`https://osu.ppy.sh.com/users/${p.user.id}/${p.mode}`} target="_blank" class="p-1 text-sm text-white px-2 rounded-full bg-[#f067a4]">
+                        <button class="flex flex-row gap-2 items-center " type="button">
+                            <img loading="lazy" alt="osu!logo" src="/public/img/osu.svg" class="size-4" />
+                            <span>{p.user.username}</span>
+                        </button>
+                    </a>
+                    {p.user.twitter ?
+                        <a href={`https://twitter.com/${p.user.twitter}`} target="_blank" class="p-1 text-sm text-white px-2 rounded-full bg-[#1DA1F2]">
+                            <button class="flex flex-row gap-2 items-center " type="button">
+                                <i class="fa-brands fa-twitter" />
+                                <span>{p.user.twitter}</span>
+                            </button>
+                        </a>
+                        : <></>
+                    }
+                    {p.user.discord ?
+                        <div class="p-1 text-sm text-white px-2 rounded-full bg-[#5865F2]">
+                            <button class="flex flex-row gap-2 items-center " type="button">
+                                <i class="fa-brands fa-discord" />
+                                <span>{p.user.discord}</span>
+                            </button>
+                        </div>
+                        : <></>
+                    }
+                    {p.user?.socials ?
+                        Object.entries((p.user.socials as any)["_doc"]).map(([social, username]) => (
+                            <UserSocial user_id={p.user.id} social={social as Social} username={String(username)} editable={p.editable} />
+                        )) : <></>
+                    }
+                    <fieldset class="peer disabled:hidden join group-disabled:hidden" id="socials_fieldset" disabled>
+                        <select required class="join-item select select-bordered select-sm" name="social">
+                            <option disabled selected>Choose</option>
+                            {socials.map(s => <option value={s}>{s}</option>)}
+                        </select>
+                        <label class="join-item input input-sm input-bordered flex items-center gap-2">
+                            @ <input required name="username" type="text" class="grow" placeholder="Username" />
+                        </label>
+                        <button class="join-item btn btn-sm btn-primary" type="submit">
+                            Add
+                        </button>
+                    </fieldset>
+                    <button class="btn btn-ghost btn-circle btn-sm peer-enabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = false" type="button">
+                        <i class="fa-solid fa-plus" />
+                    </button>
+                    <button class="btn btn-ghost btn-circle btn-sm peer-disabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = true" type="button">
+                        <i class="fa-solid fa-check" />
+                    </button>
+                </form>
                 {p.user.badges.length > 0 &&
                     <div class="flex flex-row flex-wrap gap-2">
                         {p.user.badges.map(badge =>

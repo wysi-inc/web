@@ -1,4 +1,4 @@
-import type { CollectionDB, Rank, Setup } from "../models/User";
+import type { CollectionDB, Rank, Setup, Socials } from "../models/User";
 import type { response as v2User } from "osu-api-extended/dist/types/v2_user_details";
 import type { response as v2Score } from "osu-api-extended/dist/types/v2_scores_user_category";
 import type { response as v2UserList } from "osu-api-extended/dist/types/v2_site_ranking_details";
@@ -12,26 +12,27 @@ export type UserCookie = {
 export type RankHistory = {
     global_ranks: Rank[];
     country_ranks: Rank[];
-};
+}
 
 export type UserBasic = v2User;
 
 export type User = UserBasic & {
-    db_ranks?: RankHistory;
-    db_setup?: Setup;
-    collections?: CollectionDB[];
+    db_ranks?: RankHistory,
+    db_setup?: Setup,
+    collections?: CollectionDB[],
+    socials?: Socials,
     groups: {
-        colour: string;
-        has_listing: boolean;
-        has_playmodes: boolean;
-        id: number;
-        identifier: string;
-        is_probationary: boolean;
-        name: string;
-        short_name: string;
-        playmodes: string[];
-    }[];
-};
+        colour: string,
+        has_listing: boolean,
+        has_playmodes: boolean,
+        id: number,
+        identifier: string,
+        is_probationary: boolean,
+        name: string,
+        short_name: string,
+        playmodes: string[],
+    }[],
+}
 
 export type UserList = v2UserList;
 
@@ -39,7 +40,7 @@ export type Score = v2Score;
 export type UserAchievement = {
     achieved_at: Date;
     achievement_id: number;
-};
+}
 
 export type ColorCount = {
     count: number;

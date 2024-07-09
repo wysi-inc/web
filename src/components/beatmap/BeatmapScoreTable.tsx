@@ -32,8 +32,6 @@ const BeatmapScoreTable = async (p: {
     const mods = Object.entries(p.body);
     const mod_names = mods.map(([name, value]) => value === 'on' ? name.split("-")[1] : null).filter(v => v !== null) as Mod[];
 
-    console.log(mod_names)
-
     const scores: ActualStatistics[] = await v2.scores.beatmap(p.id, {
         mode: p.mode,
         mods: mod_names,

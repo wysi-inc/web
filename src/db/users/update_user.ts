@@ -1,4 +1,4 @@
-import { type Rank, User, type Setup, type CollectionDB } from "../../models/User";
+import { type Rank, User, type Setup, type CollectionDB, type Social } from "../../models/User";
 import type { Mode } from "../../types/osu";
 import type { User as UserType } from "../../types/users";
 //@ts-ignore
@@ -47,6 +47,7 @@ export async function updateUser(user: UserType, mode: Mode): Promise<UserType> 
         user.db_ranks = new_ranks;
         user.db_setup = db_user.setup as any;
         user.collections = db_user.collections as any;
+        user.socials = db_user.socials as any;
         await db_user.save();
         return user;
     } catch (err) {
@@ -202,4 +203,23 @@ export async function deleteCollections(user_id: number) {
     if (!user.collections) return;
     user.collections = [] as any;
     await user.save();
+}
+
+export async function saveSocial(user_id: number, username: string, social: Social): Promise<boolean> {
+    const user = await User.findOne({ user_id });
+    if (!user) return false;
+    if (!user.socials) user.socials = {};
+    if (user.socials[social]) return false;
+    user.socials[social] = username;
+    await user.save();
+    return true;
+}
+
+export async function deleteSocial(user_id: number, social: Social): Promise<boolean> {
+    const user = await User.findOne({ user_id });
+    if (!user) return false;
+    if (!user.socials) return false;
+    user.socials[social] = undefined;
+    await user.save();
+    return true;
 }

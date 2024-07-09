@@ -10,6 +10,27 @@ collectionDBSchema.methods.toJSON = function() {
     return user;
 };
 
+export type Social =
+    "github" |
+    "gitlab" |
+    "twitch" |
+    "instagram" |
+    "youtube" |
+    "tiktok" |
+    "pinterest";
+
+export const socials: Social[] = ["youtube", "twitch", "instagram", "tiktok", "pinterest", "github", "gitlab"];
+
+const userSocials = new mongoose.Schema({
+    github: String,
+    gitlab: String,
+    instagram: String,
+    youtube: String,
+    twitch: String,
+    pinterest: String,
+    tiktok: String,
+}, { _id: false });
+
 const setup = new mongoose.Schema({
     keyboard: {
         name: String,
@@ -112,6 +133,7 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     extra_panels: [String],
+    socials: userSocials,
     skins: [String],
     setup: setup,
     collections: {
@@ -128,6 +150,7 @@ userSchema.methods.toJSON = function() {
 export type CollectionDB = mongoose.InferSchemaType<typeof collectionDBSchema>;
 export type Rank = mongoose.InferSchemaType<typeof rank>;
 export type Setup = mongoose.InferSchemaType<typeof setup>;
+export type Socials = mongoose.InferSchemaType<typeof userSocials>;
 export type ModeRanks = mongoose.InferSchemaType<typeof modeRanks>;
 export type User = mongoose.InferSchemaType<typeof userSchema>;
 export const User = mongoose.model('User', userSchema);

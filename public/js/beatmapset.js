@@ -388,7 +388,7 @@ async function setBeatmap(beatmap) {
     stats_form.setAttribute('data-beatmap-id', beatmap.id);
     stats_form.reset();
 
-    history.pushState({}, null, `/beatmapsets/${beatmap.beatmapset_id}/${beatmap.id}`);
+    history.replaceState({}, null, `/beatmapsets/${beatmap.beatmapset_id}/${beatmap.id}`);
     const leaderboards = document.getElementById("load_leaderboards");
     if (!leaderboards) return;
     const res = await fetch(`/beatmapsets/${beatmap.beatmapset_id}/${beatmap.id}/scores/${beatmap.mode}`, { method: "POST" });
