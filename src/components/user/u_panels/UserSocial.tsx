@@ -56,8 +56,8 @@ function UserSocial(p: { social: Social, username: string, user_id: number, edit
             url: `https://tinder.com/@${p.username}`
         },
         "roblox": {
-            icon: <img loading="lazy" alt="roblox" class="size-4" src="/public/img/roblox.svg" />,
-            bg: "bg-[#E2231A]",
+            icon: <img src="/public/img/roblox.svg" class="size-4" loading="lazy" alt="ico" />,
+            bg: "bg-[#86949f]",
         },
         "microsoft": {
             icon: <i class="fa-brands fa-xbox" />,
@@ -67,6 +67,56 @@ function UserSocial(p: { social: Social, username: string, user_id: number, edit
             icon: <i class="fa-brands fa-linkedin" />,
             bg: "bg-[#0866c2]",
             url: `https://www.linkedin.com/in/${p.username}`
+        },
+        "soundcloud": {
+            icon: <i class="fa-brands fa-soundcloud" />,
+            bg: "bg-[#cc4a00]",
+            url: `https://soundcloud.com/${p.username}`,
+        },
+        "spotify": {
+            icon: <i class="fa-brands fa-spotify" />,
+            bg: "bg-[#1ed760]",
+        },
+        "facebook": {
+            icon: <i class="fa-brands fa-facebook" />,
+            bg: "bg-[#0866ff]",
+        },
+        "paypal": {
+            icon: <i class="fa-brands fa-paypal" />,
+            bg: "bg-gradient-to-br from-[#001862] via-[#002a7d] to-[#0094d4]",
+            url: `https://www.paypal.com/paypalme/${p.username}`
+        },
+        "supercell": {
+            icon: <img src="/public/img/supercell.svg" class="size-4" loading="lazy" alt="ico" />,
+            bg: "bg-[#105ab5]",
+        },
+        "kick": {
+            icon: <img src="/public/img/kick.svg" class="size-4" loading="lazy" alt="ico" />,
+            bg: "bg-[#52fa17]",
+            url: `https://kick.com/${p.username}`,
+            black: true
+        },
+        "steam": {
+            icon: <i class="fa-brands fa-steam" />,
+            bg: "bg-[#0e1a32]",
+            url: `https://steamcommunity.com/id/${p.username}`
+        },
+        "riot": {
+            icon: <img src="/public/img/riot.svg" class="size-4" loading="lazy" alt="ico" />,
+            bg: "bg-[#eb0029]",
+        },
+        "epic": {
+            icon: <img src="/public/img/epic.svg" class="size-4" loading="lazy" alt="ico" />,
+            bg: "bg-[#000000]",
+        },
+        "anilist": {
+            icon: <img src="/public/img/anilist.svg" class="size-4" loading="lazy" alt="ico" />,
+            bg: "bg-[#242434]",
+            url: `https://anilist.co/user/${p.username}`
+        },
+        "playstation": {
+            icon: <i class="fa-brands fa-playstation" />,
+            bg: "bg-[#003087]",
         }
     };
 
@@ -75,7 +125,8 @@ function UserSocial(p: { social: Social, username: string, user_id: number, edit
     if (!social) return <>no</>;
 
     return (
-        <button class={`p-1 px-2 flex ${social.black ? "text-black" : "text-white"} flex-row gap-2 text-sm items-center rounded-full ${social.bg}`} type="button" hx-target="this" hx-swap="outerHTML">
+        <button class={`p-1 px-2 flex ${social.black ? "text-black" : "text-white"} tooltip flex-row gap-2 text-sm items-center rounded-full ${social.bg}`}
+            type="button" hx-target="this" hx-swap="outerHTML" data-tip={p.social}>
             {social.url ?
                 <a target="_blank" class="flex flex-row gap-2 items-center" href={social.url}>
                     {social.icon}

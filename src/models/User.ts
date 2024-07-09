@@ -23,7 +23,18 @@ export type Social =
     "tinder" |
     "linkedin" |
     "roblox" |
-    "microsoft"
+    "microsoft" |
+    "soundcloud" |
+    "spotify" |
+    "facebook" |
+    "paypal" |
+    "supercell" |
+    "kick" |
+    "steam" |
+    "riot" |
+    "epic" |
+    "anilist" |
+    "playstation"
 
 export const socials: Social[] = [
     "github",
@@ -38,7 +49,18 @@ export const socials: Social[] = [
     "tinder",
     "linkedin",
     "roblox",
-    "microsoft"
+    "microsoft",
+    "soundcloud",
+    "spotify",
+    "facebook",
+    "paypal",
+    "supercell",
+    "kick",
+    "steam",
+    "riot",
+    "epic",
+    "anilist",
+    "playstation",
 ]
 
 const userSocials = new mongoose.Schema({
@@ -54,7 +76,18 @@ const userSocials = new mongoose.Schema({
     tinder: String,
     linkedin: String,
     roblox: String,
-    microsoft: String
+    microsoft: String,
+    soundcloud: String,
+    spotify: String,
+    facebook: String,
+    paypal: String,
+    supercell: String,
+    kick: String,
+    steam: String,
+    riot: String,
+    epic: String,
+    anilist: String,
+    playstation: String,
 }, { _id: false });
 
 const setup = new mongoose.Schema({

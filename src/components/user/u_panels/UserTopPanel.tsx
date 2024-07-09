@@ -205,14 +205,14 @@ async function UserTopPanel(p: {
                     }
                 </div>
                 <form class="group flex flex-row flex-wrap gap-2 items-center" hx-put={`/users/${p.user.id}/socials/submit`} hx-target="#socials_fieldset" hx-swap="beforebegin">
-                    <a href={`https://osu.ppy.sh/users/${p.user.id}/${p.mode}`} target="_blank" class="p-1 text-sm text-white px-2 rounded-full bg-[#f067a4]">
+                    <a href={`https://osu.ppy.sh/users/${p.user.id}/${p.mode}`} target="_blank" data-tip="osu!" class="tooltip p-1 text-sm text-white px-2 rounded-full bg-[#f067a4]">
                         <button class="flex flex-row gap-2 items-center " type="button">
                             <img loading="lazy" alt="osu!logo" src="/public/img/osu.svg" class="size-4" />
                             <span>{p.user.username}</span>
                         </button>
                     </a>
                     {p.user.twitter ?
-                        <a href={`https://twitter.com/${p.user.twitter}`} target="_blank" class="p-1 text-sm text-white px-2 rounded-full bg-[#1DA1F2]">
+                        <a href={`https://twitter.com/${p.user.twitter}`} target="_blank" data-tip="twitter" class="tooltip p-1 text-sm text-white px-2 rounded-full bg-[#1DA1F2]">
                             <button class="flex flex-row gap-2 items-center " type="button">
                                 <i class="fa-brands fa-twitter" />
                                 <span>{p.user.twitter}</span>
@@ -221,7 +221,7 @@ async function UserTopPanel(p: {
                         : <></>
                     }
                     {p.user.discord ?
-                        <div class="p-1 text-sm text-white px-2 rounded-full bg-[#5865F2]">
+                        <div data-tip="discord" class="tooltip p-1 text-sm text-white px-2 rounded-full bg-[#5865F2]">
                             <button class="flex flex-row gap-2 items-center " type="button">
                                 <i class="fa-brands fa-discord" />
                                 <span>{p.user.discord}</span>
@@ -238,7 +238,7 @@ async function UserTopPanel(p: {
                         <fieldset class="peer disabled:hidden join group-disabled:hidden" id="socials_fieldset" disabled>
                             <select required class="join-item select select-bordered select-sm" name="social">
                                 <option disabled selected>Choose</option>
-                                {socials.map(s => <option value={s}>{s}</option>)}
+                                {socials.sort().map(s => <option value={s}>{s}</option>)}
                             </select>
                             <label class="join-item input input-sm input-bordered flex items-center gap-2">
                                 @ <input required name="username" type="text" class="grow" placeholder="Username" />
@@ -251,7 +251,7 @@ async function UserTopPanel(p: {
                             <i class="fa-solid fa-plus" />
                         </button>
                         <button class="btn btn-ghost btn-circle btn-sm peer-disabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = true" type="button">
-                            <i class="fa-solid fa-check" />
+                            <i class="fa-solid fa-xmark" />
                         </button> </> : <></>
                     }
                 </form>
