@@ -205,7 +205,7 @@ async function UserTopPanel(p: {
                     }
                 </div>
                 <form class="group flex flex-row flex-wrap gap-2 items-center" hx-put={`/users/${p.user.id}/socials/submit`} hx-target="#socials_fieldset" hx-swap="beforebegin">
-                    <a href={`https://osu.ppy.sh.com/users/${p.user.id}/${p.mode}`} target="_blank" class="p-1 text-sm text-white px-2 rounded-full bg-[#f067a4]">
+                    <a href={`https://osu.ppy.sh/users/${p.user.id}/${p.mode}`} target="_blank" class="p-1 text-sm text-white px-2 rounded-full bg-[#f067a4]">
                         <button class="flex flex-row gap-2 items-center " type="button">
                             <img loading="lazy" alt="osu!logo" src="/public/img/osu.svg" class="size-4" />
                             <span>{p.user.username}</span>
