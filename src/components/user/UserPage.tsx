@@ -24,8 +24,6 @@ const UserPage = async (p: Props) => {
 
     p.mode = user.rank_history?.mode as Mode || "osu";
 
-    console.log(user.username, user.collections);
-
     const panels: PanelType[] = [
         {
             title: "History",
@@ -138,7 +136,7 @@ const UserPage = async (p: Props) => {
 
     return (<>
         <Title title={user.username} />
-        <UserTopPanel user={user} mode={p.mode} />
+        <UserTopPanel user={user} mode={p.mode} editable={editable} />
         <nav class="underline-offset-1 text-neutral-content sticky -mt-8 top-16 bg-base-300 md:rounded-lg shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-6 flex-wrap">
             <a class="hover:underline" href="#top">Top</a>
             {panels.map((p) => {

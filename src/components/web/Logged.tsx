@@ -30,10 +30,10 @@ const Logged = (props: Props) => {
                     </a>
                 </li>
                 <li>
-                    <Link url="/logout" css="btn btn-ghost flex">
+                    <a href="/logout" class="btn btn-ghost flex">
                         <i class="fa-solid fa-right-from-bracket" />
                         logout
-                    </Link>
+                    </a>
                 </li>
             </ul>
         </div>
