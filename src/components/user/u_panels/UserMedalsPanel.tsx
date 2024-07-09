@@ -1,11 +1,17 @@
 import MedalBadge from "./u_components/Medal";
 import { Medal } from "@/src/models/Medal";
-import { User, type ProfileMedal } from "@/src/models/User";
 import type { UserMedal } from "@/src/types/medals";
 
 type Props = {
     user_id: number
+    medals: ProfileMedal[];
 }
+
+type ProfileMedal = {
+    achievement_id: number,
+    achieved_at: string
+}
+
 
 type Group = {
     [key: string]: {
@@ -16,13 +22,10 @@ type Group = {
 
 async function UserMedalsPanel(p: Props) {
 
-    const user = await User.findOne({ user_id: p.user_id });
-    if (!user) return <>This user hasn't gotten any yet. ;_;</>;
-
     const db_medals = await Medal.find().lean();
 
     const user_medals_map = new Map<number, ProfileMedal>();
-    user.medals?.forEach(um => user_medals_map.set(um.achievement_id, um));
+    p.medals.forEach(um => user_medals_map.set(um.achievement_id, um));
 
     const medals: UserMedal[] = db_medals.map((m) => {
         const user_medal = user_medals_map.get(m.medal_id);
@@ -89,9 +92,9 @@ async function UserMedalsPanel(p: Props) {
                     <span>Show all</span>
                 </div>
                 <div class="flex flex-row items-center gap-2">
-                    <progress class="hidden sm:inline-block progress progress-accent w-52" value={user.medals?.length} max={db_medals.length} />
+                    <progress class="hidden sm:inline-block progress progress-accent w-52" value={p.medals?.length} max={db_medals.length} />
                     <div>
-                        {user.medals?.length} / {db_medals.length}
+                        {p.medals?.length} / {db_medals.length}
                     </div>
                 </div>
             </summary>

@@ -6,6 +6,7 @@ import { type Mode, type PanelType } from "../../types/osu";
 import Panel from "./Panel";
 import UserSetupPanel from "./u_panels/UserSetupPanel";
 import Title from "../web/Title";
+import UserMedalsPanel from "./u_panels/UserMedalsPanel";
 
 type Props = {
     logged_id: number | undefined;
@@ -129,8 +130,9 @@ const UserPage = async (p: Props) => {
             code: "medals",
             tooltip: "powered by osekai.net",
             icon: <img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" loading="lazy" />,
-            url: `/users/${user.id}/0/panels/medals`,
-            show_if: user.user_achievements.length > 0
+            // url: `/users/${user.id}/0/panels/medals`,
+            show_if: user.user_achievements.length > 0,
+            jsx: (<UserMedalsPanel user_id={user.id} medals={user.user_achievements} />)
         }
     ];
 

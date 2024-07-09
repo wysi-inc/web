@@ -96,17 +96,6 @@ const modes = new mongoose.Schema({
     mania: modeRanks,
 }, { _id: false });
 
-const medal = new mongoose.Schema({
-    achievement_id: {
-        type: Number,
-        required: true,
-    },
-    achieved_at: {
-        type: Date,
-        required: true,
-    }
-}, { _id: false });
-
 const userSchema = new mongoose.Schema({
     user_id: {
         type: Number,
@@ -128,8 +117,7 @@ const userSchema = new mongoose.Schema({
     collections: {
         type: [collectionDBSchema],
         required: false,
-    },
-    medals: [medal]
+    }
 });
 
 userSchema.methods.toJSON = function() {
@@ -138,7 +126,6 @@ userSchema.methods.toJSON = function() {
 };
 
 export type CollectionDB = mongoose.InferSchemaType<typeof collectionDBSchema>;
-export type ProfileMedal = mongoose.InferSchemaType<typeof medal>;
 export type Rank = mongoose.InferSchemaType<typeof rank>;
 export type Setup = mongoose.InferSchemaType<typeof setup>;
 export type ModeRanks = mongoose.InferSchemaType<typeof modeRanks>;
