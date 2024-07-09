@@ -35,9 +35,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 set.status = 401;
                 return "Unauthorized";
             }
-
             if (Number(params.id) != user.id) return;
-
             const setup = await saveSetup(user.id, body);
             if (!setup) return "Failed to save setup, reload the page and try again.";
             return <UserSetupPanel setup={setup} logged_id={user.id} page_id={user.id} />
@@ -65,7 +63,6 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 set.status = 401;
                 return "Unauthorized";
             }
-
             if (Number(params.id) != user.id) return;
             const collections = await saveCollection(body as any, user.id);
             return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} collections={collections as any} />

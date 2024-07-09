@@ -2,6 +2,7 @@ import type { Category, Mode } from "@/src/types/osu";
 import Pagination from "./u_panels/u_components/Pagination";
 import UserRankingCard from "./UserRankingCard";
 import { getRankings } from "@/src/db/users/get_user";
+import Title from "../web/Title";
 
 type Props = {
     mode: Mode;
@@ -18,6 +19,7 @@ async function Rankings({ mode, category, page }: Props) {
     if (!users.ranking) return <div>No users found</div>;
 
     return (<>
+        <Title title="Rankings" />
         <Pagination mode={mode} category={category} page={page} />
         <table class="table p-4 bg-base-100 rounded-lg">
             <tr>
