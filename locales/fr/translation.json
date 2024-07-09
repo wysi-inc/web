@@ -1,10 +1,10 @@
 {
     "nav": {
-        "home": "Page d'accueil",
+        "home": "Accueil",
         "users": "Utilisateur",
         "beatmaps": "Beatmaps",
         "search": "rechercher quelqu'un",
-        "help": "Contribuez à la traduction du site!",
+        "help": "Contribuez à la traduction du site !",
         "log": {
             "login": "Connectez-vous avec osu!",
             "logout": "Se déconnecter",
@@ -28,9 +28,9 @@
                     "gpu": "Carte graphique",
                     "ram": "RAM",
                     "storage": "Stockage",
-                    "motherboard": "carte mère",
-                    "psu": "Source d'alimentation",
-                    "case": "boîtier pc"
+                    "motherboard": "Carte mère",
+                    "psu": "Alimentation",
+                    "case": "Boitier"
                 },
                 "model": "Modèle",
                 "size": "Taille",
@@ -44,7 +44,7 @@
                     "k60": "60%",
                     "k75": "75%",
                     "ktkl": "TKL",
-                    "kfull": "COMPLET"
+                    "kfull": "Complet"
                 }
             },
             "history": {
@@ -58,22 +58,22 @@
                 "title": "Médailles"
             },
             "scores_summary": {
-                "title": "Résumé des scores",
+                "title": "Résumé",
                 "tabs": {
                     "hit_ratios": "Ratios de frappe",
                     "grade_ratios": "Ratios de note",
                     "average_play": "Jeu moyen"
                 }
             },
-            "mostplayed": "Le plus joué"
+            "mostplayed": "Les plus jouées"
         },
         "performance": "Performance",
         "total_score": "Score total",
         "global_rank": "Rank global",
-        "country_rank": "Rank national",
-        "play_time": "Durée du jeu",
-        "play_count": "Nombre de sessions",
-        "replays_watched": "Replays regardés",
+        "country_rank": "Rank pays",
+        "play_time": "Temps de jeu",
+        "play_count": "Nombres de parties",
+        "replays_watched": "Replays vues",
         "hits_x_play": "Hits x Play",
         "followers": "Abonnés",
         "online": "En ligne"
@@ -81,43 +81,43 @@
     "score": {
         "status": {
             "pinned": "Épinglé",
-            "best": "Meilleure",
+            "best": "Meilleur",
             "firsts": "Premier",
             "recent": "Récent"
         },
         "mods": "Mods",
-        "max_combo": "Max combo",
+        "max_combo": "Combo max",
         "combo": "Combo",
-        "grade": "note",
+        "grade": "Note",
         "grades": "Notes",
         "acc": "Acc",
         "accuracy": "Précision",
         "score": "Score",
-        "ranked_score": "Score du classement"
+        "ranked_score": "Score classé"
     },
     "beatmapset": {
         "status": {
             "favourite": "Favoris",
-            "ranked": "Classé",
+            "ranked": "Classée",
             "guest": "Invité",
-            "loved": "Aimé",
-            "nominated": "Nominer",
-            "pending": "en attendant",
+            "loved": "Loved",
+            "nominated": "Nominées",
+            "pending": "En attente",
             "graveyard": "Cimetière",
-            "wip": "En cours",
-            "approved": "Approuvé"
+            "wip": "WIP",
+            "approved": "Approuvée"
         },
-        "length": "longueur",
+        "length": "Durée",
         "bpm": "BPM"
     },
     "footer": {
-        "rights": "Tous droits réservés à ce singe stupide"
+        "rights": "Tous droits réservés à ce singe un peu bébête"
     },
     "alerts": {
         "user": {
             "user_doesnt_exist": "Cet utilisateur n'existe pas",
             "user_is_bot": "Cet utilisateur est un bot, les bots ne sont pas encore pris en charge :(",
-            "users_fail": "Impossible de récupérer les infos d'utilisateur"
+            "users_fail": "Impossible de récupérer les infos sur l'utilisateur"
         }
     }
 }
