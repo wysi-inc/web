@@ -6,9 +6,10 @@ import Navbar from "./web/Navbar";
 type Props = {
     children: any;
     user: UserCookie | null;
+    t: any
 }
 
-const BaseHtml = ({ user, children }: Props) => {
+const BaseHtml = ({ t, user, children }: Props) => {
     return (<>
         <html class="scroll-smooth" lang="en">
             <head>
@@ -36,7 +37,7 @@ const BaseHtml = ({ user, children }: Props) => {
                 <script defer src="/public/js/audio.js" />
             </head>
             <body class="bg-base-300 flex flex-col justify-center items-center" id="top">
-                <Navbar user={user} />
+                <Navbar t={t} user={user} />
                 <main class="w-screen mil:w-mil">
                     <div id="main" class="py-4 md:px-4 flex flex-col gap-4 bg-neutral shadow-lg">
                         {children}

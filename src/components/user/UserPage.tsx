@@ -12,6 +12,7 @@ type Props = {
     logged_id: number | undefined;
     user_id: string;
     mode?: Mode;
+    t: any
 }
 
 const UserPage = async (p: Props) => {
@@ -28,11 +29,10 @@ const UserPage = async (p: Props) => {
 
     const panels: PanelType[] = [
         {
-            title: "History",
+            title: p.t.user.sections.history.title,
             code: "history",
             icon: <i class="fa-solid fa-chart-line" />,
             show_if: true,
-            info: "ALT + Mouse Scroll to zoom",
             jsx: (
                 <UserHistoryPanel
                     db_ranks={user.db_ranks}
@@ -42,7 +42,7 @@ const UserPage = async (p: Props) => {
             )
         },
         {
-            title: "About",
+            title: p.t.user.sections.about,
             code: "about",
             icon: <i class="fa-solid fa-user" />,
             show_if: user.page?.html !== undefined,
@@ -59,7 +59,7 @@ const UserPage = async (p: Props) => {
             )
         },
         {
-            title: "Setup",
+            title: p.t.user.sections.setup.title,
             code: "setup",
             icon: <i class="fa-solid fa-computer" />,
             show_if: editable || user.db_setup !== undefined,
@@ -74,9 +74,9 @@ const UserPage = async (p: Props) => {
         //     url: `/users/${user.id}/0/panels/skins`
         // },
         {
-            title: "Year",
+            title: p.t.user.sections.year.title,
             code: "year",
-            info: `This is a recap of this year so far, the data will be reset at Jaunary 1st ${new Date().getFullYear() + 1}`,
+            info: p.t.user.sections.year.info,
             tooltip: "powered by advance.catboy.best",
             icon: <i class="fa-solid fa-calendar-days" />,
             url: `/users/${user.id}/0/panels/year`,
@@ -84,41 +84,41 @@ const UserPage = async (p: Props) => {
             show_if: true,
         },
         {
-            title: "Summary",
+            title: p.t.user.sections.summary.title,
             code: "summary",
             icon: <i class="fa-solid fa-ranking-star" />,
-            info: "this is a quick summary of your top 100 plays",
+            info: p.t.user.sections.summary.info,
             url: `/users/${user.id}/${p.mode}/panels/summary`,
             manual: true,
             show_if: true,
         },
         {
-            title: "Scores",
+            title: p.t.user.sections.scores.title,
             code: "scores",
             icon: <i class="fa-solid fa-flag-checkered" />,
-            info: "hover over a grayed out PP to see the (if FC) PP value",
+            info: p.t.user.sections.scores.info,
             url: `/users/${user.id}/${p.mode}/panels/scores/best`,
             show_if: true
         },
         {
-            title: "Collections",
+            title: p.t.user.sections.collections.title,
             code: "collections",
             tooltip: "powered by catboy.best",
-            info: "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)",
+            info: p.t.user.sections.collections.info,
             icon: <i class="fa-solid fa-list" />,
             url: `/users/${user.id}/${p.mode}/panels/collections`,
             manual: true,
             show_if: editable || (user.collections !== undefined && user.collections.length > 0)
         },
         {
-            title: "Beatmapsets",
+            title: p.t.user.sections.beatmaps,
             code: "beatmapsets",
             icon: <i class="fa-solid fa-screwdriver-wrench" />,
             url: `/users/${user.id}/${p.mode}/panels/beatmapsets/favourite`,
             show_if: true
         },
         {
-            title: "Most Played",
+            title: p.t.user.sections.most,
             code: "most",
             icon: <i class="fa-solid fa-rotate-left" />,
             url: `/users/${user.id}/0/panels/most`,
@@ -126,19 +126,19 @@ const UserPage = async (p: Props) => {
             show_if: true,
         },
         {
-            title: "Medals",
+            title: p.t.user.sections.medals.title,
             code: "medals",
             tooltip: "powered by osekai.net",
             icon: <img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" loading="lazy" />,
             // url: `/users/${user.id}/0/panels/medals`,
             show_if: user.user_achievements.length > 0,
-            jsx: (<UserMedalsPanel user_id={user.id} medals={user.user_achievements} />)
+            jsx: (<UserMedalsPanel t={p.t} user_id={user.id} medals={user.user_achievements} />)
         }
     ];
 
     return (<>
         <Title title={user.username} />
-        <UserTopPanel user={user} mode={p.mode} editable={editable} />
+        <UserTopPanel t={p.t} user={user} mode={p.mode} editable={editable} />
         <nav class="underline-offset-1 text-neutral-content sticky -mt-8 top-16 bg-base-300 md:rounded-lg shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-6 flex-wrap">
             <a class="hover:underline" href="#top">Top</a>
             {panels.map((p) => {
@@ -146,15 +146,15 @@ const UserPage = async (p: Props) => {
                 return <a class="hover:underline" href={`#${p.code}`}>{p.title}</a>
             })}
         </nav>
-        {panels.map((p) => {
-            if (!p.show_if) return <></>;
-            if (p.url) return (
-                <LazyPanel title={p.title} code={p.code} icon={p.icon} manual={p.manual}
-                    url={p.url} body={p.body} tooltip={p.tooltip} info={p.info} />
+        {panels.map((panel) => {
+            if (!panel.show_if) return <></>;
+            if (panel.url) return (
+                <LazyPanel t={p.t} title={panel.title} code={panel.code} icon={panel.icon} manual={panel.manual}
+                    url={panel.url} body={panel.body} tooltip={panel.tooltip} info={panel.info} />
             );
             else return (
-                <Panel title={p.title} code={p.code} icon={p.icon} tooltip={p.tooltip} info={p.info} manual={p.manual}>
-                    {p.jsx}
+                <Panel t={p.t} title={panel.title} code={panel.code} icon={panel.icon} tooltip={panel.tooltip} info={panel.info} manual={panel.manual}>
+                    {panel.jsx}
                 </Panel>
             );
         })}

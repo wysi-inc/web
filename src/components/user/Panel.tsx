@@ -1,4 +1,5 @@
 const Panel = (p: {
+    t: any,
     code: string,
     title: string,
     icon: JSX.Element,
@@ -25,7 +26,7 @@ const Panel = (p: {
                 <summary class="cursor-pointer bg-neutral rounded-lg flex flex-row gap-4 items-center justify-between py-2 px-4">
                     <div class="flex flex-row gap-4 items-center">
                         <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
-                        <h6>Expand</h6>
+                        <h6>{p.t.user.sections.expand}</h6>
                     </div>
                 </summary>
                 <div class="mt-4">

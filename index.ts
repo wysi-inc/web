@@ -1,7 +1,7 @@
-import { Elysia } from "elysia";
-import { html } from "@elysiajs/html";
+import { Elysia } from "elysia"; import { html } from "@elysiajs/html";
 import { staticPlugin } from '@elysiajs/static'
 import { jwt } from "@elysiajs/jwt";
+import { readdir } from "node:fs/promises";
 
 import { auth } from "osu-api-extended";
 import mongoose from "mongoose";
@@ -40,6 +40,24 @@ function connect(): void {
 connect();
 setInterval(() => connect(), 1000 * 60 * 60 * 23);
 
+async function getTranslations() {
+    try {
+        const dirs = await readdir("./locales");
+        const translations: any = {};
+        for (let dir of dirs) {
+            const file = Bun.file(`./locales/${dir}/translation.json`);
+            const contents = await file.json();
+            translations[dir] = contents;
+        }
+        return translations;
+    } catch (err) {
+        console.error(err);
+        return {};
+    }
+}
+
+const translations = await getTranslations();
+
 const jwtcfg = jwt({
     secret: process.env.OSU_SECRET as string,
     cookie: "auth",
@@ -56,6 +74,11 @@ new Elysia()
         const route = request.url.split("/").slice(3).join("/");
         const method = request.method;
         console.log(`${(ip || "0.0.0.0").padStart(15, " ")} ${method.padStart(6, " ")}::/${route}`);
+    })
+    .derive(({ cookie }) => {
+        return {
+            t: translations[cookie?.lang?.value || "en"]
+        }
     })
     .use(jwtcfg)
     .get("/favicon.ico", Bun.file("./public/favicon.ico"))

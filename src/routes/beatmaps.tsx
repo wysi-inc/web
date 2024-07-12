@@ -37,8 +37,8 @@ const queryBodyElysia = {
 }
 
 export const beatmapRoutes = new Elysia({ prefix: '/beatmapsets' })
-    .get("/", async ({ request, jwt, cookie }: Route) => (
-        <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
+    .get("/", async ({ t, request, jwt, cookie }: Route) => (
+        <HtmxPage t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
             <BeatmapsetSearch />
         </HtmxPage>
     ))
@@ -48,13 +48,13 @@ export const beatmapRoutes = new Elysia({ prefix: '/beatmapsets' })
     .post("/list/:offset", ({ body, params }) => (
         <BeatmapsList body={body} offset={params.offset} />
     ), queryBodyElysia)
-    .get("/:set_id", async ({ request, jwt, cookie, params }: Route) => (
-        <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
+    .get("/:set_id", async ({ t, request, jwt, cookie, params }: Route) => (
+        <HtmxPage t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
             <BeatmapsetPage set_id={Number(params.set_id)} />
         </HtmxPage>
     ))
-    .get("/:set_id/:beatmap_id", async ({ request, jwt, cookie, params }: Route) => (
-        <HtmxPage headers={request.headers} cookie={cookie} jwt={jwt}>
+    .get("/:set_id/:beatmap_id", async ({ t, request, jwt, cookie, params }: Route) => (
+        <HtmxPage t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
             <BeatmapsetPage set_id={Number(params.set_id)}
                 beatmap_id={Number(params.beatmap_id)} />
         </HtmxPage>

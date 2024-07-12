@@ -4,32 +4,33 @@ import type { UserCookie } from "../types/users";
 import { verifyUser } from "./auth";
 
 type Props = {
-    headers: any;
-    children: JSX.Element;
+    t: any,
+    headers: any,
+    children: JSX.Element,
 } & (
-        { cookie: any; jwt: Jwt; } |
-        { user: UserCookie | null; }
+        { cookie: any, jwt: Jwt, } |
+        { user: UserCookie | null, }
     );
 
-const HtmxPage = async (props: Props) => {
-    if (props.headers?.has("hx-request")) {
+const HtmxPage = async (p: Props) => {
+    if (p.headers?.has("hx-request")) {
         return <>
-            {props.children}
+            {p.children}
         </>
     }
 
-    if ("cookie" in props) {
-        const user = await verifyUser(props.jwt, props.cookie?.auth?.value);
+    if ("cookie" in p) {
+        const user = await verifyUser(p.jwt, p.cookie?.auth?.value);
         return <>
-            <BaseHtml user={user}>
-                {props.children}
+            <BaseHtml t={p.t} user={user}>
+                {p.children}
             </BaseHtml>
         </>
     }
 
     return <>
-        <BaseHtml user={props.user}>
-            {props.children}
+        <BaseHtml t={p.t} user={p.user}>
+            {p.children}
         </BaseHtml>
     </>
 }

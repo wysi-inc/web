@@ -1,40 +1,41 @@
 import Title from "./Title";
 
-const content = [
-    {
-        title: "User Profiles",
-        img: "profile",
-    },
-    {
-        title: "Top 100 Score Stats",
-        img: "summary",
-    },
-    {
-        title: "Beatmap Search",
-        img: "beatmaps",
-    },
-    {
-        title: "Builtin PP Calculator",
-        img: "calculator",
-    },
-    {
-        title: "Share Your Setup!",
-        img: "setup",
-    },
-    {
-        title: "Upload Your Collections!",
-        img: "collections",
-    },
-];
 
-function Home() {
+function Home({ t }: any) {
+
+    const content = [
+        {
+            title: t.home.profiles,
+            img: "profile",
+        },
+        {
+            title: t.home.stats,
+            img: "summary",
+        },
+        {
+            title: t.home.search,
+            img: "beatmaps",
+        },
+        {
+            title: t.home.calculator,
+            img: "calculator",
+        },
+        {
+            title: t.home.setup,
+            img: "setup",
+        },
+        {
+            title: t.home.collecitons,
+            img: "collections",
+        },
+    ];
     return (<>
         <Title title="Home" />
         <div class="flex flex-col gap-2 items-center">
-            <h1 class="text-2xl text-center">Welcome to wysi727.com!</h1>
+            <h1 class="text-2xl text-center">{t.home.welcome}</h1>
             <img loading="lazy" src="/public/wysi.svg" class="rounded-xl size-24 shadow-lg" alt="wysi logo" />
-            <h2 class="text-lg text-center">An <b>open source</b> osu website <i>*alternative*</i></h2>
-            <h3 class="text-sm text-center">Built with bun and htmx</h3>
+            <h2 class="text-lg text-center">{t.home.foss}</h2>
+            <h3 class="text-sm text-center">{t.home.built}</h3>
             <div />
         </div>
         <div class="grid gird-cols-1 md:grid-cols-2 gap-4">

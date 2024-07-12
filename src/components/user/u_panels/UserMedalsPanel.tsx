@@ -3,8 +3,9 @@ import { Medal } from "@/src/models/Medal";
 import type { UserMedal } from "@/src/types/medals";
 
 type Props = {
-    user_id: number
-    medals: ProfileMedal[];
+    user_id: number,
+    medals: ProfileMedal[],
+    t: any
 }
 
 type ProfileMedal = {

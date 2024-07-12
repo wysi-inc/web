@@ -5,38 +5,41 @@ import Logged from "./Logged";
 import Link from "./Link";
 
 type Props = {
-    user: UserCookie | null;
+    user: UserCookie | null,
+    t: any
 }
 
-const routes = [
-    {
-        title: "Home",
-        url: "/",
-        icon: <i class="fa-solid fa-house" />
-    },
-    {
-        title: "Rankings",
-        url: "/rankings",
-        icon: <i class="fa-solid fa-ranking-star" />
-    },
-    {
-        title: "Beatmaps",
-        url: "/beatmapsets",
-        icon: <i class="fa-solid fa-music" />
-    },
-    {
-        title: "Support",
-        url: "/support",
-        icon: <i class="fa-solid fa-heart" />
-    },
-    {
-        title: "About",
-        url: "/about",
-        icon: <i class="fa-regular fa-circle-question" />
-    },
-];
 
-const Navbar = ({ user }: Props) => {
+const Navbar = ({ t, user }: Props) => {
+
+    const routes = [
+        {
+            title: t.nav.home,
+            url: "/",
+            icon: <i class="fa-solid fa-house" />
+        },
+        {
+            title: t.nav.rankings,
+            url: "/rankings",
+            icon: <i class="fa-solid fa-ranking-star" />
+        },
+        {
+            title: t.nav.beatmaps,
+            url: "/beatmapsets",
+            icon: <i class="fa-solid fa-music" />
+        },
+        {
+            title: t.nav.support,
+            url: "/support",
+            icon: <i class="fa-solid fa-heart" />
+        },
+        {
+            title: t.nav.about,
+            url: "/about",
+            icon: <i class="fa-regular fa-circle-question" />
+        },
+    ];
+
     return <>
         <nav class="flex flex-col bg-base-100 shadow-lg sticky top-0 z-50 w-full">
             <div class="grid grid-cols-3 p-2">
@@ -84,7 +87,7 @@ const Navbar = ({ user }: Props) => {
                     </div>
                 </div>
                 <div class="flex flex-row items-center justify-center">
-                    <Search />
+                    <Search t={t} />
                 </div>
                 <div class="flex flex-row items-center justify-end">
                     <div class="flex">
@@ -104,8 +107,8 @@ const Navbar = ({ user }: Props) => {
                         </a>
                     </div>
                     {user ?
-                        <Logged user={user} /> :
-                        <Login />
+                        <Logged t={t} user={user} /> :
+                        <Login t={t} />
                     }
                 </div>
             </div>

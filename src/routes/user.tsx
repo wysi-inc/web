@@ -21,19 +21,19 @@ import UserSocial from '../components/user/u_panels/UserSocial';
 import type { Social } from '../models/User';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
-    .get("/", async ({ request, cookie, params, jwt }: Route) => {
+    .get("/", async ({ t, request, cookie, params, jwt }: Route) => {
         const user = await verifyUser(jwt, cookie.auth.value);
         return <>
-            <HtmxPage headers={request.headers} user={user}>
-                <UserPage user_id={params.id} logged_id={user?.id} />
+            <HtmxPage t={t} headers={request.headers} user={user}>
+                <UserPage t={t} user_id={params.id} logged_id={user?.id} />
             </HtmxPage>
         </>
     })
     .group("/:mode", (_) => _
-        .get("/", async ({ request, cookie, params, jwt }: Route) => {
+        .get("/", async ({ t, request, cookie, params, jwt }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);
             return <>
-                <HtmxPage headers={request.headers} user={user}>
+                <HtmxPage t={t} headers={request.headers} user={user}>
                     <UserPage
                         logged_id={user?.id}
                         user_id={params.id}

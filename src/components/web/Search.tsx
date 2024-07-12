@@ -1,20 +1,18 @@
-function Search() {
+function Search({ t }: any) {
     return (<>
-        <button id="search_button" class="grid grid-cols-3 btn btn-wide bg-base-300">
+        <button id="search_button" class="relative grid grid-cols-3 btn btn-wide bg-base-300">
             <div class="col-start-2 flex flex-row gap-2">
                 <i class="fa-solid fa-magnifying-glass" />
-                <span>Search</span>
+                <span class="text-nowrap">{t.nav.search}</span>
             </div>
-            <div class="flex justify-end">
-                <kbd class="kbd hidden sm:flex">/</kbd>
-            </div>
+            <kbd class="absolute right-2 kbd hidden sm:flex">/</kbd>
         </button>
         <dialog id="search_modal" class="modal">
             <div class="modal-box bg-neutral">
                 <form method="dialog">
                     <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                 </form>
-                <h3 class="font-bold text-lg mb-4">Search</h3>
+                <h3 class="font-bold text-lg mb-4">{t.nav.search}</h3>
                 <form id="search_form" class="flex flex-col gap-4">
                     <input type="text" name="q" id="search_input"
                         class="input input-bordered"
@@ -22,7 +20,7 @@ function Search() {
                         hx-trigger="keyup changed delay:500ms"
                         hx-target="#search_results"
                         hx-sync="closest form:abort"
-                        placeholder="Search..."
+                        placeholder={`${t.nav.search_someone}...`}
                     />
                     <div id="search_results" class="flex flex-col gap-4" />
                 </form>
