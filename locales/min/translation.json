@@ -2,8 +2,12 @@
     "nav": {
         "home": "⍑𝙹ᒲᒷ",
         "users": "⚍ᓭᒷ∷ᓭ",
+        "rankings": "Rankings",
         "beatmaps": "ʖᒷᔑℸ ̣ ᒲᔑ!¡ᓭ",
+        "support": "Support",
+        "about": "About",
         "search": "ᓭᒷᔑ∷ᓵ⍑ ᓭ𝙹ᒲᒷ𝙹リᒷ",
+        "search_someone": "Search someone",
         "help": "⍑ᒷꖎ!¡ ℸ ̣ ∷ᔑリᓭꖎᔑℸ ̣ ᒷ ℸ ̣ ⍑ᒷ ᓭ╎ℸ ̣ ᒷ!",
         "log": {
             "login": "ꖎ𝙹⊣╎リ  ∴╎ℸ ̣ ⍑  𝙹ᓭ⚍",
@@ -12,8 +16,65 @@
             "wysi": "∴||ᓭ╎!!¡∷𝙹⎓╎ꖎᒷ"
         }
     },
+    "home": {
+        "welcome": "Welcome to wysi727.com!",
+        "foss": "An open source osu website alternative",
+        "built": "Build with bun and htmx",
+        "profiles": "User Profiles",
+        "stats": "Top 100 Score stats",
+        "search": "Beatmap Search",
+        "calculator": "Builtin PP Calculator",
+        "setup": "Share your setup!",
+        "collections": "Upload your collections!"
+    },
     "user": {
         "sections": {
+            "expand": "Expand",
+            "about": "About",
+            "beatmaps": "Beatmaps",
+            "medals": {
+                "title": "ᒲᒷ↸ᔑꖎᓭ",
+                "recent": "Recent Medals",
+                "rarest": "Rarest Medal",
+                "show": "Show all"
+            },
+            "year": {
+                "title": "Year",
+                "info": "This is a recap of this year so far, the data will be reset at Jaunary 1st"
+            },
+            "most": "Most Played",
+            "scores": {
+                "title": "Scores",
+                "info": "hover over a grayed out PP to see the (if FC) PP value",
+                "tabs": {
+                    "pinned": "Pinned",
+                    "best": "Best",
+                    "first": "First",
+                    "recent": "Recent"
+                }
+            },
+            "history": {
+                "title": "⍑╎ᓭℸ ̣ 𝙹∷||",
+                "tabs": {
+                    "global": "Global",
+                    "country": "Country",
+                    "plays": "Plays",
+                    "replays": "Replays"
+                }
+            },
+            "summary": {
+                "title": "Summary",
+                "info": "this is a quick summary of your top 100 plays",
+                "tabs": {
+                    "hit_ratios": "Hit Ratios",
+                    "grade_ratios": "Grade Ratios",
+                    "average_play": "Average Play"
+                }
+            },
+            "collections": {
+                "title": "Collections",
+                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+            },
             "setup": {
                 "title": "ᓭᒷℸ ̣ ⚍!¡",
                 "tabs": {
@@ -46,26 +107,7 @@
                     "ktkl": "ℸ ̣ ꖌꖎ",
                     "kfull": "⎓⚍ꖎꖎ"
                 }
-            },
-            "history": {
-                "title": "⍑╎ᓭℸ ̣ 𝙹∷||"
-            },
-            "scores": "ᓭᓵ𝙹∷ᒷᓭ",
-            "beatmaps": {
-                "title": "ʖᒷᔑℸ ̣ ᒲᔑ!¡ᓭ"
-            },
-            "medals": {
-                "title": "ᒲᒷ↸ᔑꖎᓭ"
-            },
-            "scores_summary": {
-                "title": "ᓭᓵ𝙹∷ᒷᓭ  ᓭ⚍ᒲᒲᔑ∷||",
-                "tabs": {
-                    "hit_ratios": "⍑╎ℸ ̣   ∷ᔑℸ ̣ ╎𝙹ᓭ",
-                    "grade_ratios": "⊣∷ᔑ↸ᒷ  ∷ᔑℸ ̣ ╎𝙹ᓭ",
-                    "average_play": "ᔑ⍊ᒷ∷ᔑ⊣ᒷ  !¡ꖎᔑ||"
-                }
-            },
-            "mostplayed": "Most Played"
+            }
         },
         "performance": "!¡ᒷ∷⎓𝙹∷ᒲᔑリᓵᒷ",
         "total_score": "ℸ ̣ 𝙹ℸ ̣ ᔑꖎ  ᓭᓵ𝙹∷ᒷ",
@@ -73,6 +115,7 @@
         "country_rank": "ᓵ𝙹⚍リℸ ̣ ∷||  ∷ᔑリꖌ",
         "play_time": "!¡ꖎᔑ||  ℸ ̣ ╎ᒲᒷ",
         "play_count": "!¡ꖎᔑ||  ᓵ𝙹⚍リℸ ̣",
+        "total_hits": "Total Hits",
         "replays_watched": "∷ᒷ!¡ꖎᔑ||ᓭ  ∴ᔑℸ ̣ ᓵ⍑ᒷ↸",
         "hits_x_play": "⍑╎ℸ ̣ ᓭ   ̇/  !¡ꖎᔑ||",
         "followers": "⎓𝙹ꖎꖎ𝙹∴ᒷ∷ᓭ",
