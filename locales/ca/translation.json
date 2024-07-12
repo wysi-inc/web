@@ -2,8 +2,12 @@
     "nav": {
         "home": "Inici",
         "users": "Usuaris",
+        "rankings": "Rankings",
         "beatmaps": "Beatmaps",
+        "support": "Support",
+        "about": "About",
         "search": "Busca algú",
+        "search_someone": "Search someone",
         "help": "Help translate the site!",
         "log": {
             "login": "Registra't amb osu!",
@@ -12,8 +16,65 @@
             "wysi": "perfil wysi"
         }
     },
+    "home": {
+        "welcome": "Welcome to wysi727.com!",
+        "foss": "An open source osu website alternative",
+        "built": "Build with bun and htmx",
+        "profiles": "User Profiles",
+        "stats": "Top 100 Score stats",
+        "search": "Beatmap Search",
+        "calculator": "Builtin PP Calculator",
+        "setup": "Share your setup!",
+        "collections": "Upload your collections!"
+    },
     "user": {
         "sections": {
+            "expand": "Expand",
+            "about": "About",
+            "beatmaps": "Beatmaps",
+            "medals": {
+                "title": "Medalles",
+                "recent": "Recent Medals",
+                "rarest": "Rarest Medal",
+                "show": "Show all"
+            },
+            "year": {
+                "title": "Year",
+                "info": "This is a recap of this year so far, the data will be reset at Jaunary 1st"
+            },
+            "most": "Most Played",
+            "scores": {
+                "title": "Scores",
+                "info": "hover over a grayed out PP to see the (if FC) PP value",
+                "tabs": {
+                    "pinned": "Pinned",
+                    "best": "Best",
+                    "first": "First",
+                    "recent": "Recent"
+                }
+            },
+            "history": {
+                "title": "Historial",
+                "tabs": {
+                    "global": "Global",
+                    "country": "Country",
+                    "plays": "Plays",
+                    "replays": "Replays"
+                }
+            },
+            "summary": {
+                "title": "Summary",
+                "info": "this is a quick summary of your top 100 plays",
+                "tabs": {
+                    "hit_ratios": "Hit Ratios",
+                    "grade_ratios": "Grade Ratios",
+                    "average_play": "Average Play"
+                }
+            },
+            "collections": {
+                "title": "Collections",
+                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+            },
             "setup": {
                 "title": "Setup",
                 "tabs": {
@@ -46,26 +107,7 @@
                     "ktkl": "TKL",
                     "kfull": "FULL"
                 }
-            },
-            "history": {
-                "title": "Historial"
-            },
-            "scores": "Scores",
-            "beatmaps": {
-                "title": "Beatmaps"
-            },
-            "medals": {
-                "title": "Medalles"
-            },
-            "scores_summary": {
-                "title": "Resum d'Scores",
-                "tabs": {
-                    "hit_ratios": "Proporció del clicks",
-                    "grade_ratios": "Proporció de notes",
-                    "average_play": "Partida promitja"
-                }
-            },
-            "mostplayed": "Most Played"
+            }
         },
         "performance": "Rendiment",
         "total_score": "Puntuació Total",
@@ -73,6 +115,7 @@
         "country_rank": "Rang Nacional",
         "play_time": "Temps De Partida",
         "play_count": "Vegades Jugades",
+        "total_hits": "Total Hits",
         "replays_watched": "Repeticions Vistes",
         "hits_x_play": "Clicks x Partida",
         "followers": "Seguidors",
