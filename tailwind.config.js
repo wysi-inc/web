@@ -9,6 +9,9 @@ module.exports = {
     ],
     theme: {
         extend: {
+            width: {
+                'mil': '1000px',
+            },
             screens: {
                 'mil': '1000px',
             },

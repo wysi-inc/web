@@ -42,7 +42,9 @@ async function Support() {
                 Instead we rely on the generosity of those who can and choose to support our work voluntarly. <br /><br />
                 You can also support the project by contributing to its codebase over
                 at <a class="link link-info" href="https://github.com/wysi-inc/web" target="_blank">our GitHub repo</a>,
-                all help is appreciated.
+                all help is appreciated. <br /><br />
+                If you dont know how to code help with translations is also needed
+                head over to <a class="link link-info" href="https://crowdin.com/project/wysi" target="_blank">Crowdin</a> to see all the translations.
             </p>
             <div class="flex flex-col items-center justify-center gap-2">
                 <span>Support the website's development throught Ko-fi</span>
@@ -50,7 +52,7 @@ async function Support() {
                     <img loading="lazy" class="shadow-lg rounded-full hover:-translate-y-1 ease-in-out duration-100 transform w-44" src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' alt='Buy Me a Coffee at ko-fi.com' />
                 </a>
             </div>
-        </div>
+        </div >
         <div class="bg-base-100 rounded-lg p-4 flex flex-col gap-4">
             <h3 class="text-xl">Contributors</h3>
             <div class="grid grid-cols-2 gap-4">
