@@ -6,7 +6,7 @@
         "beatmaps": "Beatmaps",
         "support": "Support",
         "about": "About",
-        "search": "Search someone",
+        "search": "Search",
         "search_someone": "Search someone",
         "help": "Help translate the site!",
         "log": {
@@ -32,6 +32,7 @@
             "expand": "Expand",
             "about": "About",
             "beatmaps": "Beatmaps",
+            "top": "Top",
             "medals": {
                 "title": "Medals",
                 "recent": "Recent Medals",
