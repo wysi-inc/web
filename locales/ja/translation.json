@@ -2,8 +2,12 @@
     "nav": {
         "home": "ホーム",
         "users": "ユーザー",
+        "rankings": "Rankings",
         "beatmaps": "ビートマップ",
+        "support": "Support",
+        "about": "About",
         "search": "ユーザーを検索",
+        "search_someone": "Search someone",
         "help": "このサイトの翻訳に協力してください！",
         "log": {
             "login": "Osu! でログイン",
@@ -12,8 +16,65 @@
             "wysi": "wysi!profile"
         }
     },
+    "home": {
+        "welcome": "Welcome to wysi727.com!",
+        "foss": "An open source osu website alternative",
+        "built": "Build with bun and htmx",
+        "profiles": "User Profiles",
+        "stats": "Top 100 Score stats",
+        "search": "Beatmap Search",
+        "calculator": "Builtin PP Calculator",
+        "setup": "Share your setup!",
+        "collections": "Upload your collections!"
+    },
     "user": {
         "sections": {
+            "expand": "Expand",
+            "about": "About",
+            "beatmaps": "Beatmaps",
+            "medals": {
+                "title": "メダル",
+                "recent": "Recent Medals",
+                "rarest": "Rarest Medal",
+                "show": "Show all"
+            },
+            "year": {
+                "title": "Year",
+                "info": "This is a recap of this year so far, the data will be reset at Jaunary 1st"
+            },
+            "most": "Most Played",
+            "scores": {
+                "title": "Scores",
+                "info": "hover over a grayed out PP to see the (if FC) PP value",
+                "tabs": {
+                    "pinned": "Pinned",
+                    "best": "Best",
+                    "first": "First",
+                    "recent": "Recent"
+                }
+            },
+            "history": {
+                "title": "履歴",
+                "tabs": {
+                    "global": "Global",
+                    "country": "Country",
+                    "plays": "Plays",
+                    "replays": "Replays"
+                }
+            },
+            "summary": {
+                "title": "Summary",
+                "info": "this is a quick summary of your top 100 plays",
+                "tabs": {
+                    "hit_ratios": "Hit Ratios",
+                    "grade_ratios": "Grade Ratios",
+                    "average_play": "Average Play"
+                }
+            },
+            "collections": {
+                "title": "Collections",
+                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+            },
             "setup": {
                 "title": "Setup",
                 "tabs": {
@@ -46,26 +107,7 @@
                     "ktkl": "TKL",
                     "kfull": "FULL"
                 }
-            },
-            "history": {
-                "title": "履歴"
-            },
-            "scores": "スコア",
-            "beatmaps": {
-                "title": "ビートマップ"
-            },
-            "medals": {
-                "title": "メダル"
-            },
-            "scores_summary": {
-                "title": "スコアの概要",
-                "tabs": {
-                    "hit_ratios": "Hit ratio",
-                    "grade_ratios": "Grade Ratios",
-                    "average_play": "平均プレイ"
-                }
-            },
-            "mostplayed": "最もプレイした"
+            }
         },
         "performance": "パフォーマンス",
         "total_score": "合計スコア",
@@ -73,6 +115,7 @@
         "country_rank": "国別ランキング",
         "play_time": "プレイ時間",
         "play_count": "プレイ回数",
+        "total_hits": "Total Hits",
         "replays_watched": "リプレイ再生回数",
         "hits_x_play": "Hits x Play",
         "followers": "Followers",

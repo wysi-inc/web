@@ -2,8 +2,12 @@
     "nav": {
         "home": "Sākums",
         "users": "Lietotāji",
+        "rankings": "Rankings",
         "beatmaps": "Bītmapes",
+        "support": "Support",
+        "about": "About",
         "search": "Meklēt kādu",
+        "search_someone": "Search someone",
         "help": "Palīdziet tulkot vietni!",
         "log": {
             "login": "Piesakieties ar osu!",
@@ -12,8 +16,65 @@
             "wysi": "wysi!profils"
         }
     },
+    "home": {
+        "welcome": "Welcome to wysi727.com!",
+        "foss": "An open source osu website alternative",
+        "built": "Build with bun and htmx",
+        "profiles": "User Profiles",
+        "stats": "Top 100 Score stats",
+        "search": "Beatmap Search",
+        "calculator": "Builtin PP Calculator",
+        "setup": "Share your setup!",
+        "collections": "Upload your collections!"
+    },
     "user": {
         "sections": {
+            "expand": "Expand",
+            "about": "About",
+            "beatmaps": "Beatmaps",
+            "medals": {
+                "title": "Medaļas",
+                "recent": "Recent Medals",
+                "rarest": "Rarest Medal",
+                "show": "Show all"
+            },
+            "year": {
+                "title": "Year",
+                "info": "This is a recap of this year so far, the data will be reset at Jaunary 1st"
+            },
+            "most": "Most Played",
+            "scores": {
+                "title": "Scores",
+                "info": "hover over a grayed out PP to see the (if FC) PP value",
+                "tabs": {
+                    "pinned": "Pinned",
+                    "best": "Best",
+                    "first": "First",
+                    "recent": "Recent"
+                }
+            },
+            "history": {
+                "title": "Vēsture",
+                "tabs": {
+                    "global": "Global",
+                    "country": "Country",
+                    "plays": "Plays",
+                    "replays": "Replays"
+                }
+            },
+            "summary": {
+                "title": "Summary",
+                "info": "this is a quick summary of your top 100 plays",
+                "tabs": {
+                    "hit_ratios": "Hit Ratios",
+                    "grade_ratios": "Grade Ratios",
+                    "average_play": "Average Play"
+                }
+            },
+            "collections": {
+                "title": "Collections",
+                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+            },
             "setup": {
                 "title": "Uzstādījumi",
                 "tabs": {
@@ -46,26 +107,7 @@
                     "ktkl": "TKL",
                     "kfull": "PILNS"
                 }
-            },
-            "history": {
-                "title": "Vēsture"
-            },
-            "scores": "Rezultāti",
-            "beatmaps": {
-                "title": "Bītmapes"
-            },
-            "medals": {
-                "title": "Medaļas"
-            },
-            "scores_summary": {
-                "title": "Rezultātu kopsavilkums",
-                "tabs": {
-                    "hit_ratios": "Hit attiecība",
-                    "grade_ratios": "Grade attiecība",
-                    "average_play": "Vidēja Play"
-                }
-            },
-            "mostplayed": "Most Played"
+            }
         },
         "performance": "Veiktspēja",
         "total_score": "Kopējie Punkti",
@@ -73,6 +115,7 @@
         "country_rank": "Valsts rangs",
         "play_time": "Spēļu laiks",
         "play_count": "Spēļu skaits",
+        "total_hits": "Total Hits",
         "replays_watched": "Atkārtojumi Apskatīti",
         "hits_x_play": "Hiti katrai rezultātai",
         "followers": "Sekotāji",
