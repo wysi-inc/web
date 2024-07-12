@@ -17,7 +17,7 @@
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
+        "welcome": "Benvingut a wysi727.com!",
         "foss": "An open source osu website alternative",
         "built": "Build with bun and htmx",
         "profiles": "User Profiles",
