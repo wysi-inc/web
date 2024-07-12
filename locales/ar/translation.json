@@ -2,8 +2,12 @@
     "nav": {
         "home": "الصفحة الرئيسية",
         "users": "المستخدمون",
+        "rankings": "Rankings",
         "beatmaps": "خرائط الموسيقية",
+        "support": "Support",
+        "about": "About",
         "search": "ال باحت",
+        "search_someone": "Search someone",
         "help": "ساعد في طرجمة الموقع الإلكتروني",
         "log": {
             "login": "تسجيل الدخول باستخدام osu!",
@@ -12,8 +16,65 @@
             "wysi": "حساب wysi"
         }
     },
+    "home": {
+        "welcome": "Welcome to wysi727.com!",
+        "foss": "An open source osu website alternative",
+        "built": "Build with bun and htmx",
+        "profiles": "User Profiles",
+        "stats": "Top 100 Score stats",
+        "search": "Beatmap Search",
+        "calculator": "Builtin PP Calculator",
+        "setup": "Share your setup!",
+        "collections": "Upload your collections!"
+    },
     "user": {
         "sections": {
+            "expand": "Expand",
+            "about": "About",
+            "beatmaps": "Beatmaps",
+            "medals": {
+                "title": "الميداليات",
+                "recent": "Recent Medals",
+                "rarest": "Rarest Medal",
+                "show": "Show all"
+            },
+            "year": {
+                "title": "Year",
+                "info": "This is a recap of this year so far, the data will be reset at Jaunary 1st"
+            },
+            "most": "Most Played",
+            "scores": {
+                "title": "Scores",
+                "info": "hover over a grayed out PP to see the (if FC) PP value",
+                "tabs": {
+                    "pinned": "Pinned",
+                    "best": "Best",
+                    "first": "First",
+                    "recent": "Recent"
+                }
+            },
+            "history": {
+                "title": "سوابق",
+                "tabs": {
+                    "global": "Global",
+                    "country": "Country",
+                    "plays": "Plays",
+                    "replays": "Replays"
+                }
+            },
+            "summary": {
+                "title": "Summary",
+                "info": "this is a quick summary of your top 100 plays",
+                "tabs": {
+                    "hit_ratios": "Hit Ratios",
+                    "grade_ratios": "Grade Ratios",
+                    "average_play": "Average Play"
+                }
+            },
+            "collections": {
+                "title": "Collections",
+                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+            },
             "setup": {
                 "title": "إعداد",
                 "tabs": {
@@ -46,26 +107,7 @@
                     "ktkl": "TKL",
                     "kfull": "كامل"
                 }
-            },
-            "history": {
-                "title": "سوابق"
-            },
-            "scores": "النقاط",
-            "beatmaps": {
-                "title": "خرائط الموسيقية"
-            },
-            "medals": {
-                "title": "الميداليات"
-            },
-            "scores_summary": {
-                "title": "ملخص النقاط",
-                "tabs": {
-                    "hit_ratios": "نسب الضرب",
-                    "grade_ratios": "نسب الصف",
-                    "average_play": "معدل اللعب"
-                }
-            },
-            "mostplayed": "الأكثر لعبًا"
+            }
         },
         "performance": "الأداء",
         "total_score": "مجموع النقاط",
@@ -73,6 +115,7 @@
         "country_rank": "التصنيف في البلد",
         "play_time": "وقت اللعب",
         "play_count": "مرات اللعب",
+        "total_hits": "Total Hits",
         "replays_watched": "مشاهدة الاستعراضات",
         "hits_x_play": "اللعب x الضرب",
         "followers": "المتابِعون",
