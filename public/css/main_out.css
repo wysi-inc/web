@@ -856,8 +856,8 @@ html {
   border-radius: var(--rounded-btn, 0.5rem);
   border-color: transparent;
   border-color: oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity));
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
   text-align: center;
   font-size: 0.875rem;
   line-height: 1em;
