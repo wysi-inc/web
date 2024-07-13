@@ -79,13 +79,14 @@
             "setup": {
                 "title": "Setup",
                 "tabs": {
-                    "inputs": "Inputs",
+                    "tablet": "Tablet",
+                    "keyboard": "Keyboard",
+                    "mouse": "Mouse",
                     "peripherals": "周辺機器",
                     "computer": "パソコン"
                 },
                 "components": {
-                    "component": "パソコンの構成部品",
-                    "details": "詳細",
+                    "os": "OS",
                     "cpu": "CPU",
                     "gpu": "GPU",
                     "ram": "RAM",
@@ -94,12 +95,29 @@
                     "psu": "電源",
                     "case": "ケース"
                 },
+                "peripherals": {
+                    "mousepad": "Mousepad",
+                    "keypad": "Keypad",
+                    "headphones": "Headphones",
+                    "camera": "Camera",
+                    "microphone": "Microphone",
+                    "monitor": "Monitor",
+                    "audio": "Audio",
+                    "desk": "Desk",
+                    "chair": "Chair"
+                },
+                "name": "Name",
                 "model": "機種",
                 "size": "サイズ",
                 "area": "エリア",
+                "width": "Width",
+                "height": "Height",
                 "position": "ポジション",
-                "dpi": "DPI",
+                "dpi": "Sensitivity",
+                "mult": "Multiplier",
+                "kb_layout": "Keyboard Layout",
                 "layout": {
+                    "k0": "None",
                     "k2": "2つのキー",
                     "k3": "3つのキー",
                     "k4": "4つのキー",
