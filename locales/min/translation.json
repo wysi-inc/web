@@ -79,13 +79,14 @@
             "setup": {
                 "title": "ᓭᒷℸ ̣ ⚍!¡",
                 "tabs": {
-                    "inputs": "╎リ!¡⚍ℸ ̣ ᓭ",
+                    "tablet": "Tablet",
+                    "keyboard": "Keyboard",
+                    "mouse": "Mouse",
                     "peripherals": "!¡ᒷ∷╎!¡⍑ᒷ∷ᔑꖎᓭ",
                     "computer": "ᓵ𝙹ᒲ!¡⚍ℸ ̣ ᒷ∷"
                 },
                 "components": {
-                    "component": "ᓵ𝙹ᒲ!¡𝙹リᒷリℸ ̣ ",
-                    "details": "↸ᒷℸ ̣ ᔑ╎ꖎᓭ",
+                    "os": "OS",
                     "cpu": "ᓵ!¡⚍",
                     "gpu": "⊣!¡⚍",
                     "ram": "∷ᔑᒲ",
@@ -94,12 +95,29 @@
                     "psu": "!¡𝙹∴ᒷ∷  ᓭ⚍!¡!¡ꖎ||",
                     "case": "ᓵᔑᓭᒷ"
                 },
+                "peripherals": {
+                    "mousepad": "Mousepad",
+                    "keypad": "Keypad",
+                    "headphones": "Headphones",
+                    "camera": "Camera",
+                    "microphone": "Microphone",
+                    "monitor": "Monitor",
+                    "audio": "Audio",
+                    "desk": "Desk",
+                    "chair": "Chair"
+                },
+                "name": "Name",
                 "model": "ᒲ𝙹↸ᒷꖎ",
                 "size": "ᓭ╎⨅ᒷ",
                 "area": "ᔑ∷ᒷᔑ",
+                "width": "Width",
+                "height": "Height",
                 "position": "!¡𝙹ᓭ╎ℸ ̣ ╎𝙹リ",
-                "dpi": "↸!¡╎",
+                "dpi": "Sensitivity",
+                "mult": "Multiplier",
+                "kb_layout": "Keyboard Layout",
                 "layout": {
+                    "k0": "None",
                     "k2": "2 ꖌᒷ||ᓭ",
                     "k3": "3 ꖌᒷ||ᓭ",
                     "k4": "4 ꖌᒷ||ᓭ",

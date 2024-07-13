@@ -79,13 +79,14 @@
             "setup": {
                 "title": "إعداد",
                 "tabs": {
-                    "inputs": "التحكم",
+                    "tablet": "Tablet",
+                    "keyboard": "Keyboard",
+                    "mouse": "Mouse",
                     "peripherals": "ملحقات (حاسوب)",
                     "computer": "حاسوب"
                 },
                 "components": {
-                    "component": "مكونات الحاسوب",
-                    "details": "التفاصيل",
+                    "os": "OS",
                     "cpu": "معالج الحاسوب",
                     "gpu": "كرت الشاشة",
                     "ram": "ذاكرة RAM",
@@ -94,12 +95,29 @@
                     "psu": "وحدة الإمداد الطاقة",
                     "case": "علبة الحاسب"
                 },
+                "peripherals": {
+                    "mousepad": "Mousepad",
+                    "keypad": "Keypad",
+                    "headphones": "Headphones",
+                    "camera": "Camera",
+                    "microphone": "Microphone",
+                    "monitor": "Monitor",
+                    "audio": "Audio",
+                    "desk": "Desk",
+                    "chair": "Chair"
+                },
+                "name": "Name",
                 "model": "النموذج",
                 "size": "الحجم",
                 "area": "المنطقة",
+                "width": "Width",
+                "height": "Height",
                 "position": "الموقع",
-                "dpi": "نقطة في البوصة (DPI)",
+                "dpi": "Sensitivity",
+                "mult": "Multiplier",
+                "kb_layout": "Keyboard Layout",
                 "layout": {
+                    "k0": "None",
                     "k2": "2 مفتاحين",
                     "k3": "3 مفاتيح",
                     "k4": "4 مفاتيح",
