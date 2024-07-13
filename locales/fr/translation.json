@@ -2,12 +2,12 @@
     "nav": {
         "home": "Page d'accueil",
         "users": "Utilisateur",
-        "rankings": "Rankings",
+        "rankings": "Classement",
         "beatmaps": "Beatmaps",
         "support": "Support",
-        "about": "About",
+        "about": "À propos",
         "search": "rechercher quelqu'un",
-        "search_someone": "Search someone",
+        "search_someone": "Rechercher quelqu'un",
         "help": "Contribuez à la traduction du site!",
         "log": {
             "login": "Connectez-vous avec osu!",
@@ -17,64 +17,64 @@
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu website alternative",
+        "welcome": "Bienvenue sur wysi727.com !",
+        "foss": "Une alternative open source au site d'osu!",
         "built": "Build with bun and htmx",
-        "profiles": "User Profiles",
-        "stats": "Top 100 Score stats",
-        "search": "Beatmap Search",
-        "calculator": "Builtin PP Calculator",
-        "setup": "Share your setup!",
-        "collections": "Upload your collections!"
+        "profiles": "Profil des utilisateurs",
+        "stats": "Stats des 100 meilleurs scores",
+        "search": "Recherche de beatmaps",
+        "calculator": "Calculateur de PP intégré",
+        "setup": "Montrez votre setup !",
+        "collections": "Importez vos collections !"
     },
     "user": {
         "sections": {
-            "expand": "Expand",
-            "about": "About",
+            "expand": "Voir plus",
+            "about": "À propos",
             "beatmaps": "Beatmaps",
             "top": "Top",
             "medals": {
                 "title": "Médailles",
-                "recent": "Recent Medals",
-                "rarest": "Rarest Medal",
-                "show": "Show all"
+                "recent": "Médailles récentes",
+                "rarest": "Médaille la plus rare",
+                "show": "Voir tout"
             },
             "year": {
-                "title": "Year",
-                "info": "This is a recap of this year so far, the data will be reset at Jaunary 1st"
+                "title": "Année",
+                "info": "Ceci est un récapitulatif de l'année en cours, les données seront remises à zéro au 1er janvier"
             },
-            "most": "Most Played",
+            "most": "Les plus jouées",
             "scores": {
                 "title": "Scores",
-                "info": "hover over a grayed out PP to see the (if FC) PP value",
+                "info": "Survolez un nombre de PP grisé pour afficher la valeur (si FC)",
                 "tabs": {
-                    "pinned": "Pinned",
-                    "best": "Best",
-                    "first": "First",
-                    "recent": "Recent"
+                    "pinned": "Épinglé",
+                    "best": "Meilleure",
+                    "first": "Premier",
+                    "recent": "Récent"
                 }
             },
             "history": {
                 "title": "Historique",
                 "tabs": {
                     "global": "Global",
-                    "country": "Country",
-                    "plays": "Plays",
+                    "country": "National",
+                    "plays": "Parties",
                     "replays": "Replays"
                 }
             },
             "summary": {
-                "title": "Summary",
-                "info": "this is a quick summary of your top 100 plays",
+                "title": "Résumé",
+                "info": "Voici un rapide résumé de votre top 100 parties",
                 "tabs": {
-                    "hit_ratios": "Hit Ratios",
-                    "grade_ratios": "Grade Ratios",
-                    "average_play": "Average Play"
+                    "hit_ratios": "Ratios de frappe",
+                    "grade_ratios": "Ratios de note",
+                    "average_play": "Jeu moyen"
                 }
             },
             "collections": {
                 "title": "Collections",
-                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "info": "Les beatmaps non présentes sur le site d'osu! ne pourront pas télécharger (ex : osu!trainer, difficultés customs, maps non publiées...)"
             },
             "setup": {
                 "title": "Configurer",
@@ -116,7 +116,7 @@
         "country_rank": "Rank national",
         "play_time": "Durée du jeu",
         "play_count": "Nombre de sessions",
-        "total_hits": "Total Hits",
+        "total_hits": "Nombre de clics",
         "replays_watched": "Replays regardés",
         "hits_x_play": "Hits x Play",
         "followers": "Abonnés",
