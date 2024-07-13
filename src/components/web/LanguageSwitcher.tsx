@@ -7,7 +7,7 @@ const flags: any = {
     "ca": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Flag_of_Catalonia.svg",
     "de": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg",
     "en": "https://upload.wikimedia.org/wikipedia/commons/0/0b/English_language.svg",
-    "eo": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Greece.svg",
+    "el": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Greece.svg",
     "es": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg",
     "et": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Flag_of_Estonia.svg",
     "gl": "https://upload.wikimedia.org/wikipedia/commons/6/64/Flag_of_Galicia.svg",
@@ -27,7 +27,7 @@ const flags: any = {
     "ja": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Japan.svg",
     "zh": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg",
     "zh-hant": "https://upload.wikimedia.org/wikipedia/commons/7/72/Flag_of_the_Republic_of_China.svg",
-    "el": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Flag_of_Esperanto.svg",
+    "eo": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Flag_of_Esperanto.svg",
     "min": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/31/Enchanting_Table.gif",
 };
 
