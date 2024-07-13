@@ -19,7 +19,7 @@
     "home": {
         "welcome": "Bienvenue sur wysi727.com !",
         "foss": "Une alternative open source au site d'osu!",
-        "built": "Build with bun and htmx",
+        "built": "Fait sous bun et htmx",
         "profiles": "Profil des utilisateurs",
         "stats": "Stats des 100 meilleurs scores",
         "search": "Recherche de beatmaps",
