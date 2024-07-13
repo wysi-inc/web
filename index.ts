@@ -21,6 +21,9 @@ export const osu_secret = String(process.env.OSU_SECRET);
 export const osu_redirect = String(process.env.OSU_REDIRECT);
 export const osu_api_key = String(process.env.OSU_API_KEY);
 
+export const crowdin_id = Number(process.env.CROWDIN_ID);
+export const crowdin_secret = String(process.env.CROWDIN_SECRET);
+
 function connect(): void {
     mongoose.connect(mongo_uri)
         .then(() => console.info("[ OK ] Connected to MongoDB"))

@@ -1,6 +1,7 @@
 import { DonationModel } from "@/src/models/Donations";
 import moment from "moment";
 import Title from "./Title";
+import { crowdin_id, crowdin_secret } from "@/index";
 
 export type Contributor = {
     login: string;
@@ -22,13 +23,56 @@ export type Contributor = {
     type: string;
     site_admin: boolean;
     contributions: number;
-}
+};
+
+type Translators = {
+    data: {
+        data: {
+            id: number;
+            username: string;
+            fullName: string;
+            role: string;
+            permissions: {
+                [key: string]: string;
+            };
+            roles: {
+                name: string;
+                permissions: {
+                    allLanguages: boolean;
+                    languagesAccess: {
+                        [key: string]: {
+                            allContent: boolean;
+                        };
+                    } | [];
+                };
+            }[];
+            avatarUrl: string;
+            joinedAt: string;
+            timezone: string;
+        };
+    }[];
+    pagination: {
+        offset: number;
+        limit: number;
+    }[];
+};
 
 async function Support() {
 
     const donations = await DonationModel.find().sort({ 'timestamp': -1 });
-    const res = await fetch("https://api.github.com/repos/wysi-inc/web/contributors");
-    const contributors = await res.json() as Contributor[];
+    const gh_res = await fetch("https://api.github.com/repos/wysi-inc/web/contributors");
+    const gh_contrib = await gh_res.json() as Contributor[];
+
+    const url = `https://api.crowdin.com/api/v2/projects/${crowdin_id}/members`;
+    const tr_res = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${crowdin_secret}`,
+            'Content-Type': 'application/json'
+        }
+    });
+
+    const tr_contrib = await tr_res.json() as Translators;
 
     return (<>
         <Title title="Support <3" />
@@ -54,9 +98,9 @@ async function Support() {
             </div>
         </div >
         <div class="bg-base-100 rounded-lg p-4 flex flex-col gap-4">
-            <h3 class="text-xl">Contributors</h3>
-            <div class="grid grid-cols-2 gap-4">
-                {contributors.map((c) =>
+            <h3 class="text-xl"><i class="fa-solid fa-code" /> Contributors</h3>
+            <div class="grid grid-cols-2 gap-4 overflow-y-scroll max-h-96">
+                {gh_contrib.map((c) =>
                     <div role="alert" class="alert bg-base-300 shadow-lg">
                         <div class="avatar">
                             <div class="size-12 rounded-xl">
@@ -74,8 +118,27 @@ async function Support() {
             </div>
         </div>
         <div class="bg-base-100 rounded-lg p-4 flex flex-col gap-4">
-            <h3 class="text-xl">Donations</h3>
-            <div class="flex flex-col gap-4">
+            <h3 class="text-xl"><i class="fa-solid fa-language" /> Translators</h3>
+            <div class="grid grid-cols-2 gap-4 overflow-y-scroll max-h-96">
+                {tr_contrib.data.map((c) =>
+                    <div role="alert" class="alert bg-base-300 shadow-lg">
+                        <div class="avatar">
+                            <div class="size-12 rounded-xl">
+                                <img src={c.data.avatarUrl} />
+                            </div>
+                        </div>
+                        <div>
+                            <a class="font-bold" href={`https://crowdin.com/profile/${c.data.username}`} target="_blank">
+                                {c.data.username}
+                            </a>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+        <div class="bg-base-100 rounded-lg p-4 flex flex-col gap-4">
+            <h3 class="text-xl"><i class="fa-solid fa-hand-holding-dollar" /> Donations</h3>
+            <div class="flex flex-col gap-4 overflow-y-scroll max-h-96">
                 {donations.length === 0 ?
                     <span>No donations have been made yet :(</span> :
                     donations.map(d => (
