@@ -4,8 +4,8 @@ import Rankings from '../components/user/Rankings';
 import HtmxPage from '../libs/routes';
 
 export const rankingRoutes = new Elysia({ prefix: '/rankings' })
-    .get("/", ({ t, request, jwt, cookie }: Route) => (
-        <HtmxPage t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
+    .get("/", ({ lang, t, request, jwt, cookie }: Route) => (
+        <HtmxPage lang={lang} t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
             <Rankings
                 mode={"osu"}
                 category={"performance"}
@@ -13,8 +13,8 @@ export const rankingRoutes = new Elysia({ prefix: '/rankings' })
             />
         </HtmxPage>
     ))
-    .get("/:mode/:category/:page", ({ t, params, request, jwt, cookie }: Route) => (
-        <HtmxPage t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
+    .get("/:mode/:category/:page", ({ lang, t, params, request, jwt, cookie }: Route) => (
+        <HtmxPage lang={lang} t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
             <Rankings
                 mode={params.mode as Mode}
                 category={params.category as Category}

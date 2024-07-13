@@ -47,6 +47,7 @@ export type Jwt = {
 
 export type Route = {
     t: any,
+    lang: any,
     request: Request,
     jwt: Jwt,
     cookie: Record<string, Cookie<any>>,

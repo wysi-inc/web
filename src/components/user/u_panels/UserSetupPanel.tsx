@@ -9,6 +9,7 @@ type Props = {
     logged_id?: number,
     page_id: number,
     setup?: Setup,
+    t: any,
 }
 
 async function UserSetupPanel(p: Props) {
@@ -23,34 +24,35 @@ async function UserSetupPanel(p: Props) {
 
     return (
         <div id="setup_panel">
-            <form id="setup_form" class="peer flex flex-col-reverse gap-2"
+            <form id="setup_form" class="peer flex flex-col-reverse gap-2 items-end"
                 hx-put={editable ? `/users/${p.page_id}/setup/submit` : undefined}
-                hx-trigger="submit" hx-swap="outerHTML" hx-target="#setup_panel" onchange="setupFormChange(this)" onsubmit="this.disabled = true">
-                <fieldset class="group w-full grid md:grid-cols-2 gap-4"
-                    id="setup_fieldset" disabled>
-                    <TabletDisplay editable={editable} tablet={p.setup?.tablet} />
+                hx-trigger="submit" hx-swap="outerHTML" hx-target="#setup_panel" onsubmit="this.disabled = true">
+                <fieldset class="group w-full grid md:grid-cols-2 gap-4" id="setup_fieldset" disabled>
+                    <TabletDisplay t={p.t} editable={editable} tablet={p.setup?.tablet} />
                     <KeyboardDisplay editable={editable} keyboard={p.setup?.keyboard} />
                     <MouseDisplay editable={editable} mouse={p.setup?.mouse} />
                     <Peripherals editable={editable} peripherals={p.setup?.peripherals} />
                     <Computer editable={editable} computer={p.setup?.computer} />
                 </fieldset>
+                {editable ?
+                    <div class="flex flex-row gap-2">
+                        <button type="button" class="hidden group-has-[:disabled]:block btn btn-sm btn-accent"
+                            id="setup_form_edit" onclick="document.getElementById('setup_fieldset').disabled = false">
+                            <i class="fa-solid fa-pen-to-square" />
+                        </button>
+                        <button type="reset" class="group-has-[:disabled]:hidden btn btn-sm btn-error"
+                            id="setup_form_cancel" onclick="document.getElementById('setup_form').reset(); document.getElementById('setup_fieldset').disabled = true">
+                            <i class="fa-solid fa-xmark" />
+                        </button>
+                        <button type="submit" class="group-has-[:disabled]:hidden btn btn-sm btn-success"
+                            id="setup_form_submit">
+                            <i class="fa-solid fa-check" />
+                        </button>
+                        <script src={`/public/js/setup.js?v=${Date.now()}`} />
+                    </div> : <></>
+                }
             </form>
-            {editable ? <>
-                <button type="button" class="peer-has-[:enabled]:hidden btn btn-sm btn-accent"
-                    id="setup_form_edit" onclick="document.getElementsById('setup_fieldset').disabled = false">
-                    <i class="fa-solid fa-pen-to-square" />
-                </button>
-                <button type="reset" class="peer-has-[:disabled]:hidden btn btn-sm btn-error"
-                    id="setup_form_cancel" onclick="document.getElementsById('setup_fieldset').reset()">
-                    <i class="fa-solid fa-xmark" />
-                </button>
-                <button type="submit" class="peer-has-[:disabled]:hidden btn btn-sm btn-success"
-                    id="setup_form_submit" onclick="document.getElementsById('setup_fieldset').submit();">
-                    <i class="fa-solid fa-check" />
-                </button>
-                <script src="/public/js/setup.js" />
-            </> : <></>}
-        </div>
+        </div >
     );
 }
 

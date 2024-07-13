@@ -4078,6 +4078,10 @@ input.tab:checked + .tab-content,
   bottom: auto;
 }
 
+.static {
+  position: static;
+}
+
 .fixed {
   position: fixed;
 }
@@ -4134,6 +4138,10 @@ input.tab:checked + .tab-content,
   z-index: 50;
 }
 
+.z-\[1\] {
+  z-index: 1;
+}
+
 .col-span-3 {
   grid-column: span 3 / span 3;
 }
@@ -4188,6 +4196,10 @@ input.tab:checked + .tab-content,
 
 .m-0 {
   margin: 0px;
+}
+
+.m-1 {
+  margin: 0.25rem;
 }
 
 .mx-auto {
@@ -4453,6 +4465,22 @@ input.tab:checked + .tab-content,
 
 .w-screen {
   width: 100vw;
+}
+
+.w-64 {
+  width: 16rem;
+}
+
+.w-80 {
+  width: 20rem;
+}
+
+.w-\[300px\] {
+  width: 300px;
+}
+
+.w-\[350px\] {
+  width: 350px;
 }
 
 .max-w-16 {
@@ -5062,6 +5090,11 @@ input.tab:checked + .tab-content,
   padding-bottom: 1rem;
 }
 
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .pb-4 {
   padding-bottom: 1rem;
 }
@@ -5536,6 +5569,18 @@ input.tab:checked + .tab-content,
 
 .has-\[\:checked\]\:outline:has(:checked) {
   outline-style: solid;
+}
+
+.group:has(:disabled) .group-has-\[\:disabled\]\:block {
+  display: block;
+}
+
+.group:has(:disabled) .group-has-\[\:disabled\]\:hidden {
+  display: none;
+}
+
+.peer:has(:disabled) ~ .peer-has-\[\:disabled\]\:block {
+  display: block;
 }
 
 .peer\/one:has(:checked) ~ .peer-has-\[\:checked\]\/one\:flex {

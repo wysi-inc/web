@@ -1,4 +1,24 @@
-function setupFormChange(e) {
+setup();
+function setup() {
+    const form = document.getElementById('setup_form');
+    const fieldset = document.getElementById('setup_fieldset');
+
+    form.addEventListener('submit', () => {
+        setTimeout(() => {
+            fieldset.disabled = true;
+            form_cancel.style.display = "none";
+            form_submit.style.display = "none";
+            form_edit.style.display = "block";
+        }, 0);
+    });
+
+    form.addEventListener('input', (e) => {
+        formChange(e);
+    });
+
+}
+
+function formChange(e) {
 
     const tablet = document.getElementById('tablet');
     const tablet_area = document.getElementById('tablet_area');
@@ -41,10 +61,11 @@ function setupFormChange(e) {
         case 'tablet_area_h':
             tablet_area.style.height = `${value}px`;
             break;
-        case 'tablet_postion_y':
+        case 'tablet_position_y':
+            console.log(value)
             tablet_area.style.top = `${value}px`;
             break;
-        case 'tablet_postion_x':
+        case 'tablet_position_x':
             tablet_area.style.left = `${value}px`;
             break;
         case 'tablet_position_r':

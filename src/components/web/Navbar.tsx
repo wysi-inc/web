@@ -3,14 +3,16 @@ import Login from "./Login";
 import Search from "./Search";
 import Logged from "./Logged";
 import Link from "./Link";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 type Props = {
     user: UserCookie | null,
-    t: any
+    t: any,
+    lang: any
 }
 
 
-const Navbar = ({ t, user }: Props) => {
+const Navbar = ({ lang, t, user }: Props) => {
 
     const routes = [
         {
@@ -105,6 +107,9 @@ const Navbar = ({ t, user }: Props) => {
                             class="hidden md:flex btn btn-ghost" aria-label="Discord">
                             <i class="fa-brands fa-discord" />
                         </a>
+                    </div>
+                    <div class="hidden md:flex flex-row items-center justify-end">
+                        <LanguageSwitcher t={t} lang={lang} />
                     </div>
                     {user ?
                         <Logged t={t} user={user} /> :

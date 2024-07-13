@@ -76,8 +76,10 @@ new Elysia()
         console.log(`${(ip || "0.0.0.0").padStart(15, " ")} ${method.padStart(6, " ")}::/${route}`);
     })
     .derive(({ cookie }) => {
+        const lang = cookie?.lang?.value || "en";
         return {
-            t: translations[cookie?.lang?.value || "en"]
+            t: translations[lang],
+            lang
         }
     })
     .use(jwtcfg)

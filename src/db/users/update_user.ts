@@ -98,17 +98,17 @@ export async function saveSetup(user_id: number, setup: any): Promise<Setup | nu
         const tablet: Setup["tablet"] = {
             name: setup.tablet_name,
             size: {
-                w: Number(setup.tablet_size_w),
-                h: Number(setup.tablet_size_h),
+                w: setup.tablet_size_w,
+                h: setup.tablet_size_h,
             },
             area: {
-                w: Number(setup.tablet_area_w),
-                h: Number(setup.tablet_area_h),
+                w: setup.tablet_area_w,
+                h: setup.tablet_area_h,
             },
             position: {
-                y: Number(setup.tablet_position_y),
-                x: Number(setup.tablet_position_x),
-                r: Number(setup.tablet_position_r),
+                y: setup.tablet_position_y,
+                x: setup.tablet_position_x,
+                r: setup.tablet_position_r,
             }
         };
 
@@ -127,8 +127,8 @@ export async function saveSetup(user_id: number, setup: any): Promise<Setup | nu
 
         const mouse: Setup["mouse"] = {
             name: setup.mouse_name,
-            dpi: Number(setup.mouse_dpi),
-            mult: Number(setup.mouse_x),
+            dpi: setup.mouse_dpi,
+            mult: setup.mouse_x,
         };
         const peripherals: Setup["peripherals"] = {
             mouse: setup.peripherals_mouse,

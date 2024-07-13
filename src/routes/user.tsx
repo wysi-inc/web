@@ -21,20 +21,20 @@ import UserSocial from '../components/user/u_panels/UserSocial';
 import type { Social } from '../models/User';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
-    .get("/", async ({ t, request, cookie, params, jwt }: Route) => {
+    .get("/", async ({ lang, t, request, cookie, params, jwt }: Route) => {
         const user = await verifyUser(jwt, cookie.auth.value);
         return <>
-            <HtmxPage t={t} headers={request.headers} user={user}>
+            <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
                 <UserPage t={t} user_id={params.id} logged_id={user?.id} />
             </HtmxPage>
         </>
     })
     .group("/:mode", (_) => _
-        .get("/", async ({ t, request, cookie, params, jwt }: Route) => {
+        .get("/", async ({ lang, t, request, cookie, params, jwt }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);
             return <>
-                <HtmxPage t={t} headers={request.headers} user={user}>
-                    <UserPage
+                <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
+                    <UserPage t={t}
                         logged_id={user?.id}
                         user_id={params.id}
                         mode={params.mode as Mode} />
@@ -72,9 +72,9 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 const user = await verifyUser(jwt, cookie.auth.value);
                 return <UserYearPanel user_id={Number(params.id)} logged_id={user?.id} />
             })
-            .post("/setup", async ({ params, cookie, jwt }: Route) => {
+            .post("/setup", async ({ t, params, cookie, jwt }: Route) => {
                 const user = await verifyUser(jwt, cookie.auth.value);
-                return <UserSetupPanel logged_id={user?.id} page_id={Number(params.id)} />
+                return <UserSetupPanel t={t} logged_id={user?.id} page_id={Number(params.id)} />
             })
             .post("/skins", ({ params }) => (
                 <UserSkinsPanel user_id={Number(params.id)} />
@@ -115,7 +115,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         )
     )
     .group("/setup", _ => _
-        .put("/submit", async ({ params, set, cookie, body, jwt }: Route) => {
+        .put("/submit", async ({ t, params, set, cookie, body, jwt }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);
             if (!user || Number(params.id) !== user.id) {
                 set.status = 401;
@@ -123,7 +123,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             }
             const setup = await saveSetup(user.id, body);
             if (!setup) return "Failed to save setup, reload the page and try again.";
-            return <UserSetupPanel setup={setup} logged_id={user.id} page_id={user.id} />
+            return <UserSetupPanel t={t} setup={setup} logged_id={user.id} page_id={user.id} />
         })
     )
     .group("/collections", _ => _

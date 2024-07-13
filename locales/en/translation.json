@@ -79,13 +79,13 @@
             "setup": {
                 "title": "Setup",
                 "tabs": {
-                    "inputs": "Inputs",
+                    "tablet": "Tablet",
+                    "keyboard": "Keyboard",
+                    "mouse": "Mouse",
                     "peripherals": "Peripherals",
                     "computer": "Computer"
                 },
                 "components": {
-                    "component": "Component",
-                    "details": "Details",
                     "cpu": "CPU",
                     "gpu": "GPU",
                     "ram": "RAM",
@@ -94,6 +94,7 @@
                     "psu": "Power Supply",
                     "case": "Case"
                 },
+                "name": "Name",
                 "model": "Model",
                 "size": "Size",
                 "area": "Area",

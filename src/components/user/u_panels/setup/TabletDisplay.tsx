@@ -5,10 +5,11 @@ import { isEmpty } from "@/src/libs/web_utils";
 
 type Props = {
     tablet: Setup["tablet"],
-    editable: boolean
+    editable: boolean,
+    t: any
 }
 
-const TabletDisplay = async ({ tablet, editable }: Props) => {
+const TabletDisplay = async ({ t, tablet, editable }: Props) => {
 
     const empty = isEmpty(tablet);
 
@@ -35,17 +36,17 @@ const TabletDisplay = async ({ tablet, editable }: Props) => {
             <div class="flex justify-center items-center h-36">
                 <div class="relative outline outline-1 overflow-hidden rounded-lg"
                     id="tablet" style={{
-                        height: `${tablet?.size?.h}px`,
-                        width: `${tablet?.size?.w}px`,
+                        height: `${tablet?.size?.h || 0}px`,
+                        width: `${tablet?.size?.w || 0}px`,
                     }}>
                     <div class="absolute flex flex-col items-center justify-center gap-1 outline outline-1 outline-secondary bg-secondary bg-opacity-75"
                         id="tablet_area" style={{
-                            height: `${tablet?.area?.h}px`,
-                            width: `${tablet?.area?.w}px`,
-                            top: `${tablet?.position?.y}px`,
-                            left: `${tablet?.position?.x}px`,
+                            height: `${tablet?.area?.h || 0}px`,
+                            width: `${tablet?.area?.w || 0}px`,
+                            top: `${tablet?.position?.y || 0}px`,
+                            left: `${tablet?.position?.x || 0}px`,
                             transformOrigin: "center",
-                            transform: `translate(-50%, -50%) rotate(${tablet?.position?.r}deg)`,
+                            transform: `translate(-50%, -50%) rotate(${tablet?.position?.r || 0}deg)`,
                         }}>
                         <div>{tablet?.area?.w} x {tablet?.area?.h}</div>
                     </div>

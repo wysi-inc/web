@@ -5,6 +5,7 @@ import { verifyUser } from "./auth";
 
 type Props = {
     t: any,
+    lang: any,
     headers: any,
     children: JSX.Element,
 } & (
@@ -22,14 +23,14 @@ const HtmxPage = async (p: Props) => {
     if ("cookie" in p) {
         const user = await verifyUser(p.jwt, p.cookie?.auth?.value);
         return <>
-            <BaseHtml t={p.t} user={user}>
+            <BaseHtml lang={p.lang} t={p.t} user={user}>
                 {p.children}
             </BaseHtml>
         </>
     }
 
     return <>
-        <BaseHtml t={p.t} user={p.user}>
+        <BaseHtml lang={p.lang} t={p.t} user={p.user}>
             {p.children}
         </BaseHtml>
     </>

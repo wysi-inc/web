@@ -36,8 +36,7 @@ async function UserCollectionsPanel({ user_id, logged_id, collections }: Props) 
                     }
                 </fieldset>
                 <div class="flex flex-row gap-2">
-                    <button type="button" class="block btn btn-sm btn-accent"
-                        id="collections_form_edit">
+                    <button type="button" class="block btn btn-sm btn-accent" id="collections_form_edit">
                         <i class="fa-solid fa-pen-to-square" />
                     </button>
                     <button type="button" class="hidden btn btn-sm flex-row gap-2 items-center"
