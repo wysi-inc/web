@@ -29,10 +29,10 @@ async function UserSetupPanel(p: Props) {
                 hx-trigger="submit" hx-swap="outerHTML" hx-target="#setup_panel" onsubmit="this.disabled = true">
                 <fieldset class="group w-full grid md:grid-cols-2 gap-4" id="setup_fieldset" disabled>
                     <TabletDisplay t={p.t} editable={editable} tablet={p.setup?.tablet} />
-                    <KeyboardDisplay editable={editable} keyboard={p.setup?.keyboard} />
-                    <MouseDisplay editable={editable} mouse={p.setup?.mouse} />
-                    <Peripherals editable={editable} peripherals={p.setup?.peripherals} />
-                    <Computer editable={editable} computer={p.setup?.computer} />
+                    <KeyboardDisplay t={p.t} editable={editable} keyboard={p.setup?.keyboard} />
+                    <MouseDisplay t={p.t} editable={editable} mouse={p.setup?.mouse} />
+                    <Peripherals t={p.t} editable={editable} peripherals={p.setup?.peripherals} />
+                    <Computer t={p.t} editable={editable} computer={p.setup?.computer} />
                 </fieldset>
                 {editable ?
                     <div class="flex flex-row gap-2">

@@ -43,7 +43,8 @@ export const Empty = () => {
 
 type Props = {
     keyboard: Setup["keyboard"],
-    editable: boolean
+    editable: boolean,
+    t: any
 }
 
 const layoutText = {
@@ -56,7 +57,7 @@ const layoutText = {
     kfull: "Full Keyboard",
 };
 
-const KeyboardDisplay = ({ keyboard, editable }: Props) => {
+const KeyboardDisplay = ({ t, keyboard, editable }: Props) => {
 
     const empty = isEmpty(keyboard);
 
@@ -64,7 +65,7 @@ const KeyboardDisplay = ({ keyboard, editable }: Props) => {
 
     return <div class={`${empty ? "block group-disabled:hidden" : ""} bg-neutral rounded-lg flex flex-col`}>
         <div class="flex flex-row justify-between items-center pe-2">
-            <h1 class="py-1 px-2 text-neutral-content">Keyboard</h1>
+            <h1 class="py-1 px-2 text-neutral-content">{t.user.sections.setup.tabs.keyboard}</h1>
             {editable ?
                 <div class="ms-auto tooltip tooltip-left"
                     data-tip={`Click on the keys you use to highlight them.`}>
@@ -85,26 +86,26 @@ const KeyboardDisplay = ({ keyboard, editable }: Props) => {
             <div class="flex flex-col gap-2 grow">
                 <label class="form-control">
                     <div class="label">
-                        <span class="label-text">Name:</span>
+                        <span class="label-text">{t.user.sections.setup.name}:</span>
                     </div>
                     <input id="keyboard_name" name="keyboard_name"
-                        type="text" placeholder="Keyboard name"
+                        type="text" placeholder={t.user.sections.setup.name}
                         class="input input-sm input-bordered peer disabled:hidden w-full" value={keyboard?.name || ""} />
                     <span class="input input-sm bg-base-300 hidden peer-disabled:block">{keyboard?.name}</span>
                 </label>
                 <label class="form-control">
                     <div class="label">
-                        <span class="label-text">Keyboard Layout:</span>
+                        <span class="label-text">{t.user.sections.setup.kb_layout}:</span>
                     </div>
                     <select class="peer disabled:hidden w-full select select-bordered select-sm" name="keyboard_layout">
-                        <option value="k0" selected={!keyboard?.layout}>None</option>
-                        <option value="k2" selected={keyboard?.layout === "k2"}>2 Keys</option>
-                        <option value="k3" selected={keyboard?.layout === "k3"}>3 Keys</option>
-                        <option value="k4" selected={keyboard?.layout === "k4"}>4 Keys</option>
-                        <option value="k60" selected={keyboard?.layout === "k60"}>60% Keyboard</option>
-                        <option value="k75" selected={keyboard?.layout === "k75"}>75% Keyboard</option>
-                        <option value="ktkl" selected={keyboard?.layout === "ktkl"}>Tenkeyless Keyboard</option>
-                        <option value="kfull" selected={keyboard?.layout === "kfull"}>Full Keyboard</option>
+                        <option value="k0" selected={!keyboard?.layout}>{t.user.sections.setup.layout.k0}</option>
+                        <option value="k2" selected={keyboard?.layout === "k2"}>{t.user.sections.setup.layout.k2}</option>
+                        <option value="k3" selected={keyboard?.layout === "k3"}>{t.user.sections.setup.layout.k3}</option>
+                        <option value="k4" selected={keyboard?.layout === "k4"}>{t.user.sections.setup.layout.k4}</option>
+                        <option value="k60" selected={keyboard?.layout === "k60"}>{t.user.sections.setup.layout.k60}</option>
+                        <option value="k75" selected={keyboard?.layout === "k75"}>{t.user.sections.setup.layout.k75}</option>
+                        <option value="ktkl" selected={keyboard?.layout === "ktkl"}>{t.user.sections.setup.layout.ktkl}</option>
+                        <option value="kfull" selected={keyboard?.layout === "kfull"}>{t.user.sections.setup.layout.kfull}</option>
                     </select>
                     <span class="input input-sm bg-base-300 hidden peer-disabled:block">
                         {keyboard?.layout ? layoutText[keyboard?.layout] : undefined}

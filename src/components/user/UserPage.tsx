@@ -64,7 +64,7 @@ const UserPage = async (p: Props) => {
             icon: <i class="fa-solid fa-computer" />,
             show_if: editable || user.db_setup !== undefined,
             manual: true,
-            jsx: (<UserSetupPanel setup={user.db_setup} page_id={user.id} logged_id={p.logged_id} />)
+            jsx: (<UserSetupPanel t={p.t} setup={user.db_setup} page_id={user.id} logged_id={p.logged_id} />)
         },
         // {
         //     title: "Skins",

@@ -86,6 +86,7 @@
                     "computer": "Computer"
                 },
                 "components": {
+                    "os": "OS",
                     "cpu": "CPU",
                     "gpu": "GPU",
                     "ram": "RAM",
@@ -94,13 +95,29 @@
                     "psu": "Power Supply",
                     "case": "Case"
                 },
+                "peripherals": {
+                    "mousepad": "Mousepad",
+                    "keypad": "Keypad",
+                    "headphones": "Headphones",
+                    "camera": "Camera",
+                    "microphone": "Microphone",
+                    "monitor": "Monitor",
+                    "audio": "Audio",
+                    "desk": "Desk",
+                    "chair": "Chair"
+                },
                 "name": "Name",
                 "model": "Model",
                 "size": "Size",
                 "area": "Area",
+                "width": "Width",
+                "height": "Height",
                 "position": "Position",
-                "dpi": "DPI",
+                "dpi": "Sensitivity",
+                "mult": "Multiplier",
+                "kb_layout": "Keyboard Layout",
                 "layout": {
+                    "k0": "None",
                     "k2": "2 Keys",
                     "k3": "3 Keys",
                     "k4": "4 Keys",

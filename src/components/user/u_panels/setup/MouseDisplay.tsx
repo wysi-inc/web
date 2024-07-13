@@ -4,17 +4,18 @@ import { isEmpty } from "@/src/libs/web_utils";
 
 type Props = {
     mouse: Setup["mouse"],
-    editable: boolean
+    editable: boolean,
+    t: any
 }
 
-const MouseDisplay = ({ mouse, editable }: Props) => {
+const MouseDisplay = ({ t, mouse, editable }: Props) => {
 
     const empty = isEmpty(mouse);
 
     if (!editable && empty) return <></>;
 
     return <div class={`${empty ? "block group-disabled:hidden" : ""} bg-neutral rounded-lg flex flex-col`}>
-        <h1 class="py-1 px-2 text-neutral-content">Mouse</h1>
+        <h1 class="py-1 px-2 text-neutral-content">{t.user.sections.setup.tabs.mouse}</h1>
         <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
             <div class="h-36 p-2 flex">
                 <div class="grow flex justify-center items-center">
@@ -31,7 +32,7 @@ const MouseDisplay = ({ mouse, editable }: Props) => {
             <div class="flex flex-col gap-2 grow">
                 <label class="form-control">
                     <div class="label">
-                        <span class="label-text">Name:</span>
+                        <span class="label-text">{t.user.sections.setup.name}:</span>
                     </div>
                     <input id="mouse_name" name="mouse_name"
                         type="text" placeholder="Mouse name"
@@ -40,11 +41,11 @@ const MouseDisplay = ({ mouse, editable }: Props) => {
                 </label>
                 <label class="form-control">
                     <div class="label">
-                        <span class="label-text">Sensitivity:</span>
+                        <span class="label-text">{t.user.sections.setup.dpi}:</span>
                     </div>
                     <div class="grow grid grid-cols-2 gap-2">
                         <SetupInput editable={editable} id="mouse_dpi" name="DPI" measure="dpi" value={mouse?.dpi} type="number" />
-                        <SetupInput editable={editable} id="mouse_x" name="Multiplier" measure="x" value={mouse?.mult} type="number" />
+                        <SetupInput editable={editable} id="mouse_x" name={t.user.sections.setup.mult} measure="x" value={mouse?.mult} type="number" />
                     </div>
                 </label>
             </div>
