@@ -79,13 +79,14 @@
             "setup": {
                 "title": "Εγκατάσταση",
                 "tabs": {
-                    "inputs": "Εισαγωγές",
+                    "tablet": "Tablet",
+                    "keyboard": "Keyboard",
+                    "mouse": "Mouse",
                     "peripherals": "Περιφερειακά",
                     "computer": "Υπολογιστής"
                 },
                 "components": {
-                    "component": "Εξαρτήματα",
-                    "details": "Λεπτομέρειες",
+                    "os": "OS",
                     "cpu": "Επεξεργαστής",
                     "gpu": "Επεξεργαστής γραφικών",
                     "ram": "Μνήμη",
@@ -94,12 +95,29 @@
                     "psu": "Τροφοδοτικό",
                     "case": "Κουτί"
                 },
+                "peripherals": {
+                    "mousepad": "Mousepad",
+                    "keypad": "Keypad",
+                    "headphones": "Headphones",
+                    "camera": "Camera",
+                    "microphone": "Microphone",
+                    "monitor": "Monitor",
+                    "audio": "Audio",
+                    "desk": "Desk",
+                    "chair": "Chair"
+                },
+                "name": "Name",
                 "model": "Μοντέλο",
                 "size": "Μέγεθος",
                 "area": "Περιοχή",
+                "width": "Width",
+                "height": "Height",
                 "position": "Θέση",
-                "dpi": "DPI",
+                "dpi": "Sensitivity",
+                "mult": "Multiplier",
+                "kb_layout": "Keyboard Layout",
                 "layout": {
+                    "k0": "None",
                     "k2": "2 Πλήκτρα",
                     "k3": "3 Πλήκτρα",
                     "k4": "4 Πλήκτρα",
