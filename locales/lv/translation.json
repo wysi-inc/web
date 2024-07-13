@@ -79,13 +79,14 @@
             "setup": {
                 "title": "Uzstādījumi",
                 "tabs": {
-                    "inputs": "Inputi",
+                    "tablet": "Tablet",
+                    "keyboard": "Keyboard",
+                    "mouse": "Mouse",
                     "peripherals": "Perifērijas ierīces",
                     "computer": "Dators"
                 },
                 "components": {
-                    "component": "Komponents",
-                    "details": "Informācija",
+                    "os": "OS",
                     "cpu": "Procesors",
                     "gpu": "Video karte",
                     "ram": "RAM",
@@ -94,12 +95,29 @@
                     "psu": "Barošanas avots",
                     "case": "Korpuss"
                 },
+                "peripherals": {
+                    "mousepad": "Mousepad",
+                    "keypad": "Keypad",
+                    "headphones": "Headphones",
+                    "camera": "Camera",
+                    "microphone": "Microphone",
+                    "monitor": "Monitor",
+                    "audio": "Audio",
+                    "desk": "Desk",
+                    "chair": "Chair"
+                },
+                "name": "Name",
                 "model": "Modelis",
                 "size": "Izmērs",
                 "area": "Laukums",
+                "width": "Width",
+                "height": "Height",
                 "position": "Pozīcija",
-                "dpi": "DPI",
+                "dpi": "Sensitivity",
+                "mult": "Multiplier",
+                "kb_layout": "Keyboard Layout",
                 "layout": {
+                    "k0": "None",
                     "k2": "2 Pogas",
                     "k3": "3 Pogas",
                     "k4": "4 Pogas",
