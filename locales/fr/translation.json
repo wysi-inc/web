@@ -46,7 +46,7 @@
             "most": "Les plus jouées",
             "scores": {
                 "title": "Scores",
-                "info": "Survolez un nombre de PP grisé pour afficher la valeur (si FC)",
+                "info": "Survolez le nombre de PP en gris pour afficher sa valeur (si FC)",
                 "tabs": {
                     "pinned": "Épinglé",
                     "best": "Meilleure",
