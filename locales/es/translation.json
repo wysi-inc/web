@@ -79,13 +79,14 @@
             "setup": {
                 "title": "Setup",
                 "tabs": {
-                    "inputs": "Inputs",
+                    "tablet": "Tablet",
+                    "keyboard": "Keyboard",
+                    "mouse": "Mouse",
                     "peripherals": "Periféricos",
                     "computer": "Ordenador"
                 },
                 "components": {
-                    "component": "Componente",
-                    "details": "Detalles",
+                    "os": "OS",
                     "cpu": "CPU",
                     "gpu": "GPU",
                     "ram": "RAM",
@@ -94,12 +95,29 @@
                     "psu": "Fuente de alimentación",
                     "case": "Caja"
                 },
+                "peripherals": {
+                    "mousepad": "Mousepad",
+                    "keypad": "Keypad",
+                    "headphones": "Headphones",
+                    "camera": "Camera",
+                    "microphone": "Microphone",
+                    "monitor": "Monitor",
+                    "audio": "Audio",
+                    "desk": "Desk",
+                    "chair": "Chair"
+                },
+                "name": "Name",
                 "model": "Modelo",
                 "size": "Tamaño",
                 "area": "Área",
+                "width": "Width",
+                "height": "Height",
                 "position": "Posición",
-                "dpi": "DPI",
+                "dpi": "Sensitivity",
+                "mult": "Multiplier",
+                "kb_layout": "Keyboard Layout",
                 "layout": {
+                    "k0": "None",
                     "k2": "2 Teclas",
                     "k3": "3 Teclas",
                     "k4": "4 Teclas",
