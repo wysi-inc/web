@@ -99,46 +99,33 @@ async function Support() {
         </div >
         <div class="bg-base-100 rounded-lg p-4 flex flex-col gap-4">
             <h3 class="text-xl"><i class="fa-solid fa-code" /> Contributors</h3>
-            <div class="grid grid-cols-2 gap-4 overflow-y-scroll max-h-96">
+            <div class="flex flex-row flex-wrap items-center justify-center rounded-lg bg-base-300 p-4 gap-4">
                 {gh_contrib.map((c) =>
-                    <div role="alert" class="alert bg-base-300 shadow-lg">
-                        <div class="avatar">
-                            <div class="size-12 rounded-xl">
-                                <img src={c.avatar_url} />
-                            </div>
+                    <a class="avatar tooltip" href={c.html_url}
+                        target="_blank" data-tip={c.login}>
+                        <div class="size-12 rounded-xl">
+                            <img src={c.avatar_url} alt="pfp" />
                         </div>
-                        <div>
-                            <a class="font-bold" href={c.html_url} target="_blank">
-                                {c.login}
-                            </a>
-                            <div class="text-xs">contributions {c.contributions}</div>
-                        </div>
-                    </div>
+                    </a>
                 )}
             </div>
         </div>
         <div class="bg-base-100 rounded-lg p-4 flex flex-col gap-4">
             <h3 class="text-xl"><i class="fa-solid fa-language" /> Translators</h3>
-            <div class="grid grid-cols-2 gap-4 overflow-y-scroll max-h-96">
+            <div class="flex flex-row flex-wrap items-center justify-center rounded-lg bg-base-300 p-4 gap-4">
                 {tr_contrib.data.map((c) =>
-                    <div role="alert" class="alert bg-base-300 shadow-lg">
-                        <div class="avatar">
-                            <div class="size-12 rounded-xl">
-                                <img src={c.data.avatarUrl} />
-                            </div>
+                    <a class="avatar tooltip" href={`https://crowdin.com/profile/${c.data.username}`}
+                        target="_blank" data-tip={c.data.username}>
+                        <div class="size-12 rounded-xl">
+                            <img src={c.data.avatarUrl} alt="pfp" />
                         </div>
-                        <div>
-                            <a class="font-bold" href={`https://crowdin.com/profile/${c.data.username}`} target="_blank">
-                                {c.data.username}
-                            </a>
-                        </div>
-                    </div>
+                    </a>
                 )}
             </div>
         </div>
         <div class="bg-base-100 rounded-lg p-4 flex flex-col gap-4">
             <h3 class="text-xl"><i class="fa-solid fa-hand-holding-dollar" /> Donations</h3>
-            <div class="flex flex-col gap-4 overflow-y-scroll max-h-96">
+            <div class="flex flex-col gap-4">
                 {donations.length === 0 ?
                     <span>No donations have been made yet :(</span> :
                     donations.map(d => (
