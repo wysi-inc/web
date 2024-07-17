@@ -79,9 +79,9 @@
             "setup": {
                 "title": "Configurer",
                 "tabs": {
-                    "tablet": "Tablet",
-                    "keyboard": "Keyboard",
-                    "mouse": "Mouse",
+                    "tablet": "Tablette",
+                    "keyboard": "Clavier",
+                    "mouse": "Souris",
                     "peripherals": "Périphériques",
                     "computer": "Ordinateur"
                 },
@@ -96,10 +96,10 @@
                     "case": "boîtier pc"
                 },
                 "peripherals": {
-                    "mousepad": "Mousepad",
-                    "keypad": "Keypad",
-                    "headphones": "Headphones",
-                    "camera": "Camera",
+                    "mousepad": "Tapis de souris",
+                    "keypad": "Keypad\n",
+                    "headphones": "Casque",
+                    "camera": "Caméra",
                     "microphone": "Microphone",
                     "monitor": "Écran",
                     "audio": "Audio",
