@@ -83,7 +83,7 @@ export const baseRoutes = new Elysia({ prefix: '' })
         })
         return <>
             <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
-                <Home />
+                <Home t={t} />
             </HtmxPage>
         </>
     }, oauthQuery)
