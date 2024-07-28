@@ -1,29 +1,29 @@
 {
     "nav": {
-        "home": "Home",
-        "users": "Users",
-        "rankings": "Rankings",
-        "beatmaps": "Beatmaps",
+        "home": "首页",
+        "users": "用户",
+        "rankings": "排行",
+        "beatmaps": "谱面",
         "support": "Support",
-        "about": "About",
-        "search": "Search someone",
-        "search_someone": "Search someone",
-        "help": "Help translate the site!",
+        "about": "关于",
+        "search": "搜索",
+        "search_someone": "搜索",
+        "help": "帮助翻译本站！",
         "log": {
-            "login": "Login with osu!",
+            "login": "使用 osu 登录！",
             "logout": "Logout",
-            "osu": "osu!profile",
-            "wysi": "wysi!profile"
+            "osu": "osu!个人资料",
+            "wysi": "wysi! 个人资料"
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu website alternative",
-        "built": "Build with bun and htmx",
-        "profiles": "User Profiles",
+        "welcome": "欢迎来到 wysi727.com!",
+        "foss": "一个开源的 osu 网站替代",
+        "built": "使用 bun 和 htmx 构建",
+        "profiles": "用户资料",
         "stats": "Top 100 Score stats",
         "search": "Beatmap Search",
-        "calculator": "Builtin PP Calculator",
+        "calculator": "内置 PP 计算器",
         "setup": "Share your setup!",
         "collections": "Upload your collections!"
     },
