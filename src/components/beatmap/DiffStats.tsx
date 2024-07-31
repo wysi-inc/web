@@ -15,9 +15,9 @@ function DiffStats({ diff }: Props) {
         return (
             <tr id={`stats_${label.toLowerCase()}`} data-original-value={value} class="border-none">
                 <td class="p-1">
-                    <label class="w-10 text-start">{label.toUpperCase()}:</label>
+                    {label.toUpperCase()}:
                 </td>
-                <td class="p-1">
+                <td class="py-1 px-2 w-full">
                     <progress class="justify-between progress progress-accent" value={value} max="11" />
                 </td>
                 <td class="p-1 text-end">
