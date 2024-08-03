@@ -311,3 +311,37 @@ export type MinoBeatmap = {
         rating: number
     }
 }
+
+export type v2Score = {
+    accuracy: number;
+    best_id: number;
+    created_at: string;
+    id: number;
+    max_combo: number;
+    mode: string;
+    mode_int: number;
+    mods: string[];
+    passed: boolean;
+    perfect: boolean;
+    pp: number;
+    rank: string;
+    replay: boolean;
+    score: number;
+    statistics: {
+        count_100: number;
+        count_300: number;
+        count_50: number;
+        count_geki: number;
+        count_katu: number;
+        count_miss: number;
+    };
+    type: string;
+    user_id: number;
+    current_user_attributes: {
+        pin: {
+            is_pinned: boolean;
+            score_id: number;
+            score_type: string;
+        };
+    };
+}

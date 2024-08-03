@@ -8,7 +8,8 @@ import Flag from "../user/u_panels/u_components/Flag";
 import SubdivisionFlag from "../user/u_panels/u_components/SubdivisionFlag";
 import Link from "../web/Link";
 import Clan from "../user/u_panels/u_components/Clan";
-import { colors } from "@/src/libs/colors";
+// import { colors } from "@/src/libs/colors";
+import type { v2Score } from "@/src/types/beatmaps";
 
 type ActualStatistics = response & {
     statistics: {
@@ -24,21 +25,32 @@ type ActualStatistics = response & {
 }
 
 const BeatmapScoreTable = async (p: {
-    id: number,
+    b_id: number,
     mode: Mode,
-    body?: any
+    body?: any,
+    logged_id?: number,
 }) => {
 
     const mods = Object.entries(p.body);
     const mod_names = mods.map(([name, value]) => value === 'on' ? name.split("-")[1] : null).filter(v => v !== null) as Mod[];
 
-    const scores: ActualStatistics[] = await v2.scores.beatmap(p.id, {
+    const scores: ActualStatistics[] = await v2.scores.beatmap(p.b_id, {
         mode: p.mode,
         mods: mod_names,
         type: "global",
     }) as any;
 
     if (!scores || scores.length === 0) return <></>;
+
+    let user_score: v2Score | undefined;
+    if (p.logged_id) {
+        user_score = await v2.scores.user.beatmap(p.b_id, p.logged_id, {
+            mode: p.mode,
+            mods: mod_names,
+            best_only: true
+        }) as any;
+    }
+
 
     return (<>
         <div class="rounded-lg"
@@ -48,101 +60,13 @@ const BeatmapScoreTable = async (p: {
                 backgroundPosition: `center`,
                 backgroundRepeat: "no-repeat"
             }}>
-            <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm justify-between flex flex-row flex-wrap gap-4 p-4 rounded-lg">
-                <div class="flex flex-row flex-wrap gap-4 items-center">
-                    <div class="flex flex-col gap-2 items-center">
-                        <span class="text-xl">#{scores[0].position}</span>
-                        <Grade grade={scores[0].rank} />
-                    </div>
-                    <img loading="lazy" src={scores[0].user.avatar_url} alt="pfp" class="size-20 rounded-lg" />
-                    <div class="flex flex-col items-start gap-1">
-                        <div class="flex flex-row gap-2 text-xl items-center">
-                            <Flag name={scores[0].user.country.name} code={scores[0].user.country.code} />
-                            <Link url={`/users/${scores[0].user.id}`}>{scores[0].user.username}</Link>
-                        </div>
-                        <span class="tooltip" data-tip={`${moment(scores[0].ended_at).format("MMMM Do YYYY")} | ${moment(scores[0].ended_at).fromNow()}`}>
-                            {moment(scores[0].ended_at).fromNow()}
-                        </span>
-                    </div>
-                </div>
-                <div class="flex flex-col gap-2 items-end">
-                    <dl class="flex flex-row gap-8 justify-end items-top">
-                        <div class="flex flex-col">
-                            <dt class="text-xs">Score</dt>
-                            <dd class="text-lg">{scores[0].total_score.toLocaleString()}</dd>
-                        </div>
-                        <div class="flex flex-col">
-                            <dt class="text-xs">Accuracy</dt>
-                            {scores[0].accuracy === 1 ?
-                                <dd class="text-lg text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-sky-500">
-                                    {(scores[0].accuracy * 100).toFixed(2)}%
-                                </dd> :
-                                <dd>
-                                    {(scores[0].accuracy * 100).toFixed(2)}%
-                                </dd>
-                            }
-                        </div>
-                        <div class="flex flex-col">
-                            <dt class="text-xs">Max Combo</dt>
-                            {scores[0].is_perfect_combo ?
-                                <dd class="text-lg text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-sky-500">
-                                    {scores[0].max_combo.toLocaleString()}x
-                                </dd> :
-                                <dd>
-                                    {scores[0].max_combo.toLocaleString()}x
-                                </dd>
-                            }
-                        </div>
-                    </dl>
-                    <div class="flex flex-row gap-4 justify-end items-center">
-                        <dl class="flex flex-row gap-8 justify-end items-top">
-                            <div class="flex flex-col">
-                                <dt class="text-xs">300</dt>
-                                <dd class={`text-lg text-base-content ${scores[0].statistics.great ? "" : "text-opacity-50"}`}
-                                    style={{ color: scores[0].statistics.great ? colors.judgements.x300 : "" }}>
-                                    {scores[0].statistics.great || 0}
-                                </dd>
-                            </div>
-                            <div class="flex flex-col">
-                                <dt class="text-xs">100</dt>
-                                <dd class={`text-lg text-base-content ${scores[0].statistics.ok ? "" : "text-opacity-50"}`}
-                                    style={{ color: scores[0].statistics.ok ? colors.judgements.x100 : "" }}>
-                                    {scores[0].statistics.ok || 0}
-                                </dd>
-                            </div>
-                            <div class="flex flex-col">
-                                <dt class="text-xs">50</dt>
-                                <dd class={`text-lg text-base-content ${scores[0].statistics.meh ? "" : "text-opacity-50"}`}
-                                    style={{ color: scores[0].statistics.meh ? colors.judgements.x50 : "" }}>
-                                    {scores[0].statistics.meh || 0}
-                                </dd>
-                            </div>
-                            <div class="flex flex-col">
-                                <dt class="text-xs">Miss</dt>
-                                <dd class={`text-lg text-base-content ${scores[0].statistics.miss ? "" : "text-opacity-50"}`}
-                                    style={{ color: scores[0].statistics.miss ? colors.judgements.xMiss : "" }}>
-                                    {scores[0].statistics.miss || 0}
-                                </dd>
-                            </div>
-                            <div class="flex flex-col">
-                                <dt class="text-xs">Performance</dt>
-                                <dd class="text-lg">
-                                    {Math.round(scores[0].pp)}pp
-                                </dd>
-                            </div>
-                            <div class="flex flex-col">
-                                <dt class="text-xs">Mods</dt>
-                                <dd class="mt-1 text-lg flex flex-row flex-wrap gap-1">
-                                    {scores[0].mods.map((mod) =>
-                                        <ModIcon mod={(mod as any).acronym} />
-                                    )}
-                                </dd>
-                            </div>
-                        </dl>
-                    </div>
-                </div>
-            </div>
         </div>
+        {
+            //     <BigScore score={scores[0]} />
+            // {user_score ?
+            //     <BigScore score={user_score} /> : <></>
+            // }
+        }
         <table class="table table-xs table-zebra p-4 bg-base-300 rounded-lg">
             <thead>
                 <tr>
@@ -228,5 +152,104 @@ const BeatmapScoreTable = async (p: {
         <script>getUserStuff()</script>
     </>);
 };
+
+// function BigScore(p: { score: v2Score | ActualStatistics }) {
+//     return (
+//         <div class="text-base-content bg-base-301 bg-opacity-65 backdrop-blur-sm justify-between flex flex-row flex-wrap gap-4 p-4 rounded-lg">
+//             <div class="flex flex-row flex-wrap gap-4 items-center">
+//                 <div class="flex flex-col gap-2 items-center">
+//                     <span class="text-xl">#{p.score.position}</span>
+//                     <Grade grade={p.score.rank} />
+//                 </div>
+//                 <img loading="lazy" src={p.score.user.avatar_url} alt="pfp" class="size-20 rounded-lg" />
+//                 <div class="flex flex-col items-start gap-1">
+//                     <div class="flex flex-row gap-2 text-xl items-center">
+//                         <Flag name={p.score.user.country.name} code={p.score.user.country.code} />
+//                         <Link url={`/users/${p.score.user.id}`}>{p.score.user.username}</Link>
+//                     </div>
+//                     <span class="tooltip" data-tip={`${moment(p.score.ended_at).format("MMMM Do YYYY")} | ${moment(p.score.ended_at).fromNow()}`}>
+//                         {moment(p.score.ended_at).fromNow()}
+//                     </span>
+//                 </div>
+//             </div>
+//             <div class="flex flex-col gap-2 items-end">
+//                 <dl class="flex flex-row gap-8 justify-end items-top">
+//                     <div class="flex flex-col">
+//                         <dt class="text-xs">Score</dt>
+//                         <dd class="text-lg">{p.score.total_score.toLocaleString()}</dd>
+//                     </div>
+//                     <div class="flex flex-col">
+//                         <dt class="text-xs">Accuracy</dt>
+//                         {p.score.accuracy === 1 ?
+//                             <dd class="text-lg text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-sky-500">
+//                                 {(p.score.accuracy * 100).toFixed(2)}%
+//                             </dd> :
+//                             <dd>
+//                                 {(p.score.accuracy * 100).toFixed(2)}%
+//                             </dd>
+//                         }
+//                     </div>
+//                     <div class="flex flex-col">
+//                         <dt class="text-xs">Max Combo</dt>
+//                         {p.score.is_perfect_combo ?
+//                             <dd class="text-lg text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-sky-500">
+//                                 {p.score.max_combo.toLocaleString()}x
+//                             </dd> :
+//                             <dd>
+//                                 {p.score.max_combo.toLocaleString()}x
+//                             </dd>
+//                         }
+//                     </div>
+//                 </dl>
+//                 <div class="flex flex-row gap-4 justify-end items-center">
+//                     <dl class="flex flex-row gap-8 justify-end items-top">
+//                         <div class="flex flex-col">
+//                             <dt class="text-xs">300</dt>
+//                             <dd class={`text-lg text-base-content ${p.score.statistics.great ? "" : "text-opacity-50"}`}
+//                                 style={{ color: p.score.statistics.great ? colors.judgements.x300 : "" }}>
+//                                 {p.score.statistics.great || 0}
+//                             </dd>
+//                         </div>
+//                         <div class="flex flex-col">
+//                             <dt class="text-xs">100</dt>
+//                             <dd class={`text-lg text-base-content ${score.statistics.ok ? "" : "text-opacity-50"}`}
+//                                 style={{ color: p.score.statistics.ok ? colors.judgements.x100 : "" }}>
+//                                 {p.score.statistics.ok || 0}
+//                             </dd>
+//                         </div>
+//                         <div class="flex flex-col">
+//                             <dt class="text-xs">50</dt>
+//                             <dd class={`text-lg text-base-content ${score.statistics.meh ? "" : "text-opacity-50"}`}
+//                                 style={{ color: p.score.statistics.meh ? colors.judgements.x50 : "" }}>
+//                                 {p.score.statistics.meh || 0}
+//                             </dd>
+//                         </div>
+//                         <div class="flex flex-col">
+//                             <dt class="text-xs">Miss</dt>
+//                             <dd class={`text-lg text-base-content ${score.statistics.miss ? "" : "text-opacity-50"}`}
+//                                 style={{ color: p.score.statistics.miss ? colors.judgements.xMiss : "" }}>
+//                                 {p.score.statistics.miss || 0}
+//                             </dd>
+//                         </div>
+//                         <div class="flex flex-col">
+//                             <dt class="text-xs">Performance</dt>
+//                             <dd class="text-lg">
+//                                 {Math.round(p.score.pp)}pp
+//                             </dd>
+//                         </div>
+//                         <div class="flex flex-col">
+//                             <dt class="text-xs">Mods</dt>
+//                             <dd class="mt-1 text-lg flex flex-row flex-wrap gap-1">
+//                                 {p.score.mods.map((mod) =>
+//                                     <ModIcon mod={(mod as any).acronym} />
+//                                 )}
+//                             </dd>
+//                         </div>
+//                     </dl>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
 
 export default BeatmapScoreTable;
