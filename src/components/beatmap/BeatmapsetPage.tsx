@@ -23,7 +23,7 @@ async function BeatmapsetPage(p: Props) {
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
 
     const hasLeaderboards = ["ranked", "approved", "loved", "qualified"].includes(beatmapset.status);
-    const beatmaps = beatmapset.beatmaps.sort((a, b) => a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int) as Beatmap[];
+    const beatmaps = beatmapset?.beatmaps?.sort((a, b) => a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int) as Beatmap[];
     const diff = (beatmapset.beatmaps.find(b => b.id === p.beatmap_id) || beatmaps[0]) as Beatmap;
     const beatmap_map = new Map<number, Beatmap>();
     beatmaps.forEach(b => beatmap_map.set(b.id, b))
