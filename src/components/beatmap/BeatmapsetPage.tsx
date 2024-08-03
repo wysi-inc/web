@@ -111,8 +111,14 @@ async function BeatmapsetPage(p: Props) {
                 <div class="md:col-span-2"><DiffStats diff={diff} /></div>
             </div>
         </div >
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 p-4 rounded-lg bg-base-100" style={{ height: "250px" }}>
-            <div class="overflow-y-scroll grid grid-cols-2 gap-2 col-span-3">
+        <details class="group bg-base-300 rounded-lg">
+            <summary class="cursor-pointer rounded-lg flex flex-row gap-4 items-center justify-between py-2 px-4">
+                <div class="flex flex-row gap-4 items-center">
+                    <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
+                    <h6>Details</h6>
+                </div>
+            </summary>
+            <div class="grid md:grid-cols-3 gap-4 p-4 rounded-lg bg-base-100">
                 <div class="flex flex-col gap-2 text-sm">
                     <div class="rounded-lg bg-base-200 shadow-lg">
                         <div class="px-2">Nominators:</div>
@@ -128,41 +134,41 @@ async function BeatmapsetPage(p: Props) {
                             <canvas id="chart-ratings" data-vals={JSON.stringify(beatmapset.ratings)} />
                         </div>
                     </div>
-                </div>
-                <div class="flex flex-col gap-2 text-sm">
-                    <div class="grid grid-cols-2 gap-2">
-                        <div class="rounded-lg bg-base-200 shadow-lg">
-                            <div class="px-2">Genre:</div>
-                            <div class="p-2 rounded-lg bg-base-300">
-                                {beatmapset.genre.name}
+                    <div class="flex flex-col gap-2 text-sm">
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="rounded-lg bg-base-200 shadow-lg">
+                                <div class="px-2">Genre:</div>
+                                <div class="p-2 rounded-lg bg-base-300">
+                                    {beatmapset.genre.name}
+                                </div>
+                            </div>
+                            <div class="rounded-lg bg-base-200 shadow-lg">
+                                <div class="px-2">Language:</div>
+                                <div class="p-2 rounded-lg bg-base-300">
+                                    {beatmapset.language.name}
+                                </div>
                             </div>
                         </div>
                         <div class="rounded-lg bg-base-200 shadow-lg">
-                            <div class="px-2">Language:</div>
-                            <div class="p-2 rounded-lg bg-base-300">
-                                {beatmapset.language.name}
+                            <div class="px-2">Tags:</div>
+                            <div class="p-2 rounded-lg flex flex-row flex-wrap gap-2 bg-base-300">
+                                {beatmapset.tags.split(" ").map(tag => (
+                                    <div class="badge badge-sm badge-neutral">{tag}</div>
+                                ))}
                             </div>
                         </div>
                     </div>
-                    <div class="rounded-lg bg-base-200 shadow-lg">
-                        <div class="px-2">Tags:</div>
-                        <div class="p-2 rounded-lg flex flex-row flex-wrap gap-2 bg-base-300">
-                            {beatmapset.tags.split(" ").map(tag => (
-                                <div class="badge badge-xs badge-neutral">{tag}</div>
-                            ))}
+                </div>
+                <div class="rounded-lg md:col-span-2">
+                    <div class="rounded-lg text-sm bg-base-200 shadow-lg">
+                        <div class="px-2">Description:</div>
+                        <div class="bbcode description p-2 rounded-lg bg-base-300">
+                            {beatmapset.description.description}
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="overflow-y-scroll rounded-lg col-span-full md:col-span-2">
-                <div class="rounded-lg bg-base-200 shadow-lg">
-                    <div class="px-2">Description:</div>
-                    <div class="p-2 rounded-lg bg-base-300">
-                        {beatmapset.description.description}
-                    </div>
-                </div>
-            </div>
-        </div>
+        </details>
         {hasLeaderboards ?
             <div role="tablist" class="tabs tabs-bordered grid grid-cols-3 items-center rounded-lg bg-base-100 p-4">
                 <input type="radio" name="beatmapset_rankings" role="tab" class="tab" aria-label="Global" checked />

@@ -3466,12 +3466,12 @@ input.tab:checked + .tab-content,
       var(--handleoffsetcalculator) 0 0 3px var(--fallback-bc,oklch(var(--bc)/1)) inset;
 }
 
-.badge-xs {
-  height: 0.75rem;
+.badge-sm {
+  height: 1rem;
   font-size: 0.75rem;
-  line-height: .75rem;
-  padding-left: 0.313rem;
-  padding-right: 0.313rem;
+  line-height: 1rem;
+  padding-left: 0.438rem;
+  padding-right: 0.438rem;
 }
 
 .btm-nav-xs > *:where(.active) {
@@ -4201,6 +4201,10 @@ input.tab:checked + .tab-content,
 
 .-mt-1 {
   margin-top: -0.25rem;
+}
+
+.-mt-12 {
+  margin-top: -3rem;
 }
 
 .-mt-8 {
@@ -5479,6 +5483,14 @@ input.tab:checked + .tab-content,
   margin-bottom: 1rem;
 }
 
+.group[open] .group-open\:flex {
+  display: flex;
+}
+
+.group[open] .group-open\:hidden {
+  display: none;
+}
+
 .group[open] .group-open\:rotate-180 {
   --tw-rotate: 180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -5593,6 +5605,10 @@ input.tab:checked + .tab-content,
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .md\:grid-cols-5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
@@ -5627,6 +5643,16 @@ input.tab:checked + .tab-content,
   }
 
   .lg\:hidden {
+    display: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .xl\:flex {
+    display: flex;
+  }
+
+  .xl\:hidden {
     display: none;
   }
 }

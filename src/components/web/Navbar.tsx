@@ -83,7 +83,8 @@ const Navbar = ({ lang, t, user }: Props) => {
                     <div class="hidden lg:flex flex-row text-sm">
                         {routes.map(route =>
                             <Link url={route.url} css="btn btn-ghost">
-                                {route.title}
+                                <span class="hidden xl:flex">{route.title}</span>
+                                <span class="flex xl:hidden">{route.icon}</span>
                             </Link>
                         )}
                     </div>

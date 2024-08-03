@@ -220,7 +220,7 @@ async function UserTopPanel(p: {
                         </form> : <></>
                     }
                 </div>
-                <div class="flex flex-row gap-4">
+                <div class="flex flex-row flex-wrap gap-4">
                     {p.user.location ?
                         <div class="flex flex-row items-center gap-2">
                             <i class="fa-solid fa-location-dot" />

@@ -129,7 +129,7 @@ function BigScore(p: { score: ActualStatistics }) {
                 backgroundPosition: `center`,
                 backgroundRepeat: "no-repeat"
             }}>
-            <div class="text-base-content bg-base-301 bg-opacity-65 backdrop-blur-sm justify-between flex flex-row flex-wrap gap-4 p-4 rounded-lg">
+            <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm justify-between flex flex-row flex-wrap gap-4 p-4 rounded-lg">
                 <div class="flex flex-row flex-wrap gap-4 items-center">
                     <div class="flex flex-col gap-2 items-center">
                         <span class="text-xl">#{p.score.position}</span>

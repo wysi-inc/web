@@ -90,7 +90,8 @@ async function UserMedalsPanel(p: Props) {
             <summary class="group-open:mb-4 cursor-pointer bg-neutral rounded-lg flex flex-row gap-4 justify-between items-center px-4 py-2">
                 <div class="flex flex-row items-center gap-4">
                     <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
-                    <span>Show all</span>
+                    <h6 class="group-open:hidden flex">Show All</h6>
+                    <h6 class="group-open:flex hidden">Show Less</h6>
                 </div>
                 <div class="flex flex-row items-center gap-2">
                     <progress class="hidden sm:inline-block progress progress-accent w-52" value={p.medals?.length} max={db_medals.length} />
