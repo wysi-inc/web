@@ -6,6 +6,7 @@ import BeatmapsetPage from '../components/beatmap/BeatmapsetPage';
 import BeatmapScoreTable from '../components/beatmap/BeatmapScoreTable';
 import HtmxPage from '../libs/routes';
 import { BeatmapCollectionCard } from '../components/beatmap/BeatmapCollectionCard';
+import { verifyUser } from '../libs/auth';
 
 const queryBodyElysia = {
     body: t.Object({
@@ -59,10 +60,11 @@ export const beatmapRoutes = new Elysia({ prefix: '/beatmapsets' })
                 beatmap_id={Number(params.beatmap_id)} />
         </HtmxPage>
     ))
-    .post("/:set_id/:beatmap_id/scores/:mode", ({ params, body }) => (
-        <BeatmapScoreTable b_id={Number(params.beatmap_id)}
-            mode={params.mode as Mode} body={body} />
-    ))
+    .post("/:set_id/:beatmap_id/scores/:mode", async ({ params, jwt, cookie, body }: Route) => {
+        const user = await verifyUser(jwt, cookie.auth.value);
+        return (<BeatmapScoreTable b_id={Number(params.beatmap_id)} logged_id={Number(user?.id)}
+            mode={params.mode as Mode} body={body} />)
+    })
     .post("/collectioncard/:hash", ({ params }) => (
         <BeatmapCollectionCard hash={params.hash} />
     ))

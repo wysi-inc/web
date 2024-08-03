@@ -8,7 +8,6 @@ import Flag from "../user/u_panels/u_components/Flag";
 import SubdivisionFlag from "../user/u_panels/u_components/SubdivisionFlag";
 import Link from "../web/Link";
 import Clan from "../user/u_panels/u_components/Clan";
-import type { v2Score } from "@/src/types/beatmaps";
 import { colors } from "@/src/libs/colors";
 
 type ActualStatistics = response & {
@@ -19,7 +18,7 @@ type ActualStatistics = response & {
         miss?: number,
     },
     ended_at: string,
-    mods: { acronym: string }[],
+    mods?: { acronym: string }[],
     is_perfect_combo: boolean,
     total_score: number
 }
@@ -34,25 +33,24 @@ const BeatmapScoreTable = async (p: {
     const mods = Object.entries(p.body);
     const mod_names = mods.map(([name, value]) => value === 'on' ? name.split("-")[1] : null).filter(v => v !== null) as Mod[];
 
-    console.log(p.b_id);
-
     const scores: ActualStatistics[] = await v2.scores.beatmap(p.b_id, {
         mode: p.mode,
         mods: mod_names,
         type: "global",
     }) as any;
 
-    if (!scores || scores.length === 0) return <></>;
-
-    let user_score: v2Score | undefined;
-    if (p.logged_id) {
-        user_score = await v2.scores.user.beatmap(p.b_id, p.logged_id, {
-            mode: p.mode,
-            mods: mod_names,
-            best_only: true
-        }) as any;
-
+    if (!scores || scores.length === 0) {
+        return <>No scores found</>
     }
+
+    // let user_score;
+    // if (p.logged_id) {
+    //     const tmp = await v2.scores.user.beatmap(p.b_id, p.logged_id, {
+    //         mode: p.mode,
+    //         mods: mod_names,
+    //         best_only: true
+    //     }) as any;
+    // }
 
     return (<>
         <BigScore score={scores[0]} />
@@ -97,7 +95,7 @@ const BeatmapScoreTable = async (p: {
                                 </span>
                             }
                         </td>
-                        <td class="hidden md:table-cell" >
+                        <td class="hidden md:table-cell">
                             <div class="flex">
                                 <Grade grade={score.rank} />
                             </div>
@@ -227,6 +225,70 @@ function BigScore(p: { score: ActualStatistics }) {
             </div>
         </div>
     </>);
+}
+
+function transformToActualStatistics(data: any): ActualStatistics {
+    return {
+        position: data.position,
+        accuracy: data.accuracy,
+        best_id: data.best_id,
+        created_at: data.ended_at, // Assuming created_at can be set to ended_at
+        id: data.id,
+        max_combo: data.max_combo,
+        mode: data.beatmap.mode,
+        mode_int: data.beatmap.mode_int,
+        mods: data.mods.map((mod: any) => ({ acronym: mod.acronym })),
+        passed: data.passed,
+        perfect: data.is_perfect_combo,
+        pp: data.pp,
+        rank: data.rank,
+        replay: data.replay,
+        score: data.total_score,
+        statistics: {
+            great: data.statistics.great,
+            ok: data.statistics.ok,
+            meh: 0, // Assuming meh is not available in the input data
+            miss: 0, // Assuming miss is not available in the input data
+            count_100: data.statistics.ok, // Assuming count_100 maps to ok
+            count_300: data.statistics.great, // Assuming count_300 maps to great
+            count_50: 0, // Assuming count_50 is not available in the input data
+            count_geki: 0, // Assuming count_geki is not available in the input data
+            count_katu: 0, // Assuming count_katu is not available in the input data
+            count_miss: 0 // Assuming count_miss is not available in the input data
+        },
+        type: data.type,
+        user_id: data.user_id,
+        current_user_attributes: {
+            pin: JSON.stringify(data.current_user_attributes.pin)
+        },
+        user: {
+            avatar_url: data.user.avatar_url,
+            country_code: data.user.country_code,
+            default_group: data.user.default_group,
+            id: data.user.id,
+            is_active: data.user.is_active,
+            is_bot: data.user.is_bot,
+            is_deleted: data.user.is_deleted,
+            is_online: data.user.is_online,
+            is_supporter: data.user.is_supporter,
+            last_visit: data.user.last_visit,
+            pm_friends_only: data.user.pm_friends_only,
+            profile_colour: data.user.profile_colour,
+            username: data.user.username,
+            country: {
+                code: data.user.country_code,
+                name: data.user.country ? data.user.country.name : ""
+            },
+            cover: {
+                custom_url: data.user.cover.custom_url,
+                url: data.user.cover.url,
+                id: data.user.cover.id
+            }
+        },
+        ended_at: data.ended_at,
+        is_perfect_combo: data.is_perfect_combo,
+        total_score: data.total_score
+    };
 }
 
 export default BeatmapScoreTable;

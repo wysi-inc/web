@@ -168,17 +168,19 @@ async function BeatmapsetPage(p: Props) {
                 <input type="radio" name="beatmapset_rankings" role="tab" class="tab" aria-label="Global" checked />
                 <div role="tabpanel" class="tab-content mt-4">
                     <div class="flex flex-col gap-4">
-                        <form class="rounded-lg flex flex-col items-center" hx-swap="innerHTML" hx-trigger="change delay:500ms" hx-target="#load_leaderboards"
-                            hx-post={`/beatmapsets/${p.set_id}/${diff.id}/scores/${diff.mode}`}>
-                            <div class="flex flex-row gap-1">
-                                {mods.map((mod) =>
-                                    <label class="has-[:checked]:opacity-100 opacity-50 transform hover:scale-110 transition easeinout duration-150 flex icons-center cursor-pointer">
-                                        <input type="checkbox" name={`mod-${mod}`} class="hidden" />
-                                        <ModIcon mod={mod} />
-                                    </label>
-                                )}
-                            </div>
-                        </form>
+                        {
+                            // <form class="rounded-lg flex flex-col items-center" hx-swap="innerHTML" hx-trigger="change delay:500ms" hx-target="#load_leaderboards"
+                            //     hx-post={`/beatmapsets/${p.set_id}/${diff.id}/scores/${diff.mode}`}>
+                            //     <div class="flex flex-row gap-1">
+                            //         {mods.map((mod) =>
+                            //             <label class="has-[:checked]:opacity-100 opacity-50 transform hover:scale-110 transition easeinout duration-150 flex icons-center cursor-pointer">
+                            //                 <input type="checkbox" name={`mod-${mod}`} class="hidden" />
+                            //                 <ModIcon mod={mod} />
+                            //             </label>
+                            //         )}
+                            //     </div>
+                            // </form>
+                        }
                         <div id="load_leaderboards" hx-post={`/beatmapsets/${p.set_id}/${diff.id}/scores/${diff.mode}`} hx-swap="innerHTML" hx-trigger="load" class="flex flex-col gap-4 empty:hidden" />
                     </div>
                 </div>
