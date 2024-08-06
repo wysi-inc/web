@@ -41,7 +41,7 @@ export const baseRoutes = new Elysia({ prefix: '' })
             <Support />
         </HtmxPage>
     ))
-    .post("/search", ({ t, body }: Route) => (
+    .post("/search", ({ body }: Route) => (
         <SearchResults query={body.q} />
     ), searchBody)
     .get("/wiki/*", async ({ lang, t, params, request, jwt, cookie }: Route) => {

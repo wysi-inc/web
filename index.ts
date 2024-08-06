@@ -1,4 +1,5 @@
-import { Elysia } from "elysia"; import { html } from "@elysiajs/html";
+import { Elysia } from "elysia";
+import { html } from "@elysiajs/html";
 import { staticPlugin } from '@elysiajs/static'
 import { jwt } from "@elysiajs/jwt";
 import { readdir } from "node:fs/promises";
