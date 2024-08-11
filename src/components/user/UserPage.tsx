@@ -79,7 +79,7 @@ const UserPage = async (p: Props) => {
             info: p.t.user.sections.year.info,
             tooltip: "powered by advance.catboy.best",
             icon: <i class="fa-solid fa-calendar-days" />,
-            url: `/users/${user.id}/0/panels/year`,
+            url: `/users/${user.id}/${p.mode}/panels/year`,
             manual: true,
             show_if: true,
         },

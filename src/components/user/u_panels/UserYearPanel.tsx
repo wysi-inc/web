@@ -1,17 +1,29 @@
 import { colors } from "@/src/libs/colors";
-import type { AdvanceUser } from "@/src/types/osu";
+import type { AdvanceUser, Mode } from "@/src/types/osu";
 import BarChart from "./u_components/BarChart";
 import BeatmapsetCard from "../../beatmap/BeatmapsetCard";
 import { getBeatmapset } from "@/src/db/beatmaps/get_beatmaps";
 import UserCard from "../UserCard";
 
-type Props = {
-    user_id: number,
-    logged_id?: number,
-}
-async function UserYearPanel(p: Props) {
+async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mode }) {
 
-    const res = await fetch(`https://advance.catboy.best/api/users/${p.user_id}`);
+    const mode_int = (m: string) => {
+        switch (m.toLowerCase()) {
+            case "osu":
+                return 0;
+            case "taiko":
+                return 1;
+            case "fruits":
+            case "catch":
+                return 2;
+            case "mania":
+                return 3;
+            default:
+                return -1;
+        }
+    }
+
+    const res = await fetch(`https://advance.catboy.best/api/users/${p.user_id}?mode=${mode_int(p.mode)}`);
     const data = (await res.json()) as AdvanceUser | { error: string };
 
     if ("error" in data) {
