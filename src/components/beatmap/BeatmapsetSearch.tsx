@@ -17,7 +17,7 @@ const Sort = (p: { label: string, code: MinoBeatmapSort }) => (
                 <span>{p.label}</span>
             </div>
             <input value={p.code} class="hidden" type="radio" name="sorting_title"
-                checked={p.code === "ranked_date"} />
+                checked={p.code === "relevant"} />
         </label>
         <div class="hidden col-start-1 row-start-1 disabled peer-has-[:checked]:enabled peer-has-[:checked]:grid">
             <label class="peer/one col-start-1 row-start-1 has-[:checked]:hidden flex">
@@ -100,16 +100,22 @@ function BeatmapsetSearch() {
                     </div>
                 </div>
             </div>
-            <div class="p-4 flex flex-row flex-wrap items-center gap-4">
+            <div class="py-2 px-4 flex flex-row flex-wrap items-center gap-4">
                 <span class="text-sm">Sort by:</span>
                 <div class="flex flex-row gap-4 flex-wrap">
-                    <Sort label="Title" code="title" />
-                    <Sort label="Artist" code="artist" />
+                    <Sort label="Relevant" code="relevant" />
+                    {
+                        //<Sort label="Title" code="title" />
+                        //<Sort label="Artist" code="artist" />
+                    }
                     <Sort label="Ranked" code="ranked_date" />
-                    <Sort label="Plays" code="playcount" />
+                    <Sort label="Plays" code="play_count" />
                     <Sort label="Rating" code="rating" />
                     <Sort label="Difficulty" code="beatmaps.difficulty_rating" />
                     <Sort label="Favourites" code="favourite_count" />
+                </div>
+                <div class="ms-auto tooltip tooltip-left cursor-help" data-tip="Click a catecory twice for it to work properly :/">
+                    <i class="fa-solid fa-circle-question" />
                 </div>
             </div>
         </form>

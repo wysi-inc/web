@@ -29,7 +29,7 @@ function DiffStats({ diff }: Props) {
 
     const total_hits = diff.count_circles + diff.count_sliders + diff.count_spinners;
 
-    const mods: Mod[] = ['HR', 'DT', 'HD', 'FL', 'EZ', 'HT'];
+    const mods: Mod[] = ['HR', 'DT', 'HD', 'FL', 'EZ', 'HT', 'TD'];
 
     return (
         <div class="flex flex-col gap-2 p-4 rounded-xl bg-base-100">

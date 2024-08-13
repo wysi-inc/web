@@ -27,7 +27,7 @@ const BeatmapsetCard = ({ beatmapset }: Props) => {
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat"
                     }}>
-                    <div class="bg-base-300 bg-opacity-75 grid grid-cols-4 rounded-lg backdrop-blur-sm">
+                    <div class="relative bg-base-300 bg-opacity-75 grid grid-cols-4 rounded-lg backdrop-blur-sm">
                         <div class="group rounded-lg flex items-center justify-center"
                             style={{
                                 backgroundImage: `url(${cardImg}), url('/public/img/fallback.webp')`,
@@ -44,27 +44,33 @@ const BeatmapsetCard = ({ beatmapset }: Props) => {
                         </div>
                         <div class="flex flex-col px-4 py-2 grow col-span-3">
                             <Link css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmapsets/${beatmapset.id}`}>{beatmapset.title}</Link>
-                            <p class="text-neutral-content text-opacity-75 text-sm truncate"> by {beatmapset.artist}</p>
+                            <span class="text-neutral-content text-opacity-75 text-sm truncate">by {beatmapset.artist}</span>
+                            <Link css="text-neutral-content text-opacity-75 text-sm hover:underline underline-offset-2 truncate" url={`/users/${beatmapset?.user?.id || beatmapset.user_id}`}>mapped by {beatmapset?.user?.username || beatmapset?.creator}</Link>
                         </div>
                     </div>
                 </div>
-                <div class="text-opacity-75 text-base-content flex flex-row py-1 px-2 gap-2 items-center">
+                <div class="text-opacity-75 text-base-content flex flex-row py-1 px-1.5 gap-2 items-center">
                     <StatusBadge status={beatmapset.status as BeatmapsetStatus} />
-                    <Link url={`/users/${beatmapset.user_id}`}>
-                        <div class="tooltip" data-tip={beatmapset.creator}>
-                            <i class="fa-solid fa-user-pen" />
-                        </div>
-                    </Link>
-                    {diffs.sort((a, b) =>
-                        a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int)
-                        .map((beatmap, i) => i < DIFF_LIMIT &&
-                            <DiffIconLink setId={beatmapset.id} diffId={beatmap.id}
-                                diff={beatmap.difficulty_rating} size={20}
-                                mode={beatmap.mode as Mode} name={beatmap.version} />)
-                    }
+                    <div class="flex flex-row gap-1">
+                        {diffs.sort((a, b) =>
+                            a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int)
+                            .map((beatmap, i) => i < DIFF_LIMIT &&
+                                <DiffIconLink setId={beatmapset.id} diffId={beatmap.id}
+                                    diff={beatmap.difficulty_rating} size={20}
+                                    mode={beatmap.mode as Mode} name={beatmap.version} />)
+                        }
+                    </div>
                     {diffs.length > DIFF_LIMIT &&
                         <div class="badge badge-info">+{beatmapset.beatmaps.length - DIFF_LIMIT}</div>
                     }
+                    <div class="ms-auto text-xs flex flex-row gap-2">
+                        <div class="tooltip" data-tip={beatmapset?.favourite_count}>
+                            <i class="fa-solid fa-heart" />
+                        </div>
+                        <div class="tooltip" data-tip={beatmapset?.play_count}>
+                            <i class="fa-solid fa-arrow-rotate-left" />
+                        </div>
+                    </div>
                 </div>
             </div>
             <CardControls set_id={beatmapset.id} />

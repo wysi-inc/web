@@ -1,16 +1,14 @@
-import type { BeatmapQuery, BeatmapSort, Beatmapset } from "@/src/types/beatmaps";
+import type { BeatmapQuery, Beatmapset } from "@/src/types/beatmaps";
 import { v2 } from "osu-api-extended";
 
 export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ sets: Beatmapset[], offset: number }> {
     const url = new URL("https://catboy.best/api/v2/search");
     if (q) {
-        let sorting: BeatmapSort;
-        if (!q.sorting_title) {
-            sorting = "ranked_desc";
-        } else if (q.sorting?.includes(q.sorting_title)) {
-            sorting = q.sorting as BeatmapSort;
+        let sorting: string;
+        if (!q?.sorting || q?.sorting_title === "relevant") {
+            sorting = "";
         } else {
-            sorting = `${q.sorting_title}_desc` as BeatmapSort;
+            sorting = q.sorting;
         }
         const min_date = new Date();
         min_date.setFullYear(Number(q.year_min));
@@ -76,8 +74,13 @@ export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ 
         url.searchParams.set("offset", offset || "0");
         url.searchParams.set("mode", q.mode || "-1");
         url.searchParams.set("status", q.status || "-3");
-        url.searchParams.set("sort", q.sorting || "ranked_date;desc");
+        if (sorting) {
+            url.searchParams.set("sort", sorting);
+        }
     }
+
+    console.log(url);
+
     const res = await fetch(url.toString());
     if (!res.ok) return { sets: [], offset: 0 };
     const sets = await res.json() as any;

@@ -4098,6 +4098,10 @@ input.tab:checked + .tab-content,
   position: sticky;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
 .bottom-2 {
   bottom: 0.5rem;
 }
@@ -4108,6 +4112,10 @@ input.tab:checked + .tab-content,
 
 .left-2 {
   left: 0.5rem;
+}
+
+.right-0 {
+  right: 0px;
 }
 
 .right-2 {
@@ -4128,6 +4136,18 @@ input.tab:checked + .tab-content,
 
 .top-2 {
   top: 0.5rem;
+}
+
+.bottom-1 {
+  bottom: 0.25rem;
+}
+
+.right-1 {
+  right: 0.25rem;
+}
+
+.top-1 {
+  top: 0.25rem;
 }
 
 .z-40 {
@@ -4201,10 +4221,6 @@ input.tab:checked + .tab-content,
 
 .-mt-1 {
   margin-top: -0.25rem;
-}
-
-.-mt-12 {
-  margin-top: -3rem;
 }
 
 .-mt-8 {
@@ -5064,6 +5080,16 @@ input.tab:checked + .tab-content,
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.px-1\.5 {
+  padding-left: 0.375rem;
+  padding-right: 0.375rem;
 }
 
 .pb-4 {
