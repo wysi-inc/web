@@ -24,12 +24,12 @@
         "stats": "前100成绩数据",
         "search": "谱面搜索",
         "calculator": "内置 PP 计算器",
-        "setup": "Share your setup!",
-        "collections": "Upload your collections!"
+        "setup": "分享您的设置！",
+        "collections": "上传您的收藏！"
     },
     "user": {
         "sections": {
-            "expand": "Expand",
+            "expand": "展开",
             "about": "About",
             "beatmaps": "Beatmaps",
             "top": "Top",
