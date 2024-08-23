@@ -49,7 +49,7 @@ async function SearchResults({ query }: Props) {
                 <h2>Beatmaps</h2>
             </div>
             {beatmaps.map((b, i) => i < LIMIT ?
-                <Link url={`/users/${b.user_id}`}>
+                <Link url={`/beatmapsets/${b.id}`}>
                     <div class="flex flex-row p-2 gap-2 bg-base-300 rounded-lg">
                         <img src={`https://b.ppy.sh/thumb/${b.id}l.jpg`} class="max-h-11 max-w-16 rounded-lg" alt="thumbnail" loading="lazy" />
                         <div class="flex flex-col">

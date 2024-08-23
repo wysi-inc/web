@@ -10,6 +10,10 @@
     max-width: min(calc(1000px - 100px), calc((100vw - 100px)));
 }
 
+.description img {
+    max-width: 100%;
+}
+
 .bbcode .imagemap {
     max-width: max-content;
     position: relative;

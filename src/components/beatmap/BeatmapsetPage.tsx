@@ -8,7 +8,6 @@ import type { Beatmap, Beatmapset, BeatmapsetStatus } from "@/src/types/beatmaps
 import type { Mod, Mode } from "@/src/types/osu";
 import { getBeatmapset } from "@/src/db/beatmaps/get_beatmaps";
 import Title from "../web/Title";
-import ModIcon from "../score/ModIcon";
 
 type Props = {
     set_id: number,
@@ -23,7 +22,7 @@ async function BeatmapsetPage(p: Props) {
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
 
     const hasLeaderboards = ["ranked", "approved", "loved", "qualified"].includes(beatmapset.status);
-    const beatmaps = beatmapset.beatmaps.sort((a, b) => a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int) as Beatmap[];
+    const beatmaps = beatmapset?.beatmaps?.sort((a, b) => a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int) as Beatmap[];
     const diff = (beatmapset.beatmaps.find(b => b.id === p.beatmap_id) || beatmaps[0]) as Beatmap;
     const beatmap_map = new Map<number, Beatmap>();
     beatmaps.forEach(b => beatmap_map.set(b.id, b))
@@ -111,8 +110,14 @@ async function BeatmapsetPage(p: Props) {
                 <div class="md:col-span-2"><DiffStats diff={diff} /></div>
             </div>
         </div >
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 p-4 rounded-lg bg-base-100" style={{ height: "250px" }}>
-            <div class="overflow-y-scroll grid grid-cols-2 gap-2 col-span-3">
+        <details class="group bg-base-300 rounded-lg">
+            <summary class="cursor-pointer rounded-lg flex flex-row gap-4 items-center justify-between py-2 px-4">
+                <div class="flex flex-row gap-4 items-center">
+                    <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
+                    <h6>Details</h6>
+                </div>
+            </summary>
+            <div class="grid md:grid-cols-3 gap-4 p-4 rounded-lg bg-base-100">
                 <div class="flex flex-col gap-2 text-sm">
                     <div class="rounded-lg bg-base-200 shadow-lg">
                         <div class="px-2">Nominators:</div>
@@ -128,57 +133,59 @@ async function BeatmapsetPage(p: Props) {
                             <canvas id="chart-ratings" data-vals={JSON.stringify(beatmapset.ratings)} />
                         </div>
                     </div>
-                </div>
-                <div class="flex flex-col gap-2 text-sm">
-                    <div class="grid grid-cols-2 gap-2">
-                        <div class="rounded-lg bg-base-200 shadow-lg">
-                            <div class="px-2">Genre:</div>
-                            <div class="p-2 rounded-lg bg-base-300">
-                                {beatmapset.genre.name}
+                    <div class="flex flex-col gap-2 text-sm">
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="rounded-lg bg-base-200 shadow-lg">
+                                <div class="px-2">Genre:</div>
+                                <div class="p-2 rounded-lg bg-base-300">
+                                    {beatmapset.genre.name}
+                                </div>
+                            </div>
+                            <div class="rounded-lg bg-base-200 shadow-lg">
+                                <div class="px-2">Language:</div>
+                                <div class="p-2 rounded-lg bg-base-300">
+                                    {beatmapset.language.name}
+                                </div>
                             </div>
                         </div>
                         <div class="rounded-lg bg-base-200 shadow-lg">
-                            <div class="px-2">Language:</div>
-                            <div class="p-2 rounded-lg bg-base-300">
-                                {beatmapset.language.name}
+                            <div class="px-2">Tags:</div>
+                            <div class="p-2 rounded-lg flex flex-row flex-wrap gap-2 bg-base-300">
+                                {beatmapset.tags.split(" ").map(tag => (
+                                    <div class="badge badge-sm badge-neutral">{tag}</div>
+                                ))}
                             </div>
                         </div>
                     </div>
-                    <div class="rounded-lg bg-base-200 shadow-lg">
-                        <div class="px-2">Tags:</div>
-                        <div class="p-2 rounded-lg flex flex-row flex-wrap gap-2 bg-base-300">
-                            {beatmapset.tags.split(" ").map(tag => (
-                                <div class="badge badge-xs badge-neutral">{tag}</div>
-                            ))}
+                </div>
+                <div class="rounded-lg md:col-span-2">
+                    <div class="rounded-lg text-sm bg-base-200 shadow-lg">
+                        <div class="px-2">Description:</div>
+                        <div class="bbcode description p-2 rounded-lg bg-base-300">
+                            {beatmapset.description.description}
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="overflow-y-scroll rounded-lg col-span-full md:col-span-2">
-                <div class="rounded-lg bg-base-200 shadow-lg">
-                    <div class="px-2">Description:</div>
-                    <div class="p-2 rounded-lg bg-base-300">
-                        {beatmapset.description.description}
-                    </div>
-                </div>
-            </div>
-        </div>
+        </details>
         {hasLeaderboards ?
             <div role="tablist" class="tabs tabs-bordered grid grid-cols-3 items-center rounded-lg bg-base-100 p-4">
                 <input type="radio" name="beatmapset_rankings" role="tab" class="tab" aria-label="Global" checked />
                 <div role="tabpanel" class="tab-content mt-4">
                     <div class="flex flex-col gap-4">
-                        <form class="rounded-lg flex flex-col items-center" hx-swap="innerHTML" hx-trigger="change delay:500ms" hx-target="#load_leaderboards"
-                            hx-post={`/beatmapsets/${p.set_id}/${diff.id}/scores/${diff.mode}`}>
-                            <div class="flex flex-row gap-1">
-                                {mods.map((mod) =>
-                                    <label class="has-[:checked]:opacity-100 opacity-50 transform hover:scale-110 transition easeinout duration-150 flex icons-center cursor-pointer">
-                                        <input type="checkbox" name={`mod-${mod}`} class="hidden" />
-                                        <ModIcon mod={mod} />
-                                    </label>
-                                )}
-                            </div>
-                        </form>
+                        {
+                            // <form class="rounded-lg flex flex-col items-center" hx-swap="innerHTML" hx-trigger="change delay:500ms" hx-target="#load_leaderboards"
+                            //     hx-post={`/beatmapsets/${p.set_id}/${diff.id}/scores/${diff.mode}`}>
+                            //     <div class="flex flex-row gap-1">
+                            //         {mods.map((mod) =>
+                            //             <label class="has-[:checked]:opacity-100 opacity-50 transform hover:scale-110 transition easeinout duration-150 flex icons-center cursor-pointer">
+                            //                 <input type="checkbox" name={`mod-${mod}`} class="hidden" />
+                            //                 <ModIcon mod={mod} />
+                            //             </label>
+                            //         )}
+                            //     </div>
+                            // </form>
+                        }
                         <div id="load_leaderboards" hx-post={`/beatmapsets/${p.set_id}/${diff.id}/scores/${diff.mode}`} hx-swap="innerHTML" hx-trigger="load" class="flex flex-col gap-4 empty:hidden" />
                     </div>
                 </div>

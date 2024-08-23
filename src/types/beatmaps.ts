@@ -5,8 +5,7 @@ import type { response as V2BeatmapSearch } from "osu-api-extended/dist/types/v2
 export type BeatmapsetCategory = 'favourite' | 'graveyard' | 'ranked' | 'loved' | 'guest' | 'nominated' | 'pending';
 export type BeatmapsetStatus = "any" | "ranked" | "approved" | "qualified" | "loved" | "pending" | "wip" | "graveyard";
 
-export type BeatmapSort = "title_desc" | "title_asc" | "artist_desc" | "artist_asc" | "difficulty_desc" | "difficulty_asc" | "updated_desc" | "updated_asc" | "ranked_desc" | "ranked_asc" | "rating_desc" | "rating_asc" | "plays_desc" | "plays_asc" | "favourites_desc" | "favourites_asc";
-export type MinoBeatmapSort = "ranked_date" | "title" | "artist" | "playcount" | "rating" | "beatmaps.difficulty_rating" | "favourite_count";
+export type MinoBeatmapSort = "relevant" | "ranked_date" | "title" | "artist" | "play_count" | "rating" | "beatmaps.difficulty_rating" | "favourite_count";
 
 export type BeatmapQuery = {
     title?: string;
@@ -310,4 +309,38 @@ export type MinoBeatmap = {
         last_checked: number
         rating: number
     }
+}
+
+export type v2Score = {
+    accuracy: number;
+    best_id: number;
+    created_at: string;
+    id: number;
+    max_combo: number;
+    mode: string;
+    mode_int: number;
+    mods: string[];
+    passed: boolean;
+    perfect: boolean;
+    pp: number;
+    rank: string;
+    replay: boolean;
+    score: number;
+    statistics: {
+        count_100: number;
+        count_300: number;
+        count_50: number;
+        count_geki: number;
+        count_katu: number;
+        count_miss: number;
+    };
+    type: string;
+    user_id: number;
+    current_user_attributes: {
+        pin: {
+            is_pinned: boolean;
+            score_id: number;
+            score_type: string;
+        };
+    };
 }

@@ -79,14 +79,14 @@ const UserPage = async (p: Props) => {
             info: p.t.user.sections.year.info,
             tooltip: "powered by advance.catboy.best",
             icon: <i class="fa-solid fa-calendar-days" />,
-            url: `/users/${user.id}/0/panels/year`,
+            url: `/users/${user.id}/${p.mode}/panels/year`,
             manual: true,
             show_if: true,
         },
         {
             title: p.t.user.sections.summary.title,
             code: "summary",
-            icon: <i class="fa-solid fa-ranking-star" />,
+            icon: <i class="fa-solid fa-newspaper" />,
             info: p.t.user.sections.summary.info,
             url: `/users/${user.id}/${p.mode}/panels/summary`,
             manual: true,
@@ -111,19 +111,19 @@ const UserPage = async (p: Props) => {
             show_if: editable || (user.collections !== undefined && user.collections.length > 0)
         },
         {
-            title: p.t.user.sections.beatmaps,
-            code: "beatmapsets",
-            icon: <i class="fa-solid fa-screwdriver-wrench" />,
-            url: `/users/${user.id}/${p.mode}/panels/beatmapsets/favourite`,
-            show_if: true
-        },
-        {
             title: p.t.user.sections.most,
             code: "most",
             icon: <i class="fa-solid fa-rotate-left" />,
             url: `/users/${user.id}/0/panels/most`,
             manual: true,
             show_if: true,
+        },
+        {
+            title: p.t.user.sections.beatmaps,
+            code: "beatmapsets",
+            icon: <i class="fa-solid fa-screwdriver-wrench" />,
+            url: `/users/${user.id}/${p.mode}/panels/beatmapsets/favourite`,
+            show_if: true
         },
         {
             title: p.t.user.sections.medals.title,
