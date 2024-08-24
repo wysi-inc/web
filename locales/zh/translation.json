@@ -35,8 +35,8 @@
             "top": "顶部",
             "medals": {
                 "title": "奖章",
-                "recent": "最近成就",
-                "rarest": "最稀有成就",
+                "recent": "最近的奖章",
+                "rarest": "最稀有奖章",
                 "show": "显示所有"
             },
             "year": {
