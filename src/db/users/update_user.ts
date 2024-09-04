@@ -48,6 +48,7 @@ export async function updateUser(user: UserType, mode: Mode): Promise<UserType> 
         user.db_setup = db_user.setup as any;
         user.collections = db_user.collections as any;
         user.socials = db_user.socials as any;
+        user.wysi_badges = db_user.wysi_badges as any;
         await db_user.save();
         return user;
     } catch (err) {

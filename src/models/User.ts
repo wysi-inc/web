@@ -172,6 +172,25 @@ const modeRanks = new mongoose.Schema({
     },
 }, { _id: false });
 
+const badgeSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+    },
+    short: {
+        type: String,
+        required: true,
+    },
+    bg: {
+        type: String,
+        required: true,
+    },
+    fg: {
+        type: String,
+        required: true,
+    }
+}, { _id: false });
+
 const modes = new mongoose.Schema({
     osu: modeRanks,
     taiko: modeRanks,
@@ -194,6 +213,7 @@ const userSchema = new mongoose.Schema({
         type: modes,
         required: true,
     },
+    wysi_badges: [badgeSchema],
     extra_panels: [String],
     socials: userSocials,
     skins: [String],
@@ -209,6 +229,7 @@ userSchema.methods.toJSON = function() {
     return user;
 };
 
+export type Badge = mongoose.InferSchemaType<typeof badgeSchema>;
 export type CollectionDB = mongoose.InferSchemaType<typeof collectionDBSchema>;
 export type Rank = mongoose.InferSchemaType<typeof rank>;
 export type Setup = mongoose.InferSchemaType<typeof setup>;

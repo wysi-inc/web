@@ -84,6 +84,17 @@ async function UserTopPanel(p: {
                                     {g.short_name}
                                 </div>
                             )}
+                            {p.user.wysi_badges?.map(b =>
+                                <div class="tooltip badge text-white p-1 flex flex-row"
+                                    data-tip={b.title}
+                                    style={{
+                                        backgroundColor: b.bg,
+                                        color: b.fg,
+                                        gap: ".08rem",
+                                    }}>
+                                    {b.short}
+                                </div>
+                            )}
                         </div>
                         {p.user.title ?
                             <div class="bg-gradient-to-r from-blue-600 to-green-400 inline-block text-transparent bg-clip-text">
