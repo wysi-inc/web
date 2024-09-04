@@ -213,15 +213,18 @@ const userSchema = new mongoose.Schema({
         type: modes,
         required: true,
     },
-    wysi_badges: [badgeSchema],
-    extra_panels: [String],
+    dan: {
+        type: String,
+        enum: ['No Dan', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta'],
+    },
     socials: userSocials,
-    skins: [String],
-    setup: setup,
     collections: {
         type: [collectionDBSchema],
         required: false,
-    }
+    },
+    skins: [String],
+    setup: setup,
+    wysi_badges: [badgeSchema],
 });
 
 userSchema.methods.toJSON = function() {

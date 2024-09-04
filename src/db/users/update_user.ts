@@ -45,6 +45,7 @@ export async function updateUser(user: UserType, mode: Mode): Promise<UserType> 
         );
         db_user.modes[mode] = new_ranks as any;
         user.db_ranks = new_ranks;
+        user.dan = db_user.dan as any;
         user.db_setup = db_user.setup as any;
         user.collections = db_user.collections as any;
         user.socials = db_user.socials as any;
@@ -221,6 +222,14 @@ export async function deleteSocial(user_id: number, social: Social): Promise<boo
     if (!user) return false;
     if (!user.socials) return false;
     user.socials[social] = undefined;
+    await user.save();
+    return true;
+}
+
+export async function updateDan(user_id: number, dan: string): Promise<boolean> {
+    const user = await User.findOne({ user_id });
+    if (!user) return false;
+    user.dan = dan;
     await user.save();
     return true;
 }

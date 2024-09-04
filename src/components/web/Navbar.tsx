@@ -46,11 +46,11 @@ const Navbar = ({ lang, t, user }: Props) => {
         <nav class="flex flex-col bg-base-100 shadow-lg sticky top-0 z-50 w-full">
             <div class="grid grid-cols-3 p-2">
                 <div class="flex flex-row items-center justify-start">
-                    <div class="dropdown lg:hidden">
-                        <button tabindex="0" role="button" class="btn btn-ghost flex items-center justify-center" aria-label="dropdown menu">
+                    <div class="dropdown">
+                        <div tabindex="0" role="button" class="btn btn-ghost flex items-center justify-center">
                             <i class="fa-solid fa-bars fa-lg" />
-                        </button>
-                        <ul class="menu menu-sm dropdown-content mt-5 z-50 p-2 shadow bg-base-100 rounded-box w-40">
+                        </div>
+                        <ul tabindex="0" class="menu menu-sm dropdown-content mt-5 z-50 p-2 shadow bg-base-100 rounded-box w-40">
                             {routes.map(route =>
                                 <li>
                                     <Link url={route.url} css="btn btn-ghost">
@@ -75,6 +75,8 @@ const Navbar = ({ lang, t, user }: Props) => {
                                 </a>
                             </li>
                         </ul>
+                    </div>
+                    <div class="dropdown lg:hidden">
                     </div>
                     <Link url="/" css="hidden sm:flex gap-4 items-center btn btn-ghost px-2 text-xl">
                         <img loading="lazy" src="/public/wysi.svg" class="w-8 h-8 rounded-lg drop-shadow-lg shadow-lg" alt="wysi logo" />

@@ -1,6 +1,6 @@
 import { Elysia, t } from 'elysia'
 import { verifyUser } from '../libs/auth';
-import { deleteCollections, deleteSocial, saveCollection, saveSetup, saveSocial } from '../db/users/update_user';
+import { deleteCollections, deleteSocial, saveCollection, saveSetup, saveSocial, updateDan } from '../db/users/update_user';
 import type { BeatmapCategory, Mode, Route, ScoreCategory } from '../types/osu';
 import HtmxPage from '../libs/routes';
 import UserPage from '../components/user/UserPage';
@@ -110,10 +110,26 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                     user_id={Number(params.id)}
                     collection_name={params.name}
                     offset={Number(query.offset)} />
-            )
-            )
+            ))
         )
     )
+    .put("/dan", async ({ params, set, cookie, body, jwt }: Route) => {
+        const user = await verifyUser(jwt, cookie.auth.value);
+        if (!user || Number(params.id) !== user.id) {
+            set.status = 401;
+            return "Unauthorized";
+        }
+        if (!body?.dan) {
+            set.status = 400;
+            return "???";
+        }
+        const done = await updateDan(user.id, body.dan);
+        if (!done) {
+            set.status = 500;
+            return "Something went wrong";
+        }
+        return ":D done";
+    })
     .group("/setup", _ => _
         .put("/submit", async ({ t, params, set, cookie, body, jwt }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);

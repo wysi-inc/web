@@ -36,6 +36,8 @@ async function UserTopPanel(p: {
 
     const joined_date = moment(p.user.join_date).format("DD/MM/YYYY");
 
+    const dans = ['No Dan', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta'];
+
     return (
         <section class="pb-4 bg-base-300 md:rounded-lg shadow-lg">
             <div class="rounded-lg"
@@ -45,142 +47,162 @@ async function UserTopPanel(p: {
                     backgroundPosition: `center`,
                     backgroundRepeat: "no-repeat"
                 }}>
-                <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm justify-center flex flex-row flex-wrap gap-4 p-4 rounded-lg">
-                    <div class="flex flex-col gap-4 justify-between w-40">
-                        <img src={p.user.avatar_url} class="rounded-lg aspect-square" alt={`${p.user.username}'s pfp`} />
-                        <div class="bg-base-300 rounded-lg flex flex-row gap-2 p-2 flex-wrap justify-around items-center">
-                            {modes.map(m => (
-                                <div class="tooltip" data-tip={m.name}>
-                                    {p.mode === m.code ?
-                                        <ModeIcon mode={m.code} size={24} css={`fill-secondary`} /> :
-                                        <Link url={`/users/${p.user.id}/${m.code}`} label="standard mode">
-                                            <ModeIcon mode={m.code} size={24} css={`fill-base-content`} />
-                                        </Link>
-                                    }
-                                </div>
-                            ))}
+                <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm justify-center flex flex-col gap-4 p-4 rounded-lg">
+                    <div class="flex flex-row flex-wrap gap-4">
+                        <div class="flex flex-col justify-between w-40">
+                            <img src={p.user.avatar_url} class="rounded-lg aspect-square" alt={`${p.user.username}'s pfp`} />
+                            <div class="bg-base-300 rounded-lg flex flex-row gap-2 p-2 flex-wrap justify-around items-center">
+                                {modes.map(m => (
+                                    <div class="tooltip" data-tip={m.name}>
+                                        {p.mode === m.code ?
+                                            <ModeIcon mode={m.code} size={24} css={`fill-secondary`} /> :
+                                            <Link url={`/users/${p.user.id}/${m.code}`} label="standard mode">
+                                                <ModeIcon mode={m.code} size={24} css={`fill-base-content`} />
+                                            </Link>
+                                        }
+                                    </div>
+                                ))}
+                            </div>
+                            <span class="text-center">joined <time class="tooltip" data-tip={joined_date} datetime={joined_date}>{moment(p.user.join_date).fromNow()}</time></span>
+                            <div class="flex flex-row justify-between gap-2 items-center">
+                                <span>{p.user.statistics.level.current}</span>
+                                <progress class="progress progress-accent w-32" value={p.user.statistics.level.progress} max="100" />
+                                <span>{p.user.statistics.level.current + 1}</span>
+                            </div>
                         </div>
-                        <span class="text-center">joined <time class="tooltip" data-tip={joined_date} datetime={joined_date}>{moment(p.user.join_date).fromNow()}</time></span>
-                        <div class="flex flex-row justify-between gap-2 items-center">
-                            <span>{p.user.statistics.level.current}</span>
-                            <progress class="progress progress-accent w-32" value={p.user.statistics.level.progress} max="100" />
-                            <span>{p.user.statistics.level.current + 1}</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-2 justify-between items-start grow">
-                        <div class="flex flex-row gap-2 items-center">
-                            <Clan user_id={p.user.id} />
-                            <a href={`https://osu.ppy.sh/users/${p.user.id}`} target="_blank" class="text-2xl underline-offset-2 hover:underline">
-                                {p.user.username}
-                            </a>
-                            {p.user.is_supporter &&
-                                <Supporter level={p.user.support_level} />
-                            }
-                            {p.user.groups.map(g =>
-                                <div class="badge text-white p-1 flex flex-row" style={{
-                                    backgroundColor: g.colour,
-                                    gap: ".08rem",
-                                }}>
-                                    {g.short_name}
-                                </div>
-                            )}
-                            {p.user.wysi_badges?.map(b =>
-                                <div class="tooltip badge text-white p-1 flex flex-row"
-                                    data-tip={b.title}
-                                    style={{
-                                        backgroundColor: b.bg,
-                                        color: b.fg,
+                        <div class="flex flex-col gap-2 justify-between items-start grow">
+                            <div class="flex flex-row gap-2 items-center">
+                                <Clan user_id={p.user.id} />
+                                <a href={`https://osu.ppy.sh/users/${p.user.id}`} target="_blank" class="text-2xl underline-offset-2 hover:underline">
+                                    {p.user.username}
+                                </a>
+                                {p.user.is_supporter &&
+                                    <Supporter level={p.user.support_level} />
+                                }
+                                {p.user.groups.map(g =>
+                                    <div class="badge text-white p-1 flex flex-row" style={{
+                                        backgroundColor: g.colour,
                                         gap: ".08rem",
                                     }}>
-                                    {b.short}
+                                        {g.short_name}
+                                    </div>
+                                )}
+                                {p.user.wysi_badges?.map(b =>
+                                    <div class="tooltip badge text-white p-1 flex flex-row"
+                                        data-tip={b.title}
+                                        style={{
+                                            backgroundColor: b.bg,
+                                            color: b.fg,
+                                            gap: ".08rem",
+                                        }}>
+                                        {b.short}
+                                    </div>
+                                )}
+                            </div>
+                            {p.user.title ?
+                                <div class="bg-gradient-to-r from-blue-600 to-green-400 inline-block text-transparent bg-clip-text">
+                                    {p.user.title}
+                                </div> : <></>}
+                            <div class="flex flex-row gap-2 items-center">
+                                <i class="fa-solid fa-earth-americas fa-xl"></i>
+                                <h2 class="text-xl tooltip" data-tip={`Peak rank: #${p.user?.rank_highest?.rank?.toLocaleString?.()}`}>
+                                    #{p.user.statistics?.global_rank?.toLocaleString() || "-"}
+                                </h2>
+                            </div>
+                            <div class="flex flex-row gap-2 items-center">
+                                {(p.user.country as any).cat ?
+                                    <Country code={"CAT"} name={"Catalunya"} /> :
+                                    <Country code={p.user.country.code} name={p.user.country.name} />
+                                }
+                                <h2 class="text-xl tooltip" data-tip={`Peak rank: #${best_country?.rank?.toLocaleString()}`}>
+                                    #{p.user.statistics?.country_rank?.toLocaleString() || "-"}
+                                </h2>
+                                <Flag name={p.user.country.name} code={p.user.country.code} />
+                            </div>
+                            <div class="hidden group flex-row gap-2 items-center">
+                                <i class="hidden group-has[.flex]:flex w-6 fa-solid fa-city"></i>
+                                <SubdivisionRanking user_id={p.user.id} mode={p.mode} />
+                                <SubdivisionFlag user_id={p.user.id} />
+                            </div>
+                            <dl class="flex flex-col gap-1">
+                                <div>
+                                    <dt class="text-sm">{p.t.user.performance}:</dt>
+                                    <dd class="text-lg">{Math.round(p.user.statistics.pp).toLocaleString()}pp</dd>
                                 </div>
-                            )}
+                                <div>
+                                    <dt class="text-sm">{p.t.score.accuracy}:</dt>
+                                    <dd class="text-lg">{(p.user.statistics.hit_accuracy).toFixed(2)}%</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-sm">{p.t.user.sections.medals.title}:</dt>
+                                    <dd class="text-lg">{p.user.user_achievements.length} <i class="fa-solid fa-medal fa-xs"></i></dd>
+                                </div>
+                                {p.mode === "mania" ?
+                                    p.editable ?
+                                        <form hx-swap="none" hx-trigger="change" hx-put={`/users/${p.user.id}/dan`}>
+                                            <label class="form-control">
+                                                <span class="label text-sm m-0 p-0 pb-1">Dan:</span>
+                                                <select name="dan" class="select-sm select select-bordered select-ghost">
+                                                    {dans.map(d =>
+                                                        <option selected={p.user.dan === d}>{d}</option>
+                                                    )}
+                                                </select>
+                                            </label>
+                                        </form> :
+                                        <div>
+                                            <dt class="text-sm">Dan:</dt>
+                                            <dd class="text-lg">{p.user.dan || "No Dan"}</dd>
+                                        </div>
+                                    : <></>
+                                }
+                            </dl>
                         </div>
-                        {p.user.title ?
-                            <div class="bg-gradient-to-r from-blue-600 to-green-400 inline-block text-transparent bg-clip-text">
-                                {p.user.title}
-                            </div> : <></>}
-                        <div class="flex flex-row gap-2 items-center">
-                            <i class="fa-solid fa-earth-americas fa-xl"></i>
-                            <h2 class="text-xl tooltip" data-tip={`Peak rank: #${p.user?.rank_highest?.rank?.toLocaleString?.()}`}>
-                                #{p.user.statistics?.global_rank?.toLocaleString() || "-"}
-                            </h2>
-                        </div>
-                        <div class="flex flex-row gap-2 items-center">
-                            {(p.user.country as any).cat ?
-                                <Country code={"CAT"} name={"Catalunya"} /> :
-                                <Country code={p.user.country.code} name={p.user.country.name} />
-                            }
-                            <h2 class="text-xl tooltip" data-tip={`Peak rank: #${best_country?.rank?.toLocaleString()}`}>
-                                #{p.user.statistics?.country_rank?.toLocaleString() || "-"}
-                            </h2>
-                            <Flag name={p.user.country.name} code={p.user.country.code} />
-                        </div>
-                        <div class="hidden group flex-row gap-2 items-center">
-                            <i class="hidden group-has[.flex]:flex w-6 fa-solid fa-city"></i>
-                            <SubdivisionRanking user_id={p.user.id} mode={p.mode} />
-                            <SubdivisionFlag user_id={p.user.id} />
-                        </div>
-                        <dl class="flex flex-col gap-1">
-                            <div>
-                                <dt class="text-sm">{p.t.user.performance}:</dt>
-                                <dd class="text-lg">{Math.round(p.user.statistics.pp).toLocaleString()}pp</dd>
+                        <div class="flex flex-col gap-4 justify-between grow">
+                            <table>
+                                <tr>
+                                    <th class="p-1"><i class="fa-solid fa-angles-up w-4 text-center" /></th>
+                                    <td class="p-1">{p.t.score.ranked_score}:</td>
+                                    <td class="p-1 text-end">{p.user.statistics.ranked_score.toLocaleString()}</td>
+                                </tr>
+                                <tr>
+                                    <th class="p-1"><i class="fa-solid fa-arrow-rotate-left w-4 text-center" /></th>
+                                    <td class="p-1">{p.t.user.play_count}:</td>
+                                    <td class="p-1 text-end">{p.user.statistics.play_count.toLocaleString()}</td>
+                                </tr>
+                                <tr>
+                                    <th class="p-1"><i class="fa-regular fa-clock w-4 text-center" /></th>
+                                    <td class="p-1">{p.t.user.play_time}:</td>
+                                    <td class="p-1 text-end">{Math.floor(p.user.statistics.play_time / 60 / 60).toLocaleString()}h</td>
+                                </tr>
+                                <tr>
+                                    <th class="p-1"><i class="fa-solid fa-fire w-4 text-center" /></th>
+                                    <td class="p-1">{p.t.score.max_combo}:</td>
+                                    <td class="p-1 text-end">{p.user.statistics.maximum_combo.toLocaleString()}x</td>
+                                </tr>
+                                <tr>
+                                    <th class="p-1"><i class="fa-solid fa-keyboard w-4 text-center" /></th>
+                                    <td class="p-1">{p.t.user.total_hits}:</td>
+                                    <td class="p-1 text-end">{p.user.statistics.total_hits.toLocaleString()}</td>
+                                </tr>
+                                <tr>
+                                    <th class="p-1"><i class="fa-solid fa-calculator w-4 text-center" /></th>
+                                    <td class="p-1">{p.t.user.hits_x_play}:</td>
+                                    <td class="p-1 text-end">{Math.round(p.user.statistics.total_hits / p.user.statistics.play_count || 0).toLocaleString()}</td>
+                                </tr>
+                                <tr>
+                                    <th class="p-1"><i class="fa-solid fa-eye w-4 text-center" /></th>
+                                    <td class="p-1">{p.t.user.replays_watched}:</td>
+                                    <td class="p-1 text-end">{p.user.statistics.replays_watched_by_others.toLocaleString()}</td>
+                                </tr>
+                            </table>
+                            <div class="flex flex-row gap-4 items-center justify-end">
+                                <BarChart name="total_grades" data={grade_counts} user={{
+                                    user_id: p.user.id,
+                                    username: p.user.username,
+                                    mode: ModeToCode(p.mode)
+                                }} />
+                                <span id="total_grades_loading" class="hidden loading loading-spinner loading-md" />
                             </div>
-                            <div>
-                                <dt class="text-sm">{p.t.score.accuracy}:</dt>
-                                <dd class="text-lg">{(p.user.statistics.hit_accuracy).toFixed(2)}%</dd>
-                            </div>
-                            <div>
-                                <dt class="text-sm">{p.t.user.sections.medals.title}:</dt>
-                                <dd class="text-lg">{p.user.user_achievements.length} <i class="fa-solid fa-medal fa-xs"></i></dd>
-                            </div>
-                        </dl>
-                    </div>
-                    <div class="flex flex-col gap-4 justify-between grow">
-                        <table>
-                            <tr>
-                                <th class="p-1"><i class="fa-solid fa-angles-up w-4 text-center" /></th>
-                                <td class="p-1">{p.t.score.ranked_score}:</td>
-                                <td class="p-1 text-end">{p.user.statistics.ranked_score.toLocaleString()}</td>
-                            </tr>
-                            <tr>
-                                <th class="p-1"><i class="fa-solid fa-arrow-rotate-left w-4 text-center" /></th>
-                                <td class="p-1">{p.t.user.play_count}:</td>
-                                <td class="p-1 text-end">{p.user.statistics.play_count.toLocaleString()}</td>
-                            </tr>
-                            <tr>
-                                <th class="p-1"><i class="fa-regular fa-clock w-4 text-center" /></th>
-                                <td class="p-1">{p.t.user.play_time}:</td>
-                                <td class="p-1 text-end">{Math.floor(p.user.statistics.play_time / 60 / 60).toLocaleString()}h</td>
-                            </tr>
-                            <tr>
-                                <th class="p-1"><i class="fa-solid fa-fire w-4 text-center" /></th>
-                                <td class="p-1">{p.t.score.max_combo}:</td>
-                                <td class="p-1 text-end">{p.user.statistics.maximum_combo.toLocaleString()}x</td>
-                            </tr>
-                            <tr>
-                                <th class="p-1"><i class="fa-solid fa-keyboard w-4 text-center" /></th>
-                                <td class="p-1">{p.t.user.total_hits}:</td>
-                                <td class="p-1 text-end">{p.user.statistics.total_hits.toLocaleString()}</td>
-                            </tr>
-                            <tr>
-                                <th class="p-1"><i class="fa-solid fa-calculator w-4 text-center" /></th>
-                                <td class="p-1">{p.t.user.hits_x_play}:</td>
-                                <td class="p-1 text-end">{Math.round(p.user.statistics.total_hits / p.user.statistics.play_count || 0).toLocaleString()}</td>
-                            </tr>
-                            <tr>
-                                <th class="p-1"><i class="fa-solid fa-eye w-4 text-center" /></th>
-                                <td class="p-1">{p.t.user.replays_watched}:</td>
-                                <td class="p-1 text-end">{p.user.statistics.replays_watched_by_others.toLocaleString()}</td>
-                            </tr>
-                        </table>
-                        <div class="flex flex-row gap-4 items-center justify-end">
-                            <BarChart name="total_grades" data={grade_counts} user={{
-                                user_id: p.user.id,
-                                username: p.user.username,
-                                mode: ModeToCode(p.mode)
-                            }} />
-                            <span id="total_grades_loading" class="hidden loading loading-spinner loading-md" />
                         </div>
                     </div>
                 </div>

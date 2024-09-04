@@ -22,6 +22,7 @@ export type User = UserBasic & {
     collections?: CollectionDB[],
     socials?: Socials,
     wysi_badges?: Badge[],
+    dan?: String,
     groups: {
         colour: string,
         has_listing: boolean,
