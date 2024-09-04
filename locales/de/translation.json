@@ -1,86 +1,86 @@
 {
     "nav": {
         "home": "Home",
-        "users": "Users",
+        "users": "Benutzer",
         "rankings": "Rankings",
         "beatmaps": "Beatmaps",
         "support": "Support",
-        "about": "About",
-        "search": "Search someone",
-        "search_someone": "Search someone",
-        "help": "Help translate the site!",
+        "about": "Über die Website",
+        "search": "Suche Jemanden",
+        "search_someone": "Suche Jemanden",
+        "help": "Hilf diese Seite zu übersetzen",
         "log": {
-            "login": "Login with osu!",
-            "logout": "Logout",
-            "osu": "osu!profile",
-            "wysi": "wysi!profile"
+            "login": "Mit Osu! Einloggen",
+            "logout": "Ausloggen",
+            "osu": "Osu! Profil",
+            "wysi": "wysi! Profil"
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu website alternative",
-        "built": "Build with bun and htmx",
-        "profiles": "User Profiles",
-        "stats": "Top 100 Score stats",
-        "search": "Beatmap Search",
-        "calculator": "Builtin PP Calculator",
-        "setup": "Share your setup!",
-        "collections": "Upload your collections!"
+        "welcome": "Willkommen zu wysi727.com!",
+        "foss": "Eine Open Source Website alternative",
+        "built": "Gebaut mit bun und htmx",
+        "profiles": "Benutzer Profile",
+        "stats": "Top 100 Score Statistiken",
+        "search": "Beatmap Suche",
+        "calculator": "Eingebauter PP Calculator",
+        "setup": "Teile dein Setup",
+        "collections": "Veröffentliche deine Kollektionen"
     },
     "user": {
         "sections": {
-            "expand": "Expand",
-            "about": "About",
+            "expand": "Öffnen",
+            "about": "Über mich",
             "beatmaps": "Beatmaps",
             "top": "Top",
             "medals": {
-                "title": "Medals",
-                "recent": "Recent Medals",
-                "rarest": "Rarest Medal",
-                "show": "Show all"
+                "title": "Medaillen",
+                "recent": "Neu bekommene Medaillen",
+                "rarest": "Seltenste Medaillen",
+                "show": "Zeige alles"
             },
             "year": {
-                "title": "Year",
-                "info": "This is a recap of this year so far, the data will be reset at Jaunary 1st"
+                "title": "Jahr",
+                "info": "Das sind die daten von diesem Jahr sie werden am 1. Januar zurückgesetzt"
             },
-            "most": "Most Played",
+            "most": "Meist Gespielte Maps",
             "scores": {
                 "title": "Scores",
-                "info": "hover over a grayed out PP to see the (if FC) PP value",
+                "info": "Geh über die grauen PP, um die Full Combo PP zu sehen",
                 "tabs": {
-                    "pinned": "Pinned",
-                    "best": "Best",
-                    "first": "First",
-                    "recent": "Recent"
+                    "pinned": "Angepinnt",
+                    "best": "Beste Score",
+                    "first": "Nummer 1 Ränge",
+                    "recent": "Neuliche Scores"
                 }
             },
             "history": {
-                "title": "History",
+                "title": "Historie",
                 "tabs": {
-                    "global": "Global",
-                    "country": "Country",
-                    "plays": "Plays",
+                    "global": "Globale Rangliste",
+                    "country": "Land",
+                    "plays": "Anzahl der spiele",
                     "replays": "Replays"
                 }
             },
             "summary": {
-                "title": "Summary",
-                "info": "this is a quick summary of your top 100 plays",
+                "title": "Statistiken",
+                "info": "Das sind die Statistiken deiner besten 100 Scores",
                 "tabs": {
-                    "hit_ratios": "Hit Ratios",
-                    "grade_ratios": "Grade Ratios",
-                    "average_play": "Average Play"
+                    "hit_ratios": "Treffer Häufigkeit",
+                    "grade_ratios": "Beatmap Rang Häufigkeit",
+                    "average_play": "Durchschnittliche Statistik per Score"
                 }
             },
             "collections": {
                 "title": "Collections",
-                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "info": "Beatmaps die nicht auf der Osu! Website vorhanden sind können nicht heruntergeladen werden (Modifizierte oder nicht eingereichte Beatmaps)"
             },
             "setup": {
                 "title": "Setup",
                 "tabs": {
                     "tablet": "Tablet",
-                    "keyboard": "Keyboard",
+                    "keyboard": "Tastatur",
                     "mouse": "Mouse",
                     "peripherals": "Peripherals",
                     "computer": "Computer"
@@ -143,43 +143,43 @@
     "score": {
         "status": {
             "pinned": "Pinned",
-            "best": "Best",
-            "firsts": "Firsts",
-            "recent": "Recent"
+            "best": "Beste",
+            "firsts": "Erste",
+            "recent": "Kürzlich"
         },
         "mods": "Mods",
-        "max_combo": "Max Combo",
+        "max_combo": "Maximale Combo",
         "combo": "Combo",
-        "grade": "Grade",
-        "grades": "Grades",
-        "acc": "Acc",
-        "accuracy": "Accuracy",
-        "score": "Score",
-        "ranked_score": "Ranked Score"
+        "grade": "Bewertung",
+        "grades": "Bewertungen",
+        "acc": "Genauigkeit",
+        "accuracy": "Genauigkeit",
+        "score": "Punktzahl",
+        "ranked_score": "Bewertete Punktzahl"
     },
     "beatmapset": {
         "status": {
-            "favourite": "Favourite",
+            "favourite": "Favoriten",
             "ranked": "Ranked",
-            "guest": "Guest",
+            "guest": "Gast",
             "loved": "Loved",
-            "nominated": "Nominated",
+            "nominated": "Nominiert",
             "pending": "Pending",
             "graveyard": "Graveyard",
-            "wip": "In Progress",
+            "wip": "In Bearbeitung",
             "approved": "Approved"
         },
-        "length": "Length",
+        "length": "Länge",
         "bpm": "BPM"
     },
     "footer": {
-        "rights": "All rights reserved to this silly monkey"
+        "rights": "Alle Rechte diesem dummen Affe vorbehalten"
     },
     "alerts": {
         "user": {
-            "user_doesnt_exist": "This user doesn't exist",
-            "user_is_bot": "This user is a bot, bots are not supported yet :(",
-            "users_fail": "Failed to fetch users"
+            "user_doesnt_exist": "Dieser Nutzer existiert nicht",
+            "user_is_bot": "Dieser Nutzer ist ein Bot, Bots werden noch nicht unterstützt :(",
+            "users_fail": "Benutzer kann nicht abgerufen werden"
         }
     }
 }
