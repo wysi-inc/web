@@ -13,12 +13,12 @@ export const rankingRoutes = new Elysia({ prefix: '/rankings' })
             />
         </HtmxPage>
     ))
-    .get("/:mode/:category/:page", ({ lang, t, params, request, jwt, cookie }: Route) => (
+    .get("/:mode/:category/:page?", ({ lang, t, params, request, jwt, cookie }: Route) => (
         <HtmxPage lang={lang} t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
             <Rankings
                 mode={params.mode as Mode}
                 category={params.category as Category}
-                page={Number(params.page)}
+                page={Number(params.page) || 0}
             />
         </HtmxPage>
     ))
