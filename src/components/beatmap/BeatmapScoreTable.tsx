@@ -43,17 +43,26 @@ const BeatmapScoreTable = async (p: {
         return <>No scores found</>
     }
 
-    // let user_score;
-    // if (p.logged_id) {
-    //     const tmp = await v2.scores.user.beatmap(p.b_id, p.logged_id, {
-    //         mode: p.mode,
-    //         mods: mod_names,
-    //         best_only: true
-    //     }) as any;
-    // }
+    let user_score;
+    if (p.logged_id) {
+        try {
+            const tmp = await v2.scores.user.beatmap(p.b_id, p.logged_id, {
+                mode: p.mode,
+                mods: mod_names,
+                best_only: true
+            });
+            user_score = transformToActualStatistics(tmp[0]);
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
     return (<>
         <BigScore score={scores[0]} />
+        {user_score ?
+            <BigScore score={user_score} />
+            : <></>
+        }
         <table class="table table-xs table-zebra bg-base-300 rounded-lg">
             <thead>
                 <tr>
@@ -228,6 +237,7 @@ function BigScore(p: { score: ActualStatistics }) {
 }
 
 function transformToActualStatistics(data: any): ActualStatistics {
+    console.log(data);
     return {
         position: data.position,
         accuracy: data.accuracy,

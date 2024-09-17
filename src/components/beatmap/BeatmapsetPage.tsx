@@ -5,7 +5,7 @@ import DiffStats from "./DiffStats";
 import AudioPlayButton from "../web/AudioPlayButton";
 import Link from "../web/Link";
 import type { Beatmap, Beatmapset, BeatmapsetStatus } from "@/src/types/beatmaps";
-import type { Mod, Mode } from "@/src/types/osu";
+import type { Mode } from "@/src/types/osu";
 import { getBeatmapset } from "@/src/db/beatmaps/get_beatmaps";
 import Title from "../web/Title";
 
@@ -21,13 +21,21 @@ async function BeatmapsetPage(p: Props) {
     if ((beatmapset as any).error === null) return <h1>Not found</h1>;
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
 
-    const hasLeaderboards = ["ranked", "approved", "loved", "qualified"].includes(beatmapset.status);
-    const beatmaps = beatmapset?.beatmaps?.sort((a, b) => a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int) as Beatmap[];
+    const hasLeaderboards = [
+        "ranked",
+        "approved",
+        "loved",
+        "qualified"
+    ].includes(beatmapset.status);
+
+    const beatmaps = beatmapset?.beatmaps?.sort((a, b) => a.mode === b.mode ?
+        a.difficulty_rating - b.difficulty_rating :
+        a.mode_int - b.mode_int
+    ) as Beatmap[];
+
     const diff = (beatmapset.beatmaps.find(b => b.id === p.beatmap_id) || beatmaps[0]) as Beatmap;
     const beatmap_map = new Map<number, Beatmap>();
     beatmaps.forEach(b => beatmap_map.set(b.id, b))
-
-    const mods: Mod[] = ['NM', 'EZ', 'NF', 'HT', 'HR', 'SD', 'PF', 'DT', 'NC', 'HD', 'FL', 'SO', 'TD'];
 
     return (<>
         <Title title={`${beatmapset.title} - ${beatmapset.artist}`} />
@@ -100,10 +108,16 @@ async function BeatmapsetPage(p: Props) {
                     <form class="flex flex-row flex-wrap gap-1 p-1 rounded-lg bg-base-content bg-opacity-25"
                         id="beatmapsets_form" data-beatmaps={JSON.stringify(Array.from(beatmap_map.entries()))}>
                         {beatmaps.map(b =>
-                            <label data-tip={`[${b.version}]`} class="m-0 tooltip cursor-pointer outline-base-content flex items-center justify-center p-1 rounded-md has-[:checked]:outline outline-2">
-                                <DiffIcon sr={b.difficulty_rating} size={20} mode={b.mode as Mode} />
-                                <input name="selected_beatmap" type="radio" value={String(b.id)} class="hidden" checked={b.id === diff.id} />
-                            </label>
+                            <span data-tip={`[${b.version}]`} class={`${b.id === diff.id ? "outline" : ""} 
+                                m-0 tooltip cursor-pointer outline-base-content flex items-center justify-center p-1 rounded-md outline-2`}>
+                                <Link url={`/beatmapsets/${p.set_id}/${b.id}`}>
+                                    <DiffIcon sr={b.difficulty_rating} size={20} mode={b.mode as Mode} />
+                                </Link>
+                            </span>
+                            // <label data-tip={`[${b.version}]`} class="m-0 tooltip cursor-pointer outline-base-content flex items-center justify-center p-1 rounded-md has-[:checked]:outline outline-2">
+                            //     <DiffIcon sr={b.difficulty_rating} size={20} mode={b.mode as Mode} />
+                            //     <input name="selected_beatmap" type="radio" value={String(b.id)} class="hidden" checked={b.id === diff.id} />
+                            // </label>
                         )}
                     </form>
                 </div>
@@ -186,7 +200,9 @@ async function BeatmapsetPage(p: Props) {
                             //     </div>
                             // </form>
                         }
-                        <div id="load_leaderboards" hx-post={`/beatmapsets/${p.set_id}/${diff.id}/scores/${diff.mode}`} hx-swap="innerHTML" hx-trigger="load" class="flex flex-col gap-4 empty:hidden" />
+                        <div id="load_leaderboards" class="flex flex-col gap-4 empty:hidden"
+                            hx-post={`/beatmapsets/${p.set_id}/${diff.id}/scores/${diff.mode}`}
+                            hx-swap="innerHTML" hx-trigger="load" />
                     </div>
                 </div>
                 <input type="radio" name="beatmapset_rankings" role="tab" class="tab" aria-label="Country" disabled />

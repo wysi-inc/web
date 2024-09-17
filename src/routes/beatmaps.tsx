@@ -70,8 +70,8 @@ export const beatmapsetRoutes = new Elysia({ prefix: '/beatmapsets' })
     ))
     .post("/:set_id/:beatmap_id/scores/:mode", async ({ params, jwt, cookie, body }: Route) => {
         const user = await verifyUser(jwt, cookie.auth.value);
-        return (<BeatmapScoreTable b_id={Number(params.beatmap_id)} logged_id={Number(user?.id)}
-            mode={params.mode as Mode} body={body} />)
+        return <BeatmapScoreTable b_id={Number(params.beatmap_id)} logged_id={Number(user?.id)}
+            mode={params.mode as Mode} body={body} />
     })
     .post("/collectioncard/:hash", ({ params }) => (
         <BeatmapCollectionCard hash={params.hash} />
