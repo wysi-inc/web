@@ -35,7 +35,7 @@ const ScoreCard = async ({ score, position }: Props) => {
     const cardImg = `https://b.ppy.sh/thumb/${beatmapset.id}l.jpg`;
 
     return <>
-        <div class="score_card group grow rounded-lg flex flex-row bg-base-300 shadow-lg"
+        <div class="score_card group grow rounded-lg flex flex-row bg-base-300 shadow-lg" onclick={`window.location='/scores/${score.id}';`}
             data-score={JSON.stringify(score)} data-fc-acc={fc_acc}>
             <div class="text-white bg-neutral flex flex-col grow rounded-lg shadow-lg">
                 <div class="bg-cover bg-center bg-no-repeat flex flex-col rounded-lg shadow-lg"

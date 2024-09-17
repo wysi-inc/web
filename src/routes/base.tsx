@@ -8,6 +8,8 @@ import type { Route } from "../types/osu";
 import { save_donation } from "../db/web/save_donation";
 import Support from "../components/web/Support";
 import Testing from "../components/web/Testing";
+import { translations } from "@/index";
+import { Html, html } from "@elysiajs/html";
 
 const searchBody = {
     body: t.Object({

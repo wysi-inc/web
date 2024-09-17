@@ -13,6 +13,7 @@ import { userRoutes } from "./src/routes/user";
 import { beatmapRoutes, beatmapsetRoutes } from "./src/routes/beatmaps";
 import { updateMedals } from "./src/db/medals/update_medals";
 import { apiRoutes } from "./src/routes/api";
+import { scoresRoutes } from "./src/routes/scores";
 
 const port = Number(process.env.PORT as string);
 const mongo_uri = process.env.MONGO_URI as string;
@@ -60,7 +61,7 @@ async function getTranslations() {
     }
 }
 
-const translations = await getTranslations();
+export const translations = await getTranslations();
 
 const jwtcfg = jwt({
     secret: process.env.OSU_SECRET as string,
@@ -95,7 +96,9 @@ new Elysia()
     .use(userRoutes)
     .use(beatmapRoutes)
     .use(beatmapsetRoutes)
+    .use(scoresRoutes)
     //.onError(() => "some")
     .use(staticPlugin())
     .onStart(() => console.info(`[ OK ] Listening on port ${port}`))
+    .onError(() => "404: This page doesnt exist")
     .listen(port);

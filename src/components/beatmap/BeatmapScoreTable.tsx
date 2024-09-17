@@ -78,8 +78,8 @@ const BeatmapScoreTable = async (p: {
                 </tr>
             </thead>
             <tbody>
-                {scores.map((score) =>
-                    <tr class="hover:bg-base-300 hover:rounded-lg">
+                {scores.map(score =>
+                    <tr class="hover:bg-base-300 hover:rounded-lg" onclick={`window.location='/scores/${score.id}';`}>
                         <th class="table-cell text-start">#{score.position}</th>
                         <td class="table-cell">
                             <div class="flex flex-row gap-2 items-center">
@@ -124,14 +124,14 @@ const BeatmapScoreTable = async (p: {
                     </tr>
                 )}
             </tbody>
-        </table>
+        </table >
         <script>getUserStuff()</script>
     </>);
 };
 
 function BigScore(p: { score: ActualStatistics }) {
     return (<>
-        <div class="rounded-lg"
+        <div class="rounded-lg" onclick={`window.location='/scores/${p.score.id}';`}
             style={{
                 backgroundImage: `url(${p.score.user.cover.url})`,
                 backgroundSize: `cover`,
