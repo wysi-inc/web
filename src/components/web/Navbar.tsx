@@ -60,6 +60,12 @@ const Navbar = ({ lang, t, user }: Props) => {
                                 </li>
                             )}
                             <div class="md:hidden divider" />
+                            <label class="btn btn-ghost">
+                                <button class="hidden" aria-label="theme switch" data-toggle-theme="dracula,pastel" data-act-class="ACTIVECLASS" />
+                                <i class="fa-solid fa-circle-half-stroke" />
+                                Theme
+                            </label>
+                            <div class="md:hidden divider" />
                             <li class="flex md:hidden">
                                 <a href="https://github.com/wysi-inc" target="_blank"
                                     class="btn btn-ghost" aria-label="Github">
@@ -95,23 +101,21 @@ const Navbar = ({ lang, t, user }: Props) => {
                     <Search t={t} />
                 </div>
                 <div class="flex flex-row items-center justify-end">
-                    <div class="flex">
+                    <a href="https://github.com/wysi-inc" target="_blank"
+                        class="hidden md:flex btn btn-ghost" aria-label="Github">
+                        <i class="fa-brands fa-github fa-lg" />
+                    </a>
+                    <a href="https://discord.gg/QYVxgS2934" target="_blank"
+                        class="hidden md:flex btn btn-ghost" aria-label="Discord">
+                        <i class="fa-brands fa-discord" />
+                    </a>
+                    <div class="hidden sm:flex">
                         <label class="btn btn-ghost">
                             <button class="hidden" aria-label="theme switch" data-toggle-theme="dracula,pastel" data-act-class="ACTIVECLASS" />
                             <i class="fa-solid fa-circle-half-stroke" />
                         </label>
                     </div>
-                    <div class="hidden md:flex flex-row items-center justify-end">
-                        <a href="https://github.com/wysi-inc" target="_blank"
-                            class="hidden md:flex btn btn-ghost" aria-label="Github">
-                            <i class="fa-brands fa-github fa-lg" />
-                        </a>
-                        <a href="https://discord.gg/QYVxgS2934" target="_blank"
-                            class="hidden md:flex btn btn-ghost" aria-label="Discord">
-                            <i class="fa-brands fa-discord" />
-                        </a>
-                    </div>
-                    <div class="hidden md:flex flex-row items-center justify-end">
+                    <div class="hidden sm:flex flex-row items-center justify-end">
                         <LanguageSwitcher t={t} lang={lang} />
                     </div>
                     {user ?
