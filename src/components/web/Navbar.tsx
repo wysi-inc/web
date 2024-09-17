@@ -18,7 +18,7 @@ const Navbar = ({ lang, t, user }: Props) => {
         {
             title: t.nav.home,
             url: "/",
-            icon: <i class="fa-solid fa-house" />
+            icon: <i class="fa-solid fa-house" />,
         },
         {
             title: t.nav.rankings,
@@ -33,12 +33,14 @@ const Navbar = ({ lang, t, user }: Props) => {
         {
             title: t.nav.support,
             url: "/support",
-            icon: <i class="fa-solid fa-heart" />
+            icon: <i class="fa-solid fa-heart" />,
+            collapsed: true
         },
         {
             title: t.nav.about,
             url: "/about",
-            icon: <i class="fa-regular fa-circle-question" />
+            icon: <i class="fa-regular fa-circle-question" />,
+            collapsed: true
         },
     ];
 
@@ -88,11 +90,10 @@ const Navbar = ({ lang, t, user }: Props) => {
                         <img loading="lazy" src="/public/wysi.svg" class="w-8 h-8 rounded-lg drop-shadow-lg shadow-lg" alt="wysi logo" />
                         <span>wysi</span>
                     </Link>
-                    <div class="hidden lg:flex flex-row text-sm">
-                        {routes.map(route =>
-                            <Link url={route.url} css="btn btn-ghost">
-                                <span class="hidden xl:flex">{route.title}</span>
-                                <span class="flex xl:hidden">{route.icon}</span>
+                    <div class="z-50 hidden xl:flex flex-row text-sm">
+                        {routes.map(r =>
+                            <Link url={r.url} css="btn btn-ghost">
+                                {r.collapsed ? r.icon : r.title}
                             </Link>
                         )}
                     </div>
@@ -100,7 +101,7 @@ const Navbar = ({ lang, t, user }: Props) => {
                 <div class="flex flex-row items-center justify-center">
                     <Search t={t} />
                 </div>
-                <div class="flex flex-row items-center justify-end">
+                <div class="z-50 flex flex-row items-center justify-end">
                     <a href="https://github.com/wysi-inc" target="_blank"
                         class="hidden md:flex btn btn-ghost" aria-label="Github">
                         <i class="fa-brands fa-github fa-lg" />
