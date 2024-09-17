@@ -38,7 +38,7 @@ const queryBodyElysia = {
     })
 }
 
-export const beatmapRoutes = new Elysia({ prefix: '/beatmap' })
+export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
     .get("/:id", async ({ params, set }: Route) => {
         const res = await v2.beatmap.id.details(Number(params.id)) as any;
         if (res.error) return "Beatmap does not exist";
