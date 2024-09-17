@@ -10,7 +10,7 @@ import mongoose from "mongoose";
 import { baseRoutes } from "./src/routes/base";
 import { rankingRoutes } from "./src/routes/rankings";
 import { userRoutes } from "./src/routes/user";
-import { beatmapRoutes } from "./src/routes/beatmaps";
+import { beatmapRoutes, beatmapsetRoutes } from "./src/routes/beatmaps";
 import { updateMedals } from "./src/db/medals/update_medals";
 import { apiRoutes } from "./src/routes/api";
 
@@ -94,6 +94,7 @@ new Elysia()
     .use(rankingRoutes)
     .use(userRoutes)
     .use(beatmapRoutes)
+    .use(beatmapsetRoutes)
     //.onError(() => "some")
     .use(staticPlugin())
     .onStart(() => console.info(`[ OK ] Listening on port ${port}`))

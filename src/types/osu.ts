@@ -57,6 +57,7 @@ export type Route = {
     },
     params: Record<any, string>
     body: any,
+    redirect: any,
     set: {
         headers: Record<string, string> & {
             'Set-Cookie'?: string | string[];

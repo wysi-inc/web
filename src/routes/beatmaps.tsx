@@ -7,6 +7,7 @@ import BeatmapScoreTable from '../components/beatmap/BeatmapScoreTable';
 import HtmxPage from '../libs/routes';
 import { BeatmapCollectionCard } from '../components/beatmap/BeatmapCollectionCard';
 import { verifyUser } from '../libs/auth';
+import { v2 } from 'osu-api-extended';
 
 const queryBodyElysia = {
     body: t.Object({
@@ -37,7 +38,14 @@ const queryBodyElysia = {
     })
 }
 
-export const beatmapRoutes = new Elysia({ prefix: '/beatmapsets' })
+export const beatmapRoutes = new Elysia({ prefix: '/beatmap' })
+    .get("/:id", async ({ params, set }: Route) => {
+        const res = await v2.beatmap.id.details(Number(params.id)) as any;
+        if (res.error) return "Beatmap does not exist";
+        return set.redirect = `/beatmapsets/${res.beatmapset_id}/${params.id}`;
+    })
+
+export const beatmapsetRoutes = new Elysia({ prefix: '/beatmapsets' })
     .get("/", async ({ lang, t, request, jwt, cookie }: Route) => (
         <HtmxPage lang={lang} t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
             <BeatmapsetSearch />
