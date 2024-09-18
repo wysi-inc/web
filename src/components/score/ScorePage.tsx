@@ -1,11 +1,10 @@
 import { v2 } from "osu-api-extended";
-import DiffIcon from "../beatmap/DiffIcon";
-import type { Mode } from "@/src/types/osu";
-import Grade from "./Grade";
-import { getDiffColor, getGradeColor, getGradeLetter } from "@/src/libs/web_utils";
-import ModIcon from "./ModIcon";
-import moment from "moment";
 import { colors } from "@/src/libs/colors";
+import { getDiffColor, getGradeColor, getGradeLetter } from "@/src/libs/web_utils";
+import moment from "moment";
+import type { Mode } from "@/src/types/osu";
+import DiffIcon from "../beatmap/DiffIcon";
+import ModIcon from "./ModIcon";
 import Link from "../web/Link";
 
 async function ScorePage(p: { score_id: number }) {
@@ -14,6 +13,8 @@ async function ScorePage(p: { score_id: number }) {
     const b = score.beatmap;
     const s = score.beatmapset;
     const u = score.user;
+
+    console.log(score);
 
     const cardImg = `https://assets.ppy.sh/beatmaps/${s.id}/covers/card.jpg?${s.id}`;
     const cardImg2x = `https://assets.ppy.sh/beatmaps/${s.id}/covers/card@2x.jpg?${s.id}`;
@@ -116,6 +117,15 @@ async function ScorePage(p: { score_id: number }) {
                                 </div>
                             </dl>
                             <dl class="flex flex-row gap-8 justify-end items-top">
+                                {score.beatmap.mode === "mania" ?
+                                    <div class="flex flex-col">
+                                        <dt class="text-xs">320</dt>
+                                        <dd class={`text-lg text-base-content ${(score.statistics as any)?.perfect ? "" : "text-opacity-50"}`}
+                                            style={{ color: (score.statistics as any)?.perfect ? colors.judgements.x320 : "" }}>
+                                            {(score.statistics as any)?.perfect || 0}
+                                        </dd>
+                                    </div> : <></>
+                                }
                                 <div class="flex flex-col">
                                     <dt class="text-xs">300</dt>
                                     <dd class={`text-lg text-base-content ${score.statistics.great ? "" : "text-opacity-50"}`}
@@ -123,6 +133,15 @@ async function ScorePage(p: { score_id: number }) {
                                         {score.statistics.great || 0}
                                     </dd>
                                 </div>
+                                {score.beatmap.mode === "mania" ?
+                                    <div class="flex flex-col">
+                                        <dt class="text-xs">200</dt>
+                                        <dd class={`text-lg text-base-content ${(score.statistics as any)?.good ? "" : "text-opacity-50"}`}
+                                            style={{ color: (score.statistics as any)?.good ? colors.judgements.x200 : "" }}>
+                                            {(score.statistics as any)?.good || 0}
+                                        </dd>
+                                    </div> : <></>
+                                }
                                 <div class="flex flex-col">
                                     <dt class="text-xs">100</dt>
                                     <dd class={`text-lg text-base-content ${score.statistics.ok ? "" : "text-opacity-50"}`}

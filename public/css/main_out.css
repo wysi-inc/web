@@ -4204,34 +4204,14 @@ input.tab:checked + .tab-content,
   margin: 0px;
 }
 
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.my-2 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.my-4 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.mx-4 {
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
-.mx-3 {
-  margin-left: 0.75rem;
-  margin-right: 0.75rem;
-}
-
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .-mt-1 {
@@ -4312,10 +4292,6 @@ input.tab:checked + .tab-content,
 
 .aspect-square {
   aspect-ratio: 1 / 1;
-}
-
-.aspect-video {
-  aspect-ratio: 16 / 9;
 }
 
 .size-10 {
@@ -4421,6 +4397,10 @@ input.tab:checked + .tab-content,
   width: 50%;
 }
 
+.w-10 {
+  width: 2.5rem;
+}
+
 .w-20 {
   width: 5rem;
 }
@@ -4492,14 +4472,6 @@ input.tab:checked + .tab-content,
 
 .w-screen {
   width: 100vw;
-}
-
-.w-28 {
-  width: 7rem;
-}
-
-.w-10 {
-  width: 2.5rem;
 }
 
 .max-w-16 {
@@ -5160,6 +5132,11 @@ input.tab:checked + .tab-content,
   line-height: 1;
 }
 
+.text-7xl {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -5178,26 +5155,6 @@ input.tab:checked + .tab-content,
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-}
-
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
-}
-
-.text-7xl {
-  font-size: 4.5rem;
-  line-height: 1;
 }
 
 .font-bold {
@@ -5275,10 +5232,6 @@ input.tab:checked + .tab-content,
 
 .text-opacity-75 {
   --tw-text-opacity: 0.75;
-}
-
-.underline {
-  text-decoration-line: underline;
 }
 
 .underline-offset-1 {
@@ -5709,10 +5662,6 @@ input.tab:checked + .tab-content,
     display: inline;
   }
 
-  .lg\:flex {
-    display: flex;
-  }
-
   .lg\:table-cell {
     display: table-cell;
   }
@@ -5725,9 +5674,5 @@ input.tab:checked + .tab-content,
 @media (min-width: 1280px) {
   .xl\:flex {
     display: flex;
-  }
-
-  .xl\:hidden {
-    display: none;
   }
 }

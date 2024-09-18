@@ -84,9 +84,17 @@ const ScoreCard = async ({ score, position }: Props) => {
                                 <div class="flex flex-row gap-4 items-center">
                                     <div class="flex flex-col gap-1">
                                         <div class="ms-auto bg-opacity-40 flex flex-row justify-between gap-2 px-2 bg-base-300 rounded-full">
+                                            {score.beatmap.mode === "mania" && (score.statistics as any)?.perfect ?
+                                                <span style={{ color: colors.judgements.x320 }}>
+                                                    {(score.statistics as any)?.perfect}
+                                                </span> : <></>}
                                             {score.statistics.great ?
                                                 <span style={{ color: colors.judgements.x300 }}>
                                                     {score.statistics.great}
+                                                </span> : <></>}
+                                            {score.beatmap.mode === "mania" && (score.statistics as any)?.good ?
+                                                <span style={{ color: colors.judgements.x200 }}>
+                                                    {(score.statistics as any)?.good}
                                                 </span> : <></>}
                                             {score.statistics.ok ?
                                                 <span style={{ color: colors.judgements.x100 }}>

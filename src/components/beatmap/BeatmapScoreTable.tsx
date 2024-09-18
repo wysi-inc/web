@@ -12,7 +12,9 @@ import { colors } from "@/src/libs/colors";
 
 type ActualStatistics = response & {
     statistics: {
+        perfect?: number,
         great?: number,
+        good?: number,
         ok?: number,
         meh?: number,
         miss?: number,
@@ -58,9 +60,9 @@ const BeatmapScoreTable = async (p: {
     }
 
     return (<>
-        <BigScore score={scores[0]} />
+        <BigScore score={scores[0]} mode={p.mode} />
         {user_score ?
-            <BigScore score={user_score} />
+            <BigScore score={user_score} mode={p.mode} />
             : <></>
         }
         <table class="table table-xs table-zebra bg-base-300 rounded-lg">
@@ -129,7 +131,7 @@ const BeatmapScoreTable = async (p: {
     </>);
 };
 
-function BigScore(p: { score: ActualStatistics }) {
+function BigScore(p: { score: ActualStatistics, mode: Mode }) {
     return (<>
         <div class="rounded-lg" onclick={`window.location='/scores/${p.score.id}';`}
             style={{
@@ -186,6 +188,15 @@ function BigScore(p: { score: ActualStatistics }) {
                     </dl>
                     <div class="flex flex-row gap-4 justify-end items-center">
                         <dl class="flex flex-row gap-8 justify-end items-top">
+                            {p.mode === "mania" ?
+                                <div class="flex flex-col">
+                                    <dt class="text-xs">320</dt>
+                                    <dd class={`text-lg text-base-content ${(p.score.statistics as any)?.perfect ? "" : "text-opacity-50"}`}
+                                        style={{ color: (p.score.statistics as any)?.perfect ? colors.judgements.x320 : "" }}>
+                                        {(p.score.statistics as any)?.perfect || 0}
+                                    </dd>
+                                </div> : <></>
+                            }
                             <div class="flex flex-col">
                                 <dt class="text-xs">300</dt>
                                 <dd class={`text-lg text-base-content ${p.score.statistics.great ? "" : "text-opacity-50"}`}
@@ -193,6 +204,15 @@ function BigScore(p: { score: ActualStatistics }) {
                                     {p.score.statistics.great || 0}
                                 </dd>
                             </div>
+                            {p.mode === "mania" ?
+                                <div class="flex flex-col">
+                                    <dt class="text-xs">200</dt>
+                                    <dd class={`text-lg text-base-content ${(p.score.statistics as any)?.good ? "" : "text-opacity-50"}`}
+                                        style={{ color: (p.score.statistics as any)?.good ? colors.judgements.x200 : "" }}>
+                                        {(p.score.statistics as any)?.good || 0}
+                                    </dd>
+                                </div> : <></>
+                            }
                             <div class="flex flex-col">
                                 <dt class="text-xs">100</dt>
                                 <dd class={`text-lg text-base-content ${p.score.statistics.ok ? "" : "text-opacity-50"}`}
@@ -255,16 +275,18 @@ function transformToActualStatistics(data: any): ActualStatistics {
         replay: data.replay,
         score: data.total_score,
         statistics: {
+            perfect: data.statistics.perfect,
             great: data.statistics.great,
+            good: data.statistics.good,
             ok: data.statistics.ok,
-            meh: 0, // Assuming meh is not available in the input data
-            miss: 0, // Assuming miss is not available in the input data
-            count_100: data.statistics.ok, // Assuming count_100 maps to ok
-            count_300: data.statistics.great, // Assuming count_300 maps to great
-            count_50: 0, // Assuming count_50 is not available in the input data
-            count_geki: 0, // Assuming count_geki is not available in the input data
-            count_katu: 0, // Assuming count_katu is not available in the input data
-            count_miss: 0 // Assuming count_miss is not available in the input data
+            meh: data.statistics.meh,
+            miss: data.statistics.miss,
+            count_100: 0,
+            count_300: 0,
+            count_50: 0,
+            count_geki: 0,
+            count_katu: 0,
+            count_miss: 0
         },
         type: data.type,
         user_id: data.user_id,
