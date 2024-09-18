@@ -225,6 +225,10 @@ const userSchema = new mongoose.Schema({
     skins: [String],
     setup: setup,
     wysi_badges: [badgeSchema],
+    admin: {
+        type: Boolean,
+        required: false
+    }
 });
 
 userSchema.methods.toJSON = function() {

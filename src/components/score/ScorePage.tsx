@@ -14,8 +14,6 @@ async function ScorePage(p: { score_id: number }) {
     const s = score.beatmapset;
     const u = score.user;
 
-    console.log(score);
-
     const cardImg = `https://assets.ppy.sh/beatmaps/${s.id}/covers/card.jpg?${s.id}`;
     const cardImg2x = `https://assets.ppy.sh/beatmaps/${s.id}/covers/card@2x.jpg?${s.id}`;
 

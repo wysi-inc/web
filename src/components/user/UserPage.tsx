@@ -7,9 +7,11 @@ import Panel from "./Panel";
 import UserSetupPanel from "./u_panels/UserSetupPanel";
 import Title from "../web/Title";
 import UserMedalsPanel from "./u_panels/UserMedalsPanel";
+import Report from "../web/Report";
+import type { UserCookie } from "@/src/types/users";
 
 type Props = {
-    logged_id: number | undefined;
+    logged: UserCookie | null;
     user_id: string;
     mode?: Mode;
     t: any
@@ -23,7 +25,7 @@ const UserPage = async (p: Props) => {
 
     if (!user || (user as any).error) return <div>User not found</div>;
 
-    const editable = p.logged_id === user.id;
+    const editable = p.logged?.id === user.id;
 
     p.mode = user.rank_history?.mode as Mode || "osu";
 
@@ -64,7 +66,7 @@ const UserPage = async (p: Props) => {
             icon: <i class="fa-solid fa-computer" />,
             show_if: editable || user.db_setup !== undefined,
             manual: true,
-            jsx: (<UserSetupPanel t={p.t} setup={user.db_setup} page_id={user.id} logged_id={p.logged_id} />)
+            jsx: (<UserSetupPanel t={p.t} setup={user.db_setup} page_id={user.id} logged_id={p.logged?.id} />)
         },
         // {
         //     title: "Skins",
@@ -158,6 +160,19 @@ const UserPage = async (p: Props) => {
                 </Panel>
             );
         })}
+        <button class="btn btn-warning btn-square sticky bottom-0 ms-auto rounded-b-none"
+            onclick="report_modal.showModal()">
+            <i class="fa-solid fa-triangle-exclamation" />
+        </button>
+        <dialog id="report_modal" class="modal">
+            <div class="modal-box">
+                <form method="dialog">
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                </form>
+                <h3 class="text-lg font-bold">Report This User</h3>
+                <Report author={p.logged} target={user.id} />
+            </div>
+        </dialog>
         <script>{`
             history.replaceState({}, null, '/users/${user.id}${no_chosen_mode ? "" : `/${p.mode}`}');
             getUserStuff();

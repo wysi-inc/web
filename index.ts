@@ -14,6 +14,8 @@ import { beatmapRoutes, beatmapsetRoutes } from "./src/routes/beatmaps";
 import { updateMedals } from "./src/db/medals/update_medals";
 import { apiRoutes } from "./src/routes/api";
 import { scoresRoutes } from "./src/routes/scores";
+import { adminRoutes } from "./src/routes/admin";
+import { reportRoutes } from "./src/routes/reports";
 
 const port = Number(process.env.PORT as string);
 const mongo_uri = process.env.MONGO_URI as string;
@@ -92,6 +94,8 @@ new Elysia()
     .use(apiRoutes)
     .use(html())
     .use(baseRoutes)
+    .use(adminRoutes)
+    .use(reportRoutes)
     .use(rankingRoutes)
     .use(userRoutes)
     .use(beatmapRoutes)

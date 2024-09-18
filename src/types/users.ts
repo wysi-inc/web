@@ -6,7 +6,8 @@ import type { response as v2UserList } from "osu-api-extended/dist/types/v2_site
 export type UserCookie = {
     id: number,
     username: string,
-    avatar: string
+    avatar: string,
+    admin?: boolean
 }
 
 export type RankHistory = {

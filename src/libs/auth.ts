@@ -2,6 +2,7 @@ import { auth } from "osu-api-extended";
 import type { UserBasic, UserCookie } from "../types/users";
 import { osu_id, osu_redirect, osu_secret } from "@/index";
 import type { Jwt } from "../types/osu";
+import { User } from "../models/User";
 
 export async function userAuthCode(code: string): Promise<any> {
     const res = await fetch("https://osu.ppy.sh/oauth/token", {
@@ -17,18 +18,17 @@ export async function userAuthCode(code: string): Promise<any> {
     return data;
 }
 
-export async function userAuthData(code: string): Promise<UserBasic> {
+export async function userAuthData(code: string): Promise<{ data: UserBasic, admin: boolean } | undefined> {
     const user_data: UserBasic = await auth.authorize(code, 'osu', osu_id, osu_secret, osu_redirect) as any;
-    return user_data;
+    if ((user_data as any).error) return;
+    const user = await User.findOne({ user_id: user_data.id });
+    return { data: user_data, admin: user?.admin || false };
 }
 
 export async function verifyUser(jwt?: Jwt, auth?: string): Promise<UserCookie | null> {
-
     const profile: UserCookie = await jwt?.verify(auth);
     if (!profile) {
         return null;
     }
-
     return profile;
-
 }

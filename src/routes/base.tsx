@@ -8,8 +8,6 @@ import type { Route } from "../types/osu";
 import { save_donation } from "../db/web/save_donation";
 import Support from "../components/web/Support";
 import Testing from "../components/web/Testing";
-import { translations } from "@/index";
-import { Html, html } from "@elysiajs/html";
 
 const searchBody = {
     body: t.Object({
@@ -69,31 +67,24 @@ export const baseRoutes = new Elysia({ prefix: '' })
         set.status = 200;
         return "tysm <3";
     })
-    .get("/oauth", async ({ lang, t, request, jwt, cookie, query }: Route) => {
-        const data = await userAuthData(query.code);
-        if ((data as any).error) return "error";
+    .get("/oauth", async ({ set, jwt, cookie, query }: Route) => {
+        const res = await userAuthData(query.code);
+        if (!res) return "error";
         const user = {
-            id: data.id,
-            username: data.username,
-            avatar: data.avatar_url
+            id: res.data.id,
+            username: res.data.username,
+            avatar: res.data.avatar_url,
+            admin: res.admin
         }
         cookie?.auth?.set({
             value: await jwt.sign(user),
             httpOnly: true,
-            maxAge: 60 * 60 * 24 * 7,
+            maxAge: 60 * 60 * 24 * 2,
             path: '/',
         })
-        return <>
-            <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
-                <Home t={t} />
-            </HtmxPage>
-        </>
+        set.redirect = "/";
     }, oauthQuery)
-    .get("/logout", ({ lang, t, request, cookie }: Route) => {
+    .get("/logout", ({ set, cookie }: Route) => {
         cookie.auth.remove();
-        return <>
-            <HtmxPage lang={lang} t={t} headers={request.headers} user={null}>
-                <Home />
-            </HtmxPage>
-        </>
+        set.redirect = "/";
     })

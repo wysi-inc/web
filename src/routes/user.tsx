@@ -1,6 +1,6 @@
 import { Elysia, t } from 'elysia'
 import { verifyUser } from '../libs/auth';
-import { deleteCollections, deleteSocial, saveCollection, saveSetup, saveSocial, updateDan } from '../db/users/update_user';
+import { deleteCollections, deleteSocial, getCollectionFile, saveCollection, saveSetup, saveSocial, updateDan } from '../db/users/update_user';
 import type { BeatmapCategory, Mode, Route, ScoreCategory } from '../types/osu';
 import HtmxPage from '../libs/routes';
 import UserPage from '../components/user/UserPage';
@@ -25,7 +25,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         const user = await verifyUser(jwt, cookie.auth.value);
         return <>
             <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
-                <UserPage t={t} user_id={params.id} logged_id={user?.id} />
+                <UserPage t={t} user_id={params.id} logged={user} />
             </HtmxPage>
         </>
     })
@@ -35,7 +35,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             return <>
                 <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
                     <UserPage t={t}
-                        logged_id={user?.id}
+                        logged={user}
                         user_id={params.id}
                         mode={params.mode as Mode} />
                 </HtmxPage>
@@ -172,6 +172,10 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             }
             await deleteCollections(user.id);
             return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} />
+        })
+        .get("/download", async ({ params }) => {
+            const file = await getCollectionFile(Number(params.id));
+            return file;
         })
     )
     .group("/socials", _ => _

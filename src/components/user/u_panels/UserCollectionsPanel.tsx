@@ -70,20 +70,26 @@ async function UserCollectionsPanel({ user_id, logged_id, collections }: Props) 
             : <></>
         }
         {collections && collections.length > 0 ? <>
-            <button class="btn btn-sm btn-info collection-download-button h-8 cursor-pointer flex flex-row gap-2 items-center"
-                id={`btn_download_${user_id}`} data-name={`all_collections_${user_id}`} data-ids={JSON.stringify(collections.map(c => c.beatmapsMd5.map(h => h)).flat())}>
-                <i class="regular fa-regular fa-file-zipper" />
-                <span class="loading loading-spinner loading-xs"
-                    style={{ display: "none" }} />
-                <label class="cursor-pointer" data-title="Download All">
-                    Download All
-                </label>
-                <progress class="progress progress-success w-56" value={0} max={collections.map(c => c.beatmapsMd5.length).reduce((total, c) => total + c, 0)}
-                    style={{ display: "none" }} />
-                <span class="progress-indicator" style={{ display: "none" }}>
-                    0/{collections.map(c => c.beatmapsMd5.length).reduce((total, c) => total + c, 0)}
-                </span>
-            </button>
+            <div class="flex flex-row flex-wrap gap-2">
+                <button class="btn btn-sm btn-info collection-download-button h-8 cursor-pointer flex flex-row gap-2 items-center grow"
+                    id={`btn_download_${user_id}`} data-name={`all_collections_${user_id}`} data-ids={JSON.stringify(collections.map(c => c.beatmapsMd5.map(h => h)).flat())}>
+                    <i class="fa-regular fa-file-zipper" />
+                    <span class="loading loading-spinner loading-xs"
+                        style={{ display: "none" }} />
+                    <label class="cursor-pointer" data-title="Download All Maps">
+                        Download All Maps
+                    </label>
+                    <progress class="progress progress-success w-56" value={0} max={collections.map(c => c.beatmapsMd5.length).reduce((total, c) => total + c, 0)}
+                        style={{ display: "none" }} />
+                    <span class="progress-indicator" style={{ display: "none" }}>
+                        0/{collections.map(c => c.beatmapsMd5.length).reduce((total, c) => total + c, 0)}
+                    </span>
+                </button>
+                <a class="btn btn-sm btn-disabled btn-secondary">
+                    <i class="fa-regular fa-file-code" />
+                    Download collection.db (wip)
+                </a>
+            </div>
             <div class="flex flex-col gap-2">
                 {collections.map((c) => (
                     <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg">

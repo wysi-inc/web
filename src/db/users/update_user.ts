@@ -207,6 +207,14 @@ export async function deleteCollections(user_id: number) {
     await user.save();
 }
 
+export async function getCollectionFile(user_id: number) {
+    const user = await User.findOne({ user_id });
+    if (!user) return;
+    if (!user.collections) return;
+    console.log(user.collections);
+    return user.collections;
+}
+
 export async function saveSocial(user_id: number, username: string, social: Social): Promise<boolean> {
     const user = await User.findOne({ user_id });
     if (!user) return false;
@@ -229,7 +237,7 @@ export async function deleteSocial(user_id: number, social: Social): Promise<boo
 export async function updateDan(user_id: number, dan: string): Promise<boolean> {
     const user = await User.findOne({ user_id });
     if (!user) return false;
-    user.dan = dan;
+    user.dan = dan as any;
     await user.save();
     return true;
 }

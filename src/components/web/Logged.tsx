@@ -30,11 +30,19 @@ const Logged = (p: Props) => {
                         {p.t.nav.log.osu}
                     </a>
                 </li>
+                {p.user.admin ?
+                    <li>
+                        <Link url="/admin" css="btn btn-ghost flex">
+                            <i class="fa-solid fa-screwdriver-wrench" />
+                            Admin
+                        </Link>
+                    </li> : <></>
+                }
                 <li>
-                    <a href="/logout" class="btn btn-ghost flex">
+                    <Link url="/logout" css="btn btn-ghost flex">
                         <i class="fa-solid fa-right-from-bracket" />
                         {p.t.nav.log.logout}
-                    </a>
+                    </Link>
                 </li>
             </ul>
         </div>

@@ -69,15 +69,13 @@ const Navbar = ({ lang, t, user }: Props) => {
                             </label>
                             <div class="md:hidden divider" />
                             <li class="flex md:hidden">
-                                <a href="https://github.com/wysi-inc" target="_blank"
-                                    class="btn btn-ghost" aria-label="Github">
+                                <a href="https://github.com/wysi-inc" target="_blank" class="btn btn-ghost" aria-label="Github">
                                     <i class="fa-brands fa-github fa-lg" />
                                     GitHub
                                 </a>
                             </li>
                             <li class="flex md:hidden">
-                                <a href="https://discord.gg/QYVxgS2934" target="_blank"
-                                    class="btn btn-ghost" aria-label="Discord">
+                                <a href="https://discord.gg/QYVxgS2934" target="_blank" class="btn btn-ghost" aria-label="Discord">
                                     <i class="fa-brands fa-discord" />
                                     Discord
                                 </a>
