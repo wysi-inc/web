@@ -18,8 +18,8 @@
     },
     "home": {
         "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu website alternative",
-        "built": "Build with bun and htmx",
+        "foss": "An open source osu! website alternative",
+        "built": "Built with bun and htmx",
         "profiles": "User Profiles",
         "stats": "Top 100 Score stats",
         "search": "Beatmap Search",
@@ -41,7 +41,7 @@
             },
             "year": {
                 "title": "Year",
-                "info": "This is a recap of this year so far, the data will be reset at Jaunary 1st"
+                "info": "This is a recap of this year so far, the data will be reset at January 1st"
             },
             "most": "Most Played",
             "scores": {
