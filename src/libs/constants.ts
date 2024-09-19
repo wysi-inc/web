@@ -108,7 +108,7 @@ languages.set("lv", { name: "Latvian", nativeName: "Latviešu" });
 languages.set("gv", { name: "Manx", nativeName: "Gaelg, Gailck" });
 languages.set("mk", { name: "Macedonian", nativeName: "македонски јазик" });
 languages.set("mg", { name: "Malagasy", nativeNLme: "Malagasy fiteny" });
-languages.set("ms", { name: "Malay", nativeName: "bahasa Melayu, بهاس ملايو‎" });
+languages.set("ms", { name: "Malay", nativeName: "Melayu" });
 languages.set("ml", { name: "Malayalam", nativeName: "മലയാളം" });
 languages.set("mt", { name: "Maltese", nativeName: "Malti" });
 languages.set("mi", { name: "Māori", nativeName: "te reo Māori" });

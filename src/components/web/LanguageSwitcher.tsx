@@ -17,6 +17,7 @@ const flags: any = {
     "it": "https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_of_Italy.svg",
     "ja": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Japan.svg",
     "lv": "https://upload.wikimedia.org/wikipedia/commons/8/84/Flag_of_Latvia.svg",
+    "ms": "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg",
     "nl": "https://upload.wikimedia.org/wikipedia/commons/2/20/Flag_of_the_Netherlands.svg",
     "no": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Norway.svg",
     "pl": "https://upload.wikimedia.org/wikipedia/commons/1/12/Flag_of_Poland.svg",
