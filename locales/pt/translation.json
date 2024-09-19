@@ -1,6 +1,6 @@
 {
     "nav": {
-        "home": "Home",
+        "home": "Início",
         "users": "Users",
         "rankings": "Rankings",
         "beatmaps": "Beatmaps",
@@ -21,8 +21,8 @@
         "foss": "An open source osu website alternative",
         "built": "Build with bun and htmx",
         "profiles": "User Profiles",
-        "stats": "Top 100 Score stats",
-        "search": "Beatmap Search",
+        "stats": "Estatísticas das Top 100 Classificações",
+        "search": "Procurar Beatmap",
         "calculator": "Builtin PP Calculator",
         "setup": "Share your setup!",
         "collections": "Upload your collections!"
