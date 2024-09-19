@@ -23,7 +23,7 @@
         "profiles": "Profile użytkowników",
         "stats": "Top 100 wyników statystyk",
         "search": "Wyszukiwanie beatmapy",
-        "calculator": "Built-in PP Calculator",
+        "calculator": "Wbudowany kalkulator PP",
         "setup": "Podziel się konfiguracją!",
         "collections": "Prześlij swoje kolekcje!"
     },
@@ -46,7 +46,7 @@
             "most": "Najczęściej grane",
             "scores": {
                 "title": "Wyniki",
-                "info": "Hover over a grayed out PP to see the (if FC) PP value",
+                "info": "Przesuń kursorem na szarą PP, aby zobaczyć wartość PP (jeżeli FC)",
                 "tabs": {
                     "pinned": "Przypięte",
                     "best": "Najlepsze",
@@ -65,7 +65,7 @@
             },
             "summary": {
                 "title": "Podsumowanie",
-                "info": "This is a quick summary of your top 100 plays",
+                "info": "To jest krótkie podsumowanie Twoich 100 najlepszych wyniki",
                 "tabs": {
                     "hit_ratios": "Stosunek uderzeń",
                     "grade_ratios": "Stosunek klasy",
@@ -74,7 +74,7 @@
             },
             "collections": {
                 "title": "Kolekcje",
-                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "info": "Żadne beatmapy nieobecne na stronie osu! nie zostaną pobrane (np. osu!trainer, customdiffs, nieprzesłane beatmapy...)"
             },
             "setup": {
                 "title": "Ustawienie",
@@ -97,45 +97,45 @@
                 },
                 "peripherals": {
                     "mousepad": "Podkładka",
-                    "keypad": "Klawisze",
-                    "headphones": "Headphones",
-                    "camera": "Camera",
-                    "microphone": "Microphone",
-                    "monitor": "Monitor",
-                    "audio": "Audio",
-                    "desk": "Desk",
-                    "chair": "Chair"
+                    "keypad": "Klawiaturka",
+                    "headphones": "Słuchawki",
+                    "camera": "Kamera",
+                    "microphone": "Mikrofon",
+                    "monitor": "Ekran",
+                    "audio": "Dźwięk",
+                    "desk": "Biurko",
+                    "chair": "Krzesło"
                 },
-                "name": "Name",
+                "name": "Nazwa",
                 "model": "Model",
-                "size": "Size",
-                "area": "Area",
-                "width": "Width",
-                "height": "Height",
-                "position": "Position",
-                "dpi": "Sensitivity",
-                "mult": "Multiplier",
-                "kb_layout": "Keyboard Layout",
+                "size": "Rozmiar",
+                "area": "Obszar",
+                "width": "Szerokość",
+                "height": "Wysokość",
+                "position": "Pozycja",
+                "dpi": "Czułość",
+                "mult": "Mnożnik",
+                "kb_layout": "Układ klawiatury",
                 "layout": {
-                    "k0": "None",
-                    "k2": "2 Keys",
-                    "k3": "3 Keys",
-                    "k4": "4 Keys",
+                    "k0": "Brak",
+                    "k2": "2 Klawisze",
+                    "k3": "3 Klawisze",
+                    "k4": "4 Klawisze",
                     "k60": "60%",
                     "k75": "75%",
                     "ktkl": "TKL",
-                    "kfull": "FULL"
+                    "kfull": "Pełny"
                 }
             }
         },
-        "performance": "Performance",
-        "total_score": "Total Score",
-        "global_rank": "Global Rank",
-        "country_rank": "Country Rank",
-        "play_time": "Play Time",
-        "play_count": "Play Count",
-        "total_hits": "Total Hits",
-        "replays_watched": "Replays Watched",
+        "performance": "Ilość PP",
+        "total_score": "Ilość punktów",
+        "global_rank": "Globalny ranking",
+        "country_rank": "Krajowy ranking",
+        "play_time": "Czas gry",
+        "play_count": "Liczba zagrań",
+        "total_hits": "Łączna liczba uderzeń",
+        "replays_watched": "Powtórki obejrzane przez innych",
         "hits_x_play": "Uderzeń na zagranie",
         "followers": "Znajomi",
         "online": "Online"
@@ -144,7 +144,7 @@
         "status": {
             "pinned": "Przypięte",
             "best": "Najlepsze",
-            "firsts": "First",
+            "firsts": "Pierwsze",
             "recent": "Ostatnie"
         },
         "mods": "Modyfikacje",
