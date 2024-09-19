@@ -86,6 +86,7 @@ new Elysia()
         const ip = request.headers.get("x-forwarded-for");
         const route = request.url.split("/").slice(3).join("/");
         const method = request.method;
+        if (route.split("/")[0] === "public") return;
         console.log(`${(ip || "0.0.0.0").padStart(15, " ")} ${method.padStart(6, " ")}::/${route}`);
     })
     .derive(({ cookie }) => {
