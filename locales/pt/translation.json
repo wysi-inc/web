@@ -18,10 +18,10 @@
     },
     "home": {
         "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu website alternative",
-        "built": "Build with bun and htmx",
+        "foss": "An open source osu! website alternative",
+        "built": "Built with bun and htmx",
         "profiles": "User Profiles",
-        "stats": "Estatísticas das Top 100 Classificações",
+        "stats": "Estatísticas das 100 Melhores Classificações",
         "search": "Procurar Beatmap",
         "calculator": "Builtin PP Calculator",
         "setup": "Share your setup!",
@@ -41,7 +41,7 @@
             },
             "year": {
                 "title": "Year",
-                "info": "This is a recap of this year so far, the data will be reset at Jaunary 1st"
+                "info": "This is a recap of this year so far, the data will be reset at January 1st"
             },
             "most": "Most Played",
             "scores": {
@@ -65,7 +65,7 @@
             },
             "summary": {
                 "title": "Summary",
-                "info": "this is a quick summary of your top 100 plays",
+                "info": "esse é um pequeno sumário das suas 100 melhores classificações",
                 "tabs": {
                     "hit_ratios": "Hit Ratios",
                     "grade_ratios": "Grade Ratios",
