@@ -25,7 +25,7 @@ function Home({ t }: any) {
             img: "setup",
         },
         {
-            title: t.home.collecitons,
+            title: t.home.collections,
             img: "collections",
         },
     ];
