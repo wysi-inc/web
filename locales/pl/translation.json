@@ -7,7 +7,7 @@
         "support": "Pomoc techniczna",
         "about": "O stronie",
         "search": "Szukaj",
-        "search_someone": "Szukaj kogoś",
+        "search_someone": "Wyszukaj kogoś",
         "help": "Pomóż przetłumaczyć stronę!",
         "log": {
             "login": "Zaloguj się przez osu!",
@@ -17,14 +17,14 @@
         }
     },
     "home": {
-        "welcome": "Witamy w wysi727.com!",
-        "foss": "Alternatywna strona osu! open source",
-        "built": "Zbudowane z bun i htmx",
+        "welcome": "Witamy na wysi727.com!",
+        "foss": "Alternatywna strona osu! która jest open source",
+        "built": "Zbudowane przy użyciu bun i htmx",
         "profiles": "Profile użytkowników",
-        "stats": "Top 100 wyników statystyk",
-        "search": "Wyszukiwanie beatmapy",
+        "stats": "Statystyki top 100 wyników",
+        "search": "Wyszukiwarka beatmap",
         "calculator": "Wbudowany kalkulator PP",
-        "setup": "Podziel się konfiguracją!",
+        "setup": "Pochwal się swoim stanowiskiem!",
         "collections": "Prześlij swoje kolekcje!"
     },
     "user": {
@@ -46,7 +46,7 @@
             "most": "Najczęściej grane",
             "scores": {
                 "title": "Wyniki",
-                "info": "Przesuń kursorem na szarą PP, aby zobaczyć wartość PP (jeżeli FC)",
+                "info": "Najedź na Liczbę PP, która jest wyblakła w danym wyniku, aby zobaczyć, ile byś dostał PP (za FC)",
                 "tabs": {
                     "pinned": "Przypięte",
                     "best": "Najlepsze",
@@ -65,10 +65,10 @@
             },
             "summary": {
                 "title": "Podsumowanie",
-                "info": "To jest krótkie podsumowanie Twoich 100 najlepszych wyniki",
+                "info": "To jest krótkie podsumowanie twoich 100 najlepszych wyników",
                 "tabs": {
                     "hit_ratios": "Stosunek uderzeń",
-                    "grade_ratios": "Stosunek klasy",
+                    "grade_ratios": "Stosunek ocen",
                     "average_play": "Typowe zagranie"
                 }
             },
@@ -77,7 +77,7 @@
                 "info": "Żadne beatmapy nieobecne na stronie osu! nie zostaną pobrane (np. osu!trainer, customdiffs, nieprzesłane beatmapy...)"
             },
             "setup": {
-                "title": "Ustawienie",
+                "title": "Stanowisko",
                 "tabs": {
                     "tablet": "Tablet",
                     "keyboard": "Klawiatura",
@@ -97,12 +97,12 @@
                 },
                 "peripherals": {
                     "mousepad": "Podkładka",
-                    "keypad": "Klawiaturka",
+                    "keypad": "Keypad",
                     "headphones": "Słuchawki",
                     "camera": "Kamera",
                     "microphone": "Mikrofon",
-                    "monitor": "Ekran",
-                    "audio": "Dźwięk",
+                    "monitor": "Monitor",
+                    "audio": "Interfejs Audio",
                     "desk": "Biurko",
                     "chair": "Krzesło"
                 },
@@ -129,9 +129,9 @@
             }
         },
         "performance": "Ilość PP",
-        "total_score": "Ilość punktów",
-        "global_rank": "Globalny ranking",
-        "country_rank": "Krajowy ranking",
+        "total_score": "Łączny wynik",
+        "global_rank": "Ranking globalny",
+        "country_rank": "Ranking krajowy",
         "play_time": "Czas gry",
         "play_count": "Liczba zagrań",
         "total_hits": "Łączna liczba uderzeń",
@@ -148,14 +148,14 @@
             "recent": "Ostatnie"
         },
         "mods": "Modyfikacje",
-        "max_combo": "Max Combo",
+        "max_combo": "Maksymalne combo",
         "combo": "Combo",
-        "grade": "Klasa",
-        "grades": "Klasy",
+        "grade": "Ocena",
+        "grades": "Oceny",
         "acc": "Acc",
         "accuracy": "Celność",
-        "score": "Punktowy",
-        "ranked_score": "Punkty Rankingowe"
+        "score": "Wynik",
+        "ranked_score": "Rankingowy wynik"
     },
     "beatmapset": {
         "status": {
@@ -166,7 +166,7 @@
             "nominated": "Nominowane",
             "pending": "Oczekujące",
             "graveyard": "Porzucone",
-            "wip": "Obecnie rozwiane",
+            "wip": "Obecnie rozwijane",
             "approved": "Zatwierdzone"
         },
         "length": "Długość",
