@@ -74,7 +74,7 @@
             },
             "collections": {
                 "title": "Collections",
-                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "info": "Beatmaps die niet aanwezig zijn in de osu!website worden niet gedownload (ex: osu!trainer, custom diffs, niet-ingezonden beatmaps...)"
             },
             "setup": {
                 "title": "Setup",
@@ -129,7 +129,7 @@
             }
         },
         "performance": "Performance",
-        "total_score": "Total Score",
+        "total_score": "Totale Score",
         "global_rank": "Global Rank",
         "country_rank": "Country Rank",
         "play_time": "Play Time",
@@ -137,7 +137,7 @@
         "total_hits": "Total Hits",
         "replays_watched": "Replays Watched",
         "hits_x_play": "Hits x Play",
-        "followers": "Followers",
+        "followers": "Vrienden",
         "online": "Online"
     },
     "score": {
