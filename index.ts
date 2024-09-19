@@ -51,7 +51,7 @@ async function relogin() {
     await updateMedals();
 }
 
-await connect()
+connect();
 
 async function getTranslations() {
     try {
@@ -90,18 +90,36 @@ setInterval(() => {
     API_CALL_COUNTER = 0;
 }, 60000);
 
+
 export function apicall() {
     API_CALL_COUNTER++;
-    console.log(API_CALL_COUNTER);
 }
 
+const RATELIMIT = 120;
+const RATELIMIT_MAP = new Map();
+
+setInterval(() => {
+    console.log(RATELIMIT_MAP);
+    RATELIMIT_MAP.clear();
+}, 60000);
+
 new Elysia()
-    .onRequest(({ request }) => {
-        const ip = request.headers.get("x-forwarded-for");
+    .onRequest(({ request, set }) => {
+        const ip = request.headers.get("x-forwarded-for") || "127.0.0.1";
+        const req_count = RATELIMIT_MAP.get(ip) || 0;
         const route = request.url.split("/").slice(3).join("/");
-        const method = request.method;
-        if (route.split("/")[0] === "public") return;
-        console.log(`${(ip || "0.0.0.0").padStart(15, " ")} ${method.padStart(6, " ")}::/${route}`);
+        const base = route.split("/")[0];
+        if (base !== "public") {
+            RATELIMIT_MAP.set(ip, req_count + 1);
+            if (req_count > RATELIMIT) {
+                set.status = 420;
+                console.log(`${ip} HIT RATE LIMIT!`);
+                return "Rate limit hit (120 req/min)";
+            }
+        }
+        if (base !== "public") {
+            console.log(`${(ip).padStart(15, " ")} ${request.method.padStart(6, " ")}::/${route}`);
+        }
     })
     .derive(({ cookie }) => {
         const lang = cookie?.lang?.value || "en";
@@ -110,8 +128,8 @@ new Elysia()
             lang
         }
     })
-    .use(jwtcfg)
     .get("/favicon.ico", Bun.file("./public/favicon.ico"))
+    .use(jwtcfg)
     .use(apiRoutes)
     .use(html())
     .use(baseRoutes)
@@ -122,7 +140,6 @@ new Elysia()
     .use(beatmapRoutes)
     .use(beatmapsetRoutes)
     .use(scoresRoutes)
-    //.onError(() => "some")
     .use(staticPlugin())
     .onStart(() => console.info(`[ OK ] Listening on port ${port}`))
     .onError(() => "404: This page doesnt exist")
