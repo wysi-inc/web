@@ -18,12 +18,12 @@
     },
     "home": {
         "welcome": "Welkom bij wysi727.com!",
-        "foss": "An open source osu! website alternative",
-        "built": "Built with bun and htmx",
+        "foss": "Een open-source osu! website alternatief",
+        "built": "Gemaakt met bun en htmx",
         "profiles": "Gebruikersprofielen",
         "stats": "Top 100 Score Statistieken",
         "search": "Beatmaps zoeken",
-        "calculator": "Ingebouwde PP Calculator",
+        "calculator": "Built-in PP Calculator",
         "setup": "Deel je setup!",
         "collections": "Upload je collecties!"
     },
@@ -41,12 +41,12 @@
             },
             "year": {
                 "title": "Jaar",
-                "info": "This is a recap of this year so far, the data will be reset at January 1st"
+                "info": "Dit is een samenvatting van dit jaar tot nu toe, de gegevens zullen worden gereset op 1 januari"
             },
             "most": "Meest Gespeeld",
             "scores": {
                 "title": "Scores",
-                "info": "Beweeg over een grijze PP om de (if FC) PP waarde te zien",
+                "info": "Hover over a grayed out PP to see the (if FC) PP value",
                 "tabs": {
                     "pinned": "Vastgezet",
                     "best": "Beste",
@@ -65,7 +65,7 @@
             },
             "summary": {
                 "title": "Samenvatting",
-                "info": "Dit is een korte samenvatting van je top 100 plays",
+                "info": "This is a quick summary of your top 100 plays",
                 "tabs": {
                     "hit_ratios": "Hit verhoudingen",
                     "grade_ratios": "Graad verhoudingen",
@@ -74,7 +74,7 @@
             },
             "collections": {
                 "title": "Collecties",
-                "info": "Beatmaps die niet aanwezig zijn in de osu!website worden niet gedownload (ex: osu!trainer, custom diffs, niet ingezonden beatmaps...)"
+                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
             },
             "setup": {
                 "title": "Setup",
@@ -144,7 +144,7 @@
         "status": {
             "pinned": "Vastgezet",
             "best": "Beste",
-            "firsts": "Eerste",
+            "firsts": "First",
             "recent": "Recent"
         },
         "mods": "Mods",
