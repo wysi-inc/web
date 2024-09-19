@@ -28,24 +28,28 @@ export const osu_api_key = String(process.env.OSU_API_KEY);
 export const crowdin_id = Number(process.env.CROWDIN_ID);
 export const crowdin_secret = String(process.env.CROWDIN_SECRET);
 
-function connect(): void {
-    mongoose.connect(mongo_uri)
-        .then(() => console.info("[ OK ] Connected to MongoDB"))
-        .catch((err) => console.error("[ EE ] Couldn't connect to MongoDB\n", err));
+await mongoose.connect(mongo_uri).catch((err) => console.error("[ EE ] Couldn't connect to MongoDB\n", err))
+console.info("[ OK ] Connected to MongoDB")
 
-    auth.login(osu_id, osu_secret, ["public"])
-        .then((res) => res?.expires_in ?
-            console.info("[ OK ] Connected to osu!API") :
-            console.error("[ EE ] Couldn't connect to osu!API\n", res)
-        ).catch((err) => console.error(err));
+async function connect(){
+    const result = await auth.login(osu_id, osu_secret, ["public"]).catch((err) => console.error(err));
 
+    if(!result?.expires_in) return console.error("[ EE ] Couldn't connect to osu!API\n", result);
+    console.info("[ OK ] Connected to osu!API")
+    setTimeout(async () => await relogin(), result.expires_in * 1000);
     auth.set_v1(osu_api_key);
-
-    updateMedals();
+    await updateMedals();
 }
 
-connect();
-setInterval(() => connect(), 1000 * 60 * 60 * 23);
+async function relogin(){
+    const result = await auth.re_login()
+    if(!result) return console.error("[ EE ] Couldn't reconnect to osu!API\n");
+    setInterval(async () => await relogin(), 1000 * 60 * 60 * 12);
+    await updateMedals();
+}
+
+
+await connect()
 
 async function getTranslations() {
     try {
