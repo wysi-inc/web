@@ -35,12 +35,12 @@
             "top": "Top",
             "medals": {
                 "title": "Медали",
-                "recent": "Recent Medals",
+                "recent": "Недавние медали",
                 "rarest": "Rarest Medal",
-                "show": "Show all"
+                "show": "Показать все"
             },
             "year": {
-                "title": "Year",
+                "title": "Год",
                 "info": "This is a recap of this year so far, the data will be reset at January 1st"
             },
             "most": "Most Played",
@@ -101,20 +101,20 @@
                     "headphones": "Гарнитура",
                     "camera": "Камера",
                     "microphone": "Микрофон",
-                    "monitor": "Экран",
+                    "monitor": "Монитор",
                     "audio": "Audio",
-                    "desk": "Desk",
-                    "chair": "Chair"
+                    "desk": "Стол",
+                    "chair": "Кресло"
                 },
-                "name": "Name",
+                "name": "Модель",
                 "model": "Модель",
                 "size": "Размер",
                 "area": "Зона",
-                "width": "Width",
-                "height": "Height",
+                "width": "Ширина",
+                "height": "Высота",
                 "position": "Позиция",
-                "dpi": "Sensitivity",
-                "mult": "Multiplier",
+                "dpi": "Чувствительность",
+                "mult": "Множитель",
                 "kb_layout": "Keyboard Layout",
                 "layout": {
                     "k0": "None",
