@@ -36,7 +36,11 @@ async function connect(){
 
     if(!result?.expires_in) return console.error("[ EE ] Couldn't connect to osu!API\n", result);
     console.info("[ OK ] Connected to osu!API")
-    setTimeout(async () => await relogin(), result.expires_in * 1000);
+    setTimeout(async () => {
+        await relogin()
+        setInterval(async () => await relogin(), 1000 * 60 * 60 * 12);
+    }, result.expires_in * 1000);
+
     auth.set_v1(osu_api_key);
     await updateMedals();
 }
@@ -44,10 +48,8 @@ async function connect(){
 async function relogin(){
     const result = await auth.re_login()
     if(!result) return console.error("[ EE ] Couldn't reconnect to osu!API\n");
-    setInterval(async () => await relogin(), 1000 * 60 * 60 * 12);
     await updateMedals();
 }
-
 
 await connect()
 
