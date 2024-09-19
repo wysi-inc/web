@@ -162,7 +162,7 @@ async function getSubdivisions() {
         const div = user_map.get(subdivision.user_id);
         if (!div) continue;
         const img = document.createElement("img");
-        img.src = subdivision.flag;
+        img.src = subdivision.flag || "https://upload.wikimedia.org/wikipedia/commons/4/49/Noflag2.svg";
         img.alt = `Flag of ${subdivision.name}`;
         img.className = "max-h-5 max-w-7 rounded-sm drop-shadow-solid";
         img.loading = "lazy";
