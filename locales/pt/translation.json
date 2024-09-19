@@ -74,7 +74,7 @@
             },
             "collections": {
                 "title": "Collections",
-                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "info": "qualquer beatmap não presente no ‘website’ do osu! não será baixado (ex: osu!trainer, dificuldades customizadas, beatmaps não enviados etc.)"
             },
             "setup": {
                 "title": "Setup",
