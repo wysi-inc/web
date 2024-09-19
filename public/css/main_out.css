@@ -5766,6 +5766,10 @@ input.tab:checked + .tab-content,
   .sm\:table-cell {
     display: table-cell;
   }
+
+  .sm\:hidden {
+    display: none;
+  }
 }
 
 @media (min-width: 768px) {
@@ -5833,5 +5837,9 @@ input.tab:checked + .tab-content,
 @media (min-width: 1280px) {
   .xl\:flex {
     display: flex;
+  }
+
+  .xl\:hidden {
+    display: none;
   }
 }
