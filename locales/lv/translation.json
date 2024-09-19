@@ -23,7 +23,7 @@
         "profiles": "User Profiles",
         "stats": "Top 100 Score stats",
         "search": "Beatmap Search",
-        "calculator": "Builtin PP Calculator",
+        "calculator": "Built-in PP Calculator",
         "setup": "Share your setup!",
         "collections": "Upload your collections!"
     },
@@ -46,7 +46,7 @@
             "most": "Most Played",
             "scores": {
                 "title": "Scores",
-                "info": "hover over a grayed out PP to see the (if FC) PP value",
+                "info": "Hover over a grayed out PP to see the (if FC) PP value",
                 "tabs": {
                     "pinned": "Pinned",
                     "best": "Best",
@@ -65,7 +65,7 @@
             },
             "summary": {
                 "title": "Summary",
-                "info": "this is a quick summary of your top 100 plays",
+                "info": "This is a quick summary of your top 100 plays",
                 "tabs": {
                     "hit_ratios": "Hit Ratios",
                     "grade_ratios": "Grade Ratios",
@@ -74,7 +74,7 @@
             },
             "collections": {
                 "title": "Collections",
-                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
             },
             "setup": {
                 "title": "Uzstādījumi",
@@ -144,7 +144,7 @@
         "status": {
             "pinned": "Piesprausts",
             "best": "Labākais",
-            "firsts": "Pirmie",
+            "firsts": "First",
             "recent": "Nesenie"
         },
         "mods": "Modi",
