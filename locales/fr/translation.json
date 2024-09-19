@@ -23,7 +23,7 @@
         "profiles": "Profil des utilisateurs",
         "stats": "Stats des 100 meilleurs scores",
         "search": "Recherche de beatmaps",
-        "calculator": "Calculateur de PP intégré",
+        "calculator": "Built-in PP Calculator",
         "setup": "Montrez votre setup !",
         "collections": "Importez vos collections !"
     },
@@ -46,7 +46,7 @@
             "most": "Les plus jouées",
             "scores": {
                 "title": "Scores",
-                "info": "Survolez le nombre de PP en gris pour afficher sa valeur (si FC)",
+                "info": "Hover over a grayed out PP to see the (if FC) PP value",
                 "tabs": {
                     "pinned": "Épinglé",
                     "best": "Meilleure",
@@ -65,7 +65,7 @@
             },
             "summary": {
                 "title": "Résumé",
-                "info": "Voici un rapide résumé de votre top 100 parties",
+                "info": "This is a quick summary of your top 100 plays",
                 "tabs": {
                     "hit_ratios": "Ratios de frappe",
                     "grade_ratios": "Ratios de note",
@@ -74,7 +74,7 @@
             },
             "collections": {
                 "title": "Collections",
-                "info": "Les beatmaps non présentes sur le site d'osu! ne pourront pas télécharger (ex : osu!trainer, difficultés customs, maps non publiées...)"
+                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
             },
             "setup": {
                 "title": "Configurer",
@@ -144,7 +144,7 @@
         "status": {
             "pinned": "Épinglé",
             "best": "Meilleure",
-            "firsts": "Premier",
+            "firsts": "First",
             "recent": "Récent"
         },
         "mods": "Mods",
