@@ -50,7 +50,7 @@
                 "tabs": {
                     "pinned": "Przypięte",
                     "best": "Najlepsze",
-                    "first": "Pierwsze",
+                    "first": "Pierwsze miejsca",
                     "recent": "Ostatnie"
                 }
             },
@@ -74,7 +74,7 @@
             },
             "collections": {
                 "title": "Kolekcje",
-                "info": "Żadne beatmapy nieobecne na stronie osu! nie zostaną pobrane (np. osu!trainer, customdiffs, nieprzesłane beatmapy...)"
+                "info": "Beatmapy które nie są widoczne na stronie osu! nie zostaną pobrane (np. osu!trainer, customowe diffy, nieprzesłane beatmapy...)"
             },
             "setup": {
                 "title": "Stanowisko",
@@ -87,10 +87,10 @@
                 },
                 "components": {
                     "os": "System operacyjny",
-                    "cpu": "CPU",
-                    "gpu": "GPU",
+                    "cpu": "Procesor",
+                    "gpu": "Karta graficzna",
                     "ram": "RAM",
-                    "storage": "Pamięć",
+                    "storage": "Dysk (HDD lub SSD)",
                     "motherboard": "Płyta Główna",
                     "psu": "Zasilacz",
                     "case": "Obudowa"
@@ -128,7 +128,7 @@
                 }
             }
         },
-        "performance": "Ilość PP",
+        "performance": "PP",
         "total_score": "Łączny wynik",
         "global_rank": "Ranking globalny",
         "country_rank": "Ranking krajowy",
