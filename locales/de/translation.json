@@ -18,12 +18,12 @@
     },
     "home": {
         "welcome": "Willkommen zu wysi727.com!",
-        "foss": "An open source osu! website alternative",
-        "built": "Built with bun and htmx",
+        "foss": "Eine open-source osu! Website Alternative",
+        "built": "Erstellt mit bun und htmx",
         "profiles": "Benutzer Profile",
         "stats": "Top 100 Score Statistiken",
         "search": "Beatmap Suche",
-        "calculator": "Eingebauter PP Calculator",
+        "calculator": "Built-in PP Calculator",
         "setup": "Teile dein Setup",
         "collections": "Veröffentliche deine Kollektionen"
     },
@@ -46,7 +46,7 @@
             "most": "Meist Gespielte Maps",
             "scores": {
                 "title": "Scores",
-                "info": "Geh über die grauen PP, um die Full Combo PP zu sehen",
+                "info": "Hover over a grayed out PP to see the (if FC) PP value",
                 "tabs": {
                     "pinned": "Angepinnt",
                     "best": "Beste Score",
@@ -65,7 +65,7 @@
             },
             "summary": {
                 "title": "Statistiken",
-                "info": "Das sind die Statistiken deiner besten 100 Scores",
+                "info": "This is a quick summary of your top 100 plays",
                 "tabs": {
                     "hit_ratios": "Treffer Häufigkeit",
                     "grade_ratios": "Beatmap Rang Häufigkeit",
@@ -74,7 +74,7 @@
             },
             "collections": {
                 "title": "Collections",
-                "info": "Beatmaps die nicht auf der Osu! Website vorhanden sind können nicht heruntergeladen werden (Modifizierte oder nicht eingereichte Beatmaps)"
+                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
             },
             "setup": {
                 "title": "Setup",
@@ -144,7 +144,7 @@
         "status": {
             "pinned": "Pinned",
             "best": "Beste",
-            "firsts": "Erste",
+            "firsts": "First",
             "recent": "Kürzlich"
         },
         "mods": "Mods",
