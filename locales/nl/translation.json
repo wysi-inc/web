@@ -23,7 +23,7 @@
         "profiles": "Gebruikersprofielen",
         "stats": "Top 100 Score Statistieken",
         "search": "Beatmaps zoeken",
-        "calculator": "Built-in PP Calculator",
+        "calculator": "Ingebouwde PP calculator",
         "setup": "Deel je setup!",
         "collections": "Upload je collecties!"
     },
@@ -46,7 +46,7 @@
             "most": "Meest Gespeeld",
             "scores": {
                 "title": "Scores",
-                "info": "Hover over a grayed out PP to see the (if FC) PP value",
+                "info": "Beweeg over een grijze PP om de (als FC) PP waarde te zien",
                 "tabs": {
                     "pinned": "Vastgezet",
                     "best": "Beste",
@@ -65,7 +65,7 @@
             },
             "summary": {
                 "title": "Samenvatting",
-                "info": "This is a quick summary of your top 100 plays",
+                "info": "Dit is een korte samenvatting van je top 100 plays",
                 "tabs": {
                     "hit_ratios": "Hit verhoudingen",
                     "grade_ratios": "Graad verhoudingen",
@@ -74,7 +74,7 @@
             },
             "collections": {
                 "title": "Collecties",
-                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "info": "Beatmaps die niet aanwezig zijn in de osu!website worden niet gedownload (ex: osu!trainer, custom diffs, niet ingezonden beatmaps...)"
             },
             "setup": {
                 "title": "Setup",
@@ -144,7 +144,7 @@
         "status": {
             "pinned": "Vastgezet",
             "best": "Beste",
-            "firsts": "First",
+            "firsts": "Eerste",
             "recent": "Recent"
         },
         "mods": "Mods",
