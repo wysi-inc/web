@@ -207,7 +207,7 @@ async function getStats(form) {
         new_bpm *= 1.5;
         new_len *= 0.75;
     }
-    if (mod_names.includes("EZ")) {
+    if (mod_names.includes("HT")) {
         new_bpm *= 0.75;
         new_len *= 1.5;
     }
