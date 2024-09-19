@@ -1,12 +1,12 @@
 {
     "nav": {
-        "home": "Início",
+        "home": "Home",
         "users": "Users",
         "rankings": "Rankings",
         "beatmaps": "Beatmaps",
         "support": "Support",
         "about": "About",
-        "search": "Search someone",
+        "search": "Search",
         "search_someone": "Search someone",
         "help": "Help translate the site!",
         "log": {
@@ -21,8 +21,8 @@
         "foss": "An open source osu! website alternative",
         "built": "Built with bun and htmx",
         "profiles": "User Profiles",
-        "stats": "Estatísticas das 100 Melhores Classificações",
-        "search": "Procurar Beatmap",
+        "stats": "Top 100 Score stats",
+        "search": "Beatmap Search",
         "calculator": "Builtin PP Calculator",
         "setup": "Share your setup!",
         "collections": "Upload your collections!"
@@ -65,7 +65,7 @@
             },
             "summary": {
                 "title": "Summary",
-                "info": "esse é um pequeno sumário das suas 100 melhores classificações",
+                "info": "this is a quick summary of your top 100 plays",
                 "tabs": {
                     "hit_ratios": "Hit Ratios",
                     "grade_ratios": "Grade Ratios",
@@ -74,7 +74,7 @@
             },
             "collections": {
                 "title": "Collections",
-                "info": "qualquer beatmap não presente no ‘website’ do osu! não será baixado (ex: osu!trainer, dificuldades customizadas, beatmaps não enviados etc.)"
+                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
             },
             "setup": {
                 "title": "Setup",
