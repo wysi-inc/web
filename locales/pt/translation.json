@@ -1,12 +1,12 @@
 {
     "nav": {
-        "home": "Início",
+        "home": "Home",
         "users": "Users",
         "rankings": "Rankings",
         "beatmaps": "Beatmaps",
         "support": "Support",
         "about": "About",
-        "search": "Search someone",
+        "search": "Search",
         "search_someone": "Search someone",
         "help": "Help translate the site!",
         "log": {
@@ -21,8 +21,8 @@
         "foss": "An open source osu! website alternative",
         "built": "Built with bun and htmx",
         "profiles": "User Profiles",
-        "stats": "Estatísticas das 100 Melhores Classificações",
-        "search": "Procurar Beatmap",
+        "stats": "Top 100 Score stats",
+        "search": "Beatmap Search",
         "calculator": "Built-in PP Calculator",
         "setup": "Share your setup!",
         "collections": "Upload your collections!"
