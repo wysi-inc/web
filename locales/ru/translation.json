@@ -23,7 +23,7 @@
         "profiles": "User Profiles",
         "stats": "Top 100 Score stats",
         "search": "Beatmap Search",
-        "calculator": "Builtin PP Calculator",
+        "calculator": "Built-in PP Calculator",
         "setup": "Share your setup!",
         "collections": "Upload your collections!"
     },
@@ -35,18 +35,18 @@
             "top": "Top",
             "medals": {
                 "title": "Медали",
-                "recent": "Recent Medals",
+                "recent": "Недавние медали",
                 "rarest": "Rarest Medal",
-                "show": "Show all"
+                "show": "Показать все"
             },
             "year": {
-                "title": "Year",
+                "title": "Год",
                 "info": "This is a recap of this year so far, the data will be reset at January 1st"
             },
             "most": "Most Played",
             "scores": {
                 "title": "Scores",
-                "info": "hover over a grayed out PP to see the (if FC) PP value",
+                "info": "Hover over a grayed out PP to see the (if FC) PP value",
                 "tabs": {
                     "pinned": "Закреплённые",
                     "best": "Лучшие",
@@ -65,7 +65,7 @@
             },
             "summary": {
                 "title": "Сводка",
-                "info": "Это быстрая сводка о твоих 100 лучших играх",
+                "info": "This is a quick summary of your top 100 plays",
                 "tabs": {
                     "hit_ratios": "Hit Ratios",
                     "grade_ratios": "Grade Ratios",
@@ -74,7 +74,7 @@
             },
             "collections": {
                 "title": "Коллекции",
-                "info": "Карты, которые отсутствуют на сайте osu!, не будут скачаны (в частности: osu!trainer, карты с пользовательской сложностью, неопубликованные карты)"
+                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
             },
             "setup": {
                 "title": "Настройка",
@@ -101,20 +101,20 @@
                     "headphones": "Гарнитура",
                     "camera": "Камера",
                     "microphone": "Микрофон",
-                    "monitor": "Экран",
+                    "monitor": "Монитор",
                     "audio": "Audio",
-                    "desk": "Desk",
-                    "chair": "Chair"
+                    "desk": "Стол",
+                    "chair": "Кресло"
                 },
-                "name": "Name",
+                "name": "Модель",
                 "model": "Модель",
                 "size": "Размер",
                 "area": "Зона",
-                "width": "Width",
-                "height": "Height",
+                "width": "Ширина",
+                "height": "Высота",
                 "position": "Позиция",
-                "dpi": "Sensitivity",
-                "mult": "Multiplier",
+                "dpi": "Чувствительность",
+                "mult": "Множитель",
                 "kb_layout": "Keyboard Layout",
                 "layout": {
                     "k0": "None",
@@ -144,7 +144,7 @@
         "status": {
             "pinned": "Закреплено",
             "best": "Лучший",
-            "firsts": "Первый",
+            "firsts": "First",
             "recent": "Последний"
         },
         "mods": "Моды",

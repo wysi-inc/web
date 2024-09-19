@@ -1,185 +1,185 @@
 {
     "nav": {
-        "home": "Home",
-        "users": "Users",
-        "rankings": "Rankings",
+        "home": "Hjem",
+        "users": "Brukere",
+        "rankings": "Rangeringer",
         "beatmaps": "Beatmaps",
-        "support": "Support",
-        "about": "About",
+        "support": "Hjelp",
+        "about": "Om",
         "search": "Search someone",
-        "search_someone": "Search someone",
-        "help": "Help translate the site!",
+        "search_someone": "Søk etter noen",
+        "help": "Hjelp å oversette siden!",
         "log": {
-            "login": "Login with osu!",
-            "logout": "Logout",
-            "osu": "osu!profile",
-            "wysi": "wysi!profile"
+            "login": "Logg in med osu!",
+            "logout": "Logg ut",
+            "osu": "osu!profil",
+            "wysi": "wysi!profil"
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu! website alternative",
-        "built": "Built with bun and htmx",
-        "profiles": "User Profiles",
-        "stats": "Top 100 Score stats",
-        "search": "Beatmap Search",
-        "calculator": "Builtin PP Calculator",
-        "setup": "Share your setup!",
-        "collections": "Upload your collections!"
+        "welcome": "Velkommen til wysi727.com!",
+        "foss": "Et alternativ til osu!'s nettside, med open kildekode",
+        "built": "Bygd med bun og htmx",
+        "profiles": "Brukerprofiler",
+        "stats": "Topp 100 poengsummer",
+        "search": "Beatmapsøk",
+        "calculator": "Innebygd PP-kalkulator",
+        "setup": "Del oppsettet ditt!",
+        "collections": "Last opp samlingene dine!"
     },
     "user": {
         "sections": {
-            "expand": "Expand",
-            "about": "About",
+            "expand": "Utvid",
+            "about": "Om",
             "beatmaps": "Beatmaps",
-            "top": "Top",
+            "top": "Topp",
             "medals": {
-                "title": "Medals",
-                "recent": "Recent Medals",
-                "rarest": "Rarest Medal",
-                "show": "Show all"
+                "title": "Medaljer",
+                "recent": "Nylige medaljer",
+                "rarest": "Sjeldneste medalje",
+                "show": "Vis alt"
             },
             "year": {
-                "title": "Year",
-                "info": "This is a recap of this year so far, the data will be reset at January 1st"
+                "title": "År",
+                "info": "Dette er en oppsummering av året så langt. Dataen blir resett 1. januar"
             },
-            "most": "Most Played",
+            "most": "Mest spilt",
             "scores": {
-                "title": "Scores",
-                "info": "hover over a grayed out PP to see the (if FC) PP value",
+                "title": "Poengsummer",
+                "info": "Hold over en grået ut PP for å se PP-verdien (for fullkombo)",
                 "tabs": {
-                    "pinned": "Pinned",
+                    "pinned": "Festet",
                     "best": "Best",
-                    "first": "First",
-                    "recent": "Recent"
+                    "first": "Først",
+                    "recent": "Nylig"
                 }
             },
             "history": {
-                "title": "History",
+                "title": "Historikk",
                 "tabs": {
-                    "global": "Global",
-                    "country": "Country",
-                    "plays": "Plays",
-                    "replays": "Replays"
+                    "global": "Globalt",
+                    "country": "Nasjonalt",
+                    "plays": "Spilte runder",
+                    "replays": "Repriser"
                 }
             },
             "summary": {
-                "title": "Summary",
-                "info": "this is a quick summary of your top 100 plays",
+                "title": "Sammendrag",
+                "info": "Her er et raskt sammendrag av dine topp 100 runder",
                 "tabs": {
-                    "hit_ratios": "Hit Ratios",
-                    "grade_ratios": "Grade Ratios",
-                    "average_play": "Average Play"
+                    "hit_ratios": "Treffrate",
+                    "grade_ratios": "Karakterrate",
+                    "average_play": "Gjennomsnittelig runde"
                 }
             },
             "collections": {
-                "title": "Collections",
-                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "title": "Samlinger",
+                "info": "Beatmaps som ikke finnes på osu!nettsiden vil ikke bli nedlastet (feks.: osu!trainer, customdiffs, upubliserte beatmaps...)"
             },
             "setup": {
-                "title": "Setup",
+                "title": "Oppsett",
                 "tabs": {
-                    "tablet": "Tablet",
-                    "keyboard": "Keyboard",
-                    "mouse": "Mouse",
-                    "peripherals": "Peripherals",
-                    "computer": "Computer"
+                    "tablet": "Tegnebrett",
+                    "keyboard": "Tastatur",
+                    "mouse": "Mus",
+                    "peripherals": "Duppeditter",
+                    "computer": "Datamaskin"
                 },
                 "components": {
                     "os": "OS",
                     "cpu": "CPU",
                     "gpu": "GPU",
                     "ram": "RAM",
-                    "storage": "Storage",
-                    "motherboard": "Motherboard",
-                    "psu": "Power Supply",
-                    "case": "Case"
+                    "storage": "Lagring",
+                    "motherboard": "Hovedkort",
+                    "psu": "Strømforsyning",
+                    "case": "Kabinett"
                 },
                 "peripherals": {
-                    "mousepad": "Mousepad",
-                    "keypad": "Keypad",
-                    "headphones": "Headphones",
-                    "camera": "Camera",
-                    "microphone": "Microphone",
-                    "monitor": "Monitor",
-                    "audio": "Audio",
-                    "desk": "Desk",
-                    "chair": "Chair"
+                    "mousepad": "Musematte",
+                    "keypad": "Talltastatur",
+                    "headphones": "Hodetelefoner",
+                    "camera": "Kamera",
+                    "microphone": "Mikrofon",
+                    "monitor": "Skjerm",
+                    "audio": "Lyd",
+                    "desk": "Skrivebord",
+                    "chair": "Stol"
                 },
-                "name": "Name",
-                "model": "Model",
-                "size": "Size",
-                "area": "Area",
-                "width": "Width",
-                "height": "Height",
-                "position": "Position",
-                "dpi": "Sensitivity",
-                "mult": "Multiplier",
-                "kb_layout": "Keyboard Layout",
+                "name": "Navn",
+                "model": "Modell",
+                "size": "Størrelse",
+                "area": "Areal",
+                "width": "Bredde",
+                "height": "Høyde",
+                "position": "Plassering",
+                "dpi": "Følsomhet",
+                "mult": "Multiplikator",
+                "kb_layout": "Tastaturoppsett",
                 "layout": {
-                    "k0": "None",
-                    "k2": "2 Keys",
-                    "k3": "3 Keys",
-                    "k4": "4 Keys",
-                    "k60": "60%",
-                    "k75": "75%",
+                    "k0": "Ingen",
+                    "k2": "2 taster",
+                    "k3": "3 taster",
+                    "k4": "4 taster",
+                    "k60": "60 %",
+                    "k75": "75 %",
                     "ktkl": "TKL",
                     "kfull": "FULL"
                 }
             }
         },
-        "performance": "Performance",
-        "total_score": "Total Score",
-        "global_rank": "Global Rank",
-        "country_rank": "Country Rank",
-        "play_time": "Play Time",
-        "play_count": "Play Count",
-        "total_hits": "Total Hits",
-        "replays_watched": "Replays Watched",
-        "hits_x_play": "Hits x Play",
-        "followers": "Followers",
-        "online": "Online"
+        "performance": "Prestasjon",
+        "total_score": "Samlet Poengsum",
+        "global_rank": "Global plassering",
+        "country_rank": "Nasjonal plassering",
+        "play_time": "Spilletid",
+        "play_count": "Spillrunder",
+        "total_hits": "Totale treff",
+        "replays_watched": "Repriser Sett",
+        "hits_x_play": "Treff x Runder",
+        "followers": "Følgere",
+        "online": "Pålogget"
     },
     "score": {
         "status": {
-            "pinned": "Pinned",
+            "pinned": "Festet",
             "best": "Best",
-            "firsts": "Firsts",
-            "recent": "Recent"
+            "firsts": "Først",
+            "recent": "Nylig"
         },
         "mods": "Mods",
-        "max_combo": "Max Combo",
-        "combo": "Combo",
-        "grade": "Grade",
-        "grades": "Grades",
-        "acc": "Acc",
-        "accuracy": "Accuracy",
-        "score": "Score",
-        "ranked_score": "Ranked Score"
+        "max_combo": "Maks Kombo",
+        "combo": "Kombo",
+        "grade": "Karakter",
+        "grades": "Karakterer",
+        "acc": "Nøy.",
+        "accuracy": "Nøyaktighet",
+        "score": "Poengsum",
+        "ranked_score": "Rangert Poengsum"
     },
     "beatmapset": {
         "status": {
-            "favourite": "Favourite",
-            "ranked": "Ranked",
-            "guest": "Guest",
-            "loved": "Loved",
-            "nominated": "Nominated",
-            "pending": "Pending",
-            "graveyard": "Graveyard",
-            "wip": "In Progress",
-            "approved": "Approved"
+            "favourite": "Favoritt",
+            "ranked": "Rangert",
+            "guest": "Gjest",
+            "loved": "Elsket",
+            "nominated": "Nominert",
+            "pending": "Avventende",
+            "graveyard": "Kirkegård",
+            "wip": "Pågående",
+            "approved": "Godkjent"
         },
-        "length": "Length",
+        "length": "Lengde",
         "bpm": "BPM"
     },
     "footer": {
-        "rights": "All rights reserved to this silly monkey"
+        "rights": "Alle rettigheter reservert til denne tullete apen"
     },
     "alerts": {
         "user": {
-            "user_doesnt_exist": "This user doesn't exist",
-            "user_is_bot": "This user is a bot, bots are not supported yet :(",
-            "users_fail": "Failed to fetch users"
+            "user_doesnt_exist": "Denne brukeren eksisterer ikke",
+            "user_is_bot": "Denne brukeren er en robot. Roboter er ikke støttet ennå :(",
+            "users_fail": "Kunne ikke hente brukere"
         }
     }
 }

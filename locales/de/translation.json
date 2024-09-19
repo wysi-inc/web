@@ -18,12 +18,12 @@
     },
     "home": {
         "welcome": "Willkommen zu wysi727.com!",
-        "foss": "An open source osu! website alternative",
-        "built": "Built with bun and htmx",
+        "foss": "Eine open-source osu! Website Alternative",
+        "built": "Erstellt mit bun und htmx",
         "profiles": "Benutzer Profile",
         "stats": "Top 100 Score Statistiken",
         "search": "Beatmap Suche",
-        "calculator": "Eingebauter PP Calculator",
+        "calculator": "Eingebauter PP-Rechner",
         "setup": "Teile dein Setup",
         "collections": "Veröffentliche deine Kollektionen"
     },
@@ -41,12 +41,12 @@
             },
             "year": {
                 "title": "Jahr",
-                "info": "This is a recap of this year so far, the data will be reset at January 1st"
+                "info": "Dies ist ein Rückblick von diesem Jahr, die Daten werden am 1. Januar zurückgesetzt"
             },
             "most": "Meist Gespielte Maps",
             "scores": {
                 "title": "Scores",
-                "info": "Geh über die grauen PP, um die Full Combo PP zu sehen",
+                "info": "Fahre über die ausgegrauten PP um den (if FC) PP Wert zu sehen",
                 "tabs": {
                     "pinned": "Angepinnt",
                     "best": "Beste Score",
@@ -65,7 +65,7 @@
             },
             "summary": {
                 "title": "Statistiken",
-                "info": "Das sind die Statistiken deiner besten 100 Scores",
+                "info": "Dies ist eine kurze Zusammenfassung deiner Top 100 Spiele",
                 "tabs": {
                     "hit_ratios": "Treffer Häufigkeit",
                     "grade_ratios": "Beatmap Rang Häufigkeit",
@@ -74,77 +74,77 @@
             },
             "collections": {
                 "title": "Collections",
-                "info": "Beatmaps die nicht auf der Osu! Website vorhanden sind können nicht heruntergeladen werden (Modifizierte oder nicht eingereichte Beatmaps)"
+                "info": "Alle Beatmaps, die nicht auf der osu! Website existieren, werden nicht heruntergeladen (z. B.: osu!trainer, customdiffs, unveröffentlichte Beatmaps...)"
             },
             "setup": {
                 "title": "Setup",
                 "tabs": {
                     "tablet": "Tablet",
                     "keyboard": "Tastatur",
-                    "mouse": "Mouse",
-                    "peripherals": "Peripherals",
+                    "mouse": "Maus",
+                    "peripherals": "andere Geräte",
                     "computer": "Computer"
                 },
                 "components": {
-                    "os": "OS",
-                    "cpu": "CPU",
-                    "gpu": "GPU",
+                    "os": "Betriebssystem",
+                    "cpu": "Prozessor",
+                    "gpu": "Grafikkarte",
                     "ram": "RAM",
-                    "storage": "Storage",
+                    "storage": "Speicher",
                     "motherboard": "Motherboard",
-                    "psu": "Power Supply",
+                    "psu": "Stromversorgung",
                     "case": "Case"
                 },
                 "peripherals": {
-                    "mousepad": "Mousepad",
+                    "mousepad": "Mauspad",
                     "keypad": "Keypad",
-                    "headphones": "Headphones",
-                    "camera": "Camera",
-                    "microphone": "Microphone",
-                    "monitor": "Monitor",
+                    "headphones": "Kopfhörer",
+                    "camera": "Kamera",
+                    "microphone": "Mikrofon",
+                    "monitor": "Bildschirm",
                     "audio": "Audio",
-                    "desk": "Desk",
-                    "chair": "Chair"
+                    "desk": "Tisch",
+                    "chair": "Stuhl"
                 },
                 "name": "Name",
-                "model": "Model",
-                "size": "Size",
-                "area": "Area",
-                "width": "Width",
-                "height": "Height",
+                "model": "Modell",
+                "size": "Größe",
+                "area": "Fläche",
+                "width": "Breite",
+                "height": "Höhe",
                 "position": "Position",
-                "dpi": "Sensitivity",
+                "dpi": "Empfindlichkeit",
                 "mult": "Multiplier",
-                "kb_layout": "Keyboard Layout",
+                "kb_layout": "Tastaturlayout",
                 "layout": {
-                    "k0": "None",
-                    "k2": "2 Keys",
-                    "k3": "3 Keys",
-                    "k4": "4 Keys",
+                    "k0": "Keine",
+                    "k2": "2 Tasten",
+                    "k3": "3 Tasten",
+                    "k4": "4 Tasten",
                     "k60": "60%",
                     "k75": "75%",
                     "ktkl": "TKL",
-                    "kfull": "FULL"
+                    "kfull": "Komplett"
                 }
             }
         },
         "performance": "Performance",
-        "total_score": "Total Score",
-        "global_rank": "Global Rank",
-        "country_rank": "Country Rank",
-        "play_time": "Play Time",
-        "play_count": "Play Count",
-        "total_hits": "Total Hits",
-        "replays_watched": "Replays Watched",
-        "hits_x_play": "Hits x Play",
-        "followers": "Followers",
+        "total_score": "Gesamte Punktzahl",
+        "global_rank": "Globaler Rang",
+        "country_rank": "Nationaler Rang",
+        "play_time": "Spielzeit",
+        "play_count": "Spielanzahl",
+        "total_hits": "Insgesamte Treffer",
+        "replays_watched": "Wiederholungen angeschaut",
+        "hits_x_play": "Treffer pro Spiel",
+        "followers": "Follower",
         "online": "Online"
     },
     "score": {
         "status": {
-            "pinned": "Pinned",
+            "pinned": "Angepinnt",
             "best": "Beste",
-            "firsts": "Erste",
+            "firsts": "Nr. 1 Ränge",
             "recent": "Kürzlich"
         },
         "mods": "Mods",

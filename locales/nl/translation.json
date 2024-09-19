@@ -18,12 +18,12 @@
     },
     "home": {
         "welcome": "Welkom bij wysi727.com!",
-        "foss": "An open source osu! website alternative",
-        "built": "Built with bun and htmx",
+        "foss": "Een open-source osu! website alternatief",
+        "built": "Gemaakt met bun en htmx",
         "profiles": "Gebruikersprofielen",
         "stats": "Top 100 Score Statistieken",
         "search": "Beatmaps zoeken",
-        "calculator": "Ingebouwde PP Calculator",
+        "calculator": "Ingebouwde PP calculator",
         "setup": "Deel je setup!",
         "collections": "Upload je collecties!"
     },
@@ -41,12 +41,12 @@
             },
             "year": {
                 "title": "Jaar",
-                "info": "This is a recap of this year so far, the data will be reset at January 1st"
+                "info": "Dit is een samenvatting van dit jaar tot nu toe, de gegevens zullen worden gereset op 1 januari"
             },
             "most": "Meest Gespeeld",
             "scores": {
                 "title": "Scores",
-                "info": "Beweeg over een grijze PP om de (if FC) PP waarde te zien",
+                "info": "Beweeg over een grijze PP om de (als FC) PP waarde te zien",
                 "tabs": {
                     "pinned": "Vastgezet",
                     "best": "Beste",

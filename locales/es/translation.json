@@ -2,13 +2,13 @@
     "nav": {
         "home": "Inicio",
         "users": "Usuarios",
-        "rankings": "Rankings",
+        "rankings": "Clasificaciones",
         "beatmaps": "Beatmaps",
-        "support": "Support",
+        "support": "Soporte",
         "about": "About",
         "search": "Busca alguien",
-        "search_someone": "Search someone",
-        "help": "Help translate the site!",
+        "search_someone": "Buscar a alguien",
+        "help": "¡Ayuda a traducir este sitio!",
         "log": {
             "login": "Registrate con osu!",
             "logout": "Salir",
@@ -17,13 +17,13 @@
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu! website alternative",
+        "welcome": "¡Bienvenido a wysi727.com!",
+        "foss": "Una página web alternativa de código abierto",
         "built": "Built with bun and htmx",
         "profiles": "User Profiles",
         "stats": "Top 100 Score stats",
         "search": "Beatmap Search",
-        "calculator": "Builtin PP Calculator",
+        "calculator": "Built-in PP Calculator",
         "setup": "Share your setup!",
         "collections": "Upload your collections!"
     },
@@ -46,7 +46,7 @@
             "most": "Most Played",
             "scores": {
                 "title": "Scores",
-                "info": "hover over a grayed out PP to see the (if FC) PP value",
+                "info": "Hover over a grayed out PP to see the (if FC) PP value",
                 "tabs": {
                     "pinned": "Pinned",
                     "best": "Best",
@@ -65,7 +65,7 @@
             },
             "summary": {
                 "title": "Summary",
-                "info": "this is a quick summary of your top 100 plays",
+                "info": "This is a quick summary of your top 100 plays",
                 "tabs": {
                     "hit_ratios": "Hit Ratios",
                     "grade_ratios": "Grade Ratios",
@@ -74,7 +74,7 @@
             },
             "collections": {
                 "title": "Collections",
-                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
             },
             "setup": {
                 "title": "Setup",
@@ -144,7 +144,7 @@
         "status": {
             "pinned": "Fijadas",
             "best": "Mejores",
-            "firsts": "Primeras",
+            "firsts": "First",
             "recent": "Recientes"
         },
         "mods": "Mods",

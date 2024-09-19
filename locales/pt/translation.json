@@ -1,179 +1,179 @@
 {
     "nav": {
-        "home": "Home",
-        "users": "Users",
-        "rankings": "Rankings",
+        "home": "Página inicial",
+        "users": "Utilizadores",
+        "rankings": "Classificações",
         "beatmaps": "Beatmaps",
-        "support": "Support",
-        "about": "About",
-        "search": "Search",
-        "search_someone": "Search someone",
-        "help": "Help translate the site!",
+        "support": "Suporte",
+        "about": "Sobre",
+        "search": "Buscar",
+        "search_someone": "Buscar alguém",
+        "help": "Ajuda a traduzir o sítio web!",
         "log": {
-            "login": "Login with osu!",
-            "logout": "Logout",
-            "osu": "osu!profile",
-            "wysi": "wysi!profile"
+            "login": "Inicia sessão com osu!",
+            "logout": "Finalizar sessão",
+            "osu": "perfil osu!",
+            "wysi": "perfil wysi!"
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu! website alternative",
-        "built": "Built with bun and htmx",
-        "profiles": "User Profiles",
-        "stats": "Top 100 Score stats",
-        "search": "Beatmap Search",
-        "calculator": "Builtin PP Calculator",
-        "setup": "Share your setup!",
-        "collections": "Upload your collections!"
+        "welcome": "Bem-vindo ao wysi727.com!",
+        "foss": "Um sítio web alternativo do osu! com fonte aberta",
+        "built": "Feito com bun e htmx",
+        "profiles": "Perfis do utilizador",
+        "stats": "Estatísticas das 100 melhores pontuações",
+        "search": "Buscar beatmap",
+        "calculator": "Feito em PP Calculator",
+        "setup": "Partilha a tua definição!",
+        "collections": "Envia as tuas coleções!"
     },
     "user": {
         "sections": {
-            "expand": "Expand",
-            "about": "About",
+            "expand": "Expandir",
+            "about": "Sobre",
             "beatmaps": "Beatmaps",
             "top": "Top",
             "medals": {
-                "title": "Medals",
-                "recent": "Recent Medals",
-                "rarest": "Rarest Medal",
-                "show": "Show all"
+                "title": "Medalhas",
+                "recent": "Medalhas recentes",
+                "rarest": "Medalhas mais raras",
+                "show": "Exibir tudo"
             },
             "year": {
-                "title": "Year",
-                "info": "This is a recap of this year so far, the data will be reset at January 1st"
+                "title": "Ano",
+                "info": "Isto é uma recapitulação deste ano, os dados serão redefinidos em 1 de janeiro"
             },
-            "most": "Most Played",
+            "most": "Mais jogado",
             "scores": {
-                "title": "Scores",
-                "info": "hover over a grayed out PP to see the (if FC) PP value",
+                "title": "Pontuações",
+                "info": "Passa o rato num PP cinza para veres o valor PP (se FC)",
                 "tabs": {
-                    "pinned": "Pinned",
-                    "best": "Best",
-                    "first": "First",
-                    "recent": "Recent"
+                    "pinned": "Destacado",
+                    "best": "Melhor",
+                    "first": "Primeiro",
+                    "recent": "Recente"
                 }
             },
             "history": {
-                "title": "History",
+                "title": "Histórico",
                 "tabs": {
                     "global": "Global",
-                    "country": "Country",
-                    "plays": "Plays",
-                    "replays": "Replays"
+                    "country": "País",
+                    "plays": "Jogos",
+                    "replays": "Repetições"
                 }
             },
             "summary": {
-                "title": "Summary",
-                "info": "this is a quick summary of your top 100 plays",
+                "title": "Resumo",
+                "info": "Este é um sumário rápido do teu top 100 jogadas",
                 "tabs": {
-                    "hit_ratios": "Hit Ratios",
-                    "grade_ratios": "Grade Ratios",
-                    "average_play": "Average Play"
+                    "hit_ratios": "Taxas de acerto",
+                    "grade_ratios": "Taxas de nota",
+                    "average_play": "Jogo médio"
                 }
             },
             "collections": {
-                "title": "Collections",
-                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "title": "Coleções",
+                "info": "Qualquer beatmaps não presente no sítio web osu! não será transferido (ex: treinador osu!, diferenças personalizadas, beatmaps não submetidos...)"
             },
             "setup": {
                 "title": "Setup",
                 "tabs": {
                     "tablet": "Tablet",
-                    "keyboard": "Keyboard",
-                    "mouse": "Mouse",
-                    "peripherals": "Peripherals",
-                    "computer": "Computer"
+                    "keyboard": "Teclado",
+                    "mouse": "Rato",
+                    "peripherals": "Periféricos",
+                    "computer": "Computador"
                 },
                 "components": {
-                    "os": "OS",
-                    "cpu": "CPU",
-                    "gpu": "GPU",
+                    "os": "SO",
+                    "cpu": "Processador",
+                    "gpu": "Placa gráfica",
                     "ram": "RAM",
-                    "storage": "Storage",
-                    "motherboard": "Motherboard",
-                    "psu": "Power Supply",
-                    "case": "Case"
+                    "storage": "Armazenamento",
+                    "motherboard": "Placa-mãe",
+                    "psu": "Fonte de energia",
+                    "case": "Caso"
                 },
                 "peripherals": {
                     "mousepad": "Mousepad",
                     "keypad": "Keypad",
-                    "headphones": "Headphones",
-                    "camera": "Camera",
-                    "microphone": "Microphone",
+                    "headphones": "Fones de ouvido",
+                    "camera": "Câmara",
+                    "microphone": "Microfone",
                     "monitor": "Monitor",
-                    "audio": "Audio",
-                    "desk": "Desk",
-                    "chair": "Chair"
+                    "audio": "Áudio",
+                    "desk": "Mesa",
+                    "chair": "Cadeira"
                 },
-                "name": "Name",
-                "model": "Model",
-                "size": "Size",
-                "area": "Area",
-                "width": "Width",
-                "height": "Height",
-                "position": "Position",
-                "dpi": "Sensitivity",
-                "mult": "Multiplier",
-                "kb_layout": "Keyboard Layout",
+                "name": "Nome",
+                "model": "Modelo",
+                "size": "Tamanho",
+                "area": "Área",
+                "width": "Largura",
+                "height": "Altura",
+                "position": "Posição",
+                "dpi": "Sensibilidade",
+                "mult": "Multiplicador",
+                "kb_layout": "Disposição do teclado",
                 "layout": {
-                    "k0": "None",
-                    "k2": "2 Keys",
-                    "k3": "3 Keys",
-                    "k4": "4 Keys",
+                    "k0": "Nenhum",
+                    "k2": "2 teclas",
+                    "k3": "3 teclas",
+                    "k4": "4 teclas",
                     "k60": "60%",
                     "k75": "75%",
                     "ktkl": "TKL",
-                    "kfull": "FULL"
+                    "kfull": "COMPLETO"
                 }
             }
         },
-        "performance": "Performance",
-        "total_score": "Total Score",
-        "global_rank": "Global Rank",
-        "country_rank": "Country Rank",
-        "play_time": "Play Time",
-        "play_count": "Play Count",
-        "total_hits": "Total Hits",
-        "replays_watched": "Replays Watched",
-        "hits_x_play": "Hits x Play",
-        "followers": "Followers",
-        "online": "Online"
+        "performance": "Desempenho",
+        "total_score": "Pontuação total",
+        "global_rank": "Classificação global",
+        "country_rank": "Classificação nacional",
+        "play_time": "Tempo de jogo",
+        "play_count": "Vezes jogadas",
+        "total_hits": "Acertos totais",
+        "replays_watched": "Repetições vistas",
+        "hits_x_play": "Acertos x Jogo",
+        "followers": "Seguidores",
+        "online": "Ativo"
     },
     "score": {
         "status": {
-            "pinned": "Pinned",
-            "best": "Best",
-            "firsts": "Firsts",
-            "recent": "Recent"
+            "pinned": "Fixado",
+            "best": "Melhor",
+            "firsts": "Primeiro",
+            "recent": "Recente"
         },
         "mods": "Mods",
-        "max_combo": "Max Combo",
+        "max_combo": "Combo máximo",
         "combo": "Combo",
-        "grade": "Grade",
-        "grades": "Grades",
+        "grade": "Nota",
+        "grades": "Notas",
         "acc": "Acc",
-        "accuracy": "Accuracy",
-        "score": "Score",
-        "ranked_score": "Ranked Score"
+        "accuracy": "Precisão",
+        "score": "Pontuação",
+        "ranked_score": "Pontuação classificada"
     },
     "beatmapset": {
         "status": {
-            "favourite": "Favourite",
-            "ranked": "Ranked",
-            "guest": "Guest",
-            "loved": "Loved",
-            "nominated": "Nominated",
-            "pending": "Pending",
-            "graveyard": "Graveyard",
-            "wip": "In Progress",
-            "approved": "Approved"
+            "favourite": "Favorito",
+            "ranked": "Classificado",
+            "guest": "Convidado",
+            "loved": "Amado",
+            "nominated": "Nominado",
+            "pending": "Pendente",
+            "graveyard": "Desclassificado",
+            "wip": "Em andamento",
+            "approved": "Aprovado"
         },
-        "length": "Length",
+        "length": "Duração",
         "bpm": "BPM"
     },
     "footer": {
-        "rights": "All rights reserved to this silly monkey"
+        "rights": "Todos os direitos reservados a este macaco bobo"
     },
     "alerts": {
         "user": {

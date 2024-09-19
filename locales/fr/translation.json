@@ -18,8 +18,8 @@
     },
     "home": {
         "welcome": "Bienvenue sur wysi727.com !",
-        "foss": "An open source osu! website alternative",
-        "built": "Built with bun and htmx",
+        "foss": "Une alternative open source au site d'osu!",
+        "built": "Fait sous bun et htmx",
         "profiles": "Profil des utilisateurs",
         "stats": "Stats des 100 meilleurs scores",
         "search": "Recherche de beatmaps",
@@ -41,7 +41,7 @@
             },
             "year": {
                 "title": "Année",
-                "info": "This is a recap of this year so far, the data will be reset at January 1st"
+                "info": "Ceci est un récapitulatif de l'année en cours, les données seront remises à zéro au 1er janvier"
             },
             "most": "Les plus jouées",
             "scores": {
