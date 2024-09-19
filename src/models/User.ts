@@ -172,31 +172,30 @@ const modeRanks = new mongoose.Schema({
     },
 }, { _id: false });
 
-const badgeSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true,
-    },
-    short: {
-        type: String,
-        required: true,
-    },
-    bg: {
-        type: String,
-        required: true,
-    },
-    fg: {
-        type: String,
-        required: true,
-    }
-}, { _id: false });
-
 const modes = new mongoose.Schema({
     osu: modeRanks,
     taiko: modeRanks,
     fruits: modeRanks,
     mania: modeRanks,
 }, { _id: false });
+
+// dev: Developer (only for regular devs)
+// <3: Supporter
+// wmt: Wysi Moderation Team
+// wdc: Wysi Development Contributor (for one time contributors)
+// wtc: Wysi Translations Contributor
+
+export const WYSI_BADGES = [
+    "dev", "<3", "wmt", "wdc", "wtc"
+];
+
+const badgeSchema = new mongoose.Schema({
+    name: {
+        required: true,
+        enum: WYSI_BADGES,
+        type: String,
+    }
+});
 
 const userSchema = new mongoose.Schema({
     user_id: {
