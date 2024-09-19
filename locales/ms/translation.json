@@ -1,0 +1,185 @@
+{
+    "nav": {
+        "home": "Utama",
+        "users": "Pengguna",
+        "rankings": "Kedudukan",
+        "beatmaps": "Beatmap",
+        "support": "Bantuan",
+        "about": "Perihal",
+        "search": "Carian",
+        "search_someone": "Mencari seseorang",
+        "help": "Tolong terjemah halaman ini!",
+        "log": {
+            "login": "Daftar dengan osu!",
+            "logout": "Log keluar",
+            "osu": "osu!profile",
+            "wysi": "wysi!profile"
+        }
+    },
+    "home": {
+        "welcome": "Selamat datang ke wysi727.com!",
+        "foss": "An open source osu! website alternative",
+        "built": "Built with bun and htmx",
+        "profiles": "Profil Pengguna",
+        "stats": "Statistik Skor 100 Teratas",
+        "search": "Carian Beatmap",
+        "calculator": "Kalkulator PP yang Dibina didalam",
+        "setup": "Kongsi setup anda!",
+        "collections": "Muat naik koleksi anda!"
+    },
+    "user": {
+        "sections": {
+            "expand": "Kembangkan",
+            "about": "Perihal",
+            "beatmaps": "Beatmap",
+            "top": "Atas",
+            "medals": {
+                "title": "Medal",
+                "recent": "Medal Terbaharu",
+                "rarest": "Medal Paling Jarang",
+                "show": "Tunjuk semua"
+            },
+            "year": {
+                "title": "Tahun",
+                "info": "This is a recap of this year so far, the data will be reset at January 1st"
+            },
+            "most": "Paling Banyak Dimainkan",
+            "scores": {
+                "title": "Skor",
+                "info": "berlegar di atas kawasan PP yang digelapkan untuk melihat (jika FC) nilai PP",
+                "tabs": {
+                    "pinned": "Dipin",
+                    "best": "Terbaik",
+                    "first": "Pertama",
+                    "recent": "Terkini"
+                }
+            },
+            "history": {
+                "title": "Sejarah",
+                "tabs": {
+                    "global": "Global",
+                    "country": "Negara",
+                    "plays": "Main",
+                    "replays": "Ulangan"
+                }
+            },
+            "summary": {
+                "title": "Ringkasan",
+                "info": "ini adalah ringkasan mainan 100 teratas anda",
+                "tabs": {
+                    "hit_ratios": "Nisbah Hit",
+                    "grade_ratios": "Nisbah Gred",
+                    "average_play": "Main Purata"
+                }
+            },
+            "collections": {
+                "title": "Koleksi",
+                "info": "mana-mana beatmap yang tiada di halaman web osu! tidak akan dapat dimuat turun (cth: osu!trainer, customdiffs, beatmap yang tidak diserahkan...)"
+            },
+            "setup": {
+                "title": "Setup",
+                "tabs": {
+                    "tablet": "Tablet",
+                    "keyboard": "Papan kekunci",
+                    "mouse": "Tetikus",
+                    "peripherals": "Kelengkapan",
+                    "computer": "Komputer"
+                },
+                "components": {
+                    "os": "OS",
+                    "cpu": "CPU",
+                    "gpu": "GPU",
+                    "ram": "RAM",
+                    "storage": "Storan",
+                    "motherboard": "Papan Induk",
+                    "psu": "Bekalan Kuasa",
+                    "case": "Peti"
+                },
+                "peripherals": {
+                    "mousepad": "Pad Tetikus",
+                    "keypad": "Pad kekunci",
+                    "headphones": "Fon Kepala",
+                    "camera": "Kamera",
+                    "microphone": "Mikrofon",
+                    "monitor": "Monitor",
+                    "audio": "Audio",
+                    "desk": "Meja",
+                    "chair": "Kerusi"
+                },
+                "name": "Nama",
+                "model": "Model",
+                "size": "Saiz",
+                "area": "Kawasan",
+                "width": "Lebar",
+                "height": "Tinggi",
+                "position": "Posisi",
+                "dpi": "Kepekaan",
+                "mult": "Pendarab",
+                "kb_layout": "Susun Atur Papan Kekunci",
+                "layout": {
+                    "k0": "Tiada",
+                    "k2": "2 Kekunci",
+                    "k3": "3 Kekunci",
+                    "k4": "4 Kekunci",
+                    "k60": "60%",
+                    "k75": "75%",
+                    "ktkl": "TKL",
+                    "kfull": "FULL"
+                }
+            }
+        },
+        "performance": "Pencapaian",
+        "total_score": "Jumlah Skor",
+        "global_rank": "Kedudukan Global",
+        "country_rank": "Kedudukan Negara",
+        "play_time": "Masa Bermain",
+        "play_count": "Jumlah Bermain",
+        "total_hits": "Jumlah Hit",
+        "replays_watched": "Ulang Tayang Ditonton",
+        "hits_x_play": "Hit x Main",
+        "followers": "Pengikut",
+        "online": "Dalam Talian"
+    },
+    "score": {
+        "status": {
+            "pinned": "Dipin",
+            "best": "Terbaik",
+            "firsts": "Pertama",
+            "recent": "Terkini"
+        },
+        "mods": "Pengubah suai",
+        "max_combo": "Kombo Maks",
+        "combo": "Kombo",
+        "grade": "Gred",
+        "grades": "Gred",
+        "acc": "Acc",
+        "accuracy": "Ketepatan",
+        "score": "Skor",
+        "ranked_score": "Skor Dirank"
+    },
+    "beatmapset": {
+        "status": {
+            "favourite": "Kegemaran",
+            "ranked": "Dirank",
+            "guest": "Tetamu",
+            "loved": "Loved",
+            "nominated": "Dicalonkan",
+            "pending": "Dalam proses",
+            "graveyard": "Graveyard",
+            "wip": "Sedang Diproses",
+            "approved": "Diluluskan"
+        },
+        "length": "Panjang",
+        "bpm": "BPM"
+    },
+    "footer": {
+        "rights": "Setiap hak terpelihara untuk monyet ini"
+    },
+    "alerts": {
+        "user": {
+            "user_doesnt_exist": "Pengguna ini tidak wujud",
+            "user_is_bot": "Pengguna ini adalah bot, bot tidak disokong setakat ini :(",
+            "users_fail": "Gagal mendapatkan pengguna"
+        }
+    }
+}

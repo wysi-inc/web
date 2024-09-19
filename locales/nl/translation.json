@@ -1,88 +1,88 @@
 {
     "nav": {
-        "home": "Home",
-        "users": "Users",
+        "home": "Startscherm",
+        "users": "Gebruikers",
         "rankings": "Rankings",
         "beatmaps": "Beatmaps",
-        "support": "Support",
-        "about": "About",
-        "search": "Search someone",
-        "search_someone": "Search someone",
-        "help": "Help translate the site!",
+        "support": "Ondersteuning",
+        "about": "Over ons",
+        "search": "Zoeken",
+        "search_someone": "Zoek iemand",
+        "help": "Help ons met het vertalen van de website!",
         "log": {
-            "login": "Login with osu!",
-            "logout": "Logout",
-            "osu": "osu!profile",
-            "wysi": "wysi!profile"
+            "login": "Log in met osu!",
+            "logout": "Afmelden",
+            "osu": "osu!profiel",
+            "wysi": "wysi!profiel"
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu website alternative",
-        "built": "Build with bun and htmx",
-        "profiles": "User Profiles",
-        "stats": "Top 100 Score stats",
-        "search": "Beatmap Search",
-        "calculator": "Builtin PP Calculator",
-        "setup": "Share your setup!",
-        "collections": "Upload your collections!"
+        "welcome": "Welkom bij wysi727.com!",
+        "foss": "An open source osu! website alternative",
+        "built": "Built with bun and htmx",
+        "profiles": "Gebruikersprofielen",
+        "stats": "Top 100 Score Statistieken",
+        "search": "Beatmaps zoeken",
+        "calculator": "Ingebouwde PP Calculator",
+        "setup": "Deel je setup!",
+        "collections": "Upload je collecties!"
     },
     "user": {
         "sections": {
-            "expand": "Expand",
-            "about": "About",
+            "expand": "Uitklappen",
+            "about": "Over ons",
             "beatmaps": "Beatmaps",
             "top": "Top",
             "medals": {
-                "title": "Medals",
-                "recent": "Recent Medals",
-                "rarest": "Rarest Medal",
-                "show": "Show all"
+                "title": "Medailles",
+                "recent": "Recente Medailles",
+                "rarest": "Zeldzaamste Medaille",
+                "show": "Toon alles"
             },
             "year": {
-                "title": "Year",
-                "info": "This is a recap of this year so far, the data will be reset at Jaunary 1st"
+                "title": "Jaar",
+                "info": "This is a recap of this year so far, the data will be reset at January 1st"
             },
-            "most": "Most Played",
+            "most": "Meest Gespeeld",
             "scores": {
                 "title": "Scores",
-                "info": "hover over a grayed out PP to see the (if FC) PP value",
+                "info": "Beweeg over een grijze PP om de (if FC) PP waarde te zien",
                 "tabs": {
-                    "pinned": "Pinned",
-                    "best": "Best",
-                    "first": "First",
+                    "pinned": "Vastgezet",
+                    "best": "Beste",
+                    "first": "Eerste",
                     "recent": "Recent"
                 }
             },
             "history": {
-                "title": "History",
+                "title": "Geschiedenis",
                 "tabs": {
-                    "global": "Global",
-                    "country": "Country",
+                    "global": "Wereldwijd",
+                    "country": "Landelijk",
                     "plays": "Plays",
                     "replays": "Replays"
                 }
             },
             "summary": {
-                "title": "Summary",
-                "info": "this is a quick summary of your top 100 plays",
+                "title": "Samenvatting",
+                "info": "Dit is een korte samenvatting van je top 100 plays",
                 "tabs": {
-                    "hit_ratios": "Hit Ratios",
-                    "grade_ratios": "Grade Ratios",
-                    "average_play": "Average Play"
+                    "hit_ratios": "Hit verhoudingen",
+                    "grade_ratios": "Graad verhoudingen",
+                    "average_play": "Gewone Play"
                 }
             },
             "collections": {
-                "title": "Collections",
-                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "title": "Collecties",
+                "info": "Beatmaps die niet aanwezig zijn in de osu!website worden niet gedownload (ex: osu!trainer, custom diffs, niet ingezonden beatmaps...)"
             },
             "setup": {
                 "title": "Setup",
                 "tabs": {
                     "tablet": "Tablet",
-                    "keyboard": "Keyboard",
-                    "mouse": "Mouse",
-                    "peripherals": "Peripherals",
+                    "keyboard": "Toetsenboord",
+                    "mouse": "Muis",
+                    "peripherals": "Randapparatuur",
                     "computer": "Computer"
                 },
                 "components": {
@@ -90,96 +90,96 @@
                     "cpu": "CPU",
                     "gpu": "GPU",
                     "ram": "RAM",
-                    "storage": "Storage",
-                    "motherboard": "Motherboard",
-                    "psu": "Power Supply",
-                    "case": "Case"
+                    "storage": "Opslag",
+                    "motherboard": "Moederbord",
+                    "psu": "Voeding",
+                    "case": "Behuizing"
                 },
                 "peripherals": {
-                    "mousepad": "Mousepad",
+                    "mousepad": "Muismat",
                     "keypad": "Keypad",
-                    "headphones": "Headphones",
+                    "headphones": "Koptelefoon",
                     "camera": "Camera",
-                    "microphone": "Microphone",
+                    "microphone": "Microfoon",
                     "monitor": "Monitor",
-                    "audio": "Audio",
-                    "desk": "Desk",
-                    "chair": "Chair"
+                    "audio": "Geluid",
+                    "desk": "Bureau",
+                    "chair": "Stoel"
                 },
-                "name": "Name",
+                "name": "Naam",
                 "model": "Model",
-                "size": "Size",
-                "area": "Area",
-                "width": "Width",
-                "height": "Height",
-                "position": "Position",
-                "dpi": "Sensitivity",
-                "mult": "Multiplier",
-                "kb_layout": "Keyboard Layout",
+                "size": "Grootte",
+                "area": "Oppervlak",
+                "width": "Breedte",
+                "height": "Hoogte",
+                "position": "Positie",
+                "dpi": "Gevoeligheid",
+                "mult": "Vermenigvuldiger",
+                "kb_layout": "Toetsenbordindeling",
                 "layout": {
-                    "k0": "None",
-                    "k2": "2 Keys",
-                    "k3": "3 Keys",
-                    "k4": "4 Keys",
+                    "k0": "Geen",
+                    "k2": "2 Toetsen",
+                    "k3": "3 Toetsen",
+                    "k4": "4 Toetsen",
                     "k60": "60%",
                     "k75": "75%",
                     "ktkl": "TKL",
-                    "kfull": "FULL"
+                    "kfull": "Volledig"
                 }
             }
         },
-        "performance": "Performance",
-        "total_score": "Total Score",
-        "global_rank": "Global Rank",
-        "country_rank": "Country Rank",
-        "play_time": "Play Time",
-        "play_count": "Play Count",
-        "total_hits": "Total Hits",
-        "replays_watched": "Replays Watched",
-        "hits_x_play": "Hits x Play",
-        "followers": "Followers",
+        "performance": "Prestatie",
+        "total_score": "Totale Score",
+        "global_rank": "Wereldwijde Ranking",
+        "country_rank": "Landelijke Ranking",
+        "play_time": "Speeltijd",
+        "play_count": "Aantal Keer Gespeeld",
+        "total_hits": "Totaal Aantal Hits",
+        "replays_watched": "Replays Bekeken door Anderen",
+        "hits_x_play": "Hits per Play",
+        "followers": "Vrienden",
         "online": "Online"
     },
     "score": {
         "status": {
-            "pinned": "Pinned",
-            "best": "Best",
-            "firsts": "Firsts",
+            "pinned": "Vastgezet",
+            "best": "Beste",
+            "firsts": "Eerste",
             "recent": "Recent"
         },
         "mods": "Mods",
         "max_combo": "Max Combo",
         "combo": "Combo",
-        "grade": "Grade",
-        "grades": "Grades",
+        "grade": "Graad",
+        "grades": "Graden",
         "acc": "Acc",
-        "accuracy": "Accuracy",
+        "accuracy": "Nauwkeurigheid",
         "score": "Score",
-        "ranked_score": "Ranked Score"
+        "ranked_score": "Gerankte Score"
     },
     "beatmapset": {
         "status": {
-            "favourite": "Favourite",
+            "favourite": "Favoriete",
             "ranked": "Ranked",
-            "guest": "Guest",
+            "guest": "Gast",
             "loved": "Loved",
-            "nominated": "Nominated",
+            "nominated": "Genomineerd",
             "pending": "Pending",
             "graveyard": "Graveyard",
-            "wip": "In Progress",
+            "wip": "In Behandeling",
             "approved": "Approved"
         },
-        "length": "Length",
+        "length": "Lengte",
         "bpm": "BPM"
     },
     "footer": {
-        "rights": "All rights reserved to this silly monkey"
+        "rights": "Alle rechten voorbehouden aan deze maffe aap"
     },
     "alerts": {
         "user": {
-            "user_doesnt_exist": "This user doesn't exist",
-            "user_is_bot": "This user is a bot, bots are not supported yet :(",
-            "users_fail": "Failed to fetch users"
+            "user_doesnt_exist": "Deze gebruiker bestaat niet",
+            "user_is_bot": "Deze gebruiker is een bot, bots zijn nog niet ondersteund :(",
+            "users_fail": "Ophalen gebruikers mislukt"
         }
     }
 }

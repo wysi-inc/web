@@ -18,8 +18,8 @@
     },
     "home": {
         "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu website alternative",
-        "built": "Build with bun and htmx",
+        "foss": "An open source osu! website alternative",
+        "built": "Built with bun and htmx",
         "profiles": "User Profiles",
         "stats": "Top 100 Score stats",
         "search": "Beatmap Search",
@@ -41,31 +41,31 @@
             },
             "year": {
                 "title": "Year",
-                "info": "This is a recap of this year so far, the data will be reset at Jaunary 1st"
+                "info": "This is a recap of this year so far, the data will be reset at January 1st"
             },
             "most": "Most Played",
             "scores": {
                 "title": "Scores",
                 "info": "hover over a grayed out PP to see the (if FC) PP value",
                 "tabs": {
-                    "pinned": "Pinned",
-                    "best": "Best",
-                    "first": "First",
-                    "recent": "Recent"
+                    "pinned": "Закреплённые",
+                    "best": "Лучшие",
+                    "first": "Первые",
+                    "recent": "Недавние"
                 }
             },
             "history": {
                 "title": "История",
                 "tabs": {
-                    "global": "Global",
-                    "country": "Country",
-                    "plays": "Plays",
-                    "replays": "Replays"
+                    "global": "Глобальный",
+                    "country": "Страна",
+                    "plays": "Сыгранные карты",
+                    "replays": "Повторы"
                 }
             },
             "summary": {
-                "title": "Summary",
-                "info": "this is a quick summary of your top 100 plays",
+                "title": "Сводка",
+                "info": "Это быстрая сводка о твоих 100 лучших играх",
                 "tabs": {
                     "hit_ratios": "Hit Ratios",
                     "grade_ratios": "Grade Ratios",
@@ -73,20 +73,20 @@
                 }
             },
             "collections": {
-                "title": "Collections",
-                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "title": "Коллекции",
+                "info": "Карты, которые отсутствуют на сайте osu!, не будут скачаны (в частности: osu!trainer, карты с пользовательской сложностью, неопубликованные карты)"
             },
             "setup": {
                 "title": "Настройка",
                 "tabs": {
-                    "tablet": "Tablet",
-                    "keyboard": "Keyboard",
-                    "mouse": "Mouse",
+                    "tablet": "Планшет",
+                    "keyboard": "Клавиатура",
+                    "mouse": "Мышь",
                     "peripherals": "Периферия",
                     "computer": "Компьютер"
                 },
                 "components": {
-                    "os": "OS",
+                    "os": "ОС",
                     "cpu": "Процессор",
                     "gpu": "Графический процессор",
                     "ram": "Оперативная память",
@@ -96,12 +96,12 @@
                     "case": "Случай"
                 },
                 "peripherals": {
-                    "mousepad": "Mousepad",
-                    "keypad": "Keypad",
-                    "headphones": "Headphones",
-                    "camera": "Camera",
-                    "microphone": "Microphone",
-                    "monitor": "Monitor",
+                    "mousepad": "Коврик для мыши",
+                    "keypad": "Мини клавиатура",
+                    "headphones": "Гарнитура",
+                    "camera": "Камера",
+                    "microphone": "Микрофон",
+                    "monitor": "Экран",
                     "audio": "Audio",
                     "desk": "Desk",
                     "chair": "Chair"

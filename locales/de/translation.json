@@ -18,8 +18,8 @@
     },
     "home": {
         "welcome": "Willkommen zu wysi727.com!",
-        "foss": "Eine Open Source Website alternative",
-        "built": "Gebaut mit bun und htmx",
+        "foss": "An open source osu! website alternative",
+        "built": "Built with bun and htmx",
         "profiles": "Benutzer Profile",
         "stats": "Top 100 Score Statistiken",
         "search": "Beatmap Suche",
@@ -41,7 +41,7 @@
             },
             "year": {
                 "title": "Jahr",
-                "info": "Das sind die daten von diesem Jahr sie werden am 1. Januar zurückgesetzt"
+                "info": "This is a recap of this year so far, the data will be reset at January 1st"
             },
             "most": "Meist Gespielte Maps",
             "scores": {

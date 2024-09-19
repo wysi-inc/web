@@ -2,46 +2,46 @@
     "nav": {
         "home": "Inici",
         "users": "Usuaris",
-        "rankings": "Rankings",
-        "beatmaps": "Beatmaps",
-        "support": "Support",
-        "about": "About",
+        "rankings": "Classificacions",
+        "beatmaps": "Mapes",
+        "support": "Ajuda",
+        "about": "Sobre la web",
         "search": "Busca algú",
-        "search_someone": "Search someone",
-        "help": "Help translate the site!",
+        "search_someone": "Cerca algú",
+        "help": "Ajuda a traduir la pàgina!",
         "log": {
             "login": "Registra't amb osu!",
-            "logout": "Logout",
+            "logout": "Sortir",
             "osu": "perfil d'osu!",
             "wysi": "perfil wysi"
         }
     },
     "home": {
         "welcome": "Benvingut a wysi727.com!",
-        "foss": "An open source osu website alternative",
-        "built": "Build with bun and htmx",
-        "profiles": "User Profiles",
-        "stats": "Top 100 Score stats",
-        "search": "Beatmap Search",
-        "calculator": "Builtin PP Calculator",
-        "setup": "Share your setup!",
-        "collections": "Upload your collections!"
+        "foss": "An open source osu! website alternative",
+        "built": "Built with bun and htmx",
+        "profiles": "Perfils d'usuari",
+        "stats": "Estadístiques de les 100 millors Puntuacions",
+        "search": "Cerca de Mapes",
+        "calculator": "Calculadora de PP integrada",
+        "setup": "Comparteix el teu setup!",
+        "collections": "Puja les teves col·leccions!"
     },
     "user": {
         "sections": {
-            "expand": "Expand",
-            "about": "About",
-            "beatmaps": "Beatmaps",
+            "expand": "Expandeix",
+            "about": "Sobre",
+            "beatmaps": "Mapes",
             "top": "Top",
             "medals": {
                 "title": "Medalles",
-                "recent": "Recent Medals",
-                "rarest": "Rarest Medal",
-                "show": "Show all"
+                "recent": "Medalles recents",
+                "rarest": "Medalla més rara",
+                "show": "Veure'ls tots"
             },
             "year": {
-                "title": "Year",
-                "info": "This is a recap of this year so far, the data will be reset at Jaunary 1st"
+                "title": "Any",
+                "info": "This is a recap of this year so far, the data will be reset at January 1st"
             },
             "most": "Most Played",
             "scores": {
