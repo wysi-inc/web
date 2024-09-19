@@ -9,6 +9,7 @@ import Title from "../web/Title";
 import UserMedalsPanel from "./u_panels/UserMedalsPanel";
 import Report from "../web/Report";
 import type { UserCookie } from "@/src/types/users";
+import { apicall } from "@/index";
 
 type Props = {
     logged: UserCookie | null;
@@ -20,6 +21,7 @@ type Props = {
 const UserPage = async (p: Props) => {
 
     const user = await getUser(p.user_id, p.mode);
+    apicall();
 
     const no_chosen_mode = p.mode === undefined;
 

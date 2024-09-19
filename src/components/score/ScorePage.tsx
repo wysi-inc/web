@@ -6,9 +6,11 @@ import type { Mode } from "@/src/types/osu";
 import DiffIcon from "../beatmap/DiffIcon";
 import ModIcon from "./ModIcon";
 import Link from "../web/Link";
+import { apicall } from "@/index";
 
 async function ScorePage(p: { score_id: number }) {
     const score = await v2.scores.details(p.score_id, "osu");
+    apicall();
 
     const b = score.beatmap;
     const s = score.beatmapset;

@@ -6,6 +6,7 @@ import ModIcon from "../../score/ModIcon";
 import Grade from "../../score/Grade";
 import { colors } from "@/src/libs/colors";
 import { secondsToTime } from "@/src/libs/web_utils";
+import { apicall } from "@/index";
 
 type Props = {
     user_id: number;
@@ -20,6 +21,7 @@ const UserSummaryPanel = async (p: Props) => {
         offset: '0',
         limit: '100'
     });
+    apicall();
 
     if (scores.length === 0) {
         return <></>;

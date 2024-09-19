@@ -3,6 +3,7 @@ import type { Mode, ScoreCategory } from "@/src/types/osu";
 import type { Score } from "@/src/types/users";
 import ScoreCard from "@/src/components/score/ScoreCard";
 import LoadMoreButton from "@/src/components/web/LoadMoreButton";
+import { apicall } from "@/index";
 
 type Props = {
     id: number;
@@ -19,6 +20,7 @@ const UserScoresList = async (p: Props) => {
         offset: String(p.offset),
         limit: String(p.limit)
     });
+    apicall();
 
     if (scores.length === 0 && p.offset === 0) return <div>This user hasn't set any scores yet</div>;
 

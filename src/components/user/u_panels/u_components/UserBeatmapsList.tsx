@@ -3,6 +3,7 @@ import type { BeatmapCategory } from "@/src/types/osu";
 import type { Beatmapset } from "@/src/types/beatmaps";
 import BeatmapsetCard from "@/src/components/beatmap/BeatmapsetCard";
 import LoadMoreButton from "@/src/components/web/LoadMoreButton";
+import { apicall } from "@/index";
 
 type Props = {
     id: number;
@@ -17,6 +18,7 @@ const UserBeatmapsList = async ({ id, category, offset, limit }: Props) => {
         offset: offset,
         limit: limit
     }) as any;
+    apicall();
 
     if (!beatmaps || beatmaps.length === 0) return <div>No {category} beatmaps</div>;
 

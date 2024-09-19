@@ -62,7 +62,6 @@ function formChange(e) {
             tablet_area.style.height = `${value}px`;
             break;
         case 'tablet_position_y':
-            console.log(value)
             tablet_area.style.top = `${value}px`;
             break;
         case 'tablet_position_x':

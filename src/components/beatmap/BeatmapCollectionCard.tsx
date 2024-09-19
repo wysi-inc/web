@@ -1,8 +1,9 @@
-import DiffIcon from "./DiffIcon";
+import { DiffIconLink } from "./DiffIcon";
 import StatusBadge from "./StatusBadge";
 import AudioPlayButton from "../web/AudioPlayButton";
 import type { BeatmapsetStatus, MinoBeatmap } from "@/src/types/beatmaps";
 import Link from "../web/Link";
+import type { Mode } from "@/src/types/osu";
 
 type Props = {
     hash: string
@@ -28,9 +29,9 @@ export async function BeatmapCollectionCard({ hash }: Props) {
             </div>
             <div class="flex flex-row gap-2 px-2 rounded-lg bg-neutral items-center">
                 <StatusBadge status={beatmap.status as BeatmapsetStatus} />
-                <DiffIcon setId={beatmap.set.id} diffId={beatmap.id}
+                <DiffIconLink setId={beatmap.set.id} diffId={beatmap.id}
                     diff={beatmap.difficulty_rating} size={20}
-                    mode={beatmap.mode} name={beatmap.version} />
+                    mode={beatmap.mode as Mode} name={beatmap.version} />
                 {/*<img src={cardImg} class="h-6 w-8" />*/}
                 <div class="flex flex-row flex-wrap gap-2 items-center">
                     <Link css="text-base-content text-lg hover:underline underline-offset-2 break-words" url={`/beatmaps/${beatmap.set.id}`}>{beatmap.set.title}</Link>

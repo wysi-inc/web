@@ -81,6 +81,17 @@ const jwtcfg = jwt({
     }
 })
 
+export let API_CALL_COUNTER = 0;
+setInterval(() => {
+    console.log(`API CALLS AFTER 1 MINUTE: ${API_CALL_COUNTER}`);
+    API_CALL_COUNTER = 0;
+}, 60000);
+
+export function apicall() {
+    API_CALL_COUNTER++;
+    console.log(API_CALL_COUNTER);
+}
+
 new Elysia()
     .onRequest(({ request }) => {
         const ip = request.headers.get("x-forwarded-for");

@@ -1,6 +1,7 @@
 import { v2 } from "osu-api-extended";
 import MostCard from "./MostCard";
 import LoadMoreButton from "@/src/components/web/LoadMoreButton";
+import { apicall } from "@/index";
 
 type Props = {
     id: number;
@@ -14,6 +15,7 @@ const UserMostList = async (p: Props) => {
         offset: p.offset,
         limit: p.limit
     });
+    apicall();
 
     if (plays.length === 0 && p.offset === 0) return <div>This user hasn't played yet</div>;
 

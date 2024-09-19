@@ -3,6 +3,7 @@ import Flag from "./u_panels/u_components/Flag";
 import SubdivisionFlag from "./u_panels/u_components/SubdivisionFlag";
 import Clan from "./u_panels/u_components/Clan";
 import Link from "../web/Link";
+import { apicall } from "@/index";
 
 type Props = {
     user_id: number
@@ -11,6 +12,7 @@ type Props = {
 async function UserCard(p: Props) {
 
     const user = await v2.user.details(p.user_id);
+    apicall();
 
     if (!user) return <div>This user doesnt exist</div>;
 

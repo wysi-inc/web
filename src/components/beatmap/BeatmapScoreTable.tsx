@@ -9,6 +9,7 @@ import SubdivisionFlag from "../user/u_panels/u_components/SubdivisionFlag";
 import Link from "../web/Link";
 import Clan from "../user/u_panels/u_components/Clan";
 import { colors } from "@/src/libs/colors";
+import { apicall } from "@/index";
 
 type ActualStatistics = response & {
     statistics: {
@@ -41,6 +42,8 @@ const BeatmapScoreTable = async (p: {
         type: "global",
     }) as any;
 
+    apicall();
+
     if (!scores || scores.length === 0) {
         return <>No scores found</>
     }
@@ -53,6 +56,7 @@ const BeatmapScoreTable = async (p: {
                 mods: mod_names,
                 best_only: true
             });
+            apicall();
             user_score = transformToActualStatistics(tmp[0]);
         } catch (err) {
             console.error(err);
@@ -257,7 +261,6 @@ function BigScore(p: { score: ActualStatistics, mode: Mode }) {
 }
 
 function transformToActualStatistics(data: any): ActualStatistics {
-    console.log(data);
     return {
         position: data.position,
         accuracy: data.accuracy,

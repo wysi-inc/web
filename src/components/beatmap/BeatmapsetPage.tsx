@@ -8,6 +8,7 @@ import type { Beatmap, Beatmapset, BeatmapsetStatus } from "@/src/types/beatmaps
 import type { Mode } from "@/src/types/osu";
 import { getBeatmapset } from "@/src/db/beatmaps/get_beatmaps";
 import Title from "../web/Title";
+import { apicall } from "@/index";
 
 type Props = {
     set_id: number,
@@ -17,6 +18,7 @@ type Props = {
 async function BeatmapsetPage(p: Props) {
 
     const beatmapset: Beatmapset = await getBeatmapset(p.set_id);
+    apicall();
 
     if ((beatmapset as any).error === null) return <h1>Not found</h1>;
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;

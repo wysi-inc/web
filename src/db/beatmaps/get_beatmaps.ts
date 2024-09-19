@@ -79,8 +79,6 @@ export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ 
         }
     }
 
-    console.log(url);
-
     const res = await fetch(url.toString());
     if (!res.ok) return { sets: [], offset: 0 };
     const sets = await res.json() as any;

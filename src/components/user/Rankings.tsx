@@ -3,6 +3,7 @@ import Pagination from "./u_panels/u_components/Pagination";
 import UserRankingCard from "./UserRankingCard";
 import { getRankings } from "@/src/db/users/get_user";
 import Title from "../web/Title";
+import { apicall } from "@/index";
 
 type Props = {
     mode: Mode;
@@ -13,6 +14,7 @@ type Props = {
 async function Rankings({ mode, category, page }: Props) {
 
     const users = await getRankings(mode, category, page);
+    apicall();
 
     if ((users as any).error) return <div>Rankings not found</div>;
     if (!users) return <div>Loading...</div>;
