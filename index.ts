@@ -81,9 +81,12 @@ const jwtcfg = jwt({
     }
 })
 
+export let API_CALL_COUNTER_MAX = 0;
 export let API_CALL_COUNTER = 0;
 setInterval(() => {
-    console.log(`API CALLS AFTER 1 MINUTE: ${API_CALL_COUNTER}`);
+    console.log(`CURRENT API CALLS IN 1 MINUTE: ${API_CALL_COUNTER}`);
+    if (API_CALL_COUNTER > API_CALL_COUNTER_MAX) API_CALL_COUNTER_MAX = API_CALL_COUNTER;
+    console.log(`MAX API CALLS IN 1 MINUTE: ${API_CALL_COUNTER_MAX}`);
     API_CALL_COUNTER = 0;
 }, 60000);
 
