@@ -18,12 +18,12 @@
     },
     "home": {
         "welcome": "Benvingut a wysi727.com!",
-        "foss": "An open source osu! website alternative",
-        "built": "Built with bun and htmx",
+        "foss": "Una web d'osu! alternativa open source",
+        "built": "Feta amb bun i htmx",
         "profiles": "Perfils d'usuari",
         "stats": "Estadístiques de les 100 millors Puntuacions",
         "search": "Cerca de Mapes",
-        "calculator": "Calculadora de PP integrada",
+        "calculator": "Built-in PP Calculator",
         "setup": "Comparteix el teu setup!",
         "collections": "Puja les teves col·leccions!"
     },
@@ -41,16 +41,16 @@
             },
             "year": {
                 "title": "Any",
-                "info": "This is a recap of this year so far, the data will be reset at January 1st"
+                "info": "Això és un recompte d'aquest any fins ara, totes les dades és reiniciaran l'1 de gener"
             },
-            "most": "Most Played",
+            "most": "Més jugades",
             "scores": {
-                "title": "Scores",
-                "info": "hover over a grayed out PP to see the (if FC) PP value",
+                "title": "Puntuacions",
+                "info": "Hover over a grayed out PP to see the (if FC) PP value",
                 "tabs": {
-                    "pinned": "Pinned",
-                    "best": "Best",
-                    "first": "First",
+                    "pinned": "Destacades",
+                    "best": "Millors",
+                    "first": "Primer",
                     "recent": "Recent"
                 }
             },
@@ -58,35 +58,35 @@
                 "title": "Historial",
                 "tabs": {
                     "global": "Global",
-                    "country": "Country",
-                    "plays": "Plays",
-                    "replays": "Replays"
+                    "country": "Nacional",
+                    "plays": "Partides",
+                    "replays": "Repeticions"
                 }
             },
             "summary": {
-                "title": "Summary",
-                "info": "this is a quick summary of your top 100 plays",
+                "title": "Resum",
+                "info": "This is a quick summary of your top 100 plays",
                 "tabs": {
-                    "hit_ratios": "Hit Ratios",
-                    "grade_ratios": "Grade Ratios",
-                    "average_play": "Average Play"
+                    "hit_ratios": "Percentatges de hits",
+                    "grade_ratios": "Percentatges de notes",
+                    "average_play": "Partida promitja"
                 }
             },
             "collections": {
-                "title": "Collections",
-                "info": "any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "title": "Col·leccions",
+                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
             },
             "setup": {
                 "title": "Setup",
                 "tabs": {
-                    "tablet": "Tablet",
-                    "keyboard": "Keyboard",
-                    "mouse": "Mouse",
+                    "tablet": "Tauleta",
+                    "keyboard": "Teclat",
+                    "mouse": "Ratolí",
                     "peripherals": "Periferics",
                     "computer": "Ordinador"
                 },
                 "components": {
-                    "os": "OS",
+                    "os": "SO",
                     "cpu": "CPU",
                     "gpu": "GPU",
                     "ram": "RAM",
@@ -96,28 +96,28 @@
                     "case": "Caixa"
                 },
                 "peripherals": {
-                    "mousepad": "Mousepad",
+                    "mousepad": "Alfombreta",
                     "keypad": "Keypad",
-                    "headphones": "Headphones",
-                    "camera": "Camera",
-                    "microphone": "Microphone",
+                    "headphones": "Auriculars",
+                    "camera": "Càmera",
+                    "microphone": "Micròfon",
                     "monitor": "Monitor",
-                    "audio": "Audio",
-                    "desk": "Desk",
-                    "chair": "Chair"
+                    "audio": "Àudio",
+                    "desk": "Taula",
+                    "chair": "Cadira"
                 },
-                "name": "Name",
+                "name": "Nom",
                 "model": "Model",
                 "size": "Tamany",
-                "area": "Area",
-                "width": "Width",
-                "height": "Height",
+                "area": "Àrea",
+                "width": "Amplada",
+                "height": "Alçada",
                 "position": "Posició",
-                "dpi": "Sensitivity",
-                "mult": "Multiplier",
-                "kb_layout": "Keyboard Layout",
+                "dpi": "Sensibilitat",
+                "mult": "Multiplicador",
+                "kb_layout": "Disposició del teclat",
                 "layout": {
-                    "k0": "None",
+                    "k0": "Cap",
                     "k2": "2 Tecles",
                     "k3": "3 Tecles",
                     "k4": "4 Tecles",
@@ -134,7 +134,7 @@
         "country_rank": "Rang Nacional",
         "play_time": "Temps De Partida",
         "play_count": "Vegades Jugades",
-        "total_hits": "Total Hits",
+        "total_hits": "Total clics",
         "replays_watched": "Repeticions Vistes",
         "hits_x_play": "Clicks x Partida",
         "followers": "Seguidors",
@@ -144,7 +144,7 @@
         "status": {
             "pinned": "Fixades",
             "best": "Millors",
-            "firsts": "Primer Lloc",
+            "firsts": "First",
             "recent": "Recents"
         },
         "mods": "Mods",
@@ -162,12 +162,12 @@
             "favourite": "Preferits",
             "ranked": "Classificats",
             "guest": "Col·laborador",
-            "loved": "Loved",
+            "loved": "Preferit",
             "nominated": "Nominat",
             "pending": "Pendent",
             "graveyard": "Descalificat",
             "wip": "En curs",
-            "approved": "Approved"
+            "approved": "Aprovat"
         },
         "length": "Duració",
         "bpm": "BPM"
