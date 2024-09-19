@@ -23,7 +23,7 @@
         "profiles": "Profil Pengguna",
         "stats": "Statistik Skor 100 Teratas",
         "search": "Carian Beatmap",
-        "calculator": "Kalkulator PP yang Dibina didalam",
+        "calculator": "Built-in PP Calculator",
         "setup": "Kongsi setup anda!",
         "collections": "Muat naik koleksi anda!"
     },
@@ -46,7 +46,7 @@
             "most": "Paling Banyak Dimainkan",
             "scores": {
                 "title": "Skor",
-                "info": "berlegar di atas kawasan PP yang digelapkan untuk melihat (jika FC) nilai PP",
+                "info": "Hover over a grayed out PP to see the (if FC) PP value",
                 "tabs": {
                     "pinned": "Dipin",
                     "best": "Terbaik",
@@ -65,7 +65,7 @@
             },
             "summary": {
                 "title": "Ringkasan",
-                "info": "ini adalah ringkasan mainan 100 teratas anda",
+                "info": "This is a quick summary of your top 100 plays",
                 "tabs": {
                     "hit_ratios": "Nisbah Hit",
                     "grade_ratios": "Nisbah Gred",
@@ -74,7 +74,7 @@
             },
             "collections": {
                 "title": "Koleksi",
-                "info": "mana-mana beatmap yang tiada di halaman web osu! tidak akan dapat dimuat turun (cth: osu!trainer, customdiffs, beatmap yang tidak diserahkan...)"
+                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
             },
             "setup": {
                 "title": "Setup",
@@ -144,7 +144,7 @@
         "status": {
             "pinned": "Dipin",
             "best": "Terbaik",
-            "firsts": "Pertama",
+            "firsts": "First",
             "recent": "Terkini"
         },
         "mods": "Pengubah suai",
