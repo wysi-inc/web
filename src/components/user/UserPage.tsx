@@ -23,7 +23,12 @@ const UserPage = async (p: Props) => {
 
     const no_chosen_mode = p.mode === undefined;
 
-    if (!user || (user as any).error) return <div>User not found</div>;
+    if (!user || (user as any).error) return (
+        <div>
+            <h2>{p.t?.alerts.user.user_doesnt_exist}</h2>
+            <span>or maybe the website stopped working, try again in a bit or tell me that its not working on the discord please :( i'll fixit asap</span>
+        </div>
+    );
 
     const editable = p.logged?.id === user.id;
 
