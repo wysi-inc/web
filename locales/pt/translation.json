@@ -6,7 +6,7 @@
         "beatmaps": "Beatmaps",
         "support": "Ajuda",
         "about": "Sobre",
-        "search": "Search someone",
+        "search": "Buscar",
         "search_someone": "Buscar alguém",
         "help": "Ajude a traduzir o site!",
         "log": {
@@ -21,8 +21,8 @@
         "foss": "Um site alternativo do osu! com fonte aberta",
         "built": "Feito com bun e htmx",
         "profiles": "Perfis do usuário",
-        "stats": "Estatísticas das 100 Melhores Classificações",
-        "search": "Procurar Beatmap",
+        "stats": "Estatísticas das 100 melhores pontuações",
+        "search": "Buscar beatmap",
         "calculator": "Feito em PP Calculator",
         "setup": "Compartilhe seu setup!",
         "collections": "Envie suas coleções!"
