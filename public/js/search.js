@@ -18,6 +18,12 @@ function Search() {
     });
 
     document.addEventListener('keypress', function(e) {
+        const activeElement = document.activeElement;
+        if (activeElement.tagName === "INPUT") {
+            if (activeElement.id !== "search_input") return;
+        }
+        else if (activeElement.tagName === "TEXTAREA") return;
+        else if (activeElement.getAttribute('contenteditable') === 'true') return;
         if (e.key === '/') {
             openDialog(e);
         }
