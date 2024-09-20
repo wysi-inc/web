@@ -1,71 +1,71 @@
 {
     "nav": {
-        "home": "Home",
-        "users": "Users",
-        "rankings": "Rankings",
-        "beatmaps": "Beatmaps",
+        "home": "Beranda",
+        "users": "Pengguna",
+        "rankings": "Peringkat",
+        "beatmaps": "Beatmap",
         "support": "Support",
-        "about": "About",
+        "about": "Tentang",
         "search": "Search someone",
-        "search_someone": "Search someone",
+        "search_someone": "Cari seseorang",
         "help": "Help translate the site!",
         "log": {
-            "login": "Login with osu!",
-            "logout": "Logout",
-            "osu": "osu!profile",
-            "wysi": "wysi!profile"
+            "login": "Masuk menggunakan osu!",
+            "logout": "Keluar",
+            "osu": "profil osu!",
+            "wysi": "profil wysi!"
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
+        "welcome": "Selamat Datang di wysi727.com!",
         "foss": "An open source osu! website alternative",
-        "built": "Built with bun and htmx",
-        "profiles": "User Profiles",
-        "stats": "Top 100 Score stats",
-        "search": "Beatmap Search",
-        "calculator": "Built-in PP Calculator",
-        "setup": "Share your setup!",
-        "collections": "Upload your collections!"
+        "built": "Dibuat menggunakan bun dan htmx",
+        "profiles": "Profil Pengguna",
+        "stats": "Statistik 100 skor terbaik",
+        "search": "Cari Beatmap",
+        "calculator": "Kalkulator PP Bawaan",
+        "setup": "Bagikan setup anda!",
+        "collections": "Unggah koleksi anda!"
     },
     "user": {
         "sections": {
-            "expand": "Expand",
-            "about": "About",
-            "beatmaps": "Beatmaps",
+            "expand": "Selengkapnya",
+            "about": "Tentang",
+            "beatmaps": "Beatmap",
             "top": "Top",
             "medals": {
-                "title": "Medals",
-                "recent": "Recent Medals",
-                "rarest": "Rarest Medal",
-                "show": "Show all"
+                "title": "Medali",
+                "recent": "Medali Terkini",
+                "rarest": "Medali Terlangka",
+                "show": "Tampilkan semua"
             },
             "year": {
-                "title": "Year",
-                "info": "This is a recap of this year so far, the data will be reset at January 1st"
+                "title": "Tahun",
+                "info": "Ini adalah rekap tahun ini, data akan direset pada 1 Januari"
             },
-            "most": "Most Played",
+            "most": "Paling Sering Dimainkan",
             "scores": {
-                "title": "Scores",
-                "info": "Hover over a grayed out PP to see the (if FC) PP value",
+                "title": "Skor",
+                "info": "Arahkan kursor ke PP berwarna abu-abu untuk melihat nilai PP (jika FC)",
                 "tabs": {
-                    "pinned": "Pinned",
-                    "best": "Best",
-                    "first": "First",
-                    "recent": "Recent"
+                    "pinned": "Disematkan",
+                    "best": "Terbaik",
+                    "first": "Pertama",
+                    "recent": "Terkini"
                 }
             },
             "history": {
-                "title": "History",
+                "title": "Riwayat",
                 "tabs": {
                     "global": "Global",
-                    "country": "Country",
-                    "plays": "Plays",
-                    "replays": "Replays"
+                    "country": "Nasional",
+                    "plays": "Permainan",
+                    "replays": "Tayangan Ulang"
                 }
             },
             "summary": {
-                "title": "Summary",
-                "info": "This is a quick summary of your top 100 plays",
+                "title": "Ringkasan",
+                "info": "Ini adalah ringkasan cepat dari 100 permainan terbaik anda",
                 "tabs": {
                     "hit_ratios": "Hit Ratios",
                     "grade_ratios": "Grade Ratios",
@@ -73,8 +73,8 @@
                 }
             },
             "collections": {
-                "title": "Collections",
-                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "title": "Koleksi",
+                "info": "Beatmap yang tidak ada di website osu! tidak akan bisa didownload (cth: osu!trainer, customdiffs, beatmap yang tidak diunggah...)"
             },
             "setup": {
                 "title": "Setup",
@@ -83,14 +83,14 @@
                     "keyboard": "Keyboard",
                     "mouse": "Mouse",
                     "peripherals": "Peripherals",
-                    "computer": "Computer"
+                    "computer": "Komputer"
                 },
                 "components": {
                     "os": "OS",
                     "cpu": "CPU",
                     "gpu": "GPU",
                     "ram": "RAM",
-                    "storage": "Storage",
+                    "storage": "Penyimpanan",
                     "motherboard": "Motherboard",
                     "psu": "Power Supply",
                     "case": "Case"
@@ -98,26 +98,26 @@
                 "peripherals": {
                     "mousepad": "Mousepad",
                     "keypad": "Keypad",
-                    "headphones": "Headphones",
-                    "camera": "Camera",
-                    "microphone": "Microphone",
+                    "headphones": "Headphone",
+                    "camera": "Kamera",
+                    "microphone": "Mikrofon",
                     "monitor": "Monitor",
                     "audio": "Audio",
-                    "desk": "Desk",
-                    "chair": "Chair"
+                    "desk": "Meja",
+                    "chair": "Kursi"
                 },
-                "name": "Name",
+                "name": "Nama",
                 "model": "Model",
-                "size": "Size",
+                "size": "Ukuran",
                 "area": "Area",
-                "width": "Width",
+                "width": "Lebar",
                 "height": "Height",
-                "position": "Position",
-                "dpi": "Sensitivity",
+                "position": "Posisi",
+                "dpi": "Sensitivitas",
                 "mult": "Multiplier",
-                "kb_layout": "Keyboard Layout",
+                "kb_layout": "Tata letak Keyboard",
                 "layout": {
-                    "k0": "None",
+                    "k0": "Tidak ada",
                     "k2": "2 Keys",
                     "k3": "3 Keys",
                     "k4": "4 Keys",
@@ -128,38 +128,38 @@
                 }
             }
         },
-        "performance": "Performance",
-        "total_score": "Total Score",
-        "global_rank": "Global Rank",
-        "country_rank": "Country Rank",
+        "performance": "Performa",
+        "total_score": "Total Skor",
+        "global_rank": "Peringkat Global",
+        "country_rank": "Peringkat Nasional",
         "play_time": "Play Time",
         "play_count": "Play Count",
-        "total_hits": "Total Hits",
-        "replays_watched": "Replays Watched",
+        "total_hits": "Jumlah Hit",
+        "replays_watched": "Pemutaran Tayangan Ulang",
         "hits_x_play": "Hits x Play",
-        "followers": "Followers",
+        "followers": "Pengikut",
         "online": "Online"
     },
     "score": {
         "status": {
-            "pinned": "Pinned",
-            "best": "Best",
-            "firsts": "First",
+            "pinned": "Disematkan",
+            "best": "Terbaik",
+            "firsts": "Pertama",
             "recent": "Recent"
         },
         "mods": "Mods",
-        "max_combo": "Max Combo",
-        "combo": "Combo",
+        "max_combo": "Kombo Maks",
+        "combo": "Kombo",
         "grade": "Grade",
         "grades": "Grades",
         "acc": "Acc",
-        "accuracy": "Accuracy",
-        "score": "Score",
-        "ranked_score": "Ranked Score"
+        "accuracy": "Akurasi",
+        "score": "Skor",
+        "ranked_score": "Skor Ranked"
     },
     "beatmapset": {
         "status": {
-            "favourite": "Favourite",
+            "favourite": "Favorit",
             "ranked": "Ranked",
             "guest": "Guest",
             "loved": "Loved",
@@ -177,9 +177,9 @@
     },
     "alerts": {
         "user": {
-            "user_doesnt_exist": "This user doesn't exist",
-            "user_is_bot": "This user is a bot, bots are not supported yet :(",
-            "users_fail": "Failed to fetch users"
+            "user_doesnt_exist": "Pengguna ini tidak ditemukan",
+            "user_is_bot": "Pengguna ini adalah bot, bot belum didukung :(",
+            "users_fail": "Gagal mengambil data pengguna"
         }
     }
 }
