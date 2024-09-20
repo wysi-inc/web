@@ -1,5 +1,6 @@
 import type { UserCookie } from "@/src/types/users";
 import Link from "./Link";
+import { isAdmin } from "@/src/routes/admin";
 
 type Props = {
     user: UserCookie,
@@ -30,7 +31,7 @@ const Logged = (p: Props) => {
                         {p.t.nav.log.osu}
                     </a>
                 </li>
-                {p.user.admin ?
+                {isAdmin(p.user) ?
                     <li>
                         <Link url="/admin" css="btn btn-ghost flex">
                             <i class="fa-solid fa-screwdriver-wrench" />

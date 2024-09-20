@@ -5,8 +5,9 @@ import Reports from "./admin/Reports";
 import { ReportModel } from "@/src/models/Report";
 import Badges from "./admin/Badges";
 import AdminAdmins from "./admin/AdminAdmins";
+import type { UserCookie } from "@/src/types/users";
 
-async function Admin(p: { t: any }) {
+async function Admin(p: { t: any, user: UserCookie }) {
 
     const user_count = await User.countDocuments();
 
@@ -37,7 +38,7 @@ async function Admin(p: { t: any }) {
         </Panel>
 
         <Panel icon={<i class="fa-solid fa-screwdriver-wrench" />} title="Admins" code="reports" t={p.t}>
-            <AdminAdmins />
+            <AdminAdmins user={p.user} />
         </Panel>
 
         <Panel icon={<i class="fa-solid fa-triangle-exclamation" />} title={`Reports (${report_count})`} code="reports" t={p.t}>

@@ -18,11 +18,11 @@ export async function userAuthCode(code: string): Promise<any> {
     return data;
 }
 
-export async function userAuthData(code: string): Promise<{ data: UserBasic, admin: boolean } | undefined> {
+export async function userAuthData(code: string): Promise<{ data: UserBasic, role: string | null | undefined } | undefined> {
     const user_data: UserBasic = await auth.authorize(code, 'osu', osu_id, osu_secret, osu_redirect) as any;
     if ((user_data as any).error) return;
     const user = await User.findOne({ user_id: user_data.id });
-    return { data: user_data, admin: user?.admin || false };
+    return { data: user_data, role: user?.role };
 }
 
 export async function verifyUser(jwt?: Jwt, auth?: string): Promise<UserCookie | null> {

@@ -55,7 +55,7 @@ function Badge(p: { badge: BadgeType, editable: boolean, user_id: number }) {
             </span>
             {p.editable ?
                 <a class="bg-white hover:bg-opacity-30 bg-opacity-0 text-xs rounded-full size-4 flex items-center justify-center"
-                    hx-delete={`/admin/badges/${p.user_id}/${badge.short}`} hx-trigger="click" hx-target>
+                    hx-delete={`/admin/badges/${p.user_id}/${badge.short}`} hx-trigger="click">
                     <i class="fa-solid fa-xmark" />
                 </a> : <></>
             }

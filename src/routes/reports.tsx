@@ -3,6 +3,7 @@ import { verifyUser } from "../libs/auth";
 import { deleteReport, submitReport } from "../db/web/reports";
 import type { Route } from "../types/osu";
 import Alert from "../components/web/Alert";
+import { isAdmin } from "./admin";
 
 export const reportRoutes = new Elysia({ prefix: '/report' })
     .put("/:target", async ({ set, params, body, jwt, cookie }: Route) => {
@@ -22,7 +23,7 @@ export const reportRoutes = new Elysia({ prefix: '/report' })
     })
     .delete("/:id", async ({ params, set, jwt, cookie }: Route) => {
         const user = await verifyUser(jwt, cookie.auth.value);
-        if (!user || !user.admin) {
+        if (!user || !isAdmin(user)) {
             set.status = 401;
             return "Unauthorized";
         }

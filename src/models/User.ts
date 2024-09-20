@@ -223,8 +223,9 @@ const userSchema = new mongoose.Schema({
     skins: [String],
     setup: setup,
     wysi_badges: [badgeSchema],
-    admin: {
-        type: Boolean,
+    role: {
+        type: String,
+        enum: ["owner", "admin"],
         required: false
     }
 });

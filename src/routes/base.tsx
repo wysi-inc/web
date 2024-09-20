@@ -74,7 +74,7 @@ export const baseRoutes = new Elysia({ prefix: '' })
             id: res.data.id,
             username: res.data.username,
             avatar: res.data.avatar_url,
-            admin: res.admin
+            role: res.role
         }
         cookie?.auth?.set({
             value: await jwt.sign(user),
