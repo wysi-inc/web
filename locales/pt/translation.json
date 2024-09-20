@@ -177,9 +177,9 @@
     },
     "alerts": {
         "user": {
-            "user_doesnt_exist": "This user doesn't exist",
-            "user_is_bot": "This user is a bot, bots are not supported yet :(",
-            "users_fail": "Failed to fetch users"
+            "user_doesnt_exist": "Este utilizador não existe",
+            "user_is_bot": "Este utilizador é um bot, os bots não são suportados ainda :(",
+            "users_fail": "Falhou ao obter utilizadores"
         }
     }
 }
