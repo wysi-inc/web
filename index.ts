@@ -105,7 +105,7 @@ setInterval(() => {
 
 new Elysia()
     .onRequest(({ request, set }) => {
-        const ip = request.headers.get("x-forwarded-for") || "127.0.0.1";
+        const ip = request.headers.get("x-forwarded-for")?.split(",")[0] || "127.0.0.1";
         const req_count = RATELIMIT_MAP.get(ip) || 0;
         const route = request.url.split("/").slice(3).join("/");
         const base = route.split("/")[0];
