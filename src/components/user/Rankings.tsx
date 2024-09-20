@@ -5,15 +5,14 @@ import { getRankings } from "@/src/db/users/get_user";
 import Title from "../web/Title";
 import { apicall } from "@/index";
 
-type Props = {
+async function Rankings(p: {
     mode: Mode;
     category: Category;
     page: number;
-}
+    country?: string
+}) {
 
-async function Rankings({ mode, category, page }: Props) {
-
-    const users = await getRankings(mode, category, page);
+    const users = await getRankings(p.mode, p.category, p.page, p.country);
     apicall();
 
     if ((users as any).error) return <div>Rankings not found</div>;
@@ -22,7 +21,7 @@ async function Rankings({ mode, category, page }: Props) {
 
     return (<>
         <Title title="Rankings" />
-        <Pagination mode={mode} category={category} page={page} />
+        <Pagination mode={p.mode} category={p.category} page={p.page} />
         <table class="table p-4 bg-base-100 rounded-lg">
             <tr>
                 <th></th>
@@ -35,10 +34,10 @@ async function Rankings({ mode, category, page }: Props) {
                 <th>Status</th>
             </tr>
             {users.ranking.map((row, i) =>
-                <UserRankingCard row={row} page={page} index={i} />
+                <UserRankingCard row={row} page={p.page} index={i} />
             )}
         </table>
-        <Pagination mode={mode} category={category} page={page} />
+        <Pagination mode={p.mode} category={p.category} page={p.page} />
         <script>getUserStuff()</script>
     </>);
 }

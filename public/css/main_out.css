@@ -5584,8 +5584,6 @@ input.tab:checked + .tab-content,
   a-z-a--z: \-\.;
 }
 
-/* /public/css/fonts/Torus-SemiBold.otf */
-
 @font-face {
   font-family: "Torus";
 

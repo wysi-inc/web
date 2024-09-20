@@ -1,17 +1,11 @@
-type Props = {
-    name: string;
-    code: string;
-}
+import Link from "@/src/components/web/Link";
 
-const Flag = ({ name, code }: Props) => {
-
-    const url = `https://flagcdn.com/h40/${code.toLowerCase()}.webp`;
-
+const Flag = (p: { name: string; code: string; }) => {
+    const url = `https://flagcdn.com/h40/${p.code.toLowerCase()}.webp`;
     return (
-        <div class="tooltip flex items-center justify-center h-5 w-7" data-tip={name}>
-            <img src={url} alt={`${name}'s flag`} loading="lazy"
-                class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
-        </div>
+        <Link url={`/rankings/osu/performance?country=${p.code}`} css="tooltip flex items-center justify-center h-5 w-7" data-tip={p.name}>
+            <img src={url} alt={`${p.name}'s flag`} loading="lazy" class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
+        </Link>
     );
 }
 

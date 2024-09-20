@@ -1,4 +1,4 @@
-import { Elysia } from 'elysia'
+import { Elysia, t } from 'elysia'
 import type { Category, Mode, Route } from '../types/osu';
 import Rankings from '../components/user/Rankings';
 import HtmxPage from '../libs/routes';
@@ -13,21 +13,31 @@ export const rankingRoutes = new Elysia({ prefix: '/rankings' })
             />
         </HtmxPage>
     ))
-    .get("/:mode/:category", ({ lang, t, params, request, jwt, cookie }: Route) => (
+    .get("/:mode/:category", ({ query, lang, t, params, request, jwt, cookie }: Route) => (
         <HtmxPage lang={lang} t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
             <Rankings
                 mode={params.mode as Mode}
                 category={params.category as Category}
                 page={1}
+                country={query?.country}
             />
         </HtmxPage>
-    ))
-    .get("/:mode/:category/:page", ({ lang, t, params, request, jwt, cookie }: Route) => (
+    ), {
+        query: t.Optional(t.Object({
+            country: t.Optional(t.String())
+        }))
+    })
+    .get("/:mode/:category/:page", ({ query, lang, t, params: { mode, category, page }, request, jwt, cookie }: Route) => (
         <HtmxPage lang={lang} t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
             <Rankings
-                mode={params.mode as Mode}
-                category={params.category as Category}
-                page={Number(params.page)}
+                mode={mode as Mode}
+                category={category as Category}
+                page={Number(page) | 0}
+                country={query?.country}
             />
         </HtmxPage>
-    ))
+    ), {
+        query: t.Optional(t.Object({
+            country: t.Optional(t.String())
+        }))
+    })

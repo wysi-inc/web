@@ -25,15 +25,22 @@ export async function getUser(id: string, mode: Mode | undefined): Promise<User 
     }
 }
 
-export async function getRankings(mode: Mode, category: Category, page: number): Promise<UserList | null> {
+export async function getRankings(
+    mode: Mode,
+    category: Category,
+    page: number,
+    country?: string
+): Promise<UserList | null> {
     try {
-        const res: UserList = await v2.site.ranking.details(
-            mode, category,
-            {
-                "cursor[page]": page,
-                filter: "all",
-            }
-        );
+        const obj: any = {
+            "cursor[page]": page,
+            filter: "all",
+        };
+        if (country && category !== "score") {
+            console.log(country);
+            obj.country = country.toUpperCase();
+        }
+        const res: UserList = await v2.site.ranking.details(mode, category, obj);
         return res;
     } catch (err) {
         console.error(err);

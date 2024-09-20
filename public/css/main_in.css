@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* /public/css/fonts/Torus-SemiBold.otf */
-
 @font-face {
   font-family: "Torus";
   font-weight: 100;

@@ -51,10 +51,7 @@ export type Route = {
     request: Request,
     jwt: Jwt,
     cookie: Record<string, Cookie<any>>,
-    query: {
-        code: string,
-        state: any,
-    },
+    query: any;
     params: Record<any, string>
     body: any,
     redirect: any,
