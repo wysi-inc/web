@@ -5,15 +5,14 @@ import type { User as UserType } from "../../types/users";
 import OsuDBParser from "osu-db-parser";
 
 export async function updateUser(user: UserType, mode: Mode): Promise<UserType> {
-    const country_rank = user.statistics.country_rank;
+    const country_rank = user.statistics.country_rank || null;
     const global_ranks = user.rank_history?.data || [];
-    if (!country_rank) return user;
     try {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         let new_ranks = {
             global_ranks: getNewGlobal(global_ranks, today),
-            country_ranks: getNewCountry(country_rank, today),
+            country_ranks: country_rank ? getNewCountry(country_rank, today) : [],
         }
         let db_user = await User.findOne({ user_id: user.id });
         if (!db_user) {

@@ -27,6 +27,7 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
             set.redirect = "/";
             return "Unauthorized";
         }
+        console.log(body);
         const [done, msg] = await addBadge(body.id, body.badge);
         if (!done) return <Alert type='error' msg={msg} />;
         return <Alert type='success' msg={msg} />;

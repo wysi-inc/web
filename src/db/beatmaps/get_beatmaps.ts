@@ -3,8 +3,6 @@ import { v2 } from "osu-api-extended";
 
 export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ sets: Beatmapset[], offset: number }> {
 
-    console.log(q);
-
     const url = new URL("https://catboy.best/api/v2/search");
     if (q) {
         const min_date = new Date();
