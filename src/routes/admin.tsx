@@ -19,7 +19,6 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
     .get("/", async ({ lang, t, set, request, jwt, cookie }: Route) => {
         const user = await verifyUser(jwt, cookie.auth.value);
         if (!user || !isAdmin(user)) {
-            set.status = 401;
             set.redirect = "/";
             return "Unauthorized";
         }
@@ -33,7 +32,6 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
         const user = await verifyUser(jwt, cookie.auth.value);
         if (!user || !isAdmin(user)) {
             set.status = 401;
-            set.redirect = "/";
             return "Unauthorized";
         }
         const [done, msg] = await addBadge(body.id, body.badge);
@@ -49,7 +47,6 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
         const user = await verifyUser(jwt, cookie.auth.value);
         if (!user || !isAdmin(user)) {
             set.status = 401;
-            set.redirect = "/";
             return "Unauthorized";
         }
         const [done, msg] = await removeBadge(Number(params.id), params.badge);
@@ -60,7 +57,6 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
         const user = await verifyUser(jwt, cookie.auth.value);
         if (!user || user.role !== "owner") {
             set.status = 401;
-            set.redirect = "/";
             return "Unauthorized";
         }
         const [done, msg] = await setRole(body.id, body.role);
@@ -76,7 +72,6 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
         const user = await verifyUser(jwt, cookie.auth.value);
         if (!user || user.role !== "owner") {
             set.status = 401;
-            set.redirect = "/";
             return "Unauthorized";
         }
         const [done, msg] = await removeRole(Number(params.id));
