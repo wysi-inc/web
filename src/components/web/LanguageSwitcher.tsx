@@ -27,7 +27,7 @@ const flags: any = {
     "sr": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Flag_of_Serbia.svg",
     "tr": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg",
     "zh": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg",
-    "zh-hant": "https://upload.wikimedia.org/wikipedia/commons/7/72/Flag_of_the_Republic_of_China.svg",
+    // "zh-hant": "https://upload.wikimedia.org/wikipedia/commons/7/72/Flag_of_the_Republic_of_China.svg",
     "eo": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Flag_of_Esperanto.svg",
     "min": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/31/Enchanting_Table.gif",
 };
@@ -46,11 +46,13 @@ function LanguageSwitcher({ lang, t }: any) {
                 <img src={language[1]} class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
             </div>
             <div tabindex="0" class="dropdown-content menu bg-base-100 rounded-box mt-5 z-50 p-2 shadow">
-                <div class="grid grid-cols-2 gap-1 w-72">
+                <div class="grid grid-cols-2 gap-1 w-72 mb-2">
                     {Object.keys(flags).map(l => (
                         <LanguageButton lang={getLang(l)} />
                     ))}
-                    <a class="col-span-full btn btn-accent btn-sm flex flex-wrap" href="https://crowdin.com/project/wysi" target="_blank">
+                </div>
+                <div class="btn btn-accent btn-block">
+                    <a class="flex items-center justify-center gap-1" href="https://crowdin.com/project/wysi" target="_blank">
                         <i class="fa-solid fa-arrow-up-right-from-square" />
                         <span>{t.nav.help}</span>
                     </a>

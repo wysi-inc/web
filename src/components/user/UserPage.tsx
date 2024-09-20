@@ -80,7 +80,8 @@ const UserPage = async (p: Props) => {
         //     code: "skins",
         //     tooltip: "powered by skins.osuck.net",
         //     icon: <i class="fa-solid fa-palette" />,
-        //     url: `/users/${user.id}/0/panels/skins`
+        //     url: `/users/${user.id}/0/panels/skins`,
+        //     show_if: true
         // },
         {
             title: p.t?.user.sections.year.title,

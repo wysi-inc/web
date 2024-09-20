@@ -3609,6 +3609,10 @@ input.tab:checked + .tab-content,
   width: 16rem;
 }
 
+.btn-block {
+  width: 100%;
+}
+
 .btn-square:where(.btn-xs) {
   height: 1.5rem;
   width: 1.5rem;
@@ -4391,6 +4395,10 @@ input.tab:checked + .tab-content,
 
 .mt-auto {
   margin-top: auto;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 
 .block {

@@ -128,15 +128,15 @@ async function UserTopPanel(p: {
                             </div>
                             <dl class="flex flex-col gap-1">
                                 <div>
-                                    <dt class="text-sm">{p.t.user.performance}:</dt>
+                                    <dt class="text-sm">{p.t?.user.performance}:</dt>
                                     <dd class="text-lg">{Math.round(p.user.statistics.pp).toLocaleString()}pp</dd>
                                 </div>
                                 <div>
-                                    <dt class="text-sm">{p.t.score.accuracy}:</dt>
+                                    <dt class="text-sm">{p.t?.score.accuracy}:</dt>
                                     <dd class="text-lg">{(p.user.statistics.hit_accuracy).toFixed(2)}%</dd>
                                 </div>
                                 <div>
-                                    <dt class="text-sm">{p.t.user.sections.medals.title}:</dt>
+                                    <dt class="text-sm">{p.t?.user.sections.medals.title}:</dt>
                                     <dd class="text-lg">{p.user.user_achievements.length} <i class="fa-solid fa-medal fa-xs"></i></dd>
                                 </div>
                                 {p.mode === "mania" ?
@@ -163,37 +163,37 @@ async function UserTopPanel(p: {
                             <table>
                                 <tr>
                                     <th class="p-1"><i class="fa-solid fa-angles-up w-4 text-center" /></th>
-                                    <td class="p-1">{p.t.score.ranked_score}:</td>
+                                    <td class="p-1">{p.t?.score.ranked_score}:</td>
                                     <td class="p-1 text-end">{p.user.statistics.ranked_score.toLocaleString()}</td>
                                 </tr>
                                 <tr>
                                     <th class="p-1"><i class="fa-solid fa-arrow-rotate-left w-4 text-center" /></th>
-                                    <td class="p-1">{p.t.user.play_count}:</td>
+                                    <td class="p-1">{p.t?.user.play_count}:</td>
                                     <td class="p-1 text-end">{p.user.statistics.play_count.toLocaleString()}</td>
                                 </tr>
                                 <tr>
                                     <th class="p-1"><i class="fa-regular fa-clock w-4 text-center" /></th>
-                                    <td class="p-1">{p.t.user.play_time}:</td>
+                                    <td class="p-1">{p.t?.user.play_time}:</td>
                                     <td class="p-1 text-end">{Math.floor(p.user.statistics.play_time / 60 / 60).toLocaleString()}h</td>
                                 </tr>
                                 <tr>
                                     <th class="p-1"><i class="fa-solid fa-fire w-4 text-center" /></th>
-                                    <td class="p-1">{p.t.score.max_combo}:</td>
+                                    <td class="p-1">{p.t?.score.max_combo}:</td>
                                     <td class="p-1 text-end">{p.user.statistics.maximum_combo.toLocaleString()}x</td>
                                 </tr>
                                 <tr>
                                     <th class="p-1"><i class="fa-solid fa-keyboard w-4 text-center" /></th>
-                                    <td class="p-1">{p.t.user.total_hits}:</td>
+                                    <td class="p-1">{p.t?.user.total_hits}:</td>
                                     <td class="p-1 text-end">{p.user.statistics.total_hits.toLocaleString()}</td>
                                 </tr>
                                 <tr>
                                     <th class="p-1"><i class="fa-solid fa-calculator w-4 text-center" /></th>
-                                    <td class="p-1">{p.t.user.hits_x_play}:</td>
+                                    <td class="p-1">{p.t?.user.hits_x_play}:</td>
                                     <td class="p-1 text-end">{Math.round(p.user.statistics.total_hits / p.user.statistics.play_count || 0).toLocaleString()}</td>
                                 </tr>
                                 <tr>
                                     <th class="p-1"><i class="fa-solid fa-eye w-4 text-center" /></th>
-                                    <td class="p-1">{p.t.user.replays_watched}:</td>
+                                    <td class="p-1">{p.t?.user.replays_watched}:</td>
                                     <td class="p-1 text-end">{p.user.statistics.replays_watched_by_others.toLocaleString()}</td>
                                 </tr>
                             </table>

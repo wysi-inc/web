@@ -1,3 +1,4 @@
+import type { Mode } from "@/src/types/osu";
 import ModeIcon from "../../beatmap/ModeIcon";
 
 type Props = {
@@ -20,7 +21,7 @@ const UserSkinsPanel = (p: Props) => {
         },
         {
             id: "2175?v=0",
-            name: "FREEDOM DiVE (BTMC) v1.0",
+            name: "FREEDOM DiVE (BMC) v1.0",
             creator: "JesusOmega",
             modes: ["osu, mania"],
             imgs: [
@@ -44,7 +45,7 @@ const UserSkinsPanel = (p: Props) => {
                         </div>
                         <div class="flex flex-row gap-1">
                             {skin.modes.map(mode =>
-                                <ModeIcon mode={mode} size={18} css="fill-neutral-content" />
+                                <ModeIcon mode={mode as Mode} size={18} css="fill-neutral-content" />
                             )}
                         </div>
                     </div>
