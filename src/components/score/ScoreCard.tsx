@@ -77,7 +77,7 @@ const ScoreCard = async ({ score, position }: Props) => {
                                         <span class="stats_pp">{Math.round(Number(score.pp))}pp</span>
                                     </div>
                                     <div class="text-sm flex flex-row gap-4">
-                                        <div class="flex flex-row gap-1 items-center tooltip" data-tip={score.beatmap.}><i class="fa-solid fa-fire" /> {score.max_combo.toLocaleString()}x</div>
+                                        <div class="flex flex-row gap-1 items-center"><i class="fa-solid fa-fire" /> {score.max_combo.toLocaleString()}x</div>
                                         <div class="flex flex-row gap-1 items-center"><i class="fa-solid fa-crosshairs" /> {acc}%</div>
                                     </div>
                                 </div>
