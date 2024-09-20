@@ -25,8 +25,8 @@ export const BADGES: any = {
     "wdt": {
         short: "wdt",
         long: "WYSI Design Team",
-        fg: `text-[#121212]`,
-        bg: "bg-[#ff7ac6]",
+        fg: `text-[#f7f7f7]`,
+        bg: "bg-[#ff71b8]",
     },
     "wdc": {
         short: "wdc",
