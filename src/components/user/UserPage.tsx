@@ -54,7 +54,7 @@ const UserPage = async (p: Props) => {
             title: p.t?.user.sections.about,
             code: "about",
             icon: <i class="fa-solid fa-user" />,
-            show_if: user.page?.html !== undefined,
+            show_if: user.page?.html !== undefined && user.page.html.length > 0,
             jsx: (
                 <div class="rounded-lg bg-base-300 flex justify-center items-center">
                     {user.page.html ?
