@@ -2,9 +2,9 @@
     "nav": {
         "home": "Beranda",
         "users": "Pengguna",
-        "rankings": "Peringkat",
+        "rankings": "Peringkat Dunia",
         "beatmaps": "Beatmap",
-        "support": "Support",
+        "support": "Dukungan",
         "about": "Tentang",
         "search": "Search someone",
         "search_someone": "Cari seseorang",
@@ -18,7 +18,7 @@
     },
     "home": {
         "welcome": "Selamat Datang di wysi727.com!",
-        "foss": "An open source osu! website alternative",
+        "foss": "Sebuah alternatif situs open source osu!",
         "built": "Dibuat menggunakan bun dan htmx",
         "profiles": "Profil Pengguna",
         "stats": "Statistik 100 skor terbaik",
@@ -67,8 +67,8 @@
                 "title": "Ringkasan",
                 "info": "Ini adalah ringkasan cepat dari 100 permainan terbaik anda",
                 "tabs": {
-                    "hit_ratios": "Hit Ratios",
-                    "grade_ratios": "Grade Ratios",
+                    "hit_ratios": "Rasio Hit",
+                    "grade_ratios": "Rasio Nilai ",
                     "average_play": "Average Play"
                 }
             },
