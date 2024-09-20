@@ -13,8 +13,9 @@ import Clan from "./u_components/Clan";
 import SubdivisionRanking from "./u_components/SubdivisionRanking";
 import { modes } from "@/src/libs/constants";
 import { ModeToCode } from "@/src/libs/web_utils";
-import { socials, type Social } from "@/src/models/User";
+import { socials, type Social, DANS } from "@/src/models/User";
 import UserSocial from "./UserSocial";
+import Badge from "../Badge";
 
 async function UserTopPanel(p: {
     t: any,
@@ -35,8 +36,6 @@ async function UserTopPanel(p: {
     grade_counts.set("A", { count: p.user.statistics.grade_counts.a, color: colors.grades.a });
 
     const joined_date = moment(p.user.join_date).format("DD/MM/YYYY");
-
-    const dans = ['No Dan', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta'];
 
     return (
         <section class="pb-4 bg-base-300 md:rounded-lg shadow-lg">
@@ -71,6 +70,7 @@ async function UserTopPanel(p: {
                             </div>
                         </div>
                         <div class="flex flex-col gap-2 justify-between items-start grow">
+                            <div class="flex flex-row gap-2 flex-wrap">{p.user.wysi_badges?.map(b => <Badge user_id={p.user.id} badge={b} editable={false} />)}</div>
                             <div class="flex flex-row gap-2 items-center">
                                 <Clan user_id={p.user.id} />
                                 <a href={`https://osu.ppy.sh/users/${p.user.id}`} target="_blank" class="text-2xl underline-offset-2 hover:underline">
@@ -80,26 +80,13 @@ async function UserTopPanel(p: {
                                     <Supporter level={p.user.support_level} />
                                 }
                                 {p.user.groups.map(g =>
-                                    <div class="badge text-white p-1 flex flex-row" style={{
+                                    <div class="badge border-none text-white p-1 flex flex-row" style={{
                                         backgroundColor: g.colour,
                                         gap: ".08rem",
                                     }}>
                                         {g.short_name}
                                     </div>
                                 )}
-                                {
-                                    // p.user.wysi_badges?.map(b =>
-                                    // <div class="tooltip badge text-white p-1 flex flex-row"
-                                    //     data-tip={b.title}
-                                    //     style={{
-                                    //         backgroundColor: b.bg,
-                                    //         color: b.fg,
-                                    //         gap: ".08rem",
-                                    //     }}>
-                                    //     {b.short}
-                                    // </div>
-                                    // )
-                                }
                             </div>
                             {p.user.title ?
                                 <div class="bg-gradient-to-r from-blue-600 to-green-400 inline-block text-transparent bg-clip-text">
@@ -145,9 +132,7 @@ async function UserTopPanel(p: {
                                             <label class="form-control">
                                                 <span class="label text-sm m-0 p-0 pb-1">Dan:</span>
                                                 <select name="dan" class="select-sm select select-bordered select-ghost">
-                                                    {dans.map(d =>
-                                                        <option selected={p.user.dan === d}>{d}</option>
-                                                    )}
+                                                    {DANS.map(d => <option selected={p.user.dan === d}>{d}</option>)}
                                                 </select>
                                             </label>
                                         </form> :

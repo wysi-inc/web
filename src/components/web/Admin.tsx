@@ -3,6 +3,7 @@ import { User } from "@/src/models/User";
 import Panel from "../user/Panel";
 import Reports from "./admin/Reports";
 import { ReportModel } from "@/src/models/Report";
+import Badges from "./admin/Badges";
 
 async function Admin(p: { t: any }) {
 
@@ -29,6 +30,10 @@ async function Admin(p: { t: any }) {
                 <div class="stat-value">{users_with_setup.toLocaleString()}</div>
             </div>
         </section>
+
+        <Panel icon={<i class="fa-solid fa-triangle-exclamation" />} title="Badges" code="reports" t={p.t}>
+            <Badges />
+        </Panel>
 
         <Panel icon={<i class="fa-solid fa-triangle-exclamation" />} title={`Reports (${report_count})`} code="reports" t={p.t}>
             <Reports />

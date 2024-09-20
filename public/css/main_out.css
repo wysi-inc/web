@@ -804,6 +804,33 @@ html {
   color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
 }
 
+.\!badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter !important;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter !important;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1) !important;
+  transition-duration: 200ms !important;
+  height: 1.25rem !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+  padding-left: 0.563rem !important;
+  padding-right: 0.563rem !important;
+  border-radius: var(--rounded-badge, 1.9rem) !important;
+  border-width: 1px !important;
+  --tw-border-opacity: 1 !important;
+  border-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-border-opacity))) !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity))) !important;
+  --tw-text-opacity: 1 !important;
+  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity))) !important;
+}
+
 @media (hover:hover) {
   .label a:hover {
     --tw-text-opacity: 1;
@@ -1637,6 +1664,10 @@ html {
   justify-self: end;
 }
 
+:where(.menu li) .\!badge {
+  justify-self: end !important;
+}
+
 .modal {
   pointer-events: none;
   position: fixed;
@@ -2052,6 +2083,14 @@ input.tab:checked + .tab-content,
   box-shadow: var(--handleoffsetcalculator) 0 0 2px var(--tglbg) inset,
     0 0 0 2px var(--tglbg) inset,
     var(--togglehandleborder);
+}
+
+.alert-info {
+  border-color: var(--fallback-in,oklch(var(--in)/0.2));
+  --tw-text-opacity: 1;
+  color: var(--fallback-inc,oklch(var(--inc)/var(--tw-text-opacity)));
+  --alert-bg: var(--fallback-in,oklch(var(--in)/1));
+  --alert-bg-mix: var(--fallback-b1,oklch(var(--b1)/1));
 }
 
 .alert-success {
@@ -4645,6 +4684,10 @@ input.tab:checked + .tab-content,
   flex-shrink: 1;
 }
 
+.shrink-0 {
+  flex-shrink: 0;
+}
+
 .grow {
   flex-grow: 1;
 }
@@ -5058,6 +5101,31 @@ input.tab:checked + .tab-content,
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#f80d68\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 13 104 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#2892D7\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(40 146 215 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#F1DB4B\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 219 75 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#131615\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(19 22 21 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#faf1df\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(250 241 223 / var(--tw-bg-opacity));
+}
+
 .bg-opacity-0 {
   --tw-bg-opacity: 0;
 }
@@ -5181,6 +5249,10 @@ input.tab:checked + .tab-content,
 
 .fill-secondary {
   fill: var(--fallback-s,oklch(var(--s)/1));
+}
+
+.stroke-current {
+  stroke: currentColor;
 }
 
 .p-0 {
@@ -5368,6 +5440,26 @@ input.tab:checked + .tab-content,
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-\[\#873D48\] {
+  --tw-text-opacity: 1;
+  color: rgb(135 61 72 / var(--tw-text-opacity));
+}
+
+.text-\[\#121212\] {
+  --tw-text-opacity: 1;
+  color: rgb(18 18 18 / var(--tw-text-opacity));
+}
+
+.text-\[\#B9314F\] {
+  --tw-text-opacity: 1;
+  color: rgb(185 49 79 / var(--tw-text-opacity));
+}
+
+.text-\[\#ff7ac6\] {
+  --tw-text-opacity: 1;
+  color: rgb(255 122 198 / var(--tw-text-opacity));
 }
 
 .text-opacity-100 {

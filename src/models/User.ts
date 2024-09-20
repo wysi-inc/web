@@ -1,4 +1,5 @@
 import * as mongoose from "mongoose";
+import { WYSI_BADGES } from "../components/user/Badge";
 
 const collectionDBSchema = new mongoose.Schema({
     name: String,
@@ -185,10 +186,6 @@ const modes = new mongoose.Schema({
 // wdc: Wysi Development Contributor (for one time contributors)
 // wtc: Wysi Translations Contributor
 
-export const WYSI_BADGES = [
-    "dev", "<3", "wmt", "wdc", "wtc"
-];
-
 const badgeSchema = new mongoose.Schema({
     name: {
         required: true,
@@ -196,6 +193,8 @@ const badgeSchema = new mongoose.Schema({
         type: String,
     }
 });
+
+export const DANS = ['No Dan', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta'];
 
 const userSchema = new mongoose.Schema({
     user_id: {
@@ -214,7 +213,7 @@ const userSchema = new mongoose.Schema({
     },
     dan: {
         type: String,
-        enum: ['No Dan', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta'],
+        enum: DANS,
     },
     socials: userSocials,
     collections: {
@@ -235,7 +234,7 @@ userSchema.methods.toJSON = function() {
     return user;
 };
 
-export type Badge = mongoose.InferSchemaType<typeof badgeSchema>;
+export type BadgeType = mongoose.InferSchemaType<typeof badgeSchema>;
 export type CollectionDB = mongoose.InferSchemaType<typeof collectionDBSchema>;
 export type Rank = mongoose.InferSchemaType<typeof rank>;
 export type Setup = mongoose.InferSchemaType<typeof setup>;
