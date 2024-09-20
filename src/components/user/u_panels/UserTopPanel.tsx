@@ -70,7 +70,7 @@ async function UserTopPanel(p: {
                             </div>
                         </div>
                         <div class="flex flex-col gap-2 justify-between items-start grow">
-                            <div class="flex flex-row gap-2 flex-wrap">{p.user.wysi_badges?.map(b => <Badge user_id={p.user.id} badge={b} editable={false} />)}</div>
+                            <div class="flex flex-row gap-2 flex-wrap">{p.user.wysi_badges?.map(b => <Badge user_id={p.user.id} badge_id={b} editable={false} />)}</div>
                             <div class="flex flex-row gap-2 items-center">
                                 <Clan user_id={p.user.id} />
                                 <a href={`https://osu.ppy.sh/users/${p.user.id}`} target="_blank" class="text-2xl underline-offset-2 hover:underline">
