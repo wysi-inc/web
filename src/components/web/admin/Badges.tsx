@@ -11,7 +11,7 @@ async function Badges() {
                     {Object.entries(BADGES).map(([k, v]: [any, any]) => <option value={k}>{v.long}</option>)}
                 </select>
                 <label class="join-item input input-sm input-bordered flex items-center gap-2">
-                    ID: <input required name="id" type="number" class="grow" />
+                    ID: <input required name="id" type="text" class="grow" />
                 </label>
             </fieldset>
             <button class="btn btn-sm btn-circle btn-primary" type="submit">
