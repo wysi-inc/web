@@ -5597,17 +5597,9 @@ input.tab:checked + .tab-content,
 @font-face {
   font-family: "Torus";
 
-  font-weight: 600;
+  font-weight: 300;
 
-  src: url("/public/fonts/Torus-SemiBold.otf");
-}
-
-@font-face {
-  font-family: "Torus";
-
-  font-weight: 700;
-
-  src: url("/public/fonts/Torus-SemiBold.otf");
+  src: url("/public/fonts/Torus-Light.otf");
 }
 
 @font-face {
@@ -5621,9 +5613,17 @@ input.tab:checked + .tab-content,
 @font-face {
   font-family: "Torus";
 
-  font-weight: 300;
+  font-weight: 600;
 
-  src: url("/public/fonts/Torus-Light.otf");
+  src: url("/public/fonts/Torus-SemiBold.otf");
+}
+
+@font-face {
+  font-family: "Torus";
+
+  font-weight: 700;
+
+  src: url("/public/fonts/Torus-SemiBold.otf");
 }
 
 @font-face {
@@ -5647,6 +5647,7 @@ input.tab:checked + .tab-content,
   margin: 0;
   box-sizing: border-box;
   font-family: Torus;
+  font-weight: 700;
 }
 
 .loading-indicator:not([style*="display: none"]) {

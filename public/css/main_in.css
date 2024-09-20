@@ -12,14 +12,8 @@
 
 @font-face {
   font-family: "Torus";
-  font-weight: 600;
-  src: url("/public/fonts/Torus-SemiBold.otf");
-}
-
-@font-face {
-  font-family: "Torus";
-  font-weight: 700;
-  src: url("/public/fonts/Torus-SemiBold.otf");
+  font-weight: 300;
+  src: url("/public/fonts/Torus-Light.otf");
 }
 
 @font-face {
@@ -30,8 +24,14 @@
 
 @font-face {
   font-family: "Torus";
-  font-weight: 300;
-  src: url("/public/fonts/Torus-Light.otf");
+  font-weight: 600;
+  src: url("/public/fonts/Torus-SemiBold.otf");
+}
+
+@font-face {
+  font-family: "Torus";
+  font-weight: 700;
+  src: url("/public/fonts/Torus-SemiBold.otf");
 }
 
 @font-face {
@@ -51,6 +51,7 @@
     margin: 0;
     box-sizing: border-box;
     font-family: Torus;
+    font-weight: 700;
 }
 
 .loading-indicator:not([style*="display: none"]) {
