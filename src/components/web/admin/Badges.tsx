@@ -1,5 +1,7 @@
 import { User } from "@/src/models/User";
 import Badge, { BADGES } from "../../user/Badge";
+import { CopyText } from "./Utils";
+import Link from "../Link";
 
 async function Badges() {
     const user_badges = await User.find({ wysi_badges: { $exists: true, $type: 'array', $ne: [] } });
@@ -27,14 +29,12 @@ async function Badges() {
             </tr>
             {user_badges.map(user =>
                 <tr class="hover">
-                    <th>
-                        {user.user_id}
-                    </th>
+                    <th><CopyText text={user.user_id} /></th>
                     <td>
-                        <div class="flex flex-row gap-1 items-center">
+                        <Link url={`/users/${user.user_id}`} css="flex flex-row gap-1 items-center">
                             <img loading="lazy" src={`https://a.ppy.sh/${user.user_id}?${user.user_id}.png`} class="size-6 rounded-lg" alt="avatar" />
                             <span>{user.username}</span>
-                        </div>
+                        </Link>
                     </td>
                     <td>
                         <div class="flex flex-row flex-wrap gap-1">

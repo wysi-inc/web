@@ -777,33 +777,6 @@ html {
   justify-content: center;
 }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  transition-duration: 200ms;
-  height: 1.25rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  width: -moz-fit-content;
-  width: fit-content;
-  padding-left: 0.563rem;
-  padding-right: 0.563rem;
-  border-radius: var(--rounded-badge, 1.9rem);
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-border-opacity)));
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
-  --tw-text-opacity: 1;
-  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
-}
-
 .\!badge {
   display: inline-flex !important;
   align-items: center !important;
@@ -829,6 +802,33 @@ html {
   background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity))) !important;
   --tw-text-opacity: 1 !important;
   color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity))) !important;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  transition-duration: 200ms;
+  height: 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding-left: 0.563rem;
+  padding-right: 0.563rem;
+  border-radius: var(--rounded-badge, 1.9rem);
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-border-opacity)));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+  --tw-text-opacity: 1;
+  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
 }
 
 @media (hover:hover) {
@@ -4366,18 +4366,6 @@ input.tab:checked + .tab-content,
   grid-column-end: 5;
 }
 
-.row-start-1 {
-  grid-row-start: 1;
-}
-
-.float-right {
-  float: right;
-}
-
-.float-left {
-  float: left;
-}
-
 .m-0 {
   margin: 0px;
 }
@@ -4402,6 +4390,10 @@ input.tab:checked + .tab-content,
 
 .mb-1 {
   margin-bottom: 0.25rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 
 .mb-3 {
@@ -4434,10 +4426,6 @@ input.tab:checked + .tab-content,
 
 .mt-auto {
   margin-top: auto;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem;
 }
 
 .block {
@@ -4682,10 +4670,6 @@ input.tab:checked + .tab-content,
 
 .shrink {
   flex-shrink: 1;
-}
-
-.shrink-0 {
-  flex-shrink: 0;
 }
 
 .grow {
@@ -4981,6 +4965,11 @@ input.tab:checked + .tab-content,
   background-color: rgb(16 124 16 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#131615\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(19 22 21 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#151321\] {
   --tw-bg-opacity: 1;
   background-color: rgb(21 19 33 / var(--tw-bg-opacity));
@@ -4999,6 +4988,11 @@ input.tab:checked + .tab-content,
 .bg-\[\#242434\] {
   --tw-bg-opacity: 1;
   background-color: rgb(36 36 52 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#2892D7\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(40 146 215 / var(--tw-bg-opacity));
 }
 
 .bg-\[\#43e660\] {
@@ -5026,6 +5020,11 @@ input.tab:checked + .tab-content,
   background-color: rgb(134 148 159 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#F1DB4B\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 219 75 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#cc3700\] {
   --tw-bg-opacity: 1;
   background-color: rgb(204 55 0 / var(--tw-bg-opacity));
@@ -5046,9 +5045,24 @@ input.tab:checked + .tab-content,
   background-color: rgb(235 0 41 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#f80d68\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 13 104 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#faf1df\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(250 241 223 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#ff0000\] {
   --tw-bg-opacity: 1;
   background-color: rgb(255 0 0 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#ff71b8\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 113 184 / var(--tw-bg-opacity));
 }
 
 .bg-\[\#fffc00\] {
@@ -5099,41 +5113,6 @@ input.tab:checked + .tab-content,
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#f80d68\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(248 13 104 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#2892D7\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(40 146 215 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#F1DB4B\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(241 219 75 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#131615\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(19 22 21 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#faf1df\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(250 241 223 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#ff7ac6\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 122 198 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#ff71b8\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 113 184 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-0 {
@@ -5259,10 +5238,6 @@ input.tab:checked + .tab-content,
 
 .fill-secondary {
   fill: var(--fallback-s,oklch(var(--s)/1));
-}
-
-.stroke-current {
-  stroke: currentColor;
 }
 
 .p-0 {
@@ -5403,9 +5378,29 @@ input.tab:checked + .tab-content,
   line-height: 1;
 }
 
+.text-\[\#121212\] {
+  --tw-text-opacity: 1;
+  color: rgb(18 18 18 / var(--tw-text-opacity));
+}
+
+.text-\[\#B9314F\] {
+  --tw-text-opacity: 1;
+  color: rgb(185 49 79 / var(--tw-text-opacity));
+}
+
 .text-\[\#e95328\] {
   --tw-text-opacity: 1;
   color: rgb(233 83 40 / var(--tw-text-opacity));
+}
+
+.text-\[\#f7f7f7\] {
+  --tw-text-opacity: 1;
+  color: rgb(247 247 247 / var(--tw-text-opacity));
+}
+
+.text-\[\#ff7ac6\] {
+  --tw-text-opacity: 1;
+  color: rgb(255 122 198 / var(--tw-text-opacity));
 }
 
 .text-base-content {
@@ -5450,31 +5445,6 @@ input.tab:checked + .tab-content,
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-\[\#873D48\] {
-  --tw-text-opacity: 1;
-  color: rgb(135 61 72 / var(--tw-text-opacity));
-}
-
-.text-\[\#121212\] {
-  --tw-text-opacity: 1;
-  color: rgb(18 18 18 / var(--tw-text-opacity));
-}
-
-.text-\[\#B9314F\] {
-  --tw-text-opacity: 1;
-  color: rgb(185 49 79 / var(--tw-text-opacity));
-}
-
-.text-\[\#ff7ac6\] {
-  --tw-text-opacity: 1;
-  color: rgb(255 122 198 / var(--tw-text-opacity));
-}
-
-.text-\[\#f7f7f7\] {
-  --tw-text-opacity: 1;
-  color: rgb(247 247 247 / var(--tw-text-opacity));
 }
 
 .text-opacity-100 {
@@ -5722,248 +5692,6 @@ input.tab:checked + .tab-content,
   max-width: calc(100% - 100px);
 }
 
-@media (hover: hover) {
-  .checked\:btn-primary:checked.btn-outline:hover {
-    --tw-text-opacity: 1;
-    color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
-  }
-
-  @supports (color: color-mix(in oklab, black, black)) {
-    .checked\:btn-primary:checked.btn-outline:hover {
-      background-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
-      border-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
-    }
-  }
-
-  .checked\:btn-primary:checked.btn-outline:hover {
-    --tw-text-opacity: 1;
-    color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
-  }
-
-  @supports (color: color-mix(in oklab, black, black)) {
-    .checked\:btn-primary:checked.btn-outline:hover {
-      background-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
-      border-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
-    }
-  }
-}
-
-@supports not (color: oklch(0% 0 0)) {
-  .checked\:btn-primary:checked {
-    --btn-color: var(--fallback-p);
-  }
-}
-
-@supports (color: color-mix(in oklab, black, black)) {
-  .checked\:btn-active:checked {
-    background-color: color-mix(
-          in oklab,
-          oklch(var(--btn-color, var(--b3)) / var(--tw-bg-opacity, 1)) 90%,
-          black
-        );
-    border-color: color-mix(
-          in oklab,
-          oklch(var(--btn-color, var(--b3)) / var(--tw-border-opacity, 1)) 90%,
-          black
-        );
-  }
-
-  .checked\:btn-primary:checked.btn-outline.btn-active {
-    background-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
-    border-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
-  }
-
-  .checked\:btn-active:checked.btn-outline.btn-primary {
-    background-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
-    border-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
-  }
-
-  .checked\:btn-active:checked.btn-outline.btn-secondary {
-    background-color: color-mix(in oklab, var(--fallback-s,oklch(var(--s)/1)) 90%, black);
-    border-color: color-mix(in oklab, var(--fallback-s,oklch(var(--s)/1)) 90%, black);
-  }
-
-  .checked\:btn-active:checked.btn-outline.btn-accent {
-    background-color: color-mix(in oklab, var(--fallback-a,oklch(var(--a)/1)) 90%, black);
-    border-color: color-mix(in oklab, var(--fallback-a,oklch(var(--a)/1)) 90%, black);
-  }
-
-  .checked\:btn-active:checked.btn-outline.btn-success {
-    background-color: color-mix(in oklab, var(--fallback-su,oklch(var(--su)/1)) 90%, black);
-    border-color: color-mix(in oklab, var(--fallback-su,oklch(var(--su)/1)) 90%, black);
-  }
-
-  .checked\:btn-active:checked.btn-outline.btn-info {
-    background-color: color-mix(in oklab, var(--fallback-in,oklch(var(--in)/1)) 90%, black);
-    border-color: color-mix(in oklab, var(--fallback-in,oklch(var(--in)/1)) 90%, black);
-  }
-
-  .checked\:btn-active:checked.btn-outline.btn-warning {
-    background-color: color-mix(in oklab, var(--fallback-wa,oklch(var(--wa)/1)) 90%, black);
-    border-color: color-mix(in oklab, var(--fallback-wa,oklch(var(--wa)/1)) 90%, black);
-  }
-
-  .checked\:btn-active:checked.btn-outline.btn-error {
-    background-color: color-mix(in oklab, var(--fallback-er,oklch(var(--er)/1)) 90%, black);
-    border-color: color-mix(in oklab, var(--fallback-er,oklch(var(--er)/1)) 90%, black);
-  }
-}
-
-.checked\:btn-primary:checked {
-  --tw-text-opacity: 1;
-  color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
-  outline-color: var(--fallback-p,oklch(var(--p)/1));
-}
-
-@supports (color: oklch(0% 0 0)) {
-  .checked\:btn-primary:checked {
-    --btn-color: var(--p);
-  }
-}
-
-.checked\:btn-active:checked.btn.glass {
-  --glass-opacity: 25%;
-  --glass-border-opacity: 15%;
-}
-
-.checked\:btn-active:checked.btn-ghost {
-  border-color: transparent;
-  background-color: var(--fallback-bc,oklch(var(--bc)/0.2));
-}
-
-.checked\:btn-active:checked.btn-link {
-  border-color: transparent;
-  background-color: transparent;
-  text-decoration-line: underline;
-}
-
-.checked\:btn-active:checked.btn-outline {
-  --tw-border-opacity: 1;
-  border-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-border-opacity)));
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity)));
-  --tw-text-opacity: 1;
-  color: var(--fallback-b1,oklch(var(--b1)/var(--tw-text-opacity)));
-}
-
-.checked\:btn-primary:checked.btn-outline {
-  --tw-text-opacity: 1;
-  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
-}
-
-.checked\:btn-primary:checked.btn-outline.btn-active {
-  --tw-text-opacity: 1;
-  color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
-}
-
-.checked\:btn-active:checked.btn-outline.btn-primary {
-  --tw-text-opacity: 1;
-  color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
-}
-
-.checked\:btn-active:checked.btn-outline.btn-secondary {
-  --tw-text-opacity: 1;
-  color: var(--fallback-sc,oklch(var(--sc)/var(--tw-text-opacity)));
-}
-
-.checked\:btn-active:checked.btn-outline.btn-accent {
-  --tw-text-opacity: 1;
-  color: var(--fallback-ac,oklch(var(--ac)/var(--tw-text-opacity)));
-}
-
-.checked\:btn-active:checked.btn-outline.btn-success {
-  --tw-text-opacity: 1;
-  color: var(--fallback-suc,oklch(var(--suc)/var(--tw-text-opacity)));
-}
-
-.checked\:btn-active:checked.btn-outline.btn-info {
-  --tw-text-opacity: 1;
-  color: var(--fallback-inc,oklch(var(--inc)/var(--tw-text-opacity)));
-}
-
-.checked\:btn-active:checked.btn-outline.btn-warning {
-  --tw-text-opacity: 1;
-  color: var(--fallback-wac,oklch(var(--wac)/var(--tw-text-opacity)));
-}
-
-.checked\:btn-active:checked.btn-outline.btn-error {
-  --tw-text-opacity: 1;
-  color: var(--fallback-erc,oklch(var(--erc)/var(--tw-text-opacity)));
-}
-
-.checked\:btn-active:checked
-  .glass {
-  border: none;
-  -webkit-backdrop-filter: blur(var(--glass-blur, 40px));
-          backdrop-filter: blur(var(--glass-blur, 40px));
-  background-color: transparent;
-  background-image: linear-gradient(
-        135deg,
-        rgb(255 255 255 / var(--glass-opacity, 30%)) 0%,
-        rgb(0 0 0 / 0%) 100%
-      ),
-      linear-gradient(
-        var(--glass-reflex-degree, 100deg),
-        rgb(255 255 255 / var(--glass-reflex-opacity, 10%)) 25%,
-        rgb(0 0 0 / 0%) 25%
-      );
-  box-shadow: 0 0 0 1px rgb(255 255 255 / var(--glass-border-opacity, 10%)) inset,
-      0 0 0 2px rgb(0 0 0 / 5%);
-  text-shadow: 0 1px rgb(0 0 0 / var(--glass-text-shadow-opacity, 5%));
-}
-
-@media (hover: hover) {
-  .checked\:btn-active:checked.glass {
-    border: none;
-    -webkit-backdrop-filter: blur(var(--glass-blur, 40px));
-            backdrop-filter: blur(var(--glass-blur, 40px));
-    background-color: transparent;
-    background-image: linear-gradient(
-          135deg,
-          rgb(255 255 255 / var(--glass-opacity, 30%)) 0%,
-          rgb(0 0 0 / 0%) 100%
-        ),
-        linear-gradient(
-          var(--glass-reflex-degree, 100deg),
-          rgb(255 255 255 / var(--glass-reflex-opacity, 10%)) 25%,
-          rgb(0 0 0 / 0%) 25%
-        );
-    box-shadow: 0 0 0 1px rgb(255 255 255 / var(--glass-border-opacity, 10%)) inset,
-        0 0 0 2px rgb(0 0 0 / 5%);
-    text-shadow: 0 1px rgb(0 0 0 / var(--glass-text-shadow-opacity, 5%));
-  }
-
-  .has-\[\:checked\]\:btn-primary:has(:checked).btn-outline:hover {
-    --tw-text-opacity: 1;
-    color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
-  }
-
-  @supports (color: color-mix(in oklab, black, black)) {
-    .has-\[\:checked\]\:btn-primary:has(:checked).btn-outline:hover {
-      background-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
-      border-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
-    }
-  }
-
-  .has-\[\:checked\]\:btn-primary:has(:checked).btn-outline:hover {
-    --tw-text-opacity: 1;
-    color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
-  }
-
-  @supports (color: color-mix(in oklab, black, black)) {
-    .has-\[\:checked\]\:btn-primary:has(:checked).btn-outline:hover {
-      background-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
-      border-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
-    }
-  }
-}
-
-@supports not (color: oklch(0% 0 0)) {
-  .has-\[\:checked\]\:btn-primary:has(:checked) {
-    --btn-color: var(--fallback-p);
-  }
-}
-
 @supports (color: color-mix(in oklab, black, black)) {
   .has-\[\:checked\]\:btn-active:has(:checked) {
     background-color: color-mix(
@@ -5976,11 +5704,6 @@ input.tab:checked + .tab-content,
           oklch(var(--btn-color, var(--b3)) / var(--tw-border-opacity, 1)) 90%,
           black
         );
-  }
-
-  .has-\[\:checked\]\:btn-primary:has(:checked).btn-outline.btn-active {
-    background-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
-    border-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
   }
 
   .has-\[\:checked\]\:btn-active:has(:checked).btn-outline.btn-primary {
@@ -6019,18 +5742,6 @@ input.tab:checked + .tab-content,
   }
 }
 
-.has-\[\:checked\]\:btn-primary:has(:checked) {
-  --tw-text-opacity: 1;
-  color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
-  outline-color: var(--fallback-p,oklch(var(--p)/1));
-}
-
-@supports (color: oklch(0% 0 0)) {
-  .has-\[\:checked\]\:btn-primary:has(:checked) {
-    --btn-color: var(--p);
-  }
-}
-
 .has-\[\:checked\]\:btn-active:has(:checked).btn.glass {
   --glass-opacity: 25%;
   --glass-border-opacity: 15%;
@@ -6054,16 +5765,6 @@ input.tab:checked + .tab-content,
   background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity)));
   --tw-text-opacity: 1;
   color: var(--fallback-b1,oklch(var(--b1)/var(--tw-text-opacity)));
-}
-
-.has-\[\:checked\]\:btn-primary:has(:checked).btn-outline {
-  --tw-text-opacity: 1;
-  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
-}
-
-.has-\[\:checked\]\:btn-primary:has(:checked).btn-outline.btn-active {
-  --tw-text-opacity: 1;
-  color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
 }
 
 .has-\[\:checked\]\:btn-active:has(:checked).btn-outline.btn-primary {
@@ -6257,10 +5958,6 @@ input.tab:checked + .tab-content,
   display: none;
 }
 
-.has-\[\:checked\]\:hidden:has(:checked) {
-  display: none;
-}
-
 .has-\[\:disabled\]\:border-0:has(:disabled) {
   border-width: 0px;
 }
@@ -6289,14 +5986,6 @@ input.tab:checked + .tab-content,
 
 .group:has(:disabled) .group-has-\[\:disabled\]\:hidden {
   display: none;
-}
-
-.peer\/one:has(:checked) ~ .peer-has-\[\:checked\]\/one\:flex {
-  display: flex;
-}
-
-.peer:has(:checked) ~ .peer-has-\[\:checked\]\:grid {
-  display: grid;
 }
 
 @media (min-width: 640px) {

@@ -1,6 +1,8 @@
 import { User } from "@/src/models/User";
 import { ROLES } from "@/src/routes/admin";
 import type { UserCookie } from "@/src/types/users";
+import Link from "../Link";
+import { CopyText } from "./Utils";
 
 async function AdminAdmins(p: {
     user: UserCookie;
@@ -32,14 +34,17 @@ async function AdminAdmins(p: {
                 <th>ID</th>
                 <th>Username</th>
                 <th>Role</th>
-                {p.user.role === "owner" ?
-                    <th>Delete</th> : <></>
-                }
+                <th></th>
             </tr>
             {sudo.map(u => (
                 <tr class="hover" id={`role-${u.user_id}`}>
-                    <td>{u.user_id}</td>
-                    <td>{u.username}</td>
+                    <td><CopyText text={u.user_id} /></td>
+                    <td>
+                        <Link url={`/users/${u.user_id}`} css="flex flex-row gap-1 items-center">
+                            <img loading="lazy" src={`https://a.ppy.sh/${u.user_id}?${u.user_id}.png`} class="size-6 rounded-lg" alt="avatar" />
+                            <span>{u.username}</span>
+                        </Link>
+                    </td>
                     <td>{u.role}</td>
                     {p.user.role === "owner" ?
                         <td>
