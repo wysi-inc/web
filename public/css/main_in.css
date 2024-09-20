@@ -2,12 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+/* /public/css/fonts/Torus-SemiBold.otf */
+
 @font-face {
-    font-family: Torus;
-    src: url("/public/css/fonts/Torus-SemiBold.otf") format("opentype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Torus";
+  font-weight: 100;
+  src: url("/public/fonts/Torus-Thin.otf");
+}
+
+@font-face {
+  font-family: "Torus";
+  font-weight: 600;
+  src: url("/public/fonts/Torus-SemiBold.otf");
+}
+
+@font-face {
+  font-family: "Torus";
+  font-weight: 700;
+  src: url("/public/fonts/Torus-SemiBold.otf");
+}
+
+@font-face {
+  font-family: "Torus";
+  font-weight: 400;
+  src: url("/public/fonts/Torus-Regular.otf");
+}
+
+@font-face {
+  font-family: "Torus";
+  font-weight: 300;
+  src: url("/public/fonts/Torus-Light.otf");
+}
+
+@font-face {
+  font-family: "Torus";
+  font-weight: 900;
+  src: url("/public/fonts/Torus-Heavy.otf");
+}
+
+@font-face {
+  font-family: "Torus";
+  font-weight: 800;
+  src: url("/public/fonts/Torus-Bold.otf");
 }
 
 * :not(i) {
