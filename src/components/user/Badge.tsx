@@ -20,19 +20,19 @@ function Badge(p: { badge: BadgeType, editable: boolean, user_id: number }) {
         },
         "wmt": {
             short: "wmt",
-            long: "Wysi Moderation Team",
+            long: "WYSI Moderation Team",
             fg: `text-[#121212]`,
             bg: "bg-[#F1DB4B]",
         },
         "wdc": {
             short: "wdc",
-            long: "Wysi Development Contributor",
+            long: "WYSI Development Contributor",
             fg: `text-white`,
             bg: "bg-[#f80d68]",
         },
         "wtc": {
             short: "wtc",
-            long: "Wysi Translations Contributor",
+            long: "WYSI Translations Contributor",
             fg: `text-white`,
             bg: "bg-[#2892D7]",
         },
