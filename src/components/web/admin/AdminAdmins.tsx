@@ -32,19 +32,24 @@ async function AdminAdmins(p: {
                 <th>ID</th>
                 <th>Username</th>
                 <th>Role</th>
+                {p.user.role === "owner" ?
+                    <th>Delete</th> : <></>
+                }
             </tr>
             {sudo.map(u => (
                 <tr class="hover" id={`role-${u.user_id}`}>
                     <td>{u.user_id}</td>
                     <td>{u.username}</td>
                     <td>{u.role}</td>
-                    <td>
-                        {u.role !== "owner" ?
-                            <button class="btn btn-error btn-xs btn-square" hx-delete={`/admin/roles/${u.user_id}`} hx-swap="delete" hx-target={`#role-${u.user_id}`}>
-                                <i class="fa-regular fa-trash-can" />
-                            </button> : <></>
-                        }
-                    </td>
+                    {p.user.role === "owner" ?
+                        <td>
+                            {u.role !== "owner" ?
+                                <button class="btn btn-error btn-xs btn-square" hx-delete={`/admin/roles/${u.user_id}`} hx-swap="delete" hx-target={`#role-${u.user_id}`}>
+                                    <i class="fa-regular fa-trash-can" />
+                                </button> : <></>
+                            }
+                        </td> : <></>
+                    }
                 </tr>
             ))}
         </table>
