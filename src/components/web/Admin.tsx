@@ -4,6 +4,7 @@ import Panel from "../user/Panel";
 import Reports from "./admin/Reports";
 import { ReportModel } from "@/src/models/Report";
 import Badges from "./admin/Badges";
+import AdminAdmins from "./admin/AdminAdmins";
 
 async function Admin(p: { t: any }) {
 
@@ -31,8 +32,12 @@ async function Admin(p: { t: any }) {
             </div>
         </section>
 
-        <Panel icon={<i class="fa-solid fa-triangle-exclamation" />} title="Badges" code="reports" t={p.t}>
+        <Panel icon={<i class="fa-solid fa-certificate" />} title="Badges" code="reports" t={p.t}>
             <Badges />
+        </Panel>
+
+        <Panel icon={<i class="fa-solid fa-screwdriver-wrench" />} title="Admins" code="reports" t={p.t}>
+            <AdminAdmins />
         </Panel>
 
         <Panel icon={<i class="fa-solid fa-triangle-exclamation" />} title={`Reports (${report_count})`} code="reports" t={p.t}>

@@ -1,5 +1,5 @@
 import { User } from "@/src/models/User";
-import Badge, { WYSI_BADGES } from "../../user/Badge";
+import Badge, { BADGES, WYSI_BADGES } from "../../user/Badge";
 
 async function Badges() {
 
@@ -10,7 +10,7 @@ async function Badges() {
             <fieldset class="peer rounded-full peer join group-disabled:hidden" id="socials_fieldset">
                 <select required class="rounded-s-full join-item select select-bordered select-sm" name="badge">
                     <option disabled selected>Choose</option>
-                    {WYSI_BADGES.sort().map(s => <option value={s}>{s}</option>)}
+                    {WYSI_BADGES.map(s => <option value={s}>{BADGES[s]?.long}</option>)}
                 </select>
                 <label class="join-item input input-sm input-bordered flex items-center gap-2">
                     ID: <input required name="id" type="number" class="grow" />
