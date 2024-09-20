@@ -2,9 +2,7 @@ import { User } from "@/src/models/User";
 import Badge, { BADGES } from "../../user/Badge";
 
 async function Badges() {
-
     const user_badges = await User.find({ wysi_badges: { $exists: true, $type: 'array', $ne: [] } });
-
     return (<div class="flex flex-col gap-4">
         <form class="group flex flex-row flex-wrap gap-2 items-center" hx-put={`/admin/badges`} hx-target="#badges_notif" hx-swap="afterbegin">
             <fieldset class="peer rounded-full peer join group-disabled:hidden" id="socials_fieldset">

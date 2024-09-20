@@ -253,8 +253,13 @@ export async function removeBadge(user_id: number, badge: number): Promise<[bool
     return [true, "Removed badge from user!"];
 }
 
-export async function addBadge(user_id: number, badge: number): Promise<[boolean, string]> {
-    const user = await User.findOne({ user_id });
+export async function addBadge(user_id: string, badge: number): Promise<[boolean, string]> {
+    let user;
+    if (Number.isNaN(user_id)) {
+        user = await User.findOne({ username: user_id });
+    } else {
+        user = await User.findOne({ user_id: Number(user_id) });
+    }
     if (!user) return [false, "User doesn't exist!"];
     if (!user.wysi_badges) user.wysi_badges = [badge] as any;
     else if (user.wysi_badges.includes(badge)) return [false, "User already has this badge!"];
