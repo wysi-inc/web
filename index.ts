@@ -117,7 +117,7 @@ new Elysia()
                 return "Rate limit hit (120 req/min)";
             }
         }
-        if (base !== "public") {
+        if (base !== "public" && route !== "favicon.ico") {
             console.log(`${(ip).padStart(15, " ")} ${request.method.padStart(6, " ")}::/${route}`);
         }
     })
