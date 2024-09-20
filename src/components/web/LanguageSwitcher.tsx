@@ -50,9 +50,9 @@ function LanguageSwitcher({ lang, t }: any) {
                     {Object.keys(flags).map(l => (
                         <LanguageButton lang={getLang(l)} />
                     ))}
-                    <a class="col-span-full btn btn-accent btn-sm" href="https://crowdin.com/project/wysi" target="_blank">
+                    <a class="col-span-full btn btn-accent btn-sm flex flex-wrap" href="https://crowdin.com/project/wysi" target="_blank">
                         <i class="fa-solid fa-arrow-up-right-from-square" />
-                        {t.nav.help}
+                        <span>{t.nav.help}</span>
                     </a>
                 </div>
             </div>

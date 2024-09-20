@@ -11,31 +11,16 @@ const Radio = (p: { name: string, label: string, code: number }) => (
 );
 
 const Sort = (p: { label: string, code: MinoBeatmapSort }) => (
-    <div class="grid">
-        <label class="peer col-start-1 row-start-1 has-[:checked]:hidden">
-            <div class="grow btn btn-sm btn-ghost cursor-pointer px-2">
-                <span>{p.label}</span>
-            </div>
-            <input value={p.code} class="hidden" type="radio" name="sorting_title"
-                checked={p.code === "relevant"} />
-        </label>
-        <div class="hidden col-start-1 row-start-1 disabled peer-has-[:checked]:enabled peer-has-[:checked]:grid">
-            <label class="peer/one col-start-1 row-start-1 has-[:checked]:hidden flex">
-                <div class="grow btn btn-sm btn-ghost cursor-pointer px-2 flex flex-row gap-2 items-center">
-                    <span>{p.label}</span>
-                    <i class="fa-solid fa-caret-down" />
-                </div>
-                <input class="hidden" type="radio" name="sorting"
-                    value={`${p.code}:asc`} />
+    <div class="flex flex-col">
+        <span class="text-center text-xs">{p.label}</span>
+        <div class="flex flex-row items-center justify-center">
+            <label class="btn btn-ghost btn-xs btn-square has-[:checked]:btn-active">
+                <input class="hidden" type="radio" name="sorting" value={`${p.code}:desc`} />
+                <i class="fa-solid fa-caret-down" />
             </label>
-            <label class="col-start-1 row-start-1 hidden peer-has-[:checked]/one:flex">
-                <div class="grow btn btn-sm btn-ghost cursor-pointer px-2 flex flex-row gap-2 items-center">
-                    <span>{p.label}</span>
-                    <i class="fa-solid fa-caret-up" />
-                </div>
-                <input class="hidden" type="radio" name="sorting"
-                    value={`${p.code}:desc`}
-                    checked={p.code === "ranked_date"} />
+            <label class="btn btn-ghost btn-xs btn-square has-[:checked]:btn-active">
+                <input class="hidden" type="radio" name="sorting" value={`${p.code}:asc`} />
+                <i class="fa-solid fa-caret-up" />
             </label>
         </div>
     </div>
@@ -100,23 +85,33 @@ function BeatmapsetSearch() {
                     </div>
                 </div>
             </div>
-            <div class="py-2 px-4 flex flex-row flex-wrap items-center gap-4">
+            <div class="py-2 px-4 flex flex-row flex-wrap justify-center items-center gap-4">
                 <span class="text-sm">Sort by:</span>
-                <div class="flex flex-row gap-4 flex-wrap">
-                    <Sort label="Relevant" code="relevant" />
+                <div class="mx-auto flex flex-row gap-6 flex-wrap">
+                    <div class="flex flex-col">
+                        <span class="text-center text-xs">Relevant</span>
+                        <label class="btn btn-ghost btn-xs has-[:checked]:btn-active">
+                            <input class="hidden" type="radio" name="sorting" value="relevant" />
+                            <i class="fa-solid fa-caret-down" />
+                        </label>
+                    </div>
                     {
                         //<Sort label="Title" code="title" />
                         //<Sort label="Artist" code="artist" />
                     }
                     <Sort label="Ranked" code="ranked_date" />
                     <Sort label="Plays" code="play_count" />
-                    <Sort label="Rating" code="rating" />
+                    {
+                        // <Sort label="Rating" code="rating" />
+                    }
                     <Sort label="Difficulty" code="beatmaps.difficulty_rating" />
                     <Sort label="Favourites" code="favourite_count" />
                 </div>
-                <div class="ms-auto tooltip tooltip-left cursor-help" data-tip="Click a catecory twice for it to work properly :/">
-                    <i class="fa-solid fa-circle-question" />
-                </div>
+                {
+                    // <div class="tooltip tooltip-left cursor-help" data-tip="Click a catecory twice for it to work properly :/">
+                    //     <i class="fa-solid fa-circle-question" />
+                    // </div>
+                }
             </div>
         </form>
         <script async type="module" src={`/public/js/sliders.js?v=${Date.now()}`} />

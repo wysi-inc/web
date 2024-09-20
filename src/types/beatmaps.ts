@@ -30,7 +30,6 @@ export type BeatmapQuery = {
     mode?: string;
     status?: string;
     sorting?: string;
-    sorting_title?: string;
 }
 
 export type BeatmapSearch = V2BeatmapSearch;

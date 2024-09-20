@@ -3,15 +3,11 @@ import BeatmapsetCard from "./BeatmapsetCard";
 import type { BeatmapQuery } from "@/src/types/beatmaps";
 import LoadMoreButton from "../web/LoadMoreButton";
 
-type Props = {
+async function BeatmapsList(p: {
     body?: BeatmapQuery,
     offset: string
-}
-
-async function BeatmapsList(p: Props) {
-
+}) {
     const res = await getBeatmaps(p.body, p.offset);
-
     if (res.sets.length === 0) return <></>;
 
     return (<>
@@ -21,8 +17,7 @@ async function BeatmapsList(p: Props) {
         {res.sets.length < 50 ? null :
             <LoadMoreButton url={`/beatmapsets/list/${res.offset}`} include="#search-form" />
         }
-    </>
-    );
+    </>);
 }
 
 export default BeatmapsList;

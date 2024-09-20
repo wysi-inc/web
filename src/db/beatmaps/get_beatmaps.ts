@@ -2,14 +2,11 @@ import type { BeatmapQuery, Beatmapset } from "@/src/types/beatmaps";
 import { v2 } from "osu-api-extended";
 
 export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ sets: Beatmapset[], offset: number }> {
+
+    console.log(q);
+
     const url = new URL("https://catboy.best/api/v2/search");
     if (q) {
-        let sorting: string;
-        if (!q?.sorting || q?.sorting_title === "relevant") {
-            sorting = "";
-        } else {
-            sorting = q.sorting;
-        }
         const min_date = new Date();
         min_date.setFullYear(Number(q.year_min));
         const max_date = new Date();
@@ -74,8 +71,8 @@ export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ 
         url.searchParams.set("offset", offset || "0");
         url.searchParams.set("mode", q.mode || "-1");
         url.searchParams.set("status", q.status || "-3");
-        if (sorting) {
-            url.searchParams.set("sort", sorting);
+        if (q.sorting && q.sorting !== "relevant") {
+            url.searchParams.set("sort", q.sorting);
         }
     }
 

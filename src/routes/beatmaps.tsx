@@ -34,7 +34,6 @@ const queryBodyElysia = {
         status: t.Optional(t.String()),
         offset: t.Optional(t.String()),
         sorting: t.Optional(t.String()),
-        sorting_title: t.Optional(t.String()),
     })
 }
 

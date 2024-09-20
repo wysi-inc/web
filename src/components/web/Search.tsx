@@ -1,7 +1,7 @@
 function Search({ t }: any) {
     return (<>
         <button id="search_button" class="relative grid grid-cols-3 btn btn-wide bg-base-300">
-            <div class="col-start-2 flex flex-row gap-2">
+            <div class="flex flex-row gap-2">
                 <i class="fa-solid fa-magnifying-glass" />
                 <span class="text-nowrap">{t.nav.search}</span>
             </div>
