@@ -74,7 +74,9 @@ export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ 
         }
     }
 
-    const res = await fetch(url.toString());
+    const res = await fetch(url.toString(), {
+        headers: { Referer: "https://wysi727.com" }
+    });
     if (!res.ok) return { sets: [], offset: 0 };
     const sets = await res.json() as any;
     return { sets, offset: Number(offset) + sets.length };

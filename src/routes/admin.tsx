@@ -34,7 +34,7 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
             set.status = 401;
             return "Unauthorized";
         }
-        const [done, msg] = await addBadge(body.id, body.badge);
+        const [done, msg] = await addBadge(Number(body.id), Number(body.badge));
         if (!done) return <Alert type='error' msg={msg} />;
         return <Alert type='success' msg={msg} />;
     }, {
@@ -49,7 +49,7 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
             set.status = 401;
             return "Unauthorized";
         }
-        const [done, msg] = await removeBadge(Number(params.id), params.badge);
+        const [done, msg] = await removeBadge(Number(params.id), Number(params.badge));
         if (!done) return <Alert type='error' msg={msg} />;
         return <Alert type='success' msg={msg} />;
     })

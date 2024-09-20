@@ -241,24 +241,24 @@ export async function updateDan(user_id: number, dan: string): Promise<boolean> 
     return true;
 }
 
-export async function removeBadge(user_id: number, badge: string): Promise<[boolean, string]> {
+export async function removeBadge(user_id: number, badge: number): Promise<[boolean, string]> {
     const user = await User.findOne({ user_id });
     if (!user) return [false, "User doesn't exist!"];
     if (!user.wysi_badges) return [false, "This user doesn't have any badges"];
-    else if (!user.wysi_badges.find(b => b.name === badge)) {
+    else if (!user.wysi_badges.includes(badge)) {
         return [false, "This user does not have that badge!"];
     }
-    else user.wysi_badges = user.wysi_badges.filter((b) => b.name !== badge) as any;
+    else user.wysi_badges = user.wysi_badges.filter(b => b !== badge) as any;
     await user.save();
     return [true, "Removed badge from user!"];
 }
 
-export async function addBadge(user_id: number, badge: string): Promise<[boolean, string]> {
+export async function addBadge(user_id: number, badge: number): Promise<[boolean, string]> {
     const user = await User.findOne({ user_id });
     if (!user) return [false, "User doesn't exist!"];
-    if (!user.wysi_badges) user.wysi_badges = [{ name: badge }] as any;
-    else if (user.wysi_badges.find(b => b.name === badge)) return [false, "User already has this badge!"];
-    else user.wysi_badges.push({ name: badge });
+    if (!user.wysi_badges) user.wysi_badges = [badge] as any;
+    else if (user.wysi_badges.includes(badge)) return [false, "User already has this badge!"];
+    else user.wysi_badges.push(badge);
     await user.save();
     return [true, "Added badge to user!"];
 }

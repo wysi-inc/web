@@ -1,5 +1,4 @@
 import * as mongoose from "mongoose";
-import { WYSI_BADGES } from "../components/user/Badge";
 
 const collectionDBSchema = new mongoose.Schema({
     name: String,
@@ -186,14 +185,6 @@ const modes = new mongoose.Schema({
 // wdc: Wysi Development Contributor (for one time contributors)
 // wtc: Wysi Translations Contributor
 
-const badgeSchema = new mongoose.Schema({
-    name: {
-        required: true,
-        enum: WYSI_BADGES,
-        type: String,
-    }
-});
-
 export const DANS = ['No Dan', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta'];
 
 const userSchema = new mongoose.Schema({
@@ -222,7 +213,10 @@ const userSchema = new mongoose.Schema({
     },
     skins: [String],
     setup: setup,
-    wysi_badges: [badgeSchema],
+    wysi_badges: {
+        type: [Number],
+        required: false
+    },
     role: {
         type: String,
         enum: ["owner", "admin"],
@@ -235,7 +229,6 @@ userSchema.methods.toJSON = function() {
     return user;
 };
 
-export type BadgeType = mongoose.InferSchemaType<typeof badgeSchema>;
 export type CollectionDB = mongoose.InferSchemaType<typeof collectionDBSchema>;
 export type Rank = mongoose.InferSchemaType<typeof rank>;
 export type Setup = mongoose.InferSchemaType<typeof setup>;
