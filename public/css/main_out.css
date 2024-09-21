@@ -4374,6 +4374,10 @@ input.tab:checked + .tab-content,
   grid-column-end: 5;
 }
 
+.float-left {
+  float: left;
+}
+
 .m-0 {
   margin: 0px;
 }
@@ -5593,6 +5597,22 @@ input.tab:checked + .tab-content,
 }
 
 @font-face {
+  font-family: "Nunito";
+
+  font-style: normal;
+
+  src: url("/public/fonts/Nunito-Variable.ttf");
+}
+
+@font-face {
+  font-family: "Nunito";
+
+  font-style: italic;
+
+  src: url("/public/fonts/Nunito-Italic-Variable.ttf");
+}
+
+@font-face {
   font-family: "Torus";
 
   font-weight: 100;
@@ -5652,7 +5672,7 @@ input.tab:checked + .tab-content,
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Torus;
+  font-family: Torus, Nunito;
   font-weight: 700;
 }
 

@@ -14,6 +14,7 @@ const flags: any = {
     "fr": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
     "gl": "https://upload.wikimedia.org/wikipedia/commons/6/64/Flag_of_Galicia.svg",
     "hu": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Flag_of_Hungary.svg",
+    "id": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg",
     "it": "https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_of_Italy.svg",
     "ja": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Japan.svg",
     "lv": "https://upload.wikimedia.org/wikipedia/commons/8/84/Flag_of_Latvia.svg",
@@ -46,17 +47,17 @@ function LanguageSwitcher({ lang, t }: any) {
                 <img src={language[1]} class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
             </div>
             <div tabindex="0" class="dropdown-content menu bg-base-100 rounded-box mt-5 z-50 p-2 shadow">
-                <div class="grid grid-cols-2 gap-1 w-72 mb-2">
+                <div class="grid grid-cols-2 gap-1 mb-2 w-96">
                     {Object.keys(flags).map(l => (
                         <LanguageButton lang={getLang(l)} />
                     ))}
                 </div>
-                <div class="btn btn-accent btn-block">
-                    <a class="flex items-center justify-center gap-1" href="https://crowdin.com/project/wysi" target="_blank">
-                        <i class="fa-solid fa-arrow-up-right-from-square" />
+                <a href="https://crowdin.com/project/wysi" class="btn btn-accent btn-block" target="_blank">
+                    <span class="flex flex-row gap-4">
+                        <i class="float float-left left-2 fa-solid fa-arrow-up-right-from-square" />
                         <span>{t.nav.help}</span>
-                    </a>
-                </div>
+                    </span>
+                </a>
             </div>
         </div >
     </>);
