@@ -41,16 +41,11 @@ async function BeatmapsetPage(p: Props) {
 
     return (<>
         <Title title={`${beatmapset.title} - ${beatmapset.artist}`} />
-        <div class="flex flex-col rounded-lg shadow-lg"
-            style={{
-                backgroundImage: `url(${cardImg}), url('/public/img/fallback.webp')`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat"
-            }}>
+        <div class="flex flex-col rounded-lg shadow-lg" data-bg={cardImg}
+            style={{ backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
             <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm grid md:grid-cols-5 flex-wrap gap-4 justify-between rounded-lg p-4">
                 <div class="md:col-span-3 flex flex-col gap-4">
-                    <img src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
+                    <img data-src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
                         style={{
                             objectFit: "cover",
                             objectPosition: "center"
@@ -80,7 +75,7 @@ async function BeatmapsetPage(p: Props) {
                     </div>
                     <div class="flex flex-row flex-wrap justify-between">
                         <div class="flex flex-row gap-2 items-center">
-                            <img src={beatmapset.user.avatar_url}
+                            <img data-src={beatmapset.user.avatar_url}
                                 class="rounded-lg size-12"
                                 alt="mapper" loading="lazy" />
                             <div class="flex flex-col gap-1 text-base-content ">

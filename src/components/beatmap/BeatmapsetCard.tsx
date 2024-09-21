@@ -20,21 +20,11 @@ const BeatmapsetCard = ({ beatmapset }: Props) => {
     return (
         <div class="group flex flex-row bg-base-300 rounded-lg shadow-lg">
             <div class="flex flex-col bg-neutral rounded-lg shadow-lg grow">
-                <div class="flex flex-col rounded-lg shadow-lg"
-                    style={{
-                        backgroundImage: `url(${cardImg}), url('/public/img/fallback.webp')`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        backgroundRepeat: "no-repeat"
-                    }}>
+                <div class="flex flex-col rounded-lg shadow-lg" data-bg={cardImg}
+                    style={{ backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
                     <div class="relative bg-base-300 bg-opacity-75 grid grid-cols-4 rounded-lg backdrop-blur-sm">
-                        <div class="group rounded-lg flex items-center justify-center"
-                            style={{
-                                backgroundImage: `url(${cardImg}), url('/public/img/fallback.webp')`,
-                                backgroundSize: "cover",
-                                backgroundPosition: "center",
-                                backgroundRepeat: "no-repeat"
-                            }}>
+                        <div class="group rounded-lg flex items-center justify-center" data-bg={cardImg}
+                            style={{ backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
                             <AudioPlayButton css="hidden bg-opacity-50 hover:bg-opacity-75 border-none group-hover:flex btn btn-sm w-full h-full"
                                 beatmap_id={beatmapset.beatmaps[0].id}
                                 set_id={beatmapset.id}

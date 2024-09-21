@@ -18,7 +18,7 @@ async function UserCard(p: Props) {
 
     return (<>
         <div class="rounded-lg shadow-lg bg-base-100 p-2 flex flex-row gap-2">
-            <img src={user.avatar_url} alt="pfp" loading="lazy" class="size-12 rounded-lg" />
+            <img data-src={user.avatar_url} alt="pfp" loading="lazy" class="size-12 rounded-lg" />
             <div class="flex flex-row gap-2 items-center">
                 <Clan user_id={user.id} />
                 <Link url={`/users/${user.id}`} css="text-xl">{user.username}</Link>

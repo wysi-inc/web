@@ -44,7 +44,7 @@ function LanguageSwitcher({ lang, t }: any) {
     return (<>
         <div class="dropdown dropdown-end">
             <div tabindex="0" role="button" class="btn btn-ghost btn-square">
-                <img src={language[1]} class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
+                <img data-src={language[1]} class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
             </div>
             <div tabindex="0" class="dropdown-content menu bg-base-100 rounded-box mt-5 z-50 p-2 shadow">
                 <div class="grid grid-cols-2 gap-1 mb-2 w-96">

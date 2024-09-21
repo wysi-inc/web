@@ -21,21 +21,11 @@ const MostCard = ({ beatmap, beatmapset, position, plays }: Props) => {
     return (
         <div class="rounded-lg flex flex-row bg-base-300 shadow-lg">
             <div class="text-white bg-neutral flex flex-col grow rounded-lg shadow-lg">
-                <div class="flex flex-col rounded-lg shadow-lg"
-                    style={{
-                        backgroundImage: `url(${cardImg}), url('/public/img/fallback.webp')`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        backgroundRepeat: "no-repeat"
-                    }}>
+                <div class="flex flex-col rounded-lg shadow-lg" data-bg={cardImg}
+                    style={{ backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
                     <div class="bg-base-300 bg-opacity-75 grid grid-cols-4 rounded-lg backdrop-blur-sm">
-                        <div class="group rounded-lg flex items-center justify-center"
-                            style={{
-                                backgroundImage: `url(${cardImg}), url('/public/img/fallback.webp')`,
-                                backgroundSize: "cover",
-                                backgroundPosition: "center",
-                                backgroundRepeat: "no-repeat"
-                            }}>
+                        <div class="group rounded-lg flex items-center justify-center" data-bg={cardImg}
+                            style={{ backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
                             <AudioPlayButton css="hidden bg-opacity-50 hover:bg-opacity-75 border-none group-hover:flex btn btn-sm w-full h-full"
                                 beatmap_id={beatmap.id}
                                 set_id={beatmapset.id}

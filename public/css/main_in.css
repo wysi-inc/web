@@ -94,6 +94,10 @@
     font-weight: 700;
 }
 
+img:not([src]):not([srcset]) {
+    visibility: hidden;
+}
+
 .loading-indicator:not([style*="display: none"]) {
     animation-duration: 1s;
     animation-fill-mode: forwards;

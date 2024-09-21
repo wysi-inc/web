@@ -53,7 +53,7 @@ const UserSkinsPanel = (p: Props) => {
                         <div class="carousel carousel-center max-w-md space-x-4 bg-base-300 rounded-lg">
                             {skin.imgs.map((img) =>
                                 <div class="carousel-item">
-                                    <img src={img} class="rounded-lg" loading="lazy" />
+                                    <img data-src={img} class="rounded-lg" loading="lazy" />
                                 </div>
                             )}
                         </div>

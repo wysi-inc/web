@@ -56,7 +56,7 @@ function UserSocial(p: { social: Social, username: string, user_id: number, edit
             url: `https://tinder.com/@${p.username}`
         },
         "roblox": {
-            icon: <img src="/public/img/roblox.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img data-src="/public/img/roblox.svg" class="size-4" loading="lazy" alt="ico" />,
             bg: "bg-[#86949f]",
         },
         "microsoft": {
@@ -87,11 +87,11 @@ function UserSocial(p: { social: Social, username: string, user_id: number, edit
             url: `https://www.paypal.com/paypalme/${p.username}`
         },
         "supercell": {
-            icon: <img src="/public/img/supercell.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img data-src="/public/img/supercell.svg" class="size-4" loading="lazy" alt="ico" />,
             bg: "bg-[#105ab5]",
         },
         "kick": {
-            icon: <img src="/public/img/kick.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img data-src="/public/img/kick.svg" class="size-4" loading="lazy" alt="ico" />,
             bg: "bg-[#52fa17]",
             url: `https://kick.com/${p.username}`,
             black: true
@@ -102,15 +102,15 @@ function UserSocial(p: { social: Social, username: string, user_id: number, edit
             url: `https://steamcommunity.com/id/${p.username}`
         },
         "riot": {
-            icon: <img src="/public/img/riot.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img data-src="/public/img/riot.svg" class="size-4" loading="lazy" alt="ico" />,
             bg: "bg-[#eb0029]",
         },
         "epic": {
-            icon: <img src="/public/img/epic.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img data-src="/public/img/epic.svg" class="size-4" loading="lazy" alt="ico" />,
             bg: "bg-[#000000]",
         },
         "anilist": {
-            icon: <img src="/public/img/anilist.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img data-src="/public/img/anilist.svg" class="size-4" loading="lazy" alt="ico" />,
             bg: "bg-[#242434]",
             url: `https://anilist.co/user/${p.username}`
         },
@@ -119,7 +119,7 @@ function UserSocial(p: { social: Social, username: string, user_id: number, edit
             bg: "bg-[#003087]",
         },
         "linktree": {
-            icon: <img src="/public/img/linktree.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img data-src="/public/img/linktree.svg" class="size-4" loading="lazy" alt="ico" />,
             bg: "bg-[#43e660]",
             url: `https://linktr.ee/${p.username}`,
             black: true

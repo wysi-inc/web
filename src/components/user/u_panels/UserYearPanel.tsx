@@ -129,7 +129,7 @@ async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mod
                 </div>
             </div>
         </div>
-        <script>getUserStuff()</script>
+        <script>lazyLoader.update(); getUserStuff();</script>
     </>);
 }
 

@@ -16,7 +16,6 @@ async function ScorePage(p: { score_id: number }) {
     const s = score.beatmapset;
     const u = score.user;
 
-    const cardImg = `https://assets.ppy.sh/beatmaps/${s.id}/covers/card.jpg?${s.id}`;
     const cardImg2x = `https://assets.ppy.sh/beatmaps/${s.id}/covers/card@2x.jpg?${s.id}`;
 
     const color = getDiffColor(b.difficulty_rating);
@@ -24,16 +23,12 @@ async function ScorePage(p: { score_id: number }) {
     const acc = (score.accuracy * 100).toFixed(2);
 
     return (<>
-        <div class="flex rounded-lg shadow-lg" style={{
-            backgroundImage: `url(${cardImg2x}), url(${cardImg}), url('/public/img/fallback.webp')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat"
-        }}>
+        <div class="flex rounded-lg shadow-lg" data-bg={cardImg2x}
+            style={{ backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
             <div class="rounded-lg grow text-base-content bg-base-300 bg-opacity-75 backdrop-blur-sm p-4 gap-4">
                 <div class="flex flex-col gap-4">
                     <div class="grid md:grid-cols-2 gap-8">
-                        <img class="md:hidden w-full rounded-lg" src={cardImg2x} />
+                        <img data-src={cardImg2x} class="md:hidden w-full rounded-lg" />
                         <div class="flex flex-col gap-2">
                             <div class="flex flex-row items-center gap-2">
                                 <DiffIcon sr={b.difficulty_rating} mode={b.mode as Mode} size={20} color="#ffffff" />
@@ -53,12 +48,12 @@ async function ScorePage(p: { score_id: number }) {
                                 </div>
                             </div>
                         </div>
-                        <img class="hidden md:block w-full rounded-lg" src={cardImg2x} />
+                        <img data-src={cardImg2x} class="hidden md:block w-full rounded-lg" />
                     </div>
                     <div class="flex flex-row justify-between gap-4">
                         <div class="flex flex-col gap-4">
                             <div class="flex flex-row items-center gap-4 text-start">
-                                <img class="size-10 rounded-lg" src={u.avatar_url} />
+                                <img data-src={u.avatar_url} class="size-10 rounded-lg" />
                                 <div class="flex flex-col">
                                     <dt class="text-sm">Played by:</dt>
                                     <dd class="text-lg">{u.username}</dd>

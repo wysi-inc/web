@@ -93,7 +93,7 @@ async function Support() {
             <div class="flex flex-col items-center justify-center gap-2">
                 <span>Support the website's development throught Ko-fi</span>
                 <a href='https://ko-fi.com/Z8Z0SPTRT' target='_blank'>
-                    <img loading="lazy" class="shadow-lg rounded-full hover:-translate-y-1 ease-in-out duration-100 transform w-44" src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' alt='Buy Me a Coffee at ko-fi.com' />
+                    <img data-src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' class="shadow-lg rounded-full hover:-translate-y-1 ease-in-out duration-100 transform w-44" alt='Buy Me a Coffee at ko-fi.com' />
                 </a>
             </div>
         </div >
@@ -104,7 +104,7 @@ async function Support() {
                     <a class="avatar tooltip" href={c.html_url}
                         target="_blank" data-tip={c.login}>
                         <div class="size-12 rounded-xl">
-                            <img src={c.avatar_url} alt="pfp" />
+                            <img data-src={c.avatar_url} alt="pfp" />
                         </div>
                     </a>
                 )}
@@ -117,7 +117,7 @@ async function Support() {
                     <a class="avatar tooltip" href={`https://crowdin.com/profile/${c.data.username}`}
                         target="_blank" data-tip={c.data.username}>
                         <div class="size-12 rounded-xl">
-                            <img src={c.data.avatarUrl} alt="pfp" />
+                            <img data-src={c.data.avatarUrl} alt="pfp" />
                         </div>
                     </a>
                 )}

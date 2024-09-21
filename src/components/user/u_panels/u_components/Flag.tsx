@@ -5,7 +5,7 @@ const Flag = (p: { name: string; code: string; }) => {
     return (
         <Link url={`/rankings/osu/performance?country=${p.code}`}>
             <span class="tooltip flex items-center justify-center h-5 w-7" data-tip={p.name}>
-                <img src={url} alt={`${p.name}'s flag`} loading="lazy" class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
+                <img data-src={url} alt={`${p.name}'s flag`} class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
             </span>
         </Link>
     );

@@ -32,11 +32,11 @@ const BaseHtml = ({ lang, t, user, children }: Props) => {
                 <link rel="stylesheet" href="/public/css/bbcode.css" type="text/css" />
                 <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous" />
                 <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js" />
-                <script async src="https://kit.fontawesome.com/d5ab19acce.js" crossorigin="anonymous" />
-                <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js" />
+                <script src="https://kit.fontawesome.com/d5ab19acce.js" crossorigin="anonymous" async />
                 <script src="/public/js/utils.js" />
-                <script defer src="/public/js/search.js" />
-                <script defer src="/public/js/audio.js" />
+                <script src="/public/js/search.js" defer />
+                <script src="/public/js/audio.js" defer />
+                <script src="/public/js/images.js" defer />
             </head>
             <body class="bg-base-300 flex flex-col justify-center items-center" id="top">
                 <Navbar lang={lang} t={t} user={user} />

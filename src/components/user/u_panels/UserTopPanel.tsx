@@ -37,17 +37,12 @@ async function UserTopPanel(p: {
 
     return (
         <section class="pb-4 bg-base-300 md:rounded-lg shadow-lg">
-            <div class="rounded-lg"
-                style={{
-                    backgroundImage: `url(${p.user.cover_url})`,
-                    backgroundSize: `cover`,
-                    backgroundPosition: `center`,
-                    backgroundRepeat: "no-repeat"
-                }}>
+            <div class="rounded-lg" data-bg={p.user.cover_url}
+                style={{ backgroundSize: `cover`, backgroundPosition: `center`, backgroundRepeat: "no-repeat" }}>
                 <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm justify-center flex flex-col gap-4 p-4 rounded-lg">
                     <div class="flex flex-row flex-wrap gap-4">
                         <div class="flex flex-col justify-between w-40">
-                            <img src={p.user.avatar_url} class="rounded-lg aspect-square" alt={`${p.user.username}'s pfp`} />
+                            <img data-src={p.user.avatar_url} class="rounded-lg aspect-square" alt={`${p.user.username}'s pfp`} />
                             <div class="bg-base-300 rounded-lg flex flex-row gap-2 p-2 flex-wrap justify-around items-center">
                                 {modes.map(m => (
                                     <div class="tooltip" data-tip={m.name}>
@@ -271,7 +266,7 @@ async function UserTopPanel(p: {
                     <div class="flex flex-row flex-wrap gap-2">
                         {p.user.badges.map(badge =>
                             <div class="tooltip" data-tip={badge.description}>
-                                <img loading="lazy" width="86" height="40" alt={badge.description} src={badge.image_url} />
+                                <img data-src={badge.image_url} width="86" height="40" alt={badge.description} />
                             </div>
                         )}
                     </div>

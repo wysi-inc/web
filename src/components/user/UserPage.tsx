@@ -140,7 +140,7 @@ const UserPage = async (p: Props) => {
             title: p.t?.user.sections.medals.title,
             code: "medals",
             tooltip: "powered by osekai.net",
-            icon: <img src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" loading="lazy" />,
+            icon: <img data-src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" loading="lazy" />,
             // url: `/users/${user.id}/0/panels/medals`,
             show_if: user.user_achievements.length > 0,
             jsx: (<UserMedalsPanel t={p.t} user_id={user.id} medals={user.user_achievements} />)

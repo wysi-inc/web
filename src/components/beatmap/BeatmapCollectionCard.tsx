@@ -32,7 +32,6 @@ export async function BeatmapCollectionCard({ hash }: Props) {
                 <DiffIconLink setId={beatmap.set.id} diffId={beatmap.id}
                     diff={beatmap.difficulty_rating} size={20}
                     mode={beatmap.mode as Mode} name={beatmap.version} />
-                {/*<img src={cardImg} class="h-6 w-8" />*/}
                 <div class="flex flex-row flex-wrap gap-2 items-center">
                     <Link css="text-base-content text-lg hover:underline underline-offset-2 break-words" url={`/beatmaps/${beatmap.set.id}`}>{beatmap.set.title}</Link>
                     <p class="text-neutral-content text-opacity-75 text-sm break-words"> by {beatmap.set.artist}</p>

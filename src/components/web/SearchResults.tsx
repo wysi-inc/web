@@ -57,7 +57,7 @@ async function SearchResults({ query }: Props) {
             {beatmaps.map((b, i) => i < LIMIT ?
                 <Link url={`/beatmapsets/${b.id}`}>
                     <div class="flex flex-row p-2 gap-2 bg-base-300 rounded-lg">
-                        <img src={`https://b.ppy.sh/thumb/${b.id}l.jpg`} class="max-h-11 max-w-16 rounded-lg" alt="thumbnail" loading="lazy" />
+                        <img data-src={`https://b.ppy.sh/thumb/${b.id}l.jpg`} class="max-h-11 max-w-16 rounded-lg" alt="thumbnail" />
                         <div class="flex flex-col">
                             <span class="truncate max-w-80">{b.title} <span class="text-sm">by {b.artist}</span></span>
                             <span class="truncate max-w-80 text-sm text-base-content text-opacity-60">mapped by {b.creator}</span>
@@ -65,7 +65,7 @@ async function SearchResults({ query }: Props) {
                     </div>
                 </Link> : <></>)}
         </div>
-        <script>getUserStuff()</script>
+        <script>lazyLoader.update(); getUserStuff();</script>
     </>);
 }
 
