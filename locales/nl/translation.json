@@ -8,7 +8,7 @@
         "about": "Over ons",
         "search": "Zoeken",
         "search_someone": "Zoek iemand",
-        "help": "Help ons met het vertalen van de website!",
+        "help": "Help de site te vertalen!",
         "log": {
             "login": "Log in met osu!",
             "logout": "Afmelden",
@@ -21,7 +21,7 @@
         "foss": "Een open-source osu! website alternatief",
         "built": "Gemaakt met bun en htmx",
         "profiles": "Gebruikersprofielen",
-        "stats": "Top 100 Score Statistieken",
+        "stats": "Top 100 score statistieken",
         "search": "Beatmaps zoeken",
         "calculator": "Ingebouwde PP calculator",
         "setup": "Deel je setup!",
@@ -35,15 +35,15 @@
             "top": "Top",
             "medals": {
                 "title": "Medailles",
-                "recent": "Recente Medailles",
-                "rarest": "Zeldzaamste Medaille",
+                "recent": "Recente medailles",
+                "rarest": "Zeldzaamste medaille",
                 "show": "Toon alles"
             },
             "year": {
                 "title": "Jaar",
                 "info": "Dit is een samenvatting van dit jaar tot nu toe, de gegevens zullen worden gereset op 1 januari"
             },
-            "most": "Meest Gespeeld",
+            "most": "Meest gespeeld",
             "scores": {
                 "title": "Scores",
                 "info": "Beweeg over een grijze PP om de (als FC) PP waarde te zien",
@@ -69,7 +69,7 @@
                 "tabs": {
                     "hit_ratios": "Hit verhoudingen",
                     "grade_ratios": "Graad verhoudingen",
-                    "average_play": "Gewone Play"
+                    "average_play": "Gewone play"
                 }
             },
             "collections": {
@@ -108,7 +108,7 @@
                 },
                 "name": "Naam",
                 "model": "Model",
-                "size": "Grootte",
+                "size": "Maat",
                 "area": "Oppervlak",
                 "width": "Breedte",
                 "height": "Hoogte",
@@ -124,19 +124,19 @@
                     "k60": "60%",
                     "k75": "75%",
                     "ktkl": "TKL",
-                    "kfull": "Volledig"
+                    "kfull": "Voledig"
                 }
             }
         },
         "performance": "Prestatie",
-        "total_score": "Totale Score",
-        "global_rank": "Wereldwijde Ranking",
-        "country_rank": "Landelijke Ranking",
+        "total_score": "Totale score",
+        "global_rank": "Wereldwijde ranking",
+        "country_rank": "Landelijke ranking",
         "play_time": "Speeltijd",
-        "play_count": "Aantal Keer Gespeeld",
-        "total_hits": "Totaal Aantal Hits",
-        "replays_watched": "Replays Bekeken door Anderen",
-        "hits_x_play": "Hits per Play",
+        "play_count": "Aantal keer gespeeld",
+        "total_hits": "Totaal aantal hits",
+        "replays_watched": "Replays bekeken door anderen",
+        "hits_x_play": "Hits per play",
         "followers": "Vrienden",
         "online": "Online"
     },
@@ -148,14 +148,14 @@
             "recent": "Recent"
         },
         "mods": "Mods",
-        "max_combo": "Max Combo",
+        "max_combo": "Max combo",
         "combo": "Combo",
         "grade": "Graad",
         "grades": "Graden",
         "acc": "Acc",
         "accuracy": "Nauwkeurigheid",
         "score": "Score",
-        "ranked_score": "Gerankte Score"
+        "ranked_score": "Gerankte score"
     },
     "beatmapset": {
         "status": {
@@ -164,9 +164,9 @@
             "guest": "Gast",
             "loved": "Loved",
             "nominated": "Genomineerd",
-            "pending": "Pending",
-            "graveyard": "Graveyard",
-            "wip": "In Behandeling",
+            "pending": "In behandeling",
+            "graveyard": "Begraafplaats",
+            "wip": "WIP",
             "approved": "Approved"
         },
         "length": "Lengte",
