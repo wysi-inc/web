@@ -147,11 +147,11 @@
             "firsts": "Pertama",
             "recent": "Terkini"
         },
-        "mods": "Mods",
+        "mods": "Modifikasi",
         "max_combo": "Kombo Maks",
         "combo": "Kombo",
-        "grade": "Grade",
-        "grades": "Grades",
+        "grade": "Pangkat",
+        "grades": "Pangkat",
         "acc": "Acc",
         "accuracy": "Akurasi",
         "score": "Skor",
@@ -163,11 +163,11 @@
             "ranked": "Ranked",
             "guest": "Guest",
             "loved": "Loved",
-            "nominated": "Nominated",
+            "nominated": "Dinominasi",
             "pending": "Pending",
             "graveyard": "Graveyard",
-            "wip": "In Progress",
-            "approved": "Approved"
+            "wip": "Dalam Proses",
+            "approved": "Lulus Uji"
         },
         "length": "Durasi",
         "bpm": "BPM"
