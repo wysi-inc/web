@@ -19,7 +19,7 @@
     "home": {
         "welcome": "¡Bienvenido a wysi727.com!",
         "foss": "Una página web alternativa de código abierto",
-        "built": "Built with bun and htmx",
+        "built": "Creado con bun y htmx",
         "profiles": "Perfiles de usuario",
         "stats": "Estadísticas del Top 100 Puntajes",
         "search": "Búsqueda de Mapas",
@@ -46,47 +46,47 @@
             "most": "Más Jugado",
             "scores": {
                 "title": "Puntajes",
-                "info": "Hover over a grayed out PP to see the (if FC) PP value",
+                "info": "Mantén sobre un PP en gris para ver el valor de PP (con FC)",
                 "tabs": {
-                    "pinned": "Pinned",
-                    "best": "Best",
-                    "first": "First",
-                    "recent": "Recent"
+                    "pinned": "Anclados",
+                    "best": "Mejores",
+                    "first": "Primeros",
+                    "recent": "Recientes"
                 }
             },
             "history": {
                 "title": "Historial",
                 "tabs": {
                     "global": "Global",
-                    "country": "Country",
-                    "plays": "Plays",
-                    "replays": "Replays"
+                    "country": "País",
+                    "plays": "Partidas",
+                    "replays": "Repeticiones"
                 }
             },
             "summary": {
-                "title": "Summary",
-                "info": "This is a quick summary of your top 100 plays",
+                "title": "Resumen",
+                "info": "Este es un resumen rápido de tus 100 mejores partidas",
                 "tabs": {
-                    "hit_ratios": "Hit Ratios",
+                    "hit_ratios": "Proporción de Hits",
                     "grade_ratios": "Grade Ratios",
-                    "average_play": "Average Play"
+                    "average_play": "Partida Promedio"
                 }
             },
             "collections": {
-                "title": "Collections",
-                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "title": "Colecciones",
+                "info": "Cualquier mapa no presente en el sitio web de osu! no será descargado (ej.: osu!trainer, dificultades personalizadas, mapas no subidos...)"
             },
             "setup": {
-                "title": "Setup",
+                "title": "Configuración",
                 "tabs": {
-                    "tablet": "Tablet",
-                    "keyboard": "Keyboard",
-                    "mouse": "Mouse",
+                    "tablet": "Tableta",
+                    "keyboard": "Teclado",
+                    "mouse": "Ratón",
                     "peripherals": "Periféricos",
                     "computer": "Ordenador"
                 },
                 "components": {
-                    "os": "OS",
+                    "os": "Sistema Operativo",
                     "cpu": "CPU",
                     "gpu": "GPU",
                     "ram": "RAM",
@@ -98,33 +98,33 @@
                 "peripherals": {
                     "mousepad": "Mousepad",
                     "keypad": "Keypad",
-                    "headphones": "Headphones",
-                    "camera": "Camera",
-                    "microphone": "Microphone",
+                    "headphones": "Audífonos",
+                    "camera": "Cámara",
+                    "microphone": "Micrófono",
                     "monitor": "Monitor",
                     "audio": "Audio",
-                    "desk": "Desk",
-                    "chair": "Chair"
+                    "desk": "Escritorio",
+                    "chair": "Silla"
                 },
-                "name": "Name",
+                "name": "Nombre",
                 "model": "Modelo",
                 "size": "Tamaño",
                 "area": "Área",
-                "width": "Width",
-                "height": "Height",
+                "width": "Ancho",
+                "height": "Alto",
                 "position": "Posición",
-                "dpi": "Sensitivity",
-                "mult": "Multiplier",
-                "kb_layout": "Keyboard Layout",
+                "dpi": "Sensibilidad",
+                "mult": "Multiplicador",
+                "kb_layout": "Distribución del teclado",
                 "layout": {
-                    "k0": "None",
+                    "k0": "Ninguna",
                     "k2": "2 Teclas",
                     "k3": "3 Teclas",
                     "k4": "4 Teclas",
                     "k60": "60%",
                     "k75": "75%",
                     "ktkl": "TKL",
-                    "kfull": "FULL"
+                    "kfull": "COMPLETO"
                 }
             }
         },
@@ -166,8 +166,8 @@
             "nominated": "Nominados",
             "pending": "Pendientes",
             "graveyard": "Abandonados",
-            "wip": "In Progress",
-            "approved": "Approved"
+            "wip": "En Progreso",
+            "approved": "Aprobado"
         },
         "length": "Duración",
         "bpm": "BPM"
