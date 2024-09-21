@@ -5597,25 +5597,11 @@ input.tab:checked + .tab-content,
 }
 
 @font-face {
-  font-family: "Nunito";
-
-  font-style: normal;
-
-  src: url("/public/fonts/Nunito-Variable.ttf");
-}
-
-@font-face {
-  font-family: "Nunito";
-
-  font-style: italic;
-
-  src: url("/public/fonts/Nunito-Italic-Variable.ttf");
-}
-
-@font-face {
   font-family: "Torus";
 
   font-weight: 100;
+
+  font-style: normal;
 
   src: url("/public/fonts/Torus-Thin.otf");
 }
@@ -5625,6 +5611,8 @@ input.tab:checked + .tab-content,
 
   font-weight: 300;
 
+  font-style: normal;
+
   src: url("/public/fonts/Torus-Light.otf");
 }
 
@@ -5632,6 +5620,8 @@ input.tab:checked + .tab-content,
   font-family: "Torus";
 
   font-weight: 400;
+
+  font-style: normal;
 
   src: url("/public/fonts/Torus-Regular.otf");
 }
@@ -5641,6 +5631,8 @@ input.tab:checked + .tab-content,
 
   font-weight: 600;
 
+  font-style: normal;
+
   src: url("/public/fonts/Torus-SemiBold.otf");
 }
 
@@ -5648,6 +5640,8 @@ input.tab:checked + .tab-content,
   font-family: "Torus";
 
   font-weight: 700;
+
+  font-style: normal;
 
   src: url("/public/fonts/Torus-SemiBold.otf");
 }
@@ -5657,6 +5651,8 @@ input.tab:checked + .tab-content,
 
   font-weight: 900;
 
+  font-style: normal;
+
   src: url("/public/fonts/Torus-Heavy.otf");
 }
 
@@ -5665,14 +5661,66 @@ input.tab:checked + .tab-content,
 
   font-weight: 800;
 
+  font-style: normal;
+
   src: url("/public/fonts/Torus-Bold.otf");
+}
+
+@font-face {
+  font-family: "Nunito";
+
+  font-weight: 400;
+
+  font-style: normal;
+
+  src: url("/public/fonts/Nunito-Variable.ttf");
+}
+
+@font-face {
+  font-family: "Nunito";
+
+  font-weight: 400;
+
+  font-style: italic;
+
+  src: url("/public/fonts/Nunito-Italic-Variable.ttf");
+}
+
+@font-face {
+  font-family: "Baloo";
+
+  font-weight: 400;
+
+  font-style: normal;
+
+  src: url("/public/fonts/BalooBhaijaan2-Variable.ttf");
+}
+
+@font-face {
+  font-family: "Kosugi";
+
+  font-weight: 400;
+
+  font-style: normal;
+
+  src: url("/public/fonts/KosugiMaru-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Moderustic";
+
+  font-weight: 400;
+
+  font-style: normal;
+
+  src: url("/public/fonts/Moderustic-Variable.ttf");
 }
 
 * :not(i) {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Torus, Nunito;
+  font-family: Torus, Nunito, Baloo, Moderustic;
   font-weight: 700;
 }
 
@@ -5945,6 +5993,10 @@ input.tab:checked + .tab-content,
   display: none;
 }
 
+.hover\:flex:hover {
+  display: flex;
+}
+
 .hover\:-translate-y-1:hover {
   --tw-translate-y: -0.25rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -5994,11 +6046,24 @@ input.tab:checked + .tab-content,
   display: flex;
 }
 
+.group\/panel[open] .group-open\/panel\:flex {
+  display: flex;
+}
+
 .group[open] .group-open\:hidden {
   display: none;
 }
 
+.group\/panel[open] .group-open\/panel\:hidden {
+  display: none;
+}
+
 .group[open] .group-open\:rotate-180 {
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.group\/panel[open] .group-open\/panel\:rotate-180 {
   --tw-rotate: 180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
@@ -6013,6 +6078,19 @@ input.tab:checked + .tab-content,
 
 .group:disabled .group-disabled\:hidden {
   display: none;
+}
+
+.peer[open] ~ .peer-open\:flex {
+  display: flex;
+}
+
+.peer[open] ~ .peer-open\:hidden {
+  display: none;
+}
+
+.peer[open] ~ .peer-open\:rotate-180 {
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .peer:invalid ~ .peer-invalid\:hidden {

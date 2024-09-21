@@ -3,64 +3,94 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: "Nunito";
-    font-style: normal;
-    src: url("/public/fonts/Nunito-Variable.ttf");
-}
-
-@font-face {
-    font-family: "Nunito";
-    font-style: italic;
-    src: url("/public/fonts/Nunito-Italic-Variable.ttf");
-}
-
-@font-face {
     font-family: "Torus";
     font-weight: 100;
+    font-style: normal;
     src: url("/public/fonts/Torus-Thin.otf");
 }
 
 @font-face {
     font-family: "Torus";
     font-weight: 300;
+    font-style: normal;
     src: url("/public/fonts/Torus-Light.otf");
 }
 
 @font-face {
     font-family: "Torus";
     font-weight: 400;
+    font-style: normal;
     src: url("/public/fonts/Torus-Regular.otf");
 }
 
 @font-face {
     font-family: "Torus";
     font-weight: 600;
+    font-style: normal;
     src: url("/public/fonts/Torus-SemiBold.otf");
 }
 
 @font-face {
     font-family: "Torus";
     font-weight: 700;
+    font-style: normal;
     src: url("/public/fonts/Torus-SemiBold.otf");
 }
 
 @font-face {
     font-family: "Torus";
     font-weight: 900;
+    font-style: normal;
     src: url("/public/fonts/Torus-Heavy.otf");
 }
 
 @font-face {
     font-family: "Torus";
     font-weight: 800;
+    font-style: normal;
     src: url("/public/fonts/Torus-Bold.otf");
+}
+
+@font-face {
+    font-family: "Nunito";
+    font-weight: 400;
+    font-style: normal;
+    src: url("/public/fonts/Nunito-Variable.ttf");
+}
+
+@font-face {
+    font-family: "Nunito";
+    font-weight: 400;
+    font-style: italic;
+    src: url("/public/fonts/Nunito-Italic-Variable.ttf");
+}
+
+@font-face {
+    font-family: "Baloo";
+    font-weight: 400;
+    font-style: normal;
+    src: url("/public/fonts/BalooBhaijaan2-Variable.ttf");
+}
+
+@font-face {
+    font-family: "Kosugi";
+    font-weight: 400;
+    font-style: normal;
+    src: url("/public/fonts/KosugiMaru-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Moderustic";
+    font-weight: 400;
+    font-style: normal;
+    src: url("/public/fonts/Moderustic-Variable.ttf");
 }
 
 * :not(i) {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: Torus, Nunito;
+    font-family: Torus, Nunito, Baloo, Moderustic;
     font-weight: 700;
 }
 
