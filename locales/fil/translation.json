@@ -2,12 +2,12 @@
     "nav": {
         "home": "Home",
         "users": "Users",
-        "rankings": "Rankings",
+        "rankings": "Mga Ranko",
         "beatmaps": "Beatmaps",
-        "support": "Support",
-        "about": "About",
+        "support": "Suporta",
+        "about": "Tungkol",
         "search": "Search someone",
-        "search_someone": "Search someone",
+        "search_someone": "Maghanap ng tao",
         "help": "Help translate the site!",
         "log": {
             "login": "Login with osu!",
