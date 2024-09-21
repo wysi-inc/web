@@ -5,7 +5,7 @@
         "rankings": "Clasificaciones",
         "beatmaps": "Beatmaps",
         "support": "Soporte",
-        "about": "About",
+        "about": "Acerca de",
         "search": "Busca alguien",
         "search_someone": "Buscar a alguien",
         "help": "¡Ayuda a traducir este sitio!",
@@ -20,32 +20,32 @@
         "welcome": "¡Bienvenido a wysi727.com!",
         "foss": "Una página web alternativa de código abierto",
         "built": "Built with bun and htmx",
-        "profiles": "User Profiles",
-        "stats": "Top 100 Score stats",
-        "search": "Beatmap Search",
-        "calculator": "Built-in PP Calculator",
-        "setup": "Share your setup!",
-        "collections": "Upload your collections!"
+        "profiles": "Perfiles de usuario",
+        "stats": "Estadísticas del Top 100 Puntajes",
+        "search": "Búsqueda de Mapas",
+        "calculator": "Calculadora de PP incluida",
+        "setup": "¡Comparte tu configuración!",
+        "collections": "¡Sube tus colecciones!"
     },
     "user": {
         "sections": {
-            "expand": "Expand",
-            "about": "About",
-            "beatmaps": "Beatmaps",
-            "top": "Top",
+            "expand": "Expandir",
+            "about": "Acerca de",
+            "beatmaps": "Mapas",
+            "top": "Inicio",
             "medals": {
                 "title": "Medallas",
-                "recent": "Recent Medals",
-                "rarest": "Rarest Medal",
-                "show": "Show all"
+                "recent": "Medallas Recientes",
+                "rarest": "Medalla más Rara",
+                "show": "Mostrar todo"
             },
             "year": {
-                "title": "Year",
-                "info": "This is a recap of this year so far, the data will be reset at January 1st"
+                "title": "Año",
+                "info": "Este es un resumen del año hasta ahora, los datos se reiniciarán el 1 de enero"
             },
-            "most": "Most Played",
+            "most": "Más Jugado",
             "scores": {
-                "title": "Scores",
+                "title": "Puntajes",
                 "info": "Hover over a grayed out PP to see the (if FC) PP value",
                 "tabs": {
                     "pinned": "Pinned",
