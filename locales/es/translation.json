@@ -68,7 +68,7 @@
                 "info": "Este es un resumen rápido de tus 100 mejores partidas",
                 "tabs": {
                     "hit_ratios": "Proporción de Hits",
-                    "grade_ratios": "Grade Ratios",
+                    "grade_ratios": "Proporción de Grados",
                     "average_play": "Partida Promedio"
                 }
             },
@@ -77,7 +77,7 @@
                 "info": "Cualquier mapa no presente en el sitio web de osu! no será descargado (ej.: osu!trainer, dificultades personalizadas, mapas no subidos...)"
             },
             "setup": {
-                "title": "Configuración",
+                "title": "Setup",
                 "tabs": {
                     "tablet": "Tableta",
                     "keyboard": "Teclado",
@@ -96,7 +96,7 @@
                     "case": "Caja"
                 },
                 "peripherals": {
-                    "mousepad": "Mousepad",
+                    "mousepad": "Alfombrilla",
                     "keypad": "Keypad",
                     "headphones": "Audífonos",
                     "camera": "Cámara",
@@ -115,9 +115,9 @@
                 "position": "Posición",
                 "dpi": "Sensibilidad",
                 "mult": "Multiplicador",
-                "kb_layout": "Distribución del teclado",
+                "kb_layout": "Tamaño del Teclado",
                 "layout": {
-                    "k0": "Ninguna",
+                    "k0": "Ninguno",
                     "k2": "2 Teclas",
                     "k3": "3 Teclas",
                     "k4": "4 Teclas",
@@ -134,7 +134,7 @@
         "country_rank": "Posición nacional",
         "play_time": "Tiempo jugado",
         "play_count": "Número de Jugadas",
-        "total_hits": "Total Hits",
+        "total_hits": "Hits Totales",
         "replays_watched": "Repeticiones Vistas",
         "hits_x_play": "Clics x Partida",
         "followers": "Seguidores",
@@ -144,7 +144,7 @@
         "status": {
             "pinned": "Fijadas",
             "best": "Mejores",
-            "firsts": "First",
+            "firsts": "Primeros",
             "recent": "Recientes"
         },
         "mods": "Mods",
