@@ -82,7 +82,7 @@
                     "tablet": "Tablet",
                     "keyboard": "Keyboard",
                     "mouse": "Mouse",
-                    "peripherals": "Peripherals",
+                    "peripherals": "Perangkat",
                     "computer": "Komputer"
                 },
                 "components": {
@@ -111,10 +111,10 @@
                 "size": "Ukuran",
                 "area": "Area",
                 "width": "Lebar",
-                "height": "Height",
+                "height": "Tinggi",
                 "position": "Posisi",
                 "dpi": "Sensitivitas",
-                "mult": "Multiplier",
+                "mult": "Pengali",
                 "kb_layout": "Tata letak Keyboard",
                 "layout": {
                     "k0": "Tidak ada",
@@ -132,8 +132,8 @@
         "total_score": "Total Skor",
         "global_rank": "Peringkat Global",
         "country_rank": "Peringkat Nasional",
-        "play_time": "Play Time",
-        "play_count": "Play Count",
+        "play_time": "Waktu Bermain",
+        "play_count": "Kali Bermain",
         "total_hits": "Jumlah Hit",
         "replays_watched": "Pemutaran Tayangan Ulang",
         "hits_x_play": "Hit x Permainan",
@@ -145,7 +145,7 @@
             "pinned": "Disematkan",
             "best": "Terbaik",
             "firsts": "Pertama",
-            "recent": "Recent"
+            "recent": "Terkini"
         },
         "mods": "Mods",
         "max_combo": "Kombo Maks",
@@ -169,11 +169,11 @@
             "wip": "In Progress",
             "approved": "Approved"
         },
-        "length": "Length",
+        "length": "Durasi",
         "bpm": "BPM"
     },
     "footer": {
-        "rights": "All rights reserved to this silly monkey"
+        "rights": "Seluruh hak dilindungi untuk monyet ini"
     },
     "alerts": {
         "user": {
