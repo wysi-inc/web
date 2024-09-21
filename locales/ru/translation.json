@@ -2,12 +2,12 @@
     "nav": {
         "home": "Главная",
         "users": "Пользователи",
-        "rankings": "Rankings",
+        "rankings": "Рейтинг",
         "beatmaps": "Бит-карты",
-        "support": "Support",
-        "about": "About",
+        "support": "Поддержать",
+        "about": "О нас",
         "search": "Найти кого-то",
-        "search_someone": "Search someone",
+        "search_someone": "Найти кого-то",
         "help": "Помогите перевести сайт!",
         "log": {
             "login": "Войти с помощью osu!",
@@ -17,36 +17,36 @@
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu! website alternative",
-        "built": "Built with bun and htmx",
-        "profiles": "User Profiles",
-        "stats": "Top 100 Score stats",
-        "search": "Beatmap Search",
-        "calculator": "Built-in PP Calculator",
-        "setup": "Share your setup!",
-        "collections": "Upload your collections!"
+        "welcome": "Добро пожаловать на wysi727.com!",
+        "foss": "Альтернативный osu! сайт с открытым исходным кодом",
+        "built": "Созданный при помощи bun и htmx",
+        "profiles": "Профили пользователей",
+        "stats": "Статистика топ 100 игр",
+        "search": "Поиск карт",
+        "calculator": "Встроенный PP калькулятор",
+        "setup": "Делитесь своим сетапом!",
+        "collections": "Загружайте ваши коллекции!"
     },
     "user": {
         "sections": {
-            "expand": "Expand",
-            "about": "About",
-            "beatmaps": "Beatmaps",
-            "top": "Top",
+            "expand": "Развернуть",
+            "about": "Обо мне",
+            "beatmaps": "Карты",
+            "top": "Начало",
             "medals": {
                 "title": "Медали",
                 "recent": "Недавние медали",
-                "rarest": "Rarest Medal",
+                "rarest": "Наиболее редкая медаль",
                 "show": "Показать все"
             },
             "year": {
                 "title": "Год",
-                "info": "This is a recap of this year so far, the data will be reset at January 1st"
+                "info": "Это краткое описание текущего года, данные будут сброшены 1 января"
             },
-            "most": "Most Played",
+            "most": "Больше всего сыграно",
             "scores": {
-                "title": "Scores",
-                "info": "Hover over a grayed out PP to see the (if FC) PP value",
+                "title": "Рекорды",
+                "info": "Наведите на серый показатель PP, что бы увидеть значение PP (если бы FC)",
                 "tabs": {
                     "pinned": "Закреплённые",
                     "best": "Лучшие",
@@ -65,16 +65,16 @@
             },
             "summary": {
                 "title": "Сводка",
-                "info": "This is a quick summary of your top 100 plays",
+                "info": "Это краткая сводка ваших топ 100 лучших игр",
                 "tabs": {
-                    "hit_ratios": "Hit Ratios",
-                    "grade_ratios": "Grade Ratios",
-                    "average_play": "Average Play"
+                    "hit_ratios": "Статистика попаданий",
+                    "grade_ratios": "Количество оценок",
+                    "average_play": "Усреднённый результат"
                 }
             },
             "collections": {
                 "title": "Коллекции",
-                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "info": "Любые карты, отсутствующие на сайте osu!, не будут загружены (например: osu!trainer, измененные сложности, не выгруженные карты...)"
             },
             "setup": {
                 "title": "Настройка",
@@ -102,7 +102,7 @@
                     "camera": "Камера",
                     "microphone": "Микрофон",
                     "monitor": "Монитор",
-                    "audio": "Audio",
+                    "audio": "Звук",
                     "desk": "Стол",
                     "chair": "Кресло"
                 },
@@ -115,9 +115,9 @@
                 "position": "Позиция",
                 "dpi": "Чувствительность",
                 "mult": "Множитель",
-                "kb_layout": "Keyboard Layout",
+                "kb_layout": "Размер клавиатуры",
                 "layout": {
-                    "k0": "None",
+                    "k0": "Не выбрано",
                     "k2": "2 Ключа",
                     "k3": "3 Ключа",
                     "k4": "4 Ключа",
@@ -134,9 +134,9 @@
         "country_rank": "Рейтинг в стране",
         "play_time": "Время в игре",
         "play_count": "Количество игр",
-        "total_hits": "Total Hits",
+        "total_hits": "Всего попаданий",
         "replays_watched": "Просмотренные",
-        "hits_x_play": "Hits x Play",
+        "hits_x_play": "Попаданий за игру",
         "followers": "Подписчики",
         "online": "Онлайн"
     },
@@ -144,7 +144,7 @@
         "status": {
             "pinned": "Закреплено",
             "best": "Лучший",
-            "firsts": "First",
+            "firsts": "Первые места",
             "recent": "Последний"
         },
         "mods": "Моды",
@@ -166,8 +166,8 @@
             "nominated": "Номинированный",
             "pending": "Ожидание",
             "graveyard": "Кладбище",
-            "wip": "In Progress",
-            "approved": "Approved"
+            "wip": "В разработке",
+            "approved": "Одобренная"
         },
         "length": "Длительность",
         "bpm": "УД/МИН"
