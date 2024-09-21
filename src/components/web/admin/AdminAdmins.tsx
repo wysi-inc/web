@@ -29,7 +29,7 @@ async function AdminAdmins(p: {
             </form>
             <div class="flex flex-col gap-2" id="roles_notify" />
         </> : <></>}
-        <table class="table table-xs">
+        <table class="table table-zebra table-xs">
             <tr>
                 <th>ID</th>
                 <th>Username</th>

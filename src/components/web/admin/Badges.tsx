@@ -21,14 +21,14 @@ async function Badges() {
             </button>
         </form>
         <div id="badges_notif" class="flex flex-col gap-2" />
-        <table class="table table-xs">
+        <table class="table table-zebra table-xs">
             <tr>
                 <th>ID</th>
                 <th>Username</th>
                 <th>Badges</th>
             </tr>
             {user_badges.map(user =>
-                <tr class="hover">
+                <tr>
                     <th><CopyText text={user.user_id} /></th>
                     <td>
                         <Link url={`/users/${user.user_id}`} css="flex flex-row gap-1 items-center">

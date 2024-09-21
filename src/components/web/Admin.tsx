@@ -13,23 +13,26 @@ async function Admin(p: { t: any, user: UserCookie }) {
 
     const users_with_setup = await User.countDocuments({ setup: { $exists: true, $ne: null } });
 
-    const donation_count = await DonationModel.countDocuments();
+    const donations = await DonationModel.find();
 
     const report_count = await ReportModel.countDocuments();
 
     return (<>
-        <section class="rounded-lg stats bg-base-300 stats-vertical md:stats-horizontal shadow">
+        <section class="stats shadow rounded-lg bg-base-300 stats-vertical md:stats-horizontal">
+            <div class="stat">
+                <div class="stat-title">Profiles Stored</div>
+                <div class="stat-value">{user_count.toLocaleString()}</div>
+                <div class="stat-desc">Total user profiles saved</div>
+            </div>
+            <div class="stat">
+                <div class="stat-title">Profile Setups</div>
+                <div class="stat-value">{users_with_setup.toLocaleString()}</div>
+                <div class="stat-desc">Profiles with custom setups</div>
+            </div>
             <div class="stat">
                 <div class="stat-title">Donations</div>
-                <div class="stat-value">{donation_count.toLocaleString()}</div>
-            </div>
-            <div class="stat">
-                <div class="stat-title">Stored Users</div>
-                <div class="stat-value">{user_count.toLocaleString()}</div>
-            </div>
-            <div class="stat">
-                <div class="stat-title">Custom Setups</div>
-                <div class="stat-value">{users_with_setup.toLocaleString()}</div>
+                <div class="stat-value">{donations.reduce((a, b) => a + b.amount, 0)}€</div>
+                <div class="stat-desc">Across {donations.length.toLocaleString()} contributions</div>
             </div>
         </section>
 

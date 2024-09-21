@@ -1877,6 +1877,14 @@ html {
   font-weight: 800;
 }
 
+.stat-desc {
+  grid-column-start: 1;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--fallback-bc,oklch(var(--bc)/0.6));
+}
+
 .steps .step {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
