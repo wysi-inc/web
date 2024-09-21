@@ -10,6 +10,7 @@ import UserMedalsPanel from "./u_panels/UserMedalsPanel";
 import Report from "../web/Report";
 import type { UserCookie } from "@/src/types/users";
 import { apicall } from "@/index";
+import UserAboutPanel from "./u_panels/UserAboutPanel";
 
 type Props = {
     logged: UserCookie | null;
@@ -55,18 +56,7 @@ const UserPage = async (p: Props) => {
             code: "about",
             icon: <i class="fa-solid fa-user" />,
             show_if: user.page?.html !== undefined && user.page.html.length > 0,
-            jsx: (
-                <div class="rounded-lg bg-base-300 flex justify-center items-center">
-                    {user.page.html ?
-                        <div class="bbcode h-96 overflow-y-scroll grow">
-                            {
-                                user.page.html
-                            }
-                            <script type="module" src={`/public/js/bbcode.js?v=${Date.now()}`} />
-                        </div> : <></>
-                    }
-                </div>
-            )
+            jsx: (<UserAboutPanel html={user.page.html} />)
         },
         {
             title: p.t?.user.sections.setup.title,

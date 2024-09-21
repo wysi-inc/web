@@ -2250,6 +2250,10 @@ input.tab:checked + .tab-content,
     --btn-color: var(--fallback-a);
   }
 
+  .btn-neutral {
+    --btn-color: var(--fallback-n);
+  }
+
   .btn-info {
     --btn-color: var(--fallback-in);
   }
@@ -2329,6 +2333,10 @@ input.tab:checked + .tab-content,
     --btn-color: var(--a);
   }
 
+  .btn-neutral {
+    --btn-color: var(--n);
+  }
+
   .btn-info {
     --btn-color: var(--in);
   }
@@ -2356,6 +2364,12 @@ input.tab:checked + .tab-content,
   --tw-text-opacity: 1;
   color: var(--fallback-ac,oklch(var(--ac)/var(--tw-text-opacity)));
   outline-color: var(--fallback-a,oklch(var(--a)/1));
+}
+
+.btn-neutral {
+  --tw-text-opacity: 1;
+  color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity)));
+  outline-color: var(--fallback-n,oklch(var(--n)/1));
 }
 
 .btn-info {
@@ -4698,6 +4712,11 @@ input.tab:checked + .tab-content,
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.rotate-180 {
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
@@ -6068,6 +6087,23 @@ img:not([src]):not([srcset]) {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.group:checked .group-checked\:flex {
+  display: flex;
+}
+
+.group:checked .group-checked\:hidden {
+  display: none;
+}
+
+.group:checked .group-checked\:max-h-96 {
+  max-height: 24rem;
+}
+
+.group:checked .group-checked\:rotate-180 {
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .group:hover .group-hover\:flex {
   display: flex;
 }
@@ -6078,6 +6114,23 @@ img:not([src]):not([srcset]) {
 
 .group:disabled .group-disabled\:hidden {
   display: none;
+}
+
+.peer:checked ~ .peer-checked\:flex {
+  display: flex;
+}
+
+.peer:checked ~ .peer-checked\:hidden {
+  display: none;
+}
+
+.peer:checked ~ .peer-checked\:max-h-96 {
+  max-height: 24rem;
+}
+
+.peer:checked ~ .peer-checked\:rotate-180 {
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .peer:invalid ~ .peer-invalid\:hidden {
@@ -6096,6 +6149,19 @@ img:not([src]):not([srcset]) {
   display: none;
 }
 
+.peer.max-h-96 ~ .peer-\[\.max-h-96\]\:flex {
+  display: flex;
+}
+
+.peer.max-h-96 ~ .peer-\[\.max-h-96\]\:hidden {
+  display: none;
+}
+
+.peer.max-h-96 ~ .peer-\[\.max-h-96\]\:rotate-0 {
+  --tw-rotate: 0deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .has-\[\:disabled\]\:border-0:has(:disabled) {
   border-width: 0px;
 }
@@ -6110,6 +6176,11 @@ img:not([src]):not([srcset]) {
   background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity)));
 }
 
+.has-\[\.max-h-96\]\:bg-white:has(.max-h-96) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 .has-\[\:checked\]\:opacity-100:has(:checked) {
   opacity: 1;
 }
@@ -6122,8 +6193,29 @@ img:not([src]):not([srcset]) {
   display: block;
 }
 
+.group:has(:cheked) .group-has-\[\:cheked\]\:flex {
+  display: flex;
+}
+
 .group:has(:disabled) .group-has-\[\:disabled\]\:hidden {
   display: none;
+}
+
+.group:has(:cheked) .group-has-\[\:cheked\]\:hidden {
+  display: none;
+}
+
+.peer:has(max-h-96) ~ .peer-has-\[max-h-96\]\:flex {
+  display: flex;
+}
+
+.peer:has(max-h-96) ~ .peer-has-\[max-h-96\]\:hidden {
+  display: none;
+}
+
+.peer:has(max-h-96) ~ .peer-has-\[max-h-96\]\:rotate-0 {
+  --tw-rotate: 0deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 @media (min-width: 640px) {

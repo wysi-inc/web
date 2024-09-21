@@ -23,12 +23,10 @@ const Panel = (p: {
         </header>
         {p.manual ?
             <details class="group/panel">
-                <summary class="cursor-pointer bg-neutral rounded-lg flex flex-row gap-4 items-center justify-between py-2 px-4">
-                    <div class="flex flex-row gap-4 items-center">
-                        <i class="group-open/panel:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
-                        <h6 class="group-open/panel:hidden flex">Show</h6>
-                        <h6 class="group-open/panel:flex hidden">Hide</h6>
-                    </div>
+                <summary class="cursor-pointer btn btn-neutral btn-sm btn-block flex flex-row gap-4">
+                    <i class="group-open/panel:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
+                    <h6 class="group-open/panel:hidden flex">Show</h6>
+                    <h6 class="group-open/panel:flex hidden">Hide</h6>
                 </summary>
                 <div class="mt-4">
                     {p.children}
