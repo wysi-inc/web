@@ -38,7 +38,7 @@ async function Rankings(p: {
             )}
         </table>
         <Pagination mode={p.mode} category={p.category} page={p.page} />
-        <script>lazyLoader.update(); getUserStuff();</script>
+        <script>getUserStuff();</script>
     </>);
 }
 

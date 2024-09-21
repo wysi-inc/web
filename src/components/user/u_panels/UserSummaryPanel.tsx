@@ -129,7 +129,7 @@ const UserSummaryPanel = async (p: Props) => {
         return mods;
     }
 
-    return (
+    return (<>
         <div class="flex flex-col gap-4">
             <div class="shadow-lg flex flex-col grow col-span-full bg-neutral rounded-lg">
                 <div class="py-1 px-2 text-neutral-content">Average Play:</div>
@@ -202,7 +202,8 @@ const UserSummaryPanel = async (p: Props) => {
                 </div>
             </div>
         </div>
-    );
+        <script>lazyLoader.update();</script>
+    </>);
 }
 
 export default UserSummaryPanel;
