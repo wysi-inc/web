@@ -96,3 +96,12 @@ h4 {
 .bbcode .bbcode__video-box {
     max-width: 425px
 }
+
+.bbcode-spoilerbox__body {
+    display: none;
+}
+
+.bbcode-spoilerbox__link::before {
+    content: ">";
+    margin-right: 10px;
+}

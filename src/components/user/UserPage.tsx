@@ -62,6 +62,7 @@ const UserPage = async (p: Props) => {
                             {
                                 user.page.html
                             }
+                            <script type="module" src={`/public/js/bbcode.js?v=${Date.now()}`} />
                         </div> : <></>
                     }
                 </div>
