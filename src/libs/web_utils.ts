@@ -13,11 +13,12 @@ export function secondsToTime(secs: number): string {
 export function getGradeLetter(grade: string): string {
     switch (grade.toLowerCase()) {
         case "ssh":
-        case "ss":
         case "xh":
-            return "X";
+            return "SS+";
+        case "x":
+            return "SS";
         case "sh":
-            return "S";
+            return "S+";
         default:
             return grade.toUpperCase();
     }
