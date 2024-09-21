@@ -27,9 +27,9 @@ async function UserTopPanel(p: {
     const best_country = p.user.db_ranks?.country_ranks?.sort?.((a, b) => a.rank - b.rank)[0];
     const grade_counts = new Map();
 
-    grade_counts.set("XH", { count: p.user.statistics.grade_counts.ssh, color: colors.grades.xh });
-    grade_counts.set("X", { count: p.user.statistics.grade_counts.ss, color: colors.grades.x });
-    grade_counts.set("SH", { count: p.user.statistics.grade_counts.sh, color: colors.grades.sh });
+    grade_counts.set("SS+", { count: p.user.statistics.grade_counts.ssh, color: colors.grades.xh });
+    grade_counts.set("SS", { count: p.user.statistics.grade_counts.ss, color: colors.grades.x });
+    grade_counts.set("S+", { count: p.user.statistics.grade_counts.sh, color: colors.grades.sh });
     grade_counts.set("S", { count: p.user.statistics.grade_counts.s, color: colors.grades.s });
     grade_counts.set("A", { count: p.user.statistics.grade_counts.a, color: colors.grades.a });
 

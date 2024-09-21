@@ -43,9 +43,9 @@ async function getGrades() {
         const inspector = await res.json();
         if (inspector.user === null) throw new Error("User not found");
 
-        grade_counts.set("XH", { count: inspector.user.ssh_count, color: colors.grades.xh });
-        grade_counts.set("X", { count: inspector.user.ss_count, color: colors.grades.x });
-        grade_counts.set("SH", { count: inspector.user.sh_count, color: colors.grades.sh });
+        grade_counts.set("SS+", { count: inspector.user.ssh_count, color: colors.grades.xh });
+        grade_counts.set("SS", { count: inspector.user.ss_count, color: colors.grades.x });
+        grade_counts.set("S+", { count: inspector.user.sh_count, color: colors.grades.sh });
         grade_counts.set("S", { count: inspector.user.s_count, color: colors.grades.s });
         grade_counts.set("A", { count: inspector.user.a_count, color: colors.grades.a });
         grade_counts.set("B", { count: inspector.user.b_count, color: colors.grades.b });
