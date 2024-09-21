@@ -2,11 +2,11 @@
     "nav": {
         "home": "Beranda",
         "users": "Pengguna",
-        "rankings": "Peringkat Dunia",
+        "rankings": "Peringkat",
         "beatmaps": "Beatmap",
         "support": "Dukungan",
         "about": "Tentang",
-        "search": "Search someone",
+        "search": "Pencarian",
         "search_someone": "Cari seseorang",
         "help": "Bantu terjemahkan situs ini!",
         "log": {
@@ -21,7 +21,7 @@
         "foss": "Sebuah alternatif situs open source osu!",
         "built": "Dibuat menggunakan bun dan htmx",
         "profiles": "Profil Pengguna",
-        "stats": "Statistik 100 skor terbaik",
+        "stats": "Statistik 100 Skor Terbaik",
         "search": "Cari Beatmap",
         "calculator": "Kalkulator PP Bawaan",
         "setup": "Bagikan setup anda!",
@@ -32,7 +32,7 @@
             "expand": "Selengkapnya",
             "about": "Tentang",
             "beatmaps": "Beatmap",
-            "top": "Top",
+            "top": "Atas",
             "medals": {
                 "title": "Medali",
                 "recent": "Medali Terkini",
@@ -69,7 +69,7 @@
                 "tabs": {
                     "hit_ratios": "Rasio Hit",
                     "grade_ratios": "Rasio Nilai ",
-                    "average_play": "Average Play"
+                    "average_play": "Rata-rata Permainan"
                 }
             },
             "collections": {
@@ -136,7 +136,7 @@
         "play_count": "Play Count",
         "total_hits": "Jumlah Hit",
         "replays_watched": "Pemutaran Tayangan Ulang",
-        "hits_x_play": "Hits x Play",
+        "hits_x_play": "Hit x Permainan",
         "followers": "Pengikut",
         "online": "Online"
     },
