@@ -1,10 +1,10 @@
 import type { Mode } from "../types/osu";
 
-export const catalans: number[] = [
+export const catalans = [
     17018032, // M4rti_
     17897192, // Siirius
     13817790, // -Yasai-
-    20661304 // Japii
+    20661304, // Japii
 ];
 
 export const languages = new Map();

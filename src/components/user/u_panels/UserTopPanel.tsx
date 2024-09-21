@@ -24,8 +24,6 @@ async function UserTopPanel(p: {
     editable?: boolean
 }) {
 
-    if (!p.user) return <></>;
-
     const best_country = p.user.db_ranks?.country_ranks?.sort?.((a, b) => a.rank - b.rank)[0];
     const grade_counts = new Map();
 

@@ -4,14 +4,16 @@ import type { User, UserList } from "@/src/types/users";
 import { updateUser } from "./update_user";
 import { catalans } from "@/src/libs/constants";
 
-export async function getUser(id: string, mode: Mode | undefined): Promise<User | null> {
+export async function getUser(id: string, mode: Mode | undefined) {
     try {
         let user: User = (await v2.user.details(id, mode) as User);
 
-        if ("error" in user) return null;
+        if ("error" in user) {
+            console.error(user.error);
+            return null;
+        }
 
         mode = user.rank_history?.mode as Mode || "osu";
-
         user = await updateUser(user, mode);
 
         if (catalans.includes(user.id)) {
@@ -41,6 +43,10 @@ export async function getRankings(
             obj.country = country.toUpperCase();
         }
         const res: UserList = await v2.site.ranking.details(mode, category, obj);
+        if ("error" in res) {
+            console.error(res.error);
+            return null;
+        }
         return res;
     } catch (err) {
         console.error(err);
