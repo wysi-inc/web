@@ -124,7 +124,7 @@ async function Support() {
             </div>
         </div>
         <div class="bg-base-100 rounded-lg p-4 flex flex-col gap-4">
-            <h3 class="text-xl"><i class="fa-solid fa-hand-holding-dollar" /> Donations</h3>
+            <h3 class="text-xl"><i class="fa-solid fa-heart" /> Donations</h3>
             <div class="flex flex-col gap-4">
                 {donations.length === 0 ?
                     <span>No donations have been made yet :(</span> :
