@@ -70,7 +70,7 @@ async function UserTopPanel(p: {
                             </div>
                         </div>
                         <div class="flex flex-col gap-2 justify-between items-start grow">
-                            {(p.user.wysi_badges?.length || 0) < 0 ?
+                            {(p.user.wysi_badges?.length || 0) > 0 ?
                                 <div class="flex flex-row gap-2 flex-wrap">{p.user.wysi_badges?.map(b => <Badge user_id={p.user.id} badge_id={b} editable={false} />)}</div>
                                 : <></>
                             }
