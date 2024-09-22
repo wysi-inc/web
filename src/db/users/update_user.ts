@@ -218,7 +218,8 @@ export async function saveSocial(user_id: number, username: string, platform: st
     const user = await User.findOne({ user_id });
     if (!user) return false;
     if (!user.socials) user.socials = [{ platform, username }] as any;
-    if (!user.socials.find(s => s.platform === platform)) user.socials.push({ platform, username });
+    if (user.socials.find(s => s.platform === platform)) return false;
+    user.socials.push({ platform, username });
     await user.save();
     return true;
 }
