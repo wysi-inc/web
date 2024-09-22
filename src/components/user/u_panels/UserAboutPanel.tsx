@@ -1,10 +1,10 @@
 function UserAboutPanel(p: { html: string }) {
     return (
         <div class="flex flex-col gap-4">
-            <div class="peer bg-base-300 p-4 overflow-hidden max-h-96" id="user_about">
+            <div class="peer bg-base-300 p-4 duration-500 ease-in-out overflow-hidden max-h-96" id="user_about">
                 {p.html}
             </div>
-            <button class="cursor-pointer btn btn-neutral btn-sm btn-block flex flex-row gap-4"
+            <button class="cursor-pointer btn btn-secondary btn-sm btn-wide mx-auto flex flex-row gap-4"
                 onclick={`
                     if (document.getElementById('user_about').classList.toggle('max-h-96')) {
                         document.getElementById('user_about_text').innerText = 'Expand';

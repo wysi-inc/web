@@ -103,7 +103,17 @@ h4 {
     transition: .5s ease-out;
 }
 
+.bbcode-spoilerbox__link:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.bbcode-spoilerbox__link-icon {
+    text-decoration: none !important;
+}
+
 .bbcode-spoilerbox__link-icon::before {
     content: ">";
     margin-right: 10px;
+    text-decoration: none !important;
 }

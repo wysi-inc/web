@@ -2202,10 +2202,6 @@ input.tab:checked + .tab-content,
     --btn-color: var(--fallback-a);
   }
 
-  .btn-neutral {
-    --btn-color: var(--fallback-n);
-  }
-
   .btn-info {
     --btn-color: var(--fallback-in);
   }
@@ -2285,10 +2281,6 @@ input.tab:checked + .tab-content,
     --btn-color: var(--a);
   }
 
-  .btn-neutral {
-    --btn-color: var(--n);
-  }
-
   .btn-info {
     --btn-color: var(--in);
   }
@@ -2316,12 +2308,6 @@ input.tab:checked + .tab-content,
   --tw-text-opacity: 1;
   color: var(--fallback-ac,oklch(var(--ac)/var(--tw-text-opacity)));
   outline-color: var(--fallback-a,oklch(var(--a)/1));
-}
-
-.btn-neutral {
-  --tw-text-opacity: 1;
-  color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity)));
-  outline-color: var(--fallback-n,oklch(var(--n)/1));
 }
 
 .btn-info {
@@ -4913,6 +4899,11 @@ input.tab:checked + .tab-content,
   background-color: rgb(0 48 135 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#00AFF1\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 175 241 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#0866c2\] {
   --tw-bg-opacity: 1;
   background-color: rgb(8 102 194 / var(--tw-bg-opacity));
@@ -5086,11 +5077,6 @@ input.tab:checked + .tab-content,
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#00AFF1\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 175 241 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-0 {
@@ -5563,6 +5549,10 @@ input.tab:checked + .tab-content,
 
 .duration-300 {
   transition-duration: 300ms;
+}
+
+.duration-500 {
+  transition-duration: 500ms;
 }
 
 .ease-in {
@@ -6061,23 +6051,7 @@ img:not([src]):not([srcset]) {
   display: block;
 }
 
-.group\/setup:disabled .group-disabled\/setup\:block {
-  display: block;
-}
-
 .group:disabled .group-disabled\:hidden {
-  display: none;
-}
-
-.group\/setup:disabled .group-disabled\/setup\:hidden {
-  display: none;
-}
-
-.group\/setup:disabled .group-\[\:disabled\]\/setup\:block {
-  display: block;
-}
-
-.group\/setup:disabled .group-\[\:disabled\]\/setup\:hidden {
   display: none;
 }
 
@@ -6119,16 +6093,8 @@ img:not([src]):not([srcset]) {
   outline-style: solid;
 }
 
-.group:has(:disabled) .group-has-\[\:disabled\]\:block {
-  display: block;
-}
-
 .group\/setup:has(:disabled) .group-has-\[\:disabled\]\/setup\:block {
   display: block;
-}
-
-.group:has(:disabled) .group-has-\[\:disabled\]\:hidden {
-  display: none;
 }
 
 .group\/setup:has(:disabled) .group-has-\[\:disabled\]\/setup\:hidden {
