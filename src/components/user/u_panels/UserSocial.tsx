@@ -115,7 +115,7 @@ function UserSocial(p: { social: Social, username: string, user_id: number, edit
             bg: "bg-[#000000]",
         },
         "anilist": {
-            icon: <img data-src="/public/img/anilist.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img data-src="/public/img/socials/anilist.svg" class="size-4" loading="lazy" alt="ico" />,
             bg: "bg-[#242434]",
             url: `https://anilist.co/user/${p.username}`
         },
