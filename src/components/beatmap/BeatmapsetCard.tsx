@@ -46,12 +46,12 @@ const BeatmapsetCard = ({ beatmapset }: Props) => {
                             a.mode === b.mode ? a.difficulty_rating - b.difficulty_rating : a.mode_int - b.mode_int)
                             .map((beatmap, i) => i < DIFF_LIMIT &&
                                 <DiffIconLink setId={beatmapset.id} diffId={beatmap.id}
-                                    diff={beatmap.difficulty_rating} size={20}
+                                    diff={beatmap.difficulty_rating} size={16}
                                     mode={beatmap.mode as Mode} name={beatmap.version} />)
                         }
                     </div>
                     {diffs.length > DIFF_LIMIT &&
-                        <div class="badge badge-info">+{beatmapset.beatmaps.length - DIFF_LIMIT}</div>
+                        <div class="badge badge-sm badge-info">+{beatmapset.beatmaps.length - DIFF_LIMIT}</div>
                     }
                     <div class="ms-auto text-xs flex flex-row gap-2">
                         <div class="tooltip" data-tip={beatmapset?.favourite_count}>

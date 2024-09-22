@@ -202,7 +202,6 @@ const UserSummaryPanel = async (p: Props) => {
                 </div>
             </div>
         </div>
-        <script>lazyLoader.update();</script>
     </>);
 }
 

@@ -9,9 +9,10 @@
     },
     "scripts": {
         "dev": "bun run --watch index.ts",
-        "prod": "bun run cssprod && bun run index.ts",
         "css": "tailwindcss -i ./public/css/main_in.css -o ./public/css/main_out.css --watch",
-        "cssprod": "tailwindcss -i ./public/css/main_in.css -o ./public/css/main_out.css --minify"
+        "prod": "bun run cssprod && bun run build && bun run index.ts",
+        "cssprod": "tailwindcss -i ./public/css/main_in.css -o ./public/css/main_out.css --minify",
+        "build": "bun run build.ts"
     },
     "peerDependencies": {
         "typescript": "^5.3.3"

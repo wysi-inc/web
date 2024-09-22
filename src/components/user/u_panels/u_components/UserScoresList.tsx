@@ -31,7 +31,6 @@ const UserScoresList = async (p: Props) => {
         {scores.length >= p.limit ?
             <LoadMoreButton url={`/users/${p.id}/${p.mode}/lists/scores/${p.category}?offset=${p.offset + p.limit}&limit=20`} />
             : <></>}
-        <script>lazyLoader.update()</script>
     </>
 }
 

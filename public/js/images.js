@@ -9,18 +9,12 @@ class LazyLoader {
     }
 
     init() {
-        // Select all images and elements with data-bg
-        const images = document.querySelectorAll(this.imageSelector);
-        const bgElements = document.querySelectorAll(this.bgSelector);
-
-        // Create a new IntersectionObserver
         this.observer = new IntersectionObserver(this.loadElements.bind(this), {
             threshold: this.threshold,
         });
 
-        // Observe each image and background element
-        images.forEach((img) => this.observer.observe(img));
-        bgElements.forEach((el) => this.observer.observe(el));
+        document.querySelectorAll(this.imageSelector).forEach((img) => this.observer.observe(img));
+        document.querySelectorAll(this.bgSelector).forEach((el) => this.observer.observe(el));
     }
 
     loadElements(entries) {
@@ -87,3 +81,4 @@ class LazyLoader {
 
 var lazyLoader = new LazyLoader('img[data-src]', '[data-bg]', '/public/img/fallback.webp', '/public/img/fallback.webp');
 lazyLoader.init();
+htmxAfterFunctions.push(() => lazyLoader.update());

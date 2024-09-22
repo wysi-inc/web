@@ -130,8 +130,7 @@ const BeatmapScoreTable = async (p: {
                     </tr>
                 )}
             </tbody>
-        </table >
-        <script>lazyLoader.update(); getUserStuff();</script>
+        </table>
     </>);
 };
 

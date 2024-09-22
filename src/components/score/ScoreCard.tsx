@@ -51,7 +51,7 @@ const ScoreCard = async ({ score, position }: Props) => {
                                     beatmap_artist={beatmapset.artist}
                                 />
                             </div>
-                            <div class="flex flex-col py-2 px-4 truncate">
+                            <div class="flex flex-col py-1 px-2 truncate">
                                 <Link css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmapsets/${beatmapset.id}`}>{beatmapset.title}</Link>
                                 <p class="text-neutral-content text-opacity-75 text-sm truncate"> by {beatmapset.artist}</p>
                             </div>
@@ -113,10 +113,10 @@ const ScoreCard = async ({ score, position }: Props) => {
                         </div>
                     </div>
                 </div>
-                <div class="text-opacity-75 text-base-content py-1 px-2 flex flex-row flex-wrap gap-4 items-center">
+                <div class="text-sm text-opacity-75 text-base-content p-0.5 flex flex-row flex-wrap gap-2 items-center">
                     <StatusBadge status={beatmapset.status as BeatmapsetStatus} />
                     <DiffIconLink setId={beatmapset.id} diffId={score.beatmap.id}
-                        diff={score.beatmap.difficulty_rating} size={20}
+                        diff={score.beatmap.difficulty_rating} size={16}
                         mode={score.beatmap.mode as Mode} name={score.beatmap.version} />
                     <Link url={`/users/${beatmapset.user_id}`}>
                         <div class="tooltip" data-tip={beatmapset.creator}>

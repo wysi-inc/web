@@ -4332,6 +4332,10 @@ input.tab:checked + .tab-content,
   top: 0.5rem;
 }
 
+.top-14 {
+  top: 3.5rem;
+}
+
 .z-40 {
   z-index: 40;
 }
@@ -4452,6 +4456,14 @@ input.tab:checked + .tab-content,
 
 .mt-auto {
   margin-top: auto;
+}
+
+.-mt-0\.5 {
+  margin-top: -0.125rem;
+}
+
+.-mt-7 {
+  margin-top: -1.75rem;
 }
 
 .block {
@@ -4849,6 +4861,10 @@ input.tab:checked + .tab-content,
   gap: 2rem;
 }
 
+.gap-3 {
+  gap: 0.75rem;
+}
+
 .space-x-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(1rem * var(--tw-space-x-reverse));
@@ -4930,6 +4946,11 @@ input.tab:checked + .tab-content,
 .rounded-s-full {
   border-start-start-radius: 9999px;
   border-end-start-radius: 9999px;
+}
+
+.rounded-b-lg {
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
 }
 
 .border {
@@ -5146,6 +5167,11 @@ input.tab:checked + .tab-content,
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-primary {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity)));
+}
+
 .bg-opacity-0 {
   --tw-bg-opacity: 0;
 }
@@ -5182,6 +5208,10 @@ input.tab:checked + .tab-content,
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
 
+.bg-gradient-to-b {
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+}
+
 .from-\[\#001862\] {
   --tw-gradient-from: #001862 var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(0 24 98 / 0) var(--tw-gradient-to-position);
@@ -5212,6 +5242,18 @@ input.tab:checked + .tab-content,
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
+.from-base-100 {
+  --tw-gradient-from: var(--fallback-b1,oklch(var(--b1)/1)) var(--tw-gradient-from-position);
+  --tw-gradient-to: var(--fallback-b1,oklch(var(--b1)/0)) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-transparent {
+  --tw-gradient-from: transparent var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .via-\[\#002a7d\] {
   --tw-gradient-to: rgb(0 42 125 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), #002a7d var(--tw-gradient-via-position), var(--tw-gradient-to);
@@ -5220,6 +5262,21 @@ input.tab:checked + .tab-content,
 .via-\[\#f80d68\] {
   --tw-gradient-to: rgb(248 13 104 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), #f80d68 var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+.via-base-100 {
+  --tw-gradient-to: var(--fallback-b1,oklch(var(--b1)/0))  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--fallback-b1,oklch(var(--b1)/1)) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+.via-transparent {
+  --tw-gradient-to: rgb(0 0 0 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), transparent var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+.via-base-300 {
+  --tw-gradient-to: var(--fallback-b3,oklch(var(--b3)/0))  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--fallback-b3,oklch(var(--b3)/1)) var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
 
 .to-\[\#0094d4\] {
@@ -5240,6 +5297,18 @@ input.tab:checked + .tab-content,
 
 .to-sky-500 {
   --tw-gradient-to: #0ea5e9 var(--tw-gradient-to-position);
+}
+
+.to-primary {
+  --tw-gradient-to: var(--fallback-p,oklch(var(--p)/1)) var(--tw-gradient-to-position);
+}
+
+.to-neutral {
+  --tw-gradient-to: var(--fallback-n,oklch(var(--n)/1)) var(--tw-gradient-to-position);
+}
+
+.to-base-300 {
+  --tw-gradient-to: var(--fallback-b3,oklch(var(--b3)/1)) var(--tw-gradient-to-position);
 }
 
 .bg-cover {
@@ -5289,6 +5358,10 @@ input.tab:checked + .tab-content,
 
 .p-4 {
   padding: 1rem;
+}
+
+.p-0\.5 {
+  padding: 0.125rem;
 }
 
 .px-1 {
@@ -6275,6 +6348,15 @@ img:not([src]):not([srcset]) {
 
   .md\:rounded-lg {
     border-radius: 0.5rem;
+  }
+
+  .md\:rounded-b-lg {
+    border-bottom-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+  }
+
+  .md\:p-4 {
+    padding: 1rem;
   }
 }
 

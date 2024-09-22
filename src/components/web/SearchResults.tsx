@@ -65,7 +65,6 @@ async function SearchResults({ query }: Props) {
                     </div>
                 </Link> : <></>)}
         </div>
-        <script>lazyLoader.update(); getUserStuff();</script>
     </>);
 }
 

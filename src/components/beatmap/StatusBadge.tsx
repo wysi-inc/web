@@ -6,11 +6,11 @@ type Props = {
 }
 const StatusBadge = ({ status }: Props) => {
     return (
-        <div class="text-opacity-100 badge m-0 border-0" style={{
+        <div class="text-opacity-100 badge badge-sm m-0 border-0" style={{
             color: "#000",
             backgroundColor: colors.beatmap[status]
         }}>
-            {status}
+            {status.toUpperCase()}
         </div>
     );
 }

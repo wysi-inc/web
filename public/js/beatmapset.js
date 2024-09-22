@@ -1,21 +1,5 @@
 import "https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js";
 
-const colors = {
-    difficulty: [
-        '#4290fe',
-        '#4cb6ff',
-        '#4fffd4',
-        '#cdf458',
-        '#fc9964',
-        '#f64d7a',
-        '#ad4dc2',
-        '#4d4bc4',
-        '#12106a',
-        '#000000',
-        '#000000'
-    ]
-};
-
 export function getDiffColor(diff) {
     let startColor;
     let endColor;

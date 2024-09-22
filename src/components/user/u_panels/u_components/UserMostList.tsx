@@ -28,7 +28,6 @@ const UserMostList = async (p: Props) => {
         {plays.length >= p.limit ?
             <LoadMoreButton url={`/users/${p.id}/0/lists/most?offset=${p.offset + p.limit}&limit=20`} />
             : <></>}
-        <script>lazyLoader.update()</script>
     </>)
 }
 

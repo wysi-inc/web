@@ -38,7 +38,6 @@ async function Rankings(p: {
             )}
         </table>
         <Pagination mode={p.mode} category={p.category} page={p.page} />
-        <script>getUserStuff();</script>
     </>);
 }
 

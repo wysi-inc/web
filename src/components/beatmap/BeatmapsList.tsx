@@ -17,7 +17,6 @@ async function BeatmapsList(p: {
         {res.sets.length < 50 ? null :
             <LoadMoreButton url={`/beatmapsets/list/${res.offset}`} include="#search-form" />
         }
-        <script>lazyLoader.update()</script>
     </>);
 }
 

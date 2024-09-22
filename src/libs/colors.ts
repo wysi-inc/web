@@ -30,15 +30,15 @@ export const colors = {
         xMiss: '#f87454',
     },
     grades: {
-        xh: '#dddddd',
-        x: '#ffa317',
-        sh: '#dddddd',
-        s: '#ff7d31',
-        a: '#4db508',
-        b: '#0564eb',
-        c: '#c715e0',
-        d: '#e30012',
-        f: '#aaaaaa'
+        xh: '#f9fafb',
+        x: '#eab308',
+        sh: '#a3a3a3',
+        s: '#f97316',
+        a: '#84cc16',
+        b: '#3b82f6',
+        c: '#8b5cf6',
+        d: '#ef4444',
+        f: '#6b7280'
     },
     beatmap: {
         any: '#f0f0f0',

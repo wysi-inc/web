@@ -1,15 +1,33 @@
+var htmxAfterFunctions = [];
+document.body.addEventListener('htmx:afterRequest', () => {
+    htmxAfterFunctions.forEach(f => { f() })
+})
+
 const colors = {
     grades: {
-        xh: '#dddddd',
-        x: '#ffa317',
-        sh: '#dddddd',
-        s: '#ff7d31',
-        a: '#4db508',
-        b: '#0564eb',
-        c: '#c715e0',
-        d: '#e30012',
-        f: '#aaaaaa'
-    }
+        xh: '#f9fafb',
+        x: '#eab308',
+        sh: '#a3a3a3',
+        s: '#f97316',
+        a: '#84cc16',
+        b: '#3b82f6',
+        c: '#8b5cf6',
+        d: '#ef4444',
+        f: '#6b7280'
+    },
+    difficulty: [
+        '#4290fe',
+        '#4cb6ff',
+        '#4fffd4',
+        '#cdf458',
+        '#fc9964',
+        '#f64d7a',
+        '#ad4dc2',
+        '#4d4bc4',
+        '#12106a',
+        '#000000',
+        '#000000'
+    ],
 };
 
 function secondsToTime(secs) {
@@ -201,8 +219,6 @@ async function getSubdivisionRankings() {
         h2.parentElement.classList.add("flex");
         h2.classList.add("flex");
         h2.innerText = `#${user.placement}`;
-        // div.classList.add("tooltip");
-        // div.setAttribute("data-tip", subdivision.name);
     }
 }
 function getUserStuff() {
@@ -210,3 +226,6 @@ function getUserStuff() {
     getSubdivisionRankings();
     getClans();
 }
+
+getUserStuff();
+htmxAfterFunctions.push(getUserStuff);

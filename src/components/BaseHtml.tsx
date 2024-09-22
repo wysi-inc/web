@@ -10,6 +10,8 @@ type Props = {
     lang: any
 }
 
+const PROD = process.env.STATE === "prod";
+
 const BaseHtml = ({ lang, t, user, children }: Props) => {
     return (<>
         <html class="scroll-smooth" lang="en">
@@ -33,15 +35,16 @@ const BaseHtml = ({ lang, t, user, children }: Props) => {
                 <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous" />
                 <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js" />
                 <script src="https://kit.fontawesome.com/d5ab19acce.js" crossorigin="anonymous" async />
-                <script src="/public/js/utils.js" />
-                <script src="/public/js/search.js" defer />
-                <script src="/public/js/audio.js" defer />
-                <script src="/public/js/images.js" defer />
+                <script src={`/public/js/utils.js`} defer />
+                <script src={`/public/js/search${PROD ? ".min" : ""}.js`} defer />
+                <script src={`/public/js/audio${PROD ? ".min" : ""}.js`} defer />
+                <script src={`/public/js/images${PROD ? ".min" : ""}.js`} defer />
+                <script src={`/public/js/bbcode${PROD ? ".min" : ""}.js`} defer />
             </head>
             <body class="bg-base-300 flex flex-col justify-center items-center" id="top">
                 <Navbar lang={lang} t={t} user={user} />
                 <main class="w-screen mil:w-mil">
-                    <div id="main" class="py-4 px-4 flex flex-col gap-4 bg-neutral shadow-lg">
+                    <div id="main" class="md:p-4 flex flex-col gap-4 bg-neutral shadow-lg">
                         {children}
                     </div>
                 </main>
