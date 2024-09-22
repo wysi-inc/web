@@ -35,7 +35,7 @@ async function UserTopPanel(p: {
 
     const joined_date = moment(p.user.join_date).format("DD/MM/YYYY");
 
-    const has_socials = true;
+    const has_socials = p.user.discord ? true : p.user.twitter ? true : p.user.socials ? p.user.socials.length > 0 ? true : false : false;
     const has_info = p.user.location ? true : p.user.interests ? true : p.user.occupation ? true : p.user.website ? true : false;
 
     return (
@@ -194,88 +194,92 @@ async function UserTopPanel(p: {
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col gap-4 p-4">
-                    <div class="flex flex-row items-center flex-wrap gap-2">
-                        {p.user.twitter ?
-                            <a href={`https://twitter.com/${p.user.twitter}`} target="_blank" data-tip="twitter" class="tooltip p-1 text-sm text-white px-2 rounded-full bg-[#1DA1F2]">
-                                <button class="flex flex-row gap-2 items-center " type="button">
-                                    <i class="fa-brands fa-twitter" />
-                                    <span>{p.user.twitter}</span>
-                                </button>
-                            </a> : <></>
-                        }
-                        {p.user.discord ?
-                            <div data-tip="discord" class="tooltip p-1 text-sm text-white px-2 rounded-full bg-[#5865F2]">
-                                <button class="flex flex-row gap-2 items-center " type="button">
-                                    <i class="fa-brands fa-discord" />
-                                    <span>{p.user.discord}</span>
-                                </button>
+                {has_socials || has_info || p.user.badges.length > 0 ?
+                    <div class="flex flex-col gap-4 p-4">
+                        {has_socials ?
+                            <div class="flex flex-row items-center flex-wrap gap-2">
+                                {p.user.twitter ?
+                                    <a href={`https://twitter.com/${p.user.twitter}`} target="_blank" data-tip="twitter" class="tooltip p-1 text-sm text-white px-2 rounded-full bg-[#1DA1F2]">
+                                        <button class="flex flex-row gap-2 items-center " type="button">
+                                            <i class="fa-brands fa-twitter" />
+                                            <span>{p.user.twitter}</span>
+                                        </button>
+                                    </a> : <></>
+                                }
+                                {p.user.discord ?
+                                    <div data-tip="discord" class="tooltip p-1 text-sm text-white px-2 rounded-full bg-[#5865F2]">
+                                        <button class="flex flex-row gap-2 items-center " type="button">
+                                            <i class="fa-brands fa-discord" />
+                                            <span>{p.user.discord}</span>
+                                        </button>
+                                    </div> : <></>
+                                }
+                                {p.user.socials?.map(s => (
+                                    <UserSocial user_id={p.user.id} social={s} editable={p.editable} />
+                                ))}
+                                {p.editable ?
+                                    <form class="group flex flex-row flex-wrap gap-2 items-center" hx-put={`/users/${p.user.id}/socials/submit`} hx-target="#socials_fieldset" hx-swap="beforebegin">
+                                        <fieldset class="peer rounded-full peer disabled:hidden join group-disabled:hidden" id="socials_fieldset" disabled>
+                                            <select required class="rounded-s-full join-item select select-bordered select-sm" name="platform">
+                                                <option disabled selected>Choose</option>
+                                                {SOCIALS.map(s => <option value={s}>{s}</option>)}
+                                            </select>
+                                            <label class="join-item input input-sm input-bordered flex items-center gap-2">
+                                                @ <input required name="username" type="text" class="grow" placeholder="Username" />
+                                            </label>
+                                        </fieldset>
+                                        <button class="peer-disabled:hidden btn btn-sm btn-circle btn-primary" type="submit">
+                                            <i class="fa-solid fa-plus" />
+                                        </button>
+                                        <button class="btn btn-ghost btn-circle btn-sm peer-enabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = false" type="button">
+                                            <i class="fa-solid fa-plus" />
+                                        </button>
+                                        <button class="btn btn-ghost btn-circle btn-sm peer-disabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = true" type="button">
+                                            <i class="fa-solid fa-xmark" />
+                                        </button>
+                                    </form> : <></>
+                                }
                             </div> : <></>
                         }
-                        {p.user.socials?.map(s => (
-                            <UserSocial user_id={p.user.id} social={s} editable={p.editable} />
-                        ))}
-                        {p.editable ?
-                            <form class="group flex flex-row flex-wrap gap-2 items-center" hx-put={`/users/${p.user.id}/socials/submit`} hx-target="#socials_fieldset" hx-swap="beforebegin">
-                                <fieldset class="peer rounded-full peer disabled:hidden join group-disabled:hidden" id="socials_fieldset" disabled>
-                                    <select required class="rounded-s-full join-item select select-bordered select-sm" name="platform">
-                                        <option disabled selected>Choose</option>
-                                        {SOCIALS.map(s => <option value={s}>{s}</option>)}
-                                    </select>
-                                    <label class="join-item input input-sm input-bordered flex items-center gap-2">
-                                        @ <input required name="username" type="text" class="grow" placeholder="Username" />
-                                    </label>
-                                </fieldset>
-                                <button class="peer-disabled:hidden btn btn-sm btn-circle btn-primary" type="submit">
-                                    <i class="fa-solid fa-plus" />
-                                </button>
-                                <button class="btn btn-ghost btn-circle btn-sm peer-enabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = false" type="button">
-                                    <i class="fa-solid fa-plus" />
-                                </button>
-                                <button class="btn btn-ghost btn-circle btn-sm peer-disabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = true" type="button">
-                                    <i class="fa-solid fa-xmark" />
-                                </button>
-                            </form> : <></>
+                        {has_info ?
+                            <div class="flex flex-row flex-wrap gap-4">
+                                {p.user.location ?
+                                    <div class="flex flex-row items-center gap-2">
+                                        <i class="fa-solid fa-location-dot" />
+                                        <span>{p.user.location}</span>
+                                    </div> : <></>
+                                }
+                                {p.user.interests ?
+                                    <div class="flex flex-row items-center gap-2">
+                                        <i class="fa-solid fa-heart" />
+                                        <span>{p.user.interests}</span>
+                                    </div> : <></>
+                                }
+                                {p.user.occupation ?
+                                    <div class="flex flex-row items-center gap-2">
+                                        <i class="fa-solid fa-building" />
+                                        <span>{p.user.occupation}</span>
+                                    </div> : <></>
+                                }
+                                {p.user.website ?
+                                    <div class="flex flex-row items-center gap-2">
+                                        <i class="fa-solid fa-globe"></i>
+                                        <a href={p.user.website} target="_blank" class="hover:underline">{p.user.website}</a>
+                                    </div> : <></>
+                                }
+                            </div> : <></>
                         }
-                    </div>
-                    {has_info ?
-                        <div class="flex flex-row flex-wrap gap-4">
-                            {p.user.location ?
-                                <div class="flex flex-row items-center gap-2">
-                                    <i class="fa-solid fa-location-dot" />
-                                    <span>{p.user.location}</span>
-                                </div> : <></>
-                            }
-                            {p.user.interests ?
-                                <div class="flex flex-row items-center gap-2">
-                                    <i class="fa-solid fa-heart" />
-                                    <span>{p.user.interests}</span>
-                                </div> : <></>
-                            }
-                            {p.user.occupation ?
-                                <div class="flex flex-row items-center gap-2">
-                                    <i class="fa-solid fa-building" />
-                                    <span>{p.user.occupation}</span>
-                                </div> : <></>
-                            }
-                            {p.user.website ?
-                                <div class="flex flex-row items-center gap-2">
-                                    <i class="fa-solid fa-globe"></i>
-                                    <a href={p.user.website} target="_blank" class="hover:underline">{p.user.website}</a>
-                                </div> : <></>
-                            }
-                        </div> : <></>
-                    }
-                    {p.user.badges.length > 0 &&
-                        <div class="flex flex-row flex-wrap gap-2">
-                            {p.user.badges.map(badge =>
-                                <div class="tooltip" data-tip={badge.description}>
-                                    <img data-src={badge.image_url} width="86" height="40" alt={badge.description} />
-                                </div>
-                            )}
-                        </div>
-                    }
-                </div>
+                        {p.user.badges.length > 0 &&
+                            <div class="flex flex-row flex-wrap gap-2">
+                                {p.user.badges.map(badge =>
+                                    <div class="tooltip" data-tip={badge.description}>
+                                        <img data-src={badge.image_url} width="86" height="40" alt={badge.description} />
+                                    </div>
+                                )}
+                            </div>
+                        }
+                    </div> : <></>
+                }
             </div>
         </section >
     );
