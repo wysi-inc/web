@@ -14,7 +14,7 @@ const Peripherals = ({ t, peripherals, editable }: Props) => {
 
     if (!editable && empty) return <></>;
 
-    return <div class={`${empty ? "block group-disabled:hidden" : ""} bg-neutral rounded-lg flex flex-col`}>
+    return <div class={`${empty ? "block group-has-[:disabled]/setup:hidden" : ""} bg-neutral rounded-lg flex flex-col`}>
         <div class="flex flex-row justify-between items-center pe-2">
             <h1 class="py-1 px-2 text-neutral-content">Peripherals</h1>
             {editable ?
