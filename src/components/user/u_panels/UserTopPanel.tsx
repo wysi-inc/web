@@ -217,7 +217,7 @@ async function UserTopPanel(p: {
                                 {p.user.socials?.map(s => (
                                     <UserSocial user_id={p.user.id} social={s} editable={p.editable} />
                                 ))}
-                                {true ?
+                                {p.editable ?
                                     <form class="group flex flex-row flex-wrap gap-2 items-center" hx-put={`/users/${p.user.id}/socials/submit`} hx-target="#socials_fieldset" hx-swap="beforebegin">
                                         <fieldset class="peer rounded-full peer disabled:hidden join group-disabled:hidden" id="socials_fieldset" disabled>
                                             <select required class="rounded-s-full join-item select select-bordered select-sm" name="platform">
