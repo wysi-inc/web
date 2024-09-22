@@ -1,7 +1,7 @@
 function UserAboutPanel(p: { html: string }) {
     return (
         <div class="flex flex-col gap-4">
-            <div class="peer rounded-lg bg-base-300 overflow-hidden max-h-96" id="user_about">
+            <div class="peer bg-base-300 p-4 overflow-hidden max-h-96" id="user_about">
                 {p.html}
             </div>
             <button class="cursor-pointer btn btn-neutral btn-sm btn-block flex flex-row gap-4"

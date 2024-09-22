@@ -89,7 +89,7 @@ h4 {
     margin: 0;
     background-color: rgba(0, 0, 0, .2);
     border: 2px solid;
-    border-radius: 10px;
+    border-radius: 4px;
     padding: 10px
 }
 
@@ -99,9 +99,10 @@ h4 {
 
 .bbcode-spoilerbox__body {
     display: none;
+    transition: .5s ease-out;
 }
 
-.bbcode-spoilerbox__link::before {
+.bbcode-spoilerbox__link-icon::before {
     content: ">";
     margin-right: 10px;
 }

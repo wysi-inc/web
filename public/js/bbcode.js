@@ -1,10 +1,15 @@
-document.querySelector('.js-spoilerbox__link')?.addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent the default anchor action
-    const spoilerBody = document.querySelector('.js-spoilerbox__body');
-    let st1 = document.styleSheets[0].cssRules[1];
-    if (spoilerBody.style.display === 'block') {
-        spoilerBody.style.display = 'none';
-    } else {
-        spoilerBody.style.display = 'block';
-    }
+document.querySelectorAll('.js-spoilerbox')?.forEach(box => {
+    const body = box.querySelector('.js-spoilerbox__body');
+    const link = box.querySelector('.js-spoilerbox__link');
+    const icon = link.querySelector('.bbcode-spoilerbox__link-icon');
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (body.style.display === 'block') {
+            body.style.display = 'none';
+            icon.style.transform = 'rotate(90deg)';
+        } else {
+            body.style.display = 'block';
+            icon.style.transform = 'rotate(0)';
+        }
+    })
 });
