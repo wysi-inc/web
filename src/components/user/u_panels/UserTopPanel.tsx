@@ -21,7 +21,7 @@ async function UserTopPanel(p: {
     t: any,
     user: User,
     mode: Mode,
-    editable?: boolean
+    editable?: boolean,
 }) {
 
     const best_country = p.user.db_ranks?.country_ranks?.sort?.((a, b) => a.rank - b.rank)[0];
@@ -194,7 +194,7 @@ async function UserTopPanel(p: {
                         </div>
                     </div>
                 </div>
-                {has_socials || has_info || p.user.badges.length > 0 ?
+                {p.editable || has_socials || has_info || p.user.badges.length > 0 ?
                     <div class="flex flex-col gap-4 p-4">
                         {has_socials ?
                             <div class="flex flex-row items-center flex-wrap gap-2">
