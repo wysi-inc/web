@@ -1,6 +1,6 @@
 import { type Rank, User, type Setup, type CollectionDB, type UserSocialType } from "../../models/User";
 import type { Mode } from "../../types/osu";
-import type { User as UserType } from "../../types/users";
+import type { Res, User as UserType } from "../../types/users";
 //@ts-ignore
 import OsuDBParser from "osu-db-parser";
 
@@ -214,23 +214,52 @@ export async function getCollectionFile(user_id: number) {
     return user.collections;
 }
 
-export async function saveSocial(user_id: number, username: string, platform: string): Promise<boolean> {
+export async function saveSocial(user_id: number, username: string, platform: string): Promise<Res> {
     const user = await User.findOne({ user_id });
-    if (!user) return false;
-    if (!user.socials) user.socials = [{ platform, username }] as any;
-    if (user.socials.find(s => s.platform === platform)) return false;
-    user.socials.push({ platform, username });
+    if (!user) return {
+        msg: "User doesnt exist",
+        done: false,
+        code: 404
+    };
+    if (user.socials?.find(s => s.platform === platform)) return {
+        msg: "User already has this social",
+        done: false,
+        code: 304
+    };
+    if (!user.socials) [{ platform, username }] as any;
+    else user.socials.push({ platform, username });
     await user.save();
-    return true;
+    return {
+        msg: "Social added",
+        done: true,
+        code: 201
+    };
 }
 
-export async function deleteSocial(user_id: number, platform: string): Promise<boolean> {
+export async function deleteSocial(user_id: number, platform: string): Promise<Res> {
     const user = await User.findOne({ user_id });
-    if (!user) return false;
-    if (!user.socials) return false;
+    if (!user) return {
+        msg: "User doesnt exist",
+        done: false,
+        code: 404
+    };
+    if (!user.socials) return {
+        msg: "User doesnt have this social",
+        done: false,
+        code: 304
+    };
+    if (!user.socials.find(s => s.platform === platform)) return {
+        msg: "User doesnt have this social",
+        done: false,
+        code: 304
+    };
     user.socials = user.socials.filter(s => s.platform !== platform) as any;
     await user.save();
-    return true;
+    return {
+        msg: "Social removed",
+        done: true,
+        code: 200
+    };
 }
 
 export async function updateDan(user_id: number, dan: string): Promise<boolean> {

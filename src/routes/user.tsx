@@ -185,10 +185,10 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 set.status = 401;
                 return "Unauthorized";
             }
-            const saved = await saveSocial(user.id, body.username, body.platform);
-            if (!saved) {
-                set.status = 500;
-                return "Social could not be saved";
+            const res = await saveSocial(user.id, body.username, body.platform);
+            if (!res.done) {
+                set.status = res.code;
+                return res.msg;
             }
             return <UserSocial user_id={user.id} social={{ username: body.username, platform: body.platform }} editable={true} />;
         }, {
@@ -203,10 +203,10 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 set.status = 401;
                 return "Unauthorized";
             }
-            const deleted = await deleteSocial(user.id, params.platform);
-            if (!deleted) {
-                set.status = 500;
-                return "Social could not delete";
+            const res = await deleteSocial(user.id, params.platform);
+            if (!res.done) {
+                set.status = res.code;
+                return res.msg;
             }
             return <></>;
         })
