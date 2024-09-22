@@ -140,7 +140,7 @@ const UserPage = async (p: Props) => {
     return (<>
         <Title title={user.username} />
         <UserTopPanel t={p.t} user={user} mode={p.mode} editable={editable} />
-        <nav class="underline-offset-1 text-neutral-content sticky -mt-8 top-16 bg-base-300 rounded-b-lg text-sm shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-6 flex-wrap">
+        <nav class="underline-offset-1 text-neutral-content sticky -mt-8 top-16 bg-base-300 rounded-b-lg text-sm shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-x-6 gap-y-2 flex-wrap">
             <a class="hover:underline" href="#top">{p.t?.user.sections.top}</a>
             {panels.map((p) => {
                 if (!p.show_if) return <></>;
