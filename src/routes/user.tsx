@@ -137,6 +137,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 set.status = 401;
                 return "Unauthorized";
             }
+            console.log(body);
             const setup = await saveSetup(user.id, body);
             if (!setup) return "Failed to save setup, reload the page and try again.";
             return <UserSetupPanel t={t} setup={setup} logged_id={user.id} page_id={user.id} />
