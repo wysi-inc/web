@@ -10,7 +10,8 @@ type Props = {
     lang: any
 }
 
-const PROD = process.env.STATE === "prod";
+// const PROD = process.env.STATE === "prod";
+const PROD = false;
 
 const BaseHtml = ({ lang, t, user, children }: Props) => {
     return (<>
