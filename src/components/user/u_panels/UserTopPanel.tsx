@@ -196,7 +196,7 @@ async function UserTopPanel(p: {
                 </div>
                 {p.editable || has_socials || has_info || p.user.badges.length > 0 ?
                     <div class="flex flex-col gap-4 p-4">
-                        {has_socials ?
+                        {has_socials || p.editable ?
                             <div class="flex flex-row items-center flex-wrap gap-2">
                                 {p.user.twitter ?
                                     <a href={`https://twitter.com/${p.user.twitter}`} target="_blank" data-tip="twitter" class="tooltip p-1 text-sm text-white px-2 rounded-full bg-[#1DA1F2]">
@@ -217,7 +217,7 @@ async function UserTopPanel(p: {
                                 {p.user.socials?.map(s => (
                                     <UserSocial user_id={p.user.id} social={s} editable={p.editable} />
                                 ))}
-                                {p.editable ?
+                                {true ?
                                     <form class="group flex flex-row flex-wrap gap-2 items-center" hx-put={`/users/${p.user.id}/socials/submit`} hx-target="#socials_fieldset" hx-swap="beforebegin">
                                         <fieldset class="peer rounded-full peer disabled:hidden join group-disabled:hidden" id="socials_fieldset" disabled>
                                             <select required class="rounded-s-full join-item select select-bordered select-sm" name="platform">
