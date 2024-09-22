@@ -30,6 +30,7 @@ export type Social =
     "paypal" |
     "supercell" |
     "kick" |
+    "kofi" |
     "steam" |
     "riot" |
     "epic" |
@@ -57,6 +58,7 @@ export const socials: Social[] = [
     "paypal",
     "supercell",
     "kick",
+    "kofi",
     "steam",
     "riot",
     "epic",
@@ -85,6 +87,7 @@ const userSocials = new mongoose.Schema({
     paypal: String,
     supercell: String,
     kick: String,
+    kofi: String,
     steam: String,
     riot: String,
     epic: String,

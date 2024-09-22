@@ -56,7 +56,7 @@ function UserSocial(p: { social: Social, username: string, user_id: number, edit
             url: `https://tinder.com/@${p.username}`
         },
         "roblox": {
-            icon: <img data-src="/public/img/roblox.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img data-src="/public/img/socials/roblox.svg" class="size-4" loading="lazy" alt="ico" />,
             bg: "bg-[#86949f]",
         },
         "microsoft": {
@@ -87,14 +87,19 @@ function UserSocial(p: { social: Social, username: string, user_id: number, edit
             url: `https://www.paypal.com/paypalme/${p.username}`
         },
         "supercell": {
-            icon: <img data-src="/public/img/supercell.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img data-src="/public/img/socials/supercell.svg" class="size-4" loading="lazy" alt="ico" />,
             bg: "bg-[#105ab5]",
         },
         "kick": {
-            icon: <img data-src="/public/img/kick.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img data-src="/public/img/socials/kick.svg" class="size-4" loading="lazy" alt="ico" />,
             bg: "bg-[#52fa17]",
             url: `https://kick.com/${p.username}`,
             black: true
+        },
+        "kofi": {
+            icon: <img data-src="/public/img/socials/kofi.svg" class="size-4" loading="lazy" alt="ico" />,
+            bg: "bg-[#00AFF1]",
+            url: `https://ko-fi.com/${p.username}`,
         },
         "steam": {
             icon: <i class="fa-brands fa-steam" />,

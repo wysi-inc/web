@@ -22,12 +22,12 @@ const Panel = (p: {
             }
         </header>
         {p.manual ?
-            <details class="group">
+            <details class="group/summary">
                 <summary class="cursor-pointer bg-neutral rounded-lg flex flex-row gap-4 items-center justify-between py-2 px-4">
                     <div class="flex flex-row gap-4 items-center">
-                        <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
-                        <h6 class="group-open:hidden flex">Show</h6>
-                        <h6 class="group-open:flex hidden">Hide</h6>
+                        <i class="group-open/summary:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
+                        <h6 class="group-open/summary:hidden flex">Show</h6>
+                        <h6 class="group-open/summary:flex hidden">Hide</h6>
                     </div>
                 </summary>
                 <div class="mt-4">
