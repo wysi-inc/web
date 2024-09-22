@@ -2,6 +2,9 @@ setup();
 function setup() {
     const form = document.getElementById('setup_form');
     const fieldset = document.getElementById('setup_fieldset');
+    const form_cancel = document.getElementById('setup_form_cancel');
+    const form_submit = document.getElementById('setup_form_submit');
+    const form_edit = document.getElementById('setup_form_edit');
 
     form.addEventListener('submit', () => {
         setTimeout(() => {
