@@ -224,7 +224,7 @@ export async function saveSocial(user_id: number, username: string, platform: st
     if (user.socials?.find(s => s.platform === platform)) return {
         msg: "User already has this social",
         done: false,
-        code: 304
+        code: 400
     };
     if (!user.socials) [{ platform, username }] as any;
     else user.socials.push({ platform, username });
@@ -243,15 +243,10 @@ export async function deleteSocial(user_id: number, platform: string): Promise<R
         done: false,
         code: 404
     };
-    if (!user.socials) return {
+    if (!user.socials?.find(s => s.platform === platform)) return {
         msg: "User doesnt have this social",
         done: false,
-        code: 304
-    };
-    if (!user.socials.find(s => s.platform === platform)) return {
-        msg: "User doesnt have this social",
-        done: false,
-        code: 304
+        code: 400
     };
     user.socials = user.socials.filter(s => s.platform !== platform) as any;
     await user.save();
