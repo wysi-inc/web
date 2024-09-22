@@ -1,4 +1,4 @@
-import type { BadgeType, CollectionDB, Rank, Setup, Socials } from "../models/User";
+import type { CollectionDB, Rank, Setup, UserSocialType } from "../models/User";
 import type { response as v2User } from "osu-api-extended/dist/types/v2_user_details";
 import type { response as v2Score } from "osu-api-extended/dist/types/v2_scores_user_category";
 import type { response as v2UserList } from "osu-api-extended/dist/types/v2_site_ranking_details";
@@ -21,8 +21,8 @@ export type User = UserBasic & {
     db_ranks?: RankHistory,
     db_setup?: Setup,
     collections?: CollectionDB[],
-    socials?: Socials,
-    wysi_badges?: BadgeType[],
+    socials?: UserSocialType[],
+    wysi_badges?: number[],
     dan?: String,
     groups: {
         colour: string,

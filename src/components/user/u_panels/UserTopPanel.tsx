@@ -13,9 +13,9 @@ import Clan from "./u_components/Clan";
 import SubdivisionRanking from "./u_components/SubdivisionRanking";
 import { modes } from "@/src/libs/constants";
 import { ModeToCode } from "@/src/libs/web_utils";
-import { socials, type Social, DANS } from "@/src/models/User";
-import UserSocial from "./UserSocial";
 import Badge from "../Badge";
+import { DANS } from "@/src/models/User";
+import UserSocial, { SOCIALS } from "./UserSocial";
 
 async function UserTopPanel(p: {
     t: any,
@@ -34,6 +34,9 @@ async function UserTopPanel(p: {
     grade_counts.set("A", { count: p.user.statistics.grade_counts.a, color: colors.grades.a });
 
     const joined_date = moment(p.user.join_date).format("DD/MM/YYYY");
+
+    const has_socials = true;
+    const has_info = p.user.location ? true : p.user.interests ? true : p.user.occupation ? true : p.user.website ? true : false;
 
     return (
         <section class="pb-4 bg-base-300 rounded-lg shadow-lg">
@@ -209,17 +212,15 @@ async function UserTopPanel(p: {
                                 </button>
                             </div> : <></>
                         }
-                        {p.user?.socials ?
-                            Object.entries((p.user.socials as any)["_doc"]).map(([social, username]) => (
-                                <UserSocial user_id={p.user.id} social={social as Social} username={String(username)} editable={p.editable} />
-                            )) : <></>
-                        }
+                        {p.user.socials?.map(s => (
+                            <UserSocial user_id={p.user.id} social={s} editable={p.editable} />
+                        ))}
                         {p.editable ?
                             <form class="group flex flex-row flex-wrap gap-2 items-center" hx-put={`/users/${p.user.id}/socials/submit`} hx-target="#socials_fieldset" hx-swap="beforebegin">
                                 <fieldset class="peer rounded-full peer disabled:hidden join group-disabled:hidden" id="socials_fieldset" disabled>
-                                    <select required class="rounded-s-full join-item select select-bordered select-sm" name="social">
+                                    <select required class="rounded-s-full join-item select select-bordered select-sm" name="platform">
                                         <option disabled selected>Choose</option>
-                                        {socials.sort().map(s => <option value={s}>{s}</option>)}
+                                        {SOCIALS.map(s => <option value={s}>{s}</option>)}
                                     </select>
                                     <label class="join-item input input-sm input-bordered flex items-center gap-2">
                                         @ <input required name="username" type="text" class="grow" placeholder="Username" />
@@ -237,32 +238,34 @@ async function UserTopPanel(p: {
                             </form> : <></>
                         }
                     </div>
-                    <div class="flex flex-row flex-wrap gap-4">
-                        {p.user.location ?
-                            <div class="flex flex-row items-center gap-2">
-                                <i class="fa-solid fa-location-dot" />
-                                <span>{p.user.location}</span>
-                            </div> : <></>
-                        }
-                        {p.user.interests ?
-                            <div class="flex flex-row items-center gap-2">
-                                <i class="fa-solid fa-heart" />
-                                <span>{p.user.interests}</span>
-                            </div> : <></>
-                        }
-                        {p.user.occupation ?
-                            <div class="flex flex-row items-center gap-2">
-                                <i class="fa-solid fa-building" />
-                                <span>{p.user.occupation}</span>
-                            </div> : <></>
-                        }
-                        {p.user.website ?
-                            <div class="flex flex-row items-center gap-2">
-                                <i class="fa-solid fa-globe"></i>
-                                <a href={p.user.website} target="_blank" class="hover:underline">{p.user.website}</a>
-                            </div> : <></>
-                        }
-                    </div>
+                    {has_info ?
+                        <div class="flex flex-row flex-wrap gap-4">
+                            {p.user.location ?
+                                <div class="flex flex-row items-center gap-2">
+                                    <i class="fa-solid fa-location-dot" />
+                                    <span>{p.user.location}</span>
+                                </div> : <></>
+                            }
+                            {p.user.interests ?
+                                <div class="flex flex-row items-center gap-2">
+                                    <i class="fa-solid fa-heart" />
+                                    <span>{p.user.interests}</span>
+                                </div> : <></>
+                            }
+                            {p.user.occupation ?
+                                <div class="flex flex-row items-center gap-2">
+                                    <i class="fa-solid fa-building" />
+                                    <span>{p.user.occupation}</span>
+                                </div> : <></>
+                            }
+                            {p.user.website ?
+                                <div class="flex flex-row items-center gap-2">
+                                    <i class="fa-solid fa-globe"></i>
+                                    <a href={p.user.website} target="_blank" class="hover:underline">{p.user.website}</a>
+                                </div> : <></>
+                            }
+                        </div> : <></>
+                    }
                     {p.user.badges.length > 0 &&
                         <div class="flex flex-row flex-wrap gap-2">
                             {p.user.badges.map(badge =>

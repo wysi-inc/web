@@ -18,7 +18,6 @@ import BeatmapCollectionList from '../components/beatmap/BeatmapCollectionList';
 import CollectionsForm from '../components/user/u_panels/u_components/CollectionsForm';
 import UserYearPanel from '../components/user/u_panels/UserYearPanel';
 import UserSocial from '../components/user/u_panels/UserSocial';
-import type { Social } from '../models/User';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
     .get("/", async ({ lang, t, request, cookie, params, jwt }: Route) => {
@@ -186,25 +185,25 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 set.status = 401;
                 return "Unauthorized";
             }
-            const saved = await saveSocial(user.id, body.username, body.social);
+            const saved = await saveSocial(user.id, body.username, body.platform);
             if (!saved) {
                 set.status = 500;
                 return "Social could not be saved";
             }
-            return <UserSocial user_id={user.id} username={body.username} social={body.social} editable={true} />;
+            return <UserSocial user_id={user.id} social={{ username: body.username, platform: body.platform }} editable={true} />;
         }, {
             body: t.Object({
                 username: t.String(),
-                social: t.String()
+                platform: t.String()
             })
         })
-        .delete("/delete/:social", async ({ params, set, cookie, jwt }: Route) => {
+        .delete("/delete/:platform", async ({ params, set, cookie, jwt }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);
             if (!user || Number(params.id) !== user.id) {
                 set.status = 401;
                 return "Unauthorized";
             }
-            const deleted = await deleteSocial(user.id, params.social as Social);
+            const deleted = await deleteSocial(user.id, params.platform);
             if (!deleted) {
                 set.status = 500;
                 return "Social could not delete";

@@ -1,4 +1,4 @@
-import { type Rank, User, type Setup, type CollectionDB, type Social } from "../../models/User";
+import { type Rank, User, type Setup, type CollectionDB, type UserSocialType } from "../../models/User";
 import type { Mode } from "../../types/osu";
 import type { User as UserType } from "../../types/users";
 //@ts-ignore
@@ -214,21 +214,20 @@ export async function getCollectionFile(user_id: number) {
     return user.collections;
 }
 
-export async function saveSocial(user_id: number, username: string, social: Social): Promise<boolean> {
+export async function saveSocial(user_id: number, username: string, platform: string): Promise<boolean> {
     const user = await User.findOne({ user_id });
     if (!user) return false;
-    if (!user.socials) user.socials = {};
-    if (user.socials[social]) return false;
-    user.socials[social] = username;
+    if (!user.socials) user.socials = [{ platform, username }] as any;
+    if (!user.socials.find(s => s.platform === platform)) user.socials.push({ platform, username });
     await user.save();
     return true;
 }
 
-export async function deleteSocial(user_id: number, social: Social): Promise<boolean> {
+export async function deleteSocial(user_id: number, platform: string): Promise<boolean> {
     const user = await User.findOne({ user_id });
     if (!user) return false;
     if (!user.socials) return false;
-    user.socials[social] = undefined;
+    user.socials = user.socials.filter(s => s.platform !== platform) as any;
     await user.save();
     return true;
 }

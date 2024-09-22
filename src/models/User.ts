@@ -1,4 +1,5 @@
 import * as mongoose from "mongoose";
+import { SOCIALS } from "../components/user/u_panels/UserSocial";
 
 const collectionDBSchema = new mongoose.Schema({
     name: String,
@@ -10,90 +11,16 @@ collectionDBSchema.methods.toJSON = function() {
     return user;
 };
 
-export type Social =
-    "github" |
-    "gitlab" |
-    "twitch" |
-    "instagram" |
-    "youtube" |
-    "tiktok" |
-    "pinterest" |
-    "snapchat" |
-    "reddit" |
-    "tinder" |
-    "linkedin" |
-    "roblox" |
-    "microsoft" |
-    "soundcloud" |
-    "spotify" |
-    "facebook" |
-    "paypal" |
-    "supercell" |
-    "kick" |
-    "kofi" |
-    "steam" |
-    "riot" |
-    "epic" |
-    "anilist" |
-    "playstation" |
-    "linktree"
-
-export const socials: Social[] = [
-    "github",
-    "gitlab",
-    "twitch",
-    "instagram",
-    "youtube",
-    "tiktok",
-    "pinterest",
-    "snapchat",
-    "reddit",
-    "tinder",
-    "linkedin",
-    "roblox",
-    "microsoft",
-    "soundcloud",
-    "spotify",
-    "facebook",
-    "paypal",
-    "supercell",
-    "kick",
-    "kofi",
-    "steam",
-    "riot",
-    "epic",
-    "anilist",
-    "playstation",
-    "linktree",
-]
-
-const userSocials = new mongoose.Schema({
-    github: String,
-    gitlab: String,
-    twitch: String,
-    instagram: String,
-    youtube: String,
-    tiktok: String,
-    pinterest: String,
-    snapchat: String,
-    reddit: String,
-    tinder: String,
-    linkedin: String,
-    roblox: String,
-    microsoft: String,
-    soundcloud: String,
-    spotify: String,
-    facebook: String,
-    paypal: String,
-    supercell: String,
-    kick: String,
-    kofi: String,
-    steam: String,
-    riot: String,
-    epic: String,
-    anilist: String,
-    playstation: String,
-    linktree: String,
+const userSocial = new mongoose.Schema({
+    platform: {
+        type: String,
+        enum: SOCIALS,
+        required: true
+    },
+    username: {
+        type: String,
+        required: true
+    }
 }, { _id: false });
 
 const setup = new mongoose.Schema({
@@ -182,12 +109,6 @@ const modes = new mongoose.Schema({
     mania: modeRanks,
 }, { _id: false });
 
-// dev: Developer (only for regular devs)
-// <3: Supporter
-// wmt: Wysi Moderation Team
-// wdc: Wysi Development Contributor (for one time contributors)
-// wtc: Wysi Translations Contributor
-
 export const DANS = ['No Dan', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta'];
 
 const userSchema = new mongoose.Schema({
@@ -209,7 +130,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: DANS,
     },
-    socials: userSocials,
+    socials: [userSocial],
     collections: {
         type: [collectionDBSchema],
         required: false,
@@ -235,7 +156,7 @@ userSchema.methods.toJSON = function() {
 export type CollectionDB = mongoose.InferSchemaType<typeof collectionDBSchema>;
 export type Rank = mongoose.InferSchemaType<typeof rank>;
 export type Setup = mongoose.InferSchemaType<typeof setup>;
-export type Socials = mongoose.InferSchemaType<typeof userSocials>;
+export type UserSocialType = mongoose.InferSchemaType<typeof userSocial>;
 export type ModeRanks = mongoose.InferSchemaType<typeof modeRanks>;
 export type User = mongoose.InferSchemaType<typeof userSchema>;
 export const User = mongoose.model('User', userSchema);
