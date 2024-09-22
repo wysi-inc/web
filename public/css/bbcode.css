@@ -99,6 +99,7 @@ h4 {
 
 .bbcode-spoilerbox__body {
     display: none;
+    padding: 15px;
     transition: .5s ease-out;
 }
 
