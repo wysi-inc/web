@@ -49,7 +49,7 @@ async function Admin(p: { t: any, user: UserCookie }) {
             <Reports />
         </Panel>
 
-        <Panel icon={<i class="fa-solid fa-pen-ruler" />} title="Tablets" code="tablets" t={p.t} manual={false}>
+        <Panel icon={<i class="fa-solid fa-pen-ruler" />} title="Tablets" code="tablets" t={p.t} manual={true}>
             <Tablets />
         </Panel>
 
