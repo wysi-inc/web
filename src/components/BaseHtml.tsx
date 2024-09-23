@@ -33,7 +33,7 @@ const BaseHtml = ({ lang, t, user, children }: Props) => {
                 <link href="/favicon.ico" rel="icon" />
                 <link href="/public/css/main_out.css" rel="stylesheet" type="text/css" />
                 <link href="/public/css/bbcode.css" rel="stylesheet" type="text/css" />
-                <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous" />
+                <script src="https://unpkg.com/htmx.org@2.0.0/dist/htmx.min.js" />
                 <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js" />
                 <script defer src="/public/lib/fontawesome/brands.min.js" />
                 <script defer src="/public/lib/fontawesome/solid.min.js" />

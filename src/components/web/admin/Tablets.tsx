@@ -5,7 +5,10 @@ async function Tablets() {
     if (!tablets) return <>No Tablets Found</>;
     return (<>
         <div class="flex flex-col gap-2">
-            <form class="group flex flex-row flex-wrap gap-2 items-center" hx-put={`/admin/tablets`} hx-target="#tablets_table" hx-swap="afterbegin">
+            <form class="group flex flex-row flex-wrap gap-2 items-center" hx-put={`/admin/tablets`}
+                hx-swap="afterbegin"
+                hx-target="#tablets_table"
+                hx-target-error="#tablets_error">
                 <fieldset class="peer rounded-full peer join group-disabled:hidden" id="socials_fieldset">
                     <label class="join-item input input-sm input-bordered flex items-center gap-2">
                         Name: <input required name="name" type="text" />
@@ -21,6 +24,7 @@ async function Tablets() {
                     <i class="fa-solid fa-plus" />
                 </button>
             </form>
+            <div id="tablets_error" class="flex flex-col gap-2" />
             <table class="table table-zebra table-xs">
                 <thead>
                     <tr>

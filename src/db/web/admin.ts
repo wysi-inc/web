@@ -87,21 +87,22 @@ export async function removeRole(user_id: number): Promise<Res> {
     };
 }
 
-export async function addTablet(name: number, w: number, h: number): Promise<Res> {
+export async function addTablet(name: number, w: number, h: number): Promise<Res & { id?: string }> {
     try {
         const tablet = new TabletModel({ name, w, h })
         await tablet.save();
         return {
             done: true,
             msg: "Tablet added!",
-            code: 201
+            code: 201,
+            id: tablet._id.toString()
         };
     } catch (err: any) {
         console.error(err);
         return {
             done: false,
             msg: err.message,
-            code: 400
+            code: 400,
         };
     }
 }

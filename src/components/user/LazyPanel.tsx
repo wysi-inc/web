@@ -1,6 +1,6 @@
 import Panel from "./Panel";
 
-type Props = {
+const LazyPanel = (p: {
     t: any,
     title: string,
     code: string,
@@ -10,10 +10,7 @@ type Props = {
     url: string,
     body?: string,
     manual?: boolean,
-};
-
-
-const LazyPanel = (p: Props) => {
+}) => {
     return (<>
         <Panel t={p.t} icon={p.icon} title={p.title} tooltip={p.tooltip} code={p.code} info={p.info} manual={p.manual}>
             <span hx-post={p.url} hx-trigger="intersect once" hx-swap="outerHTML"
