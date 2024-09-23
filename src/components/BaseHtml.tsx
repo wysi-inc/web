@@ -35,6 +35,7 @@ const BaseHtml = ({ lang, t, user, children }: Props) => {
                 <link href="/public/css/bbcode.css" rel="stylesheet" type="text/css" />
                 <script src="https://unpkg.com/htmx.org@2.0.0/dist/htmx.min.js" />
                 <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js" />
+                <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js?" />
                 <script defer src="/public/lib/fontawesome/brands.min.js" />
                 <script defer src="/public/lib/fontawesome/solid.min.js" />
                 <script defer src="/public/lib/fontawesome/regular.min.js" />
@@ -44,6 +45,7 @@ const BaseHtml = ({ lang, t, user, children }: Props) => {
                 <script defer src={`/public/js/audio${PROD ? ".min" : ""}.js`} />
                 <script defer src={`/public/js/images${PROD ? ".min" : ""}.js`} />
                 <script defer src={`/public/js/bbcode${PROD ? ".min" : ""}.js`} />
+                <script defer src={`/public/js/drag${PROD ? ".min" : ""}.js`} />
             </head>
             <body class="bg-base-300 flex flex-col justify-center items-center" id="top">
                 <script>let FF_FOUC_FIX;</script>

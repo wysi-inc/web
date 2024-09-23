@@ -198,7 +198,7 @@ async function UserTopPanel(p: {
                     <div class="flex flex-col gap-4 p-4">
                         {has_socials || p.editable ? <>
                             <div class="flex flex-row flex-wrap gap-2">
-                                <form class="flex flex-row flex-wrap items-center gap-2 sortable" id="socials_list"
+                                <form class="flex flex-row flex-wrap items-center gap-2 sortable empty:hidden" id="socials_list"
                                     hx-post={`/users/${p.user.id}/socials/sort`} hx-trigger="end" hx-swap="none">
                                     {p.user.socials?.map(s => <UserSocial user_id={p.user.id} social={s} editable={p.editable} />)}
                                     <span class="loading loading-spinner htmx-indicator" />

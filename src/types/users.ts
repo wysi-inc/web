@@ -4,7 +4,7 @@ import type { response as v2Score } from "osu-api-extended/dist/types/v2_scores_
 import type { response as v2UserList } from "osu-api-extended/dist/types/v2_site_ranking_details";
 
 export type Res = {
-    done: boolean,
+    error: boolean,
     msg: string,
     code: number
 }

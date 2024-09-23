@@ -1,11 +1,13 @@
-import { TabletModel } from "@/src/models/Tablet";
-import { type Rank, User, type Setup, type CollectionDB, type UserSocialType } from "../../models/User";
+import { type Rank, User, type Setup, type CollectionDB } from "../../models/User";
 import type { Mode } from "../../types/osu";
 import type { Res, User as UserType } from "../../types/users";
 //@ts-ignore
 import OsuDBParser from "osu-db-parser";
 
-export async function updateUser(user: UserType, mode: Mode): Promise<UserType> {
+export async function updateUser(
+    user: UserType,
+    mode: Mode
+): Promise<UserType> {
     const country_rank = user.statistics.country_rank || null;
     const global_ranks = user.rank_history?.data || [];
     try {
@@ -58,7 +60,12 @@ export async function updateUser(user: UserType, mode: Mode): Promise<UserType> 
     }
 }
 
-function getNewMerge(old_g: Rank[], new_g: Rank[], old_c: Rank[], new_c: Rank[]) {
+function getNewMerge(
+    old_g: Rank[],
+    new_g: Rank[],
+    old_c: Rank[],
+    new_c: Rank[]
+) {
     return {
         global_ranks: addRanks(old_g, new_g),
         country_ranks: addRanks(old_c, new_c),
@@ -90,7 +97,10 @@ function getNewCountry(rank: number, today: Date): Rank[] {
     return [{ date: today, rank }]
 }
 
-export async function saveSetup(user_id: number, setup: any): Promise<Setup | null> {
+export async function saveSetup(
+    user_id: number,
+    setup: any
+): Promise<Setup | null> {
     try {
         const user = await User.findOne({ user_id });
 
@@ -211,57 +221,139 @@ export async function getCollectionFile(user_id: number) {
     const user = await User.findOne({ user_id });
     if (!user) return;
     if (!user.collections) return;
-    console.log(user.collections);
     return user.collections;
 }
 
-export async function saveSocial(user_id: number, username: string, platform: string): Promise<Res> {
-    const user = await User.findOne({ user_id });
-    if (!user) return {
-        msg: "User doesnt exist",
-        done: false,
-        code: 404
-    };
-    if (user.socials?.find(s => s.platform === platform)) return {
-        msg: "User already has this social",
-        done: false,
-        code: 400
-    };
-    if (!user.socials) [{ platform, username }] as any;
-    else user.socials.push({ platform, username });
-    await user.save();
-    return {
-        msg: "Social added",
-        done: true,
-        code: 201
-    };
+export async function saveSocial(
+    user_id: number,
+    username: string,
+    platform: string
+): Promise<Res> {
+    try {
+        const user = await User.findOne({ user_id });
+        if (!user) return {
+            error: true,
+            msg: "User doesnt exist",
+            code: 404
+        };
+        if (user.socials?.find(s => s.platform === platform)) return {
+            error: true,
+            msg: "User already has this social",
+            code: 400
+        };
+        if (!user.socials) [{ platform, username }] as any;
+        else user.socials.push({ platform, username });
+        await user.save();
+        return {
+            error: false,
+            msg: "Social added",
+            code: 201
+        };
+    } catch (err: any) {
+        console.error(err);
+        return {
+            error: true,
+            msg: "Something went wrong",
+            code: 500
+        }
+    }
 }
 
-export async function deleteSocial(user_id: number, platform: string): Promise<Res> {
-    const user = await User.findOne({ user_id });
-    if (!user) return {
-        msg: "User doesnt exist",
-        done: false,
-        code: 404
-    };
-    if (!user.socials?.find(s => s.platform === platform)) return {
-        msg: "User doesnt have this social",
-        done: false,
-        code: 400
-    };
-    user.socials = user.socials.filter(s => s.platform !== platform) as any;
-    await user.save();
-    return {
-        msg: "Social removed",
-        done: true,
-        code: 200
-    };
+export async function deleteSocial(
+    user_id: number,
+    platform: string
+): Promise<Res> {
+    try {
+        const user = await User.findOne({ user_id });
+        if (!user) return {
+            error: true,
+            msg: "User doesnt exist",
+            code: 404
+        };
+        if (!user.socials?.find(s => s.platform === platform)) return {
+            error: true,
+            msg: "User doesnt have this social",
+            code: 400
+        };
+        user.socials = user.socials.filter(s => s.platform !== platform) as any;
+        await user.save();
+        return {
+            error: false,
+            msg: "Social removed",
+            code: 200
+        };
+    } catch (err: any) {
+        console.error(err);
+        return {
+            error: true,
+            msg: "Something went wrong",
+            code: 500
+        }
+    }
 }
 
-export async function updateDan(user_id: number, dan: string): Promise<boolean> {
-    const user = await User.findOne({ user_id });
-    if (!user) return false;
-    user.dan = dan as any;
-    await user.save();
-    return true;
+export async function sortSocials(
+    user_id: number,
+    platforms: string[]
+): Promise<Res> {
+    try {
+        const user = await User.findOne({ user_id });
+        if (!user) return {
+            error: true,
+            msg: "User doesnt exist",
+            code: 404
+        };
+        if (!user.socials) return {
+            error: true,
+            msg: "User doesnt have socials",
+            code: 404
+        };
+        let new_socials: any = [];
+        for (let platform of platforms) {
+            console.log(`finding ${platform}`);
+            new_socials.push(user.socials.find(s => s.platform === platform));
+        }
+        user.socials = new_socials;
+        await user.save();
+        return {
+            error: false,
+            msg: "Socials sorted",
+            code: 200
+        };
+    } catch (err: any) {
+        console.error(err);
+        return {
+            error: true,
+            msg: "Something went wrong",
+            code: 500
+        }
+    }
+}
+
+export async function updateDan(
+    user_id: number,
+    dan: string
+): Promise<Res> {
+    try {
+        const user = await User.findOne({ user_id });
+        if (!user) return {
+            error: true,
+            msg: "User doesn't exist",
+            code: 400
+        };
+        user.dan = dan as any;
+        await user.save();
+        return {
+            error: false,
+            msg: "Dan updated",
+            code: 200
+        };
+    } catch (err: any) {
+        console.error(err);
+        return {
+            error: true,
+            msg: "Something went wrong",
+            code: 500
+        }
+    }
 }

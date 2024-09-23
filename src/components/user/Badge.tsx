@@ -47,15 +47,17 @@ function Badge(p: { badge_id: number, editable: boolean, user_id: number }) {
     return (
         <div class={`badge cursor-default border-none tooltip flex flex-row gap-1 ${badge.fg} ${badge.bg}`}
             hx-target="this" hx-swap="outerHTML" data-tip={badge.long} draggable={true} >
-            <input type="hidden" value={`${p.badge_id}`} name='badge_id' />
             <span class="flex flex-row gap-2 items-center">
                 {badge.icon || <span>{badge.short.toUpperCase()}</span>}
             </span>
             {p.editable ?
-                <a class="bg-white hover:bg-opacity-30 bg-opacity-0 text-xs rounded-full size-4 flex items-center justify-center"
-                    hx-delete={`/admin/badges/${p.user_id}/${p.badge_id}`} hx-trigger="click">
-                    <i class="fa-solid fa-xmark" />
-                </a> : <></>
+                <>
+                    <input type="hidden" value={`${p.badge_id}`} name='badges' />
+                    <a class="bg-white hover:bg-opacity-30 bg-opacity-0 text-xs rounded-full size-4 flex items-center justify-center"
+                        hx-delete={`/admin/badges/${p.user_id}/${p.badge_id}`} hx-trigger="click">
+                        <i class="fa-solid fa-xmark" />
+                    </a>
+                </> : <></>
             }
         </div>
     );

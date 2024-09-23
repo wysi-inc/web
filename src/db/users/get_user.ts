@@ -4,7 +4,7 @@ import type { User, UserList } from "@/src/types/users";
 import { updateUser } from "./update_user";
 import { catalans } from "@/src/libs/constants";
 
-export async function getUser(id: string, mode: Mode | undefined) {
+export async function getUser(id: string, mode?: Mode) {
     try {
         let user: User = (await v2.user.details(id, mode) as User);
 
@@ -12,14 +12,11 @@ export async function getUser(id: string, mode: Mode | undefined) {
             console.error(user.error);
             return null;
         }
-
         mode = user.rank_history?.mode as Mode || "osu";
         user = await updateUser(user, mode);
-
         if (catalans.includes(user.id)) {
             (user.country as any).cat = true;
         }
-
         return user;
     } catch (err) {
         console.error(err);

@@ -52,8 +52,6 @@ async function Admin(p: { t: any, user: UserCookie }) {
         <Panel icon={<i class="fa-solid fa-pen-ruler" />} title="Tablets" code="tablets" t={p.t} manual={true}>
             <Tablets />
         </Panel>
-        <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-        <script src={`/public/js/drag.js?a=${Date.now()}`}/>
     </>);
 }
 

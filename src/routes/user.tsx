@@ -1,6 +1,6 @@
-import { Elysia, t } from 'elysia'
+import { Elysia, error, t } from 'elysia'
 import { verifyUser } from '../libs/auth';
-import { deleteCollections, deleteSocial, getCollectionFile, saveCollection, saveSetup, saveSocial, updateDan } from '../db/users/update_user';
+import { deleteCollections, deleteSocial, getCollectionFile, saveCollection, saveSetup, saveSocial, sortSocials, updateDan } from '../db/users/update_user';
 import type { BeatmapCategory, Mode, Route, ScoreCategory } from '../types/osu';
 import HtmxPage from '../libs/routes';
 import UserPage from '../components/user/UserPage';
@@ -112,64 +112,45 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             ))
         )
     )
-    .put("/dan", async ({ params, set, cookie, body, jwt }: Route) => {
+    .put("/dan", async ({ params, cookie, body, jwt }: Route) => {
         const user = await verifyUser(jwt, cookie.auth.value);
-        if (!user || Number(params.id) !== user.id) {
-            set.status = 401;
-            return "Unauthorized";
-        }
-        if (!body?.dan) {
-            set.status = 400;
-            return "???";
-        }
-        const done = await updateDan(user.id, body.dan);
-        if (!done) {
-            set.status = 500;
-            return "Something went wrong";
-        }
+        if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+        const res = await updateDan(user.id, body.dan);
+        if (res.error) return error(res.code, res.msg);
         return ":D done";
+    }, {
+        body: t.Object({
+            dan: t.String()
+        })
     })
     .group("/setup", _ => _
-        .put("/submit", async ({ t, params, set, cookie, body, jwt }: Route) => {
+        .put("/submit", async ({ t, params, cookie, body, jwt }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);
-            if (!user || Number(params.id) !== user.id) {
-                set.status = 401;
-                return "Unauthorized";
-            }
-            console.log(body);
+            if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const setup = await saveSetup(user.id, body);
             if (!setup) return "Failed to save setup, reload the page and try again.";
             return <UserSetupPanel t={t} setup={setup} logged_id={user.id} page_id={user.id} />
         })
     )
     .group("/collections", _ => _
-        .post("/parse", async ({ params, set, cookie, body, jwt }: Route) => {
+        .post("/parse", async ({ params, cookie, body, jwt }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);
-            if (!user || Number(params.id) !== user.id) {
-                set.status = 401;
-                return "Unauthorized";
-            }
+            if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             return <CollectionsForm file={body.collection} user_id={user.id} />;
         }, {
             body: t.Object({
                 collection: t.Any()
             })
         })
-        .put("/submit", async ({ params, set, cookie, body, jwt }: Route) => {
+        .put("/submit", async ({ params, cookie, body, jwt }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);
-            if (!user || Number(params.id) !== user.id) {
-                set.status = 401;
-                return "Unauthorized";
-            }
+            if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const collections = await saveCollection(body as any, user.id);
             return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} collections={collections as any} />
         })
-        .delete("/delete", async ({ params, set, cookie, jwt }: Route) => {
+        .delete("/delete", async ({ params, cookie, jwt }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);
-            if (!user || Number(params.id) !== user.id) {
-                set.status = 401;
-                return "Unauthorized";
-            }
+            if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             await deleteCollections(user.id);
             return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} />
         })
@@ -179,17 +160,11 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         })
     )
     .group("/socials", _ => _
-        .put("/submit", async ({ params, set, cookie, body, jwt }: Route) => {
+        .put("/submit", async ({ params, cookie, body, jwt }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);
-            if (!user || Number(params.id) !== user.id) {
-                set.status = 401;
-                return "Unauthorized";
-            }
+            if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const res = await saveSocial(user.id, body.username, body.platform);
-            if (!res.done) {
-                set.status = res.code;
-                return res.msg;
-            }
+            if (res.error) return error(res.code, res.msg);
             return <UserSocial user_id={user.id} social={{ username: body.username, platform: body.platform }} editable={true} />;
         }, {
             body: t.Object({
@@ -197,17 +172,22 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 platform: t.String()
             })
         })
-        .delete("/delete/:platform", async ({ params, set, cookie, jwt }: Route) => {
+        .delete("/delete/:platform", async ({ params, cookie, jwt }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);
-            if (!user || Number(params.id) !== user.id) {
-                set.status = 401;
-                return "Unauthorized";
-            }
+            if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const res = await deleteSocial(user.id, params.platform);
-            if (!res.done) {
-                set.status = res.code;
-                return res.msg;
-            }
+            if (res.error) return error(res.code, res.msg);
             return <></>;
+        })
+        .post("/sort", async ({ jwt, cookie, body, params }: Route) => {
+            const user = await verifyUser(jwt, cookie.auth.value);
+            if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+            const res = await sortSocials(Number(params.id), body.platforms);
+            if (res.error) return error(res.code, res.msg);
+            return res.msg;
+        }, {
+            body: t.Object({
+                platforms: t.Array(t.String())
+            })
         })
     )

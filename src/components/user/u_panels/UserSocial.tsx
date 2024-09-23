@@ -4,7 +4,7 @@ export const SOCIALS = [
     "github", "gitlab", "twitch", "instagram", "youtube", "tiktok", "pinterest",
     "snapchat", "reddit", "tinder", "linkedin", "roblox", "microsoft", "soundcloud",
     "spotify", "facebook", "paypal", "supercell", "kick", "kofi", "steam", "riot",
-    "epic", "anilist", "playstation", "linktree",
+    "epic", "anilist", "playstation", "linktree", "discord", "twitter"
 ]
 
 function UserSocial(p: { social: UserSocialType, user_id: number, editable?: boolean }) {
@@ -44,6 +44,15 @@ function UserSocial(p: { social: UserSocialType, user_id: number, editable?: boo
             icon: <i class="fa-brands fa-tiktok" />,
             bg: "bg-[#000000]",
             url: `https://tiktok.com/@${p.social.username}`,
+        },
+        "twitter": {
+            icon: <i class="fa-brands fa-twitter" />,
+            bg: "bg-[#1DA1F2]",
+            url: `https://twitter.com/${p.social.username}`
+        },
+        "discord": {
+            icon: <i class="fa-brands fa-discord" />,
+            bg: "bg-[#5865F2]",
         },
         "snapchat": {
             icon: <i class="fa-brands fa-snapchat" />,
@@ -153,11 +162,13 @@ function UserSocial(p: { social: UserSocialType, user_id: number, editable?: boo
                     {social.icon}
                     <span>{p.social.username}</span>
                 </span>}
-            {p.editable ?
+            {p.editable ? <>
+                <input type="hidden" value={`${p.social.platform}`} name='platforms' />
                 <a class="bg-white hover:bg-opacity-30 bg-opacity-0 text-xs rounded-full size-4 flex items-center justify-center"
                     hx-delete={`/users/${p.user_id}/socials/delete/${p.social.platform}`} hx-trigger="click" hx-target>
                     <i class="fa-solid fa-xmark" />
-                </a> : <></>
+                </a>
+            </> : <></>
             }
         </button>
     );
