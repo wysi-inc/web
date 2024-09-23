@@ -35,10 +35,10 @@ const BaseHtml = ({ lang, t, user, children }: Props) => {
                 <link href="/public/css/bbcode.css" rel="stylesheet" type="text/css" />
                 <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous" />
                 <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js" />
-                <script defer src="/public/js/fontawesome/brands.min.js" />
-                <script defer src="/public/js/fontawesome/solid.min.js" />
-                <script defer src="/public/js/fontawesome/regular.min.js" />
-                <script defer src="/public/js/fontawesome/fontawesome.min.js" />
+                <script defer src="/public/lib/fontawesome/brands.min.js" />
+                <script defer src="/public/lib/fontawesome/solid.min.js" />
+                <script defer src="/public/lib/fontawesome/regular.min.js" />
+                <script defer src="/public/lib/fontawesome/fontawesome.min.js" />
                 <script defer src={`/public/js/utils.js`} />
                 <script defer src={`/public/js/search${PROD ? ".min" : ""}.js`} />
                 <script defer src={`/public/js/audio${PROD ? ".min" : ""}.js`} />

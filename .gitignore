@@ -17,7 +17,6 @@
 # production
 /build
 ./public/css/main_out.css
-**/*.min.*
 
 .pnp.js
 np.js
