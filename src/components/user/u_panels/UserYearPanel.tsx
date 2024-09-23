@@ -64,7 +64,7 @@ async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mod
                     <h4 class="py-1 px-2 flex flex-row text-neutral-content justify-between">
                         <span>Performance Tags:</span>
                     </h4>
-                    <div class="grow flex flex-row gap-2 p-2 rounded-lg bg-base-300">
+                    <div class="grow flex flex-row flex-wrap gap-2 p-2 rounded-lg bg-base-300">
                         {data.tags.map((tag) =>
                             <div class={`badge ${tag.type === 1 ? "badge-success" : tag.type === 2 ? "badge-warning" : "badge-error"}`}>
                                 {tag.name}
