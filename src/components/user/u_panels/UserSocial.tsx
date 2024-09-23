@@ -2,7 +2,7 @@ import type { UserSocialType } from "@/src/models/User";
 
 export const SOCIALS = [
     "github", "gitlab", "twitch", "instagram", "youtube", "tiktok", "pinterest",
-    "snapchat", "reddit", "tinder", "linkedin", "roblox", "microsoft", "soundcloud",
+    "snapchat", "reddit", "linkedin", "roblox", "microsoft", "soundcloud",
     "spotify", "facebook", "paypal", "supercell", "kick", "kofi", "steam", "riot",
     "epic", "anilist", "playstation", "linktree", "discord", "twitter"
 ]
@@ -64,11 +64,6 @@ function UserSocial(p: { social: UserSocialType, user_id: number, editable?: boo
             icon: <i class="fa-brands fa-reddit-alien" />,
             bg: "bg-[#cc3700]",
             url: `https://reddit.com/user/${p.social.username}`
-        },
-        "tinder": {
-            icon: <i class="fa-solid fa-fire" />,
-            bg: "bg-gradient-to-br from-[#fd3277] to-[#fd7456]",
-            url: `https://tinder.com/@${p.social.username}`
         },
         "roblox": {
             icon: <img data-src="/public/img/socials/roblox.svg" class="size-4" loading="lazy" alt="ico" />,
