@@ -3,7 +3,7 @@ import HtmxPage from '../libs/routes';
 import type { Route } from '../types/osu';
 import Admin from '../components/web/Admin';
 import { verifyUser } from '../libs/auth';
-import { addBadge, addTablet, removeBadge, removeRole, removeTablet, setRole } from '../db/web/admin';
+import { addBadge, addTablet, removeBadge, removeRole, removeTablet, setRole, sortBadges } from '../db/web/admin';
 import Alert from '../components/web/Alert';
 import type { UserCookie } from '../types/users';
 import { TabletListItem } from '../components/web/admin/Tablets';
@@ -53,17 +53,17 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
             }
             return <Alert type='success' msg={res.msg} />;
         })
-        .post("/sort", async({ jwt, cookie, body, request }: Route) => {
+        .post("/:id/sort", async ({ jwt, cookie, body, params }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
-            const badge_id = body.badge_id;
-
-            // guardar en la BBDD
-            
-            return badge_id;   
-        }, {body: t.Object({
-            badge_id: t.Array(t.String())
-        })})
+            const res = await sortBadges(Number(params.id), body.badge_id);
+            if (!res.done) return error(res.code, res.msg);
+            return res.msg;
+        }, {
+            body: t.Object({
+                badge_id: t.Array(t.String())
+            })
+        })
     )
     .group("/roles", _ => _
         .put("/", async ({ body, jwt, cookie }: Route) => {

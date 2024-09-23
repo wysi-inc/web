@@ -47,7 +47,7 @@ function Badge(p: { badge_id: number, editable: boolean, user_id: number }) {
     return (
         <div class={`badge cursor-default border-none tooltip flex flex-row gap-1 ${badge.fg} ${badge.bg}`}
             hx-target="this" hx-swap="outerHTML" data-tip={badge.long} draggable={true} >
-            <input type="hidden" value={`${p.badge_id}`} name='badge_id'/>
+            <input type="hidden" value={`${p.badge_id}`} name='badge_id' />
             <span class="flex flex-row gap-2 items-center">
                 {badge.icon || <span>{badge.short.toUpperCase()}</span>}
             </span>

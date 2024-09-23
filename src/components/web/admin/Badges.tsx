@@ -30,18 +30,18 @@ async function Badges() {
                 </tr>
             </thead>
             <tbody>
-                {user_badges.map(user =>
+                {user_badges.map(u =>
                     <tr>
-                        <th><CopyText text={user.user_id} /></th>
+                        <th><CopyText text={u.user_id} /></th>
                         <td>
-                            <Link url={`/users/${user.user_id}`} css="flex flex-row gap-1 items-center">
-                                <img loading="lazy" src={`https://a.ppy.sh/${user.user_id}?${user.user_id}.png`} class="size-6 rounded-lg" alt="avatar" />
-                                <span>{user.username}</span>
+                            <Link url={`/users/${u.user_id}`} css="flex flex-row gap-1 items-center">
+                                <img loading="lazy" src={`https://a.ppy.sh/${u.user_id}?${u.user_id}.png`} class="size-6 rounded-lg" alt="avatar" />
+                                <span>{u.username}</span>
                             </Link>
                         </td>
                         <td>
-                            <form class="flex flex-row flex-wrap gap-1 sortable" hx-post="/admin/badges/sort" hx-trigger="end" hx-swap="none">
-                                {user.wysi_badges?.map(b => <Badge user_id={user.user_id} badge_id={b} editable={true} />)} 
+                            <form class="flex flex-row flex-wrap gap-1 sortable" hx-post={`/admin/badges/${u.user_id}/sort`} hx-trigger="end" hx-swap="none">
+                                {u.wysi_badges?.map(b => <Badge user_id={u.user_id} badge_id={b} editable={true} />)}
                             </form>
                         </td>
                     </tr>
