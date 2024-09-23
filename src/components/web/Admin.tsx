@@ -6,6 +6,7 @@ import { ReportModel } from "@/src/models/Report";
 import Badges from "./admin/Badges";
 import AdminAdmins from "./admin/AdminAdmins";
 import type { UserCookie } from "@/src/types/users";
+import Tablets from "./admin/Tablets";
 
 async function Admin(p: { t: any, user: UserCookie }) {
 
@@ -36,16 +37,20 @@ async function Admin(p: { t: any, user: UserCookie }) {
             </div>
         </section>
 
-        <Panel icon={<i class="fa-solid fa-certificate" />} title="Badges" code="reports" t={p.t}>
+        <Panel icon={<i class="fa-solid fa-certificate" />} title="Badges" code="badges" t={p.t} manual={true}>
             <Badges />
         </Panel>
 
-        <Panel icon={<i class="fa-solid fa-screwdriver-wrench" />} title="Admins" code="reports" t={p.t}>
+        <Panel icon={<i class="fa-solid fa-screwdriver-wrench" />} title="Admins" code="admins" t={p.t} manual={true}>
             <AdminAdmins user={p.user} />
         </Panel>
 
-        <Panel icon={<i class="fa-solid fa-triangle-exclamation" />} title={`Reports (${report_count})`} code="reports" t={p.t}>
+        <Panel icon={<i class="fa-solid fa-triangle-exclamation" />} title={`Reports (${report_count})`} code="reports" t={p.t} manual={true}>
             <Reports />
+        </Panel>
+
+        <Panel icon={<i class="fa-solid fa-pen-ruler" />} title="Tablets" code="tablets" t={p.t} manual={false}>
+            <Tablets />
         </Panel>
 
     </>);

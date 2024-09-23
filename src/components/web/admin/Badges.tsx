@@ -22,27 +22,31 @@ async function Badges() {
         </form>
         <div id="badges_notif" class="flex flex-col gap-2" />
         <table class="table table-zebra table-xs">
-            <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Badges</th>
-            </tr>
-            {user_badges.map(user =>
+            <thead>
                 <tr>
-                    <th><CopyText text={user.user_id} /></th>
-                    <td>
-                        <Link url={`/users/${user.user_id}`} css="flex flex-row gap-1 items-center">
-                            <img loading="lazy" src={`https://a.ppy.sh/${user.user_id}?${user.user_id}.png`} class="size-6 rounded-lg" alt="avatar" />
-                            <span>{user.username}</span>
-                        </Link>
-                    </td>
-                    <td>
-                        <div class="flex flex-row flex-wrap gap-1">
-                            {user.wysi_badges?.map(b => <Badge user_id={user.user_id} badge_id={b} editable={true} />)}
-                        </div>
-                    </td>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Badges</th>
                 </tr>
-            )}
+            </thead>
+            <tbody>
+                {user_badges.map(user =>
+                    <tr>
+                        <th><CopyText text={user.user_id} /></th>
+                        <td>
+                            <Link url={`/users/${user.user_id}`} css="flex flex-row gap-1 items-center">
+                                <img loading="lazy" src={`https://a.ppy.sh/${user.user_id}?${user.user_id}.png`} class="size-6 rounded-lg" alt="avatar" />
+                                <span>{user.username}</span>
+                            </Link>
+                        </td>
+                        <td>
+                            <div class="flex flex-row flex-wrap gap-1">
+                                {user.wysi_badges?.map(b => <Badge user_id={user.user_id} badge_id={b} editable={true} />)}
+                            </div>
+                        </td>
+                    </tr>
+                )}
+            </tbody>
         </table>
     </div>);
 }

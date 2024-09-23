@@ -15,7 +15,7 @@ const TabletDisplay = async ({ t, tablet, editable }: Props) => {
 
     if (!editable && empty) return <></>;
 
-    const tablets = await TabletModel.find();
+    const tablets = await TabletModel.aggregate([{ $sort: { name: 1 } }]);
 
     const custom: boolean = tablet?.name === "" || tablets.find((t) => t.name === tablet?.name) === undefined;
 
@@ -58,7 +58,7 @@ const TabletDisplay = async ({ t, tablet, editable }: Props) => {
                         <span class="label-text">{t.user.sections.setup.model}:</span>
                     </div>
                     <select class="peer disabled:hidden w-full select select-bordered select-sm" name="tablet_model">
-                        {tablets.sort((a, b) => a.name.localeCompare(b.name)).map((t) => <option value={JSON.stringify(t)} selected={tablet?.name === t.name}>{t.name}</option>)}
+                        {tablets.map(t => <option value={JSON.stringify(t)} selected={tablet?.name === t.name}>{t.name}</option>)}
                         <option value="custom" selected={custom}>Custom</option>
                     </select>
                     <span class="input input-sm bg-base-300 hidden peer-disabled:block">{tablet?.name}</span>
