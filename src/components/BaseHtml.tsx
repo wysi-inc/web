@@ -15,7 +15,7 @@ const PROD = false;
 
 const BaseHtml = ({ lang, t, user, children }: Props) => {
     return (<>
-        <html class="scroll-smooth" lang="en">
+        <html lang="en" class="scroll-smooth">
             <head>
                 <title>wysi</title>
                 <meta charset="UTF-8" />
@@ -46,6 +46,7 @@ const BaseHtml = ({ lang, t, user, children }: Props) => {
                 <script defer src={`/public/js/bbcode${PROD ? ".min" : ""}.js`} />
             </head>
             <body class="bg-base-300 flex flex-col justify-center items-center" id="top">
+                <script>let FF_FOUC_FIX;</script>
                 <Navbar lang={lang} t={t} user={user} />
                 <main class="w-screen mil:w-mil">
                     <div id="main" class="md:p-4 flex flex-col gap-4 bg-neutral shadow-lg">
