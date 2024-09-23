@@ -14,10 +14,10 @@ async function Tablets() {
                         Name: <input required name="name" type="text" />
                     </label>
                     <label class="join-item input input-sm input-bordered flex items-center gap-2">
-                        Width: <input required name="w" type="number" />
+                        Width: <input required name="w" type="number" step="any" />
                     </label>
                     <label class="join-item input input-sm input-bordered flex items-center gap-2">
-                        Height: <input required name="h" type="number" />
+                        Height: <input required name="h" type="number" step="any" />
                     </label>
                 </fieldset>
                 <button class="btn btn-sm btn-circle btn-primary" type="submit">
