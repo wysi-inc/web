@@ -95,7 +95,7 @@ export function apicall() {
     API_CALL_COUNTER++;
 }
 
-const RATELIMIT = 500;
+const RATELIMIT = 120;
 const RATELIMIT_MAP = new Map();
 
 setInterval(() => {
