@@ -37,7 +37,7 @@ async function Admin(p: { t: any, user: UserCookie }) {
             </div>
         </section>
 
-        <Panel icon={<i class="fa-solid fa-certificate" />} title="Badges" code="badges" t={p.t} manual={true}>
+        <Panel icon={<i class="fa-solid fa-certificate" />} title="Badges" code="badges" t={p.t} manual={false}>
             <Badges />
         </Panel>
 
@@ -52,7 +52,8 @@ async function Admin(p: { t: any, user: UserCookie }) {
         <Panel icon={<i class="fa-solid fa-pen-ruler" />} title="Tablets" code="tablets" t={p.t} manual={true}>
             <Tablets />
         </Panel>
-
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+        <script src={`/public/js/drag.js?a=${Date.now()}`}/>
     </>);
 }
 

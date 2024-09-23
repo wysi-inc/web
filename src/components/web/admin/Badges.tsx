@@ -40,15 +40,16 @@ async function Badges() {
                             </Link>
                         </td>
                         <td>
-                            <div class="flex flex-row flex-wrap gap-1">
-                                {user.wysi_badges?.map(b => <Badge user_id={user.user_id} badge_id={b} editable={true} />)}
-                            </div>
+                            <form class="flex flex-row flex-wrap gap-1 sortable" hx-post="/admin/badges/sort" hx-trigger="end" hx-swap="none">
+                                {user.wysi_badges?.map(b => <Badge user_id={user.user_id} badge_id={b} editable={true} />)} 
+                            </form>
                         </td>
                     </tr>
                 )}
             </tbody>
         </table>
-    </div>);
+    </div>
+    );
 }
 
 export default Badges;

@@ -53,6 +53,17 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
             }
             return <Alert type='success' msg={res.msg} />;
         })
+        .post("/sort", async({ jwt, cookie, body, request }: Route) => {
+            const user = await verifyUser(jwt, cookie.auth.value);
+            if (!user || !isAdmin(user)) return error(401, "Unauthorized")
+            const badge_id = body.badge_id;
+
+            // guardar en la BBDD
+            
+            return badge_id;   
+        }, {body: t.Object({
+            badge_id: t.Array(t.String())
+        })})
     )
     .group("/roles", _ => _
         .put("/", async ({ body, jwt, cookie }: Route) => {

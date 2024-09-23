@@ -41,11 +41,13 @@ export const BADGES: any = {
 function Badge(p: { badge_id: number, editable: boolean, user_id: number }) {
 
     const badge = BADGES[p.badge_id];
-    if (!badge) return <>no</>;
+    if (!badge) return <>xd</>;
+
 
     return (
-        <button class={`badge cursor-default border-none tooltip flex flex-row gap-1 ${badge.fg} ${badge.bg}`}
-            type="button" hx-target="this" hx-swap="outerHTML" data-tip={badge.long}>
+        <div class={`badge cursor-default border-none tooltip flex flex-row gap-1 ${badge.fg} ${badge.bg}`}
+            hx-target="this" hx-swap="outerHTML" data-tip={badge.long} draggable={true} >
+            <input type="hidden" value={`${p.badge_id}`} name='badge_id'/>
             <span class="flex flex-row gap-2 items-center">
                 {badge.icon || <span>{badge.short.toUpperCase()}</span>}
             </span>
@@ -55,7 +57,7 @@ function Badge(p: { badge_id: number, editable: boolean, user_id: number }) {
                     <i class="fa-solid fa-xmark" />
                 </a> : <></>
             }
-        </button>
+        </div>
     );
 }
 
