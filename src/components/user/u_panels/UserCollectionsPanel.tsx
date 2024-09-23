@@ -16,7 +16,7 @@ async function UserCollectionsPanel({ user_id, logged_id, collections }: Props) 
         collections = user?.collections as any;
     }
 
-    return (<div id="colpanel" class="max-h-96 overflow-y-scroll flex flex-col gap-4">
+    return (<div id="colpanel" class="flex flex-col gap-4">
         {editable ?
             <form id="collections_form" class="flex flex-row items-center justify-between gap-2" hx-swap="innerHTML" hx-target="#colpanel" hx-trigger="submit"
                 hx-encoding='multipart/form-data' hx-post={`/users/${user_id}/collections/parse`} >
