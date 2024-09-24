@@ -73,7 +73,7 @@ const UserPage = async (p: Props) => {
             icon: <i class="fa-solid fa-palette" />,
             url: `/users/${user.id}/0/panels/skins`,
             manual: true,
-            show_if: (user.skins || []).length > 0 || editable
+            show_if: (user.skins?.length || 0) > 0 || editable
         },
         {
             title: p.t?.user.sections.year.title,
