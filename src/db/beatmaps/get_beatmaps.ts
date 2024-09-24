@@ -55,6 +55,12 @@ export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ 
         if (q.od_max && Number(q.od_max) < 10) {
             query.push(`beatmaps.od<=${q.od_max}`);
         }
+        if (q.len_min && Number(q.len_min) > 0) {
+            query.push(`beatmaps.total_length>=${q.len_min}`);
+        }
+        if (q.len_max && Number(q.len_max) < 600) {
+            query.push(`beatmaps.total_length<=${q.len_min}`);
+        }
         let query_string = "";
         if (q.title) {
             query_string += q.title;

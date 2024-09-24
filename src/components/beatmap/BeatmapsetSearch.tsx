@@ -30,7 +30,8 @@ function BeatmapsetSearch() {
     return (<>
         <Title title="Beatmap Listing" />
         <form class="flex flex-col rounded-lg drop-shadow-lg bg-base-300" id="search-form"
-            hx-post="/beatmapsets/list" hx-trigger="load, input delay:500ms" hx-target="#beatmap-search-results"
+            hx-post="/beatmapsets/list" hx-trigger="load, input delay:500ms"
+            hx-target="#beatmap-search-results" hx-indicator="#beatmap-search-indicator"
             hx-on--before-request="document.getElementById('beatmap-search-results').innerHTML='';">
             <div class="flex flex-col gap-4 p-4 bg-base-100 rounded-lg">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -115,7 +116,12 @@ function BeatmapsetSearch() {
             </div>
         </form>
         <script async type="module" src={`/public/js/sliders.js?v=${Date.now()}`} />
-        <output id="beatmap-search-results" class="empty:hidden peer bg-base-100 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg" />
+        <div id="beatmap-search-indicator" class="htmx-indicator bg-base-100 p-4 rounded-lg">
+            <div class="flex items-center justify-center">
+                <span class="loading loading-spinner loading-md mx-auto" />
+            </div>
+        </div>
+        <output id="beatmap-search-results" class="empty:hidden bg-base-100 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg" />
     </>);
 }
 
