@@ -75,7 +75,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 const user = await verifyUser(jwt, cookie.auth.value);
                 return <UserSetupPanel t={t} logged_id={user?.id} page_id={Number(params.id)} />
             })
-            .post("/skins", async ({ t, params, jwt, cookie }: Route) => {
+            .post("/skins", async ({ params, jwt, cookie }: Route) => {
                 const user = await verifyUser(jwt, cookie.auth.value);
                 return <UserSkinsPanel user_id={Number(params.id)} logged_id={user?.id} />
             })
