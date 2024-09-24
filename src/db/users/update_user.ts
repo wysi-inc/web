@@ -357,3 +357,73 @@ export async function updateDan(
         }
     }
 }
+
+export async function addSkin(user_id: number, skin_id: string): Promise<Res & { id?: number }> {
+    try {
+        const user = await User.findOne({ user_id });
+        if (!user) return {
+            error: true,
+            msg: "User doesnt exist!",
+            code: 404
+        };
+        if (user.skins.length >= 2) return {
+            error: true,
+            msg: "User has reached the skin limit!",
+            code: 400
+        };
+        if (user.skins?.find(s => s === skin_id)) return {
+            error: true,
+            msg: "User already has this skin!",
+            code: 400
+        };
+        if (!user.skins) user.skins = [skin_id];
+        else user.skins.push(skin_id);
+        await user.save();
+        return {
+            error: false,
+            msg: "Skin added",
+            code: 201,
+            id: user.skins.length - 1,
+        };
+    } catch (err: any) {
+        console.error(err);
+        return {
+            error: true,
+            msg: "Something went wrong",
+            code: 500
+        }
+    }
+}
+
+export async function deleteSkin(
+    user_id: number,
+    skin_id: string
+): Promise<Res> {
+    try {
+        const user = await User.findOne({ user_id });
+        if (!user) return {
+            error: true,
+            msg: "User doesnt exist",
+            code: 404
+        };
+        if (!user.skins?.find(s => s === skin_id)) return {
+            error: true,
+            msg: "User doesnt have this skin",
+            code: 400
+        };
+        user.skins = user.skins.filter(s => s !== skin_id);
+        await user.save();
+        return {
+            error: false,
+            msg: "Skin removed",
+            code: 200
+        };
+    } catch (err: any) {
+        console.error(err);
+        return {
+            error: true,
+            msg: "Something went wrong",
+            code: 500
+        }
+    }
+}

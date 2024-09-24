@@ -21,6 +21,18 @@ export type RankHistory = {
     country_ranks: Rank[];
 }
 
+export type Skin = {
+    id: number,
+    name: string,
+    modes: string[],
+    screenshots: {
+        large: string,
+        medium: string,
+        small: string,
+    }[],
+    link_to_skin: string
+}
+
 export type UserBasic = v2User;
 
 export type User = UserBasic & {
@@ -28,6 +40,7 @@ export type User = UserBasic & {
     db_setup?: Setup,
     collections?: CollectionDB[],
     socials?: UserSocialType[],
+    skins?: String[],
     wysi_badges?: number[],
     dan?: String,
     groups: {

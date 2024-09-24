@@ -1,7 +1,7 @@
 import { DonationModel } from "@/src/models/Donations";
 import moment from "moment";
 import Title from "./Title";
-import { crowdin_id, crowdin_secret } from "@/index";
+import { env } from "bun";
 
 export type Contributor = {
     login: string;
@@ -63,11 +63,11 @@ async function Support() {
     const gh_res = await fetch("https://api.github.com/repos/wysi-inc/web/contributors");
     const gh_contrib = await gh_res.json() as Contributor[];
 
-    const url = `https://api.crowdin.com/api/v2/projects/${crowdin_id}/members`;
+    const url = `https://api.crowdin.com/api/v2/projects/${env.CROWDIN_ID}/members`;
     const tr_res = await fetch(url, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${crowdin_secret}`,
+            'Authorization': `Bearer ${env.CROWDIN_SECRET}`,
             'Content-Type': 'application/json'
         }
     });

@@ -1,6 +1,6 @@
 import { Elysia, error, t } from 'elysia'
 import { verifyUser } from '../libs/auth';
-import { deleteCollections, deleteSocial, getCollectionFile, saveCollection, saveSetup, saveSocial, sortSocials, updateDan } from '../db/users/update_user';
+import { addSkin, deleteCollections, deleteSkin, deleteSocial, getCollectionFile, saveCollection, saveSetup, saveSocial, sortSocials, updateDan } from '../db/users/update_user';
 import type { BeatmapCategory, Mode, Route, ScoreCategory } from '../types/osu';
 import HtmxPage from '../libs/routes';
 import UserPage from '../components/user/UserPage';
@@ -8,7 +8,7 @@ import UserScoresPanel from '../components/user/u_panels/UserScoresPanel';
 import UserBeatmapsPanel from '../components/user/u_panels/UserBeatmapsPanel';
 import UserSummaryPanel from '../components/user/u_panels/UserSummaryPanel';
 import UserMostPanel from '../components/user/u_panels/UserMostPanel';
-import UserSkinsPanel from '../components/user/u_panels/UserSkinsPanel';
+import UserSkinsPanel, { SkinCard } from '../components/user/u_panels/UserSkinsPanel';
 import UserScoresList from '../components/user/u_panels/u_components/UserScoresList';
 import UserBeatmapsList from '../components/user/u_panels/u_components/UserBeatmapsList';
 import UserMostList from '../components/user/u_panels/u_components/UserMostList';
@@ -71,13 +71,14 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 const user = await verifyUser(jwt, cookie.auth.value);
                 return <UserYearPanel user_id={Number(params.id)} mode={params.mode as Mode} logged_id={user?.id} />
             })
-            .post("/setup", async ({ t, params, cookie, jwt }: Route) => {
+            .post("/setup", async ({ t, params, jwt, cookie }: Route) => {
                 const user = await verifyUser(jwt, cookie.auth.value);
                 return <UserSetupPanel t={t} logged_id={user?.id} page_id={Number(params.id)} />
             })
-            .post("/skins", ({ params }) => (
-                <UserSkinsPanel user_id={Number(params.id)} />
-            ))
+            .post("/skins", async ({ t, params, jwt, cookie }: Route) => {
+                const user = await verifyUser(jwt, cookie.auth.value);
+                return <UserSkinsPanel user_id={Number(params.id)} logged_id={user?.id} />
+            })
         )
         .group("/lists", (_) => _
             .post("/scores/:category", ({ params, query }) => (
@@ -189,5 +190,29 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             body: t.Object({
                 platforms: t.Array(t.String())
             })
+        })
+    )
+    .group("/skins", _ => _
+        .put("/submit", async ({ params, cookie, body, jwt }: Route) => {
+            const user = await verifyUser(jwt, cookie.auth.value);
+            if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+            const res = await addSkin(Number(params.id), body.skin_id);
+            if (res.error) return error(res.code, res.msg);
+            return <SkinCard user_id={user.id} skin_id={body.skin_id} index={res?.id || 0} editable />
+        }, {
+            body: t.Object({
+                skin_id: t.String()
+            })
+        })
+        .delete("/delete/:skin_id", async ({ params, cookie, jwt, query }: Route) => {
+            const user = await verifyUser(jwt, cookie.auth.value);
+            if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+            const res = await deleteSkin(Number(params.id), `${params.skin_id}${query.v ? `?v=${query.v}` : ""}`);
+            if (res.error) return error(res.code, res.msg);
+            return res.msg;
+        }, {
+            query: t.Optional(t.Object({
+                v: t.Optional(t.String())
+            }))
         })
     )

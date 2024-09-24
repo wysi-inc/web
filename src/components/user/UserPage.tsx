@@ -66,14 +66,15 @@ const UserPage = async (p: Props) => {
             manual: true,
             jsx: (<UserSetupPanel t={p.t} setup={user.db_setup} page_id={user.id} logged_id={p.logged?.id} />)
         },
-        // {
-        //     title: "Skins",
-        //     code: "skins",
-        //     tooltip: "powered by skins.osuck.net",
-        //     icon: <i class="fa-solid fa-palette" />,
-        //     url: `/users/${user.id}/0/panels/skins`,
-        //     show_if: true
-        // },
+        {
+            title: "Skins (beta)",
+            code: "skins",
+            tooltip: "powered by skins.osuck.net",
+            icon: <i class="fa-solid fa-palette" />,
+            url: `/users/${user.id}/0/panels/skins`,
+            manual: true,
+            show_if: (user.skins || []).length > 0 || editable
+        },
         {
             title: p.t?.user.sections.year.title,
             code: "year",

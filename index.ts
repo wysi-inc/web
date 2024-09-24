@@ -16,23 +16,30 @@ import { apiRoutes } from "./src/routes/api";
 import { scoresRoutes } from "./src/routes/scores";
 import { adminRoutes } from "./src/routes/admin";
 import { reportRoutes } from "./src/routes/reports";
+import { env } from "bun";
 
-const port = Number(process.env.PORT as string);
-const mongo_uri = process.env.MONGO_URI as string;
+declare module "bun" {
+    interface Env {
+        OSU_ID: number,
+        OSU_SECRET: string,
+        OSU_REDIRECT: string,
+        OSU_API_KEY: string,
+        OSUCK_API_KEY: string,
+        MONGO_URI: string,
+        CROWDIN_ID: number,
+        CROWDIN_SECRET: string,
+        KOFI_TOKEN: string,
+        CLOUDFLARE_TOKEN: string,
+        STATE: "dev" | "prod",
+        PORT: number,
+    }
+}
 
-export const osu_id = Number(process.env.OSU_ID);
-export const osu_secret = String(process.env.OSU_SECRET);
-export const osu_redirect = String(process.env.OSU_REDIRECT);
-export const osu_api_key = String(process.env.OSU_API_KEY);
-
-export const crowdin_id = Number(process.env.CROWDIN_ID);
-export const crowdin_secret = String(process.env.CROWDIN_SECRET);
-
-await mongoose.connect(mongo_uri).catch((err) => console.error("[ EE ] Couldn't connect to MongoDB\n", err))
+await mongoose.connect(env.MONGO_URI).catch((err) => console.error("[ EE ] Couldn't connect to MongoDB\n", err))
 console.info("[ OK ] Connected to MongoDB")
 
 async function connect() {
-    const result = await auth.login(osu_id, osu_secret, ["public"]).catch((err) => console.error(err));
+    const result = await auth.login(env.OSU_ID, env.OSU_SECRET, ["public"]).catch((err) => console.error(err));
 
     if (!result?.expires_in) return console.error("[ EE ] Couldn't connect to osu!API\n", result);
     console.info("[ OK ] Connected to osu!API")
@@ -41,7 +48,7 @@ async function connect() {
         setInterval(async () => await relogin(), 1000 * 60 * 60 * 12);
     }, result.expires_in * 1000);
 
-    auth.set_v1(osu_api_key);
+    auth.set_v1(env.OSU_API_KEY);
     await updateMedals();
 }
 
@@ -72,7 +79,7 @@ async function getTranslations() {
 export const translations = await getTranslations();
 
 const jwtcfg = jwt({
-    secret: process.env.OSU_SECRET as string,
+    secret: env.OSU_SECRET as string,
     cookie: "auth",
     cookieOptions: {
         httpOnly: true,
@@ -141,6 +148,6 @@ new Elysia()
     .use(beatmapRoutes)
     .use(beatmapsetRoutes)
     .use(scoresRoutes)
-    .onStart(() => console.info(`[ OK ] Listening on port ${port}`))
+    .onStart(() => console.info(`[ OK ] Listening on port ${env.PORT}`))
     .onError(() => "404: This page doesnt exist")
-    .listen(port);
+    .listen(env.PORT);

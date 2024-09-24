@@ -1,8 +1,8 @@
 import { auth } from "osu-api-extended";
 import type { UserBasic, UserCookie } from "../types/users";
-import { osu_id, osu_redirect, osu_secret } from "@/index";
 import type { Jwt } from "../types/osu";
 import { User } from "../models/User";
+import { env } from "bun";
 
 export async function userAuthCode(code: string): Promise<any> {
     const res = await fetch("https://osu.ppy.sh/oauth/token", {
@@ -11,7 +11,7 @@ export async function userAuthCode(code: string): Promise<any> {
             "Accept": "application/json",
             "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `client_id=${osu_id}&client_secret=${osu_secret}&code=${code}&grant_type=authorization_code&redirect_uri=${osu_redirect}`
+        body: `client_id=${env.OSU_ID}&client_secret=${env.OSU_SECRET}&code=${code}&grant_type=authorization_code&redirect_uri=${env.OSU_REDIRECT}`
     });
 
     const data = await res.json();
@@ -19,7 +19,7 @@ export async function userAuthCode(code: string): Promise<any> {
 }
 
 export async function userAuthData(code: string): Promise<{ data: UserBasic, role: string | null | undefined } | undefined> {
-    const user_data: UserBasic = await auth.authorize(code, 'osu', osu_id, osu_secret, osu_redirect) as any;
+    const user_data: UserBasic = await auth.authorize(code, 'osu', env.OSU_ID, env.OSU_SECRET, env.OSU_REDIRECT) as any;
     if ((user_data as any).error) return;
     const user = await User.findOne({ user_id: user_data.id });
     return { data: user_data, role: user?.role };

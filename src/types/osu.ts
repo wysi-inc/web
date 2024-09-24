@@ -1,4 +1,4 @@
-export type Mode = "osu" | "taiko" | "fruits" | "mania";
+export type Mode = "osu" | "taiko" | "fruits" | "mania" | "std";
 export type Mod = "1K" | "2K" | "3K" | "4K" | "5K" | "6K" | "7K" | "8K" | "9K" | "AC" | "AD" | "AL" | "AP" | "AS" | "AT" | "BL" | "BR" | "BU" | "CL" | "CN" | "DA" | "DC" | "DF" | "DP" | "DT" | "EZ" | "FL" | "FR" | "GR" | "HD" | "HR" | "HT" | "MG" | "MR" | "MU" | "NC" | "NF" | "NM" | "NS" | "PF" | "RD" | "RP" | "RX" | "SD" | "SG" | "SI" | "SO" | "ST" | "SY" | "TC" | "TD" | "TP" | "TR" | "WD" | "WG" | "WU";
 
 export type Category = "score" | "performance";

@@ -131,16 +131,10 @@ const userSchema = new mongoose.Schema({
         enum: DANS,
     },
     socials: [userSocial],
-    collections: {
-        type: [collectionDBSchema],
-        required: false,
-    },
+    collections: [collectionDBSchema],
     skins: [String],
     setup: setup,
-    wysi_badges: {
-        type: [Number],
-        required: false
-    },
+    wysi_badges: [Number],
     role: {
         type: String,
         enum: ["owner", "admin"],
