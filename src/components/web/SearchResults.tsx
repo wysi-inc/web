@@ -5,30 +5,18 @@ import Link from "./Link";
 import SubdivisionFlag from "../user/u_panels/u_components/SubdivisionFlag";
 import Clan from "../user/u_panels/u_components/Clan";
 import type { Beatmapset } from "@/src/types/beatmaps";
-import { apicall } from "@/index";
 
 type Props = {
     query: string | undefined;
 }
 
 async function SearchResults({ query }: Props) {
-
     if (!query) return <></>;
-
     const res = await v2.site.search({ query, mode: "user" });
-
-    apicall();
-
     const users = res.user.data;
     const response = await v2.beatmaps.search({ query }) as any;
-
-    apicall();
-
     const beatmaps = response.beatmapsets as Beatmapset[];
-
     const LIMIT = 5;
-
-    console.log(users);
 
     return (<>
         <div class="rounded-lg bg-base-100 flex flex-col p-2 gap-2">
