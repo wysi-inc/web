@@ -6,74 +6,74 @@
         "beatmaps": "Beatmaps",
         "support": "Support",
         "about": "Über die Website",
-        "search": "Suche Jemanden",
-        "search_someone": "Suche Jemanden",
+        "search": "Suche",
+        "search_someone": "Suche jemanden",
         "help": "Hilf diese Seite zu übersetzen",
         "log": {
-            "login": "Mit Osu! Einloggen",
-            "logout": "Ausloggen",
-            "osu": "Osu! Profil",
+            "login": "Mit osu! Einloggen",
+            "logout": "Abmelden",
+            "osu": "osu! Profil",
             "wysi": "wysi! Profil"
         }
     },
     "home": {
-        "welcome": "Willkommen zu wysi727.com!",
+        "welcome": "Willkommen auf wysi727.com!",
         "foss": "Eine open-source osu! Website Alternative",
         "built": "Erstellt mit bun und htmx",
-        "profiles": "Benutzer Profile",
+        "profiles": "Nutzerprofile",
         "stats": "Top 100 Score Statistiken",
-        "search": "Beatmap Suche",
+        "search": "Beatmapsuche",
         "calculator": "Eingebauter PP-Rechner",
-        "setup": "Teile dein Setup",
-        "collections": "Veröffentliche deine Kollektionen"
+        "setup": "Teile dein Setup!",
+        "collections": "Lade deine Kollektionen hoch!"
     },
     "user": {
         "sections": {
-            "expand": "Öffnen",
+            "expand": "Erweitern",
             "about": "Über mich",
             "beatmaps": "Beatmaps",
             "top": "Top",
             "medals": {
                 "title": "Medaillen",
                 "recent": "Neu bekommene Medaillen",
-                "rarest": "Seltenste Medaillen",
+                "rarest": "Seltenste Medaille",
                 "show": "Zeige alles"
             },
             "year": {
                 "title": "Jahr",
                 "info": "Dies ist ein Rückblick von diesem Jahr, die Daten werden am 1. Januar zurückgesetzt"
             },
-            "most": "Meist Gespielte Maps",
+            "most": "Meist gespielt",
             "scores": {
                 "title": "Scores",
                 "info": "Fahre über die ausgegrauten PP um den (if FC) PP Wert zu sehen",
                 "tabs": {
                     "pinned": "Angepinnt",
-                    "best": "Beste Score",
-                    "first": "Nummer 1 Ränge",
-                    "recent": "Neuliche Scores"
+                    "best": "Beste Scores",
+                    "first": "Platz 1 Ränge",
+                    "recent": "Kürzliche Scores"
                 }
             },
             "history": {
-                "title": "Historie",
+                "title": "Verlauf",
                 "tabs": {
-                    "global": "Globale Rangliste",
-                    "country": "Land",
-                    "plays": "Anzahl der spiele",
-                    "replays": "Replays"
+                    "global": "Global",
+                    "country": "National",
+                    "plays": "Anzahl der Spiele",
+                    "replays": "Wiederholungen"
                 }
             },
             "summary": {
-                "title": "Statistiken",
+                "title": "Zusammenfassung",
                 "info": "Dies ist eine kurze Zusammenfassung deiner Top 100 Spiele",
                 "tabs": {
-                    "hit_ratios": "Treffer Häufigkeit",
-                    "grade_ratios": "Beatmap Rang Häufigkeit",
-                    "average_play": "Durchschnittliche Statistik per Score"
+                    "hit_ratios": "Treffer-Häufigkeit",
+                    "grade_ratios": "Beatmap-Rang-Häufigkeit",
+                    "average_play": "Durchschnittliche Statistiken pro Score"
                 }
             },
             "collections": {
-                "title": "Collections",
+                "title": "Kollektionen",
                 "info": "Alle Beatmaps, die nicht auf der osu! Website existieren, werden nicht heruntergeladen (z. B.: osu!trainer, customdiffs, unveröffentlichte Beatmaps...)"
             },
             "setup": {
@@ -173,13 +173,13 @@
         "bpm": "BPM"
     },
     "footer": {
-        "rights": "Alle Rechte diesem dummen Affe vorbehalten"
+        "rights": "Alle Rechte diesem dummen Affen vorbehalten"
     },
     "alerts": {
         "user": {
             "user_doesnt_exist": "Dieser Nutzer existiert nicht",
             "user_is_bot": "Dieser Nutzer ist ein Bot, Bots werden noch nicht unterstützt :(",
-            "users_fail": "Benutzer kann nicht abgerufen werden"
+            "users_fail": "Nutzer kann nicht abgerufen werden"
         }
     }
 }
