@@ -5898,6 +5898,10 @@ input.tab:checked + .tab-content,
   font-weight: 700;
 }
 
+body {
+  display: flex !important;
+}
+
 img:not([src]):not([srcset]) {
   visibility: hidden;
 }

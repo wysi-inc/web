@@ -94,6 +94,10 @@
     font-weight: 700;
 }
 
+body {
+    display: flex !important;
+}
+
 img:not([src]):not([srcset]) {
     visibility: hidden;
 }
