@@ -28,6 +28,8 @@ async function SearchResults({ query }: Props) {
 
     const LIMIT = 5;
 
+    console.log(users);
+
     return (<>
         <div class="rounded-lg bg-base-100 flex flex-col p-2 gap-2">
             <div class="px-1 flex flex-row gap-2 items-center">
@@ -35,17 +37,15 @@ async function SearchResults({ query }: Props) {
                 <h2>Users</h2>
             </div>
             {users.map((u, i) => i < LIMIT ?
-                <Link url={`/users/${u.id}`}>
-                    <div class="flex flex-row justify-between p-2 gap-2 bg-base-300 rounded-lg">
-                        <div class="flex flex-row gap-2 items-center">
-                            <Flag name={""} code={u.country_code} />
-                            <SubdivisionFlag user_id={u.id} />
-                            <Clan user_id={u.id} />
-                            <span>{u.username}</span>
-                        </div>
-                        <div class="flex justify-center">
-                            <OnlineDot size={24} online={u.is_online} />
-                        </div>
+                <Link url={`/users/${u.id}`} css="flex flex-row justify-between p-2 gap-2 bg-base-300 rounded-lg">
+                    <div class="flex flex-row gap-2 items-center">
+                        <Flag code={u.country_code} static={true} />
+                        <SubdivisionFlag user_id={u.id} />
+                        <Clan user_id={u.id} />
+                        <span>{u.username}</span>
+                    </div>
+                    <div class="flex justify-center">
+                        <OnlineDot size={24} online={u.is_online} />
                     </div>
                 </Link> : <></>)}
         </div>

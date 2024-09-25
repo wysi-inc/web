@@ -30,6 +30,6 @@
         "mongoose": "^8.6.3",
         "osu-api-extended": "^2.8.52",
         "osu-db-parser": "^1.0.37",
-        "tailwindcss": "^3.4.12"
+        "tailwindcss": "^3.4.13"
     }
 }
