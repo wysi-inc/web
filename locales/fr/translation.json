@@ -1,12 +1,12 @@
 {
     "nav": {
-        "home": "Page d'accueil",
-        "users": "Utilisateur",
+        "home": "Accueil",
+        "users": "Utilisateurs",
         "rankings": "Classement",
         "beatmaps": "Beatmaps",
         "support": "Support",
         "about": "À propos",
-        "search": "rechercher quelqu'un",
+        "search": "Rechercher",
         "search_someone": "Rechercher quelqu'un",
         "help": "Contribuez à la traduction du site!",
         "log": {
@@ -74,10 +74,10 @@
             },
             "collections": {
                 "title": "Collections",
-                "info": "Les beatmaps non présentes sur le site d'osu! ne pourront pas télécharger (ex : osu!trainer, difficultés customs, maps non publiées...)"
+                "info": "Les beatmaps non présentes sur le site d'osu! ne pourront pas être téléchargés (ex : osu!trainer, difficultés customs, maps non publiées...)"
             },
             "setup": {
-                "title": "Configurer",
+                "title": "Setup",
                 "tabs": {
                     "tablet": "Tablette",
                     "keyboard": "Clavier",
@@ -91,8 +91,8 @@
                     "gpu": "Carte graphique",
                     "ram": "RAM",
                     "storage": "Stockage",
-                    "motherboard": "carte mère",
-                    "psu": "Source d'alimentation",
+                    "motherboard": "Carte mère",
+                    "psu": "Alimentation",
                     "case": "boîtier pc"
                 },
                 "peripherals": {
@@ -132,8 +132,8 @@
         "total_score": "Score total",
         "global_rank": "Rank global",
         "country_rank": "Rank national",
-        "play_time": "Durée du jeu",
-        "play_count": "Nombre de sessions",
+        "play_time": "Temps de jeu",
+        "play_count": "Nombre de parties",
         "total_hits": "Nombre de clics",
         "replays_watched": "Replays regardés",
         "hits_x_play": "Hits x Play",
@@ -143,31 +143,31 @@
     "score": {
         "status": {
             "pinned": "Épinglé",
-            "best": "Meilleure",
+            "best": "Meilleur",
             "firsts": "Premier",
             "recent": "Récent"
         },
         "mods": "Mods",
-        "max_combo": "Max combo",
+        "max_combo": "Combo max",
         "combo": "Combo",
-        "grade": "note",
+        "grade": "Note",
         "grades": "Notes",
         "acc": "Acc",
         "accuracy": "Précision",
         "score": "Score",
-        "ranked_score": "Score du classement"
+        "ranked_score": "Score classé"
     },
     "beatmapset": {
         "status": {
             "favourite": "Favoris",
-            "ranked": "Classé",
+            "ranked": "Classée",
             "guest": "Invité",
-            "loved": "Aimé",
-            "nominated": "Nominer",
-            "pending": "en attendant",
+            "loved": "Loved",
+            "nominated": "Nominées",
+            "pending": "En attente",
             "graveyard": "Cimetière",
             "wip": "En cours",
-            "approved": "Approuvé"
+            "approved": "Approuvée"
         },
         "length": "longueur",
         "bpm": "BPM"
@@ -179,7 +179,7 @@
         "user": {
             "user_doesnt_exist": "Cet utilisateur n'existe pas",
             "user_is_bot": "Cet utilisateur est un bot, les bots ne sont pas encore pris en charge :(",
-            "users_fail": "Impossible de récupérer les infos d'utilisateur"
+            "users_fail": "Impossible d'extraire les infos utilisateur"
         }
     }
 }
