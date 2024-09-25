@@ -6,7 +6,8 @@ import { catalans } from "@/src/libs/constants";
 
 export async function getUser(id: string, mode?: Mode) {
     try {
-        let user: User = (await v2.user.details(id, mode) as User);
+        //@ts-ignore
+        let user: User = await v2.user.details(id, mode);
 
         if ("error" in user) {
             console.error(user.error);
@@ -36,9 +37,9 @@ export async function getRankings(
             filter: "all",
         };
         if (country && category !== "score") {
-            console.log(country);
             obj.country = country.toUpperCase();
         }
+        //@ts-ignore
         const res: UserList = await v2.site.ranking.details(mode, category, obj);
         if ("error" in res) {
             console.error(res.error);

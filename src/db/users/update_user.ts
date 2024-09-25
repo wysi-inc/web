@@ -310,7 +310,6 @@ export async function sortSocials(
         };
         let new_socials: any = [];
         for (let platform of platforms) {
-            console.log(`finding ${platform}`);
             new_socials.push(user.socials.find(s => s.platform === platform));
         }
         user.socials = new_socials;
