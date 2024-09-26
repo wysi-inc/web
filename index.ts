@@ -81,7 +81,6 @@ async function updateStats() {
     await stats.save();
 }
 
-updateStats()
 setInterval(() => updateStats(), 1000 * 60 * 30);
 
 connect();
