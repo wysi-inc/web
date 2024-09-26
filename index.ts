@@ -85,8 +85,8 @@ async function updateStats() {
     console.log("finished updating stats...");
 }
 
-updateStats();
-setInterval(() => updateStats(), 1000 * 60 * 30);
+// updateStats();
+// setInterval(() => updateStats(), 1000 * 60 * 30);
 
 connect();
 
