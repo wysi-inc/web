@@ -46,8 +46,8 @@ const Navbar = ({ lang, t, user }: Props) => {
 
     return <>
         <nav class="flex flex-col bg-base-100 shadow-lg sticky top-0 z-50 w-full">
-            <div class="grid grid-cols-3 p-2">
-                <div class="flex flex-row items-center justify-start">
+            <div class="grid grid-cols-3 md:grid-cols-5 p-2">
+                <div class="md:col-span-2 flex flex-row items-center justify-start">
                     <div class="dropdown xl:hidden">
                         <div tabindex="0" role="button" class="btn btn-ghost flex items-center justify-center">
                             <i class="fa-solid fa-bars fa-lg" />
@@ -99,7 +99,7 @@ const Navbar = ({ lang, t, user }: Props) => {
                 <div class="flex flex-row items-center justify-center">
                     <Search t={t} />
                 </div>
-                <div class="z-50 flex flex-row items-center justify-end">
+                <div class="md:col-span-2 z-50 flex flex-row items-center justify-end">
                     <a href="https://github.com/wysi-inc" target="_blank"
                         class="hidden md:flex btn btn-ghost" aria-label="Github">
                         <i class="fa-brands fa-github fa-lg" />
@@ -114,7 +114,7 @@ const Navbar = ({ lang, t, user }: Props) => {
                             <i class="fa-solid fa-circle-half-stroke" />
                         </label>
                     </div>
-                    <div class="hidden sm:flex flex-row items-center justify-end">
+                    <div class="">
                         <LanguageSwitcher t={t} lang={lang} />
                     </div>
                     {user ?
