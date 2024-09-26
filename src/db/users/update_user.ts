@@ -426,3 +426,40 @@ export async function deleteSkin(
         }
     }
 }
+
+export async function sortSkins(
+    user_id: number,
+    skins: string[]
+): Promise<Res> {
+    try {
+        const user = await User.findOne({ user_id });
+        if (!user) return {
+            error: true,
+            msg: "User doesnt exist",
+            code: 404
+        };
+        if (!user.socials) return {
+            error: true,
+            msg: "User doesnt have any skins",
+            code: 404
+        };
+        let new_skins: any = [];
+        for (let skin of skins) {
+            new_skins.push(user.skins.find(s => s === skin));
+        }
+        user.skins = new_skins;
+        await user.save();
+        return {
+            error: false,
+            msg: "Skins sorted",
+            code: 200
+        };
+    } catch (err: any) {
+        console.error(err);
+        return {
+            error: true,
+            msg: "Something went wrong",
+            code: 500
+        }
+    }
+}

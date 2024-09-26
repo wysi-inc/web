@@ -1,6 +1,6 @@
 import { Elysia, error, t } from 'elysia'
 import { verifyUser } from '../libs/auth';
-import { addSkin, deleteCollections, deleteSkin, deleteSocial, getCollectionFile, saveCollection, saveSetup, saveSocial, sortSocials, updateDan } from '../db/users/update_user';
+import { addSkin, deleteCollections, deleteSkin, deleteSocial, getCollectionFile, saveCollection, saveSetup, saveSocial, sortSkins, sortSocials, updateDan } from '../db/users/update_user';
 import type { BeatmapCategory, Mode, Route, ScoreCategory } from '../types/osu';
 import HtmxPage from '../libs/routes';
 import UserPage from '../components/user/UserPage';
@@ -31,14 +31,11 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
     .group("/:mode", (_) => _
         .get("/", async ({ lang, t, request, cookie, params, jwt }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);
-            return <>
+            return (
                 <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
-                    <UserPage t={t}
-                        logged={user}
-                        user_id={params.id}
-                        mode={params.mode as Mode} />
+                    <UserPage t={t} logged={user} user_id={params.id} mode={params.mode as Mode} />
                 </HtmxPage>
-            </>
+            );
         })
         .group("/panels", (_) => _
             .post("/scores/:category", ({ params }) => (
@@ -214,5 +211,17 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             query: t.Optional(t.Object({
                 v: t.Optional(t.String())
             }))
+        })
+        .post("/sort", async ({ jwt, cookie, body, params }: Route) => {
+            const user = await verifyUser(jwt, cookie.auth.value);
+            if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+            console.log(body.skins);
+            const res = await sortSkins(Number(params.id), body.skins);
+            if (res.error) return error(res.code, res.msg);
+            return res.msg;
+        }, {
+            body: t.Object({
+                skins: t.Array(t.String())
+            })
         })
     )

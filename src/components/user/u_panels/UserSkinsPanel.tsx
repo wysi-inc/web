@@ -11,6 +11,7 @@ async function UserSkinsPanel(p: { user_id: number, logged_id?: number }) {
     if (!user) return <>this user doesn't exist</>;
     if (!user.skins && !editable) return <>This user doesn't have skins</>;
 
+    console.log(user.skins);
     return (
         <div class="flex flex-col gap-4">
             {editable ? <>
@@ -41,9 +42,9 @@ async function UserSkinsPanel(p: { user_id: number, logged_id?: number }) {
                 </form>
             </> : null
             }
-            <div class="grid grid-cols-1 md:grid-cols-2 flex-wrap items-center justify-center gap-4 empty:hidden" id="skins_list">
+            <form id="skins_list" class={`${editable ? "sortable" : ""} grid grid-cols-1 md:grid-cols-2 flex-wrap gap-4 empty:hidden`} hx-post={`/users/${user.user_id}/skins/sort`} hx-trigger="end" hx-swap="none">
                 {user.skins.map((s, i) => <SkinCard user_id={p.user_id} skin_id={s} index={i} editable={editable} />)}
-            </div>
+            </form>
             <script src={`/public/js/scroll.js?v=${Date.now()}`} />
         </div>
     );
@@ -53,10 +54,10 @@ export async function SkinCard(p: { user_id: number, skin_id: string, editable: 
     const url = new URL("https://osuck.link/api/skins");
     url.searchParams.append('key', process.env.OSUCK_API_KEY);
     url.searchParams.append('skin', `https://osuck.link/s-${p.skin_id}`);
-    const res = await fetch(url.toString(), { method: "POST" })
-    if (!res.ok) return (<span>{p.skin_id}</span>);
+    const res = await fetch(url.toString(), { method: "POST" });
+    if (!res.ok) return (<span>{p.skin_id.toString()}</span>);
     const data = await res.json() as any;
-    if (data.status !== "success") return (<span>{p.skin_id}</span>);
+    if (data.status !== "success") return (<span>{p.skin_id.toString()}</span>);
     const skin: Skin = data.message;
     return (
         <div class="bg-neutral rounded-lg flex flex-col" hx-target="this" hx-swap="delete">
@@ -76,6 +77,10 @@ export async function SkinCard(p: { user_id: number, skin_id: string, editable: 
                     </button> : null
                 }
             </div>
+            {p.editable ?
+                <input type="hidden" value={p.skin_id} name="skins" />
+                : null
+            }
             <div class="carousel carousel-center bg-base-300 rounded-lg p-4">
                 {skin.screenshots.map((img, j) => (
                     <div id={`slide-${p.index}-${j}`} class="carousel-item rounded-lg relative grow p-2">
