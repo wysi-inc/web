@@ -22,6 +22,11 @@
         "verbatimModuleSyntax": true,
         "noEmit": true,
         /* Linting */
+        "typeRoots": [
+            "./src/types",
+            "./src/models",
+            "./node_modules/@types"
+        ],
         "skipLibCheck": true,
         "strict": true,
         "noFallthroughCasesInSwitch": true,

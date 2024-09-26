@@ -1,4 +1,5 @@
 import { DonationModel } from "@/src/models/Donations";
+import { log } from "@/src/tasks/logs";
 
 export async function save_donation(data: any): Promise<boolean> {
     try {
@@ -12,7 +13,7 @@ export async function save_donation(data: any): Promise<boolean> {
         });
         donation.save();
     } catch (err) {
-        console.error(err);
+        log.error("Error saving donation", err);
         return false;
     }
     return true;

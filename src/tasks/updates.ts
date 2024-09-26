@@ -2,34 +2,40 @@ import { Medal } from "@/src/models/Medal";
 import type { OsekaiMedal } from "@/src/types/medals";
 import { StatsModel } from "../models/Stats";
 import { User } from "../models/User";
+import { log } from "./logs";
 
 async function update_stats() {
-    console.log("started updating stats...");
-    const user_count = await User.countDocuments();
-    const users_with_setup = await User.countDocuments({ setup: { $exists: true, $ne: null } });
-    const users_with_collections = await User.find({ collections: { $exists: true, $ne: null } });
+    log.info("Started updating stats...");
+    try {
+        const user_count = await User.countDocuments();
+        const users_with_setup = await User.countDocuments({ setup: { $exists: true, $ne: null } });
+        const users_with_collections = await User.find({ collections: { $exists: true, $ne: null } });
 
-    let stats = await StatsModel.findOne();
-    if (!stats) stats = new StatsModel();
+        let stats = await StatsModel.findOne();
+        if (!stats) stats = new StatsModel();
 
-    let collection_count = 0;
+        let collection_count = 0;
 
-    for (let u of users_with_collections) {
-        collection_count += u.collections.length;
+        for (let u of users_with_collections) {
+            collection_count += u.collections.length;
+        }
+
+        stats.users = user_count;
+        stats.setups = users_with_setup;
+        stats.collections = collection_count;
+        stats.updated_at = new Date();
+
+        await stats.save();
+        log.success("Finished updating stats...");
+    } catch (err) {
+        log.error("Error updaing stats", err);
     }
-
-    stats.users = user_count;
-    stats.setups = users_with_setup;
-    stats.collections = collection_count;
-    stats.updated_at = new Date();
-
-    await stats.save();
-    console.log("finished updating stats...");
 }
 
 
 export async function update_medals() {
     try {
+        log.info("started updating medals...");
         const res = await fetch("https://osekai.net/medals/api/medals.php");
         const new_medals: OsekaiMedal[] = await res.json() as any;
         for (const m of new_medals) {
@@ -56,7 +62,8 @@ export async function update_medals() {
             }
             medal.save();
         }
+        log.success("Finished updating medals...");
     } catch (err) {
-        console.error("[ EE ] Could not update medals");
+        log.error("Error updating medals", err);
     }
 }

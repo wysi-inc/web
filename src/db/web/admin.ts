@@ -1,5 +1,6 @@
 import { TabletModel } from "@/src/models/Tablet";
 import { User } from "@/src/models/User";
+import { log } from "@/src/tasks/logs";
 import type { Res } from "@/src/types/users";
 
 export async function removeBadge(user_id: number, badge: number): Promise<Res> {
@@ -22,13 +23,14 @@ export async function removeBadge(user_id: number, badge: number): Promise<Res> 
         };
         user.wysi_badges = user.wysi_badges.filter(b => b !== badge) as any;
         await user.save();
+        log.info("Badge removed");
         return {
             error: false,
             msg: "Removed badge from user!",
             code: 200
         };
-    } catch (err: any) {
-        console.error(err);
+    } catch (err) {
+        log.error("Error removing badge", err);
         return {
             error: true,
             msg: "Something went wrong",
@@ -58,13 +60,14 @@ export async function addBadge(user_id: string, badge: number): Promise<Res> {
         };
         else user.wysi_badges.push(badge);
         await user.save();
+        log.info("Badge added");
         return {
             error: false,
             msg: "Added badge to user!",
             code: 200
         };
-    } catch (err: any) {
-        console.error(err);
+    } catch (err) {
+        log.error("Error adding badge", err);
         return {
             error: true,
             msg: "Something went wrong",
@@ -83,13 +86,14 @@ export async function sortBadges(user_id: number, badges: string[]): Promise<Res
         };
         user.wysi_badges = badges.map(b => Number(b));
         await user.save();
+        log.info("Badges sorted");
         return {
             error: false,
             msg: "Badges sorted!",
             code: 200
         };
-    } catch (err: any) {
-        console.error(err);
+    } catch (err) {
+        log.error("Error sorting badges", err);
         return {
             error: true,
             msg: "Something went wrong",
@@ -108,13 +112,14 @@ export async function setRole(user_id: number, role: string): Promise<Res> {
         };
         user.role = role as any;
         await user.save();
+        log.info("Updated user role");
         return {
             error: false,
             msg: "Updated user role",
             code: 200
         };
-    } catch (err: any) {
-        console.error(err);
+    } catch (err) {
+        log.error("Error updating role", err);
         return {
             error: true,
             msg: "Something went wrong",
@@ -133,13 +138,14 @@ export async function removeRole(user_id: number): Promise<Res> {
         };
         user.role = undefined;
         await user.save();
+        log.info("Removed user role");
         return {
             error: false,
             msg: "Removed user role",
             code: 200
         };
-    } catch (err: any) {
-        console.error(err);
+    } catch (err) {
+        log.error("Error removing role", err);
         return {
             error: true,
             msg: "Something went wrong",
@@ -148,18 +154,19 @@ export async function removeRole(user_id: number): Promise<Res> {
     }
 }
 
-export async function addTablet(name: number, w: number, h: number): Promise<Res & { id?: string }> {
+export async function addTablet(name: string, w: number, h: number): Promise<Res & { id?: string }> {
     try {
         const tablet = new TabletModel({ name, w, h })
         await tablet.save();
+        log.info("Tablet added");
         return {
             error: false,
-            msg: "Tablet added!",
+            msg: "Tablet added",
             code: 201,
             id: tablet._id.toString()
         };
-    } catch (err: any) {
-        console.error(err);
+    } catch (err) {
+        log.error("Error adding tablet", err);
         return {
             error: true,
             msg: "Something went wrong",
@@ -171,13 +178,14 @@ export async function addTablet(name: number, w: number, h: number): Promise<Res
 export async function removeTablet(id: string): Promise<Res> {
     try {
         await TabletModel.deleteOne({ _id: id });
+        log.info("Tablet deleted");
         return {
             error: false,
-            msg: "Tablet deleted!",
+            msg: "Tablet deleted",
             code: 200
         };
-    } catch (err: any) {
-        console.error(err);
+    } catch (err) {
+        log.error("Error deleting tablet", err);
         return {
             error: true,
             msg: "Something went wrong",

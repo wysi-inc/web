@@ -1,6 +1,6 @@
 import { v2 } from "osu-api-extended";
 import { marked } from "marked";
-import { apicall } from "@/index";
+import { apicall } from "@/src/tasks/logs";
 
 type Props = {
     params: string[],
@@ -9,7 +9,6 @@ type Props = {
 async function Testing(p: Props) {
 
     const wiki = await v2.site.wiki("en", p.params.join("/"));
-
     apicall();
 
     console.log(wiki);

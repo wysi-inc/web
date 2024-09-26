@@ -3,7 +3,7 @@ import type { Mode, ScoreCategory } from "@/src/types/osu";
 import type { Score } from "@/src/types/users";
 import ScoreCard from "@/src/components/score/ScoreCard";
 import LoadMoreButton from "@/src/components/web/LoadMoreButton";
-import { apicall } from "@/index";
+import { apicall } from "@/src/tasks/logs";
 
 type Props = {
     id: number;

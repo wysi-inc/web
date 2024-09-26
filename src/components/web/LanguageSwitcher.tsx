@@ -1,4 +1,4 @@
-import { languages } from "@/src/libs/constants";
+import { LANGUAGES } from "@/src/libs/countries";
 import LanguageButton from "./LanguageButton";
 
 const flags: any = {
@@ -34,7 +34,7 @@ const flags: any = {
 };
 
 export function getLang(code: string) {
-    return [languages.get(code), flags[code] || "", code]
+    return [LANGUAGES.get(code), flags[code] || "", code]
 }
 
 function LanguageSwitcher({ lang, t }: any) {

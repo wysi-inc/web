@@ -1,7 +1,7 @@
 import type { Mode } from "../types/osu";
 import type { Subdivision, UserSubdivision } from "../types/users";
 import { colors } from "./colors";
-import { subdivisionFlags } from "./constants";
+import { subdivisionFlags } from "./countries";
 
 export function secondsToTime(secs: number): string {
     let hours = Math.floor(secs / 3600);

@@ -9,4 +9,3 @@ export const scoresRoutes = new Elysia({ prefix: '/scores/:id' })
             <ScorePage score_id={Number(params.id)} />
         </HtmxPage>
     ))
-

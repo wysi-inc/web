@@ -1,4 +1,5 @@
 import { readdir } from "node:fs/promises";
+import { log } from "./logs";
 
 const BASEDIR = ".";
 
@@ -11,9 +12,10 @@ export async function get_translations() {
             const contents = await file.json();
             translations[dir] = contents;
         }
+        log.info("Translations read");
         return translations;
     } catch (err) {
-        console.error(err);
+        log.error("Error getting translations", err);
         return {};
     }
 }

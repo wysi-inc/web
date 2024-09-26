@@ -1,2 +1,3 @@
-declare module "*";
+export { };
+
 declare module "osu-db-parser";

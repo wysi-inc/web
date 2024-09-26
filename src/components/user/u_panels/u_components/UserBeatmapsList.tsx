@@ -3,7 +3,7 @@ import type { BeatmapCategory } from "@/src/types/osu";
 import type { Beatmapset } from "@/src/types/beatmaps";
 import BeatmapsetCard from "@/src/components/beatmap/BeatmapsetCard";
 import LoadMoreButton from "@/src/components/web/LoadMoreButton";
-import { apicall } from "@/index";
+import { apicall } from "@/src/tasks/logs";
 
 type Props = {
     id: number;

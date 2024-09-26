@@ -9,7 +9,7 @@ import SubdivisionFlag from "../user/u_panels/u_components/SubdivisionFlag";
 import Link from "../web/Link";
 import Clan from "../user/u_panels/u_components/Clan";
 import { colors } from "@/src/libs/colors";
-import { apicall } from "@/index";
+import { apicall, log } from "@/src/tasks/logs";
 
 type ActualStatistics = response & {
     statistics: {
@@ -59,7 +59,7 @@ const BeatmapScoreTable = async (p: {
             apicall();
             user_score = transformToActualStatistics(tmp[0]);
         } catch (err) {
-            console.error(err);
+            log.error("Error getting own score", err);
         }
     }
 

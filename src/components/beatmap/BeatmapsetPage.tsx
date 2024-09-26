@@ -8,7 +8,7 @@ import type { Beatmap, Beatmapset, BeatmapsetStatus } from "@/src/types/beatmaps
 import type { Mode } from "@/src/types/osu";
 import { getBeatmapset } from "@/src/db/beatmaps/get_beatmaps";
 import Title from "../web/Title";
-import { apicall } from "@/index";
+import { apicall } from "@/src/tasks/logs";
 
 type Props = {
     set_id: number,

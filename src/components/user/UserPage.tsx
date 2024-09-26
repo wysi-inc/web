@@ -9,8 +9,8 @@ import Title from "../web/Title";
 import UserMedalsPanel from "./u_panels/UserMedalsPanel";
 import Report from "../web/Report";
 import type { UserCookie } from "@/src/types/users";
-import { apicall } from "@/index";
 import UserAboutPanel from "./u_panels/UserAboutPanel";
+import { apicall } from "@/src/tasks/logs";
 
 type Props = {
     logged: UserCookie | null;

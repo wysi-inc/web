@@ -1,3 +1,4 @@
+import { log } from "@/src/tasks/logs";
 import { type Rank, User, type Setup, type CollectionDB } from "../../models/User";
 import type { Mode } from "../../types/osu";
 import type { Res, User as UserType } from "../../types/users";
@@ -55,7 +56,7 @@ export async function updateUser(
         await db_user.save();
         return user;
     } catch (err) {
-        console.error(err);
+        log.error("Error Updating User", err);
         return user;
     }
 }
@@ -181,7 +182,7 @@ export async function saveSetup(
         await user.save();
         return user.setup;
     } catch (err) {
-        console.error(err);
+        log.error("Error saving setup", err);
         return null;
     }
 }
@@ -192,6 +193,7 @@ export async function parseCollection(file: any) {
         const collectionDB = new OsuDBParser(null, collectionBuffer);
         return collectionDB.getCollectionData();
     } catch (err) {
+        log.error("Error parsing setup", err);
         return;
     }
 }
@@ -253,8 +255,8 @@ export async function saveSocial(
             msg: "Social added",
             code: 201
         };
-    } catch (err: any) {
-        console.error(err);
+    } catch (err) {
+        log.error("Error adding social", err);
         return {
             error: true,
             msg: "Something went wrong",
@@ -286,8 +288,8 @@ export async function deleteSocial(
             msg: "Social removed",
             code: 200
         };
-    } catch (err: any) {
-        console.error(err);
+    } catch (err) {
+        log.error("Error removing social", err);
         return {
             error: true,
             msg: "Something went wrong",
@@ -323,8 +325,8 @@ export async function sortSocials(
             msg: "Socials sorted",
             code: 200
         };
-    } catch (err: any) {
-        console.error(err);
+    } catch (err) {
+        log.error("Error sorting socials", err);
         return {
             error: true,
             msg: "Something went wrong",
@@ -351,8 +353,8 @@ export async function updateDan(
             msg: "Dan updated",
             code: 200
         };
-    } catch (err: any) {
-        console.error(err);
+    } catch (err) {
+        log.error("Error updating Dan", err);
         return {
             error: true,
             msg: "Something went wrong",
@@ -388,8 +390,8 @@ export async function addSkin(user_id: number, skin_id: string): Promise<Res & {
             code: 201,
             id: user.skins.length - 1,
         };
-    } catch (err: any) {
-        console.error(err);
+    } catch (err) {
+        log.error("Error adding skin", err);
         return {
             error: true,
             msg: "Something went wrong",
@@ -421,8 +423,8 @@ export async function deleteSkin(
             msg: "Skin removed",
             code: 200
         };
-    } catch (err: any) {
-        console.error(err);
+    } catch (err) {
+        log.error("Error removing skin", err);
         return {
             error: true,
             msg: "Something went wrong",
@@ -458,8 +460,8 @@ export async function sortSkins(
             msg: "Skins sorted",
             code: 200
         };
-    } catch (err: any) {
-        console.error(err);
+    } catch (err) {
+        log.error("Error sorting skins", err);
         return {
             error: true,
             msg: "Something went wrong",

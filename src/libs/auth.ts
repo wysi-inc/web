@@ -1,8 +1,8 @@
-import { auth } from "osu-api-extended";
-import type { UserBasic, UserCookie } from "../types/users";
-import type { Jwt } from "../types/osu";
-import { User } from "../models/User";
 import { env } from "bun";
+import { auth } from "osu-api-extended";
+import { User } from "../models/User";
+import type { Jwt } from "../types/osu";
+import type { UserBasic, UserCookie } from "../types/users";
 
 export async function userAuthCode(code: string): Promise<any> {
     const res = await fetch("https://osu.ppy.sh/oauth/token", {
@@ -18,7 +18,7 @@ export async function userAuthCode(code: string): Promise<any> {
     return data;
 }
 
-export async function userAuthData(code: string): Promise<{ data: UserBasic, role: string | null | undefined } | undefined> {
+export async function userAuthData(code: string) {
     const user_data: UserBasic = await auth.authorize(code, 'osu', env.OSU_ID, env.OSU_SECRET, env.OSU_REDIRECT) as any;
     if ((user_data as any).error) return;
     const user = await User.findOne({ user_id: user_data.id });

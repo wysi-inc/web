@@ -3,7 +3,7 @@ import Flag from "./u_panels/u_components/Flag";
 import SubdivisionFlag from "./u_panels/u_components/SubdivisionFlag";
 import Clan from "./u_panels/u_components/Clan";
 import Link from "../web/Link";
-import { apicall } from "@/index";
+import { apicall } from "@/src/tasks/logs";
 
 type Props = {
     user_id: number

@@ -3,7 +3,7 @@ import Pagination from "./u_panels/u_components/Pagination";
 import UserRankingCard from "./UserRankingCard";
 import { getRankings } from "@/src/db/users/get_user";
 import Title from "../web/Title";
-import { apicall } from "@/index";
+import { apicall } from "@/src/tasks/logs";
 
 async function Rankings(p: {
     mode: Mode;

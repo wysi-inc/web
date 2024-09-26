@@ -2,7 +2,7 @@ import type { Mode } from "@/src/types/osu";
 
 type Props = {
     size: number;
-    mode: Mode;
+    mode: Mode | "std";
 } & (
         { color: string; css?: never } |
         { css: string; color?: never }

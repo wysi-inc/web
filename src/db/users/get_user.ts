@@ -2,25 +2,26 @@ import { v2 } from "osu-api-extended";
 import type { Category, Mode } from "@/src/types/osu";
 import type { User, UserList } from "@/src/types/users";
 import { updateUser } from "./update_user";
-import { catalans } from "@/src/libs/constants";
+import { CATALANS } from "@/src/libs/countries";
+import { log } from "@/src/tasks/logs";
 
-export async function getUser(id: string, mode?: Mode) {
+export async function getUser(id: string, mode?: Mode): Promise<User | null> {
     try {
         //@ts-ignore
         let user: User = await v2.user.details(id, mode);
 
         if ("error" in user) {
-            console.error(user.error);
+            log.error("Error getting user", user.error);
             return null;
         }
         mode = user.rank_history?.mode as Mode || "osu";
         user = await updateUser(user, mode);
-        if (catalans.includes(user.id)) {
+        if (CATALANS.includes(user.id)) {
             (user.country as any).cat = true;
         }
         return user;
     } catch (err) {
-        console.error(err);
+        log.error("Error getting user", err);
         return null;
     }
 }
@@ -42,12 +43,12 @@ export async function getRankings(
         //@ts-ignore
         const res: UserList = await v2.site.ranking.details(mode, category, obj);
         if ("error" in res) {
-            console.error(res.error);
+            log.error("Error getting rankings", res.error);
             return null;
         }
         return res;
     } catch (err) {
-        console.error(err);
+        log.error("Error getting rankings", err);
         return null;
     }
 }

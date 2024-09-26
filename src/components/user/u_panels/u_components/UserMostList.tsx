@@ -1,7 +1,7 @@
 import { v2 } from "osu-api-extended";
 import MostCard from "./MostCard";
 import LoadMoreButton from "@/src/components/web/LoadMoreButton";
-import { apicall } from "@/index";
+import { apicall } from "@/src/tasks/logs";
 
 type Props = {
     id: number;

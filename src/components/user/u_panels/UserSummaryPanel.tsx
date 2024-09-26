@@ -6,7 +6,7 @@ import ModIcon from "../../score/ModIcon";
 import Grade from "../../score/Grade";
 import { colors } from "@/src/libs/colors";
 import { secondsToTime } from "@/src/libs/web_utils";
-import { apicall } from "@/index";
+import { apicall } from "@/src/tasks/logs";
 
 type Props = {
     user_id: number;

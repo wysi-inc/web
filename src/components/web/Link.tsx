@@ -7,8 +7,7 @@ type Props = {
 }
 
 function Link(p: Props) {
-    return <a
-        href={p.url}
+    return <a href={p.url}
         // hx-get={p.url}
         // hx-push-url="true" hx-target="#main"
         // hx-swap="innerHTML show:window:top"

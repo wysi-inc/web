@@ -1,4 +1,5 @@
 import { ReportModel } from "@/src/models/Report";
+import { log } from "@/src/tasks/logs";
 
 export async function submitReport(body: { description: string, category: string }, target: number, author: number) {
     try {
@@ -10,10 +11,11 @@ export async function submitReport(body: { description: string, category: string
             category: body.category,
             timestamp: new Date(),
         })
-        report.save();
+        await report.save();
+        log.success("Report saved");
         return report.id;
     } catch (err) {
-        console.error(err);
+        log.error("Error submitting report", err);
         return -1;
     }
 }
@@ -23,7 +25,7 @@ export async function deleteReport(id: number) {
         await ReportModel.findOneAndDelete({ id });
         return true;
     } catch (err) {
-        console.error(err);
+        log.error("Error deleting report", err);
         return false;
     }
 }

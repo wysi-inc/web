@@ -1,4 +1,4 @@
-export type Mode = "osu" | "taiko" | "fruits" | "mania" | "std";
+export type Mode = "osu" | "taiko" | "fruits" | "mania";
 export type Mod = "1K" | "2K" | "3K" | "4K" | "5K" | "6K" | "7K" | "8K" | "9K" | "AC" | "AD" | "AL" | "AP" | "AS" | "AT" | "BL" | "BR" | "BU" | "CL" | "CN" | "DA" | "DC" | "DF" | "DP" | "DT" | "EZ" | "FL" | "FR" | "GR" | "HD" | "HR" | "HT" | "MG" | "MR" | "MU" | "NC" | "NF" | "NM" | "NS" | "PF" | "RD" | "RP" | "RX" | "SD" | "SG" | "SI" | "SO" | "ST" | "SY" | "TC" | "TD" | "TP" | "TR" | "WD" | "WG" | "WU";
 
 export type Category = "score" | "performance";
@@ -7,8 +7,17 @@ export type BeatmapCategory = "favourite" | "ranked" | "loved" | "pending" | "gr
 
 import { type JWTPayload, type JWSHeaderParameters, type KeyLike } from 'jose';
 import type { Static, TSchema } from '@sinclair/typebox';
-import type { Cookie } from 'elysia';
+import { t, type Cookie } from 'elysia';
+
 type UnwrapSchema<Schema extends TSchema | undefined, Fallback = unknown> = Schema extends TSchema ? Static<NonNullable<Schema>> : Fallback;
+
+export const modeUnion = t.Union([
+    t.Literal("osu"),
+    t.Literal("taiko"),
+    t.Literal("fruits"),
+    t.Literal("mania"),
+])
+
 export interface JWTPayloadSpec {
     iss?: string;
     sub?: string;
@@ -50,7 +59,7 @@ export type Route = {
     lang: any,
     request: Request,
     jwt: Jwt,
-    cookie: Record<string, Cookie<any>>,
+    cookie: Record<string, Cookie<string | undefined>> & { cookieName: Cookie<string>; },
     query: any;
     params: Record<any, string>
     body: any,

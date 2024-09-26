@@ -1,21 +1,22 @@
-import moment from "moment";
-import BarChart from "./u_components/BarChart";
-import Flag from "./u_components/Flag";
-import Country from "./u_components/Country";
-import Supporter from "./u_components/Supporter";
-import ModeIcon from "../../beatmap/ModeIcon";
-import type { User } from "@/src/types/users";
-import type { Mode } from "@/src/types/osu";
 import { colors } from "@/src/libs/colors";
-import SubdivisionFlag from "./u_components/SubdivisionFlag";
-import Link from "../../web/Link";
-import Clan from "./u_components/Clan";
-import SubdivisionRanking from "./u_components/SubdivisionRanking";
-import { modes } from "@/src/libs/constants";
+import { MODES } from "@/src/libs/countries";
 import { ModeToCode } from "@/src/libs/web_utils";
-import Badge from "../Badge";
 import { DANS } from "@/src/models/User";
+import type { Mode } from "@/src/types/osu";
+import type { User } from "@/src/types/users";
+import { Html } from '@elysiajs/html';
+import moment from "moment";
+import ModeIcon from "../../beatmap/ModeIcon";
+import Link from "../../web/Link";
+import Badge from "../Badge";
 import UserSocial, { SOCIALS } from "./UserSocial";
+import BarChart from "./u_components/BarChart";
+import Clan from "./u_components/Clan";
+import Country from "./u_components/Country";
+import Flag from "./u_components/Flag";
+import SubdivisionFlag from "./u_components/SubdivisionFlag";
+import SubdivisionRanking from "./u_components/SubdivisionRanking";
+import Supporter from "./u_components/Supporter";
 
 async function UserTopPanel(p: {
     t: any,
@@ -48,7 +49,7 @@ async function UserTopPanel(p: {
                             <div class="flex w-40 flex-col justify-between">
                                 <img data-src={p.user.avatar_url} class="aspect-square rounded-lg" alt={`${p.user.username}'s pfp`} />
                                 <div class="flex flex-row flex-wrap items-center justify-around gap-2 rounded-lg bg-base-300 p-2">
-                                    {modes.map(m => (
+                                    {MODES.map(m => (
                                         <div class="tooltip" data-tip={m.name}>
                                             {p.mode === m.code ?
                                                 <ModeIcon mode={m.code} size={24} css={`fill-secondary`} /> :
