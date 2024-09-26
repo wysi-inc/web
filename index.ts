@@ -62,6 +62,7 @@ async function relogin() {
 
 async function updateStats() {
 
+    console.log("started updating stats...");
     const user_count = await User.countDocuments();
     const users_with_setup = await User.countDocuments({ setup: { $exists: true, $ne: null } });
     const users_with_collections = await User.find({ collections: { $exists: true, $ne: null } });
@@ -81,6 +82,7 @@ async function updateStats() {
     stats.updated_at = new Date();
 
     await stats.save();
+    console.log("finished updating stats...");
 }
 
 updateStats();
