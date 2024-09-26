@@ -17,6 +17,8 @@ import { scoresRoutes } from "./src/routes/scores";
 import { adminRoutes } from "./src/routes/admin";
 import { reportRoutes } from "./src/routes/reports";
 import { env } from "bun";
+import { User } from "./src/models/User";
+import { StatsModel } from "./src/models/Stats";
 
 declare module "bun" {
     interface Env {
@@ -53,10 +55,34 @@ async function connect() {
 }
 
 async function relogin() {
-    const result = await auth.re_login()
+    const result = await auth.re_login();
     if (!result) return console.error("[ EE ] Couldn't reconnect to osu!API\n");
     await updateMedals();
 }
+
+async function updateStats() {
+    const user_count = await User.countDocuments();
+    const users_with_setup = await User.countDocuments({ setup: { $exists: true, $ne: null } });
+    const users_with_collections = await User.find({ collections: { $exists: true, $ne: null } });
+
+    let stats = await StatsModel.findOne();
+    if (!stats) stats = new StatsModel();
+
+    let collection_count = 0;
+    users_with_collections.forEach(u => {
+        collection_count += u.collections.length;
+    });
+
+    stats.users = user_count;
+    stats.setups = users_with_setup;
+    stats.collections = collection_count;
+    stats.updated_at = new Date();
+
+    await stats.save();
+}
+
+updateStats()
+setInterval(() => updateStats(), 1000 * 60 * 30);
 
 connect();
 

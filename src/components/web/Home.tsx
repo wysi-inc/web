@@ -1,7 +1,8 @@
+import { StatsModel } from "@/src/models/Stats";
 import Title from "./Title";
 
 
-function Home({ t }: any) {
+async function Home({ t }: any) {
 
     const content = [
         {
@@ -29,6 +30,9 @@ function Home({ t }: any) {
             img: "collections",
         },
     ];
+
+    const stats = await StatsModel.findOne();
+
     return (<>
         <Title title="Home" />
         <div class="flex flex-col gap-2 items-center">
@@ -38,6 +42,23 @@ function Home({ t }: any) {
             <h3 class="text-sm text-center">{t.home.built}</h3>
             <div />
         </div>
+        <section class="stats shadow rounded-lg bg-base-300 stats-vertical md:stats-horizontal">
+            <div class="stat">
+                <div class="stat-title"><i class="fa-solid fa-database" /> Profiles Stored</div>
+                <div class="stat-value">{stats?.users.toLocaleString()}</div>
+                <div class="stat-desc">User profiles saved</div>
+            </div>
+            <div class="stat">
+                <div class="stat-title"><i class="fa-solid fa-computer" /> Profile Setups</div>
+                <div class="stat-value">{stats?.setups.toLocaleString()}</div>
+                <div class="stat-desc">Profiles with custom setups</div>
+            </div>
+            <div class="stat">
+                <div class="stat-title"><i class="fa-solid fa-heart" /> Collections</div>
+                <div class="stat-value">{stats?.collections.toLocaleString()}</div>
+                <div class="stat-desc">Collections uploaded</div>
+            </div>
+        </section>
         <div class="grid gird-cols-1 md:grid-cols-2 gap-4">
             {content.map(c => (
                 <div class="bg-base-100 rounded-lg flex flex-col">
