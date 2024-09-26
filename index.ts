@@ -61,6 +61,7 @@ async function relogin() {
 }
 
 async function updateStats() {
+
     const user_count = await User.countDocuments();
     const users_with_setup = await User.countDocuments({ setup: { $exists: true, $ne: null } });
     const users_with_collections = await User.find({ collections: { $exists: true, $ne: null } });
@@ -69,9 +70,10 @@ async function updateStats() {
     if (!stats) stats = new StatsModel();
 
     let collection_count = 0;
-    users_with_collections.forEach(u => {
+
+    for (let u of users_with_collections) {
         collection_count += u.collections.length;
-    });
+    }
 
     stats.users = user_count;
     stats.setups = users_with_setup;
