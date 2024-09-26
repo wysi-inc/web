@@ -30,6 +30,9 @@ async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mod
         if (p.user_id !== p.logged_id) return <>This user isn't being tracked by Advanced</>;
         return <>Get tracked with Advanced by clicking <a href="https://advance.catboy.best/api/track" class="link link-info" target="_blank">here</a>!</>;
     }
+    if (!data.tags) {
+        return <>This user is still being processed, this could take a couple hours, check out later</>;
+    }
 
     const passrate = data.scores.passed / data.scores.total * 100;
     const rank_gain = data.rank.start - data.rank.current
