@@ -832,6 +832,11 @@ html {
 }
 
 @media (hover:hover) {
+  .checkbox-secondary:hover {
+    --tw-border-opacity: 1;
+    border-color: var(--fallback-s,oklch(var(--s)/var(--tw-border-opacity)));
+  }
+
   .label a:hover {
     --tw-text-opacity: 1;
     color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
@@ -2599,6 +2604,27 @@ input.tab:checked + .tab-content,
   background-image: linear-gradient(90deg, transparent 80%, var(--chkbg) 80%),
       linear-gradient(-90deg, transparent 80%, var(--chkbg) 80%),
       linear-gradient(0deg, var(--chkbg) 43%, var(--chkfg) 43%, var(--chkfg) 57%, var(--chkbg) 57%);
+}
+
+.checkbox-secondary {
+  --chkbg: var(--fallback-s,oklch(var(--s)/1));
+  --chkfg: var(--fallback-sc,oklch(var(--sc)/1));
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-s,oklch(var(--s)/var(--tw-border-opacity)));
+}
+
+.checkbox-secondary:focus-visible {
+  outline-color: var(--fallback-s,oklch(var(--s)/1));
+}
+
+.checkbox-secondary:checked,
+    .checkbox-secondary[aria-checked="true"] {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-s,oklch(var(--s)/var(--tw-border-opacity)));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-s,oklch(var(--s)/var(--tw-bg-opacity)));
+  --tw-text-opacity: 1;
+  color: var(--fallback-sc,oklch(var(--sc)/var(--tw-text-opacity)));
 }
 
 @keyframes checkmark {
@@ -6284,6 +6310,22 @@ img:not([src]):not([srcset]) {
 
 .group\/setup:has(:disabled) .group-has-\[\:disabled\]\/setup\:hidden {
   display: none;
+}
+
+.peer:has(:checked) ~ .peer-has-\[\:checked\]\:flex {
+  display: flex;
+}
+
+.peer\/rt:has(:checked) ~ .peer-has-\[\:checked\]\/rt\:flex {
+  display: flex;
+}
+
+.peer:has(:checked) ~ .peer-has-\[\:checked\]\/\:flex {
+  display: flex;
+}
+
+.peer\/rt:has(:checked) ~ .peer-has-\[\:checked\]\/rt\:grid {
+  display: grid;
 }
 
 @media (min-width: 640px) {

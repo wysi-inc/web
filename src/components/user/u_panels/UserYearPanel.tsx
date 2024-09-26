@@ -24,13 +24,13 @@ async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mod
     }
 
     const res = await fetch(`https://advance.catboy.best/api/users/${p.user_id}?mode=${mode_int(p.mode)}`);
-    const data = (await res.json()) as AdvanceUser | { error: string };
+    const data = await res.json() as AdvanceUser | { error: string };
 
     if ("error" in data) {
         if (p.user_id !== p.logged_id) return <>This user isn't being tracked by Advanced</>;
         return <>Get tracked with Advanced by clicking <a href="https://advance.catboy.best/api/track" class="link link-info" target="_blank">here</a>!</>;
     }
-    if (!data.tags) {
+    if (!data.available) {
         return <>This user is still being processed, this could take a couple hours, check out later</>;
     }
 

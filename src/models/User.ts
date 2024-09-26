@@ -31,6 +31,10 @@ const setup = new mongoose.Schema({
             enum: ["k2", "k3", "k4", "k60", "k75", "ktkl", "kfull", ""],
         },
         keys: [String],
+        actuation: Number,
+        rt: Boolean,
+        release: Number,
+        press: Number,
     },
     tablet: {
         name: String,

@@ -3,8 +3,8 @@ import type { OsekaiMedal } from "@/src/types/medals";
 
 export async function updateMedals() {
     try {
-        const result = await fetch("https://osekai.net/medals/api/medals.php");
-        const new_medals: OsekaiMedal[] = await result.json() as OsekaiMedal[];
+        const res = await fetch("https://osekai.net/medals/api/medals.php");
+        const new_medals: OsekaiMedal[] = await res.json() as any;
         for (const m of new_medals) {
             let medal = await Medal.findOne({ medal_id: m.MedalID });
             if (medal) {
@@ -30,6 +30,6 @@ export async function updateMedals() {
             medal.save();
         }
     } catch (err) {
-        console.error("could not update medals", err);
+        console.error("[ EE ] Could not update medals");
     }
 }

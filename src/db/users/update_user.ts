@@ -135,6 +135,10 @@ export async function saveSetup(
             name: setup.keyboard_name,
             layout: setup.keyboard_layout,
             keys: keys,
+            rt: setup.keyboard_rt ? true : false,
+            press: setup.keyboard_press,
+            release: setup.keyboard_release,
+            actuation: setup.keyboard_actuation,
         };
 
         const mouse: Setup["mouse"] = {

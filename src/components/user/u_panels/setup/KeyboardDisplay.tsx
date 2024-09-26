@@ -7,6 +7,7 @@ import K2 from "./Keyboards/K2";
 import K3 from "./Keyboards/K3";
 import K4 from "./Keyboards/K4";
 import { isEmpty } from "@/src/libs/web_utils";
+import SetupInput from "./SetupInput";
 
 export type KeyboardProps = {
     keys?: string[];
@@ -22,7 +23,7 @@ type KeyProps = {
 
 export const Key = ({ char, code, width, keys, height }: KeyProps) => {
     return (
-        <label class="m-0 p-0 rounded-sm cursor-pointer text-center border-base-content border has-[:checked]:bg-secondary bg-opacity-75"
+        <label class="m-0 cursor-pointer rounded-sm border border-base-content bg-opacity-75 p-0 text-center has-[:checked]:bg-secondary"
             style={{
                 fontSize: '0.5rem',
                 width: `${width}rem`,
@@ -63,18 +64,18 @@ const KeyboardDisplay = ({ t, keyboard, editable }: Props) => {
 
     if (!editable && empty) return <></>;
 
-    return <div class={`${empty ? "block group-has-[:disabled]/setup:hidden" : ""} bg-neutral rounded-lg flex flex-col`}>
-        <div class="flex flex-row justify-between items-center pe-2">
-            <h1 class="py-1 px-2 text-neutral-content">{t.user.sections.setup.tabs.keyboard}</h1>
+    return <div class={`${empty ? "block group-has-[:disabled]/setup:hidden" : ""} flex flex-col rounded-lg bg-neutral`}>
+        <div class="flex flex-row items-center justify-between pe-2">
+            <h1 class="px-2 py-1 text-neutral-content">{t.user.sections.setup.tabs.keyboard}</h1>
             {editable ?
-                <div class="ms-auto tooltip tooltip-left"
+                <div class="tooltip tooltip-left ms-auto"
                     data-tip={`Click on the keys you use to highlight them.`}>
                     <i class="fa-solid fa-circle-info" />
                 </div> : <></>
             }
         </div>
-        <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
-            <div class="flex justify-center items-center h-36" id="keyboard_display">
+        <div class="flex grow flex-col gap-2 rounded-lg bg-base-300 p-2">
+            <div class="flex h-36 items-center justify-center" id="keyboard_display">
                 {keyboard?.layout === "k2" && <K2 keys={keyboard?.keys} />}
                 {keyboard?.layout === "k3" && <K3 keys={keyboard?.keys} />}
                 {keyboard?.layout === "k4" && <K4 keys={keyboard?.keys} />}
@@ -83,21 +84,21 @@ const KeyboardDisplay = ({ t, keyboard, editable }: Props) => {
                 {keyboard?.layout === "ktkl" && <KTkl keys={keyboard?.keys} />}
                 {keyboard?.layout === "kfull" && <KFull keys={keyboard?.keys} />}
             </div>
-            <div class="flex flex-col gap-2 grow">
+            <div class="flex grow flex-col gap-2">
                 <label class="form-control">
                     <div class="label">
                         <span class="label-text">{t.user.sections.setup.name}:</span>
                     </div>
                     <input id="keyboard_name" name="keyboard_name"
                         type="text" placeholder={t.user.sections.setup.name}
-                        class="input input-sm input-bordered peer disabled:hidden w-full" value={keyboard?.name || ""} />
-                    <span class="input input-sm bg-base-300 hidden peer-disabled:block">{keyboard?.name}</span>
+                        class="peer input input-sm input-bordered w-full disabled:hidden" value={keyboard?.name || ""} />
+                    <span class="input input-sm hidden bg-base-300 peer-disabled:block">{keyboard?.name}</span>
                 </label>
                 <label class="form-control">
                     <div class="label">
                         <span class="label-text">{t.user.sections.setup.kb_layout}:</span>
                     </div>
-                    <select class="peer disabled:hidden w-full select select-bordered select-sm" name="keyboard_layout">
+                    <select class="peer select select-bordered select-sm w-full disabled:hidden" name="keyboard_layout">
                         <option value="k0" selected={!keyboard?.layout}>{t.user.sections.setup.layout.k0}</option>
                         <option value="k2" selected={keyboard?.layout === "k2"}>{t.user.sections.setup.layout.k2}</option>
                         <option value="k3" selected={keyboard?.layout === "k3"}>{t.user.sections.setup.layout.k3}</option>
@@ -107,10 +108,21 @@ const KeyboardDisplay = ({ t, keyboard, editable }: Props) => {
                         <option value="ktkl" selected={keyboard?.layout === "ktkl"}>{t.user.sections.setup.layout.ktkl}</option>
                         <option value="kfull" selected={keyboard?.layout === "kfull"}>{t.user.sections.setup.layout.kfull}</option>
                     </select>
-                    <span class="input input-sm bg-base-300 hidden peer-disabled:block">
+                    <span class="input input-sm hidden bg-base-300 peer-disabled:block">
                         {keyboard?.layout ? layoutText[keyboard?.layout] : undefined}
                     </span>
                 </label>
+                <div class="peer/rt form-control">
+                    <label class="label cursor-pointer">
+                        <span class="label-text">Rapid Trigger:</span>
+                        <input type="checkbox" checked={keyboard?.rt || false} class="checkbox-secondary checkbox" name="keyboard_rt" />
+                    </label>
+                </div>
+                <div class="hidden flex-row flex-wrap gap-2 peer-has-[:checked]/rt:flex">
+                    <SetupInput editable={editable} id="keyboard_actuation" name="Actuation" measure="mm" value={keyboard?.actuation} type="number" />
+                    <SetupInput editable={editable} id="keyboard_press" name="↓" measure="mm" value={keyboard?.press} type="number" />
+                    <SetupInput editable={editable} id="keyboard_release" name="↑" measure="mm" value={keyboard?.release} type="number" />
+                </div>
                 <div class="hidden" id="keyboard_store">
                     <template id="k0_temp">
                         <div />

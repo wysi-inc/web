@@ -11,7 +11,6 @@ type Props = {
     lang: any
 }
 
-
 const Navbar = ({ lang, t, user }: Props) => {
 
     const routes = [
