@@ -215,7 +215,6 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         .post("/sort", async ({ jwt, cookie, body, params }: Route) => {
             const user = await verifyUser(jwt, cookie.auth.value);
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
-            console.log(body.skins);
             const res = await sortSkins(Number(params.id), body.skins);
             if (res.error) return error(res.code, res.msg);
             return res.msg;
