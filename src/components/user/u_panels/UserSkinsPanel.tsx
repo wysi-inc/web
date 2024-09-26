@@ -11,7 +11,6 @@ async function UserSkinsPanel(p: { user_id: number, logged_id?: number }) {
     if (!user) return <>this user doesn't exist</>;
     if (!user.skins && !editable) return <>This user doesn't have skins</>;
 
-    console.log(user.skins);
     return (
         <div class="flex flex-col gap-4">
             {editable ? <>
