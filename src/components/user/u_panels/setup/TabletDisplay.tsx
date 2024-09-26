@@ -19,11 +19,11 @@ const TabletDisplay = async ({ t, tablet, editable }: Props) => {
 
     const custom: boolean = tablet?.name === "" || tablets.find((t) => t.name === tablet?.name) === undefined;
 
-    return <div class={`${empty ? "block group-has-[:disabled]/setup:hidden" : ""} bg-neutral rounded-lg flex flex-col`}>
-        <div class="flex flex-row justify-between items-center pe-2">
-            <h1 class="py-1 px-2 text-neutral-content">{t.user.sections.setup.tabs.tablet}</h1>
+    return <div class={`${empty ? "block group-has-[:disabled]/setup:hidden" : ""} flex flex-col rounded-lg bg-neutral`}>
+        <div class="flex flex-row items-center justify-between pe-2">
+            <h1 class="px-2 py-1 text-neutral-content">{t.user.sections.setup.tabs.tablet}</h1>
             {editable ?
-                <div class="ms-auto tooltip tooltip-left"
+                <div class="tooltip tooltip-left ms-auto"
                     data-tip={`Same values as OpenTabletDriver.
                     The tablet area doesnt move on the preview, save the changes to see the tablet go into the right place (will be fixed in the future).
                     If your tablet is not on the list, choose "custom" and insert the tablet name and its size before setting the area or the position.
@@ -32,14 +32,14 @@ const TabletDisplay = async ({ t, tablet, editable }: Props) => {
                 </div> : <></>
             }
         </div>
-        <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
-            <div class="flex justify-center items-center h-36">
-                <div class="relative outline outline-1 overflow-hidden rounded-lg"
+        <div class="flex grow flex-col gap-2 rounded-lg bg-base-300 p-2">
+            <div class="flex h-36 items-center justify-center">
+                <div class="relative overflow-hidden rounded-lg outline outline-1"
                     id="tablet" style={{
                         height: `${tablet?.size?.h || 0}px`,
                         width: `${tablet?.size?.w || 0}px`,
                     }}>
-                    <div class="absolute flex flex-col items-center justify-center gap-1 outline outline-1 outline-secondary bg-secondary bg-opacity-75"
+                    <div class="absolute flex flex-col items-center justify-center gap-1 bg-secondary bg-opacity-75 outline outline-1 outline-secondary"
                         id="tablet_area" style={{
                             height: `${tablet?.area?.h || 0}px`,
                             width: `${tablet?.area?.w || 0}px`,
@@ -52,16 +52,16 @@ const TabletDisplay = async ({ t, tablet, editable }: Props) => {
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col gap-2 grow">
+            <div class="flex grow flex-col gap-2">
                 <label class="form-control">
                     <div class="label">
                         <span class="label-text">{t.user.sections.setup.model}:</span>
                     </div>
-                    <select class="peer disabled:hidden w-full select select-bordered select-sm" name="tablet_model">
+                    <select class="peer select select-bordered select-sm w-full disabled:hidden" name="tablet_model">
                         {tablets.map(t => <option value={JSON.stringify(t)} selected={tablet?.name === t.name}>{t.name}</option>)}
                         <option value="custom" selected={custom}>Custom</option>
                     </select>
-                    <span class="input input-sm bg-base-300 hidden peer-disabled:block">{tablet?.name}</span>
+                    <span class="input input-sm hidden bg-base-300 peer-disabled:block">{tablet?.name}</span>
                 </label>
                 <div id="tablet_custom" class={custom ? "" : "hidden"}>
                     <label class="form-control">
@@ -70,8 +70,8 @@ const TabletDisplay = async ({ t, tablet, editable }: Props) => {
                         </div>
                         <input id="tablet_name" name="tablet_name"
                             type="text" placeholder={t.user.sections.setup.name}
-                            class="input input-sm input-bordered peer disabled:hidden w-full" value={tablet?.name || ""} />
-                        <span class="input input-sm bg-base-200 hidden peer-disabled:block">{tablet?.name}</span>
+                            class="peer input input-sm input-bordered w-full disabled:hidden" value={tablet?.name || ""} />
+                        <span class="input input-sm hidden bg-base-200 peer-disabled:block">{tablet?.name}</span>
                     </label>
                     <label class="form-control">
                         <div class="label">

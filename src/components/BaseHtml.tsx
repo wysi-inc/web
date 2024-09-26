@@ -47,11 +47,11 @@ const BaseHtml = ({ lang, t, user, children }: Props) => {
                 <script defer src={`/public/js/bbcode${PROD ? ".min" : ""}.js`} />
                 <script defer src={`/public/js/drag${PROD ? ".min" : ""}.js`} />
             </head>
-            <body style="display: hidden;" class="bg-base-300 flex flex-col justify-center items-center" id="top">
+            <body style="display: hidden;" class="flex flex-col items-center justify-center bg-base-300" id="top">
                 <script>let FF_FOUC_FIX;</script>
                 <Navbar lang={lang} t={t} user={user} />
                 <main class="w-screen mil:w-mil">
-                    <div id="main" class="md:p-4 flex flex-col gap-4 bg-neutral shadow-lg">
+                    <div id="main" class="flex flex-col gap-4 bg-neutral shadow-lg md:p-4">
                         {children}
                     </div>
                 </main>

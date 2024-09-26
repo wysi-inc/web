@@ -44,14 +44,14 @@ const Navbar = ({ lang, t, user }: Props) => {
     ];
 
     return <>
-        <nav class="flex flex-col bg-base-100 shadow-lg sticky top-0 z-50 w-full">
-            <div class="grid grid-cols-3 md:grid-cols-5 p-2">
-                <div class="md:col-span-2 flex flex-row items-center justify-start">
+        <nav class="sticky top-0 z-50 flex w-full flex-col bg-base-100 shadow-lg">
+            <div class="grid grid-cols-3 p-2 md:grid-cols-5">
+                <div class="flex flex-row items-center justify-start md:col-span-2">
                     <div class="dropdown xl:hidden">
                         <div tabindex="0" role="button" class="btn btn-ghost flex items-center justify-center">
                             <i class="fa-solid fa-bars fa-lg" />
                         </div>
-                        <ul tabindex="0" class="menu menu-sm dropdown-content mt-5 z-50 p-2 shadow bg-base-100 rounded-box w-40">
+                        <ul tabindex="0" class="dropdown-content menu menu-sm z-50 mt-5 w-40 rounded-box bg-base-100 p-2 shadow">
                             {routes.map(route =>
                                 <li>
                                     <Link url={route.url} css="btn btn-ghost">
@@ -61,7 +61,7 @@ const Navbar = ({ lang, t, user }: Props) => {
                                 </li>
                             )}
                             <div class="divider flex sm:hidden" />
-                            <label class="sm:hidden btn btn-ghost">
+                            <label class="btn btn-ghost sm:hidden">
                                 <button class="hidden" aria-label="theme switch" data-toggle-theme="dracula,pastel" data-act-class="ACTIVECLASS" />
                                 <i class="fa-solid fa-circle-half-stroke" />
                                 Theme
@@ -83,11 +83,11 @@ const Navbar = ({ lang, t, user }: Props) => {
                     </div>
                     <div class="dropdown lg:hidden">
                     </div>
-                    <Link url="/" css="hidden sm:flex gap-4 items-center btn btn-ghost px-2 text-xl">
-                        <img loading="lazy" src="/public/wysi.svg" class="w-8 h-8 rounded-lg drop-shadow-lg shadow-lg" alt="wysi logo" />
+                    <Link url="/" css="btn btn-ghost hidden items-center gap-4 px-2 text-xl sm:flex">
+                        <img loading="lazy" src="/public/wysi.svg" class="h-8 w-8 rounded-lg shadow-lg drop-shadow-lg" alt="wysi logo" />
                         <span>wysi</span>
                     </Link>
-                    <div class="z-50 hidden xl:flex flex-row text-sm">
+                    <div class="z-50 hidden flex-row text-sm xl:flex">
                         {routes.map(r =>
                             <Link url={r.url} css="btn btn-ghost">
                                 {r.collapsed ? r.icon : r.title}
@@ -98,13 +98,13 @@ const Navbar = ({ lang, t, user }: Props) => {
                 <div class="flex flex-row items-center justify-center">
                     <Search t={t} />
                 </div>
-                <div class="md:col-span-2 z-50 flex flex-row items-center justify-end">
+                <div class="z-50 flex flex-row items-center justify-end md:col-span-2">
                     <a href="https://github.com/wysi-inc" target="_blank"
-                        class="hidden md:flex btn btn-ghost" aria-label="Github">
+                        class="btn btn-ghost hidden md:flex" aria-label="Github">
                         <i class="fa-brands fa-github fa-lg" />
                     </a>
                     <a href="https://discord.gg/QYVxgS2934" target="_blank"
-                        class="hidden md:flex btn btn-ghost" aria-label="Discord">
+                        class="btn btn-ghost hidden md:flex" aria-label="Discord">
                         <i class="fa-brands fa-discord" />
                     </a>
                     <div class="hidden sm:flex">
@@ -123,7 +123,7 @@ const Navbar = ({ lang, t, user }: Props) => {
                 </div>
             </div>
             <div class="h-1">
-                <div id="page-loading" class="htmx-indicator bg-accent h-full w-full loading-indicator" />
+                <div id="page-loading" class="htmx-indicator loading-indicator h-full w-full bg-accent" />
             </div>
         </nav>
     </>

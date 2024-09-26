@@ -6312,20 +6312,8 @@ img:not([src]):not([srcset]) {
   display: none;
 }
 
-.peer:has(:checked) ~ .peer-has-\[\:checked\]\:flex {
-  display: flex;
-}
-
 .peer\/rt:has(:checked) ~ .peer-has-\[\:checked\]\/rt\:flex {
   display: flex;
-}
-
-.peer:has(:checked) ~ .peer-has-\[\:checked\]\/\:flex {
-  display: flex;
-}
-
-.peer\/rt:has(:checked) ~ .peer-has-\[\:checked\]\/rt\:grid {
-  display: grid;
 }
 
 @media (min-width: 640px) {

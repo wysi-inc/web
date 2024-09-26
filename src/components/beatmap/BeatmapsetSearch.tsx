@@ -4,21 +4,19 @@ import Input from "./Input";
 import Title from "../web/Title";
 
 const Radio = (p: { name: string, label: string, code: number }) => (
-    <input class="btn" type="radio"
-        name={p.name} value={String(p.code)}
-        aria-label={p.label}
-        checked={p.label === "any"} />
+    <input class="btn" type="radio" aria-label={p.label}
+        name={p.name} value={String(p.code)} checked={p.label === "any"} />
 );
 
 const Sort = (p: { label: string, code: MinoBeatmapSort }) => (
     <div class="flex flex-col">
         <span class="text-center text-xs">{p.label}</span>
         <div class="flex flex-row items-center justify-center">
-            <label class="btn btn-ghost btn-xs btn-square has-[:checked]:btn-active">
+            <label class="btn btn-square btn-ghost btn-xs has-[:checked]:btn-active">
                 <input class="hidden" type="radio" name="sorting" value={`${p.code}:desc`} />
                 <i class="fa-solid fa-caret-down" />
             </label>
-            <label class="btn btn-ghost btn-xs btn-square has-[:checked]:btn-active">
+            <label class="btn btn-square btn-ghost btn-xs has-[:checked]:btn-active">
                 <input class="hidden" type="radio" name="sorting" value={`${p.code}:asc`} />
                 <i class="fa-solid fa-caret-up" />
             </label>
@@ -29,24 +27,24 @@ const Sort = (p: { label: string, code: MinoBeatmapSort }) => (
 function BeatmapsetSearch() {
     return (<>
         <Title title="Beatmap Listing" />
-        <form class="flex flex-col rounded-lg drop-shadow-lg bg-base-300" id="search-form"
+        <form class="flex flex-col rounded-lg bg-base-300 drop-shadow-lg" id="search-form"
             hx-post="/beatmapsets/list" hx-trigger="load, input delay:500ms"
             hx-target="#beatmap-search-results" hx-indicator="#beatmap-search-indicator"
             hx-on--before-request="document.getElementById('beatmap-search-results').innerHTML='';">
-            <div class="flex flex-col gap-4 p-4 bg-base-100 rounded-lg">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-4 rounded-lg bg-base-100 p-4">
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <Input name="Title" placeholder="Beatmap Title or Artist" />
                     <Input name="Mapper" placeholder="Beatmap Mapper" />
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <DoubleSlider code="sr" name="Stars" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
                     <DoubleSlider code="bpm" name="BPM" min={0} max={300} step={5} min_label="0" max_label="∞" />
-                    <details class="group bg-base-300 rounded-lg col-span-full">
-                        <summary class="cursor-pointer rounded-lg flex flex-row gap-4 px-4 py-2 items-center">
-                            <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
+                    <details class="group col-span-full rounded-lg bg-base-300">
+                        <summary class="flex cursor-pointer flex-row items-center gap-4 rounded-lg px-4 py-2">
+                            <i class="fa-solid fa-caret-down transform duration-200 ease-out group-open:rotate-180" />
                             <span>Advanced Filters</span>
                         </summary>
-                        <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 gap-4 p-4 md:grid-cols-2">
                             <DoubleSlider code="len" name="Length" min={0} max={600} step={30} min_label="0s" max_label="∞" />
                             <DoubleSlider code="year" name="Year" min={2007} max={new Date().getFullYear()} step={1} min_label="2007" max_label="now" />
                             <DoubleSlider code="ar" name="AR" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
@@ -56,7 +54,7 @@ function BeatmapsetSearch() {
                         </div>
                     </details>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-5">
                     <div class="md:col-span-2">
                         <div class="label">
                             <span class="label-text">Mode:</span>
@@ -86,9 +84,9 @@ function BeatmapsetSearch() {
                     </div>
                 </div>
             </div>
-            <div class="py-2 px-4 flex flex-row flex-wrap justify-center items-center gap-4">
+            <div class="flex flex-row flex-wrap items-center justify-center gap-4 px-4 py-2">
                 <span class="text-sm">Sort by:</span>
-                <div class="mx-auto flex flex-row gap-6 flex-wrap">
+                <div class="mx-auto flex flex-row flex-wrap gap-6">
                     <div class="flex flex-col">
                         <span class="text-center text-xs">Relevant</span>
                         <label class="btn btn-ghost btn-xs has-[:checked]:btn-active">
@@ -116,12 +114,12 @@ function BeatmapsetSearch() {
             </div>
         </form>
         <script async type="module" src={`/public/js/sliders.js?v=${Date.now()}`} />
-        <div id="beatmap-search-indicator" class="htmx-indicator bg-base-100 p-4 rounded-lg">
+        <div id="beatmap-search-indicator" class="htmx-indicator rounded-lg bg-base-100 p-4">
             <div class="flex items-center justify-center">
                 <span class="loading loading-spinner loading-md mx-auto" />
             </div>
         </div>
-        <output id="beatmap-search-results" class="empty:hidden bg-base-100 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg" />
+        <output id="beatmap-search-results" class="grid grid-cols-1 gap-4 rounded-lg bg-base-100 p-4 empty:hidden md:grid-cols-2" />
     </>);
 }
 

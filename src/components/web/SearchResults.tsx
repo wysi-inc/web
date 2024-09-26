@@ -6,27 +6,23 @@ import SubdivisionFlag from "../user/u_panels/u_components/SubdivisionFlag";
 import Clan from "../user/u_panels/u_components/Clan";
 import type { Beatmapset } from "@/src/types/beatmaps";
 
-type Props = {
-    query: string | undefined;
-}
-
-async function SearchResults({ query }: Props) {
-    if (!query) return <></>;
-    const res = await v2.site.search({ query, mode: "user" });
+async function SearchResults(p: { query?: string; }) {
+    if (!p.query) return <></>;
+    const res = await v2.site.search({ query: p.query, mode: "user" });
     const users = res.user.data;
-    const response = await v2.beatmaps.search({ query }) as any;
+    const response = await v2.beatmaps.search({ query: p.query }) as any;
     const beatmaps = response.beatmapsets as Beatmapset[];
     const LIMIT = 5;
 
     return (<>
-        <div class="rounded-lg bg-base-100 flex flex-col p-2 gap-2">
-            <div class="px-1 flex flex-row gap-2 items-center">
+        <div class="flex flex-col gap-2 rounded-lg bg-base-100 p-2">
+            <div class="flex flex-row items-center gap-2 px-1">
                 <i class="fa-solid fa-user" />
                 <h2>Users</h2>
             </div>
             {users.map((u, i) => i < LIMIT ?
-                <Link url={`/users/${u.id}`} css="flex flex-row justify-between p-2 gap-2 bg-base-300 rounded-lg">
-                    <div class="flex flex-row gap-2 items-center">
+                <Link url={`/users/${u.id}`} css="flex flex-row justify-between gap-2 rounded-lg bg-base-300 p-2">
+                    <div class="flex flex-row items-center gap-2">
                         <Flag code={u.country_code} static={true} />
                         <SubdivisionFlag user_id={u.id} />
                         <Clan user_id={u.id} />
@@ -37,18 +33,18 @@ async function SearchResults({ query }: Props) {
                     </div>
                 </Link> : <></>)}
         </div>
-        <div class="rounded-lg bg-base-100 flex flex-col p-2 gap-2">
-            <div class="px-1 flex flex-row gap-2 items-center">
+        <div class="flex flex-col gap-2 rounded-lg bg-base-100 p-2">
+            <div class="flex flex-row items-center gap-2 px-1">
                 <i class="fa-solid fa-music" />
                 <h2>Beatmaps</h2>
             </div>
             {beatmaps.map((b, i) => i < LIMIT ?
                 <Link url={`/beatmapsets/${b.id}`}>
-                    <div class="flex flex-row p-2 gap-2 bg-base-300 rounded-lg">
+                    <div class="flex flex-row gap-2 rounded-lg bg-base-300 p-2">
                         <img data-src={`https://b.ppy.sh/thumb/${b.id}l.jpg`} class="max-h-11 max-w-16 rounded-lg" alt="thumbnail" />
                         <div class="flex flex-col">
-                            <span class="truncate max-w-80">{b.title} <span class="text-sm">by {b.artist}</span></span>
-                            <span class="truncate max-w-80 text-sm text-base-content text-opacity-60">mapped by {b.creator}</span>
+                            <span class="max-w-80 truncate">{b.title} <span class="text-sm">by {b.artist}</span></span>
+                            <span class="max-w-80 truncate text-sm text-base-content text-opacity-60">mapped by {b.creator}</span>
                         </div>
                     </div>
                 </Link> : <></>)}

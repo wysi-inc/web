@@ -35,15 +35,15 @@ async function Home({ t }: any) {
 
     return (<>
         <Title title="Home" />
-        <div class="flex flex-col gap-2 items-center">
-            <h1 class="text-2xl text-center">{t.home.welcome}</h1>
-            <img loading="lazy" src="/public/wysi.svg" class="rounded-xl size-24 shadow-lg" alt="wysi logo" />
-            <h2 class="text-lg text-center">{t.home.foss}</h2>
-            <h3 class="text-sm text-center">{t.home.built}</h3>
+        <div class="flex flex-col items-center gap-2">
+            <h1 class="text-center text-2xl">{t.home.welcome}</h1>
+            <img loading="lazy" src="/public/wysi.svg" class="size-24 rounded-xl shadow-lg" alt="wysi logo" />
+            <h2 class="text-center text-lg">{t.home.foss}</h2>
+            <h3 class="text-center text-sm">{t.home.built}</h3>
             <div />
         </div>
         {stats ?
-            <section class="stats shadow rounded-lg bg-base-300 stats-vertical md:stats-horizontal">
+            <section class="stats stats-vertical rounded-lg bg-base-300 shadow md:stats-horizontal">
                 <div class="stat">
                     <div class="stat-title"><i class="fa-solid fa-database" /> Profiles Stored</div>
                     <div class="stat-value">{stats.users.toLocaleString()}</div>
@@ -61,11 +61,11 @@ async function Home({ t }: any) {
                 </div>
             </section> : null
         }
-        <div class="grid gird-cols-1 md:grid-cols-2 gap-4">
+        <div class="gird-cols-1 grid gap-4 md:grid-cols-2">
             {content.map(c => (
-                <div class="bg-base-100 rounded-lg flex flex-col">
-                    <h1 class="p-2 text-neutral-content text-center">{c.title}</h1>
-                    <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg grow">
+                <div class="flex flex-col rounded-lg bg-base-100">
+                    <h1 class="p-2 text-center text-neutral-content">{c.title}</h1>
+                    <div class="flex grow flex-col gap-2 rounded-lg bg-base-300 p-2">
                         <img loading="lazy" class="rounded-lg" src={`/public/img/home/${c.img}.webp`} alt="user profiles" />
                     </div>
                 </div>

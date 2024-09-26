@@ -63,70 +63,70 @@ async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mod
     return (<>
         <div class="grid grid-cols-1 gap-4">
             <div class="flex flex-col gap-4">
-                <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
-                    <h4 class="py-1 px-2 flex flex-row text-neutral-content justify-between">
+                <div class="flex flex-col rounded-lg bg-neutral shadow-lg">
+                    <h4 class="flex flex-row justify-between px-2 py-1 text-neutral-content">
                         <span>Performance Tags:</span>
                     </h4>
-                    <div class="grow flex flex-row flex-wrap gap-2 p-2 rounded-lg bg-base-300">
+                    <div class="flex grow flex-row flex-wrap gap-2 rounded-lg bg-base-300 p-2">
                         {data.tags.map((tag) =>
-                            <div class={`badge ${tag.type === 1 ? "badge-success" : tag.type === 2 ? "badge-warning" : "badge-error"}`}>
+                            <div class={`${tag.type === 1 ? "badge-success" : tag.type === 2 ? "badge-warning" : "badge-error"} badge`}>
                                 {tag.name}
                             </div>
                         )}
                     </div>
                 </div>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
-                        <h4 class="py-1 px-2 flex flex-row text-neutral-content justify-between">
+                <div class="grid gap-4 md:grid-cols-2">
+                    <div class="flex flex-col rounded-lg bg-neutral shadow-lg">
+                        <h4 class="flex flex-row justify-between px-2 py-1 text-neutral-content">
                             <span>Stats:</span>
                         </h4>
-                        <div class="grow flex text-center flex-row flex-wrap gap-2 p-2 rounded-lg bg-base-300">
-                            <div class="flex flex-row gap-2 items-center justify-between bg-base-100 rounded-full px-2 py-1">
+                        <div class="flex grow flex-row flex-wrap gap-2 rounded-lg bg-base-300 p-2 text-center">
+                            <div class="flex flex-row items-center justify-between gap-2 rounded-full bg-base-100 px-2 py-1">
                                 <span>Playtime:</span>
                                 <span>+{Math.round(data.playtime / 60 / 60).toLocaleString()}h</span>
                             </div>
-                            <div class="flex flex-row gap-2 items-center justify-between bg-base-100 rounded-full px-2 py-1">
+                            <div class="flex flex-row items-center justify-between gap-2 rounded-full bg-base-100 px-2 py-1">
                                 <span>Playcount:</span>
                                 <span>+{data.scores.total.toLocaleString()}</span>
                             </div>
-                            <div class="flex flex-row gap-2 items-center justify-between bg-base-100 rounded-full px-2 py-1">
+                            <div class="flex flex-row items-center justify-between gap-2 rounded-full bg-base-100 px-2 py-1">
                                 <span>Pass rate:</span>
                                 <span class={passrate > 66 ? "text-success" : passrate > 33 ? "text-warning" : "text-error"}>{(passrate).toFixed(2)}%</span>
                             </div>
-                            <div class="flex flex-row gap-2 items-center justify-between bg-base-100 rounded-full px-2 py-1">
+                            <div class="flex flex-row items-center justify-between gap-2 rounded-full bg-base-100 px-2 py-1">
                                 <span>Rank gain:</span>
                                 <span class={rank_gain > 0 ? "text-success" : "text-error"}>{rank_gain}</span>
                             </div>
-                            <div class="flex flex-row gap-2 items-center justify-between bg-base-100 rounded-full px-2 py-1">
+                            <div class="flex flex-row items-center justify-between gap-2 rounded-full bg-base-100 px-2 py-1">
                                 <span>PP gain:</span>
                                 <span class={pp_gain > 0 ? "text-success" : "text-error"}>{pp_gain > 0 ? "+" : "-"}{pp_gain}pp</span>
                             </div>
                         </div>
                     </div>
-                    <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
-                        <h4 class="py-1 px-2 flex flex-row text-neutral-content justify-between">
+                    <div class="flex flex-col rounded-lg bg-neutral shadow-lg">
+                        <h4 class="flex flex-row justify-between px-2 py-1 text-neutral-content">
                             <span>Grades:</span>
                         </h4>
-                        <div class="grow p-4 rounded-lg bg-base-300 flex justify-center items-center">
+                        <div class="flex grow items-center justify-center rounded-lg bg-base-300 p-4">
                             <BarChart name="year_grades" data={grade_counts} />
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="grid md:grid-cols-2 gap-4">
-                <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
+            <div class="grid gap-4 md:grid-cols-2">
+                <div class="flex flex-col rounded-lg bg-neutral shadow-lg">
                     <h4 class="flex flex-row flex-wrap justify-between gap-2 px-2 py-1">
                         <span>Top mappers:</span><span>({mappers.map(m => `x${m.count}`).join(" | ")})</span>
                     </h4>
-                    <div class="flex flex-col gap-2 rounded-lg p-2 bg-base-300 grow">
+                    <div class="flex grow flex-col gap-2 rounded-lg bg-base-300 p-2">
                         {mappers.map(m => <UserCard user_id={m.id} />)}
                     </div>
                 </div>
-                <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
+                <div class="flex flex-col rounded-lg bg-neutral shadow-lg">
                     <h4 class="flex flex-row flex-wrap justify-between gap-2 px-2 py-1">
                         <span>Top songs:</span><span>({songs.map(s => `x${s.count}`).join(" | ")})</span>
                     </h4>
-                    <div class="flex flex-col gap-2 rounded-lg p-2 bg-base-300 grow">
+                    <div class="flex grow flex-col gap-2 rounded-lg bg-base-300 p-2">
                         {songs.map(async (s) => <BeatmapsetCard beatmapset={await getBeatmapset(s.id)} />)}
                     </div>
                 </div>

@@ -43,18 +43,18 @@ function LanguageSwitcher({ lang, t }: any) {
 
     return (<>
         <div class="dropdown dropdown-end">
-            <div tabindex="0" role="button" class="btn btn-ghost btn-square">
+            <div tabindex="0" role="button" class="btn btn-square btn-ghost">
                 <img data-src={language[1]} class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
             </div>
-            <div tabindex="0" class="dropdown-content menu bg-base-100 rounded-box mt-5 z-50 p-2 shadow">
-                <div class="grid grid-cols-2 gap-1 mb-2 w-96">
+            <div tabindex="0" class="dropdown-content menu z-50 mt-5 rounded-box bg-base-100 p-2 shadow">
+                <div class="mb-2 grid w-96 grid-cols-2 gap-1">
                     {Object.keys(flags).map(l => (
                         <LanguageButton lang={getLang(l)} />
                     ))}
                 </div>
                 <a href="https://crowdin.com/project/wysi" class="btn btn-accent btn-block" target="_blank">
                     <span class="flex flex-row gap-4">
-                        <i class="float float-left left-2 fa-solid fa-arrow-up-right-from-square" />
+                        <i class="float fa-solid fa-arrow-up-right-from-square left-2 float-left" />
                         <span>{t.nav.help}</span>
                     </span>
                 </a>

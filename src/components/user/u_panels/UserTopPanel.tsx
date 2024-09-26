@@ -39,15 +39,15 @@ async function UserTopPanel(p: {
     const has_info = p.user.location ? true : p.user.interests ? true : p.user.occupation ? true : p.user.website ? true : false;
 
     return (
-        <section class="pb-4 bg-base-300 rounded-lg shadow-lg">
-            <div class="flex flex-col bg-base-100 rounded-lg">
+        <section class="rounded-lg bg-base-300 pb-4 shadow-lg">
+            <div class="flex flex-col rounded-lg bg-base-100">
                 <div class="rounded-lg" data-bg={p.user.cover_url}
                     style={{ backgroundSize: `cover`, backgroundPosition: `center`, backgroundRepeat: "no-repeat" }}>
-                    <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm justify-center flex flex-col gap-4 p-4 rounded-lg">
+                    <div class="flex flex-col justify-center gap-4 rounded-lg bg-base-300 bg-opacity-65 p-4 text-base-content backdrop-blur-sm">
                         <div class="flex flex-row flex-wrap gap-4">
-                            <div class="flex flex-col justify-between w-40">
-                                <img data-src={p.user.avatar_url} class="rounded-lg aspect-square" alt={`${p.user.username}'s pfp`} />
-                                <div class="bg-base-300 rounded-lg flex flex-row gap-2 p-2 flex-wrap justify-around items-center">
+                            <div class="flex w-40 flex-col justify-between">
+                                <img data-src={p.user.avatar_url} class="aspect-square rounded-lg" alt={`${p.user.username}'s pfp`} />
+                                <div class="flex flex-row flex-wrap items-center justify-around gap-2 rounded-lg bg-base-300 p-2">
                                     {modes.map(m => (
                                         <div class="tooltip" data-tip={m.name}>
                                             {p.mode === m.code ?
@@ -60,18 +60,18 @@ async function UserTopPanel(p: {
                                     ))}
                                 </div>
                                 <span class="text-center">joined <time class="tooltip" data-tip={joined_date} datetime={joined_date}>{moment(p.user.join_date).fromNow()}</time></span>
-                                <div class="flex flex-row justify-between gap-2 items-center">
+                                <div class="flex flex-row items-center justify-between gap-2">
                                     <span>{p.user.statistics.level.current}</span>
                                     <progress class="progress progress-accent w-32" value={p.user.statistics.level.progress} max="100" />
                                     <span>{p.user.statistics.level.current + 1}</span>
                                 </div>
                             </div>
-                            <div class="flex flex-col gap-2 justify-between items-start grow">
+                            <div class="flex grow flex-col items-start justify-between gap-2">
                                 {(p.user.wysi_badges?.length || 0) > 0 ?
-                                    <div class="flex flex-row gap-2 flex-wrap">{p.user.wysi_badges?.map(b => <Badge user_id={p.user.id} badge_id={b} editable={false} />)}</div>
+                                    <div class="flex flex-row flex-wrap gap-2">{p.user.wysi_badges?.map(b => <Badge user_id={p.user.id} badge_id={b} editable={false} />)}</div>
                                     : <></>
                                 }
-                                <div class="flex flex-row gap-2 items-center">
+                                <div class="flex flex-row items-center gap-2">
                                     <Clan user_id={p.user.id} />
                                     <a href={`https://osu.ppy.sh/users/${p.user.id}`} target="_blank" class="text-2xl underline-offset-2 hover:underline">
                                         {p.user.username}
@@ -80,7 +80,7 @@ async function UserTopPanel(p: {
                                         <Supporter level={p.user.support_level} />
                                     }
                                     {p.user.groups.map(g =>
-                                        <div class="badge border-none text-white p-1 flex flex-row" style={{
+                                        <div class="badge flex flex-row border-none p-1 text-white" style={{
                                             backgroundColor: g.colour,
                                             gap: ".08rem",
                                         }}>
@@ -89,27 +89,27 @@ async function UserTopPanel(p: {
                                     )}
                                 </div>
                                 {p.user.title ?
-                                    <div class="bg-gradient-to-r from-blue-600 to-green-400 inline-block text-transparent bg-clip-text">
+                                    <div class="inline-block bg-gradient-to-r from-blue-600 to-green-400 bg-clip-text text-transparent">
                                         {p.user.title}
                                     </div> : <></>}
-                                <div class="flex flex-row gap-2 items-center">
+                                <div class="flex flex-row items-center gap-2">
                                     <i class="fa-solid fa-earth-americas fa-xl"></i>
-                                    <h2 class="text-xl tooltip" data-tip={`Peak rank: #${p.user?.rank_highest?.rank?.toLocaleString?.()}`}>
+                                    <h2 class="tooltip text-xl" data-tip={`Peak rank: #${p.user?.rank_highest?.rank?.toLocaleString?.()}`}>
                                         #{p.user.statistics?.global_rank?.toLocaleString() || "-"}
                                     </h2>
                                 </div>
-                                <div class="flex flex-row gap-2 items-center">
+                                <div class="flex flex-row items-center gap-2">
                                     {(p.user.country as any).cat ?
                                         <Country code={"CAT"} name={"Catalunya"} /> :
                                         <Country code={p.user.country.code} name={p.user.country.name} />
                                     }
-                                    <h2 class="text-xl tooltip" data-tip={`Peak rank: #${best_country?.rank?.toLocaleString()}`}>
+                                    <h2 class="tooltip text-xl" data-tip={`Peak rank: #${best_country?.rank?.toLocaleString()}`}>
                                         #{p.user.statistics?.country_rank?.toLocaleString() || "-"}
                                     </h2>
                                     <Flag name={p.user.country.name} code={p.user.country.code} />
                                 </div>
-                                <div class="hidden group flex-row gap-2 items-center">
-                                    <i class="hidden group-has[.flex]:flex w-6 fa-solid fa-city"></i>
+                                <div class="group hidden flex-row items-center gap-2">
+                                    <i class="group-has[.flex]:flex fa-solid fa-city hidden w-6"></i>
                                     <SubdivisionRanking user_id={p.user.id} mode={p.mode} />
                                     <SubdivisionFlag user_id={p.user.id} />
                                 </div>
@@ -130,8 +130,8 @@ async function UserTopPanel(p: {
                                         p.editable ?
                                             <form hx-swap="none" hx-trigger="change" hx-put={`/users/${p.user.id}/dan`}>
                                                 <label class="form-control">
-                                                    <span class="label text-sm m-0 p-0 pb-1">Dan:</span>
-                                                    <select name="dan" class="select-sm select select-bordered select-ghost">
+                                                    <span class="label m-0 p-0 pb-1 text-sm">Dan:</span>
+                                                    <select name="dan" class="select select-bordered select-ghost select-sm">
                                                         {DANS.map(d => <option selected={p.user.dan === d}>{d}</option>)}
                                                     </select>
                                                 </label>
@@ -144,7 +144,7 @@ async function UserTopPanel(p: {
                                     }
                                 </dl>
                             </div>
-                            <div class="flex flex-col gap-4 justify-between grow">
+                            <div class="flex grow flex-col justify-between gap-4">
                                 <table>
                                     <tr>
                                         <th class="p-1"><i class="fa-solid fa-angles-up w-4 text-center" /></th>
@@ -182,13 +182,13 @@ async function UserTopPanel(p: {
                                         <td class="p-1 text-end">{p.user.statistics.replays_watched_by_others.toLocaleString()}</td>
                                     </tr>
                                 </table>
-                                <div class="flex flex-row gap-4 items-center justify-end">
+                                <div class="flex flex-row items-center justify-end gap-4">
                                     <BarChart name="total_grades" data={grade_counts} user={{
                                         user_id: p.user.id,
                                         username: p.user.username,
                                         mode: ModeToCode(p.mode)
                                     }} />
-                                    <span id="total_grades_loading" class="hidden loading loading-spinner loading-md" />
+                                    <span id="total_grades_loading" class="loading loading-spinner loading-md hidden" />
                                 </div>
                             </div>
                         </div>
@@ -198,31 +198,31 @@ async function UserTopPanel(p: {
                     <div class="flex flex-col gap-4 p-4">
                         {has_socials || p.editable ? <>
                             <div class="flex flex-row flex-wrap gap-2">
-                                <form class="flex flex-row flex-wrap items-center gap-2 sortable" id="socials_list"
+                                <form class="sortable flex flex-row flex-wrap items-center gap-2" id="socials_list"
                                     hx-post={`/users/${p.user.id}/socials/sort`} hx-trigger="end" hx-swap="none">
                                     {p.user.socials?.map(s => <UserSocial user_id={p.user.id} social={s} editable={p.editable} />)}
-                                    <span class="loading loading-spinner htmx-indicator" />
+                                    <span class="htmx-indicator loading loading-spinner" />
                                 </form>
                                 {p.editable ?
-                                    <form class="group flex flex-row flex-wrap gap-2 items-center" hx-put={`/users/${p.user.id}/socials/submit`} hx-target="#socials_list"
+                                    <form class="group flex flex-row flex-wrap items-center gap-2" hx-put={`/users/${p.user.id}/socials/submit`} hx-target="#socials_list"
                                         hx-swap="beforeend">
-                                        <span class="loading loading-spinner htmx-indicator" />
-                                        <fieldset class="peer rounded-full peer disabled:hidden join group-disabled:hidden" id="socials_fieldset" disabled>
-                                            <select required class="rounded-s-full join-item select select-bordered select-sm" name="platform">
+                                        <span class="htmx-indicator loading loading-spinner" />
+                                        <fieldset class="peer peer join rounded-full disabled:hidden group-disabled:hidden" id="socials_fieldset" disabled>
+                                            <select required class="join-item select select-bordered select-sm rounded-s-full" name="platform">
                                                 <option disabled selected>Choose</option>
                                                 {SOCIALS.sort().map(s => <option value={s}>{s}</option>)}
                                             </select>
-                                            <label class="join-item input input-sm input-bordered flex items-center gap-2">
+                                            <label class="input input-sm join-item input-bordered flex items-center gap-2">
                                                 @ <input required name="username" type="text" class="grow" placeholder="Username" />
                                             </label>
                                         </fieldset>
-                                        <button class="peer-disabled:hidden btn btn-sm btn-circle btn-primary" type="submit">
+                                        <button class="btn btn-circle btn-primary btn-sm peer-disabled:hidden" type="submit">
                                             <i class="fa-solid fa-plus" />
                                         </button>
-                                        <button class="btn btn-ghost btn-circle btn-sm peer-enabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = false" type="button">
+                                        <button class="btn btn-circle btn-ghost btn-sm peer-enabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = false" type="button">
                                             <i class="fa-solid fa-plus" />
                                         </button>
-                                        <button class="btn btn-ghost btn-circle btn-sm peer-disabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = true" type="button">
+                                        <button class="btn btn-circle btn-ghost btn-sm peer-disabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = true" type="button">
                                             <i class="fa-solid fa-xmark" />
                                         </button>
                                     </form> : <></>

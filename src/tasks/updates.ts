@@ -1,7 +1,34 @@
 import { Medal } from "@/src/models/Medal";
 import type { OsekaiMedal } from "@/src/types/medals";
+import { StatsModel } from "../models/Stats";
+import { User } from "../models/User";
 
-export async function updateMedals() {
+async function update_stats() {
+    console.log("started updating stats...");
+    const user_count = await User.countDocuments();
+    const users_with_setup = await User.countDocuments({ setup: { $exists: true, $ne: null } });
+    const users_with_collections = await User.find({ collections: { $exists: true, $ne: null } });
+
+    let stats = await StatsModel.findOne();
+    if (!stats) stats = new StatsModel();
+
+    let collection_count = 0;
+
+    for (let u of users_with_collections) {
+        collection_count += u.collections.length;
+    }
+
+    stats.users = user_count;
+    stats.setups = users_with_setup;
+    stats.collections = collection_count;
+    stats.updated_at = new Date();
+
+    await stats.save();
+    console.log("finished updating stats...");
+}
+
+
+export async function update_medals() {
     try {
         const res = await fetch("https://osekai.net/medals/api/medals.php");
         const new_medals: OsekaiMedal[] = await res.json() as any;

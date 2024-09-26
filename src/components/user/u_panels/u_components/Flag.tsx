@@ -9,7 +9,7 @@ const Flag = (p: {
     const url = `https://flagcdn.com/h40/${p.code.toLowerCase()}.webp`;
     const name = p.name || tools.country(p.code);
     const FlagInner = () => (
-        <span class="tooltip flex items-center justify-center h-5 w-7" data-tip={name}>
+        <span class="tooltip flex h-5 w-7 items-center justify-center" data-tip={name}>
             <img data-src={url} alt={`${name}'s flag`} class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
         </span>
     );
