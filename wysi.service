@@ -11,10 +11,10 @@ Type=simple
 # which user to use when starting the app
 User=m4rti
 # path to your application's root directory
-WorkingDirectory=/var/www/wysi/web
+WorkingDirectory=/var/www/wysi/web/src
 # the command to start the app
 # requires absolute paths
-ExecStart=/home/m4rti/.bun/bin/bun run src/index.ts
+ExecStart=/home/m4rti/.bun/bin/bun run index.ts
 # restart policy
 # one of {no|on-success|on-failure|on-abnormal|on-watchdog|on-abort|always}
 Restart=always
