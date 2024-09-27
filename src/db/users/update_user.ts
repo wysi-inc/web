@@ -1,14 +1,14 @@
 import { log } from "@/src/tasks/logs";
-import { type Rank, User, type Setup, type CollectionDB } from "../../models/User";
+import { type Rank, type Setup, type CollectionDB, UserModel } from "../../models/User";
 import type { Mode } from "../../types/osu";
-import type { Res, User as UserType } from "../../types/users";
+import type { Res, UserBasic, UserExtended } from "../../types/users";
 //@ts-ignore
 import OsuDBParser from "osu-db-parser";
 
 export async function updateUser(
-    user: UserType,
+    user: UserBasic,
     mode: Mode
-): Promise<UserType> {
+): Promise<UserExtended> {
     const country_rank = user.statistics.country_rank || null;
     const global_ranks = user.rank_history?.data || [];
     try {
@@ -18,26 +18,27 @@ export async function updateUser(
             global_ranks: getNewGlobal(global_ranks, today),
             country_ranks: country_rank ? getNewCountry(country_rank, today) : [],
         }
-        let db_user = await User.findOne({ user_id: user.id });
+        let db_user = await UserModel.findOne({ user_id: user.id });
+        let updated_user: UserExtended = user;
         if (!db_user) {
-            db_user = new User({
+            db_user = new UserModel({
                 user_id: user.id,
                 username: user.username,
                 modes: { [mode]: new_ranks },
             });
             await db_user.save();
-            user.db_ranks = new_ranks;
-            user.db_setup = db_user.setup as any;
-            return user;
+            updated_user.db_ranks = new_ranks;
+            updated_user.db_setup = db_user.setup as any;
+            return updated_user;
         }
         db_user.username = user.username;
         if (!db_user.modes[mode]) {
             db_user.modes[mode] = new_ranks as any;
-            user.db_ranks = new_ranks;
-            user.db_setup = db_user.setup as any;
-            user.collections = db_user.collections as any;
+            updated_user.db_ranks = new_ranks;
+            updated_user.db_setup = db_user.setup as any;
+            updated_user.collections = db_user.collections as any;
             await db_user.save();
-            return user;
+            return updated_user;
         }
         const user_mode = db_user.modes[mode] as any;
         new_ranks = getNewMerge(
@@ -47,14 +48,14 @@ export async function updateUser(
             new_ranks.country_ranks
         );
         db_user.modes[mode] = new_ranks as any;
-        user.db_ranks = new_ranks;
-        user.dan = db_user.dan as any;
-        user.db_setup = db_user.setup as any;
-        user.collections = db_user.collections as any;
-        user.socials = db_user.socials as any;
-        user.wysi_badges = db_user.wysi_badges as any;
+        updated_user.db_ranks = new_ranks;
+        updated_user.dan = db_user.dan;
+        updated_user.db_setup = db_user.setup;
+        updated_user.collections = db_user.collections;
+        updated_user.socials = db_user.socials;
+        updated_user.wysi_badges = db_user.wysi_badges;
         await db_user.save();
-        return user;
+        return updated_user;
     } catch (err) {
         log.error("Error Updating User", err);
         return user;
@@ -103,7 +104,7 @@ export async function saveSetup(
     setup: any
 ): Promise<Setup | null> {
     try {
-        const user = await User.findOne({ user_id });
+        const user = await UserModel.findOne({ user_id });
 
         if (!user) return null;
         if (setup.keyboard_layout === "k0") setup.keyboard_layout = "";
@@ -208,7 +209,7 @@ export async function saveCollection(body: object, user_id: number) {
             beatmapsMd5: JSON.parse(v)
         });
     }
-    const user = await User.findOne({ user_id });
+    const user = await UserModel.findOne({ user_id });
     if (!user) throw new Error("User doesnt exist");
     user.collections = collections as any;
     await user.save();
@@ -216,7 +217,7 @@ export async function saveCollection(body: object, user_id: number) {
 
 
 export async function deleteCollections(user_id: number) {
-    const user = await User.findOne({ user_id });
+    const user = await UserModel.findOne({ user_id });
     if (!user) return;
     if (!user.collections) return;
     user.collections = [] as any;
@@ -224,7 +225,7 @@ export async function deleteCollections(user_id: number) {
 }
 
 export async function getCollectionFile(user_id: number) {
-    const user = await User.findOne({ user_id });
+    const user = await UserModel.findOne({ user_id });
     if (!user) return;
     if (!user.collections) return;
     return user.collections;
@@ -236,7 +237,7 @@ export async function saveSocial(
     platform: string
 ): Promise<Res> {
     try {
-        const user = await User.findOne({ user_id });
+        const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
             msg: "User doesnt exist",
@@ -270,7 +271,7 @@ export async function deleteSocial(
     platform: string
 ): Promise<Res> {
     try {
-        const user = await User.findOne({ user_id });
+        const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
             msg: "User doesnt exist",
@@ -303,7 +304,7 @@ export async function sortSocials(
     platforms: string[]
 ): Promise<Res> {
     try {
-        const user = await User.findOne({ user_id });
+        const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
             msg: "User doesnt exist",
@@ -340,7 +341,7 @@ export async function updateDan(
     dan: string
 ): Promise<Res> {
     try {
-        const user = await User.findOne({ user_id });
+        const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
             msg: "User doesn't exist",
@@ -365,7 +366,7 @@ export async function updateDan(
 
 export async function addSkin(user_id: number, skin_id: string): Promise<Res & { id?: number }> {
     try {
-        const user = await User.findOne({ user_id });
+        const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
             msg: "User doesnt exist!",
@@ -405,7 +406,7 @@ export async function deleteSkin(
     skin_id: string
 ): Promise<Res> {
     try {
-        const user = await User.findOne({ user_id });
+        const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
             msg: "User doesnt exist",
@@ -438,7 +439,7 @@ export async function sortSkins(
     skins: string[]
 ): Promise<Res> {
     try {
-        const user = await User.findOne({ user_id });
+        const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
             msg: "User doesnt exist",

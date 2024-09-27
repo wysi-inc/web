@@ -156,5 +156,5 @@ export type Rank = mongoose.InferSchemaType<typeof rank>;
 export type Setup = mongoose.InferSchemaType<typeof setup>;
 export type UserSocialType = mongoose.InferSchemaType<typeof userSocial>;
 export type ModeRanks = mongoose.InferSchemaType<typeof modeRanks>;
-export type User = mongoose.InferSchemaType<typeof userSchema>;
-export const User = mongoose.model('User', userSchema);
+export type UserDB = mongoose.InferSchemaType<typeof userSchema>;
+export const UserModel = mongoose.model('User', userSchema);
