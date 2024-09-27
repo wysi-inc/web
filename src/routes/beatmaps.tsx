@@ -1,14 +1,13 @@
-import { Elysia, t } from 'elysia'
-import { modeUnion, type Mode, type Route } from '../types/osu';
-import BeatmapsetSearch from '../components/beatmap/BeatmapsetSearch';
+import { Elysia, error, t } from 'elysia';
+import { api_beatmap_details } from '../api/beatmap';
+import { BeatmapCollectionCard } from '../components/beatmap/BeatmapCollectionCard';
+import BeatmapScoreTable from '../components/beatmap/BeatmapScoreTable';
 import BeatmapsList from '../components/beatmap/BeatmapsList';
 import BeatmapsetPage from '../components/beatmap/BeatmapsetPage';
-import BeatmapScoreTable from '../components/beatmap/BeatmapScoreTable';
-import HtmxPage from '../libs/routes';
-import { BeatmapCollectionCard } from '../components/beatmap/BeatmapCollectionCard';
+import BeatmapsetSearch from '../components/beatmap/BeatmapsetSearch';
 import { verifyUser } from '../libs/auth';
-import { v2 } from 'osu-api-extended';
-import { apicall } from '../tasks/logs';
+import HtmxPage from '../libs/routes';
+import { modeUnion } from '../types/osu';
 import { plugins } from './plugins';
 const queryBodyElysia = {
     body: t.Object({
@@ -40,9 +39,8 @@ const queryBodyElysia = {
 
 export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
     .get("/:id", async ({ params, set }) => {
-        const res = await v2.beatmap.id.details(params.id) as any;
-        apicall();
-        if (res.error) return "Beatmap does not exist";
+        const res = await api_beatmap_details(params.id);
+        if (!res) return error(404, "Beatmap doesn't exist");
         return set.redirect = `/beatmapsets/${res.beatmapset_id}/${params.id}`;
     }, {
         params: t.Object({

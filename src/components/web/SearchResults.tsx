@@ -1,4 +1,3 @@
-import { v2 } from "osu-api-extended";
 import OnlineDot from "../user/u_panels/u_components/OnlineDot";
 import Flag from "../user/u_panels/u_components/Flag";
 import Link from "./Link";

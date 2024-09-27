@@ -16,6 +16,8 @@ import { update_medals } from "./tasks/updates";
 await connect_mongodb();
 await connect_osu();
 update_medals();
+setInterval(() => connect_osu(), 1000 * 60 * 60 * 12);      // every 12h
+setInterval(() => update_medals(), 1000 * 60 * 60 * 12);    // every 12h
 // update_stats();
 
 

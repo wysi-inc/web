@@ -4,11 +4,10 @@ import StatusBadge from "./StatusBadge";
 import DiffStats from "./DiffStats";
 import AudioPlayButton from "../web/AudioPlayButton";
 import Link from "../web/Link";
-import type { Beatmap, Beatmapset, BeatmapsetStatus } from "@/src/types/beatmaps";
+import type { Beatmap, BeatmapsetStatus } from "@/src/types/beatmaps";
 import type { Mode } from "@/src/types/osu";
-import { getBeatmapset } from "@/src/db/beatmaps/get_beatmaps";
 import Title from "../web/Title";
-import { apicall } from "@/src/tasks/logs";
+import { api_beatmapset_details } from "@/src/api/beatmap";
 
 type Props = {
     set_id: number,
@@ -17,10 +16,9 @@ type Props = {
 
 async function BeatmapsetPage(p: Props) {
 
-    const beatmapset: Beatmapset = await getBeatmapset(p.set_id);
-    apicall();
+    const beatmapset = await api_beatmapset_details(p.set_id);
+    if (!beatmapset) return <h1>Not found</h1>;
 
-    if ((beatmapset as any).error === null) return <h1>Not found</h1>;
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
 
     const hasLeaderboards = [
@@ -33,7 +31,7 @@ async function BeatmapsetPage(p: Props) {
     const beatmaps = beatmapset?.beatmaps?.sort((a, b) => a.mode === b.mode ?
         a.difficulty_rating - b.difficulty_rating :
         a.mode_int - b.mode_int
-    ) as Beatmap[];
+    );
 
     const diff = (beatmapset.beatmaps.find(b => b.id === p.beatmap_id) || beatmaps[0]) as Beatmap;
     const beatmap_map = new Map<number, Beatmap>();
