@@ -34,7 +34,7 @@ new Elysia()
             log.request(ip, request.method, route);
         }
     })
-    .onError(() => "404: This page doesnt exist")
+    .onError(({ error }) => error.message)
     .get("/favicon.ico", Bun.file("./public/favicon.ico"))
     .use(staticPlugin())
     .use(apiRoutes)
