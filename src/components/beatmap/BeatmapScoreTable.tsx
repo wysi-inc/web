@@ -1,7 +1,5 @@
 import type { Mod, Mode } from "@/src/types/osu";
-import { v2 } from "osu-api-extended";
 import moment from "moment";
-import type { response } from "osu-api-extended/dist/types/v2_scores_beatmap";
 import Grade from "../score/Grade";
 import ModIcon from "../score/ModIcon";
 import Flag from "../user/u_panels/u_components/Flag";
@@ -10,21 +8,6 @@ import Link from "../web/Link";
 import Clan from "../user/u_panels/u_components/Clan";
 import { colors } from "@/src/libs/colors";
 import { apicall, log } from "@/src/tasks/logs";
-
-type ActualStatistics = response & {
-    statistics: {
-        perfect?: number,
-        great?: number,
-        good?: number,
-        ok?: number,
-        meh?: number,
-        miss?: number,
-    },
-    ended_at: string,
-    mods?: { acronym: string }[],
-    is_perfect_combo: boolean,
-    total_score: number
-}
 
 const BeatmapScoreTable = async (p: {
     b_id: number,
@@ -36,7 +19,7 @@ const BeatmapScoreTable = async (p: {
     const mods = Object.entries(p.body);
     const mod_names = mods.map(([name, value]) => value === 'on' ? name.split("-")[1] : null).filter(v => v !== null) as Mod[];
 
-    const scores: ActualStatistics[] = await v2.scores.beatmap(p.b_id, {
+    const scores = await v2.scores.beatmap(p.b_id, {
         mode: p.mode,
         mods: mod_names,
         type: "global",

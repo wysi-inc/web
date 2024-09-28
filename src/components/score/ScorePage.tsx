@@ -1,4 +1,3 @@
-import { v2 } from "osu-api-extended";
 import { colors } from "@/src/libs/colors";
 import { getDiffColor, getGradeColor, getGradeLetter } from "@/src/libs/web_utils";
 import moment from "moment";
@@ -7,9 +6,11 @@ import DiffIcon from "../beatmap/DiffIcon";
 import ModIcon from "./ModIcon";
 import Link from "../web/Link";
 import { apicall } from "@/src/tasks/logs";
+import { api_score_details } from "@/src/api/score";
 
 async function ScorePage(p: { score_id: number }) {
-    const score = await v2.scores.details(p.score_id, "osu");
+    const score = await api_score_details(p.score_id);
+    if (!score) return <>score not found</>;
     apicall();
 
     const b = score.beatmap;
@@ -115,47 +116,47 @@ async function ScorePage(p: { score_id: number }) {
                                 {score.beatmap.mode === "mania" ?
                                     <div class="flex flex-col">
                                         <dt class="text-xs">320</dt>
-                                        <dd class={`text-lg text-base-content ${(score.statistics as any)?.perfect ? "" : "text-opacity-50"}`}
-                                            style={{ color: (score.statistics as any)?.perfect ? colors.judgements.x320 : "" }}>
-                                            {(score.statistics as any)?.perfect || 0}
+                                        <dd class={`text-lg text-base-content ${score.statistics.count_geki ? "" : "text-opacity-50"}`}
+                                            style={{ color: score.statistics.count_geki ? colors.judgements.x320 : "" }}>
+                                            {score.statistics.count_geki || 0}
                                         </dd>
                                     </div> : <></>
                                 }
                                 <div class="flex flex-col">
                                     <dt class="text-xs">300</dt>
-                                    <dd class={`text-lg text-base-content ${score.statistics.great ? "" : "text-opacity-50"}`}
-                                        style={{ color: score.statistics.great ? colors.judgements.x300 : "" }}>
-                                        {score.statistics.great || 0}
+                                    <dd class={`text-lg text-base-content ${score.statistics.count_300 ? "" : "text-opacity-50"}`}
+                                        style={{ color: score.statistics.count_300 ? colors.judgements.x300 : "" }}>
+                                        {score.statistics.count_300 || 0}
                                     </dd>
                                 </div>
                                 {score.beatmap.mode === "mania" ?
                                     <div class="flex flex-col">
                                         <dt class="text-xs">200</dt>
-                                        <dd class={`text-lg text-base-content ${(score.statistics as any)?.good ? "" : "text-opacity-50"}`}
-                                            style={{ color: (score.statistics as any)?.good ? colors.judgements.x200 : "" }}>
-                                            {(score.statistics as any)?.good || 0}
+                                        <dd class={`text-lg text-base-content ${score.statistics.count_katu ? "" : "text-opacity-50"}`}
+                                            style={{ color: score.statistics.count_katu ? colors.judgements.x200 : "" }}>
+                                            {score.statistics.count_katu || 0}
                                         </dd>
                                     </div> : <></>
                                 }
                                 <div class="flex flex-col">
                                     <dt class="text-xs">100</dt>
-                                    <dd class={`text-lg text-base-content ${score.statistics.ok ? "" : "text-opacity-50"}`}
-                                        style={{ color: score.statistics.ok ? colors.judgements.x100 : "" }}>
-                                        {score.statistics.ok || 0}
+                                    <dd class={`text-lg text-base-content ${score.statistics.count_100 ? "" : "text-opacity-50"}`}
+                                        style={{ color: score.statistics.count_100 ? colors.judgements.x100 : "" }}>
+                                        {score.statistics.count_100 || 0}
                                     </dd>
                                 </div>
                                 <div class="flex flex-col">
                                     <dt class="text-xs">50</dt>
-                                    <dd class={`text-lg text-base-content ${score.statistics.meh ? "" : "text-opacity-50"}`}
-                                        style={{ color: score.statistics.meh ? colors.judgements.x50 : "" }}>
-                                        {score.statistics.meh || 0}
+                                    <dd class={`text-lg text-base-content ${score.statistics.count_50 ? "" : "text-opacity-50"}`}
+                                        style={{ color: score.statistics.count_50 ? colors.judgements.x50 : "" }}>
+                                        {score.statistics.count_50 || 0}
                                     </dd>
                                 </div>
                                 <div class="flex flex-col">
                                     <dt class="text-xs">Miss</dt>
-                                    <dd class={`text-lg text-base-content ${score.statistics.miss ? "" : "text-opacity-50"}`}
-                                        style={{ color: score.statistics.miss ? colors.judgements.xMiss : "" }}>
-                                        {score.statistics.miss || 0}
+                                    <dd class={`text-lg text-base-content ${score.statistics.count_miss ? "" : "text-opacity-50"}`}
+                                        style={{ color: score.statistics.count_miss ? colors.judgements.xMiss : "" }}>
+                                        {score.statistics.count_miss || 0}
                                     </dd>
                                 </div>
                             </dl>
