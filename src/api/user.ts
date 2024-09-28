@@ -1,3 +1,4 @@
+import type { Beatmapset } from "../types/beatmaps";
 import type { Mode } from "../types/osu";
 import type { UserBasic } from "../types/users";
 import { osu_fetch } from "./api";
@@ -20,11 +21,13 @@ export async function api_user_details(
 export async function api_user_beatmaps(
     id: number,
     type: "favourite" | "graveyard" | "guest" | "loved" | "most_played" | "nominated" | "pending" | "ranked",
+    obj: {
+        offset: number,
+        limit: number
+    },
     token?: string
-): Promise<UserBasic | null> {
+): Promise<Beatmapset[] | null> {
     const url = new URL(`https://osu.ppy.sh/api/v2/users/${id}/beatmapsets/${type}`);
+    Object.keys(obj).forEach(key => url.searchParams.append(key, obj[key]));
     return await osu_fetch({ url, token });
 }
-const url = new URL(
-    "https://osu.ppy.sh/api/v2/users/1/beatmapsets/favourite"
-);

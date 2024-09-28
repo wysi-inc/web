@@ -48,8 +48,5 @@ new Elysia()
     .use(beatmapRoutes)
     .use(beatmapsetRoutes)
     .use(scoresRoutes)
-    .onAfterHandle(() => {
-        console.log(performance.now())
-    })
     .onStart(() => log.success(`Listening on port ${env.PORT}`))
     .listen(env.PORT);

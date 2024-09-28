@@ -1,5 +1,3 @@
-import { DonationModel } from "@/src/models/Donations";
-import { User } from "@/src/models/User";
 import Panel from "../user/Panel";
 import Reports from "./admin/Reports";
 import { ReportModel } from "@/src/models/Report";

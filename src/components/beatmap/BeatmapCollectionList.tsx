@@ -1,23 +1,18 @@
 import { BeatmapCollectionCard } from "./BeatmapCollectionCard";
 import LoadMoreButton from "../web/LoadMoreButton";
-import { User } from "@/src/models/User";
+import { UserModel } from "@/src/models/User";
 
-type Props = {
+async function BeatmapCollectionList(p: {
     user_id: number,
     collection_name: string,
-    offset?: number
-}
+    offset: number
+}) {
 
-async function BeatmapCollectionList({ user_id, collection_name, offset }: Props) {
-
-    if (!collection_name) return (<></>);
-    if (offset === undefined) return (<></>);
-
-    const decoded_collection_name = decodeURIComponent(collection_name);
+    const decoded_collection_name = decodeURIComponent(p.collection_name);
 
     const LIMIT = 20;
 
-    const user = await User.findOne({ user_id });
+    const user = await UserModel.findOne({ user_id: p.user_id });
 
     if (!user) return (<></>);
     if (!user.collections) return (<></>);
@@ -35,7 +30,7 @@ async function BeatmapCollectionList({ user_id, collection_name, offset }: Props
 
     let hashes: string[] = [];
 
-    for (let i = offset; i < offset + LIMIT; i++) {
+    for (let i = p.offset; i < p.offset + LIMIT; i++) {
         if (!collection.beatmapsMd5[i]) break;
         hashes.push(collection.beatmapsMd5[i]);
     }
@@ -45,7 +40,7 @@ async function BeatmapCollectionList({ user_id, collection_name, offset }: Props
             <BeatmapCollectionCard hash={h} />
         )}
         {hashes.length >= LIMIT ?
-            <LoadMoreButton url={`/users/${user_id}/0/lists/collections/${collection_name}?offset=${offset + LIMIT}`} />
+            <LoadMoreButton url={`/users/${p.user_id}/0/lists/collections/${p.collection_name}?offset=${p.offset + LIMIT}`} />
             : <></>
         }
     </>);

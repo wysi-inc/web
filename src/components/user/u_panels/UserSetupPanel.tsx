@@ -3,12 +3,12 @@ import KeyboardDisplay from "./setup/KeyboardDisplay";
 import Computer from "./setup/Computer";
 import MouseDisplay from "./setup/MouseDisplay";
 import Peripherals from "./setup/Peripherals";
-import { User, type Setup } from "@/src/models/User";
+import { UserModel, type Setup } from "@/src/models/User";
 
 type Props = {
     logged_id?: number,
     page_id: number,
-    setup?: Setup,
+    setup?: Setup | null,
     t: any,
 }
 
@@ -17,7 +17,7 @@ async function UserSetupPanel(p: Props) {
     const editable = p.page_id === p.logged_id;
 
     if (!p.setup) {
-        const user = await User.findOne({ user_id: p.page_id });
+        const user = await UserModel.findOne({ user_id: p.page_id });
         if (!user || !user.setup && !editable) return <>This user hasn't specified their setup</>;
         else if (user?.setup) p.setup = user.setup as any;
     }

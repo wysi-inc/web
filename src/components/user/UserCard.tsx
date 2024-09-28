@@ -1,9 +1,8 @@
-import { v2 } from "osu-api-extended";
 import Flag from "./u_panels/u_components/Flag";
 import SubdivisionFlag from "./u_panels/u_components/SubdivisionFlag";
 import Clan from "./u_panels/u_components/Clan";
 import Link from "../web/Link";
-import { apicall } from "@/src/tasks/logs";
+import { api_user_details } from "@/src/api/user";
 
 type Props = {
     user_id: number
@@ -11,9 +10,7 @@ type Props = {
 
 async function UserCard(p: Props) {
 
-    const user = await v2.user.details(p.user_id);
-    apicall();
-
+    const user = await api_user_details(p.user_id);
     if (!user) return <div>This user doesnt exist</div>;
 
     return (<>

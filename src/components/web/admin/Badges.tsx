@@ -1,10 +1,10 @@
-import { User } from "@/src/models/User";
+import { UserModel } from "@/src/models/User";
 import Badge, { BADGES } from "../../user/Badge";
 import { CopyText } from "./Utils";
 import Link from "../Link";
 
 async function Badges() {
-    const user_badges = await User.find({ wysi_badges: { $exists: true, $type: 'array', $ne: [] } });
+    const user_badges = await UserModel.find({ wysi_badges: { $exists: true, $type: 'array', $ne: [] } });
     return (
         <div class="flex flex-col gap-4">
             <form class="group flex flex-row flex-wrap items-center gap-2" hx-put={`/admin/badges`} hx-target="#badges_notif" hx-swap="afterbegin">

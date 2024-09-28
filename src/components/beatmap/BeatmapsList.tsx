@@ -12,7 +12,7 @@ async function BeatmapsList(p: {
 
     return (<>
         {res.sets.map((set) =>
-            <BeatmapsetCard beatmapset={set} />
+            <BeatmapsetCard b_set={set} />
         )}
         {res.sets.length < 50 ? null :
             <LoadMoreButton url={`/beatmapsets/list/${res.offset}`} include="#search-form" />

@@ -2,8 +2,9 @@ import { colors } from "@/src/libs/colors";
 import type { AdvanceUser, Mode } from "@/src/types/osu";
 import BarChart from "./u_components/BarChart";
 import BeatmapsetCard from "../../beatmap/BeatmapsetCard";
-import { getBeatmapset } from "@/src/db/beatmaps/get_beatmaps";
 import UserCard from "../UserCard";
+import { api_beatmapset_details } from "@/src/api/beatmap";
+import type { Beatmapset } from "@/src/types/beatmaps";
 
 async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mode }) {
 
@@ -54,10 +55,11 @@ async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mod
         mappers.push(data.favourite.mapper[i]);
     }
 
-    const songs = [];
-    for (let i = 0; i < 3; i++) {
-        if (!data.favourite.songs[i]) break;
-        songs.push(data.favourite.songs[i]);
+    const beatmaps: Array<[Beatmapset, number]> = [];
+    for (let i = 0; i < Math.min(data.favourite.songs.length, 3); i++) {
+        const b = await api_beatmapset_details(data.favourite.songs[i].id);
+        if (!b) continue;
+        beatmaps.push([b, data.favourite.songs[i].id]);
     }
 
     return (<>
@@ -124,10 +126,10 @@ async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mod
                 </div>
                 <div class="flex flex-col rounded-lg bg-neutral shadow-lg">
                     <h4 class="flex flex-row flex-wrap justify-between gap-2 px-2 py-1">
-                        <span>Top songs:</span><span>({songs.map(s => `x${s.count}`).join(" | ")})</span>
+                        Top songs:
                     </h4>
                     <div class="flex grow flex-col gap-2 rounded-lg bg-base-300 p-2">
-                        {songs.map(async (s) => <BeatmapsetCard beatmapset={await getBeatmapset(s.id)} />)}
+                        {beatmaps.map(b => <BeatmapsetCard b_set={b[0]} count={b[1]} />)}
                     </div>
                 </div>
             </div>

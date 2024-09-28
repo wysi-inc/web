@@ -160,6 +160,20 @@ export type DBRankHistory = {
     country_ranks: Rank[];
 }
 
+
+export type UserTiny = {
+    id: number;
+    username: string;
+    profile_colour: string;
+    avatar_url: string;
+    country_code: string;
+    is_active: boolean;
+    is_bot: boolean;
+    is_deleted: boolean;
+    is_online: boolean;
+    is_supporter: boolean;
+}
+
 export type UserExtended = UserBasic & {
     db_ranks?: DBRankHistory | null,
     db_setup?: Setup | null,

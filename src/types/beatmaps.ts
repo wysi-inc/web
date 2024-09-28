@@ -1,6 +1,5 @@
-import type { response as V2Beatmapset } from "osu-api-extended/dist/types/v2_beatmap_set_details";
-import type { response as V2Beatmap } from "osu-api-extended/dist/types/v2_beatmap_id_details";
-import type { response as V2BeatmapSearch } from "osu-api-extended/dist/types/v2_beatmaps_search";
+import type { UserTiny } from "./users";
+import type { Mode } from "./osu";
 
 export type BeatmapsetCategory = 'favourite' | 'graveyard' | 'ranked' | 'loved' | 'guest' | 'nominated' | 'pending';
 export type BeatmapsetStatus = "any" | "ranked" | "approved" | "qualified" | "loved" | "pending" | "wip" | "graveyard";
@@ -28,16 +27,83 @@ export type BeatmapQuery = {
     od_min?: string;
     od_max?: string;
     mode?: string;
-    status?: string;
+    status?: BeatmapsetStatus
     sorting?: string;
 }
 
-export type BeatmapSearch = V2BeatmapSearch;
+export type Beatmap = {
+    id: number
+    beatmapset_id: number
+    difficulty_rating: number
+    mode: Mode
+    status: BeatmapsetStatus
+    total_length: number
+    user_id: number
+    version: string
+}
 
-export type Beatmapset = V2Beatmapset;
+export type BeatmapExtended = Beatmap & {
+    accuracy: number
+    ar: number
+    bpm: number
+    convert: boolean
+    count_circles: number
+    count_sliders: number
+    count_spinners: number
+    cs: number
+    deleted_at: number
+    drain: number
+    hit_length: number
+    is_scoreable: boolean
+    last_updated: number
+    mode_int: number
+    passcount: number
+    playcount: number
+    ranked: number
+    url: string
+};
 
-export type Beatmap = V2Beatmap & {
-    set: Beatmapset
+export type Covers = {
+    cover: string
+    "cover@2x": string
+    card: string
+    "card@2x": string
+    list: string
+    "list@2x": string
+    slimcover: string
+    "slimcover@2x": string
+}
+
+export type Beatmapset = {
+    artist: string,
+    artist_unicode: string
+    covers: Covers
+    creator: string
+    favourite_count: number
+    id: number
+    nsfw: boolean
+    offset: number
+    play_count: number
+    preview_url: string
+    source: string
+    status: BeatmapsetStatus
+    spotlight: boolean
+    title: string
+    title_unicode: string
+    user_id: number
+    video: boolean,
+    beatmaps?: Beatmap[]
+    converts?: Beatmap[]
+    description?: string
+    genre?: string
+    has_favourited?: boolean
+    language?: string
+    nominations?: number[]
+    pack_tags?: string[]
+    ratings?: any
+    related_users?: any
+    user?: UserTiny
+    track_id?: number
 };
 
 export type SongLanguageType =
@@ -254,7 +320,7 @@ export type MinoBeatmap = {
         play_count: number
         preview_url: string
         spotlight: boolean
-        status: string
+        status: BeatmapsetStatus
         track_id: any
         user_id: number
         video: boolean

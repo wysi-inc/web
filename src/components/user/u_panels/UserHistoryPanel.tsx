@@ -1,5 +1,5 @@
 import type { Rank } from "@/src/models/User";
-import type { RankHistory } from "@/src/types/users";
+import type { DBRankHistory } from "@/src/types/users";
 
 type MonthCount = {
     count: number;
@@ -7,7 +7,7 @@ type MonthCount = {
 }
 
 type Props = {
-    db_ranks?: RankHistory,
+    db_ranks?: DBRankHistory | null,
     play_counts: MonthCount[],
     replays_watched: MonthCount[],
 }

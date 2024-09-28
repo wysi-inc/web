@@ -1,9 +1,7 @@
-import { v2 } from "osu-api-extended";
 import type { Mode, ScoreCategory } from "@/src/types/osu";
-import type { Score } from "@/src/types/users";
 import ScoreCard from "@/src/components/score/ScoreCard";
 import LoadMoreButton from "@/src/components/web/LoadMoreButton";
-import { apicall } from "@/src/tasks/logs";
+import { api_scores_user_category } from "@/src/api/score";
 
 type Props = {
     id: number;
@@ -15,13 +13,16 @@ type Props = {
 
 const UserScoresList = async (p: Props) => {
 
-    const scores: Score[] = await v2.scores.user.category(p.id, p.category, {
-        mode: p.mode,
-        offset: String(p.offset),
-        limit: String(p.limit)
-    });
-    apicall();
+    const scores = await api_scores_user_category(
+        p.id, p.category,
+        {
+            mode: p.mode,
+            offset: p.offset,
+            limit: p.limit
+        }
+    );
 
+    if (!scores) return <></>;
     if (scores.length === 0 && p.offset === 0) return <div>This user hasn't set any scores yet</div>;
 
     return <>

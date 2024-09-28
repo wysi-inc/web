@@ -1,13 +1,13 @@
 import type { Mode } from "@/src/types/osu";
 import ModeIcon from "../../beatmap/ModeIcon";
-import { User } from "@/src/models/User";
+import { UserModel } from "@/src/models/User";
 import type { Skin } from "@/src/types/users";
 
 async function UserSkinsPanel(p: { user_id: number, logged_id?: number }) {
 
     const editable = p.user_id === p.logged_id;
 
-    const user = await User.findOne({ user_id: p.user_id });
+    const user = await UserModel.findOne({ user_id: p.user_id });
     if (!user) return <>this user doesn't exist</>;
     if (!user.skins && !editable) return <>This user doesn't have skins</>;
 

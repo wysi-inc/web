@@ -1,6 +1,5 @@
 import { getGradeColor, getGradeLetter, secondsToTime } from "@/src/libs/web_utils";
 import { colors } from "@/src/libs/colors";
-import { tools } from "osu-api-extended";
 import moment from "moment";
 import { DiffIconLink } from "@/src/components/beatmap/DiffIcon";
 import CardControls from "@/src/components/web/CardControls";
@@ -8,28 +7,29 @@ import StatusBadge from "../beatmap/StatusBadge";
 import ModIcon from "./ModIcon";
 import AudioPlayButton from "../web/AudioPlayButton";
 import Link from "../web/Link";
-import type { Score } from "@/src/types/users";
 import type { BeatmapsetStatus } from "@/src/types/beatmaps";
 import type { Mode } from "@/src/types/osu";
+import type { ScoreType } from "@/src/types/score";
 
-type Props = {
+async function ScoreCard(p: {
     position: number;
-    score: Score;
-}
+    score: ScoreType;
+}) {
 
-const ScoreCard = async ({ score, position }: Props) => {
-
+    const score = p.score;
     const beatmap = score.beatmap;
     const beatmapset = score.beatmapset;
     const acc = (score.accuracy * 100).toFixed(2);
-    const fc_acc = tools.accuracy({
-        "300": (score.statistics.great + (score.statistics.miss || 0)).toString() || "0",
-        "100": score.statistics.ok?.toString() || "0",
-        "50": score.statistics.meh?.toString() || "0",
-        "0": "0",
-        "geki": "0",
-        "katu": "0"
-    }, beatmap.mode as Mode);
+
+    const fc_acc = 100;
+    // const fc_acc = tools.accuracy({
+    //     "300": (score.statistics.count_300 + (score.statistics.miss || 0)).toString() || "0",
+    //     "100": score.statistics.count_100?.toString() || "0",
+    //     "50": score.statistics.count_50?.toString() || "0",
+    //     "0": "0",
+    //     "geki": "0",
+    //     "katu": "0"
+    // }, beatmap.mode as Mode);
 
     // const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
     const cardImg = `https://b.ppy.sh/thumb/${beatmapset.id}l.jpg`;
@@ -78,30 +78,30 @@ const ScoreCard = async ({ score, position }: Props) => {
                                                 <span style={{ color: colors.judgements.x320 }}>
                                                     {(score.statistics as any)?.perfect}
                                                 </span> : <></>}
-                                            {score.statistics.great ?
+                                            {score.statistics.count_300 ?
                                                 <span style={{ color: colors.judgements.x300 }}>
-                                                    {score.statistics.great}
+                                                    {score.statistics.count_300}
                                                 </span> : <></>}
                                             {score.beatmap.mode === "mania" && (score.statistics as any)?.good ?
                                                 <span style={{ color: colors.judgements.x200 }}>
                                                     {(score.statistics as any)?.good}
                                                 </span> : <></>}
-                                            {score.statistics.ok ?
+                                            {score.statistics.count_100 ?
                                                 <span style={{ color: colors.judgements.x100 }}>
-                                                    {score.statistics.ok}
+                                                    {score.statistics.count_100}
                                                 </span> : <></>}
-                                            {score.statistics.meh ?
+                                            {score.statistics.count_50 ?
                                                 <span style={{ color: colors.judgements.x50 }}>
-                                                    {score.statistics.meh}
+                                                    {score.statistics.count_50}
                                                 </span> : <></>}
-                                            {score.statistics.miss ?
+                                            {score.statistics.count_miss ?
                                                 <span style={{ color: colors.judgements.xMiss }}>
-                                                    {score.statistics.miss}
+                                                    {score.statistics.count_miss}
                                                 </span> : <></>}
                                         </div>
                                         <div class="ms-auto flex flex-wrap flex-row-reverse gap-1">
                                             {score.mods.map((mod) =>
-                                                <ModIcon mod={mod.acronym} />
+                                                <ModIcon mod={mod} />
                                             )}
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@ const ScoreCard = async ({ score, position }: Props) => {
                     <div class="ms-auto tooltip" data-tip={moment(new Date(score.ended_at)).format("MMMM Do YYYY")}>
                         {moment(new Date(score.ended_at)).fromNow()}
                     </div>
-                    <div>#{position}</div>
+                    <div>#{p.position}</div>
                 </div>
             </div>
             <CardControls set_id={beatmapset.id} />

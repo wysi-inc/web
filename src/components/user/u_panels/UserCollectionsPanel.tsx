@@ -1,5 +1,5 @@
 import LoadMoreButton from "../../web/LoadMoreButton";
-import { User, type CollectionDB } from "@/src/models/User";
+import { UserModel, type CollectionDB } from "@/src/models/User";
 
 type Props = {
     user_id: number,
@@ -12,7 +12,7 @@ async function UserCollectionsPanel({ user_id, logged_id, collections }: Props) 
     const editable = user_id === logged_id;
 
     if (!collections) {
-        const user = await User.findOne({ user_id });
+        const user = await UserModel.findOne({ user_id });
         collections = user?.collections as any;
     }
 

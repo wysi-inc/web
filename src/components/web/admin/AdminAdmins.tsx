@@ -1,4 +1,4 @@
-import { User } from "@/src/models/User";
+import { UserModel } from "@/src/models/User";
 import { ROLES } from "@/src/routes/admin";
 import type { UserCookie } from "@/src/types/users";
 import Link from "../Link";
@@ -8,7 +8,7 @@ async function AdminAdmins(p: {
     user: UserCookie;
 }) {
 
-    const sudo = await User.find({ role: { $in: ["owner", "admin"] } });
+    const sudo = await UserModel.find({ role: { $in: ["owner", "admin"] } });
     if (!sudo) return <>No admins found!</>;
 
     return (<div class="flex flex-col gap-2">

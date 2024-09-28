@@ -110,7 +110,7 @@ const UserPage = async (p: Props) => {
             icon: <i class="fa-solid fa-list" />,
             url: `/users/${user.id}/${p.mode}/panels/collections`,
             manual: true,
-            show_if: editable || (user.collections !== undefined && user.collections.length > 0)
+            show_if: editable || !user.collections == true
         },
         {
             title: p.t?.user.sections.most,

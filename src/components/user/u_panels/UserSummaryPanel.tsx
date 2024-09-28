@@ -1,31 +1,27 @@
 import type { Mode } from "@/src/types/osu";
-import type { ColorCount, Score } from "@/src/types/users";
-import { v2 } from "osu-api-extended";
+import type { ColorCount } from "@/src/types/users";
 import BarChart from "./u_components/BarChart";
 import ModIcon from "../../score/ModIcon";
 import Grade from "../../score/Grade";
 import { colors } from "@/src/libs/colors";
 import { secondsToTime } from "@/src/libs/web_utils";
-import { apicall } from "@/src/tasks/logs";
+import { api_scores_user_category } from "@/src/api/score";
+import type { ScoreType } from "@/src/types/score";
 
-type Props = {
-    user_id: number;
-    mode: Mode;
-}
+async function UserSummaryPanel(p: { user_id: number; mode: Mode; }) {
+    const scores = await api_scores_user_category(
+        p.user_id,
+        "best",
+        {
+            mode: p.mode,
+            offset: 0,
+            limit: 100
+        }
+    );
 
-const UserSummaryPanel = async (p: Props) => {
+    if (!scores) return <></>;
 
-    const scores: Score[] = await v2.scores.user.category(
-        p.user_id, "best", {
-        mode: p.mode,
-        offset: '0',
-        limit: '100'
-    });
-    apicall();
-
-    if (scores.length === 0) {
-        return <></>;
-    }
+    if (scores.length === 0) return <></>;
 
     const grade_counts = new Map<string, ColorCount>();
     const hit_counts = new Map<string, ColorCount>();
@@ -48,7 +44,7 @@ const UserSummaryPanel = async (p: Props) => {
     grade_counts.set("D", { count: 0, color: colors.grades.d });
 
     for (let i = 0; i < scores.length; i++) {
-        const score: Score = scores[i];
+        const score: ScoreType = scores[i];
 
         const grade = score.rank;
 
@@ -57,8 +53,8 @@ const UserSummaryPanel = async (p: Props) => {
 
         let bpm = score.beatmap.bpm;
         let len = score.beatmap.total_length;
-        score.mods.forEach((mod) => {
-            switch (mod.acronym) {
+        score.mods.forEach(mod => {
+            switch (mod) {
                 case "DT":
                 case "NC":
                     bpm *= 1.5;
@@ -87,23 +83,34 @@ const UserSummaryPanel = async (p: Props) => {
             color: (colors.grades as any)[grade.toLowerCase()]
         });
 
+        if (p.mode === "mania") {
+            hit_counts.set("320", {
+                count: (hit_counts.get("320")?.count || 0) + (score.statistics.count_geki || 0),
+                color: colors.judgements.x320
+            });
+            hit_counts.set("200", {
+                count: (hit_counts.get("200")?.count || 0) + (score.statistics.count_katu || 0),
+                color: colors.judgements.x200
+            });
+        }
+
         hit_counts.set("300", {
-            count: (hit_counts.get("300")?.count || 0) + (score.statistics.great || 0),
+            count: (hit_counts.get("300")?.count || 0) + (score.statistics.count_300 || 0),
             color: colors.judgements.x300
         });
 
         hit_counts.set("100", {
-            count: (hit_counts.get("100")?.count || 0) + (score.statistics.ok || 0),
+            count: (hit_counts.get("100")?.count || 0) + (score.statistics.count_100 || 0),
             color: colors.judgements.x100
         });
 
         hit_counts.set("50", {
-            count: (hit_counts.get("50")?.count || 0) + (score.statistics.meh || 0),
+            count: (hit_counts.get("50")?.count || 0) + (score.statistics.count_50 || 0),
             color: colors.judgements.x50
         });
 
         hit_counts.set("Miss", {
-            count: (hit_counts.get("Miss")?.count || 0) + (score.statistics.miss || 0),
+            count: (hit_counts.get("Miss")?.count || 0) + (score.statistics.count_miss || 0),
             color: colors.judgements.xMiss
         });
 
@@ -123,8 +130,8 @@ const UserSummaryPanel = async (p: Props) => {
     const max_pp = Math.round(pp_values[pp_values.length - 1]);
     const min_pp = Math.round(pp_values[0]);
 
-    function getScoreMods(sc: Score): string[] {
-        const arr = sc.mods.filter(m => m.acronym !== "CL").map(m => m.acronym);
+    function getScoreMods(sc: ScoreType) {
+        const arr = sc.mods.filter(m => m !== "CL");
         const mods = arr.length > 0 ? arr : ["NM"];
         return mods;
     }

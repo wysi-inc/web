@@ -1,4 +1,4 @@
-import type { Mod, Mode } from "../types/osu";
+import type { Mod, Mode, ScoreCategory } from "../types/osu";
 import type { BeatmapScores, ScoreType } from "../types/score";
 import { osu_fetch } from "./api";
 
@@ -16,6 +16,21 @@ export async function api_scores_beatmap(
     },
     token?: string): Promise<BeatmapScores | null> {
     const url = new URL(`https://osu.ppy.sh/api/v2/beatmaps/${id}/scores`);
+    Object.keys(obj).forEach(key => url.searchParams.append(key, obj[key]));
+    return await osu_fetch({ url, token });
+}
+
+export async function api_scores_user_category(
+    user: number,
+    category: ScoreCategory,
+    obj: {
+        mode: Mode,
+        offset?: number,
+        limit?: number,
+    },
+    token?: string
+): Promise<ScoreType[] | null> {
+    const url = new URL(`https://osu.ppy.sh/api/v2/users/${user}/scores/${category}`);
     Object.keys(obj).forEach(key => url.searchParams.append(key, obj[key]));
     return await osu_fetch({ url, token });
 }

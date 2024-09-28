@@ -28,12 +28,12 @@ export async function osu_fetch(p: {
             body: body_string
         });
 
-        if (!res.ok) throw res.text;
+        if (!res.ok) throw await res.text();
 
         const data = await res.json();
         return data;
     } catch (err) {
-        log.error("Error getting data", err);
+        log.error(`Error: ${p.url}`, err);
         return null;
     }
 }

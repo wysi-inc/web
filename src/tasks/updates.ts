@@ -1,15 +1,15 @@
 import { Medal } from "@/src/models/Medal";
 import type { OsekaiMedal } from "@/src/types/medals";
 import { StatsModel } from "../models/Stats";
-import { User } from "../models/User";
+import { UserModel } from "../models/User";
 import { log } from "./logs";
 
 async function update_stats() {
     log.info("Started updating stats...");
     try {
-        const user_count = await User.countDocuments();
-        const users_with_setup = await User.countDocuments({ setup: { $exists: true, $ne: null } });
-        const users_with_collections = await User.find({ collections: { $exists: true, $ne: null } });
+        const user_count = await UserModel.countDocuments();
+        const users_with_setup = await UserModel.countDocuments({ setup: { $exists: true, $ne: null } });
+        const users_with_collections = await UserModel.find({ collections: { $exists: true, $ne: null } });
 
         let stats = await StatsModel.findOne();
         if (!stats) stats = new StatsModel();

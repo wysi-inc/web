@@ -1,11 +1,11 @@
 import { TabletModel } from "@/src/models/Tablet";
-import { User } from "@/src/models/User";
+import { UserModel } from "@/src/models/User";
 import { log } from "@/src/tasks/logs";
 import type { Res } from "@/src/types/users";
 
 export async function removeBadge(user_id: number, badge: number): Promise<Res> {
     try {
-        const user = await User.findOne({ user_id });
+        const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
             msg: "User doesn't exist!",
@@ -43,9 +43,9 @@ export async function addBadge(user_id: string, badge: number): Promise<Res> {
     try {
         let user;
         if (isNaN(Number(user_id))) {
-            user = await User.findOne({ username: { $eq: user_id } });
+            user = await UserModel.findOne({ username: { $eq: user_id } });
         } else {
-            user = await User.findOne({ user_id: Number(user_id) });
+            user = await UserModel.findOne({ user_id: Number(user_id) });
         }
         if (!user) return {
             error: true,
@@ -78,7 +78,7 @@ export async function addBadge(user_id: string, badge: number): Promise<Res> {
 
 export async function sortBadges(user_id: number, badges: string[]): Promise<Res> {
     try {
-        const user = await User.findOne({ user_id });
+        const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
             msg: "User doesn't exist!",
@@ -104,7 +104,7 @@ export async function sortBadges(user_id: number, badges: string[]): Promise<Res
 
 export async function setRole(user_id: number, role: string): Promise<Res> {
     try {
-        const user = await User.findOne({ user_id });
+        const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
             msg: "User doesn't exist!",
@@ -130,7 +130,7 @@ export async function setRole(user_id: number, role: string): Promise<Res> {
 
 export async function removeRole(user_id: number): Promise<Res> {
     try {
-        const user = await User.findOne({ user_id });
+        const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
             msg: "User doesn't exist!",

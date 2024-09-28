@@ -1,9 +1,9 @@
 import { env } from "bun";
-import { auth } from "osu-api-extended";
 
 const Login = ({ t }: any) => {
-    const scope_list: any = ["public", "identify", "friends.read"];
-    const url = auth.build_url(env.OSU_ID, env.OSU_REDIRECT, scope_list);
+
+    const url = `https://osu.ppy.sh/oauth/authorize? client_id=${env.OSU_ID}& redirect_uri=${env.OSU_REDIRECT}&response_type=code&scope=public identify friends.read`;
+
     return (
         <a href={url} class="btn btn-ghost" aria-label="login with osu!">
             <span class="hidden lg:inline">{t.nav.log.login}</span>

@@ -1,33 +1,27 @@
-import { v2 } from "osu-api-extended";
 import type { BeatmapCategory } from "@/src/types/osu";
-import type { Beatmapset } from "@/src/types/beatmaps";
 import BeatmapsetCard from "@/src/components/beatmap/BeatmapsetCard";
 import LoadMoreButton from "@/src/components/web/LoadMoreButton";
-import { apicall } from "@/src/tasks/logs";
+import { api_user_beatmaps } from "@/src/api/user";
 
-type Props = {
+async function UserBeatmapsList(p: {
     id: number;
     category: BeatmapCategory;
     offset: number;
     limit: number;
-}
+}) {
 
-const UserBeatmapsList = async ({ id, category, offset, limit }: Props) => {
+    const beatmaps = await api_user_beatmaps(p.id, p.category,
+        { offset: p.offset, limit: p.limit }
+    );
 
-    const beatmaps: Beatmapset[] = await v2.user.beatmaps.category(id, category, {
-        offset: offset,
-        limit: limit
-    }) as any;
-    apicall();
-
-    if (!beatmaps || beatmaps.length === 0) return <div>No {category} beatmaps</div>;
+    if (!beatmaps) return <div>No {p.category} beatmaps</div>;
 
     return (<>
         {beatmaps.map((beatmap) =>
-            <BeatmapsetCard beatmapset={beatmap} />
+            <BeatmapsetCard b_set={beatmap} />
         )}
-        {beatmaps.length >= limit ?
-            <LoadMoreButton url={`/users/${id}/0/lists/beatmapsets/${category}?offset=${offset + limit}&limit=20`} />
+        {beatmaps.length >= p.limit ?
+            <LoadMoreButton url={`/users/${p.id}/0/lists/beatmapsets/${p.category}?offset=${p.offset + p.limit}&limit=20`} />
             : <></>}
     </>)
 }
