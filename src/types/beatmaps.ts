@@ -1,34 +1,41 @@
-import type { UserTiny } from "./users";
-import type { Mode } from "./osu";
+import type { UserTiny } from "./users"
+import type { Mode } from "./osu"
 
-export type BeatmapsetCategory = 'favourite' | 'graveyard' | 'ranked' | 'loved' | 'guest' | 'nominated' | 'pending';
-export type BeatmapsetStatus = "any" | "ranked" | "approved" | "qualified" | "loved" | "pending" | "wip" | "graveyard";
+export type BeatmapsetCategory = 'favourite' | 'graveyard' | 'ranked' | 'loved' | 'guest' | 'nominated' | 'pending'
+export type BeatmapsetStatus = "any" | "ranked" | "approved" | "qualified" | "loved" | "pending" | "wip" | "graveyard"
 
-export type MinoBeatmapSort = "relevant" | "ranked_date" | "title" | "artist" | "play_count" | "rating" | "beatmaps.difficulty_rating" | "favourite_count";
+export type MinoBeatmapSort = "relevant" | "ranked_date" | "title" | "artist" | "play_count" | "rating" | "beatmaps.difficulty_rating" | "favourite_count"
 
 export type BeatmapQuery = {
-    title?: string;
-    artist?: string;
-    mapper?: string;
-    bpm_min?: string;
-    bpm_max?: string;
-    sr_min?: string;
-    sr_max?: string;
-    len_min?: string;
-    len_max?: string;
-    year_min?: string;
-    year_max?: string;
-    ar_min?: string;
-    ar_max?: string;
-    cs_min?: string;
-    cs_max?: string;
-    hp_min?: string;
-    hp_max?: string;
-    od_min?: string;
-    od_max?: string;
-    mode?: string;
+    title?: string,
+    artist?: string,
+    mapper?: string,
+    bpm_min?: string,
+    bpm_max?: string,
+    sr_min?: string,
+    sr_max?: string,
+    len_min?: string,
+    len_max?: string,
+    year_min?: string,
+    year_max?: string,
+    ar_min?: string,
+    ar_max?: string,
+    cs_min?: string,
+    cs_max?: string,
+    hp_min?: string,
+    hp_max?: string,
+    od_min?: string,
+    od_max?: string,
+    mode?: string,
     status?: BeatmapsetStatus
-    sorting?: string;
+    sorting?: string,
+}
+
+export type BeatmapsetCount = {
+    beatmap_id: number,
+    beatmap: BeatmapExtended,
+    beatmapset: Beatmapset,
+    count: number,
 }
 
 export type Beatmap = {
@@ -61,7 +68,7 @@ export type BeatmapExtended = Beatmap & {
     playcount: number
     ranked: number
     url: string
-};
+}
 
 export type Covers = {
     cover: string
@@ -104,7 +111,7 @@ export type Beatmapset = {
     related_users?: any
     user?: UserTiny
     track_id?: number
-};
+}
 
 export type SongLanguageType =
     | "any"
@@ -121,7 +128,7 @@ export type SongLanguageType =
     | "Polish"
     | "Instrumental"
     | "Unspecified"
-    | "Other";
+    | "Other"
 
 export type SongGenreType =
     | "any"
@@ -137,7 +144,7 @@ export type SongGenreType =
     | "Folk"
     | "Jazz"
     | "Unspecified"
-    | "Other";
+    | "Other"
 
 export type SongSortType =
     | "title_desc"
@@ -155,111 +162,111 @@ export type SongSortType =
     | "plays_desc"
     | "plays_asc"
     | "favourites_desc"
-    | "favourites_asc";
+    | "favourites_asc"
 
 export type v1Beatmap = {
     id: {
-        set: number;
-        diff: number;
-    };
+        set: number,
+        diff: number,
+    },
     date: {
-        submit: string;
-        approved: string;
-        update: string;
-    };
+        submit: string,
+        approved: string,
+        update: string,
+    },
     metadata: {
         artist: {
-            original: string;
-            unicode: string;
-        };
+            original: string,
+            unicode: string,
+        },
         title: {
-            original: string;
-            unicode: string;
-        };
+            original: string,
+            unicode: string,
+        },
         creator: {
-            id: number;
-            name: string;
-        };
-        favs: number;
-        rating: number;
-        source: string;
+            id: number,
+            name: string,
+        },
+        favs: number,
+        rating: number,
+        source: string,
         genre_id: {
-            id: number;
-            name: string;
-        };
+            id: number,
+            name: string,
+        },
         language_id: {
-            id: number;
-            name: string;
-        };
-        tags: string;
-    };
+            id: number,
+            name: string,
+        },
+        tags: string,
+    },
     status: {
-        id: number;
-        name: string;
-    };
+        id: number,
+        name: string,
+    },
     difficulties: {
-        id: number;
-        diff: string;
+        id: number,
+        diff: string,
         mode: {
-            id: number;
-            name: string;
-        };
-        file_md5: string;
+            id: number,
+            name: string,
+        },
+        file_md5: string,
         stats: {
             star: {
-                pure: number;
-                aim: number;
-                speed: number;
-            };
-            ar: number;
-            od: number;
-            cs: number;
-            hp: number;
+                pure: number,
+                aim: number,
+                speed: number,
+            },
+            ar: number,
+            od: number,
+            cs: number,
+            hp: number,
             bpm: {
-                avg: number;
-            };
-            combo: number;
+                avg: number,
+            },
+            combo: number,
             time: {
-                full: number;
-                drain: number;
-            };
+                full: number,
+                drain: number,
+            },
             objects: {
-                all: number;
-                circles: number;
-                sliders: number;
-                spinners: number;
-            };
-        };
-        plays: number;
-        pass: number;
-    };
+                all: number,
+                circles: number,
+                sliders: number,
+                spinners: number,
+            },
+        },
+        plays: number,
+        pass: number,
+    },
     misc: {
-        download_unavailable: boolean;
-        audio_unavailable: boolean;
-        storyboard: boolean;
-        video: boolean;
-        packs: string;
+        download_unavailable: boolean,
+        audio_unavailable: boolean,
+        storyboard: boolean,
+        video: boolean,
+        packs: string,
         bg: {
-            full: string;
-            raw: string;
+            full: string,
+            raw: string,
             slim: {
-                1: string;
-                2: string;
-            };
+                1: string,
+                2: string,
+            },
             cover: {
-                1: string;
-                2: string;
-            };
+                1: string,
+                2: string,
+            },
             card: {
-                1: string;
-                2: string;
-            };
+                1: string,
+                2: string,
+            },
             list: {
-                1: string;
-                2: string;
-            };
-        };
-    };
+                1: string,
+                2: string,
+            },
+        },
+    },
 }
 
 
@@ -377,35 +384,35 @@ export type MinoBeatmap = {
 }
 
 export type v2Score = {
-    accuracy: number;
-    best_id: number;
-    created_at: string;
-    id: number;
-    max_combo: number;
-    mode: string;
-    mode_int: number;
-    mods: string[];
-    passed: boolean;
-    perfect: boolean;
-    pp: number;
-    rank: string;
-    replay: boolean;
-    score: number;
+    accuracy: number,
+    best_id: number,
+    created_at: string,
+    id: number,
+    max_combo: number,
+    mode: string,
+    mode_int: number,
+    mods: string[],
+    passed: boolean,
+    perfect: boolean,
+    pp: number,
+    rank: string,
+    replay: boolean,
+    score: number,
     statistics: {
-        count_100: number;
-        count_300: number;
-        count_50: number;
-        count_geki: number;
-        count_katu: number;
-        count_miss: number;
-    };
-    type: string;
-    user_id: number;
+        count_100: number,
+        count_300: number,
+        count_50: number,
+        count_geki: number,
+        count_katu: number,
+        count_miss: number,
+    },
+    type: string,
+    user_id: number,
     current_user_attributes: {
         pin: {
-            is_pinned: boolean;
-            score_id: number;
-            score_type: string;
-        };
-    };
+            is_pinned: boolean,
+            score_id: number,
+            score_type: string,
+        },
+    },
 }

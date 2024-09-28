@@ -6,7 +6,7 @@ import AudioPlayButton from "../web/AudioPlayButton";
 import Link from "../web/Link";
 import type { Mode } from "@/src/types/osu";
 
-function BeatmapsetCard(p: { b_set: Beatmapset, count?: number }) {
+function BeatmapsetCard(p: { b_set: Beatmapset }) {
 
     const diffs = p.b_set.beatmaps;
     // const cardImg = `https://assets.ppy.sh/beatmaps/${p.b_set.id}/covers/card.jpg?${p.b_set.id}`;
@@ -28,14 +28,14 @@ function BeatmapsetCard(p: { b_set: Beatmapset, count?: number }) {
                                 beatmap_artist={p.b_set.artist}
                             />
                         </div>
-                        <div class="flex flex-col px-4 py-2 grow col-span-3">
+                        <div class="flex flex-col px-2 py-1 grow col-span-3">
                             <Link css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmapsets/${p.b_set.id}`}>{p.b_set.title}</Link>
                             <span class="text-neutral-content text-opacity-75 text-sm truncate">by {p.b_set.artist}</span>
                             <Link css="text-neutral-content text-opacity-75 text-sm hover:underline underline-offset-2 truncate" url={`/users/${p.b_set?.user?.id || p.b_set.user_id}`}>mapped by {p.b_set?.user?.username || p.b_set?.creator}</Link>
                         </div>
                     </div>
                 </div>
-                <div class="text-opacity-75 text-base-content flex flex-row py-1 px-1.5 gap-2 items-center">
+                <div class="text-sm text-opacity-75 text-base-content p-0.5 flex flex-row flex-wrap gap-2 items-center">
                     <StatusBadge status={p.b_set.status} />
                     {diffs ? <>
                         <div class="flex flex-row gap-1">
@@ -50,12 +50,12 @@ function BeatmapsetCard(p: { b_set: Beatmapset, count?: number }) {
                         } </> : null
                     }
                     <div class="ms-auto text-xs flex flex-row gap-2">
-                        <div class="tooltip" data-tip={p.b_set?.favourite_count}>
+                        <span class="tooltip" data-tip={p.b_set?.favourite_count.toLocaleString()}>
                             <i class="fa-solid fa-heart" />
-                        </div>
-                        <div class="tooltip" data-tip={p.b_set?.play_count}>
+                        </span>
+                        <span class="tooltip" data-tip={p.b_set?.play_count.toLocaleString()}>
                             <i class="fa-solid fa-arrow-rotate-left" />
-                        </div>
+                        </span>
                     </div>
                 </div>
             </div>

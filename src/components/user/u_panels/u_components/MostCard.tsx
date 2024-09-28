@@ -1,4 +1,5 @@
 import { DiffIconLink } from "@/src/components/beatmap/DiffIcon";
+import StatusBadge from "@/src/components/beatmap/StatusBadge";
 import AudioPlayButton from "@/src/components/web/AudioPlayButton";
 import CardControls from "@/src/components/web/CardControls";
 import Link from "@/src/components/web/Link";
@@ -39,27 +40,21 @@ const MostCard = ({ beatmap, beatmapset, position, plays }: Props) => {
                         </div>
                     </div>
                 </div>
-                <div class="text-opacity-75 text-base-content py-1 px-2 flex flex-row justify-between items-center gap-2">
-                    <div class="flex flex-row gap-2">
-                        <div class="badge" style={`color: #000; background-color: ${(colors.beatmap as any)[beatmapset.status]}`}>
-                            {beatmapset.status}
+                <div class="text-sm text-opacity-75 text-base-content p-0.5 flex flex-row flex-wrap gap-2 items-center">
+                    <StatusBadge status={beatmapset.status} />
+                    <Link url={`/users/${beatmapset.user_id}`}>
+                        <div class="tooltip" data-tip={beatmapset.creator}>
+                            <i class="fa-solid fa-user-pen" />
                         </div>
-                        <Link url={`/users/${beatmapset.user_id}`}>
-                            <div class="tooltip" data-tip={beatmapset.creator}>
-                                <i class="fa-solid fa-user-pen" />
-                            </div>
-                        </Link>
-                        <DiffIconLink setId={beatmapset.id} diffId={beatmap.id}
-                            diff={beatmap.difficulty_rating} size={20}
-                            mode={beatmap.mode as Mode} name={beatmap.version} />
+                    </Link>
+                    <DiffIconLink setId={beatmapset.id} diffId={beatmap.id}
+                        diff={beatmap.difficulty_rating} size={20}
+                        mode={beatmap.mode as Mode} name={beatmap.version} />
+                    <div class="flex flex-row items-center gap-2 ms-auto">
+                        <i class="fa-sm fa-solid fa-arrow-rotate-left" />
+                        <div>{plays}</div>
                     </div>
-                    <div class="flex flex-row items-center gap-2 text-base-content">
-                        <div class="flex flex-row items-center gap-2">
-                            <i class="fa-sm fa-solid fa-arrow-rotate-left" />
-                            <div>{plays}</div>
-                        </div>
-                        <div>#{position}</div>
-                    </div>
+                    <div>#{position}</div>
                 </div>
             </div>
             <CardControls set_id={beatmapset.id} />

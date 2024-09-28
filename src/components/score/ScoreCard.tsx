@@ -62,7 +62,7 @@ async function ScoreCard(p: {
                                     <div class="flex flex-row gap-4 items-center">
                                         <div class="flex flex-row gap-2 items-center">
                                             <i class="fa-solid fa-flag-checkered" />
-                                            <span>{score.total_score.toLocaleString()}</span>
+                                            <span>{score.score.toLocaleString()}</span>
                                         </div>
                                         <span class="stats_pp">{Math.round(Number(score.pp))}pp</span>
                                     </div>
@@ -134,8 +134,8 @@ async function ScoreCard(p: {
                         <i class="fa-solid fa-stopwatch fa-xs" />
                         <span class="stats_len">{secondsToTime(beatmap.total_length)}</span>
                     </div>
-                    <div class="ms-auto tooltip" data-tip={moment(new Date(score.ended_at)).format("MMMM Do YYYY")}>
-                        {moment(new Date(score.ended_at)).fromNow()}
+                    <div class="ms-auto tooltip" data-tip={moment(score.created_at).format("MMMM Do YYYY")}>
+                        {moment(score.created_at).fromNow()}
                     </div>
                     <div>#{p.position}</div>
                 </div>

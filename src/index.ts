@@ -36,7 +36,10 @@ new Elysia()
             log.request(ip, request.method, route);
         }
     })
-    .onError(({ error }) => error.message)
+    .onError(({ error }) => {
+        log.error(error.message);
+        return error.message;
+    })
     .get("/favicon.ico", Bun.file("./public/favicon.ico"))
     .use(staticPlugin())
     .use(apiRoutes)

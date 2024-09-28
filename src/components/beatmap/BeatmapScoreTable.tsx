@@ -7,7 +7,8 @@ import SubdivisionFlag from "../user/u_panels/u_components/SubdivisionFlag";
 import Link from "../web/Link";
 import Clan from "../user/u_panels/u_components/Clan";
 import { colors } from "@/src/libs/colors";
-import { apicall, log } from "@/src/tasks/logs";
+import { api_scores_beatmap } from "@/src/api/score";
+import type { ScoreType } from "@/src/types/score";
 
 const BeatmapScoreTable = async (p: {
     b_id: number,
@@ -19,37 +20,20 @@ const BeatmapScoreTable = async (p: {
     const mods = Object.entries(p.body);
     const mod_names = mods.map(([name, value]) => value === 'on' ? name.split("-")[1] : null).filter(v => v !== null) as Mod[];
 
-    const scores = await v2.scores.beatmap(p.b_id, {
+    const scores = await api_scores_beatmap(p.b_id, {
         mode: p.mode,
         mods: mod_names,
         type: "global",
-    }) as any;
+    });
 
-    apicall();
+    if (!scores || !scores.scores) return <>No scores found</>
 
-    if (!scores || scores.length === 0) {
-        return <>No scores found</>
-    }
-
-    let user_score;
-    if (p.logged_id) {
-        try {
-            const tmp = await v2.scores.user.beatmap(p.b_id, p.logged_id, {
-                mode: p.mode,
-                mods: mod_names,
-                best_only: true
-            });
-            apicall();
-            user_score = transformToActualStatistics(tmp[0]);
-        } catch (err) {
-            log.error("Error getting own score", err);
-        }
-    }
+    console.log(scores.scores[0]);
 
     return (<>
-        <BigScore score={scores[0]} mode={p.mode} />
-        {user_score ?
-            <BigScore score={user_score} mode={p.mode} />
+        <BigScore score={scores.scores[0]} mode={p.mode} />
+        {scores.userScore ?
+            <BigScore score={scores.userScore} mode={p.mode} />
             : <></>
         }
         <table class="table table-xs table-zebra bg-base-300 rounded-lg">
@@ -67,9 +51,9 @@ const BeatmapScoreTable = async (p: {
                 </tr>
             </thead>
             <tbody>
-                {scores.map(score =>
+                {scores.scores.map(score =>
                     <tr class="hover:bg-base-300 hover:rounded-lg" onclick={`window.location='/scores/${score.id}';`}>
-                        <th class="table-cell text-start">#{score.position}</th>
+                        <th class="table-cell text-start">#{score.rank_global}</th>
                         <td class="table-cell">
                             <div class="flex flex-row gap-2 items-center">
                                 <Flag name={score.user.country.name} code={score.user.country.code} />
@@ -84,7 +68,7 @@ const BeatmapScoreTable = async (p: {
                             {(score.accuracy * 100).toFixed(2)}%
                         </td>
                         <td class="hidden md:table-cell">
-                            {score.is_perfect_combo ?
+                            {score.perfect ?
                                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-sky-500">
                                     {score.max_combo.toLocaleString()}x
                                 </span> :
@@ -100,14 +84,14 @@ const BeatmapScoreTable = async (p: {
                         </td>
                         <td class="hidden md:table-cell">
                             <div class="flex flex-row flex-wrap gap-1">
-                                {score.mods.map((mod) =>
-                                    <ModIcon mod={(mod as any).acronym} />
+                                {score.mods.map(mod =>
+                                    <ModIcon mod={mod} />
                                 )}
                             </div>
                         </td>
                         <td class="text-end hidden md:table-cell">
-                            <span class="tooltip tooltip-left" data-tip={`${moment(score.ended_at).format("MMMM Do YYYY")} | ${moment(score.ended_at).fromNow()}`}>
-                                {moment(score.ended_at).fromNow(true)}
+                            <span class="tooltip tooltip-left" data-tip={`${moment(score.created_at).format("MMMM Do YYYY")} | ${moment(score.created_at).fromNow()}`}>
+                                {moment(score.created_at).fromNow(true)}
                             </span>
                         </td>
                     </tr>
@@ -117,7 +101,7 @@ const BeatmapScoreTable = async (p: {
     </>);
 };
 
-function BigScore(p: { score: ActualStatistics, mode: Mode }) {
+function BigScore(p: { score: ScoreType, mode: Mode }) {
     return (<>
         <div class="rounded-lg" onclick={`window.location='/scores/${p.score.id}';`}
             style={{
@@ -129,7 +113,7 @@ function BigScore(p: { score: ActualStatistics, mode: Mode }) {
             <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm justify-between flex flex-row flex-wrap gap-4 p-4 rounded-lg">
                 <div class="flex flex-row flex-wrap gap-4 items-center">
                     <div class="flex flex-col gap-2 items-center">
-                        <span class="text-xl">#{p.score.position}</span>
+                        <span class="text-xl">#{p.score.rank_global}</span>
                         <Grade grade={p.score.rank} />
                     </div>
                     <img data-src={p.score.user.avatar_url} alt="pfp" class="size-20 rounded-lg" />
@@ -138,8 +122,8 @@ function BigScore(p: { score: ActualStatistics, mode: Mode }) {
                             <Flag name={p.score.user.country.name} code={p.score.user.country.code} />
                             <Link url={`/users/${p.score.user.id}`}>{p.score.user.username}</Link>
                         </div>
-                        <span class="tooltip" data-tip={`${moment(p.score.ended_at).format("MMMM Do YYYY")} | ${moment(p.score.ended_at).fromNow()}`}>
-                            {moment(p.score.ended_at).fromNow()}
+                        <span class="tooltip" data-tip={`${moment(p.score.created_at).format("MMMM Do YYYY")} | ${moment(p.score.created_at).fromNow()}`}>
+                            {moment(p.score.created_at).fromNow()}
                         </span>
                     </div>
                 </div>
@@ -147,7 +131,7 @@ function BigScore(p: { score: ActualStatistics, mode: Mode }) {
                     <dl class="flex flex-row gap-8 justify-end items-top">
                         <div class="flex flex-col">
                             <dt class="text-xs">Score</dt>
-                            <dd class="text-lg">{p.score.total_score.toLocaleString()}</dd>
+                            <dd class="text-lg">{p.score.score.toLocaleString()}</dd>
                         </div>
                         <div class="flex flex-col">
                             <dt class="text-xs">Accuracy</dt>
@@ -162,7 +146,7 @@ function BigScore(p: { score: ActualStatistics, mode: Mode }) {
                         </div>
                         <div class="flex flex-col">
                             <dt class="text-xs">Max Combo</dt>
-                            {p.score.is_perfect_combo ?
+                            {p.score.perfect ?
                                 <dd class="text-lg text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-sky-500">
                                     {p.score.max_combo.toLocaleString()}x
                                 </dd> :
@@ -177,47 +161,47 @@ function BigScore(p: { score: ActualStatistics, mode: Mode }) {
                             {p.mode === "mania" ?
                                 <div class="flex flex-col">
                                     <dt class="text-xs">320</dt>
-                                    <dd class={`text-lg text-base-content ${(p.score.statistics as any)?.perfect ? "" : "text-opacity-50"}`}
-                                        style={{ color: (p.score.statistics as any)?.perfect ? colors.judgements.x320 : "" }}>
-                                        {(p.score.statistics as any)?.perfect || 0}
+                                    <dd class={`text-lg text-base-content ${p.score.statistics.count_geki ? "" : "text-opacity-50"}`}
+                                        style={{ color: p.score.statistics.count_geki ? colors.judgements.x320 : "" }}>
+                                        {p.score.statistics.count_geki || 0}
                                     </dd>
                                 </div> : <></>
                             }
                             <div class="flex flex-col">
                                 <dt class="text-xs">300</dt>
-                                <dd class={`text-lg text-base-content ${p.score.statistics.great ? "" : "text-opacity-50"}`}
-                                    style={{ color: p.score.statistics.great ? colors.judgements.x300 : "" }}>
-                                    {p.score.statistics.great || 0}
+                                <dd class={`text-lg text-base-content ${p.score.statistics.count_300 ? "" : "text-opacity-50"}`}
+                                    style={{ color: p.score.statistics.count_300 ? colors.judgements.x300 : "" }}>
+                                    {p.score.statistics.count_300 || 0}
                                 </dd>
                             </div>
                             {p.mode === "mania" ?
                                 <div class="flex flex-col">
                                     <dt class="text-xs">200</dt>
-                                    <dd class={`text-lg text-base-content ${(p.score.statistics as any)?.good ? "" : "text-opacity-50"}`}
-                                        style={{ color: (p.score.statistics as any)?.good ? colors.judgements.x200 : "" }}>
-                                        {(p.score.statistics as any)?.good || 0}
+                                    <dd class={`text-lg text-base-content ${p.score.statistics.count_katu ? "" : "text-opacity-50"}`}
+                                        style={{ color: p.score.statistics.count_katu ? colors.judgements.x200 : "" }}>
+                                        {p.score.statistics.count_katu || 0}
                                     </dd>
                                 </div> : <></>
                             }
                             <div class="flex flex-col">
                                 <dt class="text-xs">100</dt>
-                                <dd class={`text-lg text-base-content ${p.score.statistics.ok ? "" : "text-opacity-50"}`}
-                                    style={{ color: p.score.statistics.ok ? colors.judgements.x100 : "" }}>
-                                    {p.score.statistics.ok || 0}
+                                <dd class={`text-lg text-base-content ${p.score.statistics.count_100 ? "" : "text-opacity-50"}`}
+                                    style={{ color: p.score.statistics.count_100 ? colors.judgements.x100 : "" }}>
+                                    {p.score.statistics.count_100 || 0}
                                 </dd>
                             </div>
                             <div class="flex flex-col">
                                 <dt class="text-xs">50</dt>
-                                <dd class={`text-lg text-base-content ${p.score.statistics.meh ? "" : "text-opacity-50"}`}
-                                    style={{ color: p.score.statistics.meh ? colors.judgements.x50 : "" }}>
-                                    {p.score.statistics.meh || 0}
+                                <dd class={`text-lg text-base-content ${p.score.statistics.count_50 ? "" : "text-opacity-50"}`}
+                                    style={{ color: p.score.statistics.count_50 ? colors.judgements.x50 : "" }}>
+                                    {p.score.statistics.count_50 || 0}
                                 </dd>
                             </div>
                             <div class="flex flex-col">
                                 <dt class="text-xs">Miss</dt>
-                                <dd class={`text-lg text-base-content ${p.score.statistics.miss ? "" : "text-opacity-50"}`}
-                                    style={{ color: p.score.statistics.miss ? colors.judgements.xMiss : "" }}>
-                                    {p.score.statistics.miss || 0}
+                                <dd class={`text-lg text-base-content ${p.score.statistics.count_miss ? "" : "text-opacity-50"}`}
+                                    style={{ color: p.score.statistics.count_miss ? colors.judgements.xMiss : "" }}>
+                                    {p.score.statistics.count_miss || 0}
                                 </dd>
                             </div>
                             <div class="flex flex-col">
@@ -240,72 +224,6 @@ function BigScore(p: { score: ActualStatistics, mode: Mode }) {
             </div>
         </div>
     </>);
-}
-
-function transformToActualStatistics(data: any): ActualStatistics {
-    return {
-        position: data.position,
-        accuracy: data.accuracy,
-        best_id: data.best_id,
-        created_at: data.ended_at, // Assuming created_at can be set to ended_at
-        id: data.id,
-        max_combo: data.max_combo,
-        mode: data.beatmap.mode,
-        mode_int: data.beatmap.mode_int,
-        mods: data.mods.map((mod: any) => ({ acronym: mod.acronym })),
-        passed: data.passed,
-        perfect: data.is_perfect_combo,
-        pp: data.pp,
-        rank: data.rank,
-        replay: data.replay,
-        score: data.total_score,
-        statistics: {
-            perfect: data.statistics.perfect,
-            great: data.statistics.great,
-            good: data.statistics.good,
-            ok: data.statistics.ok,
-            meh: data.statistics.meh,
-            miss: data.statistics.miss,
-            count_100: 0,
-            count_300: 0,
-            count_50: 0,
-            count_geki: 0,
-            count_katu: 0,
-            count_miss: 0
-        },
-        type: data.type,
-        user_id: data.user_id,
-        current_user_attributes: {
-            pin: JSON.stringify(data.current_user_attributes.pin)
-        },
-        user: {
-            avatar_url: data.user.avatar_url,
-            country_code: data.user.country_code,
-            default_group: data.user.default_group,
-            id: data.user.id,
-            is_active: data.user.is_active,
-            is_bot: data.user.is_bot,
-            is_deleted: data.user.is_deleted,
-            is_online: data.user.is_online,
-            is_supporter: data.user.is_supporter,
-            last_visit: data.user.last_visit,
-            pm_friends_only: data.user.pm_friends_only,
-            profile_colour: data.user.profile_colour,
-            username: data.user.username,
-            country: {
-                code: data.user.country_code,
-                name: data.user.country ? data.user.country.name : ""
-            },
-            cover: {
-                custom_url: data.user.cover.custom_url,
-                url: data.user.cover.url,
-                id: data.user.cover.id
-            }
-        },
-        ended_at: data.ended_at,
-        is_perfect_combo: data.is_perfect_combo,
-        total_score: data.total_score
-    };
 }
 
 export default BeatmapScoreTable;

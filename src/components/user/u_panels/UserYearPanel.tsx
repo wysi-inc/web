@@ -50,8 +50,7 @@ async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mod
     grade_counts.set("D", { count: data.grades.D, color: colors.grades.d });
 
     const mappers = [];
-    for (let i = 0; i < 4; i++) {
-        if (!data.favourite.mapper[i]) break;
+    for (let i = 0; i < Math.min(data.favourite.mapper.length, 5); i++) {
         mappers.push(data.favourite.mapper[i]);
     }
 
@@ -59,7 +58,7 @@ async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mod
     for (let i = 0; i < Math.min(data.favourite.songs.length, 3); i++) {
         const b = await api_beatmapset_details(data.favourite.songs[i].id);
         if (!b) continue;
-        beatmaps.push([b, data.favourite.songs[i].id]);
+        beatmaps.push([b, data.favourite.songs[i].count]);
     }
 
     return (<>
@@ -118,18 +117,32 @@ async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mod
             <div class="grid gap-4 md:grid-cols-2">
                 <div class="flex flex-col rounded-lg bg-neutral shadow-lg">
                     <h4 class="flex flex-row flex-wrap justify-between gap-2 px-2 py-1">
-                        <span>Top mappers:</span><span>({mappers.map(m => `x${m.count}`).join(" | ")})</span>
+                        Top mappers:
                     </h4>
-                    <div class="flex grow flex-col gap-2 rounded-lg bg-base-300 p-2">
-                        {mappers.map(m => <UserCard user_id={m.id} />)}
+                    <div class="bg-base-300 rounded-lg p-1 flex grow">
+                        <table class="grow">
+                            {mappers.map(m => (
+                                <tr>
+                                    <th class="min-w-12 p-1 text-lg">{m.count}x</th>
+                                    <td class="p-1"><UserCard user_id={m.id} /></td>
+                                </tr>
+                            ))}
+                        </table>
                     </div>
                 </div>
                 <div class="flex flex-col rounded-lg bg-neutral shadow-lg">
                     <h4 class="flex flex-row flex-wrap justify-between gap-2 px-2 py-1">
                         Top songs:
                     </h4>
-                    <div class="flex grow flex-col gap-2 rounded-lg bg-base-300 p-2">
-                        {beatmaps.map(b => <BeatmapsetCard b_set={b[0]} count={b[1]} />)}
+                    <div class="bg-base-300 rounded-lg p-1 flex grow">
+                        <table class="grow">
+                            {beatmaps.map(b => (
+                                <tr>
+                                    <th class="min-w-12 p-1 text-lg">{b[1]}x</th>
+                                    <td class="p-1"><BeatmapsetCard b_set={b[0]} /></td>
+                                </tr>
+                            ))}
+                        </table>
                     </div>
                 </div>
             </div>

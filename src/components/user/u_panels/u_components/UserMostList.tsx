@@ -1,6 +1,6 @@
+import { api_user_most_played } from "@/src/api/user";
 import MostCard from "./MostCard";
 import LoadMoreButton from "@/src/components/web/LoadMoreButton";
-import { apicall } from "@/src/tasks/logs";
 
 type Props = {
     id: number;
@@ -10,12 +10,12 @@ type Props = {
 
 const UserMostList = async (p: Props) => {
 
-    const plays = await v2.user.beatmaps.most_played(p.id, {
+    const plays = await api_user_most_played(p.id, {
         offset: p.offset,
         limit: p.limit
     });
-    apicall();
 
+    if (!plays) return <></>;
     if (plays.length === 0 && p.offset === 0) return <div>This user hasn't played yet</div>;
 
     return (<>
