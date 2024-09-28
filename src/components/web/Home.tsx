@@ -6,27 +6,27 @@ async function Home({ t }: any) {
 
     const content = [
         {
-            title: t.home.profiles,
+            title: t?.home?.profiles,
             img: "profile",
         },
         {
-            title: t.home.stats,
+            title: t?.home?.stats,
             img: "summary",
         },
         {
-            title: t.home.search,
+            title: t?.home?.search,
             img: "beatmaps",
         },
         {
-            title: t.home.calculator,
+            title: t?.home?.calculator,
             img: "calculator",
         },
         {
-            title: t.home.setup,
+            title: t?.home?.setup,
             img: "setup",
         },
         {
-            title: t.home.collections,
+            title: t?.home?.collections,
             img: "collections",
         },
     ];
@@ -36,10 +36,10 @@ async function Home({ t }: any) {
     return (<>
         <Title title="Home" />
         <div class="flex flex-col items-center gap-2">
-            <h1 class="text-center text-2xl">{t.home.welcome}</h1>
+            <h1 class="text-center text-2xl">{t?.home?.welcome}</h1>
             <img loading="lazy" src="/public/wysi.svg" class="size-24 rounded-xl shadow-lg" alt="wysi logo" />
-            <h2 class="text-center text-lg">{t.home.foss}</h2>
-            <h3 class="text-center text-sm">{t.home.built}</h3>
+            <h2 class="text-center text-lg">{t?.home?.foss}</h2>
+            <h3 class="text-center text-sm">{t?.home?.built}</h3>
             <div />
         </div>
         {stats ?

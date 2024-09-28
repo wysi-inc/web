@@ -7,9 +7,9 @@
         "daisyui": "latest"
     },
     "scripts": {
-        "dev": "bun run --watch ./src/index.ts",
+        "dev": "bun run --watch src/index.ts",
         "css": "tailwindcss -i ./public/css/main_in.css -o ./public/css/main_out.css --watch",
-        "prod": "bun run cssprod && bun run build && bun run ./src/index.ts",
+        "prod": "bun run cssprod && bun run src/index.ts",
         "cssprod": "tailwindcss -i ./public/css/main_in.css -o ./public/css/main_out.css --minify",
         "build": "bun run build.ts"
     },

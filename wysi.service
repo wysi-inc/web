@@ -14,7 +14,7 @@ User=m4rti
 WorkingDirectory=/var/www/wysi/web
 # the command to start the app
 # requires absolute paths
-ExecStart=/home/m4rti/.bun/bin/bun run index.ts
+ExecStart=/home/m4rti/.bun/bin/bun run prod
 # restart policy
 # one of {no|on-success|on-failure|on-abnormal|on-watchdog|on-abort|always}
 Restart=always
