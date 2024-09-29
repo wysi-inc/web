@@ -42,25 +42,33 @@ function LanguageSwitcher({ lang, t }: any) {
     const language = getLang(lang);
 
     return (<>
-        <details class="dropdown dropdown-end">
-            <summary class="btn btn-square btn-ghost">
-                <img data-src={language[1]} class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
-            </summary>
-            <div class="mt-6 menu dropdown-content w-96 bg-base-100 rounded-box z-[1] p-2 shadow">
-                <div class="mb-2 grid grid-cols-2 gap-1">
+        <button id="language_button" class="btn btn-square btn-ghost" onclick="language_modal.showModal()" >
+            <img data-src={language[1]} class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
+        </button>
+        <dialog id="language_modal" class="modal">
+            <div class="modal-box bg-neutral p-2">
+                <form method="dialog">
+                    <button class="btn btn-circle btn-ghost btn-sm absolute right-2 top-2">✕</button>
+                </form>
+                <h3 class="mx-1 mt-2 mb-4 text-lg font-bold">Select language</h3>
+                <div class="mb-4 grid grid-cols-2 gap-1">
                     {Object.keys(flags).map(l => (
                         <LanguageButton lang={getLang(l)} />
                     ))}
                 </div>
-                <a href="https://crowdin.com/project/wysi" class="btn btn-accent btn-block" target="_blank">
+                <a href="https://crowdin.com/project/wysi" class="btn col-span-full btn-accent btn-block" target="_blank">
                     <span class="flex flex-row gap-4">
                         <i class="float fa-solid fa-arrow-up-right-from-square left-2 float-left" />
                         <span>{t.nav.help}</span>
                     </span>
                 </a>
             </div>
-        </details>
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
     </>);
+
 }
 
 export default LanguageSwitcher;

@@ -25,6 +25,9 @@ function Search({ t }: any) {
                     <div id="search_results" class="flex flex-col gap-4" />
                 </form>
             </div>
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
         </dialog>
     </>);
 }
