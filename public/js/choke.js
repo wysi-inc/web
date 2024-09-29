@@ -1,48 +1,50 @@
+htmxAfterFunctions.push(getChokes);
+
 function getChokes() {
-    const ids = document.getElementsByClassName("score_card");
+    const scores = document.getElementsByClassName("score_card");
     const new_scores = [];
-    for (let i = 0; i < ids.length; i++) {
-        if (ids[i].hasAttribute("calculated")) continue;
-        ids[i].setAttribute("calculated", true);
-        new_scores.push(ids[i]);
+    for (let score of scores) {
+        if (score.hasAttribute("calculated")) continue;
+        score.setAttribute("calculated", true);
+        new_scores.push(score);
     }
-    for (let i = 0; i < new_scores.length; i++) {
-        getChoke(new_scores[i]);
+    for (let score of new_scores) {
+        getChoke(score);
     }
 }
-
-getChokes();
-document.getElementById("user_scores_panel").addEventListener('htmx:afterRequest', () => { getChokes() })
 
 async function getChoke(score_card) {
     const score = JSON.parse(score_card.getAttribute("data-score"));
     const fc_acc = score_card.getAttribute("data-fc-acc");
     const beatmap = score.beatmap;
     let stats = {};
-    if (score.mods.length > 0 || score.legacy_perfect === false) {
-        const url = `https://catboy.best/api/meta/${beatmap.id}?misses=0&acc=${fc_acc}&mods=${score.mods_id}`;
+    if (score.mods.length > 0 || score.perfect === false) {
+        const mods_int = score.mods.reduce((t, m) => t + modsInt[m], 0);
+        const url = new URL(`https://catboy.best/api/meta/${beatmap.id}`)
+        url.searchParams.set("misses", 0);
+        url.searchParams.set("acc", fc_acc);
+        url.searchParams.set("mods", mods_int);
         const res = await fetch(url);
-        if (res.ok) {
-            const data = await res.json();
-            const new_sr = data.difficulty?.stars;
-            if (new_sr !== beatmap.difficulty_rating) {
-                stats.sr = new_sr?.toFixed(2);
-            }
-            stats.ar = data.map.ar?.toFixed(1);
-            stats.cs = data.map.cs?.toFixed(1);
-            stats.od = data.map.od?.toFixed(1);
-            stats.hp = data.map.hp?.toFixed(1);
-            stats.pp = Math.round(data?.pp?.[Number(fc_acc)]?.pp);
-            if (stats.pp <= Number(score.pp) + 10) {
-                stats.pp = null;
-            }
-            if (score.mods.find((mod) => mod.acronym === "DT") || score.mods.find((mod) => mod.acronym === "NC")) {
-                stats.len = Math.round(beatmap.total_length / 1.5);
-                stats.bpm = beatmap.bpm * 1.5;
-            } else if (score.mods.find((mod) => mod.acronym === "HT")) {
-                stats.len = Math.round(beatmap.total_length / 0.75);
-                stats.bpm = beatmap.bpm * 0.75;
-            }
+        if (!res.ok) return;
+        const data = await res.json();
+        const new_sr = data.difficulty?.stars;
+        if (new_sr !== beatmap.difficulty_rating) {
+            stats.sr = new_sr?.toFixed(2);
+        }
+        stats.ar = data.map.ar?.toFixed(1);
+        stats.cs = data.map.cs?.toFixed(1);
+        stats.od = data.map.od?.toFixed(1);
+        stats.hp = data.map.hp?.toFixed(1);
+        stats.pp = Math.round(data?.pp?.[Number(fc_acc)]?.pp);
+        if (stats.pp <= Number(score.pp) + 10) {
+            stats.pp = null;
+        }
+        if (score.mods.includes("DT") || score.mods.includes("NC")) {
+            stats.len = Math.round(beatmap.total_length / 1.5);
+            stats.bpm = beatmap.bpm * 1.5;
+        } else if (score.mods.includes("HT")) {
+            stats.len = Math.round(beatmap.total_length / 0.75);
+            stats.bpm = beatmap.bpm * 0.75;
         }
     }
 

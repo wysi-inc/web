@@ -44,7 +44,6 @@ const UserScoresPanel = (p: Props) => {
             <Tab cat="firsts" title="First" col="col-start-3 col-end-3" />
             <Tab cat="recent" title="Recent" col="col-start-4 col-end-4" />
         </div>
-        <script type="module" src="/public/js/choke.js" />
     </>
     )
 }

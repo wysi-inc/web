@@ -40,12 +40,13 @@ const BaseHtml = ({ lang, t, user, children }: Props) => {
                 <script defer src="/public/lib/fontawesome/solid.min.js" />
                 <script defer src="/public/lib/fontawesome/regular.min.js" />
                 <script defer src="/public/lib/fontawesome/fontawesome.min.js" />
-                <script defer src={`/public/js/utils.js`} />
-                <script defer src={`/public/js/search${PROD ? ".min" : ""}.js`} />
-                <script defer src={`/public/js/audio${PROD ? ".min" : ""}.js`} />
-                <script defer src={`/public/js/images${PROD ? ".min" : ""}.js`} />
-                <script defer src={`/public/js/bbcode${PROD ? ".min" : ""}.js`} />
-                <script defer src={`/public/js/drag${PROD ? ".min" : ""}.js`} />
+                <script defer src="/public/js/utils.js" />
+                <script defer src="/public/js/search.js" />
+                <script defer src="/public/js/audio.js" />
+                <script defer src="/public/js/images.js" />
+                <script defer src="/public/js/bbcode.js" />
+                <script defer src="/public/js/drag.js" />
+                <script defer src="/public/js/choke.js" />
             </head>
             <body style="display: hidden;" class="flex flex-col items-center justify-center bg-base-300" id="top">
                 <script>let FF_FOUC_FIX;</script>

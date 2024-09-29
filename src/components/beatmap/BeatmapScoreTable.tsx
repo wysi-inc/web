@@ -10,12 +10,12 @@ import { colors } from "@/src/libs/colors";
 import { api_scores_beatmap } from "@/src/api/score";
 import type { ScoreType } from "@/src/types/score";
 
-const BeatmapScoreTable = async (p: {
+async function BeatmapScoreTable(p: {
     b_id: number,
     mode: Mode,
     body?: any,
     logged_id?: number,
-}) => {
+}) {
 
     const mods = Object.entries(p.body);
     const mod_names = mods.map(([name, value]) => value === 'on' ? name.split("-")[1] : null).filter(v => v !== null) as Mod[];
@@ -29,12 +29,13 @@ const BeatmapScoreTable = async (p: {
     if (!scores || !scores.scores) return <>No scores found</>
 
     console.log(scores.scores[0]);
+    console.log(scores.scores[0].mods);
 
     return (<>
-        <BigScore score={scores.scores[0]} mode={p.mode} />
+        <BigScore score={scores.scores[0]} mode={p.mode} position={1} />
         {scores.userScore ?
-            <BigScore score={scores.userScore} mode={p.mode} />
-            : <></>
+            <BigScore score={scores.userScore} mode={p.mode} position={0} />
+            : null
         }
         <table class="table table-xs table-zebra bg-base-300 rounded-lg">
             <thead>
@@ -51,9 +52,9 @@ const BeatmapScoreTable = async (p: {
                 </tr>
             </thead>
             <tbody>
-                {scores.scores.map(score =>
+                {scores.scores.map((score, i) =>
                     <tr class="hover:bg-base-300 hover:rounded-lg" onclick={`window.location='/scores/${score.id}';`}>
-                        <th class="table-cell text-start">#{score.rank_global}</th>
+                        <th class="table-cell text-start">#{i + 1}</th>
                         <td class="table-cell">
                             <div class="flex flex-row gap-2 items-center">
                                 <Flag name={score.user.country.name} code={score.user.country.code} />
@@ -101,7 +102,7 @@ const BeatmapScoreTable = async (p: {
     </>);
 };
 
-function BigScore(p: { score: ScoreType, mode: Mode }) {
+function BigScore(p: { score: ScoreType, mode: Mode, position: number }) {
     return (<>
         <div class="rounded-lg" onclick={`window.location='/scores/${p.score.id}';`}
             style={{
@@ -113,7 +114,7 @@ function BigScore(p: { score: ScoreType, mode: Mode }) {
             <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm justify-between flex flex-row flex-wrap gap-4 p-4 rounded-lg">
                 <div class="flex flex-row flex-wrap gap-4 items-center">
                     <div class="flex flex-col gap-2 items-center">
-                        <span class="text-xl">#{p.score.rank_global}</span>
+                        <span class="text-xl">#{p.position}</span>
                         <Grade grade={p.score.rank} />
                     </div>
                     <img data-src={p.score.user.avatar_url} alt="pfp" class="size-20 rounded-lg" />
