@@ -42,12 +42,12 @@ function LanguageSwitcher({ lang, t }: any) {
     const language = getLang(lang);
 
     return (<>
-        <div class="dropdown dropdown-end">
-            <div tabindex="0" role="button" class="btn btn-square btn-ghost">
+        <details class="dropdown dropdown-end">
+            <summary class="btn btn-square btn-ghost">
                 <img data-src={language[1]} class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
-            </div>
-            <div tabindex="0" class="dropdown-content menu z-50 mt-5 rounded-box bg-base-100 p-2 shadow">
-                <div class="mb-2 grid w-96 grid-cols-2 gap-1">
+            </summary>
+            <div class="mt-6 menu dropdown-content w-96 bg-base-100 rounded-box z-[1] p-2 shadow">
+                <div class="mb-2 grid grid-cols-2 gap-1">
                     {Object.keys(flags).map(l => (
                         <LanguageButton lang={getLang(l)} />
                     ))}
@@ -59,7 +59,7 @@ function LanguageSwitcher({ lang, t }: any) {
                     </span>
                 </a>
             </div>
-        </div >
+        </details>
     </>);
 }
 

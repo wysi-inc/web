@@ -1,10 +1,12 @@
 import { colors } from "@/src/libs/colors";
 
 type Props = {
-    mod: string,
+    mod?: string,
 }
 
 const ModIcon = ({ mod }: Props) => {
+
+    if (!mod) return <></>;
 
     let color;
     let name = mod.toLowerCase();

@@ -1,3 +1,4 @@
+import { RESULT_LIMIT } from "@/src/libs/constants";
 import type { BeatmapQuery, Beatmapset } from "@/src/types/beatmaps";
 
 export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ sets: Beatmapset[], offset: number }> {
@@ -70,7 +71,7 @@ export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ 
         if (query_string) {
             url.searchParams.set("query", query_string);
         }
-        url.searchParams.set("limit", "50");
+        url.searchParams.set("limit", RESULT_LIMIT.BEATMAPS.SEARCH);
         url.searchParams.set("offset", offset || "0");
         url.searchParams.set("mode", q.mode || "-1");
         url.searchParams.set("status", q.status || "-3");
@@ -82,6 +83,7 @@ export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ 
     const res = await fetch(url.toString(), {
         headers: { Referer: "https://wysi727.com" }
     });
+
     if (!res.ok) return { sets: [], offset: 0 };
     const sets = await res.json() as Beatmapset[];
     return { sets, offset: Number(offset) + sets.length };

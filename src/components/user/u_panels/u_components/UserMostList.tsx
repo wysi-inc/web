@@ -1,6 +1,7 @@
 import { api_user_most_played } from "@/src/api/user";
 import MostCard from "./MostCard";
 import LoadMoreButton from "@/src/components/web/LoadMoreButton";
+import { RESULT_LIMIT } from "@/src/libs/constants";
 
 type Props = {
     id: number;
@@ -25,7 +26,7 @@ const UserMostList = async (p: Props) => {
                 beatmapset={play.beatmapset as any} />
         )}
         {plays.length >= p.limit ?
-            <LoadMoreButton url={`/users/${p.id}/0/lists/most?offset=${p.offset + p.limit}&limit=20`} />
+            <LoadMoreButton url={`/users/${p.id}/0/lists/most?offset=${p.offset + p.limit}&limit=${RESULT_LIMIT.USER.MOST}`} />
             : <></>}
     </>)
 }

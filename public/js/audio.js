@@ -20,34 +20,30 @@ function playAudio(btn) {
     audio_player.play();
 }
 
-function Audio() {
-    close_button.addEventListener('click', () => {
-        audio_player.pause();
-        audio_box.style.display = 'none';
-    });
-    audio_player.addEventListener('loadstart', () => {
-        audio_progress.value = 0;
-        audio_loading.style.display = 'block';
-        play_button.style.display = 'none';
-        pause_button.style.display = 'none';
-        audio_box.style.display = 'block';
-    });
-    audio_player.addEventListener('pause', () => {
-        play_button.style.display = 'block';
-        pause_button.style.display = 'none';
-    });
-    audio_player.addEventListener('ended', () => {
-        audio_box.style.display = 'none';
-    });
-    audio_progress.addEventListener('change', (e) => {
-        audio_player.currentTime = (audio_player.duration / 100) * e.target.value;
-    });
-    audio_player.addEventListener('timeupdate', () => {
-        play_button.style.display = 'none';
-        pause_button.style.display = 'block';
-        audio_loading.style.display = 'none';
-        audio_progress.value = `${(audio_player.currentTime / audio_player.duration) * 100}`;
-    });
-}
-
-Audio();
+close_button.addEventListener('click', () => {
+    audio_player.pause();
+    audio_box.style.display = 'none';
+});
+audio_player.addEventListener('loadstart', () => {
+    audio_progress.value = 0;
+    audio_loading.style.display = 'block';
+    play_button.style.display = 'none';
+    pause_button.style.display = 'none';
+    audio_box.style.display = 'block';
+});
+audio_player.addEventListener('pause', () => {
+    play_button.style.display = 'block';
+    pause_button.style.display = 'none';
+});
+audio_player.addEventListener('ended', () => {
+    audio_box.style.display = 'none';
+});
+audio_progress.addEventListener('change', (e) => {
+    audio_player.currentTime = (audio_player.duration / 100) * e.target.value;
+});
+audio_player.addEventListener('timeupdate', () => {
+    play_button.style.display = 'none';
+    pause_button.style.display = 'block';
+    audio_loading.style.display = 'none';
+    audio_progress.value = `${(audio_player.currentTime / audio_player.duration) * 100}`;
+});

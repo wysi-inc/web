@@ -13,7 +13,7 @@ function Search({ t }: any) {
                     <button class="btn btn-circle btn-ghost btn-sm absolute right-2 top-2">✕</button>
                 </form>
                 <h3 class="mb-4 text-lg font-bold">{t.nav.search}</h3>
-                <form id="search_form" class="flex flex-col gap-4">
+                <form id="search_form" class="flex flex-col gap-4" onsubmit="return false;">
                     <input type="text" name="q" id="search_input"
                         class="input input-bordered"
                         hx-post="/search"

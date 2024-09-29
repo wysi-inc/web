@@ -3,7 +3,7 @@ import { MODES } from "@/src/libs/countries";
 import { ModeToCode } from "@/src/libs/web_utils";
 import { DANS } from "@/src/models/User";
 import type { Mode } from "@/src/types/osu";
-import type { User } from "@/src/types/users";
+import type { UserExtended } from "@/src/types/users";
 import { Html } from '@elysiajs/html';
 import moment from "moment";
 import ModeIcon from "../../beatmap/ModeIcon";
@@ -17,10 +17,11 @@ import Flag from "./u_components/Flag";
 import SubdivisionFlag from "./u_components/SubdivisionFlag";
 import SubdivisionRanking from "./u_components/SubdivisionRanking";
 import Supporter from "./u_components/Supporter";
+import Avatar from "../Avatar";
 
 async function UserTopPanel(p: {
     t: any,
-    user: User,
+    user: UserExtended,
     mode: Mode,
     editable?: boolean,
 }) {
@@ -47,7 +48,7 @@ async function UserTopPanel(p: {
                     <div class="flex flex-col justify-center gap-4 rounded-lg bg-base-300 bg-opacity-65 p-4 text-base-content backdrop-blur-sm">
                         <div class="flex flex-row flex-wrap gap-4">
                             <div class="flex w-40 flex-col justify-between">
-                                <img data-src={p.user.avatar_url} class="aspect-square rounded-lg" alt={`${p.user.username}'s pfp`} />
+                                <Avatar id={p.user.id} />
                                 <div class="flex flex-row flex-wrap items-center justify-around gap-2 rounded-lg bg-base-300 p-2">
                                     {MODES.map(m => (
                                         <div class="tooltip" data-tip={m.name}>

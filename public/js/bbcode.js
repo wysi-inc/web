@@ -17,4 +17,5 @@ function foldSpoilerboxes() {
     });
 }
 
+foldSpoilerboxes();
 htmxAfterFunctions.push(foldSpoilerboxes);

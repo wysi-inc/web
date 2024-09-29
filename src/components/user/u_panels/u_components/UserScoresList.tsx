@@ -2,6 +2,7 @@ import type { Mode, ScoreCategory } from "@/src/types/osu";
 import ScoreCard from "@/src/components/score/ScoreCard";
 import LoadMoreButton from "@/src/components/web/LoadMoreButton";
 import { api_scores_user_category } from "@/src/api/score";
+import { RESULT_LIMIT } from "@/src/libs/constants";
 
 type Props = {
     id: number;
@@ -30,7 +31,7 @@ const UserScoresList = async (p: Props) => {
             <ScoreCard position={i + p.offset + 1} score={score} />
         )}
         {scores.length >= p.limit ?
-            <LoadMoreButton url={`/users/${p.id}/${p.mode}/lists/scores/${p.category}?offset=${p.offset + p.limit}&limit=20`} />
+            <LoadMoreButton url={`/users/${p.id}/${p.mode}/lists/scores/${p.category}?offset=${p.offset + p.limit}&limit=${RESULT_LIMIT.USER.SCORES}`} />
             : <></>}
     </>
 }

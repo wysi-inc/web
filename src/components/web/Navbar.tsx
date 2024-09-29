@@ -47,42 +47,41 @@ const Navbar = ({ lang, t, user }: Props) => {
         <nav class="sticky top-0 z-50 flex w-full flex-col bg-base-100 shadow-lg">
             <div class="grid grid-cols-3 p-2 md:grid-cols-5">
                 <div class="flex flex-row items-center justify-start md:col-span-2">
-                    <div class="dropdown xl:hidden">
-                        <div tabindex="0" role="button" class="btn btn-ghost flex items-center justify-center">
+                    <details class="dropdown xl:hidden">
+                        <summary class="btn btn-square btn-ghost">
                             <i class="fa-solid fa-bars fa-lg" />
-                        </div>
-                        <ul tabindex="0" class="dropdown-content menu menu-sm z-50 mt-5 w-40 rounded-box bg-base-100 p-2 shadow">
+                        </summary>
+                        <ul class="mt-6 menu dropdown-content w-56 bg-base-100 rounded-box z-[1] p-2 shadow">
                             {routes.map(route =>
                                 <li>
-                                    <Link url={route.url} css="btn btn-ghost">
+                                    <Link url={route.url} css="btn btn-ghost flex flex-row gap-2">
                                         {route.icon}
-                                        {route.title}
+                                        <span>{route.title}</span>
                                     </Link>
                                 </li>
                             )}
-                            <div class="divider flex sm:hidden" />
-                            <label class="btn btn-ghost sm:hidden">
-                                <button class="hidden" aria-label="theme switch" data-toggle-theme="dracula,pastel" data-act-class="ACTIVECLASS" />
-                                <i class="fa-solid fa-circle-half-stroke" />
-                                Theme
-                            </label>
-                            <div class="divider flex md:hidden" />
+                            <div class="divider sm:hidden m-0" />
+                            <li class="md:hidden">
+                                <button class="btn btn-ghost sm:hidden" aria-label="theme switch" data-toggle-theme="dracula,pastel" data-act-class="ACTIVECLASS">
+                                    <i class="fa-solid fa-circle-half-stroke" />
+                                    <span>Theme</span>
+                                </button>
+                            </li>
+                            <div class="divider md:hidden m-0" />
                             <li class="md:hidden">
                                 <a href="https://github.com/wysi-inc" target="_blank" class="btn btn-ghost" aria-label="Github">
                                     <i class="fa-brands fa-github fa-lg" />
-                                    GitHub
+                                    <span>GitHub</span>
                                 </a>
                             </li>
                             <li class="md:hidden">
                                 <a href="https://discord.gg/QYVxgS2934" target="_blank" class="btn btn-ghost" aria-label="Discord">
                                     <i class="fa-brands fa-discord" />
-                                    Discord
+                                    <span>Discord</span>
                                 </a>
                             </li>
                         </ul>
-                    </div>
-                    <div class="dropdown lg:hidden">
-                    </div>
+                    </details>
                     <Link url="/" css="btn btn-ghost hidden items-center gap-4 px-2 text-xl sm:flex">
                         <img loading="lazy" src="/public/wysi.svg" class="h-8 w-8 rounded-lg shadow-lg drop-shadow-lg" alt="wysi logo" />
                         <span>wysi</span>

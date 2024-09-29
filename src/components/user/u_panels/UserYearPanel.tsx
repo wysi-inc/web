@@ -1,10 +1,10 @@
+import { api_beatmapset_details } from "@/src/api/beatmap";
 import { colors } from "@/src/libs/colors";
+import type { Beatmapset } from "@/src/types/beatmaps";
 import type { AdvanceUser, Mode } from "@/src/types/osu";
-import BarChart from "./u_components/BarChart";
 import BeatmapsetCard from "../../beatmap/BeatmapsetCard";
 import UserCard from "../UserCard";
-import { api_beatmapset_details } from "@/src/api/beatmap";
-import type { Beatmapset } from "@/src/types/beatmaps";
+import BarChart from "./u_components/BarChart";
 
 async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mode }) {
 
@@ -25,6 +25,7 @@ async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mod
     }
 
     const res = await fetch(`https://advance.catboy.best/api/users/${p.user_id}?mode=${mode_int(p.mode)}`);
+    if (!res.ok) return <>Can't reach Advance at the moment</>;
     const data = await res.json() as AdvanceUser | { error: string };
 
     if ("error" in data) {
@@ -124,7 +125,7 @@ async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mod
                             {mappers.map(m => (
                                 <tr>
                                     <th class="min-w-12 p-1 text-lg">{m.count}x</th>
-                                    <td class="p-1"><UserCard user_id={m.id} /></td>
+                                    <td class="p-1"><UserCard user_id={m.id} username={m.name} /></td>
                                 </tr>
                             ))}
                         </table>

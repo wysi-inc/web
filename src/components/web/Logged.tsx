@@ -1,6 +1,7 @@
 import type { UserCookie } from "@/src/types/users";
 import Link from "./Link";
 import { isAdmin } from "@/src/routes/admin";
+import Avatar from "../user/Avatar";
 
 type Props = {
     user: UserCookie,
@@ -8,15 +9,13 @@ type Props = {
 }
 const Logged = (p: Props) => {
     return (
-        <div class="dropdown dropdown-end">
-            <button aria-label="user logged menu" tabindex="0" role="button" class="aspect-square btn p-0 btn-ghost">
-                <div class="avatar">
-                    <div class="size-10 rounded-lg">
-                        <img loading="lazy" src={p.user.avatar} class="" alt="avatar" />
-                    </div>
+        <details class="dropdown dropdown-end">
+            <summary class="btn btn-square btn-ghost">
+                <div class="avatar size-10">
+                    <Avatar id={p.user.id} />
                 </div>
-            </button>
-            <ul tabindex="0" class="menu menu-sm dropdown-content mt-5 z-50 p-2 shadow-lg bg-base-100 rounded-box w-40">
+            </summary>
+            <ul class="mt-6 menu dropdown-content w-56 bg-base-100 rounded-box z-[1] p-2 shadow">
                 <li>
                     <Link url={`/users/${p.user.id}`} css="btn btn-ghost flex">
                         <i class="fa-solid fa-user" />
@@ -46,7 +45,7 @@ const Logged = (p: Props) => {
                     </Link>
                 </li>
             </ul>
-        </div>
+        </details>
     );
 }
 

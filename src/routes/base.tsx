@@ -56,7 +56,6 @@ export const baseRoutes = new Elysia({ prefix: '' })
         const user: UserCookie = {
             id: res.data.id,
             username: res.data.username,
-            avatar: res.data.avatar_url,
             role: res.role ? res.role : undefined
         }
         cookie?.auth?.set({

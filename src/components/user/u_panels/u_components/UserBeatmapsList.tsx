@@ -2,6 +2,7 @@ import type { BeatmapCategory } from "@/src/types/osu";
 import BeatmapsetCard from "@/src/components/beatmap/BeatmapsetCard";
 import LoadMoreButton from "@/src/components/web/LoadMoreButton";
 import { api_user_beatmaps } from "@/src/api/user";
+import { RESULT_LIMIT } from "@/src/libs/constants";
 
 async function UserBeatmapsList(p: {
     id: number;
@@ -21,7 +22,7 @@ async function UserBeatmapsList(p: {
             <BeatmapsetCard b_set={beatmap} />
         )}
         {beatmaps.length >= p.limit ?
-            <LoadMoreButton url={`/users/${p.id}/0/lists/beatmapsets/${p.category}?offset=${p.offset + p.limit}&limit=20`} />
+            <LoadMoreButton url={`/users/${p.id}/0/lists/beatmapsets/${p.category}?offset=${p.offset + p.limit}&limit=${RESULT_LIMIT.USER.BEATMAPS}`} />
             : <></>}
     </>)
 }
