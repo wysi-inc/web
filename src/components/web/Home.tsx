@@ -57,7 +57,7 @@ async function Home({ t }: any) {
                 <div class="stat">
                     <div class="stat-title"><i class="fa-solid fa-heart" /> Collections</div>
                     <div class="stat-value">{stats.collections.toLocaleString()}</div>
-                    <div class="stat-desc">Collections uploaded</div>
+                    <div class="stat-desc">Profiles with collections uploaded</div>
                 </div>
             </section> : null
         }
