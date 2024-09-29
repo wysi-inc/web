@@ -21,14 +21,7 @@ export type ScoreType = {
     rank: string;
     replay: boolean;
     score: number;
-    statistics: {
-        count_geki: number;
-        count_300: number;
-        count_katu: number;
-        count_100: number;
-        count_50: number;
-        count_miss: number;
-    };
+    statistics: ScoreHitCounts;
     type: string;
     user_id: number;
     current_user_attributes: {
@@ -42,4 +35,13 @@ export type ScoreType = {
     beatmapset: Beatmapset,
     rank_global: number;
     user: UserScore
+}
+
+export type ScoreHitCounts = {
+    count_geki: number;
+    count_300: number;
+    count_katu: number;
+    count_100: number;
+    count_50: number;
+    count_miss: number;
 }

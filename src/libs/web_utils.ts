@@ -1,4 +1,5 @@
 import type { Mode } from "../types/osu";
+import type { ScoreHitCounts } from "../types/score";
 import type { Subdivision, UserSubdivision } from "../types/users";
 import { colors } from "./colors";
 import { subdivisionFlags } from "./countries";
@@ -123,4 +124,16 @@ export function assert(condition: any, msg?: string): asserts condition {
     if (!condition) {
         throw new Error(msg);
     }
+}
+
+export function getFCacc(hits: ScoreHitCounts, mode: Mode) {
+    let acc = 0.0;
+    switch (mode) {
+        case 'osu': acc = (100.0 * (6 * hits.count_300 + 2 * hits.count_100 + hits.count_50)) / (6 * (hits.count_50 + hits.count_100 + hits.count_300 + hits.count_miss)); break;
+        case 'taiko': acc = (100.0 * (2 * hits.count_300 + hits.count_100)) / (2 * (hits.count_300 + hits.count_100 + hits.count_miss)); break;
+        case 'fruits': acc = (100.0 * (hits.count_300 + hits.count_100 + hits.count_50)) / (hits.count_300 + hits.count_100 + hits.count_50 + hits.count_katu + hits.count_miss); break;
+        case 'mania': acc = (100.0 * (6 * hits.count_geki + 6 * hits.count_300 + 4 * hits.count_katu + 2 * hits.count_100 + hits.count_50)) / (6 * (hits.count_50 + hits.count_100 + hits.count_300 + hits.count_miss + hits.count_geki + hits.count_katu)); break;
+    };
+
+    return parseFloat(acc.toFixed(2));
 }

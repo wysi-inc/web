@@ -16,7 +16,7 @@ export const log = {
     object: (msg: any) => console.log(msg),
 };
 
-export function start_counter() {
+export function osu_api_call_logger() {
     setInterval(() => {
         log.info(`CURRENT API CALLS IN 1 MINUTE: ${api_call_counter}`);
         api_call_counter_max = Math.max(api_call_counter, api_call_counter_max);
@@ -29,7 +29,7 @@ export function apicall() {
     api_call_counter++;
 }
 
-export function start_ratelimit() {
+export function ratelimit_logger() {
     setInterval(() => {
         log.object(ratelimits);
         ratelimits.clear();

@@ -9,6 +9,7 @@ declare module "bun" {
         CROWDIN_ID: number,
         CROWDIN_SECRET: string,
         KOFI_TOKEN: string,
+        CLOUDFLARE_ZONE: string,
         CLOUDFLARE_TOKEN: string,
         STATE: "dev" | "prod",
         PORT: number,

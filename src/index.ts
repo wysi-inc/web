@@ -10,15 +10,17 @@ import { reportRoutes } from "./routes/reports";
 import { scoresRoutes } from "./routes/scores";
 import { userRoutes } from "./routes/user";
 import { connect_mongodb, connect_osu } from "./tasks/connections";
-import { below_ratelimit, log } from "./tasks/logs";
-import { update_medals } from "./tasks/updates";
+import { below_ratelimit, log, osu_api_call_logger, ratelimit_logger } from "./tasks/logs";
+import { update_medals, update_stats } from "./tasks/updates";
 
 await connect_mongodb();
 await connect_osu();
 update_medals();
+update_stats();
+ratelimit_logger();
+osu_api_call_logger();
 setInterval(() => connect_osu(), 1000 * 60 * 60 * 12);      // every 12h
 setInterval(() => update_medals(), 1000 * 60 * 60 * 12);    // every 12h
-// update_stats();
 
 
 new Elysia()

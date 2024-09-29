@@ -3,26 +3,22 @@ import type { OsekaiMedal } from "@/src/types/medals";
 import { StatsModel } from "../models/Stats";
 import { UserModel } from "../models/User";
 import { log } from "./logs";
+// import { api_cloudflare_stats } from "../api/cloudflare";
 
-async function update_stats() {
+export async function update_stats() {
     log.info("Started updating stats...");
     try {
         const user_count = await UserModel.countDocuments();
         const users_with_setup = await UserModel.countDocuments({ setup: { $exists: true, $ne: null } });
-        const users_with_collections = await UserModel.find({ collections: { $exists: true, $ne: null } });
+        const users_with_collections = await UserModel.countDocuments({ collections: { $exists: true, $nin: [null, []] } });
+        // const cloudflare = await api_cloudflare_stats();
 
         let stats = await StatsModel.findOne();
         if (!stats) stats = new StatsModel();
 
-        let collection_count = 0;
-
-        for (let u of users_with_collections) {
-            collection_count += u.collections.length;
-        }
-
         stats.users = user_count;
         stats.setups = users_with_setup;
-        stats.collections = collection_count;
+        stats.collections = users_with_collections;
         stats.updated_at = new Date();
 
         await stats.save();
