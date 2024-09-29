@@ -5,22 +5,17 @@ import type { Mode } from "@/src/types/osu";
 import DiffIcon from "../beatmap/DiffIcon";
 import ModIcon from "./ModIcon";
 import Link from "../web/Link";
-import { apicall } from "@/src/tasks/logs";
 import { api_score_details } from "@/src/api/score";
 
 async function ScorePage(p: { score_id: number }) {
     const score = await api_score_details(p.score_id);
     if (!score) return <>score not found</>;
-    apicall();
-
     const b = score.beatmap;
     const s = score.beatmapset;
     const u = score.user;
 
     const cardImg2x = `https://assets.ppy.sh/beatmaps/${s.id}/covers/card@2x.jpg?${s.id}`;
-
     const color = getDiffColor(b.difficulty_rating);
-
     const acc = (score.accuracy * 100).toFixed(2);
 
     return (<>
@@ -38,14 +33,13 @@ async function ScorePage(p: { score_id: number }) {
                                 </div>
                             </div>
                             <h2 class="text-2xl">{s.title} <span class="text-sm">by {s.artist}</span></h2>
-                            <h3 class="text-xl">[{b.version}] <span class="text-sm">mapped by <Link url={`/users/${b.user.id}`}>{b.user.username}</Link></span></h3>
+                            <h3 class="text-xl">[{b.version}] <span class="text-sm">mapped by <Link url={`/users/${s.user_id}`}>{s.creator}</Link></span></h3>
                             <div class="flex flex-row items-center gap-4">
                                 <div class="text-7xl -mt-1 mx-2" style={{ color: getGradeColor(score.rank) }}>
                                     {getGradeLetter(score.rank)}
                                 </div>
                                 <div class="flex flex-col gap-1">
-                                    <h1 class="text-5xl">{score.total_score.toLocaleString()}</h1>
-                                    <h2 class="text-2xl">{score.legacy_total_score.toLocaleString()}</h2>
+                                    <h1 class="text-5xl">{score.score.toLocaleString()}</h1>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +65,7 @@ async function ScorePage(p: { score_id: number }) {
                                 <i class="text-center w-10 fa-regular fa-clock text-2xl" />
                                 <div class="flex flex-col">
                                     <dt class="text-sm">Submitted on:</dt>
-                                    <dd class="text-lg tooltip tooltip-right" data-tip={moment(score.ended_at).fromNow()}>{moment(score.ended_at).format("MMMM Do YYYY HH:MM")}</dd>
+                                    <dd class="text-lg tooltip tooltip-right" data-tip={moment(score.created_at).fromNow()}>{moment(score.created_at).format("MMMM Do YYYY HH:MM")}</dd>
                                 </div>
                             </div>
                         </div>
@@ -96,14 +90,9 @@ async function ScorePage(p: { score_id: number }) {
                                 </div>
                                 <div class="flex flex-col">
                                     <dt class="text-xs">Max Combo</dt>
-                                    {score.legacy_perfect ?
-                                        <dd class="text-lg text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-sky-500">
-                                            {score.max_combo.toLocaleString()}x
-                                        </dd> :
-                                        <dd>
-                                            {score.max_combo.toLocaleString()}x
-                                        </dd>
-                                    }
+                                    <dd class={score.perfect ? "text-lg text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-sky-500" : ""}>
+                                        {score.max_combo.toLocaleString()}x
+                                    </dd>
                                 </div>
                                 <div class="flex flex-col">
                                     <dt class="text-xs">Performance</dt>
