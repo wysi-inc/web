@@ -120,30 +120,26 @@ async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mod
                     <h4 class="flex flex-row flex-wrap justify-between gap-2 px-2 py-1">
                         Top mappers:
                     </h4>
-                    <div class="bg-base-300 rounded-lg p-1 flex grow">
-                        <table class="grow">
-                            {mappers.map(m => (
-                                <tr>
-                                    <th class="min-w-12 p-1 text-lg">{m.count}x</th>
-                                    <td class="p-1"><UserCard user_id={m.id} username={m.name} /></td>
-                                </tr>
-                            ))}
-                        </table>
+                    <div class="bg-base-300 rounded-lg p-1 flex flex-col gap-1 grow">
+                        {mappers.map(m => (
+                            <div class="flex flex-row items-center gap-4">
+                                <div class="min-w-12 p-1 text-lg text-center">{m.count}x</div>
+                                <div class="p-1 grow"><UserCard user_id={m.id} username={m.name} /></div>
+                            </div>
+                        ))}
                     </div>
                 </div>
                 <div class="flex flex-col rounded-lg bg-neutral shadow-lg">
                     <h4 class="flex flex-row flex-wrap justify-between gap-2 px-2 py-1">
                         Top songs:
                     </h4>
-                    <div class="bg-base-300 rounded-lg p-1 flex grow">
-                        <table class="grow">
-                            {beatmaps.map(b => (
-                                <tr>
-                                    <th class="min-w-12 p-1 text-lg">{b[1]}x</th>
-                                    <td class="p-1"><BeatmapsetCard b_set={b[0]} /></td>
-                                </tr>
-                            ))}
-                        </table>
+                    <div class="bg-base-300 rounded-lg p-1 flex flex-col gap-2 grow">
+                        {beatmaps.map(b => (
+                            <div class="flex flex-row items-center gap-4">
+                                <div class="min-w-12 p-1 text-lg text-center">{b[1]}x</div>
+                                <div class="p-1 grow"><BeatmapsetCard b_set={b[0]} /></div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
