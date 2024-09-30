@@ -5,7 +5,7 @@
         "rankings": "Rankings",
         "beatmaps": "Beatmaps",
         "support": "Support",
-        "about": "About",
+        "about": "Σχετικά",
         "search": "Αναζήτηση Χρήστη",
         "search_someone": "Search someone",
         "help": "Βοηθήστε στη μετάφραση της ιστοσελίδας!",
@@ -17,8 +17,8 @@
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu! website alternative",
+        "welcome": "Καλώς ήρθατε στο wysi727.com!",
+        "foss": "Μία εναλλακτική osu! ιστοσελίδα ανοικτού κώδικα",
         "built": "Built with bun and htmx",
         "profiles": "User Profiles",
         "stats": "Top 100 Score stats",
