@@ -12,6 +12,7 @@ import { userRoutes } from "./routes/user";
 import { connect_mongodb, connect_osu } from "./tasks/connections";
 import { below_ratelimit, log, osu_api_call_logger, ratelimit_logger } from "./tasks/logs";
 import { update_medals, update_stats } from "./tasks/updates";
+import { notFound } from './routes/notFound';
 
 await connect_mongodb();
 await connect_osu();
@@ -53,5 +54,6 @@ new Elysia()
     .use(beatmapRoutes)
     .use(beatmapsetRoutes)
     .use(scoresRoutes)
+    .use(notFound)
     .onStart(() => log.success(`Listening on port ${env.PORT}`))
     .listen(env.PORT);

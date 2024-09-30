@@ -1,5 +1,5 @@
 import { Elysia, t } from 'elysia'
-import type { Category, Mode, Route } from '../types/osu';
+import type { Category, Mode } from '../types/osu';
 import Rankings from '../components/user/Rankings';
 import HtmxPage from '../libs/routes';
 

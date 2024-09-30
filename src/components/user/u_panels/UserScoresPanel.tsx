@@ -1,11 +1,13 @@
 import type { Mode } from "@/src/types/osu";
 import type { ScoreCategory } from "@/src/types/osu";
 import UserScoresList from "./u_components/UserScoresList";
+import type { UserCookie } from "@/src/types/users";
 
 type Props = {
     user_id: number;
     mode: Mode;
     category: ScoreCategory;
+    user?: UserCookie | null
 }
 
 type TabProps = {
@@ -28,7 +30,7 @@ const UserScoresPanel = (p: Props) => {
             <div role="tabpanel" class="tab-content pt-4 col-span-full">
                 <div id={`scores-list-${cat}`} class="grid grid-cols-1 gap-4 col-span-full">
                     {current ?
-                        <UserScoresList id={p.user_id} mode={p.mode} category={p.category} offset={0} limit={5} />
+                        <UserScoresList id={p.user_id} mode={p.mode} category={p.category} offset={0} limit={5} user={p.user} />
                         :
                         <span class="loading loading-spinner htmx-indicator" id={`scores-loading-${cat}`} />
                     }

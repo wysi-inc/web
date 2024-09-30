@@ -23,16 +23,16 @@ export async function api_scores_beatmap(
 }
 
 export async function api_scores_user_category(
-    user: number,
+    user_id: number,
     category: ScoreCategory,
     obj: {
         mode: Mode,
         offset?: number,
         limit?: number,
     },
-    token?: string
+    user?: UserCookie | null
 ): Promise<ScoreType[] | null> {
-    const url = new URL(`https://osu.ppy.sh/api/v2/users/${user}/scores/${category}`);
+    const url = new URL(`https://osu.ppy.sh/api/v2/users/${user_id}/scores/${category}`);
     Object.keys(obj).forEach(key => url.searchParams.append(key, obj[key]));
-    return await osu_fetch({ url, token });
+    return await osu_fetch({ url, user });
 }

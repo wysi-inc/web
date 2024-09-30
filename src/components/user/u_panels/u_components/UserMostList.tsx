@@ -2,19 +2,19 @@ import { api_user_most_played } from "@/src/api/user";
 import MostCard from "./MostCard";
 import LoadMoreButton from "@/src/components/web/LoadMoreButton";
 import { RESULT_LIMIT } from "@/src/libs/constants";
+import type { UserCookie } from "@/src/types/users";
 
-type Props = {
-    id: number;
-    offset: number;
-    limit: number;
-}
-
-const UserMostList = async (p: Props) => {
+async function UserMostList(p: {
+    id: number,
+    offset: number,
+    limit: number,
+    user?: UserCookie | null
+}) {
 
     const plays = await api_user_most_played(p.id, {
         offset: p.offset,
         limit: p.limit
-    });
+    }, p.user);
 
     if (!plays) return <></>;
     if (plays.length === 0 && p.offset === 0) return <div>This user hasn't played yet</div>;

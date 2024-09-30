@@ -10,7 +10,10 @@ export async function api_beatmapset_details(
     return await osu_fetch({ url, user });
 }
 
-export async function api_beatmap_details(id: number, token?: string): Promise<BeatmapExtended | null> {
+export async function api_beatmap_details(
+    id: number,
+    user?: UserCookie | null
+): Promise<BeatmapExtended | null> {
     const url = new URL(`https://osu.ppy.sh/api/v2/beatmaps/${id}`);
-    return await osu_fetch({ url, token });
+    return await osu_fetch({ url, user });
 }

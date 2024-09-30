@@ -6,11 +6,11 @@ import type { UserCookie } from "@/src/types/users";
 import { api_ranking } from "@/src/api/ranking";
 
 async function Rankings(p: {
-    mode: Mode;
-    category: Category;
-    page: number;
-    country?: string
-    user?: UserCookie | null;
+    mode: Mode,
+    category: Category,
+    page: number,
+    country?: string,
+    user?: UserCookie | null,
 }) {
 
     let obj: any = {
@@ -27,7 +27,7 @@ async function Rankings(p: {
 
     return (<>
         <Title title="Rankings" />
-        <Pagination mode={p.mode} category={p.category} page={p.page} />
+        <Pagination mode={p.mode} category={p.category} page={p.page} country={p.country} />
         <table class="table p-4 bg-base-100 rounded-lg">
             <tr>
                 <th></th>
@@ -43,7 +43,7 @@ async function Rankings(p: {
                 <UserRankingCard row={row} page={p.page} index={i} />
             )}
         </table>
-        <Pagination mode={p.mode} category={p.category} page={p.page} />
+        <Pagination mode={p.mode} category={p.category} page={p.page} country={p.country} />
     </>);
 }
 

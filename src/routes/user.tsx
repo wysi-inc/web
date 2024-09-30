@@ -18,7 +18,6 @@ import CollectionsForm from '../components/user/u_panels/u_components/Collection
 import UserYearPanel from '../components/user/u_panels/UserYearPanel';
 import UserSocial from '../components/user/u_panels/UserSocial';
 import { plugins } from './plugins';
-import { verifyUser } from '../libs/auth';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
     .use(plugins)
@@ -34,33 +33,36 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             </HtmxPage>
         ))
         .group("/panels", (_) => _
-            .post("/scores/:category", ({ params }) => (
+            .post("/scores/:category", ({ params, user }) => (
                 <UserScoresPanel
                     user_id={Number(params.id)}
                     mode={params.mode as Mode}
                     category={params.category as ScoreCategory}
+                    user={user}
                 />)
             )
-            .post("/beatmapsets/:category", ({ params }) => (
+            .post("/beatmapsets/:category", ({ params, user }) => (
                 <UserBeatmapsPanel
                     id={Number(params.id)}
                     category={params.category as BeatmapCategory}
+                    user={user}
                 />
             ))
-            .post("/summary", ({ params }) => (
+            .post("/summary", ({ params, user }) => (
                 <UserSummaryPanel
                     user_id={Number(params.id)}
                     mode={params.mode as Mode}
+                    user={user}
                 />
             ))
             .post("/collections", ({ params, user }) => (
                 <UserCollectionsPanel user_id={Number(params.id)} logged_id={user?.id} />
             ))
-            .post("/most", ({ params }) => (
-                <UserMostPanel user_id={Number(params.id)} />
+            .post("/most", ({ params, user }) => (
+                <UserMostPanel user_id={Number(params.id)} user={user} />
             ))
             .post("/year", ({ params, user }) => (
-                <UserYearPanel user_id={Number(params.id)} mode={params.mode as Mode} logged_id={user?.id} />
+                <UserYearPanel user_id={Number(params.id)} mode={params.mode as Mode} logged_id={user?.id} user={user} />
             ))
             .post("/setup", ({ t, params, user }) => (
                 <UserSetupPanel t={t} logged_id={user?.id} page_id={Number(params.id)} />
@@ -70,28 +72,31 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             ))
         )
         .group("/lists", (_) => _
-            .post("/scores/:category", ({ params, query }) => (
+            .post("/scores/:category", ({ params, query, user }) => (
                 <UserScoresList
                     id={Number(params.id)}
                     mode={params.mode as Mode}
                     category={params.category as ScoreCategory}
                     offset={Number(query.offset)}
                     limit={Number(query.limit)}
+                    user={user}
                 />
             ))
-            .post("/beatmapsets/:category", ({ params, query }) => (
+            .post("/beatmapsets/:category", ({ params, query, user }) => (
                 <UserBeatmapsList
                     id={Number(params.id)}
                     category={params.category as BeatmapCategory}
                     offset={Number(query.offset)}
                     limit={Number(query.limit)}
+                    user={user}
                 />
             ))
-            .post("/most", ({ params, query }) => (
+            .post("/most", ({ params, query, user }) => (
                 <UserMostList
                     id={Number(params.id)}
                     offset={Number(query.offset)}
                     limit={Number(query.limit)}
+                    user={user}
                 />
             ))
             .post("/collections/:name", ({ params, query }) => (
@@ -140,8 +145,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} />
         })
         .get("/download", async ({ params }) => {
-            const file = await getCollectionFile(Number(params.id));
-            return file;
+            return await getCollectionFile(Number(params.id))
         })
     )
     .group("/socials", _ => _

@@ -11,7 +11,7 @@ export async function api_me_details(token?: string): Promise<UserBasic | null> 
 export async function api_user_details(
     id: number | string,
     mode?: Mode,
-    user?: UserCookie
+    user?: UserCookie | null
 ): Promise<UserBasic | null> {
     const url = new URL(`https://osu.ppy.sh/api/v2/users/${id}${mode ? `/${mode}` : ""}`);
     return await osu_fetch({ url, user });
@@ -24,7 +24,7 @@ export async function api_user_beatmaps(
         offset: number,
         limit: number
     },
-    user?: UserCookie
+    user?: UserCookie | null
 ): Promise<Beatmapset[] | null> {
     const url = new URL(`https://osu.ppy.sh/api/v2/users/${id}/beatmapsets/${type}`);
     Object.keys(obj).forEach(key => url.searchParams.append(key, obj[key]));
@@ -37,7 +37,7 @@ export async function api_user_most_played(
         offset: number,
         limit: number
     },
-    user?: UserCookie
+    user?: UserCookie | null
 ): Promise<BeatmapsetCount[] | null> {
     const url = new URL(`https://osu.ppy.sh/api/v2/users/${id}/beatmapsets/most_played`);
     Object.keys(obj).forEach(key => url.searchParams.append(key, obj[key]));
