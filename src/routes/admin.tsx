@@ -18,21 +18,19 @@ export function isAdmin(user: UserCookie) {
 
 export const adminRoutes = new Elysia({ prefix: '/admin' })
     .use(plugins)
-    .get("/", async ({ lang, t, set, request, jwt, cookie }) => {
-        const user = await verifyUser(jwt, cookie);
+    .get("/", ({ lang, t, set, request, user }) => {
         if (!user || !isAdmin(user)) {
             set.redirect = "/";
             return "Unauthorized";
         }
         return (
-            <HtmxPage lang={lang} t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
+            <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
                 <Admin t={t} user={user} />
             </HtmxPage>
         );
     })
     .group("/badges", _ => _
-        .put("/", async ({ body, jwt, cookie }) => {
-            const user = await verifyUser(jwt, cookie);
+        .put("/", async ({ body, user }) => {
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await addBadge(body.id, Number(body.badge));
             if (res.error) return error(res.code, res.msg);
@@ -43,15 +41,13 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
                 badge: t.String()
             })
         })
-        .delete("/:id/:badge", async ({ params, jwt, cookie }) => {
-            const user = await verifyUser(jwt, cookie);
+        .delete("/:id/:badge", async ({ params, user }) => {
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await removeBadge(Number(params.id), Number(params.badge));
             if (res.error) return error(res.code, res.msg);
             return <Alert type='success' msg={res.msg} />;
         })
-        .post("/:id/sort", async ({ jwt, cookie, body, params }) => {
-            const user = await verifyUser(jwt, cookie);
+        .post("/:id/sort", async ({ params, body, user }) => {
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await sortBadges(Number(params.id), body.badges);
             if (res.error) return error(res.code, res.msg);
@@ -63,8 +59,7 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
         })
     )
     .group("/roles", _ => _
-        .put("/", async ({ body, jwt, cookie }) => {
-            const user = await verifyUser(jwt, cookie);
+        .put("/", async ({ body, user }) => {
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await setRole(body.id, body.role);
             if (res.error) return error(res.code, res.msg);
@@ -75,8 +70,7 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
                 role: t.String()
             })
         })
-        .delete("/:id", async ({ params, jwt, cookie }) => {
-            const user = await verifyUser(jwt, cookie);
+        .delete("/:id", async ({ params, user }) => {
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await removeRole(Number(params.id));
             if (res.error) return error(res.code, res.msg);
@@ -84,8 +78,7 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
         })
     )
     .group("/tablets", _ => _
-        .put("/", async ({ body, jwt, cookie }) => {
-            const user = await verifyUser(jwt, cookie);
+        .put("/", async ({ body, user }) => {
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await addTablet(body.name, body.w, body.h);
             if (res.error) return error(res.code, res.msg);
@@ -97,8 +90,7 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
                 h: t.Numeric()
             })
         })
-        .delete("/:id", async ({ params, jwt, cookie }) => {
-            const user = await verifyUser(jwt, cookie);
+        .delete("/:id", async ({ params, user }) => {
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await removeTablet(params.id);
             if (res.error) return error(res.code, res.msg);

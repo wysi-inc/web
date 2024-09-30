@@ -1,5 +1,6 @@
 import type { Mod, Mode, ScoreCategory } from "../types/osu";
 import type { BeatmapScores, ScoreType } from "../types/score";
+import type { UserCookie } from "../types/users";
 import { osu_fetch } from "./api";
 
 export async function api_score_details(id: number, token?: string): Promise<ScoreType | null> {
@@ -14,10 +15,11 @@ export async function api_scores_beatmap(
         mods: Mod[],
         type: "global" | "country" | "friend"
     },
-    token?: string): Promise<BeatmapScores | null> {
+    user?: UserCookie | null
+): Promise<BeatmapScores | null> {
     const url = new URL(`https://osu.ppy.sh/api/v2/beatmaps/${id}/scores`);
     Object.keys(obj).forEach(key => url.searchParams.append(key, obj[key]));
-    return await osu_fetch({ url, token });
+    return await osu_fetch({ url, user });
 }
 
 export async function api_scores_user_category(

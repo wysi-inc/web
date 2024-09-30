@@ -47,6 +47,7 @@ export type Beatmap = {
     total_length: number
     user_id: number
     version: string
+    mode_int: number
 }
 
 export type BeatmapExtended = Beatmap & {
@@ -91,6 +92,8 @@ export type Beatmapset = {
     nsfw: boolean
     offset: number
     play_count: number
+    submitted_date: Date
+    ranked_date: Date
     preview_url: string
     source: string
     status: BeatmapsetStatus
@@ -99,12 +102,19 @@ export type Beatmapset = {
     title_unicode: string
     user_id: number
     video: boolean,
+    tags: string,
     beatmaps?: Beatmap[]
     converts?: Beatmap[]
-    description?: string
-    genre?: string
+    description?: {
+        description: string
+    }
+    genre?: {
+        name: string
+    }
     has_favourited?: boolean
-    language?: string
+    language?: {
+        name: string
+    }
     nominations?: number[]
     pack_tags?: string[]
     ratings?: any

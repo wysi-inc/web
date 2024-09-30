@@ -1,22 +1,28 @@
 import type { Category, Mode } from "@/src/types/osu";
 import Pagination from "./u_panels/u_components/Pagination";
 import UserRankingCard from "./UserRankingCard";
-import { getRankings } from "@/src/db/users/get_user";
 import Title from "../web/Title";
-import { apicall } from "@/src/tasks/logs";
+import type { UserCookie } from "@/src/types/users";
+import { api_ranking } from "@/src/api/ranking";
 
 async function Rankings(p: {
     mode: Mode;
     category: Category;
     page: number;
     country?: string
+    user?: UserCookie | null;
 }) {
 
-    const users = await getRankings(p.mode, p.category, p.page, p.country);
-    apicall();
+    let obj: any = {
+        "cursor[page]": p.page,
+        filter: "all",
+    };
+    if (p.country && p.category !== "score") {
+        obj.country = p.country.toUpperCase();
+    }
+    const users = await api_ranking(p.mode, p.category, obj, p.user);
 
-    if ((users as any).error) return <div>Rankings not found</div>;
-    if (!users) return <div>Loading...</div>;
+    if (!users) return <div>No users fount</div>;
     if (!users.ranking) return <div>No users found</div>;
 
     return (<>

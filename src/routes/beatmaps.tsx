@@ -7,7 +7,7 @@ import BeatmapsetPage from '../components/beatmap/BeatmapsetPage';
 import BeatmapsetSearch from '../components/beatmap/BeatmapsetSearch';
 import { verifyUser } from '../libs/auth';
 import HtmxPage from '../libs/routes';
-import { modeUnion } from '../types/osu';
+import { modeUnion, scoresUnion } from '../types/osu';
 import { plugins } from './plugins';
 const queryBodyElysia = {
     body: t.Object({
@@ -50,8 +50,8 @@ export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
 
 export const beatmapsetRoutes = new Elysia({ prefix: '/beatmapsets' })
     .use(plugins)
-    .get("/", async ({ lang, t, request, jwt, cookie }) => (
-        <HtmxPage lang={lang} t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
+    .get("/", ({ lang, t, request, user }) => (
+        <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
             <BeatmapsetSearch />
         </HtmxPage>
     ))
@@ -61,18 +61,18 @@ export const beatmapsetRoutes = new Elysia({ prefix: '/beatmapsets' })
     .post("/list/:offset", ({ body, params }) => (
         <BeatmapsList body={body} offset={params.offset} />
     ), queryBodyElysia)
-    .get("/:set_id", async ({ lang, t, request, jwt, cookie, params }) => (
-        <HtmxPage lang={lang} t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
-            <BeatmapsetPage set_id={params.set_id} />
+    .get("/:set_id", ({ lang, t, request, params, user }) => (
+        <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
+            <BeatmapsetPage set_id={params.set_id} user={user} />
         </HtmxPage>
     ), {
         params: t.Object({
             set_id: t.Numeric()
         })
     })
-    .get("/:set_id/:beatmap_id", async ({ lang, t, request, jwt, cookie, params }) => (
-        <HtmxPage lang={lang} t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
-            <BeatmapsetPage set_id={params.set_id} beatmap_id={params.beatmap_id} />
+    .get("/:set_id/:beatmap_id", ({ lang, t, request, params, user }) => (
+        <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
+            <BeatmapsetPage set_id={params.set_id} beatmap_id={params.beatmap_id} user={user} />
         </HtmxPage>
     ), {
         params: t.Object({
@@ -80,14 +80,14 @@ export const beatmapsetRoutes = new Elysia({ prefix: '/beatmapsets' })
             beatmap_id: t.Numeric()
         })
     })
-    .post("/:set_id/:beatmap_id/scores/:mode", async ({ params, jwt, cookie, body }) => {
-        const user = await verifyUser(jwt, cookie);
-        return <BeatmapScoreTable b_id={params.beatmap_id} logged_id={user?.id} mode={params.mode} body={body} />
-    }, {
+    .post("/:set_id/:beatmap_id/scores/:mode/:type", ({ params, user, body }) => (
+        <BeatmapScoreTable b_id={params.beatmap_id} mode={params.mode} body={body} user={user} type={params.type} />
+    ), {
         params: t.Object({
             set_id: t.Numeric(),
             beatmap_id: t.Numeric(),
-            mode: modeUnion
+            mode: modeUnion,
+            type: scoresUnion
         })
     })
     .post("/collectioncard/:hash", ({ params }) => (

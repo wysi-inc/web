@@ -21,7 +21,7 @@ const HtmxPage = async (p: Props) => {
     }
 
     if ("cookie" in p) {
-        const user = await verifyUser(p.jwt, p.cookie?.auth?.value);
+        const user = await verifyUser(p.jwt, p.cookie);
         return <>
             <BaseHtml lang={p.lang} t={p.t} user={user}>
                 {p.children}

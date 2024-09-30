@@ -3,14 +3,11 @@ import { html } from "@elysiajs/html";
 import jwt from "@elysiajs/jwt";
 import { env } from "bun";
 import { get_translations } from "../tasks/files";
+import { verifyUser } from "../libs/auth";
 
 const translations = await get_translations();
 
 export const plugins = new Elysia()
-    .derive(({ cookie }) => {
-        const lang = cookie?.lang?.value || "en";
-        return { t: translations[lang], lang }
-    })
     .use(html())
     .use(jwt({
         secret: env.OSU_SECRET,
@@ -21,3 +18,8 @@ export const plugins = new Elysia()
             path: '/',
         }
     }))
+    .derive(async ({ cookie, jwt }) => {
+        const user = await verifyUser(jwt, cookie);
+        const lang = cookie?.lang?.value || "en";
+        return { t: translations[lang], lang, user }
+    })

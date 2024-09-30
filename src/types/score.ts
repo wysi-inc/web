@@ -3,7 +3,10 @@ import type { UserScore } from "./users";
 
 export type BeatmapScores = {
     scores: ScoreType[],
-    userScore?: ScoreType
+    userScore?: {
+        score: ScoreType,
+        position: number
+    }
 };
 
 export type ScoreType = {

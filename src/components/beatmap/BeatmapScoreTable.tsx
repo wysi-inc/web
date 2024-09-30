@@ -8,12 +8,14 @@ import Clan from "../user/u_panels/u_components/Clan";
 import Flag from "../user/u_panels/u_components/Flag";
 import SubdivisionFlag from "../user/u_panels/u_components/SubdivisionFlag";
 import Link from "../web/Link";
+import type { UserCookie } from "@/src/types/users";
 
 async function BeatmapScoreTable(p: {
     b_id: number,
     mode: Mode,
     body?: any,
-    logged_id?: number,
+    user?: UserCookie | null
+    type?: "global" | "country" | "friend"
 }) {
 
     const mods = Object.entries(p.body);
@@ -22,15 +24,15 @@ async function BeatmapScoreTable(p: {
     const scores = await api_scores_beatmap(p.b_id, {
         mode: p.mode,
         mods: mod_names,
-        type: "global",
-    });
+        type: p.type || "global",
+    }, p.user);
 
     if (!scores || !scores.scores) return <>No scores found</>;
 
     return (<>
         <BigScore score={scores.scores[0]} mode={p.mode} position={1} />
         {scores.userScore ?
-            <BigScore score={scores.userScore} mode={p.mode} position={0} />
+            <BigScore score={scores.userScore.score} mode={p.mode} position={scores.userScore.position} />
             : null
         }
         <table class="table table-xs table-zebra bg-base-300 rounded-lg">

@@ -17,13 +17,19 @@ export async function osu_fetch(o: FetchOptions): Promise<any | null> {
         let token = "";
         if ("token" in o && o.token) {
             token = o.token;
+            log.info("Using parameter token");
         } else if ("user" in o && o.user) {
             const tokenObject = await TokenModel.findOne({ user_id: o.user.id })
             if (tokenObject) {
-                token = tokenObject.token;
+                token = tokenObject.access_token;
+                log.info("Using user token");
+            } else {
+                token = OSU_API_TOKEN
+                log.info("Using default token");
             }
         } else {
             token = OSU_API_TOKEN
+            log.info("Using default token");
         }
 
         const headers = {

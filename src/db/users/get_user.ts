@@ -29,14 +29,6 @@ export async function getRankings(
     country?: string
 ): Promise<RankingsType | null> {
     try {
-        let obj: any = {
-            "cursor[page]": page,
-            filter: "all",
-        };
-        if (country && category !== "score") {
-            obj.country = country.toUpperCase();
-        }
-        return await api_ranking(mode, category, obj);
     } catch (err) {
         log.error("Error getting rankings", err);
         return null;

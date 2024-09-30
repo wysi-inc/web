@@ -1,5 +1,5 @@
 import type { Category, Mode } from "../types/osu";
-import type { RankingsType } from "../types/users";
+import type { RankingsType, UserCookie } from "../types/users";
 import { osu_fetch } from "./api";
 
 export async function api_ranking(
@@ -11,9 +11,9 @@ export async function api_ranking(
         country?: string,
         variant?: string
     },
-    token?: string
+    user?: UserCookie | null
 ): Promise<RankingsType | null> {
     const url = new URL(`https://osu.ppy.sh/api/v2/rankings/${mode}/${category}`);
     Object.keys(obj).forEach(key => url.searchParams.append(key, obj[key]));
-    return await osu_fetch({ url, token });
+    return await osu_fetch({ url, user });
 }

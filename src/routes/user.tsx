@@ -22,23 +22,17 @@ import { verifyUser } from '../libs/auth';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
     .use(plugins)
-    .get("/", async ({ lang, t, request, cookie, params, jwt }) => {
-        const user = await verifyUser(jwt, cookie);
-        return <>
-            <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
-                <UserPage t={t} user_id={params.id} logged={user} />
-            </HtmxPage>
-        </>
-    })
+    .get("/", async ({ lang, t, request, params, user }) => (
+        <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
+            <UserPage t={t} user_id={params.id} logged={user} />
+        </HtmxPage>
+    ))
     .group("/:mode", (_) => _
-        .get("/", async ({ lang, t, request, cookie, params, jwt }) => {
-            const user = await verifyUser(jwt, cookie);
-            return (
-                <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
-                    <UserPage t={t} logged={user} user_id={params.id} mode={params.mode as Mode} />
-                </HtmxPage>
-            );
-        })
+        .get("/", ({ lang, t, request, params, user }) => (
+            <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
+                <UserPage t={t} logged={user} user_id={params.id} mode={params.mode as Mode} />
+            </HtmxPage>
+        ))
         .group("/panels", (_) => _
             .post("/scores/:category", ({ params }) => (
                 <UserScoresPanel
@@ -59,25 +53,21 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                     mode={params.mode as Mode}
                 />
             ))
-            .post("/collections", async ({ cookie, params, jwt }) => {
-                const user = await verifyUser(jwt, cookie);
-                return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user?.id} />
-            })
+            .post("/collections", ({ params, user }) => (
+                <UserCollectionsPanel user_id={Number(params.id)} logged_id={user?.id} />
+            ))
             .post("/most", ({ params }) => (
                 <UserMostPanel user_id={Number(params.id)} />
             ))
-            .post("/year", async ({ params, jwt, cookie }) => {
-                const user = await verifyUser(jwt, cookie);
-                return <UserYearPanel user_id={Number(params.id)} mode={params.mode as Mode} logged_id={user?.id} />
-            })
-            .post("/setup", async ({ t, params, jwt, cookie }) => {
-                const user = await verifyUser(jwt, cookie);
-                return <UserSetupPanel t={t} logged_id={user?.id} page_id={Number(params.id)} />
-            })
-            .post("/skins", async ({ params, jwt, cookie }) => {
-                const user = await verifyUser(jwt, cookie);
-                return <UserSkinsPanel user_id={Number(params.id)} logged_id={user?.id} />
-            })
+            .post("/year", ({ params, user }) => (
+                <UserYearPanel user_id={Number(params.id)} mode={params.mode as Mode} logged_id={user?.id} />
+            ))
+            .post("/setup", ({ t, params, user }) => (
+                <UserSetupPanel t={t} logged_id={user?.id} page_id={Number(params.id)} />
+            ))
+            .post("/skins", ({ params, user }) => (
+                <UserSkinsPanel user_id={Number(params.id)} logged_id={user?.id} />
+            ))
         )
         .group("/lists", (_) => _
             .post("/scores/:category", ({ params, query }) => (
@@ -112,8 +102,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             ))
         )
     )
-    .put("/dan", async ({ params, cookie, body, jwt }) => {
-        const user = await verifyUser(jwt, cookie);
+    .put("/dan", async ({ params, body, user }) => {
         if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
         const res = await updateDan(user.id, body.dan);
         if (res.error) return error(res.code, res.msg);
@@ -124,8 +113,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         })
     })
     .group("/setup", _ => _
-        .put("/submit", async ({ t, params, cookie, body, jwt }) => {
-            const user = await verifyUser(jwt, cookie);
+        .put("/submit", async ({ t, params, body, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const setup = await saveSetup(user.id, body);
             if (!setup) return "Failed to save setup, reload the page and try again.";
@@ -133,8 +121,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         })
     )
     .group("/collections", _ => _
-        .post("/parse", async ({ params, cookie, body, jwt }) => {
-            const user = await verifyUser(jwt, cookie);
+        .post("/parse", async ({ params, body, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             return <CollectionsForm file={body.collection} user_id={user.id} />;
         }, {
@@ -142,14 +129,12 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 collection: t.Any()
             })
         })
-        .put("/submit", async ({ params, cookie, body, jwt }) => {
-            const user = await verifyUser(jwt, cookie);
+        .put("/submit", async ({ params, body, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const collections = await saveCollection(body as any, user.id);
             return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} collections={collections as any} />
         })
-        .delete("/delete", async ({ params, cookie, jwt }) => {
-            const user = await verifyUser(jwt, cookie);
+        .delete("/delete", async ({ params, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             await deleteCollections(user.id);
             return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} />
@@ -160,8 +145,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         })
     )
     .group("/socials", _ => _
-        .put("/submit", async ({ params, cookie, body, jwt }) => {
-            const user = await verifyUser(jwt, cookie);
+        .put("/submit", async ({ params, body, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const res = await saveSocial(user.id, body.username, body.platform);
             if (res.error) return error(res.code, res.msg);
@@ -172,15 +156,13 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 platform: t.String()
             })
         })
-        .delete("/delete/:platform", async ({ params, cookie, jwt }) => {
-            const user = await verifyUser(jwt, cookie);
+        .delete("/delete/:platform", async ({ params, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const res = await deleteSocial(user.id, params.platform);
             if (res.error) return error(res.code, res.msg);
             return <></>;
         })
-        .post("/sort", async ({ jwt, cookie, body, params }) => {
-            const user = await verifyUser(jwt, cookie);
+        .post("/sort", async ({ params, body, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const res = await sortSocials(Number(params.id), body.platforms);
             if (res.error) return error(res.code, res.msg);
@@ -192,8 +174,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         })
     )
     .group("/skins", _ => _
-        .put("/submit", async ({ params, cookie, body, jwt }) => {
-            const user = await verifyUser(jwt, cookie);
+        .put("/submit", async ({ params, body, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const res = await addSkin(Number(params.id), body.skin_id);
             if (res.error) return error(res.code, res.msg);
@@ -203,8 +184,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 skin_id: t.String()
             })
         })
-        .delete("/delete/:skin_id", async ({ params, cookie, jwt, query }) => {
-            const user = await verifyUser(jwt, cookie);
+        .delete("/delete/:skin_id", async ({ params, query, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const res = await deleteSkin(Number(params.id), `${params.skin_id}${query.v ? `?v=${query.v}` : ""}`);
             if (res.error) return error(res.code, res.msg);
@@ -214,8 +194,7 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
                 v: t.Optional(t.String())
             }))
         })
-        .post("/sort", async ({ jwt, cookie, body, params }) => {
-            const user = await verifyUser(jwt, cookie);
+        .post("/sort", async ({ params, body, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const res = await sortSkins(Number(params.id), body.skins);
             if (res.error) return error(res.code, res.msg);

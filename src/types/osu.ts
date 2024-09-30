@@ -18,6 +18,12 @@ export const modeUnion = t.Union([
     t.Literal("mania"),
 ])
 
+export const scoresUnion = t.Union([
+    t.Literal("global"),
+    t.Literal("country"),
+    t.Literal("friend"),
+])
+
 export interface JWTPayloadSpec {
     iss?: string;
     sub?: string;
