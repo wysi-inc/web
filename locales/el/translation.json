@@ -2,12 +2,12 @@
     "nav": {
         "home": "Αρχική Σελίδα",
         "users": "Χρήστες",
-        "rankings": "Rankings",
+        "rankings": "Κατατάξεις",
         "beatmaps": "Beatmaps",
-        "support": "Support",
+        "support": "Υποστήριξη",
         "about": "Σχετικά",
         "search": "Αναζήτηση Χρήστη",
-        "search_someone": "Search someone",
+        "search_someone": "Αναζήτηση χρήστη",
         "help": "Βοηθήστε στη μετάφραση της ιστοσελίδας!",
         "log": {
             "login": "Σύνδεση με osu!",
@@ -19,74 +19,74 @@
     "home": {
         "welcome": "Καλώς ήρθατε στο wysi727.com!",
         "foss": "Μία εναλλακτική osu! ιστοσελίδα ανοικτού κώδικα",
-        "built": "Built with bun and htmx",
-        "profiles": "User Profiles",
-        "stats": "Top 100 Score stats",
-        "search": "Beatmap Search",
-        "calculator": "Built-in PP Calculator",
-        "setup": "Share your setup!",
-        "collections": "Upload your collections!"
+        "built": "Δημιουργήθηκε με bun και htmx",
+        "profiles": "Προφίλ Χρηστών",
+        "stats": "Στατιστικά κορυφαίων 100 σκορ",
+        "search": "Αναζήτηση Beatmap",
+        "calculator": "Ενσωματωμένη Αριθμομηχανή PP",
+        "setup": "Μοιραστείτε τις ρυθμίσεις σας!",
+        "collections": "Μεταφορτώστε τις συλλογές σας!"
     },
     "user": {
         "sections": {
-            "expand": "Expand",
-            "about": "About",
+            "expand": "Επέκταση",
+            "about": "Σχετικά",
             "beatmaps": "Beatmaps",
-            "top": "Top",
+            "top": "Κορυφαία",
             "medals": {
                 "title": "Μετάλλια",
-                "recent": "Recent Medals",
-                "rarest": "Rarest Medal",
-                "show": "Show all"
+                "recent": "Πρόσφατα Μετάλλια",
+                "rarest": "Σπανιότερα Μετάλλια",
+                "show": "Εμφάνιση όλων"
             },
             "year": {
-                "title": "Year",
-                "info": "This is a recap of this year so far, the data will be reset at January 1st"
+                "title": "Έτος",
+                "info": "Αυτή είναι μία ανακεφαλαίωση της χρονιάς μέχρι στιγμής, τα δεδομένα θα εκκαθαριστούν την 1η Ιανουαρίου"
             },
-            "most": "Most Played",
+            "most": "Πιο πολυπαιγμένα",
             "scores": {
-                "title": "Scores",
-                "info": "Hover over a grayed out PP to see the (if FC) PP value",
+                "title": "Σκορ",
+                "info": "Τοποθετήστε πάνω από γκρι PP για να δείτε την (αν FC) αξία PP",
                 "tabs": {
-                    "pinned": "Pinned",
-                    "best": "Best",
-                    "first": "First",
-                    "recent": "Recent"
+                    "pinned": "Καρφιτσωμένα",
+                    "best": "Καλύτερες Επιδόσεις",
+                    "first": "Πρώτες Θέσεις",
+                    "recent": "Πρόσφατα"
                 }
             },
             "history": {
                 "title": "Ιστορικό",
                 "tabs": {
-                    "global": "Global",
-                    "country": "Country",
-                    "plays": "Plays",
-                    "replays": "Replays"
+                    "global": "Παγκόσμια",
+                    "country": "Χώρα",
+                    "plays": "Σκορς",
+                    "replays": "Αναπαραγωγές"
                 }
             },
             "summary": {
-                "title": "Summary",
-                "info": "This is a quick summary of your top 100 plays",
+                "title": "Σύνοψη",
+                "info": "Αυτή είναι μία σύντομη περίληψη των κορυφαίων 100 σκορ σας",
                 "tabs": {
-                    "hit_ratios": "Hit Ratios",
-                    "grade_ratios": "Grade Ratios",
-                    "average_play": "Average Play"
+                    "hit_ratios": "Αναλογίες Hit",
+                    "grade_ratios": "Αναλογίες Βαθμού",
+                    "average_play": "Μέσο σκορ"
                 }
             },
             "collections": {
-                "title": "Collections",
-                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "title": "Συλλογές",
+                "info": "Όσα beatmaps δεν υπάρχουν στο osu!website δεν θα κατέβουν (π.χ.: osu!trainer, customdiffs, unsubmitted beatmaps...)"
             },
             "setup": {
                 "title": "Εγκατάσταση",
                 "tabs": {
-                    "tablet": "Tablet",
-                    "keyboard": "Keyboard",
-                    "mouse": "Mouse",
+                    "tablet": "Γραφίδα",
+                    "keyboard": "Πληκτρολόγιο",
+                    "mouse": "Ποντίκι",
                     "peripherals": "Περιφερειακά",
                     "computer": "Υπολογιστής"
                 },
                 "components": {
-                    "os": "OS",
+                    "os": "Λειτουργικό Σύστημα",
                     "cpu": "Επεξεργαστής",
                     "gpu": "Επεξεργαστής γραφικών",
                     "ram": "Μνήμη",
@@ -98,26 +98,26 @@
                 "peripherals": {
                     "mousepad": "Mousepad",
                     "keypad": "Keypad",
-                    "headphones": "Headphones",
-                    "camera": "Camera",
-                    "microphone": "Microphone",
-                    "monitor": "Monitor",
-                    "audio": "Audio",
-                    "desk": "Desk",
-                    "chair": "Chair"
+                    "headphones": "Ακουστικά",
+                    "camera": "Κάμερα",
+                    "microphone": "Μικρόφωνο",
+                    "monitor": "Οθόνη",
+                    "audio": "Ήχος",
+                    "desk": "Γραφείο",
+                    "chair": "Καρέκλα"
                 },
-                "name": "Name",
+                "name": "Μοντέλο",
                 "model": "Μοντέλο",
                 "size": "Μέγεθος",
                 "area": "Περιοχή",
-                "width": "Width",
-                "height": "Height",
+                "width": "Πλάτος",
+                "height": "Ύψος",
                 "position": "Θέση",
-                "dpi": "Sensitivity",
-                "mult": "Multiplier",
-                "kb_layout": "Keyboard Layout",
+                "dpi": "Ευαισθησία",
+                "mult": "Πολλαπλασιαστής",
+                "kb_layout": "Διάταξη πληκτρολογίου",
                 "layout": {
-                    "k0": "None",
+                    "k0": "Κανένα",
                     "k2": "2 Πλήκτρα",
                     "k3": "3 Πλήκτρα",
                     "k4": "4 Πλήκτρα",
@@ -134,9 +134,9 @@
         "country_rank": "Εθνική Κατάταξη",
         "play_time": "Χρόνος Παιχνιδιού",
         "play_count": "Αριθμός Προσπαθειών",
-        "total_hits": "Total Hits",
+        "total_hits": "Συνολικά Hits",
         "replays_watched": "Παρακολουθημένες Επαναλήψεις",
-        "hits_x_play": "Hits x Play",
+        "hits_x_play": "Hits ανά σκορ",
         "followers": "Ακόλουθοι",
         "online": "Συνδεμένος"
     },
@@ -144,10 +144,10 @@
         "status": {
             "pinned": "Καρφιτσωμένα",
             "best": "Καλύτερες Επιδώσεις",
-            "firsts": "First",
+            "firsts": "Πρώτο",
             "recent": "Πρόσφατα"
         },
-        "mods": "Mods",
+        "mods": "Τροποποιήσεις",
         "max_combo": "Μέγιστο Combo",
         "combo": "Combo",
         "grade": "Βαθμίδα",
@@ -167,7 +167,7 @@
             "pending": "Σε εκκρεμότητα",
             "graveyard": "Νεκροταφείο",
             "wip": "Σε εξέλιξη",
-            "approved": "Approved"
+            "approved": "Εγκεκριμένο"
         },
         "length": "Διάρκεια",
         "bpm": "BPM (Χτύποι/λεπτό)"
