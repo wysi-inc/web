@@ -186,7 +186,7 @@ async function BeatmapsetPage(p: Props) {
         {hasLeaderboards ?
             <div role="tablist" class="tabs tabs-bordered grid grid-cols-3 items-center rounded-lg bg-base-100 p-4">
                 {["global", "country", "friend"].map(type => (<>
-                    <input type="radio" name="beatmapset_rankings" aria-label={type} role="tab" class="tab" />
+                    <input type="radio" name="beatmapset_rankings" aria-label={type} role="tab" class="tab" checked={type === "global"} />
                     <div role="tabpanel" class="tab-content mt-4"
                         hx-post={`/beatmapsets/${p.set_id}/${diff.id}/scores/${diff.mode}/${type}`}
                         hx-trigger={"revealed"} hx-swap="innerHTML" hx-target={`#${type}_leaderboards`} >
