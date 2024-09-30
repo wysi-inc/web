@@ -80,6 +80,8 @@ export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ 
         }
     }
 
+    console.log(url.toString());
+
     const res = await fetch(url.toString(), {
         headers: { Referer: "https://wysi727.com" }
     });

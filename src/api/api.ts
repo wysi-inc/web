@@ -4,9 +4,9 @@ import { apicall, log } from "../tasks/logs";
 import type { UserCookie } from "../types/users";
 
 type FetchOptions = {
-    url: any;
-    method?: string;
-    body?: object;
+    url: any,
+    method?: string,
+    body?: object,
 } & (
         | { token?: string }
         | { user?: UserCookie | null }
@@ -19,7 +19,12 @@ export async function osu_fetch(o: FetchOptions): Promise<any | null> {
             token = o.token;
             log.info("Using parameter token");
         } else if ("user" in o && o.user) {
-            const tokenObject = await TokenModel.findOne({ user_id: o.user.id })
+            const tokenObject = await TokenModel.findOne({
+                $and: [
+                    { user_id: o.user.id },
+                    { expires_at: { $gt: Math.floor(Date.now() / 1000) } }
+                ]
+            });
             if (tokenObject) {
                 token = tokenObject.access_token;
                 log.info("Using user token");
@@ -38,7 +43,6 @@ export async function osu_fetch(o: FetchOptions): Promise<any | null> {
             "Authorization": `Bearer ${token}`
         };
 
-        apicall();
 
         let body_string;
         if (o.body) {
@@ -50,6 +54,8 @@ export async function osu_fetch(o: FetchOptions): Promise<any | null> {
             headers,
             body: body_string
         });
+
+        apicall();
 
         if (!res.ok) throw await res.text();
 

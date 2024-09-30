@@ -3,6 +3,8 @@ import type { OsekaiMedal } from "@/src/types/medals";
 import { StatsModel } from "../models/Stats";
 import { UserModel } from "../models/User";
 import { log } from "./logs";
+import { TokenModel } from "../models/Tokens";
+import { api_auth_user_refresh } from "../api/auth";
 // import { api_cloudflare_stats } from "../api/cloudflare";
 
 export async function update_stats() {
@@ -58,8 +60,30 @@ export async function update_medals() {
             }
             medal.save();
         }
-        log.success("Finished updating medals...");
+        log.success("Finished updating medals!");
     } catch (err) {
         log.error("Error updating medals", err);
+    }
+}
+
+export async function update_user_tokens() {
+    try {
+        log.info("started updating user tokens...");
+        // 10h from now
+        let time_limit = Math.floor(Date.now() / 1000) + (60 * 60 * 10);
+        const tokens = await TokenModel.find({ expires_at: { $lt: time_limit } });
+        let done = 0;
+        for (let old_token of tokens) {
+            const new_token = await api_auth_user_refresh(old_token.refresh_token);
+            if (!new_token) continue;
+            old_token.access_token = new_token.access_token;
+            old_token.refresh_token = new_token.refresh_token;
+            old_token.expires_at = Math.floor(Date.now() / 1000) + new_token.expires_in;
+            await old_token.save();
+            done++;
+        }
+        log.success(`Finished updating ${done} user tokens!`);
+    } catch (err) {
+        log.error("Error updating user tokens", err)
     }
 }

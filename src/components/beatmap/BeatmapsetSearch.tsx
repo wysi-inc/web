@@ -96,7 +96,7 @@ function BeatmapsetSearch() {
                     <div class="flex flex-col">
                         <span class="text-center text-xs">Relevant</span>
                         <label class="btn btn-ghost btn-xs has-[:checked]:btn-active">
-                            <input class="hidden" type="radio" name="sorting" value="relevant" />
+                            <input class="hidden" type="radio" name="sorting" value="relevant" checked />
                             <i class="fa-solid fa-caret-down" />
                         </label>
                     </div>
