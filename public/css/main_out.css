@@ -4684,6 +4684,10 @@ input.tab:checked + .tab-content,
   margin-top: auto;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
 .block {
   display: block;
 }
