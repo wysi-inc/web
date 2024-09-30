@@ -1,29 +1,46 @@
+import { TokenModel } from "../models/Tokens";
 import { OSU_API_TOKEN } from "../tasks/connections";
 import { apicall, log } from "../tasks/logs";
+import type { UserCookie } from "../types/users";
 
-export async function osu_fetch(p: {
-    url: any,
-    method?: string,
-    body?: object,
-    token?: string
-}
-): Promise<any | null> {
+type FetchOptions = {
+    url: any;
+    method?: string;
+    body?: object;
+} & (
+        | { token?: string }
+        | { user?: UserCookie | null }
+    );
+
+export async function osu_fetch(o: FetchOptions): Promise<any | null> {
     try {
+        let token = "";
+        if ("token" in o && o.token) {
+            token = o.token;
+        } else if ("user" in o && o.user) {
+            const tokenObject = await TokenModel.findOne({ user_id: o.user.id })
+            if (tokenObject) {
+                token = tokenObject.token;
+            }
+        } else {
+            token = OSU_API_TOKEN
+        }
+
         const headers = {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": `Bearer ${p.token || OSU_API_TOKEN}`
+            "Authorization": `Bearer ${token}`
         };
 
         apicall();
 
         let body_string;
-        if (p.body) {
-            body_string = JSON.stringify(p.body);
+        if (o.body) {
+            body_string = JSON.stringify(o.body);
         }
 
-        const res = await fetch(p.url, {
-            method: p.method,
+        const res = await fetch(o.url, {
+            method: o.method,
             headers,
             body: body_string
         });
@@ -33,7 +50,7 @@ export async function osu_fetch(p: {
         const data = await res.json();
         return data;
     } catch (err) {
-        log.error(`Error: ${p.url}`, err);
+        log.error(`Error: ${o.url}`, err);
         return null;
     }
 }

@@ -1,6 +1,6 @@
 import type { Beatmapset, BeatmapsetCount } from "../types/beatmaps";
 import type { Mode } from "../types/osu";
-import type { UserBasic } from "../types/users";
+import type { UserBasic, UserCookie } from "../types/users";
 import { osu_fetch } from "./api";
 
 export async function api_me_details(token?: string): Promise<UserBasic | null> {
@@ -11,12 +11,11 @@ export async function api_me_details(token?: string): Promise<UserBasic | null> 
 export async function api_user_details(
     id: number | string,
     mode?: Mode,
-    token?: string
+    user?: UserCookie
 ): Promise<UserBasic | null> {
     const url = new URL(`https://osu.ppy.sh/api/v2/users/${id}${mode ? `/${mode}` : ""}`);
-    return await osu_fetch({ url, token });
+    return await osu_fetch({ url, user });
 }
-
 
 export async function api_user_beatmaps(
     id: number,
@@ -25,11 +24,11 @@ export async function api_user_beatmaps(
         offset: number,
         limit: number
     },
-    token?: string
+    user?: UserCookie
 ): Promise<Beatmapset[] | null> {
     const url = new URL(`https://osu.ppy.sh/api/v2/users/${id}/beatmapsets/${type}`);
     Object.keys(obj).forEach(key => url.searchParams.append(key, obj[key]));
-    return await osu_fetch({ url, token });
+    return await osu_fetch({ url, user });
 }
 
 export async function api_user_most_played(
@@ -38,9 +37,9 @@ export async function api_user_most_played(
         offset: number,
         limit: number
     },
-    token?: string
+    user?: UserCookie
 ): Promise<BeatmapsetCount[] | null> {
     const url = new URL(`https://osu.ppy.sh/api/v2/users/${id}/beatmapsets/most_played`);
     Object.keys(obj).forEach(key => url.searchParams.append(key, obj[key]));
-    return await osu_fetch({ url, token });
+    return await osu_fetch({ url, user });
 }

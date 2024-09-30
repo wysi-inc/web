@@ -19,7 +19,7 @@ export function isAdmin(user: UserCookie) {
 export const adminRoutes = new Elysia({ prefix: '/admin' })
     .use(plugins)
     .get("/", async ({ lang, t, set, request, jwt, cookie }) => {
-        const user = await verifyUser(jwt, cookie.auth.value);
+        const user = await verifyUser(jwt, cookie);
         if (!user || !isAdmin(user)) {
             set.redirect = "/";
             return "Unauthorized";
@@ -32,7 +32,7 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
     })
     .group("/badges", _ => _
         .put("/", async ({ body, jwt, cookie }) => {
-            const user = await verifyUser(jwt, cookie.auth.value);
+            const user = await verifyUser(jwt, cookie);
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await addBadge(body.id, Number(body.badge));
             if (res.error) return error(res.code, res.msg);
@@ -44,14 +44,14 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
             })
         })
         .delete("/:id/:badge", async ({ params, jwt, cookie }) => {
-            const user = await verifyUser(jwt, cookie.auth.value);
+            const user = await verifyUser(jwt, cookie);
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await removeBadge(Number(params.id), Number(params.badge));
             if (res.error) return error(res.code, res.msg);
             return <Alert type='success' msg={res.msg} />;
         })
         .post("/:id/sort", async ({ jwt, cookie, body, params }) => {
-            const user = await verifyUser(jwt, cookie.auth.value);
+            const user = await verifyUser(jwt, cookie);
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await sortBadges(Number(params.id), body.badges);
             if (res.error) return error(res.code, res.msg);
@@ -64,7 +64,7 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
     )
     .group("/roles", _ => _
         .put("/", async ({ body, jwt, cookie }) => {
-            const user = await verifyUser(jwt, cookie.auth.value);
+            const user = await verifyUser(jwt, cookie);
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await setRole(body.id, body.role);
             if (res.error) return error(res.code, res.msg);
@@ -76,7 +76,7 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
             })
         })
         .delete("/:id", async ({ params, jwt, cookie }) => {
-            const user = await verifyUser(jwt, cookie.auth.value);
+            const user = await verifyUser(jwt, cookie);
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await removeRole(Number(params.id));
             if (res.error) return error(res.code, res.msg);
@@ -85,7 +85,7 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
     )
     .group("/tablets", _ => _
         .put("/", async ({ body, jwt, cookie }) => {
-            const user = await verifyUser(jwt, cookie.auth.value);
+            const user = await verifyUser(jwt, cookie);
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await addTablet(body.name, body.w, body.h);
             if (res.error) return error(res.code, res.msg);
@@ -98,7 +98,7 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
             })
         })
         .delete("/:id", async ({ params, jwt, cookie }) => {
-            const user = await verifyUser(jwt, cookie.auth.value);
+            const user = await verifyUser(jwt, cookie);
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await removeTablet(params.id);
             if (res.error) return error(res.code, res.msg);

@@ -7,7 +7,7 @@ import { isAdmin } from "./admin";
 
 export const reportRoutes = new Elysia({ prefix: '/report' })
     .put("/:target", async ({ set, params, body, jwt, cookie }: Route) => {
-        const user = await verifyUser(jwt, cookie.auth.value);
+        const user = await verifyUser(jwt, cookie);
         if (!user) {
             set.status = 401;
             return "Unauthorized";
@@ -22,7 +22,7 @@ export const reportRoutes = new Elysia({ prefix: '/report' })
         })
     })
     .delete("/:id", async ({ params, set, jwt, cookie }: Route) => {
-        const user = await verifyUser(jwt, cookie.auth.value);
+        const user = await verifyUser(jwt, cookie);
         if (!user || !isAdmin(user)) {
             set.status = 401;
             return "Unauthorized";

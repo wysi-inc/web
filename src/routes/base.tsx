@@ -44,11 +44,13 @@ export const baseRoutes = new Elysia({ prefix: '' })
         }
         return <>Page not available</>;
     })
-    .post("/donations", async ({ body }: any) => {
+    .post("/donations", async ({ body }) => {
         const data = JSON.parse(body.data);
         if (data.verification_token !== env.KOFI_TOKEN) return error(401, "Unauthorized");
         if (!await save_donation(data)) return error(500, "Something went wrong");
         return "tysm <3";
+    }, {
+        body: t.Object(t.Any())
     })
     .get("/oauth", async ({ set, jwt, cookie, query }) => {
         const res = await userAuthData(query.code);
@@ -62,7 +64,7 @@ export const baseRoutes = new Elysia({ prefix: '' })
             value: await jwt.sign(user),
             httpOnly: true,
             maxAge: 60 * 60 * 24 * 2,
-            path: '/',
+            path: "/",
         })
         set.redirect = "/";
     }, oauthQuery)

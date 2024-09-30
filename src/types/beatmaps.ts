@@ -27,7 +27,7 @@ export type BeatmapQuery = {
     od_min?: string,
     od_max?: string,
     mode?: string,
-    status?: BeatmapsetStatus
+    status?: string,
     sorting?: string,
 }
 

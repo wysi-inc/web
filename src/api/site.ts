@@ -8,6 +8,6 @@ export async function api_site_search(
     const url = new URL("https://osu.ppy.sh/api/v2/search");
     url.searchParams.append("mode", "user");
     url.searchParams.append("query", query);
-    url.searchParams.append("page", 1);
+    url.searchParams.append("page", "1");
     return await osu_fetch({ url, token });
 }
