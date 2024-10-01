@@ -172,6 +172,11 @@
         "length": "Length",
         "bpm": "BPM"
     },
+    "search": {
+        "sort": {
+            "relevant": "Relevant"
+        }
+    },
     "footer": {
         "rights": "All rights reserved to this silly monkey"
     },
