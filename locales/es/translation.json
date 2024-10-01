@@ -172,6 +172,11 @@
         "length": "Duración",
         "bpm": "BPM"
     },
+    "search": {
+        "sort": {
+            "relevant": "Relevant"
+        }
+    },
     "footer": {
         "rights": "Todos los derechos reservados a este estúpido mono"
     },
