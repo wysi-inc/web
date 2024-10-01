@@ -172,6 +172,11 @@
         "length": "الطول",
         "bpm": "نبضة/دق"
     },
+    "search": {
+        "sort": {
+            "relevant": "Relevant"
+        }
+    },
     "footer": {
         "rights": "جميع الحقوق محفوظة لهذا القرد السخيف"
     },
