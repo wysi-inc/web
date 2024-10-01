@@ -1864,6 +1864,21 @@ html {
   outline: none;
 }
 
+.rating {
+  position: relative;
+  display: inline-flex;
+}
+
+.rating :where(input) {
+  cursor: pointer;
+  border-radius: 0px;
+  animation: rating-pop var(--animation-input, 0.25s) ease-out;
+  height: 1.5rem;
+  width: 1.5rem;
+  background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity)));
+  --tw-bg-opacity: 1;
+}
+
 .select {
   display: inline-flex;
   cursor: pointer;
@@ -3295,6 +3310,39 @@ input.tab:checked + .tab-content,
   --range-shdw: var(--fallback-a,oklch(var(--a)/1));
 }
 
+.rating input {
+  -moz-appearance: none;
+       appearance: none;
+  -webkit-appearance: none;
+}
+
+.rating .rating-hidden {
+  width: 0.5rem;
+  background-color: transparent;
+}
+
+.rating input[type="radio"]:checked {
+  background-image: none;
+}
+
+.rating input:checked ~ input,
+  .rating input[aria-checked="true"] ~ input {
+  --tw-bg-opacity: 0.2;
+}
+
+.rating input:focus-visible {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  transition-duration: 300ms;
+  transform: translateY(-0.125em);
+}
+
+.rating input:active:focus {
+  animation: none;
+  transform: translateY(-0.125em);
+}
+
 @keyframes rating-pop {
   0% {
     transform: translateY(-0.125em);
@@ -4660,6 +4708,10 @@ input.tab:checked + .tab-content,
   display: table;
 }
 
+.table-cell {
+  display: table-cell;
+}
+
 .grid {
   display: grid;
 }
@@ -5502,6 +5554,10 @@ input.tab:checked + .tab-content,
 
 .p-4 {
   padding: 1rem;
+}
+
+.p-10 {
+  padding: 2.5rem;
 }
 
 .px-1 {
@@ -6366,6 +6422,10 @@ img:not([src]):not([srcset]) {
     display: flex;
   }
 
+  .sm\:table-cell {
+    display: table-cell;
+  }
+
   .sm\:hidden {
     display: none;
   }
@@ -6386,6 +6446,10 @@ img:not([src]):not([srcset]) {
 
   .md\:flex {
     display: flex;
+  }
+
+  .md\:table-cell {
+    display: table-cell;
   }
 
   .md\:hidden {
@@ -6422,6 +6486,10 @@ img:not([src]):not([srcset]) {
 @media (min-width: 1024px) {
   .lg\:inline {
     display: inline;
+  }
+
+  .lg\:table-cell {
+    display: table-cell;
   }
 }
 

@@ -10,12 +10,13 @@ import UserMedalsPanel from "./u_panels/UserMedalsPanel";
 import Report from "../web/Report";
 import UserAboutPanel from "./u_panels/UserAboutPanel";
 import type { UserCookie } from "@/src/types/users";
+import { txt } from "@/src/tasks/files";
 
 async function UserPage(p: {
     logged: UserCookie | null;
     user_id: string;
     mode?: Mode;
-    t: any
+    lang: string
 }) {
 
     const user = await getUser(p.user_id, p.mode, p.logged);
@@ -24,7 +25,7 @@ async function UserPage(p: {
 
     if (!user || (user as any).error) return (
         <div>
-            <h2>{p.t?.alerts.user.user_doesnt_exist}</h2>
+            <h2>{txt(p.lang, "alerts.user.user_doesnt_exist")}</h2>
             <span>or maybe the website stopped working, try again in a bit or tell me that its not working on the discord please :( i'll fixit asap</span>
         </div>
     );
@@ -35,7 +36,7 @@ async function UserPage(p: {
 
     const panels: PanelType[] = [
         {
-            title: p.t?.user.sections.history.title,
+            title: txt(p.lang, "user.sections.history.title"),
             code: "history",
             icon: <i class="fa-solid fa-chart-line" />,
             show_if: true,
@@ -48,19 +49,19 @@ async function UserPage(p: {
             )
         },
         {
-            title: p.t?.user.sections.about,
+            title: txt(p.lang, "user.sections.history.about"),
             code: "about",
             icon: <i class="fa-solid fa-user" />,
             show_if: user.page?.html !== undefined && user.page.html.length > 0,
             jsx: (<UserAboutPanel html={user.page.html} />)
         },
         {
-            title: p.t?.user.sections.setup.title,
+            title: txt(p.lang, "user.sections.setup.title"),
             code: "setup",
             icon: <i class="fa-solid fa-computer" />,
             show_if: editable || user.db_setup !== undefined,
             manual: true,
-            jsx: (<UserSetupPanel t={p.t} setup={user.db_setup} page_id={user.id} logged_id={p.logged?.id} />)
+            jsx: (<UserSetupPanel lang={p.lang} setup={user.db_setup} page_id={user.id} logged_id={p.logged?.id} />)
         },
         {
             title: "Skins (beta)",
@@ -72,9 +73,9 @@ async function UserPage(p: {
             show_if: true
         },
         {
-            title: p.t?.user.sections.year.title,
+            title: txt(p.lang, "user.sections.year.title"),
             code: "year",
-            info: p.t?.user.sections.year.info,
+            info: txt(p.lang, "user.sections.year.info"),
             tooltip: "powered by advance.catboy.best",
             icon: <i class="fa-solid fa-calendar-days" />,
             url: `/users/${user.id}/${p.mode}/panels/year`,
@@ -82,34 +83,34 @@ async function UserPage(p: {
             show_if: true,
         },
         {
-            title: p.t?.user.sections.summary.title,
+            title: txt(p.lang, "user.sections.summary.title"),
             code: "summary",
             icon: <i class="fa-solid fa-newspaper" />,
-            info: p.t?.user.sections.summary.info,
+            info: txt(p.lang, "user.sections.summary.info"),
             url: `/users/${user.id}/${p.mode}/panels/summary`,
             manual: true,
             show_if: true,
         },
         {
-            title: p.t?.user.sections.scores.title,
+            title: txt(p.lang, "user.sections.scores.title"),
             code: "scores",
             icon: <i class="fa-solid fa-flag-checkered" />,
-            info: p.t?.user.sections.scores.info,
+            info: txt(p.lang, "user.sections.scores.info"),
             url: `/users/${user.id}/${p.mode}/panels/scores/best`,
             show_if: true
         },
         {
-            title: p.t?.user.sections.collections.title,
+            title: txt(p.lang, "user.sections.collections.title"),
             code: "collections",
             tooltip: "powered by catboy.best",
-            info: p.t?.user.sections.collections.info,
+            info: txt(p.lang, "user.sections.collections.info"),
             icon: <i class="fa-solid fa-list" />,
             url: `/users/${user.id}/${p.mode}/panels/collections`,
             manual: true,
             show_if: editable || !user.collections == true
         },
         {
-            title: p.t?.user.sections.most,
+            title: txt(p.lang, "user.sections.most"),
             code: "most",
             icon: <i class="fa-solid fa-rotate-left" />,
             url: `/users/${user.id}/0/panels/most`,
@@ -117,28 +118,28 @@ async function UserPage(p: {
             show_if: true,
         },
         {
-            title: p.t?.user.sections.beatmaps,
+            title: txt(p.lang, "user.sections.beatmaps"),
             code: "beatmapsets",
             icon: <i class="fa-solid fa-screwdriver-wrench" />,
             url: `/users/${user.id}/${p.mode}/panels/beatmapsets/favourite`,
             show_if: true
         },
         {
-            title: p.t?.user.sections.medals.title,
+            title: txt(p.lang, "user.sections.medals.title"),
             code: "medals",
             tooltip: "powered by osekai.net",
             icon: <img data-src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" loading="lazy" />,
             // url: `/users/${user.id}/0/panels/medals`,
             show_if: user.user_achievements.length > 0,
-            jsx: (<UserMedalsPanel t={p.t} user_id={user.id} medals={user.user_achievements} />)
+            jsx: (<UserMedalsPanel lang={p.lang} user_id={user.id} medals={user.user_achievements} />)
         }
     ];
 
     return (<>
         <Title title={user.username} />
-        <UserTopPanel t={p.t} user={user} mode={p.mode} editable={editable} />
+        <UserTopPanel lang={p.lang} user={user} mode={p.mode} editable={editable} />
         <nav class="underline-offset-1 text-neutral-content sticky -mt-8 top-16 bg-base-300 rounded-b-lg text-sm shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-x-6 gap-y-2 flex-wrap">
-            <a class="hover:underline" href="#top">{p.t?.user.sections.top}</a>
+            <a class="hover:underline" href="#top">{txt(p.lang, "user.sections.top")}</a>
             {panels.map((p) => {
                 if (!p.show_if) return <></>;
                 return <a class="hover:underline" href={`#${p.code}`}>{p.title}</a>
@@ -147,11 +148,11 @@ async function UserPage(p: {
         {panels.map((panel) => {
             if (!panel.show_if) return <></>;
             if (panel.url) return (
-                <LazyPanel t={p.t} title={panel.title} code={panel.code} icon={panel.icon} manual={panel.manual}
+                <LazyPanel title={panel.title} code={panel.code} icon={panel.icon} manual={panel.manual}
                     url={panel.url} body={panel.body} tooltip={panel.tooltip} info={panel.info} />
             );
             else return (
-                <Panel t={p.t} title={panel.title} code={panel.code} icon={panel.icon} tooltip={panel.tooltip} info={panel.info} manual={panel.manual}>
+                <Panel title={panel.title} code={panel.code} icon={panel.icon} tooltip={panel.tooltip} info={panel.info} manual={panel.manual}>
                     {panel.jsx}
                 </Panel>
             );

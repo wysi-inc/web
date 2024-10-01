@@ -2,12 +2,6 @@ import MedalBadge from "./u_components/Medal";
 import { Medal } from "@/src/models/Medal";
 import type { UserMedal } from "@/src/types/medals";
 
-type Props = {
-    user_id: number,
-    medals: ProfileMedal[],
-    t: any
-}
-
 type ProfileMedal = {
     achievement_id: number,
     achieved_at: string
@@ -21,7 +15,11 @@ type Group = {
     }
 }
 
-async function UserMedalsPanel(p: Props) {
+async function UserMedalsPanel(p: {
+    user_id: number,
+    medals: ProfileMedal[],
+    lang: string
+}) {
 
     const db_medals = await Medal.find().lean();
 

@@ -1,5 +1,4 @@
 const Panel = (p: {
-    t: any,
     code: string,
     title: string,
     icon: JSX.Element,

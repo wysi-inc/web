@@ -23,13 +23,13 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
     .use(plugins)
     .get("/", async ({ lang, request, params, user }) => (
         <HtmxPage lang={lang} headers={request.headers} user={user}>
-            <UserPage t={t} user_id={params.id} logged={user} />
+            <UserPage lang={lang} user_id={params.id} logged={user} />
         </HtmxPage>
     ))
     .group("/:mode", (_) => _
-        .get("/", ({ lang, t, request, params, user }) => (
-            <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
-                <UserPage t={t} logged={user} user_id={params.id} mode={params.mode as Mode} />
+        .get("/", ({ lang, request, params, user }) => (
+            <HtmxPage lang={lang} headers={request.headers} user={user}>
+                <UserPage lang={lang} logged={user} user_id={params.id} mode={params.mode as Mode} />
             </HtmxPage>
         ))
         .group("/panels", (_) => _
@@ -64,8 +64,8 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             .post("/year", ({ params, user }) => (
                 <UserYearPanel user_id={Number(params.id)} mode={params.mode as Mode} logged_id={user?.id} user={user} />
             ))
-            .post("/setup", ({ t, params, user }) => (
-                <UserSetupPanel t={t} logged_id={user?.id} page_id={Number(params.id)} />
+            .post("/setup", ({ lang, params, user }) => (
+                <UserSetupPanel lang={lang} logged_id={user?.id} page_id={Number(params.id)} />
             ))
             .post("/skins", ({ params, user }) => (
                 <UserSkinsPanel user_id={Number(params.id)} logged_id={user?.id} />
@@ -118,11 +118,11 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
         })
     })
     .group("/setup", _ => _
-        .put("/submit", async ({ t, params, body, user }) => {
+        .put("/submit", async ({ lang, params, body, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const setup = await saveSetup(user.id, body);
             if (!setup) return "Failed to save setup, reload the page and try again.";
-            return <UserSetupPanel t={t} setup={setup} logged_id={user.id} page_id={user.id} />
+            return <UserSetupPanel lang={lang} setup={setup} logged_id={user.id} page_id={user.id} />
         })
     )
     .group("/collections", _ => _
