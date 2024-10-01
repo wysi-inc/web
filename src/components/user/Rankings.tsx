@@ -29,7 +29,7 @@ async function Rankings(p: {
         <Title title="Rankings" />
         <Pagination mode={p.mode} category={p.category} page={p.page} country={p.country} />
         <div class="overflow-x-scroll overflow-y-hidden">
-            <table class="table table-xs p-4 bg-base-100 rounded-lg">
+            <table class="table table-sm p-4 bg-base-100 rounded-lg">
                 <tr>
                     <th></th>
                     <th>User</th>
