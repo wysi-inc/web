@@ -172,6 +172,11 @@
         "length": "Длительность",
         "bpm": "BPM"
     },
+    "search": {
+        "sort": {
+            "relevant": "Relevant"
+        }
+    },
     "footer": {
         "rights": "Все права защищены этой глупой обезьяне"
     },
