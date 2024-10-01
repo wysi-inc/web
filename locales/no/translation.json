@@ -172,6 +172,11 @@
         "length": "Lengde",
         "bpm": "BPM"
     },
+    "search": {
+        "sort": {
+            "relevant": "Relevant"
+        }
+    },
     "footer": {
         "rights": "Alle rettigheter reservert til denne tullete apen"
     },
