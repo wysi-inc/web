@@ -1,10 +1,10 @@
 {
     "nav": {
-        "home": "Home",
-        "users": "Users",
-        "rankings": "Rankings",
-        "beatmaps": "Beatmaps",
-        "support": "Support",
+        "home": "Trang chủ",
+        "users": "Người dùng",
+        "rankings": "Xếp hạng",
+        "beatmaps": "Beatmap",
+        "support": "Hỗ trợ",
         "about": "About",
         "search": "Search someone",
         "search_someone": "Search someone",
