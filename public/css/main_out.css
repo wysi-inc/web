@@ -1864,21 +1864,6 @@ html {
   outline: none;
 }
 
-.rating {
-  position: relative;
-  display: inline-flex;
-}
-
-.rating :where(input) {
-  cursor: pointer;
-  border-radius: 0px;
-  animation: rating-pop var(--animation-input, 0.25s) ease-out;
-  height: 1.5rem;
-  width: 1.5rem;
-  background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity)));
-  --tw-bg-opacity: 1;
-}
-
 .select {
   display: inline-flex;
   cursor: pointer;
@@ -3310,39 +3295,6 @@ input.tab:checked + .tab-content,
   --range-shdw: var(--fallback-a,oklch(var(--a)/1));
 }
 
-.rating input {
-  -moz-appearance: none;
-       appearance: none;
-  -webkit-appearance: none;
-}
-
-.rating .rating-hidden {
-  width: 0.5rem;
-  background-color: transparent;
-}
-
-.rating input[type="radio"]:checked {
-  background-image: none;
-}
-
-.rating input:checked ~ input,
-  .rating input[aria-checked="true"] ~ input {
-  --tw-bg-opacity: 0.2;
-}
-
-.rating input:focus-visible {
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  transition-duration: 300ms;
-  transform: translateY(-0.125em);
-}
-
-.rating input:active:focus {
-  animation: none;
-  transform: translateY(-0.125em);
-}
-
 @keyframes rating-pop {
   0% {
     transform: translateY(-0.125em);
@@ -4363,6 +4315,18 @@ input.tab:checked + .tab-content,
   padding-bottom: 0.25rem;
 }
 
+.table-sm :not(thead):not(tfoot) tr {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.table-sm :where(th, td) {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 .tooltip {
   position: relative;
   display: inline-block;
@@ -4706,10 +4670,6 @@ input.tab:checked + .tab-content,
 
 .table {
   display: table;
-}
-
-.table-cell {
-  display: table-cell;
 }
 
 .grid {
@@ -5556,10 +5516,6 @@ input.tab:checked + .tab-content,
   padding: 1rem;
 }
 
-.p-10 {
-  padding: 2.5rem;
-}
-
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -5742,6 +5698,11 @@ input.tab:checked + .tab-content,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-secondary-content {
+  --tw-text-opacity: 1;
+  color: var(--fallback-sc,oklch(var(--sc)/var(--tw-text-opacity)));
+}
+
 .text-opacity-100 {
   --tw-text-opacity: 1;
 }
@@ -5756,6 +5717,10 @@ input.tab:checked + .tab-content,
 
 .text-opacity-75 {
   --tw-text-opacity: 0.75;
+}
+
+.text-opacity-30 {
+  --tw-text-opacity: 0.3;
 }
 
 .underline {
@@ -6422,10 +6387,6 @@ img:not([src]):not([srcset]) {
     display: flex;
   }
 
-  .sm\:table-cell {
-    display: table-cell;
-  }
-
   .sm\:hidden {
     display: none;
   }
@@ -6446,10 +6407,6 @@ img:not([src]):not([srcset]) {
 
   .md\:flex {
     display: flex;
-  }
-
-  .md\:table-cell {
-    display: table-cell;
   }
 
   .md\:hidden {
@@ -6486,10 +6443,6 @@ img:not([src]):not([srcset]) {
 @media (min-width: 1024px) {
   .lg\:inline {
     display: inline;
-  }
-
-  .lg\:table-cell {
-    display: table-cell;
   }
 }
 

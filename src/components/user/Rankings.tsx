@@ -32,16 +32,14 @@ async function Rankings(p: {
             <table class="table table-sm p-4 bg-base-100 rounded-lg">
                 <tr>
                     <th></th>
-                    <th>User</th>
-                    <th>PP</th>
-                    <th>Ranked Score</th>
-                    <th>Accuracy</th>
-                    <th>Play Time</th>
-                    <th>Play Count</th>
-                    <th>Status</th>
+                    <th></th>
+                    <th class="text-center">{p.category === "performance" ? "PP" : "Ranked Score"}</th>
+                    <th class="text-center text-neutral-content">Accuracy</th>
+                    <th class="text-center text-neutral-content">Play Time</th>
+                    <th class="text-center text-neutral-content">Online</th>
                 </tr>
                 {users.ranking.map((row, i) =>
-                    <UserRankingCard row={row} page={p.page} index={i} />
+                    <UserRankingCard row={row} page={p.page} index={i} category={p.category} />
                 )}
             </table>
         </div>

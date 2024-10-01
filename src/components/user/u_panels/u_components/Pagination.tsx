@@ -31,7 +31,7 @@ function Pagination(p: {
 
     return (
         <div class="flex justify-between">
-            <div class="hidden md:flex tabs tabs-boxed bg-base-300" role="tablist">
+            <div class="hidden md:flex tabs tabs-boxed tabs-sm bg-base-300" role="tablist">
                 {ModeTab("osu")}
                 {ModeTab("taiko")}
                 {ModeTab("fruits")}
@@ -39,11 +39,11 @@ function Pagination(p: {
             </div>
             <div class="flex flex-row justify-center grow gap-2">
                 {p.page > 3 &&
-                    <div class="tabs tabs-boxed bg-base-300" role="tablist">
+                    <div class="tabs tabs-sm tabs-boxed bg-base-300" role="tablist">
                         {PageTab(1)}
                     </div>
                 }
-                <div class="tabs tabs-boxed bg-base-300" role="tablist">
+                <div class="tabs tabs-sm tabs-boxed bg-base-300" role="tablist">
                     {PageTab(p.page - 2)}
                     {PageTab(p.page - 1)}
                     {PageTab(p.page)}
@@ -51,12 +51,12 @@ function Pagination(p: {
                     {PageTab(p.page + 2)}
                 </div>
                 {p.page < 198 &&
-                    <div class="tabs tabs-boxed bg-base-300" role="tablist">
+                    <div class="tabs tabs-sm tabs-boxed bg-base-300" role="tablist">
                         {PageTab(200)}
                     </div>
                 }
             </div>
-            <div class="hidden md:flex tabs tabs-boxed bg-base-300" role="tablist">
+            <div class="hidden md:flex tabs tabs-sm tabs-boxed bg-base-300" role="tablist">
                 {CategoryTab("performance")}
                 {CategoryTab("score")}
             </div>
