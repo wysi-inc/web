@@ -172,6 +172,11 @@
         "length": "longueur",
         "bpm": "BPM"
     },
+    "search": {
+        "sort": {
+            "relevant": "Relevant"
+        }
+    },
     "footer": {
         "rights": "Tous droits réservés à ce singe stupide"
     },
