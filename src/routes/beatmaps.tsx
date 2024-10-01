@@ -5,10 +5,10 @@ import BeatmapScoreTable from '../components/beatmap/BeatmapScoreTable';
 import BeatmapsList from '../components/beatmap/BeatmapsList';
 import BeatmapsetPage from '../components/beatmap/BeatmapsetPage';
 import BeatmapsetSearch from '../components/beatmap/BeatmapsetSearch';
-import { verifyUser } from '../libs/auth';
 import HtmxPage from '../libs/routes';
 import { modeUnion, scoresUnion } from '../types/osu';
 import { plugins } from './plugins';
+
 const queryBodyElysia = {
     body: t.Object({
         title: t.Optional(t.String()),
@@ -30,12 +30,13 @@ const queryBodyElysia = {
         hp_max: t.Optional(t.String()),
         od_min: t.Optional(t.String()),
         od_max: t.Optional(t.String()),
-        mode: t.Optional(t.String()),
-        status: t.Optional(t.String()),
+        mode: t.Optional(t.Array(t.Numeric())),
+        status: t.Optional(t.Array(t.Numeric())),
         offset: t.Optional(t.String()),
         sorting: t.Optional(t.String()),
     })
 }
+
 
 export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
     .get("/:id", async ({ params, set }) => {
@@ -50,8 +51,8 @@ export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
 
 export const beatmapsetRoutes = new Elysia({ prefix: '/beatmapsets' })
     .use(plugins)
-    .get("/", ({ lang, t, request, user }) => (
-        <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
+    .get("/", ({ lang, request, user }) => (
+        <HtmxPage lang={lang} headers={request.headers} user={user}>
             <BeatmapsetSearch />
         </HtmxPage>
     ))
@@ -61,8 +62,8 @@ export const beatmapsetRoutes = new Elysia({ prefix: '/beatmapsets' })
     .post("/list/:offset", ({ body, params }) => (
         <BeatmapsList body={body} offset={params.offset} />
     ), queryBodyElysia)
-    .get("/:set_id", ({ lang, t, request, params, user }) => (
-        <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
+    .get("/:set_id", ({ lang, request, params, user }) => (
+        <HtmxPage lang={lang} headers={request.headers} user={user}>
             <BeatmapsetPage set_id={params.set_id} user={user} />
         </HtmxPage>
     ), {
@@ -70,8 +71,8 @@ export const beatmapsetRoutes = new Elysia({ prefix: '/beatmapsets' })
             set_id: t.Numeric()
         })
     })
-    .get("/:set_id/:beatmap_id", ({ lang, t, request, params, user }) => (
-        <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
+    .get("/:set_id/:beatmap_id", ({ lang, request, params, user }) => (
+        <HtmxPage lang={lang} headers={request.headers} user={user}>
             <BeatmapsetPage set_id={params.set_id} beatmap_id={params.beatmap_id} user={user} />
         </HtmxPage>
     ), {

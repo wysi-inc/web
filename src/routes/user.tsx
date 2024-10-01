@@ -21,8 +21,8 @@ import { plugins } from './plugins';
 
 export const userRoutes = new Elysia({ prefix: '/users/:id' })
     .use(plugins)
-    .get("/", async ({ lang, t, request, params, user }) => (
-        <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
+    .get("/", async ({ lang, request, params, user }) => (
+        <HtmxPage lang={lang} headers={request.headers} user={user}>
             <UserPage t={t} user_id={params.id} logged={user} />
         </HtmxPage>
     ))

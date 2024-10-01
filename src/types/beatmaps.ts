@@ -26,8 +26,8 @@ export type BeatmapQuery = {
     hp_max?: string,
     od_min?: string,
     od_max?: string,
-    mode?: string,
-    status?: string,
+    mode?: number[],
+    status?: number[],
     sorting?: string,
 }
 

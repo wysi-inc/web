@@ -35,74 +35,70 @@ async function BeatmapScoreTable(p: {
             <BigScore score={scores.userScore.score} mode={p.mode} position={scores.userScore.position} />
             : null
         }
-        <table class="table table-xs table-zebra bg-base-300 rounded-lg">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>User</th>
-                    <th class="hidden sm:table-cell">PP</th>
-                    <th class="hidden md:table-cell">Acc</th>
-                    {/*<th class="hidden md:table-cell">Hits</th>*/}
-                    <th class="hidden md:table-cell">Combo</th>
-                    <th class="hidden md:table-cell">Grade</th>
-                    <th class="hidden md:table-cell">Mods</th>
-                    <th class="hidden md:table-cell">Date</th>
-                    <th class=""></th>
-                </tr>
-            </thead>
-            <tbody>
-                {scores.scores.map((score, i) =>
-                    <tr class="hover:bg-base-300 hover:rounded-lg group">
-                        <th class="table-cell text-start">#{i + 1}</th>
-                        <td class="table-cell">
-                            <div class="flex flex-row gap-2 items-center">
-                                <Flag name={score.user.country.name} code={score.user.country.code} />
-                                <SubdivisionFlag user_id={score.user.id} />
-                                <Clan user_id={score.user.id} />
-                                <Link url={`/users/${score.user.id}`}>{score.user.username}</Link>
-                            </div>
-                        </td>
-                        <td class="hidden sm:table-cell">
-                            {Number((score.pp?.toFixed()) || 0).toLocaleString()}pp</td>
-                        <td class="hidden md:table-cell">
-                            {(score.accuracy * 100).toFixed(2)}%
-                        </td>
-                        <td class="hidden md:table-cell">
-                            {score.perfect ?
-                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-sky-500">
-                                    {score.max_combo.toLocaleString()}x
-                                </span> :
-                                <span>
-                                    {score.max_combo.toLocaleString()}x
-                                </span>
-                            }
-                        </td>
-                        <td class="hidden md:table-cell">
-                            <div class="flex">
-                                <Grade grade={score.rank} />
-                            </div>
-                        </td>
-                        <td class="hidden md:table-cell">
-                            <div class="flex flex-row flex-wrap gap-1">
-                                {score.mods.map(mod =>
-                                    <ModIcon mod={mod} />
-                                )}
-                            </div>
-                        </td>
-                        <td class="hidden md:table-cell">
-                            <span class="tooltip tooltip-left" data-tip={`${moment(score.created_at).format("MMMM Do YYYY")} | ${moment(score.created_at).fromNow()}`}>
-                                {moment(score.created_at).fromNow(true)}
-                            </span>
-                        </td>
-                        <td class="relative">
-                            <Link url={`/scores/${score.id}`} css="absolute right-2 top-1.5 hidden group-hover:block" tooltip="View Score Page">
-                                <i class="fa-solid fa-eye" />
-                            </Link>
-                        </td>
+        <div class="overflow-x-scroll overflow-y-hidden">
+            <table class="table table-xs table-zebra bg-base-300 rounded-lg">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>User</th>
+                        <th>Score</th>
+                        <th>PP</th>
+                        <th>Acc</th>
+                        <th>Combo</th>
+                        <th>Grade</th>
+                        <th>Mods</th>
+                        <th>Date</th>
+                        <th></th>
                     </tr>
-                )}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {scores.scores.map((score, i) =>
+                        <tr class="hover:bg-base-300 hover:rounded-lg group">
+                            <th>#{i + 1}</th>
+                            <td>
+                                <div class="flex flex-row gap-2 items-center">
+                                    <Flag name={score.user.country.name} code={score.user.country.code} />
+                                    <SubdivisionFlag user_id={score.user.id} />
+                                    <Clan user_id={score.user.id} />
+                                    <Link url={`/users/${score.user.id}`}>{score.user.username}</Link>
+                                </div>
+                            </td>
+                            <td>{score.score.toLocaleString()}</td>
+                            <td>{Number((score.pp?.toFixed()) || 0).toLocaleString()}pp</td>
+                            <td>{(score.accuracy * 100).toFixed(2)}%</td>
+                            <td>
+                                {score.perfect ?
+                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-sky-500">
+                                        {score.max_combo.toLocaleString()}x
+                                    </span> :
+                                    <span>
+                                        {score.max_combo.toLocaleString()}x
+                                    </span>
+                                }
+                            </td>
+                            <td><Grade grade={score.rank} /></td>
+                            <td>
+                                <div class="flex flex-row gap-1">
+                                    {score.mods.map(mod =>
+                                        <ModIcon mod={mod} />
+                                    )}
+                                </div>
+                            </td>
+                            <td>
+                                <span class="tooltip tooltip-left" data-tip={`${moment(score.created_at).format("MMMM Do YYYY")} | ${moment(score.created_at).fromNow()}`}>
+                                    {moment(score.created_at).fromNow(true)}
+                                </span>
+                            </td>
+                            <td class="relative">
+                                <Link url={`/scores/${score.id}`} css="absolute right-2 top-1.5 hidden group-hover:block" tooltip="View Score Page">
+                                    <i class="fa-solid fa-eye" />
+                                </Link>
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+        </div>
     </>);
 };
 

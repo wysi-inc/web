@@ -71,10 +71,10 @@ export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ 
         if (query_string) {
             url.searchParams.set("query", query_string);
         }
-        url.searchParams.set("limit", RESULT_LIMIT.BEATMAPS.SEARCH);
+        url.searchParams.set("limit", String(RESULT_LIMIT.BEATMAPS.SEARCH));
         url.searchParams.set("offset", offset || "0");
-        url.searchParams.set("mode", q.mode || "-1");
-        url.searchParams.set("status", q.status || "-3");
+        q.mode?.forEach(m => url.searchParams.append("mode", String(m)))
+        q.status?.forEach(s => url.searchParams.append("status", String(s)))
         if (q.sorting && q.sorting !== "relevant") {
             url.searchParams.set("sort", q.sorting);
         }

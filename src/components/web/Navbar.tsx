@@ -4,39 +4,34 @@ import Search from "./Search";
 import Logged from "./Logged";
 import Link from "./Link";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { txt } from "@/src/tasks/files";
 
-type Props = {
-    user: UserCookie | null,
-    t: any,
-    lang: any
-}
-
-const Navbar = ({ lang, t, user }: Props) => {
+function Navbar(p: { lang: string, user?: UserCookie | null }) {
 
     const routes = [
         {
-            title: t.nav.home,
+            title: txt(p.lang, "nav.home"),
             url: "/",
             icon: <i class="fa-solid fa-house" />,
         },
         {
-            title: t.nav.rankings,
+            title: txt(p.lang, "nav.rankings"),
             url: "/rankings",
             icon: <i class="fa-solid fa-ranking-star" />
         },
         {
-            title: t.nav.beatmaps,
+            title: txt(p.lang, "nav.beatmaps"),
             url: "/beatmapsets",
             icon: <i class="fa-solid fa-music" />
         },
         {
-            title: t.nav.support,
+            title: txt(p.lang, "nav.support"),
             url: "/support",
             icon: <i class="fa-solid fa-heart" />,
             collapsed: true
         },
         {
-            title: t.nav.about,
+            title: txt(p.lang, "nav.about"),
             url: "/about",
             icon: <i class="fa-regular fa-circle-question" />,
             collapsed: true
@@ -95,7 +90,7 @@ const Navbar = ({ lang, t, user }: Props) => {
                     </div>
                 </div>
                 <div class="flex flex-row items-center justify-center">
-                    <Search t={t} />
+                    <Search lang={p.lang} />
                 </div>
                 <div class="z-50 flex flex-row items-center justify-end md:col-span-2">
                     <a href="https://github.com/wysi-inc" target="_blank"
@@ -113,11 +108,11 @@ const Navbar = ({ lang, t, user }: Props) => {
                         </label>
                     </div>
                     <div class="">
-                        <LanguageSwitcher t={t} lang={lang} />
+                        <LanguageSwitcher lang={p.lang} />
                     </div>
-                    {user ?
-                        <Logged t={t} user={user} /> :
-                        <Login t={t} />
+                    {p.user ?
+                        <Logged lang={p.lang} user={p.user} /> :
+                        <Login lang={p.lang} />
                     }
                 </div>
             </div>

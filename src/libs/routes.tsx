@@ -1,11 +1,10 @@
 import BaseHtml from "../components/BaseHtml";
-import type { Jwt } from "../types/osu";
+import type { Jwt } from "../types/api";
 import type { UserCookie } from "../types/users";
 import { verifyUser } from "./auth";
 
 type Props = {
-    t: any,
-    lang: any,
+    lang: string,
     headers: any,
     children: JSX.Element,
 } & (
@@ -23,14 +22,14 @@ const HtmxPage = async (p: Props) => {
     if ("cookie" in p) {
         const user = await verifyUser(p.jwt, p.cookie);
         return <>
-            <BaseHtml lang={p.lang} t={p.t} user={user}>
+            <BaseHtml lang={p.lang} user={user}>
                 {p.children}
             </BaseHtml>
         </>
     }
 
     return <>
-        <BaseHtml lang={p.lang} t={p.t} user={p.user}>
+        <BaseHtml lang={p.lang} user={p.user}>
             {p.children}
         </BaseHtml>
     </>

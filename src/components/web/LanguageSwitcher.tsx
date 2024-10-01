@@ -1,5 +1,6 @@
 import { LANGUAGES } from "@/src/libs/countries";
 import LanguageButton from "./LanguageButton";
+import { txt } from "@/src/tasks/files";
 
 const flags: any = {
     "af": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Flag_of_South_Africa_%281928-1982%29.svg",
@@ -37,10 +38,8 @@ export function getLang(code: string) {
     return [LANGUAGES.get(code), flags[code] || "", code]
 }
 
-function LanguageSwitcher({ lang, t }: any) {
-
-    const language = getLang(lang);
-
+function LanguageSwitcher(p: { lang: string }) {
+    const language = getLang(p.lang);
     return (<>
         <button id="language_button" class="btn btn-square btn-ghost" onclick="language_modal.showModal()" >
             <img data-src={language[1]} class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
@@ -59,7 +58,7 @@ function LanguageSwitcher({ lang, t }: any) {
                 <a href="https://crowdin.com/project/wysi" class="btn col-span-full btn-accent btn-block" target="_blank">
                     <span class="flex flex-row gap-4">
                         <i class="float fa-solid fa-arrow-up-right-from-square left-2 float-left" />
-                        <span>{t.nav.help}</span>
+                        <span>{txt(p.lang, "nav.help")}</span>
                     </span>
                 </a>
             </div>
@@ -68,7 +67,6 @@ function LanguageSwitcher({ lang, t }: any) {
             </form>
         </dialog>
     </>);
-
 }
 
 export default LanguageSwitcher;

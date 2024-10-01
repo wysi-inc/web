@@ -5,14 +5,12 @@ import MouseDisplay from "./setup/MouseDisplay";
 import Peripherals from "./setup/Peripherals";
 import { UserModel, type Setup } from "@/src/models/User";
 
-type Props = {
+async function UserSetupPanel(p: {
     logged_id?: number,
     page_id: number,
     setup?: Setup | null,
-    t: any,
-}
-
-async function UserSetupPanel(p: Props) {
+    lang: string
+}) {
 
     const editable = p.page_id === p.logged_id;
 
@@ -28,11 +26,11 @@ async function UserSetupPanel(p: Props) {
                 hx-put={editable ? `/users/${p.page_id}/setup/submit` : undefined}
                 hx-trigger="submit" hx-swap="outerHTML" hx-target="#setup_panel">
                 <fieldset class="grid w-full gap-4 md:grid-cols-2" id="setup_fieldset" disabled>
-                    <TabletDisplay t={p.t} editable={editable} tablet={p.setup?.tablet} />
-                    <KeyboardDisplay t={p.t} editable={editable} keyboard={p.setup?.keyboard} />
-                    <MouseDisplay t={p.t} editable={editable} mouse={p.setup?.mouse} />
-                    <Peripherals t={p.t} editable={editable} peripherals={p.setup?.peripherals} />
-                    <Computer t={p.t} editable={editable} computer={p.setup?.computer} />
+                    <TabletDisplay lang={p.lang} editable={editable} tablet={p.setup?.tablet} />
+                    <KeyboardDisplay lang={p.lang} editable={editable} keyboard={p.setup?.keyboard} />
+                    <MouseDisplay lang={p.lang} editable={editable} mouse={p.setup?.mouse} />
+                    <Peripherals lang={p.lang} editable={editable} peripherals={p.setup?.peripherals} />
+                    <Computer lang={p.lang} editable={editable} computer={p.setup?.computer} />
                 </fieldset>
                 {editable ?
                     <div class="flex flex-row gap-2">

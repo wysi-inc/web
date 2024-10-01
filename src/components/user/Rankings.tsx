@@ -28,21 +28,23 @@ async function Rankings(p: {
     return (<>
         <Title title="Rankings" />
         <Pagination mode={p.mode} category={p.category} page={p.page} country={p.country} />
-        <table class="table p-4 bg-base-100 rounded-lg">
-            <tr>
-                <th></th>
-                <th>User</th>
-                <th class="hidden sm:table-cell">PP</th>
-                <th class="hidden sm:table-cell">Ranked Score</th>
-                <th class="hidden md:table-cell">Accuracy</th>
-                <th class="hidden lg:table-cell">Play Time</th>
-                <th class="hidden lg:table-cell">Play Count</th>
-                <th>Status</th>
-            </tr>
-            {users.ranking.map((row, i) =>
-                <UserRankingCard row={row} page={p.page} index={i} />
-            )}
-        </table>
+        <div class="overflow-x-scroll overflow-y-hidden">
+            <table class="table table-xs p-4 bg-base-100 rounded-lg">
+                <tr>
+                    <th></th>
+                    <th>User</th>
+                    <th>PP</th>
+                    <th>Ranked Score</th>
+                    <th>Accuracy</th>
+                    <th>Play Time</th>
+                    <th>Play Count</th>
+                    <th>Status</th>
+                </tr>
+                {users.ranking.map((row, i) =>
+                    <UserRankingCard row={row} page={p.page} index={i} />
+                )}
+            </table>
+        </div>
         <Pagination mode={p.mode} category={p.category} page={p.page} country={p.country} />
     </>);
 }

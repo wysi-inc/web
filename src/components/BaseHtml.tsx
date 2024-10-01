@@ -6,11 +6,10 @@ import Navbar from "./web/Navbar";
 type Props = {
     children: any;
     user: UserCookie | null;
-    t: any,
-    lang: any
+    lang: string
 }
 
-const BaseHtml = ({ lang, t, user, children }: Props) => {
+const BaseHtml = ({ lang, user, children }: Props) => {
     return (<>
         <html lang="en" class="scroll-smooth">
             <head>
@@ -47,7 +46,7 @@ const BaseHtml = ({ lang, t, user, children }: Props) => {
             </head>
             <body style="display: hidden;" class="flex flex-col items-center justify-center bg-base-300" id="top">
                 <script>let FF_FOUC_FIX;</script>
-                <Navbar lang={lang} t={t} user={user} />
+                <Navbar lang={lang} user={user} />
                 <main class="w-screen mil:w-mil">
                     <div id="main" class="flex flex-col gap-4 bg-neutral shadow-lg md:p-4">
                         {children}

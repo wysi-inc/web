@@ -2,12 +2,9 @@ import type { UserCookie } from "@/src/types/users";
 import Link from "./Link";
 import { isAdmin } from "@/src/routes/admin";
 import Avatar from "../user/Avatar";
+import { txt } from "@/src/tasks/files";
 
-type Props = {
-    user: UserCookie,
-    t: any
-}
-const Logged = (p: Props) => {
+function Logged(p: { user: UserCookie, lang: string }) {
     return (
         <details class="dropdown dropdown-end">
             <summary class="btn btn-square btn-ghost">
@@ -19,7 +16,7 @@ const Logged = (p: Props) => {
                 <li>
                     <Link url={`/users/${p.user.id}`} css="btn btn-ghost flex">
                         <i class="fa-solid fa-user" />
-                        {p.t.nav.log.wysi}
+                        {txt(p.lang, "nav.log.wysi")}
                     </Link>
                 </li>
                 <li>
@@ -27,7 +24,7 @@ const Logged = (p: Props) => {
                         target="_blank" rel="noreferrer noopener"
                         class="btn btn-ghost flex">
                         <i class="fa-regular fa-user" />
-                        {p.t.nav.log.osu}
+                        {txt(p.lang, "nav.log.osu")}
                     </a>
                 </li>
                 {isAdmin(p.user) ?
@@ -41,7 +38,7 @@ const Logged = (p: Props) => {
                 <li>
                     <Link url="/logout" css="btn btn-ghost flex">
                         <i class="fa-solid fa-right-from-bracket" />
-                        {p.t.nav.log.logout}
+                        {txt(p.lang, "nav.log.logout")}
                     </Link>
                 </li>
             </ul>

@@ -4648,6 +4648,10 @@ input.tab:checked + .tab-content,
   margin-bottom: 0.25rem;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
 .mb-3 {
   margin-bottom: 0.75rem;
 }
@@ -4682,10 +4686,6 @@ input.tab:checked + .tab-content,
 
 .mt-auto {
   margin-top: auto;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem;
 }
 
 .block {
@@ -5118,6 +5118,18 @@ input.tab:checked + .tab-content,
   overflow: hidden;
 }
 
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.overflow-y-visible {
+  overflow-y: visible;
+}
+
+.overflow-x-scroll {
+  overflow-x: scroll;
+}
+
 .scroll-smooth {
   scroll-behavior: smooth;
 }
@@ -5546,10 +5558,6 @@ input.tab:checked + .tab-content,
 
 .p-4 {
   padding: 1rem;
-}
-
-.p-10 {
-  padding: 2.5rem;
 }
 
 .px-1 {
@@ -6458,6 +6466,10 @@ img:not([src]):not([srcset]) {
 
   .md\:grid-cols-5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .md\:justify-end {
+    justify-content: flex-end;
   }
 
   .md\:p-4 {

@@ -13,9 +13,11 @@ import { connect_mongodb, connect_osu } from "./tasks/connections";
 import { below_ratelimit, log, osu_api_call_logger, ratelimit_logger } from "./tasks/logs";
 import { update_medals, update_stats, update_user_tokens } from "./tasks/updates";
 import { notFound } from './routes/notFound';
+import { load_translations } from './tasks/files';
 
 await connect_mongodb();
 await connect_osu();
+await load_translations();
 update_user_tokens();
 update_medals();
 update_stats();

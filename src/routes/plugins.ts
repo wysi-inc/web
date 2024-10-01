@@ -2,10 +2,7 @@ import { Elysia } from "elysia";
 import { html } from "@elysiajs/html";
 import jwt from "@elysiajs/jwt";
 import { env } from "bun";
-import { get_translations } from "../tasks/files";
 import { verifyUser } from "../libs/auth";
-
-const translations = await get_translations();
 
 export const plugins = new Elysia()
     .use(html())
@@ -21,5 +18,5 @@ export const plugins = new Elysia()
     .derive(async ({ cookie, jwt }) => {
         const user = await verifyUser(jwt, cookie);
         const lang = cookie?.lang?.value || "en";
-        return { t: translations[lang], lang, user }
+        return { lang, user }
     })
