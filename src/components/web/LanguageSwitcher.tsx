@@ -28,6 +28,7 @@ const flags: any = {
     "ru": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Russia.svg",
     "sr": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Flag_of_Serbia.svg",
     "tr": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg",
+    "vi": "https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg",
     "zh": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg",
     // "zh-hant": "https://upload.wikimedia.org/wikipedia/commons/7/72/Flag_of_the_Republic_of_China.svg",
     "eo": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Flag_of_Esperanto.svg",
