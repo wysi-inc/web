@@ -172,6 +172,11 @@
         "length": "Lengte",
         "bpm": "BPM"
     },
+    "search": {
+        "sort": {
+            "relevant": "Relevant"
+        }
+    },
     "footer": {
         "rights": "Alle rechten voorbehouden aan deze maffe aap"
     },
