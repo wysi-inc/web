@@ -172,6 +172,11 @@
         "length": "Duració",
         "bpm": "BPM"
     },
+    "search": {
+        "sort": {
+            "relevant": "Relevant"
+        }
+    },
     "footer": {
         "rights": "Tots els drets estan reservats a aquest mico"
     },
