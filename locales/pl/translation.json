@@ -172,6 +172,11 @@
         "length": "Długość",
         "bpm": "BPM"
     },
+    "search": {
+        "sort": {
+            "relevant": "Relevant"
+        }
+    },
     "footer": {
         "rights": "Wszelkie prawa zastrzeżone dla tej głupiej małpy"
     },
