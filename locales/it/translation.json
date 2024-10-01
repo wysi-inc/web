@@ -172,6 +172,11 @@
         "length": "Durata",
         "bpm": "BPM"
     },
+    "search": {
+        "sort": {
+            "relevant": "Relevant"
+        }
+    },
     "footer": {
         "rights": "Tutti i diritti riservati a questa stupida scimmia"
     },
