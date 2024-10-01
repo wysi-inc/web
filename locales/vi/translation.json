@@ -5,76 +5,76 @@
         "rankings": "Xếp hạng",
         "beatmaps": "Beatmap",
         "support": "Hỗ trợ",
-        "about": "About",
+        "about": "Thông tin",
         "search": "Search someone",
-        "search_someone": "Search someone",
-        "help": "Help translate the site!",
+        "search_someone": "Tìm kiếm ai đó",
+        "help": "Hãy giúp chúng mình dịch trang này!",
         "log": {
-            "login": "Login with osu!",
-            "logout": "Logout",
-            "osu": "osu!profile",
-            "wysi": "wysi!profile"
+            "login": "Đăng nhập với osu!",
+            "logout": "Đăng xuất",
+            "osu": "Trang cá nhân osu!",
+            "wysi": "Trang cá nhân wysi!"
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu! website alternative",
-        "built": "Built with bun and htmx",
-        "profiles": "User Profiles",
-        "stats": "Top 100 Score stats",
-        "search": "Beatmap Search",
-        "calculator": "Built-in PP Calculator",
-        "setup": "Share your setup!",
-        "collections": "Upload your collections!"
+        "welcome": "Chào mừng đến với wysi727.com!",
+        "foss": "Một trang web nguồn mở thay thế web osu!",
+        "built": "Được tạo bằng bun và htmx",
+        "profiles": "Trang cá nhân người dùng",
+        "stats": "Chỉ số Top 100",
+        "search": "Tìm kiếm beatmap",
+        "calculator": "May tính PP có sẵn",
+        "setup": "Chia sẻ setup!",
+        "collections": "Đăng tải bộ sưu tập!"
     },
     "user": {
         "sections": {
-            "expand": "Expand",
-            "about": "About",
-            "beatmaps": "Beatmaps",
-            "top": "Top",
+            "expand": "Mở rộng",
+            "about": "Về bản thân",
+            "beatmaps": "Beatmap",
+            "top": "Xếp hạng",
             "medals": {
-                "title": "Medals",
-                "recent": "Recent Medals",
-                "rarest": "Rarest Medal",
-                "show": "Show all"
+                "title": "Huy chương",
+                "recent": "Huy chương gần đây",
+                "rarest": "Huy chương hiếm nhất",
+                "show": "Hiện tất cả"
             },
             "year": {
-                "title": "Year",
-                "info": "This is a recap of this year so far, the data will be reset at January 1st"
+                "title": "Năm",
+                "info": "Hiện tại đây là recap của năm nay, dữ liệu sẽ reset vào Ngày 1 Tháng 1"
             },
-            "most": "Most Played",
+            "most": "Chơi nhiều nhất",
             "scores": {
-                "title": "Scores",
-                "info": "Hover over a grayed out PP to see the (if FC) PP value",
+                "title": "Thành tích",
+                "info": "Di chuột lên số PP bôi xám để xem số PP (nếu FC)",
                 "tabs": {
-                    "pinned": "Pinned",
-                    "best": "Best",
-                    "first": "First",
-                    "recent": "Recent"
+                    "pinned": "Ghim",
+                    "best": "Tốt nhất",
+                    "first": "Đứng đầu",
+                    "recent": "Gần đây"
                 }
             },
             "history": {
-                "title": "History",
+                "title": "Lịch sử",
                 "tabs": {
-                    "global": "Global",
-                    "country": "Country",
-                    "plays": "Plays",
-                    "replays": "Replays"
+                    "global": "Thế giới",
+                    "country": "Toàn quốc",
+                    "plays": "Lịch sử chơi",
+                    "replays": "Lịch sử Replay"
                 }
             },
             "summary": {
-                "title": "Summary",
-                "info": "This is a quick summary of your top 100 plays",
+                "title": "Tổng quan cá nhân",
+                "info": "Đây là tổng quan chỉ số top 100 của bạn",
                 "tabs": {
-                    "hit_ratios": "Hit Ratios",
-                    "grade_ratios": "Grade Ratios",
-                    "average_play": "Average Play"
+                    "hit_ratios": "Tỷ lệ hit",
+                    "grade_ratios": "Tỷ lệ bậc",
+                    "average_play": "Lượt chơi trung bình"
                 }
             },
             "collections": {
-                "title": "Collections",
-                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "title": "Bộ sưu tập",
+                "info": "Những beatmap không có ở web osu! sẽ không được tải xuống (vd: osu!trainer, customdiffs, beatmap không được submit...)"
             },
             "setup": {
                 "title": "Setup",
@@ -137,33 +137,33 @@
         "total_hits": "Total Hits",
         "replays_watched": "Replays Watched",
         "hits_x_play": "Hits x Play",
-        "followers": "Followers",
+        "followers": "Người theo dõi",
         "online": "Online"
     },
     "score": {
         "status": {
-            "pinned": "Pinned",
-            "best": "Best",
-            "firsts": "First",
-            "recent": "Recent"
+            "pinned": "Ghim",
+            "best": "Tốt nhất",
+            "firsts": "Đứng đầu",
+            "recent": "Gần đây"
         },
-        "mods": "Mods",
-        "max_combo": "Max Combo",
+        "mods": "Mod",
+        "max_combo": "Combo tối đa",
         "combo": "Combo",
-        "grade": "Grade",
-        "grades": "Grades",
-        "acc": "Acc",
-        "accuracy": "Accuracy",
-        "score": "Score",
-        "ranked_score": "Ranked Score"
+        "grade": "Bậc",
+        "grades": "Các bậc",
+        "acc": "Độ chính xác",
+        "accuracy": "Độ chính xác",
+        "score": "Điểm",
+        "ranked_score": "Điểm được xếp hạng"
     },
     "beatmapset": {
         "status": {
-            "favourite": "Favourite",
-            "ranked": "Ranked",
-            "guest": "Guest",
-            "loved": "Loved",
-            "nominated": "Nominated",
+            "favourite": "Yêu thích",
+            "ranked": "Đã được xếp hạng",
+            "guest": "Khách mời",
+            "loved": "Yêu thích",
+            "nominated": "Được ứng cử",
             "pending": "Pending",
             "graveyard": "Graveyard",
             "wip": "In Progress",
@@ -171,6 +171,11 @@
         },
         "length": "Length",
         "bpm": "BPM"
+    },
+    "search": {
+        "sort": {
+            "relevant": "Relevant"
+        }
     },
     "footer": {
         "rights": "All rights reserved to this silly monkey"
