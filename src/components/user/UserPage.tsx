@@ -49,7 +49,7 @@ async function UserPage(p: {
             )
         },
         {
-            title: txt(p.lang, "user.sections.history.about"),
+            title: txt(p.lang, "user.sections.about"),
             code: "about",
             icon: <i class="fa-solid fa-user" />,
             show_if: user.page?.html !== undefined && user.page.html.length > 0,
