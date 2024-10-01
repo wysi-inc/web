@@ -172,6 +172,11 @@
         "length": "Länge",
         "bpm": "BPM"
     },
+    "search": {
+        "sort": {
+            "relevant": "Relevant"
+        }
+    },
     "footer": {
         "rights": "Alle Rechte diesem dummen Affen vorbehalten"
     },
