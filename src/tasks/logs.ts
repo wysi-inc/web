@@ -10,10 +10,18 @@ export const log = {
         console.log(`\x1b[31m[ E ]: ${msg} \x1b[0m`);
         if (err) console.error(err);
     },
-    success: (msg: string) => console.log(`\x1b[32m[ S ]: ${msg} \x1b[0m`),
-    info: (msg: string) => console.log(`\x1b[34m[ I ]: ${msg} \x1b[0m`),
-    request: (ip: string, method: string, route: string) => console.log(`[ R ]: ${(ip).padStart(15, " ")} ${method.padStart(6, " ")}::/${route}`),
-    object: (msg: any) => console.log(msg),
+    success: (msg: string) => {
+        console.log(`\x1b[32m[ S ]: ${msg} \x1b[0m`)
+    },
+    info: (msg: string) => {
+        console.log(`\x1b[34m[ I ]: ${msg} \x1b[0m`)
+    },
+    request: (ip: string, method: string, route: string) => {
+        console.log(`[ R ]: ${(ip).padStart(15, " ")} ${method.padStart(6, " ")}::/${route}`)
+    },
+    object: (msg: any) => {
+        console.log(msg)
+    }
 };
 
 export function osu_api_call_logger() {

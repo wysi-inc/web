@@ -5,11 +5,7 @@ export type Category = "score" | "performance";
 export type ScoreCategory = "best" | "recent" | "firsts" | "pinned";
 export type BeatmapCategory = "favourite" | "ranked" | "loved" | "pending" | "graveyard";
 
-import { type JWTPayload, type JWSHeaderParameters, type KeyLike } from 'jose';
-import type { Static, TSchema } from '@sinclair/typebox';
-import { t, type Cookie } from 'elysia';
-
-type UnwrapSchema<Schema extends TSchema | undefined, Fallback = unknown> = Schema extends TSchema ? Static<NonNullable<Schema>> : Fallback;
+import { t } from 'elysia';
 
 export const modeUnion = t.Union([
     t.Literal("osu"),
@@ -18,15 +14,11 @@ export const modeUnion = t.Union([
     t.Literal("mania"),
 ])
 
-export interface JWTPayloadSpec {
-    iss?: string;
-    sub?: string;
-    aud?: string | string[];
-    jti?: string;
-    nbf?: number;
-    exp?: number;
-    iat?: number;
-}
+export const scoresUnion = t.Union([
+    t.Literal("global"),
+    t.Literal("country"),
+    t.Literal("friend"),
+])
 
 export type PanelType = {
     title: string,
@@ -40,39 +32,6 @@ export type PanelType = {
         { jsx: JSX.Element, url?: never } |
         { url: string, body?: string, jsx?: never }
     );
-
-export interface JWTOption<Name extends string | undefined = 'jwt', Schema extends TSchema | undefined = undefined> extends JWSHeaderParameters, Omit<JWTPayload, 'nbf' | 'exp'> {
-    name?: Name;
-    secret: string | Uint8Array | KeyLike;
-    schema?: Schema;
-    nbf?: string | number;
-    exp?: string | number;
-}
-
-export type Jwt = {
-    readonly sign: (morePayload: UnwrapSchema<any, Record<string, string | number>> & JWTPayloadSpec) => Promise<string>;
-    readonly verify: (jwt?: string) => Promise<false | (UnwrapSchema<any, Record<string, string | number>> & JWTPayloadSpec)>;
-}
-
-export type Route = {
-    t: any,
-    lang: any,
-    request: Request,
-    jwt: Jwt,
-    cookie: Record<string, Cookie<string | undefined>> & { cookieName: Cookie<string>; },
-    query: any;
-    params: Record<any, string>
-    body: any,
-    redirect: any,
-    set: {
-        headers: Record<string, string> & {
-            'Set-Cookie'?: string | string[];
-        };
-        status?: number | any;
-        redirect?: string;
-        cookie?: any;
-    }
-}
 
 export type InspectorRes = {
     user: {

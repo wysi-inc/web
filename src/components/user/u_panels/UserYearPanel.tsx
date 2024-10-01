@@ -5,8 +5,14 @@ import type { AdvanceUser, Mode } from "@/src/types/osu";
 import BeatmapsetCard from "../../beatmap/BeatmapsetCard";
 import UserCard from "../UserCard";
 import BarChart from "./u_components/BarChart";
+import type { UserCookie } from "@/src/types/users";
 
-async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mode }) {
+async function UserYearPanel(p: {
+    user_id: number,
+    logged_id?: number,
+    mode: Mode,
+    user?: UserCookie | null
+}) {
 
     const mode_int = (m: string) => {
         switch (m.toLowerCase()) {
@@ -57,7 +63,7 @@ async function UserYearPanel(p: { user_id: number, logged_id?: number, mode: Mod
 
     const beatmaps: Array<[Beatmapset, number]> = [];
     for (let i = 0; i < Math.min(data.favourite.songs.length, 3); i++) {
-        const b = await api_beatmapset_details(data.favourite.songs[i].id);
+        const b = await api_beatmapset_details(data.favourite.songs[i].id, p.user);
         if (!b) continue;
         beatmaps.push([b, data.favourite.songs[i].count]);
     }

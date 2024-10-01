@@ -8,15 +8,17 @@ import type { Beatmap, BeatmapsetStatus } from "@/src/types/beatmaps";
 import type { Mode } from "@/src/types/osu";
 import Title from "../web/Title";
 import { api_beatmapset_details } from "@/src/api/beatmap";
+import type { UserCookie } from "@/src/types/users";
 
 type Props = {
     set_id: number,
     beatmap_id?: number
+    user?: UserCookie | null
 }
 
 async function BeatmapsetPage(p: Props) {
 
-    const beatmapset = await api_beatmapset_details(p.set_id);
+    const beatmapset = await api_beatmapset_details(p.set_id, p.user);
     if (!beatmapset) return <h1>Not found</h1>;
 
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
@@ -33,7 +35,9 @@ async function BeatmapsetPage(p: Props) {
         a.mode_int - b.mode_int
     );
 
-    const diff = (beatmapset.beatmaps.find(b => b.id === p.beatmap_id) || beatmaps[0]) as Beatmap;
+    if (!beatmaps) return <></>;
+
+    const diff = (beatmaps.find(b => b.id === p.beatmap_id) || beatmaps[0]) as Beatmap;
     const beatmap_map = new Map<number, Beatmap>();
     beatmaps.forEach(b => beatmap_map.set(b.id, b))
 
@@ -72,19 +76,21 @@ async function BeatmapsetPage(p: Props) {
                         </div>
                     </div>
                     <div class="flex flex-row flex-wrap justify-between">
-                        <div class="flex flex-row gap-2 items-center">
-                            <img data-src={beatmapset.user.avatar_url}
-                                class="rounded-lg size-12"
-                                alt="mapper" loading="lazy" />
-                            <div class="flex flex-col gap-1 text-base-content ">
-                                <Link url={`/users/${beatmapset.user_id}`}>
-                                    mapped by {beatmapset.user.username}
-                                </Link>
-                                <span class="text-base-content">
-                                    {moment(hasLeaderboards ? beatmapset.ranked_date : beatmapset.submitted_date).format("MMMM Do YYYY")}
-                                </span>
-                            </div>
-                        </div>
+                        {beatmapset.user ?
+                            <div class="flex flex-row gap-2 items-center">
+                                <img data-src={beatmapset.user.avatar_url}
+                                    class="rounded-lg size-12"
+                                    alt="mapper" loading="lazy" />
+                                <div class="flex flex-col gap-1 text-base-content ">
+                                    <Link url={`/users/${beatmapset.user_id}`}>
+                                        mapped by {beatmapset.user.username}
+                                    </Link>
+                                    <span class="text-base-content">
+                                        {moment(hasLeaderboards ? beatmapset.ranked_date : beatmapset.submitted_date).format("MMMM Do YYYY")}
+                                    </span>
+                                </div>
+                            </div> : null
+                        }
                         <div class="join">
                             <AudioPlayButton css="btn btn-info join-item"
                                 beatmap_id={diff.id}
@@ -131,8 +137,8 @@ async function BeatmapsetPage(p: Props) {
                     <div class="rounded-lg bg-base-200 shadow-lg">
                         <div class="px-2">Nominators:</div>
                         <div class="p-2 rounded-lg bg-base-300 flex flex-row flex-wrap gap-1">
-                            {beatmapset.current_nominations.map(nom =>
-                                <Link url={`/users/${nom.user_id}`}>{nom.user_id}</Link>
+                            {beatmapset.nominations?.map(nom =>
+                                <Link url={`/users/${nom}`}>{nom}</Link>
                             )}
                         </div>
                     </div>
@@ -147,13 +153,13 @@ async function BeatmapsetPage(p: Props) {
                             <div class="rounded-lg bg-base-200 shadow-lg">
                                 <div class="px-2">Genre:</div>
                                 <div class="p-2 rounded-lg bg-base-300">
-                                    {beatmapset.genre.name}
+                                    {beatmapset.genre?.name}
                                 </div>
                             </div>
                             <div class="rounded-lg bg-base-200 shadow-lg">
                                 <div class="px-2">Language:</div>
                                 <div class="p-2 rounded-lg bg-base-300">
-                                    {beatmapset.language.name}
+                                    {beatmapset.language?.name}
                                 </div>
                             </div>
                         </div>
@@ -171,7 +177,7 @@ async function BeatmapsetPage(p: Props) {
                     <div class="rounded-lg text-sm bg-base-200 shadow-lg">
                         <div class="px-2">Description:</div>
                         <div class="bbcode description p-2 rounded-lg bg-base-300">
-                            {beatmapset.description.description}
+                            {beatmapset.description?.description}
                         </div>
                     </div>
                 </div>
@@ -179,33 +185,18 @@ async function BeatmapsetPage(p: Props) {
         </details>
         {hasLeaderboards ?
             <div role="tablist" class="tabs tabs-bordered grid grid-cols-3 items-center rounded-lg bg-base-100 p-4">
-                <input type="radio" name="beatmapset_rankings" role="tab" class="tab" aria-label="Global" checked />
-                <div role="tabpanel" class="tab-content mt-4">
-                    <div class="flex flex-col gap-4">
-                        {
-                            // <form class="rounded-lg flex flex-col items-center" hx-swap="innerHTML" hx-trigger="change delay:500ms" hx-target="#load_leaderboards"
-                            //     hx-post={`/beatmapsets/${p.set_id}/${diff.id}/scores/${diff.mode}`}>
-                            //     <div class="flex flex-row gap-1">
-                            //         {mods.map((mod) =>
-                            //             <label class="has-[:checked]:opacity-100 opacity-50 transform hover:scale-110 transition easeinout duration-150 flex icons-center cursor-pointer">
-                            //                 <input type="checkbox" name={`mod-${mod}`} class="hidden" />
-                            //                 <ModIcon mod={mod} />
-                            //             </label>
-                            //         )}
-                            //     </div>
-                            // </form>
-                        }
-                        <div id="load_leaderboards" class="flex flex-col gap-4 empty:hidden"
-                            hx-post={`/beatmapsets/${p.set_id}/${diff.id}/scores/${diff.mode}`}
-                            hx-swap="innerHTML" hx-trigger="load" />
+                {["global", "country", "friend"].map(type => (<>
+                    <input type="radio" name="beatmapset_rankings" aria-label={type} role="tab" class="tab" checked={type === "global"} />
+                    <div role="tabpanel" class="tab-content mt-4"
+                        hx-post={`/beatmapsets/${p.set_id}/${diff.id}/scores/${diff.mode}/${type}`}
+                        hx-trigger={"revealed"} hx-swap="innerHTML" hx-target={`#${type}_leaderboards`} >
+                        <div id={`${type}_leaderboards`} class="flex flex-col gap-4">
+                            <span class="loading loading-spinner mx-auto" />
+                        </div>
                     </div>
-                </div>
-                <input type="radio" name="beatmapset_rankings" role="tab" class="tab" aria-label="Country" disabled />
-                <div role="tabpanel" class="tab-content p-10">Not available yet</div>
-
-                <input type="radio" name="beatmapset_rankings" role="tab" class="tab" aria-label="Friends" disabled />
-                <div role="tabpanel" class="tab-content p-10">Not available yet</div>
-            </div> : <></>}
+                </>))
+                }
+            </div > : <></>}
         <script type="module" src={`/public/js/beatmapset.js?v=${Date.now()}`} />
     </>);
 }

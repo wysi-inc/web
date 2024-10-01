@@ -2,6 +2,7 @@ import { DonationModel } from "@/src/models/Donations";
 import moment from "moment";
 import Title from "./Title";
 import { env } from "bun";
+import Badge from "../user/Badge";
 
 export type Contributor = {
     login: string;
@@ -130,9 +131,7 @@ async function Support() {
                     <span>No donations have been made yet :(</span> :
                     donations.map(d => (
                         <div role="alert" class="alert flex flex-row items-center bg-base-300 shadow-lg">
-                            <div class="size-8 rounded-full flex items-center justify-center bg-secondary">
-                                <i class="fa-solid fa-heart" />
-                            </div>
+                            <Badge badge_id={2} />
                             <div class="me-auto">
                                 <h3 class="text-start font-bold">{d.is_public ? d.from_name : "Anonym"} ({d.amount} {d.currency})</h3>
                                 <div class="text-start text-xs">{d.is_public ? d.message : ""}</div>

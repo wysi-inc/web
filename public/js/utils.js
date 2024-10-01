@@ -14,7 +14,7 @@ const modsInt = {
     "DT": 64,
     "RX": 128,
     "HT": 256,
-    "NC": 512,
+    "NC": 64,
     "FL": 1024,
     "Autoplay": 2048,
     "SO": 4096,

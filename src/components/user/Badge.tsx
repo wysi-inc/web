@@ -38,12 +38,13 @@ export const BADGES: any = {
     },
 };
 
-function Badge(p: { badge_id: number, editable: boolean, user_id: number }) {
-
+function Badge(p: {
+    badge_id: number
+    editable?: boolean,
+    user_id?: number
+}) {
     const badge = BADGES[p.badge_id];
     if (!badge) return <>xd</>;
-
-
     return (
         <div class={`${badge.fg} ${badge.bg} badge tooltip flex cursor-default flex-row gap-1 border-none`}
             hx-target="this" hx-swap="outerHTML" data-tip={badge.long} draggable={true} >

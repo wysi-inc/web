@@ -1,5 +1,6 @@
 import { LANGUAGES } from "@/src/libs/countries";
 import LanguageButton from "./LanguageButton";
+import { txt } from "@/src/tasks/files";
 
 const flags: any = {
     "af": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Flag_of_South_Africa_%281928-1982%29.svg",
@@ -27,6 +28,7 @@ const flags: any = {
     "ru": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Russia.svg",
     "sr": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Flag_of_Serbia.svg",
     "tr": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg",
+    "vi": "https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg",
     "zh": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg",
     // "zh-hant": "https://upload.wikimedia.org/wikipedia/commons/7/72/Flag_of_the_Republic_of_China.svg",
     "eo": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Flag_of_Esperanto.svg",
@@ -37,10 +39,8 @@ export function getLang(code: string) {
     return [LANGUAGES.get(code), flags[code] || "", code]
 }
 
-function LanguageSwitcher({ lang, t }: any) {
-
-    const language = getLang(lang);
-
+function LanguageSwitcher(p: { lang: string }) {
+    const language = getLang(p.lang);
     return (<>
         <button id="language_button" class="btn btn-square btn-ghost" onclick="language_modal.showModal()" >
             <img data-src={language[1]} class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
@@ -59,7 +59,7 @@ function LanguageSwitcher({ lang, t }: any) {
                 <a href="https://crowdin.com/project/wysi" class="btn col-span-full btn-accent btn-block" target="_blank">
                     <span class="flex flex-row gap-4">
                         <i class="float fa-solid fa-arrow-up-right-from-square left-2 float-left" />
-                        <span>{t.nav.help}</span>
+                        <span>{txt(p.lang, "nav.help")}</span>
                     </span>
                 </a>
             </div>
@@ -68,7 +68,6 @@ function LanguageSwitcher({ lang, t }: any) {
             </form>
         </dialog>
     </>);
-
 }
 
 export default LanguageSwitcher;

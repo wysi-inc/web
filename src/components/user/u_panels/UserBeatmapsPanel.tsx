@@ -1,18 +1,20 @@
 import type { BeatmapCategory } from "@/src/types/osu";
 import UserBeatmapsList from "./u_components/UserBeatmapsList";
+import type { UserCookie } from "@/src/types/users";
 
 type Props = {
     id: number;
     category: BeatmapCategory;
+    user?: UserCookie | null
 }
 
 type TabProps = {
     type: BeatmapCategory,
     title: string,
-    col: string
+    col: string,
 }
 
-const UserBeatmapsPanel = ({ id, category }: Props) => {
+const UserBeatmapsPanel = ({ id, category, user }: Props) => {
 
     const Tab = ({ type, title, col }: TabProps) => {
         const current = type === category;
@@ -31,7 +33,7 @@ const UserBeatmapsPanel = ({ id, category }: Props) => {
                         <span class="loading loading-spinner htmx-indicator" id={`beatmaps-loading-${type}`} />
                     }
                     {current &&
-                        <UserBeatmapsList id={id} category={category} offset={0} limit={6} />
+                        <UserBeatmapsList id={id} category={category} offset={0} limit={6} user={user} />
                     }
                 </div>
             </div>

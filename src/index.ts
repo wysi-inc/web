@@ -11,16 +11,24 @@ import { scoresRoutes } from "./routes/scores";
 import { userRoutes } from "./routes/user";
 import { connect_mongodb, connect_osu } from "./tasks/connections";
 import { below_ratelimit, log, osu_api_call_logger, ratelimit_logger } from "./tasks/logs";
-import { update_medals, update_stats } from "./tasks/updates";
+import { update_medals, update_stats, update_user_tokens } from "./tasks/updates";
+import { notFound } from './routes/notFound';
+import { load_translations } from './tasks/files';
 
 await connect_mongodb();
 await connect_osu();
+await load_translations();
+update_user_tokens();
 update_medals();
 update_stats();
 ratelimit_logger();
 osu_api_call_logger();
-setInterval(() => connect_osu(), 1000 * 60 * 60 * 12);      // every 12h
-setInterval(() => update_medals(), 1000 * 60 * 60 * 12);    // every 12h
+
+setInterval(() => {
+    connect_osu();
+    update_user_tokens();
+    update_medals();
+}, 1000 * 60 * 60 * 12);        // every 12h
 
 
 new Elysia()
@@ -53,5 +61,6 @@ new Elysia()
     .use(beatmapRoutes)
     .use(beatmapsetRoutes)
     .use(scoresRoutes)
+    .use(notFound)
     .onStart(() => log.success(`Listening on port ${env.PORT}`))
     .listen(env.PORT);

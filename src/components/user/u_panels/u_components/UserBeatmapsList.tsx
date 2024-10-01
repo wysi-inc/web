@@ -3,17 +3,20 @@ import BeatmapsetCard from "@/src/components/beatmap/BeatmapsetCard";
 import LoadMoreButton from "@/src/components/web/LoadMoreButton";
 import { api_user_beatmaps } from "@/src/api/user";
 import { RESULT_LIMIT } from "@/src/libs/constants";
+import type { UserCookie } from "@/src/types/users";
 
 async function UserBeatmapsList(p: {
-    id: number;
-    category: BeatmapCategory;
-    offset: number;
-    limit: number;
+    id: number,
+    category: BeatmapCategory,
+    offset: number,
+    limit: number,
+    user?: UserCookie | null
 }) {
 
-    const beatmaps = await api_user_beatmaps(p.id, p.category,
-        { offset: p.offset, limit: p.limit }
-    );
+    const beatmaps = await api_user_beatmaps(p.id, p.category, {
+        offset: p.offset,
+        limit: p.limit
+    }, p.user);
 
     if (!beatmaps) return <div>No {p.category} beatmaps</div>;
 

@@ -42,13 +42,9 @@ function About() {
                 <li class="flex flex-row gap-1 flex-wrap">
                     <a href={t.url} target="_blank" class="hover:-translate-y-1 transform ease-in duration-100 flex flex-row gap-2 items-center link link-info">
                         <i class="fa-solid fa-arrow-up-right-from-square" />
-                        <span>
-                            {t.title}
-                        </span>
+                        <span>{t.title}</span>
                     </a>
-                    <span>
-                        {t.description}
-                    </span>
+                    <span>{t.description}</span>
                 </li>
             )}
         </ul>

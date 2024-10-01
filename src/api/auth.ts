@@ -1,13 +1,13 @@
 import { env } from "bun";
 import { osu_fetch } from "./api";
-import type { ClientAuth } from "../types/api";
+import type { ClientAuth, UserAuth } from "../types/api";
 import { log } from "../tasks/logs";
 
 
 export async function api_auth_client(): Promise<ClientAuth | null> {
     try {
         const url = new URL("https://osu.ppy.sh/oauth/token");
-        let body = {
+        const body = {
             client_id: env.OSU_ID,
             client_secret: env.OSU_SECRET,
             grant_type: "client_credentials",
@@ -20,18 +20,37 @@ export async function api_auth_client(): Promise<ClientAuth | null> {
     }
 }
 
-export async function api_auth_user(code: string): Promise<ClientAuth | null> {
-    const url = new URL("https://osu.ppy.sh/oauth/token");
-
-    let body = {
-        client_id: env.OSU_ID,
-        client_secret: env.OSU_SECRET,
-        code: code,
-        grant_type: "authorization_code",
-        redirect_uri: env.OSU_REDIRECT
+export async function api_auth_user(code: string): Promise<UserAuth | null> {
+    try {
+        const url = new URL("https://osu.ppy.sh/oauth/token");
+        const body = {
+            client_id: env.OSU_ID,
+            client_secret: env.OSU_SECRET,
+            grant_type: "authorization_code",
+            code: code,
+            redirect_uri: env.OSU_REDIRECT
+        }
+        return await osu_fetch({ url, method: "POST", body });
+    } catch (err) {
+        log.error("Something went wrong when connecting to the osu!API", err);
+        return null;
     }
+}
 
-    const res = await osu_fetch({ url, method: "POST", body });
-    if (!res) return null;
-    return res;
+export async function api_auth_user_refresh(refresh_token: string): Promise<UserAuth | null> {
+    try {
+        const url = new URL("https://osu.ppy.sh/oauth/token");
+        const body = {
+            client_id: env.OSU_ID,
+            client_secret: env.OSU_SECRET,
+            grant_type: "refresh_token",
+            refresh_token: refresh_token,
+            redirect_uri: env.OSU_REDIRECT,
+            scope: "public",
+        }
+        return await osu_fetch({ url, method: "POST", body })
+    } catch (err) {
+        log.error("Something went wrong refreshing the token", err);
+        return null;
+    }
 }

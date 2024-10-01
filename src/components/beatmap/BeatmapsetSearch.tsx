@@ -3,9 +3,9 @@ import DoubleSlider from "./DoubleSlider";
 import Input from "./Input";
 import Title from "../web/Title";
 
-const Radio = (p: { name: string, label: string, code: number }) => (
-    <input class="btn" type="radio" aria-label={p.label}
-        name={p.name} value={String(p.code)} checked={p.label === "any"} />
+const CheckBox = (p: { name: string, label: string, code: number, checked?: boolean }) => (
+    <input class="btn btn-sm" type="checkbox" aria-label={p.label}
+        name={p.name} value={String(p.code)} checked={p.checked} />
 );
 
 const Sort = (p: { label: string, code: MinoBeatmapSort }) => (
@@ -31,12 +31,11 @@ function BeatmapsetSearch() {
             hx-post="/beatmapsets/list" hx-trigger="load, input delay:500ms"
             hx-target="#beatmap-search-results" hx-indicator="#beatmap-search-indicator"
             hx-on--before-request={`
-                document.getElementById('beatmap-search-results').innerHTML=\`
-        <div class="col-span-full flex items-center justify-center">
-            <span class="loading loading-spinner loading-md mx-auto" />
-        </div>
-                \`;
-                `}>
+            document.getElementById('beatmap-search-results').innerHTML=\`
+                <div class="col-span-full flex items-center justify-center">
+                    <span class="loading loading-spinner loading-md mx-auto" />
+                </div>\`;
+            `}>
             <div class="flex flex-col gap-4 rounded-lg bg-base-100 p-4">
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <Input name="Title" placeholder="Beatmap Title or Artist" />
@@ -66,11 +65,10 @@ function BeatmapsetSearch() {
                             <span class="label-text">Mode:</span>
                         </div>
                         <div class="flex flex-row flex-wrap gap-2">
-                            <Radio name="mode" code={-1} label="any" />
-                            <Radio name="mode" code={0} label="osu" />
-                            <Radio name="mode" code={1} label="taiko" />
-                            <Radio name="mode" code={2} label="fruits" />
-                            <Radio name="mode" code={3} label="mania" />
+                            <CheckBox name="mode" code={0} label="osu" checked />
+                            <CheckBox name="mode" code={1} label="taiko" checked />
+                            <CheckBox name="mode" code={2} label="fruits" checked />
+                            <CheckBox name="mode" code={3} label="mania" checked />
                         </div>
                     </div>
                     <div class="md:col-span-3">
@@ -78,14 +76,13 @@ function BeatmapsetSearch() {
                             <span class="label-text">Status:</span>
                         </div>
                         <div class="flex flex-row flex-wrap gap-2">
-                            <Radio name="status" code={-3} label="any" />
-                            <Radio name="status" code={1} label="ranked" />
-                            <Radio name="status" code={2} label="approved" />
-                            <Radio name="status" code={4} label="loved" />
-                            <Radio name="status" code={3} label="qualified" />
-                            <Radio name="status" code={0} label="pending" />
-                            <Radio name="status" code={-1} label="wip" />
-                            <Radio name="status" code={-2} label="graveyard" />
+                            <CheckBox name="status" code={1} label="ranked" checked />
+                            <CheckBox name="status" code={2} label="approved" checked />
+                            <CheckBox name="status" code={4} label="loved" checked />
+                            <CheckBox name="status" code={3} label="qualified" />
+                            <CheckBox name="status" code={0} label="pending" />
+                            <CheckBox name="status" code={-1} label="wip" />
+                            <CheckBox name="status" code={-2} label="graveyard" />
                         </div>
                     </div>
                 </div>
@@ -96,27 +93,15 @@ function BeatmapsetSearch() {
                     <div class="flex flex-col">
                         <span class="text-center text-xs">Relevant</span>
                         <label class="btn btn-ghost btn-xs has-[:checked]:btn-active">
-                            <input class="hidden" type="radio" name="sorting" value="relevant" />
+                            <input class="hidden" type="radio" name="sorting" value="relevant" checked />
                             <i class="fa-solid fa-caret-down" />
                         </label>
                     </div>
-                    {
-                        //<Sort label="Title" code="title" />
-                        //<Sort label="Artist" code="artist" />
-                    }
                     <Sort label="Ranked" code="ranked_date" />
                     <Sort label="Plays" code="play_count" />
-                    {
-                        // <Sort label="Rating" code="rating" />
-                    }
                     <Sort label="Difficulty" code="beatmaps.difficulty_rating" />
                     <Sort label="Favourites" code="favourite_count" />
                 </div>
-                {
-                    // <div class="tooltip tooltip-left cursor-help" data-tip="Click a catecory twice for it to work properly :/">
-                    //     <i class="fa-solid fa-circle-question" />
-                    // </div>
-                }
             </div>
         </form>
         <script async type="module" src={`/public/js/sliders.js?v=${Date.now()}`} />

@@ -1,5 +1,5 @@
 import type { Mode } from "@/src/types/osu";
-import type { ColorCount } from "@/src/types/users";
+import type { ColorCount, UserCookie } from "@/src/types/users";
 import BarChart from "./u_components/BarChart";
 import ModIcon from "../../score/ModIcon";
 import Grade from "../../score/Grade";
@@ -8,7 +8,11 @@ import { secondsToTime } from "@/src/libs/web_utils";
 import { api_scores_user_category } from "@/src/api/score";
 import type { ScoreType } from "@/src/types/score";
 
-async function UserSummaryPanel(p: { user_id: number; mode: Mode; }) {
+async function UserSummaryPanel(p: {
+    user_id: number,
+    mode: Mode,
+    user?: UserCookie | null
+}) {
     const scores = await api_scores_user_category(
         p.user_id,
         "best",
@@ -16,7 +20,8 @@ async function UserSummaryPanel(p: { user_id: number; mode: Mode; }) {
             mode: p.mode,
             offset: 0,
             limit: 100
-        }
+        },
+        p.user
     );
 
     if (!scores) return <></>;

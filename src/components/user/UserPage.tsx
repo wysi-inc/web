@@ -8,21 +8,17 @@ import UserSetupPanel from "./u_panels/UserSetupPanel";
 import Title from "../web/Title";
 import UserMedalsPanel from "./u_panels/UserMedalsPanel";
 import Report from "../web/Report";
-import type { UserCookie } from "@/src/types/users";
 import UserAboutPanel from "./u_panels/UserAboutPanel";
-import { apicall } from "@/src/tasks/logs";
+import type { UserCookie } from "@/src/types/users";
 
-type Props = {
+async function UserPage(p: {
     logged: UserCookie | null;
     user_id: string;
     mode?: Mode;
     t: any
-}
+}) {
 
-const UserPage = async (p: Props) => {
-
-    const user = await getUser(p.user_id, p.mode);
-    apicall();
+    const user = await getUser(p.user_id, p.mode, p.logged);
 
     const no_chosen_mode = p.mode === undefined;
 

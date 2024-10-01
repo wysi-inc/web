@@ -3,25 +3,22 @@ import ScoreCard from "@/src/components/score/ScoreCard";
 import LoadMoreButton from "@/src/components/web/LoadMoreButton";
 import { api_scores_user_category } from "@/src/api/score";
 import { RESULT_LIMIT } from "@/src/libs/constants";
+import type { UserCookie } from "@/src/types/users";
 
-type Props = {
-    id: number;
-    mode: Mode;
-    category: ScoreCategory;
-    offset: number;
-    limit: number;
-}
+async function UserScoresList(p: {
+    id: number,
+    mode: Mode,
+    category: ScoreCategory,
+    offset: number,
+    limit: number,
+    user?: UserCookie | null
+}) {
 
-const UserScoresList = async (p: Props) => {
-
-    const scores = await api_scores_user_category(
-        p.id, p.category,
-        {
-            mode: p.mode,
-            offset: p.offset,
-            limit: p.limit
-        }
-    );
+    const scores = await api_scores_user_category(p.id, p.category, {
+        mode: p.mode,
+        offset: p.offset,
+        limit: p.limit
+    }, p.user);
 
     if (!scores) return <></>;
     if (scores.length === 0 && p.offset === 0) return <div>This user hasn't set any scores yet</div>;

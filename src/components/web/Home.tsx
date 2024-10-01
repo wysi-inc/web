@@ -47,7 +47,7 @@ async function Home({ t }: any) {
                 <div class="stat">
                     <div class="stat-title"><i class="fa-solid fa-database" /> Profiles Stored</div>
                     <div class="stat-value">{stats.users.toLocaleString()}</div>
-                    <div class="stat-desc">User profiles saved</div>
+                    <div class="stat-desc">User profiles stored</div>
                 </div>
                 <div class="stat">
                     <div class="stat-title"><i class="fa-solid fa-computer" /> Profile Setups</div>
