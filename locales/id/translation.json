@@ -172,6 +172,11 @@
         "length": "Durasi",
         "bpm": "BPM"
     },
+    "search": {
+        "sort": {
+            "relevant": "Relevant"
+        }
+    },
     "footer": {
         "rights": "Seluruh hak dilindungi untuk monyet ini"
     },
