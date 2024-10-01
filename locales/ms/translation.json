@@ -172,6 +172,11 @@
         "length": "Panjang",
         "bpm": "BPM"
     },
+    "search": {
+        "sort": {
+            "relevant": "Relevant"
+        }
+    },
     "footer": {
         "rights": "Setiap hak terpelihara untuk monyet ini"
     },
