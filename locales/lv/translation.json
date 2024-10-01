@@ -172,6 +172,11 @@
         "length": "Garums",
         "bpm": "BPM"
     },
+    "search": {
+        "sort": {
+            "relevant": "Relevant"
+        }
+    },
     "footer": {
         "rights": "Visas tiesības paturētas šim muļķīgajam mērkaķim"
     },
