@@ -16,28 +16,28 @@ const oauthQuery = { query: t.Object({ code: t.String(), state: t.Any() }) };
 
 export const baseRoutes = new Elysia({ prefix: '' })
     .use(plugins)
-    .get("/", async ({ lang, t, request, jwt, cookie }) => (
-        <HtmxPage lang={lang} t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
-            <Home t={t} />
+    .get("/", async ({ lang, request, user }) => (
+        <HtmxPage lang={lang} headers={request.headers} user={user}>
+            <Home lang={lang} />
         </HtmxPage>
     ))
-    .get("/about", async ({ lang, t, request, jwt, cookie }) => (
-        <HtmxPage lang={lang} t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
+    .get("/about", async ({ lang, request, user }) => (
+        <HtmxPage lang={lang} headers={request.headers} user={user}>
             <About />
         </HtmxPage>
     ))
-    .get("/support", async ({ lang, t, request, jwt, cookie }) => (
-        <HtmxPage lang={lang} t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
+    .get("/support", async ({ lang, request, user }) => (
+        <HtmxPage lang={lang} headers={request.headers} user={user}>
             <Support />
         </HtmxPage>
     ))
     .post("/search", ({ body }) => (
         <SearchResults query={body.q} />
     ), searchBody)
-    .get("/wiki/*", async ({ lang, t, params, request, jwt, cookie }) => {
+    .get("/wiki/*", async ({ lang, params, request, user }) => {
         if (env.STATE === "dev") {
             return (
-                <HtmxPage lang={lang} t={t} headers={request.headers} cookie={cookie} jwt={jwt}>
+                <HtmxPage lang={lang} headers={request.headers} user={user}>
                     <Testing params={Object.values(params)} />
                 </HtmxPage>
             )
@@ -52,7 +52,7 @@ export const baseRoutes = new Elysia({ prefix: '' })
     }, {
         body: t.Object(t.Any())
     })
-    .get("/oauth", async ({ set, jwt, cookie, query }) => {
+    .get("/oauth", async ({ query, set, cookie, jwt }) => {
         const res = await userAuthData(query.code);
         if (!res) return error(500, "error");
         const user: UserCookie = {
@@ -60,7 +60,7 @@ export const baseRoutes = new Elysia({ prefix: '' })
             username: res.data.username,
             role: res.role ? res.role : undefined
         }
-        cookie?.auth?.set({
+        cookie.auth.set({
             value: await jwt.sign(user),
             httpOnly: true,
             maxAge: 60 * 60 * 24 * 2,

@@ -1,32 +1,33 @@
 import { StatsModel } from "@/src/models/Stats";
 import Title from "./Title";
+import { txt } from "@/src/tasks/files";
 
 
-async function Home({ t }: any) {
+async function Home(p: { lang: string }) {
 
     const content = [
         {
-            title: t?.home?.profiles,
+            title: txt(p.lang, "home.profiles"),
             img: "profile",
         },
         {
-            title: t?.home?.stats,
+            title: txt(p.lang, "home.stats"),
             img: "summary",
         },
         {
-            title: t?.home?.search,
+            title: txt(p.lang, "home.search"),
             img: "beatmaps",
         },
         {
-            title: t?.home?.calculator,
+            title: txt(p.lang, "home.calculator"),
             img: "calculator",
         },
         {
-            title: t?.home?.setup,
+            title: txt(p.lang, "home.setup"),
             img: "setup",
         },
         {
-            title: t?.home?.collections,
+            title: txt(p.lang, "home.collections"),
             img: "collections",
         },
     ];
@@ -36,10 +37,10 @@ async function Home({ t }: any) {
     return (<>
         <Title title="Home" />
         <div class="flex flex-col items-center gap-2">
-            <h1 class="text-center text-2xl">{t?.home?.welcome}</h1>
+            <h1 class="text-center text-2xl">{txt(p.lang, "home.welcome")}</h1>
             <img loading="lazy" src="/public/wysi.svg" class="size-24 rounded-xl shadow-lg" alt="wysi logo" />
-            <h2 class="text-center text-lg">{t?.home?.foss}</h2>
-            <h3 class="text-center text-sm">{t?.home?.built}</h3>
+            <h2 class="text-center text-lg">{txt(p.lang, "home.foss")}</h2>
+            <h3 class="text-center text-sm">{txt(p.lang, "home.built")}</h3>
             <div />
         </div>
         {stats ?
