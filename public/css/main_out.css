@@ -5698,11 +5698,6 @@ input.tab:checked + .tab-content,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.text-secondary-content {
-  --tw-text-opacity: 1;
-  color: var(--fallback-sc,oklch(var(--sc)/var(--tw-text-opacity)));
-}
-
 .text-opacity-100 {
   --tw-text-opacity: 1;
 }
@@ -5717,10 +5712,6 @@ input.tab:checked + .tab-content,
 
 .text-opacity-75 {
   --tw-text-opacity: 0.75;
-}
-
-.text-opacity-30 {
-  --tw-text-opacity: 0.3;
 }
 
 .underline {

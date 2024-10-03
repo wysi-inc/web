@@ -59,7 +59,7 @@ async function UserMedalsPanel(p: {
     })[0];
 
     return (<>
-        <div class="flex flex-row flex-wrap gap-4 overflow-hidden">
+        <div class="flex flex-row flex-wrap gap-4">
             <div class="rounded-lg bg-neutral shadow-lg grow">
                 <div class="p-1 px-2 text-neutral-content">
                     Recent Medals
@@ -84,7 +84,7 @@ async function UserMedalsPanel(p: {
                 </div>
             </div>
         </div>
-        <details class="group mt-4 overflow-hidden">
+        <details class="group mt-4 ">
             <summary class="group-open:mb-4 cursor-pointer bg-neutral rounded-lg flex flex-row gap-4 justify-between items-center px-4 py-2">
                 <div class="flex flex-row items-center gap-4">
                     <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
@@ -98,7 +98,7 @@ async function UserMedalsPanel(p: {
                     </div>
                 </div>
             </summary>
-            <div class="flex flex-col gap-4 overflow-hidden">
+            <div class="flex flex-col gap-4">
                 {Object.entries(categories).map(([key, vals]) =>
                     <div class="rounded-lg bg-neutral shadow-lg">
                         <div class="text-neutral-content py-1 px-2 flex flex-row justify-between items-center">
