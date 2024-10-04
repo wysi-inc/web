@@ -30,8 +30,8 @@ const queryBodyElysia = {
         hp_max: t.Optional(t.String()),
         od_min: t.Optional(t.String()),
         od_max: t.Optional(t.String()),
-        mode: t.Optional(t.Array(t.Numeric())),
-        status: t.Optional(t.Array(t.Numeric())),
+        mode: t.Optional(t.Any()),
+        status: t.Optional(t.Any()),
         offset: t.Optional(t.String()),
         sorting: t.Optional(t.String()),
     })

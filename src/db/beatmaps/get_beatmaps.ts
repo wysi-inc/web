@@ -73,14 +73,20 @@ export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ 
         }
         url.searchParams.set("limit", String(RESULT_LIMIT.BEATMAPS.SEARCH));
         url.searchParams.set("offset", offset || "0");
-        q.mode?.forEach(m => url.searchParams.append("mode", String(m)))
-        q.status?.forEach(s => url.searchParams.append("status", String(s)))
+        if (typeof q.mode === "object") {
+            q.mode.forEach(m => url.searchParams.append("mode", String(m)))
+        } else if (q.mode) {
+            url.searchParams.append("mode", String(q.mode));
+        }
+        if (typeof q.status === "object") {
+            q.status.forEach(s => url.searchParams.append("status", String(s)))
+        } else if (q.status) {
+            url.searchParams.append("status", String(q.status));
+        }
         if (q.sorting && q.sorting !== "relevant") {
             url.searchParams.set("sort", q.sorting);
         }
     }
-
-    console.log(url.toString());
 
     const res = await fetch(url.toString(), {
         headers: { Referer: "https://wysi727.com" }
