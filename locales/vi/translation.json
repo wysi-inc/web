@@ -23,7 +23,7 @@
         "profiles": "Trang cá nhân người dùng",
         "stats": "Chỉ số Top 100",
         "search": "Tìm kiếm beatmap",
-        "calculator": "May tính PP có sẵn",
+        "calculator": "Máy tính PP có sẵn",
         "setup": "Chia sẻ setup!",
         "collections": "Đăng tải bộ sưu tập!"
     },
@@ -40,7 +40,7 @@
                 "show": "Hiện tất cả"
             },
             "year": {
-                "title": "Năm",
+                "title": "Trong năm",
                 "info": "Hiện tại đây là recap của năm nay, dữ liệu sẽ reset vào Ngày 1 Tháng 1"
             },
             "most": "Chơi nhiều nhất",
