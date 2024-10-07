@@ -1,175 +1,175 @@
 {
     "nav": {
-        "home": "首页",
-        "users": "用户",
-        "rankings": "排行",
-        "beatmaps": "谱面",
-        "support": "支持",
-        "about": "关于",
-        "search": "搜索",
-        "search_someone": "搜索",
-        "help": "帮助翻译本站！",
+        "home": "Home",
+        "users": "Users",
+        "rankings": "Rankings",
+        "beatmaps": "Beatmaps",
+        "support": "Support",
+        "about": "About",
+        "search": "Search someone",
+        "search_someone": "Search someone",
+        "help": "Help translate the site!",
         "log": {
-            "login": "使用 osu 登录！",
-            "logout": "登出",
-            "osu": "osu!个人资料",
-            "wysi": "wysi! 个人资料"
+            "login": "Login with osu!",
+            "logout": "Logout",
+            "osu": "osu!profile",
+            "wysi": "wysi!profile"
         }
     },
     "home": {
-        "welcome": "欢迎来到 wysi727.com!",
-        "foss": "一个开源的 osu! 官网替代方案",
-        "built": "使用Bun和Htmx搭建",
-        "profiles": "用户资料",
-        "stats": "前100成绩数据",
-        "search": "谱面搜索",
-        "calculator": "内置PP计算器",
-        "setup": "分享您的设置！",
-        "collections": "上传您的收藏！"
+        "welcome": "Welcome to wysi727.com!",
+        "foss": "An open source osu! website alternative",
+        "built": "Built with bun and htmx",
+        "profiles": "User Profiles",
+        "stats": "Top 100 Score stats",
+        "search": "Beatmap Search",
+        "calculator": "Built-in PP Calculator",
+        "setup": "Share your setup!",
+        "collections": "Upload your collections!"
     },
     "user": {
         "sections": {
-            "expand": "展开",
-            "about": "关于",
-            "beatmaps": "谱面",
-            "top": "顶部",
+            "expand": "Expand",
+            "about": "About",
+            "beatmaps": "Beatmaps",
+            "top": "Top",
             "medals": {
-                "title": "成就",
-                "recent": "最近取得",
-                "rarest": "最稀有",
-                "show": "显示所有"
+                "title": "Medals",
+                "recent": "Recent Medals",
+                "rarest": "Rarest Medal",
+                "show": "Show all"
             },
             "year": {
-                "title": "年份",
-                "info": "这是今年到目前为止的回顾，数据将在1月1日被重置"
+                "title": "Year",
+                "info": "This is a recap of this year so far, the data will be reset at January 1st"
             },
-            "most": "玩次数最多",
+            "most": "Most Played",
             "scores": {
-                "title": "分数",
-                "info": "将鼠标指针悬浮在灰色的PP上以查看理论PP(IF FC)",
+                "title": "Scores",
+                "info": "Hover over a grayed out PP to see the (if FC) PP value",
                 "tabs": {
-                    "pinned": "已置顶",
-                    "best": "最佳",
-                    "first": "第一",
-                    "recent": "最近"
+                    "pinned": "Pinned",
+                    "best": "Best",
+                    "first": "First",
+                    "recent": "Recent"
                 }
             },
             "history": {
-                "title": "历史记录",
+                "title": "History",
                 "tabs": {
-                    "global": "全球",
-                    "country": "国家/地区",
-                    "plays": "游玩",
-                    "replays": "回放"
+                    "global": "Global",
+                    "country": "Country",
+                    "plays": "Plays",
+                    "replays": "Replays"
                 }
             },
             "summary": {
-                "title": "摘要",
-                "info": "这是您前100成绩的简单总结",
+                "title": "Summary",
+                "info": "This is a quick summary of your top 100 plays",
                 "tabs": {
-                    "hit_ratios": "点击率",
-                    "grade_ratios": "等级比率",
-                    "average_play": "平均游戏"
+                    "hit_ratios": "Hit Ratios",
+                    "grade_ratios": "Grade Ratios",
+                    "average_play": "Average Play"
                 }
             },
             "collections": {
-                "title": "收藏",
-                "info": "所有不存在于osu!官网中的谱面都不会被下载(例如：osu!trainer, customdiffs, 未提交谱面...)"
+                "title": "Collections",
+                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
             },
             "setup": {
-                "title": "设置",
+                "title": "Setup",
                 "tabs": {
-                    "tablet": "绘图板",
-                    "keyboard": "键盘",
-                    "mouse": "滑鼠",
-                    "peripherals": "外设",
-                    "computer": "电脑"
+                    "tablet": "Tablet",
+                    "keyboard": "Keyboard",
+                    "mouse": "Mouse",
+                    "peripherals": "Peripherals",
+                    "computer": "Computer"
                 },
                 "components": {
-                    "os": "操作系统",
-                    "cpu": "处理器",
-                    "gpu": "显卡",
-                    "ram": "内存",
-                    "storage": "存储",
-                    "motherboard": "主板",
-                    "psu": "电源装置",
-                    "case": "电脑机箱"
+                    "os": "OS",
+                    "cpu": "CPU",
+                    "gpu": "GPU",
+                    "ram": "RAM",
+                    "storage": "Storage",
+                    "motherboard": "Motherboard",
+                    "psu": "Power Supply",
+                    "case": "Case"
                 },
                 "peripherals": {
-                    "mousepad": "鼠标垫",
-                    "keypad": "小键盘",
-                    "headphones": "耳机",
-                    "camera": "摄像头",
-                    "microphone": "麦克风",
-                    "monitor": "显示器",
-                    "audio": "音频",
-                    "desk": "桌子",
-                    "chair": "椅子"
+                    "mousepad": "Mousepad",
+                    "keypad": "Keypad",
+                    "headphones": "Headphones",
+                    "camera": "Camera",
+                    "microphone": "Microphone",
+                    "monitor": "Monitor",
+                    "audio": "Audio",
+                    "desk": "Desk",
+                    "chair": "Chair"
                 },
-                "name": "用户名",
-                "model": "型号",
-                "size": "大小",
-                "area": "区域",
-                "width": "宽度",
-                "height": "高度",
-                "position": "位置",
-                "dpi": "灵敏度",
-                "mult": "倍数",
-                "kb_layout": "键盘布局",
+                "name": "Name",
+                "model": "Model",
+                "size": "Size",
+                "area": "Area",
+                "width": "Width",
+                "height": "Height",
+                "position": "Position",
+                "dpi": "Sensitivity",
+                "mult": "Multiplier",
+                "kb_layout": "Keyboard Layout",
                 "layout": {
-                    "k0": "无",
-                    "k2": "2 键",
-                    "k3": "3 键",
-                    "k4": "4 键",
+                    "k0": "None",
+                    "k2": "2 Keys",
+                    "k3": "3 Keys",
+                    "k4": "4 Keys",
                     "k60": "60%",
                     "k75": "75%",
                     "ktkl": "TKL",
-                    "kfull": "完整"
+                    "kfull": "FULL"
                 }
             }
         },
-        "performance": "成绩",
-        "total_score": "总分",
-        "global_rank": "全球排名",
-        "country_rank": "地区排名",
-        "play_time": "游戏时间",
-        "play_count": "游戏次数",
-        "total_hits": "总命中次数",
-        "replays_watched": "回放被观看次数",
-        "hits_x_play": "按下 x 游戏",
-        "followers": "粉丝",
-        "online": "在线"
+        "performance": "Performance",
+        "total_score": "Total Score",
+        "global_rank": "Global Rank",
+        "country_rank": "Country Rank",
+        "play_time": "Play Time",
+        "play_count": "Play Count",
+        "total_hits": "Total Hits",
+        "replays_watched": "Replays Watched",
+        "hits_x_play": "Hits x Play",
+        "followers": "Followers",
+        "online": "Online"
     },
     "score": {
         "status": {
-            "pinned": "置頂",
-            "best": "最好",
-            "firsts": "第一名",
-            "recent": "最近活动"
+            "pinned": "Pinned",
+            "best": "Best",
+            "firsts": "First",
+            "recent": "Recent"
         },
-        "mods": "模组",
-        "max_combo": "最大连击",
-        "combo": "连击",
-        "grade": "等级",
-        "grades": "等级",
-        "acc": "准确率",
-        "accuracy": "准确率",
-        "score": "得分",
-        "ranked_score": "进榜总分"
+        "mods": "Mods",
+        "max_combo": "Max Combo",
+        "combo": "Combo",
+        "grade": "Grade",
+        "grades": "Grades",
+        "acc": "Acc",
+        "accuracy": "Accuracy",
+        "score": "Score",
+        "ranked_score": "Ranked Score"
     },
     "beatmapset": {
         "status": {
-            "favourite": "收藏",
-            "ranked": "上架",
-            "guest": "访客",
-            "loved": "社区喜爱",
-            "nominated": "提名",
-            "pending": "待定",
-            "graveyard": "坟场 (Graveyard)",
-            "wip": "进行中",
-            "approved": "达标"
+            "favourite": "Favourite",
+            "ranked": "Ranked",
+            "guest": "Guest",
+            "loved": "Loved",
+            "nominated": "Nominated",
+            "pending": "Pending",
+            "graveyard": "Graveyard",
+            "wip": "In Progress",
+            "approved": "Approved"
         },
-        "length": "长度",
+        "length": "Length",
         "bpm": "BPM"
     },
     "search": {
@@ -178,13 +178,13 @@
         }
     },
     "footer": {
-        "rights": "保留给这个傻猴子的所有权利"
+        "rights": "All rights reserved to this silly monkey"
     },
     "alerts": {
         "user": {
-            "user_doesnt_exist": "该用户不存在",
-            "user_is_bot": "此用户是机器人，不支持机器人:(",
-            "users_fail": "无法获取用户"
+            "user_doesnt_exist": "This user doesn't exist",
+            "user_is_bot": "This user is a bot, bots are not supported yet :(",
+            "users_fail": "Failed to fetch users"
         }
     }
 }
