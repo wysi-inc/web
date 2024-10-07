@@ -23,7 +23,7 @@
         "profiles": "Trang cá nhân người dùng",
         "stats": "Chỉ số Top 100",
         "search": "Tìm kiếm beatmap",
-        "calculator": "May tính PP có sẵn",
+        "calculator": "Máy tính PP có sẵn",
         "setup": "Chia sẻ setup!",
         "collections": "Đăng tải bộ sưu tập!"
     },
@@ -40,7 +40,7 @@
                 "show": "Hiện tất cả"
             },
             "year": {
-                "title": "Năm",
+                "title": "Trong năm",
                 "info": "Hiện tại đây là recap của năm nay, dữ liệu sẽ reset vào Ngày 1 Tháng 1"
             },
             "most": "Chơi nhiều nhất",
@@ -80,47 +80,47 @@
                 "title": "Setup",
                 "tabs": {
                     "tablet": "Tablet",
-                    "keyboard": "Keyboard",
-                    "mouse": "Mouse",
-                    "peripherals": "Peripherals",
-                    "computer": "Computer"
+                    "keyboard": "Bàn phím",
+                    "mouse": "Chuột",
+                    "peripherals": "Thiết bị",
+                    "computer": "Máy tính"
                 },
                 "components": {
-                    "os": "OS",
+                    "os": "Hệ điều hành",
                     "cpu": "CPU",
                     "gpu": "GPU",
                     "ram": "RAM",
-                    "storage": "Storage",
-                    "motherboard": "Motherboard",
-                    "psu": "Power Supply",
-                    "case": "Case"
+                    "storage": "Bộ nhớ",
+                    "motherboard": "Bo mạch chủ",
+                    "psu": "Nguồn cấp điện",
+                    "case": "Case máy tính"
                 },
                 "peripherals": {
-                    "mousepad": "Mousepad",
+                    "mousepad": "Bàn di chuột",
                     "keypad": "Keypad",
-                    "headphones": "Headphones",
+                    "headphones": "Tai nghe",
                     "camera": "Camera",
                     "microphone": "Microphone",
-                    "monitor": "Monitor",
-                    "audio": "Audio",
-                    "desk": "Desk",
-                    "chair": "Chair"
+                    "monitor": "Màn hình",
+                    "audio": "Âm thanh",
+                    "desk": "Bàn",
+                    "chair": "Ghế"
                 },
-                "name": "Name",
-                "model": "Model",
-                "size": "Size",
+                "name": "Tên",
+                "model": "Mẫu",
+                "size": "Kích thước",
                 "area": "Area",
-                "width": "Width",
-                "height": "Height",
-                "position": "Position",
-                "dpi": "Sensitivity",
-                "mult": "Multiplier",
-                "kb_layout": "Keyboard Layout",
+                "width": "Chiều rộng",
+                "height": "Chiều dài",
+                "position": "Vị trí",
+                "dpi": "Độ nhạy",
+                "mult": "Số nhân",
+                "kb_layout": "Kiểu bàn phím",
                 "layout": {
-                    "k0": "None",
-                    "k2": "2 Keys",
-                    "k3": "3 Keys",
-                    "k4": "4 Keys",
+                    "k0": "Không có",
+                    "k2": "2 Phím",
+                    "k3": "3 Phím",
+                    "k4": "4 Phím",
                     "k60": "60%",
                     "k75": "75%",
                     "ktkl": "TKL",
@@ -128,15 +128,15 @@
                 }
             }
         },
-        "performance": "Performance",
-        "total_score": "Total Score",
-        "global_rank": "Global Rank",
-        "country_rank": "Country Rank",
-        "play_time": "Play Time",
-        "play_count": "Play Count",
-        "total_hits": "Total Hits",
-        "replays_watched": "Replays Watched",
-        "hits_x_play": "Hits x Play",
+        "performance": "Điểm performance",
+        "total_score": "Tổng điểm",
+        "global_rank": "Xếp hạng thế giới",
+        "country_rank": "Xếp hạng cuốc gia",
+        "play_time": "Giờ chơi",
+        "play_count": "Số lượt chơi",
+        "total_hits": "Tổng số hit",
+        "replays_watched": "Số lượt xem",
+        "hits_x_play": "Hit trên Lượt chơi",
         "followers": "Người theo dõi",
         "online": "Online"
     },
@@ -164,27 +164,27 @@
             "guest": "Khách mời",
             "loved": "Yêu thích",
             "nominated": "Được ứng cử",
-            "pending": "Pending",
-            "graveyard": "Graveyard",
-            "wip": "In Progress",
-            "approved": "Approved"
+            "pending": "Đang chờ",
+            "graveyard": "Đắp mộ",
+            "wip": "Chưa xong",
+            "approved": "Được chấp nhận"
         },
-        "length": "Length",
+        "length": "Độ dài",
         "bpm": "BPM"
     },
     "search": {
         "sort": {
-            "relevant": "Relevant"
+            "relevant": "Liên quan"
         }
     },
     "footer": {
-        "rights": "All rights reserved to this silly monkey"
+        "rights": "Mọi bản quyền thuộc về con khỉ ngố này"
     },
     "alerts": {
         "user": {
-            "user_doesnt_exist": "This user doesn't exist",
-            "user_is_bot": "This user is a bot, bots are not supported yet :(",
-            "users_fail": "Failed to fetch users"
+            "user_doesnt_exist": "Người dùng này không tồn tại",
+            "user_is_bot": "Người dùng này là bot, bot hiện chưa được hỗ trợ :(",
+            "users_fail": "Truy xuất dữ liệu người dùng thất bại"
         }
     }
 }

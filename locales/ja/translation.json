@@ -2,86 +2,86 @@
     "nav": {
         "home": "ホーム",
         "users": "ユーザー",
-        "rankings": "Rankings",
+        "rankings": "ランキング",
         "beatmaps": "ビートマップ",
-        "support": "Support",
-        "about": "About",
+        "support": "サポート",
+        "about": "概要",
         "search": "ユーザーを検索",
-        "search_someone": "Search someone",
+        "search_someone": "ユーザー検索",
         "help": "このサイトの翻訳に協力してください！",
         "log": {
             "login": "Osu! でログイン",
             "logout": "退出",
             "osu": "osu!のプロファイル",
-            "wysi": "wysi!profile"
+            "wysi": "wysiプロフィール"
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu! website alternative",
-        "built": "Built with bun and htmx",
-        "profiles": "User Profiles",
-        "stats": "Top 100 Score stats",
-        "search": "Beatmap Search",
-        "calculator": "Built-in PP Calculator",
-        "setup": "Share your setup!",
-        "collections": "Upload your collections!"
+        "welcome": "wysi727.comへようこそ！",
+        "foss": "osu!の代用オープンソースウェブサイト",
+        "built": "htmxとbunを使って開発",
+        "profiles": "ユーザープロフィール",
+        "stats": "スコアトップ100位",
+        "search": "ビートマップ検索",
+        "calculator": "PP計算ツール搭載",
+        "setup": "デスク環境をシェアしよう！",
+        "collections": "コレクションをアップロード！"
     },
     "user": {
         "sections": {
-            "expand": "Expand",
-            "about": "About",
-            "beatmaps": "Beatmaps",
-            "top": "Top",
+            "expand": "拡大",
+            "about": "概要",
+            "beatmaps": "ビートマップ",
+            "top": "トップ",
             "medals": {
                 "title": "メダル",
-                "recent": "Recent Medals",
-                "rarest": "Rarest Medal",
-                "show": "Show all"
+                "recent": "最新のメダル",
+                "rarest": "希少メダル",
+                "show": "すべて表示"
             },
             "year": {
-                "title": "Year",
-                "info": "This is a recap of this year so far, the data will be reset at January 1st"
+                "title": "年",
+                "info": "今年の要約、年の初めにリセットされます"
             },
-            "most": "Most Played",
+            "most": "プレイ回数の多いビートマップ",
             "scores": {
-                "title": "Scores",
-                "info": "Hover over a grayed out PP to see the (if FC) PP value",
+                "title": "スコア",
+                "info": "グレー表示のPPにカーソルを合わせれば(フルコンボの場合)のPPが表示されます。",
                 "tabs": {
-                    "pinned": "Pinned",
-                    "best": "Best",
-                    "first": "First",
-                    "recent": "Recent"
+                    "pinned": "ピン留めされたスコア",
+                    "best": "最高",
+                    "first": "初回",
+                    "recent": "最近"
                 }
             },
             "history": {
                 "title": "履歴",
                 "tabs": {
-                    "global": "Global",
-                    "country": "Country",
-                    "plays": "Plays",
-                    "replays": "Replays"
+                    "global": "グローバル",
+                    "country": "国",
+                    "plays": "プレイ",
+                    "replays": "リプレイ"
                 }
             },
             "summary": {
-                "title": "Summary",
-                "info": "This is a quick summary of your top 100 plays",
+                "title": "まとめ",
+                "info": "ベストパフォーマンストップ100位のまとめ",
                 "tabs": {
-                    "hit_ratios": "Hit Ratios",
-                    "grade_ratios": "Grade Ratios",
-                    "average_play": "Average Play"
+                    "hit_ratios": "ヒット比率",
+                    "grade_ratios": "成績比率",
+                    "average_play": "平均プレイ"
                 }
             },
             "collections": {
-                "title": "Collections",
-                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "title": "コレクション",
+                "info": "osu!ウェブサイトに載っていないビートマップはダウンロードされません（osu!trainer、カスタム難易度、非投票マップなど）"
             },
             "setup": {
-                "title": "Setup",
+                "title": "スペック",
                 "tabs": {
-                    "tablet": "Tablet",
-                    "keyboard": "Keyboard",
-                    "mouse": "Mouse",
+                    "tablet": "タブレット",
+                    "keyboard": "キーボード",
+                    "mouse": "マウス",
                     "peripherals": "周辺機器",
                     "computer": "パソコン"
                 },
@@ -96,35 +96,35 @@
                     "case": "ケース"
                 },
                 "peripherals": {
-                    "mousepad": "Mousepad",
-                    "keypad": "Keypad",
-                    "headphones": "Headphones",
-                    "camera": "Camera",
-                    "microphone": "Microphone",
-                    "monitor": "Monitor",
-                    "audio": "Audio",
-                    "desk": "Desk",
-                    "chair": "Chair"
+                    "mousepad": "マウスパッド",
+                    "keypad": "キーパッド",
+                    "headphones": "ヘッドホン",
+                    "camera": "カメラ",
+                    "microphone": "マイク",
+                    "monitor": "モニター",
+                    "audio": "オーディオ",
+                    "desk": "机",
+                    "chair": "椅子"
                 },
-                "name": "Name",
+                "name": "名前",
                 "model": "機種",
                 "size": "サイズ",
                 "area": "エリア",
-                "width": "Width",
-                "height": "Height",
+                "width": "幅",
+                "height": "長さ",
                 "position": "ポジション",
-                "dpi": "Sensitivity",
-                "mult": "Multiplier",
-                "kb_layout": "Keyboard Layout",
+                "dpi": "感度",
+                "mult": "倍率",
+                "kb_layout": "キーボード配列",
                 "layout": {
-                    "k0": "None",
+                    "k0": "無し",
                     "k2": "2つのキー",
                     "k3": "3つのキー",
                     "k4": "4つのキー",
                     "k60": "60%",
                     "k75": "75%",
-                    "ktkl": "TKL",
-                    "kfull": "FULL"
+                    "ktkl": "テンキーレス",
+                    "kfull": "フル"
                 }
             }
         },
@@ -134,57 +134,57 @@
         "country_rank": "国別ランキング",
         "play_time": "プレイ時間",
         "play_count": "プレイ回数",
-        "total_hits": "Total Hits",
+        "total_hits": "合計ヒット数",
         "replays_watched": "リプレイ再生回数",
-        "hits_x_play": "Hits x Play",
-        "followers": "Followers",
-        "online": "Online"
+        "hits_x_play": "プレイあたりのヒット数",
+        "followers": "フォロワー",
+        "online": "オンライン"
     },
     "score": {
         "status": {
-            "pinned": "Pinned",
-            "best": "Best",
-            "firsts": "First",
-            "recent": "Recent"
+            "pinned": "ピン留め",
+            "best": "最高",
+            "firsts": "初回",
+            "recent": "最近"
         },
-        "mods": "Mods",
-        "max_combo": "Max Combo",
-        "combo": "Combo",
-        "grade": "Grade",
-        "grades": "Grades",
-        "acc": "Acc",
-        "accuracy": "Accuracy",
-        "score": "Score",
-        "ranked_score": "Ranked Score"
+        "mods": "Mod",
+        "max_combo": "最高コンボ数",
+        "combo": "コンボ数",
+        "grade": "グレード",
+        "grades": "グレード",
+        "acc": "ACC",
+        "accuracy": "精度",
+        "score": "スコア",
+        "ranked_score": "ランクスコア"
     },
     "beatmapset": {
         "status": {
-            "favourite": "Favourite",
-            "ranked": "Ranked",
-            "guest": "Guest",
+            "favourite": "お気に入り",
+            "ranked": "ランク",
+            "guest": "ゲスト",
             "loved": "Loved",
-            "nominated": "Nominated",
-            "pending": "Pending",
+            "nominated": "ノミネート済み",
+            "pending": "保留",
             "graveyard": "Graveyard",
-            "wip": "In Progress",
-            "approved": "Approved"
+            "wip": "実行中",
+            "approved": "承認済"
         },
-        "length": "Length",
+        "length": "長さ",
         "bpm": "BPM"
     },
     "search": {
         "sort": {
-            "relevant": "Relevant"
+            "relevant": "関連"
         }
     },
     "footer": {
-        "rights": "All rights reserved to this silly monkey"
+        "rights": "全ての著作権はこのへっぽこたぬき帰属します。"
     },
     "alerts": {
         "user": {
-            "user_doesnt_exist": "This user doesn't exist",
-            "user_is_bot": "This user is a bot, bots are not supported yet :(",
-            "users_fail": "Failed to fetch users"
+            "user_doesnt_exist": "このユーザーは存在しません",
+            "user_is_bot": "このユーザーはボットです。ボットのサポートはまだありません",
+            "users_fail": "ユーザー情報の取得に失敗しました"
         }
     }
 }
