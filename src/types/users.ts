@@ -114,6 +114,10 @@ export type UserBasic = {
     support_level: number
     user_achievements: UserAchievement[]
     rank_history: RankHistory
+    rank_highest: {
+        date: Date
+        rank: number
+    }
 }
 
 export type Kudosu = {
