@@ -3,7 +3,6 @@ import StatusBadge from "@/src/components/beatmap/StatusBadge";
 import AudioPlayButton from "@/src/components/web/AudioPlayButton";
 import CardControls from "@/src/components/web/CardControls";
 import Link from "@/src/components/web/Link";
-import { colors } from "@/src/libs/colors";
 import type { Beatmap, Beatmapset } from "@/src/types/beatmaps";
 import type { Mode } from "@/src/types/osu";
 
@@ -27,7 +26,7 @@ const MostCard = ({ beatmap, beatmapset, position, plays }: Props) => {
                     <div class="bg-base-300 bg-opacity-75 grid grid-cols-4 rounded-lg backdrop-blur-sm">
                         <div class="group rounded-lg flex items-center justify-center" data-bg={cardImg}
                             style={{ backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
-                            <AudioPlayButton css="hidden bg-opacity-50 hover:bg-opacity-75 border-none group-hover:flex btn btn-sm w-full h-full"
+                            <AudioPlayButton
                                 beatmap_id={beatmap.id}
                                 set_id={beatmapset.id}
                                 beatmap_title={beatmapset.title}

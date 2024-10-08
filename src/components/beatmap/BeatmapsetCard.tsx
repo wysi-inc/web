@@ -8,10 +8,14 @@ import type { Mode } from "@/src/types/osu";
 
 function BeatmapsetCard(p: { b_set: Beatmapset }) {
 
-    const diffs = p.b_set.beatmaps;
     // const cardImg = `https://assets.ppy.sh/beatmaps/${p.b_set.id}/covers/card.jpg?${p.b_set.id}`;
     const cardImg = `https://b.ppy.sh/thumb/${p.b_set.id}l.jpg`;
     const DIFF_LIMIT = 5;
+
+    const beatmaps = p.b_set?.beatmaps?.sort((a, b) => a.mode === b.mode ?
+        a.difficulty_rating - b.difficulty_rating :
+        a.mode_int - b.mode_int
+    );
 
     return (
         <div class="group flex flex-row bg-base-300 rounded-lg shadow-lg">
@@ -21,8 +25,7 @@ function BeatmapsetCard(p: { b_set: Beatmapset }) {
                     <div class="relative bg-base-300 bg-opacity-75 grid grid-cols-4 rounded-lg backdrop-blur-sm">
                         <div class="group rounded-lg flex items-center justify-center" data-bg={cardImg}
                             style={{ backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
-                            <AudioPlayButton css="hidden bg-opacity-50 hover:bg-opacity-75 border-none group-hover:flex btn btn-sm w-full h-full"
-                                beatmap_id={p.b_set.beatmaps?.[0].id || 0}
+                            <AudioPlayButton beatmap_id={p.b_set.beatmaps?.[0].id || 0}
                                 set_id={p.b_set.id}
                                 beatmap_title={p.b_set.title}
                                 beatmap_artist={p.b_set.artist}
@@ -37,16 +40,16 @@ function BeatmapsetCard(p: { b_set: Beatmapset }) {
                 </div>
                 <div class="text-sm text-opacity-75 text-base-content p-0.5 flex flex-row flex-wrap gap-2 items-center">
                     <StatusBadge status={p.b_set.status} />
-                    {diffs ? <>
+                    {beatmaps ? <>
                         <div class="flex flex-row gap-1">
-                            {diffs.map((beatmap, i) => i < DIFF_LIMIT &&
+                            {beatmaps.map((beatmap, i) => i < DIFF_LIMIT &&
                                 <DiffIconLink setId={p.b_set.id} diffId={beatmap.id}
                                     diff={beatmap.difficulty_rating} size={16}
                                     mode={beatmap.mode as Mode} name={beatmap.version} />)
                             }
                         </div>
-                        {diffs.length > DIFF_LIMIT &&
-                            <div class="badge badge-sm badge-info">+{diffs.length - DIFF_LIMIT}</div>
+                        {beatmaps.length > DIFF_LIMIT &&
+                            <div class="badge badge-sm badge-info">+{beatmaps.length - DIFF_LIMIT}</div>
                         } </> : null
                     }
                     <div class="ms-auto text-xs flex flex-row gap-2">

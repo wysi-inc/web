@@ -34,7 +34,7 @@ async function ScoreCard(p: {
                         <div class="flex flex-row">
                             <div class="group rounded-lg w-24 flex items-center justify-center" data-bg={cardImg}
                                 style={{ backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
-                                <AudioPlayButton css="hidden bg-opacity-50 hover:bg-opacity-75 border-none group-hover:flex btn btn-sm w-full h-full"
+                                <AudioPlayButton
                                     beatmap_id={beatmap.id}
                                     set_id={beatmapset.id}
                                     beatmap_title={beatmapset.title}

@@ -6,14 +6,10 @@ const AudioPlayer = () => {
                     <div class="flex flex-row gap-2 justify-between">
                         <div id="audio_image" class="size-12 rounded-lg bg-center bg-no-repeat bg-cover">
                             <div class="size-12 flex grow items-center justify-center rounded-lg bg-base-300 bg-opacity-50">
-                                <button class="size-12 btn btn-ghost" id="audio_loading">
-                                    <span class="loading loading-spinner" />
-                                </button>
-                                <button class="size-12 btn btn-ghost" id="audio_play" onclick="document.getElementById('audio_player').play()">
-                                    <i class="fa-solid fa-play fa-lg" />
-                                </button>
-                                <button class="size-12 btn btn-ghost" id="audio_pause" onclick="document.getElementById('audio_player').pause()">
-                                    <i class="fa-solid fa-pause fa-lg" />
+                                <button class="size-12 btn btn-ghost group/audio" onclick="on_player_click()" id="audio_button">
+                                    <span class="loading loading-spinner hidden group-aria-busy/audio:block" />
+                                    <i class="fa-solid fa-play fa-lg block group-aria-pressed/audio:hidden" />
+                                    <i class="fa-solid fa-pause fa-lg hidden group-aria-pressed/audio:block" />
                                 </button>
                             </div>
                         </div>
@@ -25,10 +21,10 @@ const AudioPlayer = () => {
                     <input id="audio_progress" type="range" min="0" max="100" value="0" class="range range-xs range-accent" />
                 </div>
                 <div class="flex flex-col gap-2 items-center">
-                    <button class="btn btn-ghost btn-sm size-8" id="audio_close">
+                    <button class="btn btn-ghost btn-sm size-8" onclick="audio_end()">
                         <i class="fa-solid fa-xmark" />
                     </button>
-                    <button class="btn btn-ghost btn-sm size-8" id="audio_volume">
+                    <button class="btn btn-ghost btn-sm size-8">
                         <i class="fa-solid fa-volume-high" />
                     </button>
                     <div>

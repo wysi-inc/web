@@ -4723,6 +4723,11 @@ input.tab:checked + .tab-content,
   height: 2rem;
 }
 
+.size-full {
+  width: 100%;
+  height: 100%;
+}
+
 .h-1 {
   height: 0.25rem;
 }
@@ -6319,6 +6324,22 @@ img:not([src]):not([srcset]) {
   display: none;
 }
 
+.groupplaying .group-\[playing\]\:block {
+  display: block;
+}
+
+.group\/audioplaying .group-\[playing\]\/audio\:block {
+  display: block;
+}
+
+.groupplaying .group-\[playing\]\:hidden {
+  display: none;
+}
+
+.group\/audioplaying .group-\[playing\]\/audio\:hidden {
+  display: none;
+}
+
 .peer:invalid ~ .peer-invalid\:hidden {
   display: none;
 }
@@ -6361,12 +6382,52 @@ img:not([src]):not([srcset]) {
   display: block;
 }
 
+.group:has(playing) .group-has-\[playing\]\:block {
+  display: block;
+}
+
+.group\/audio:has(playing) .group-has-\[playing\]\/audio\:block {
+  display: block;
+}
+
 .group\/setup:has(:disabled) .group-has-\[\:disabled\]\/setup\:hidden {
+  display: none;
+}
+
+.group:has(playing) .group-has-\[playing\]\:hidden {
+  display: none;
+}
+
+.group\/audio:has(playing) .group-has-\[playing\]\/audio\:hidden {
   display: none;
 }
 
 .peer\/rt:has(:checked) ~ .peer-has-\[\:checked\]\/rt\:flex {
   display: flex;
+}
+
+.aria-pressed\:flex[aria-pressed="true"] {
+  display: flex;
+}
+
+.aria-pressed\:bg-opacity-75[aria-pressed="true"] {
+  --tw-bg-opacity: 0.75;
+}
+
+.group\/audio[aria-busy="true"] .group-aria-busy\/audio\:block {
+  display: block;
+}
+
+.group\/audio[aria-busy="true"] .group-aria-busy\/audio\:hidden {
+  display: none;
+}
+
+.group\/audio[aria-pressed="true"] .group-aria-pressed\/audio\:block {
+  display: block;
+}
+
+.group\/audio[aria-pressed="true"] .group-aria-pressed\/audio\:hidden {
+  display: none;
 }
 
 @media (min-width: 640px) {
