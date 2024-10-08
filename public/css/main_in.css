@@ -94,6 +94,10 @@
     font-weight: 700;
 }
 
+* {
+    /* outline: solid #00ff00 1px !important; */
+}
+
 body {
     display: flex !important;
 }

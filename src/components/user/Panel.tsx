@@ -11,7 +11,7 @@ const Panel = (p: {
     <section class="scroll-mt-36 shadow-lg rounded-lg bg-gradient-to-b from-transparent via-base-300 to-base-300 flex flex-col" id={p.code}>
         <div class="rounded-lg bg-base-100 flex flex-col p-4 gap-4">
             <header class="flex flex-row items-center gap-3">
-                <div class="tooltip tooltip-right size-6 text-center" data-tip={p.tooltip}>
+                <div class="tooltip tooltip-right size-6 flex justify-center items-center text-center" data-tip={p.tooltip}>
                     {p.icon}
                 </div>
                 <h2>{p.title}</h2>

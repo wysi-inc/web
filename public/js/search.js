@@ -28,4 +28,4 @@ function openDialog(e) {
     setTimeout(() => {
         searchInput.focus();
     }, 0);
-    }
+}

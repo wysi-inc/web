@@ -1,10 +1,11 @@
-const audio_player = document.getElementById('audio_player');
-const audio_box = document.getElementById('audio_box');
-const audio_progress = document.getElementById('audio_progress');
-const audio_image = document.getElementById('audio_image');
-const audio_title = document.getElementById('audio_title');
-const audio_artist = document.getElementById('audio_artist');
-const audio_button = document.getElementById('audio_button');
+const audio_player = document.getElementById("audio_player");
+const audio_box = document.getElementById("audio_box");
+const audio_progress = document.getElementById("audio_progress");
+const audio_image = document.getElementById("audio_image");
+const audio_title = document.getElementById("audio_title");
+const audio_artist = document.getElementById("audio_artist");
+const audio_button = document.getElementById("audio_button");
+const audio_volume = document.getElementById("audio_volume");
 let current_button = null;
 let playing = false;
 let song = null;
@@ -18,7 +19,7 @@ function on_card_click(btn) {
     current_button = btn;
     song = JSON.parse(btn.getAttribute("data-song"));
     audio_player.src = song.src;
-    audio_image.style.backgroundImage = `url('${song.cover}')`;
+    audio_image.style.backgroundImage = `url("${song.cover}")`;
     audio_title.innerText = song.title;
     audio_title.href = `/beatmaps/${song.set_id}/${song.beatmap_id}`;
     audio_artist.innerText = `by ${song.artist}`;
@@ -37,25 +38,34 @@ function play_pause(btn) {
     }
 }
 
-audio_player.addEventListener('loadstart', audio_start);
-audio_player.addEventListener('ended', audio_end);
-audio_progress.addEventListener('change', (e) => {
+function mute_unmute(input) {
+    audio_player.muted = input.checked;
+}
+
+audio_volume.addEventListener("input", (e) => { audio_player.volume = e.target.value / 100; })
+audio_player.addEventListener("loadstart", audio_start);
+audio_player.addEventListener("ended", audio_end);
+audio_progress.addEventListener("change", (e) => {
     audio_player.currentTime = (audio_player.duration / 100) * e.target.value;
 });
-audio_player.addEventListener('timeupdate', () => {
+audio_player.addEventListener("timeupdate", () => {
     audio_progress.value = `${(audio_player.currentTime / audio_player.duration) * 100}`;
 });
 
 function audio_start() {
-    audio_player.volume = 0.1;
+    audio_player.volume = audio_volume.value / 100;
     audio_progress.value = 0;
-    audio_box.style.display = 'block';
+    audio_box.style.display = "block";
+    current_button?.setAttribute("aria-expanded", true);
+    audio_button?.setAttribute("aria-expanded", true);
     audio_play();
 }
 
 function audio_end() {
     audio_pause();
-    audio_box.style.display = 'none';
+    current_button?.removeAttribute("aria-expanded");
+    audio_button?.removeAttribute("aria-expanded");
+    audio_box.style.display = "none";
     current_button = null;
 }
 
@@ -67,6 +77,6 @@ function audio_play() {
 
 function audio_pause() {
     audio_player.pause();
-    current_button?.removeAttribute("aria-pressed", true);
-    audio_button?.removeAttribute("aria-pressed", true);
+    current_button?.removeAttribute("aria-pressed");
+    audio_button?.removeAttribute("aria-pressed");
 }

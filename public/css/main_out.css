@@ -3748,6 +3748,12 @@ input.tab:checked + .tab-content,
       var(--handleoffsetcalculator) 0 0 3px var(--fallback-bc,oklch(var(--bc)/1)) inset;
 }
 
+.no-animation {
+  --btn-focus-scale: 1;
+  --animation-btn: 0;
+  --animation-input: 0;
+}
+
 .artboard.phone {
   width: 320px;
 }
@@ -4469,12 +4475,12 @@ input.tab:checked + .tab-content,
   position: sticky;
 }
 
-.bottom-0 {
-  bottom: 0px;
-}
-
 .bottom-2 {
   bottom: 0.5rem;
+}
+
+.bottom-4 {
+  bottom: 1rem;
 }
 
 .left-1\/2 {
@@ -4491,6 +4497,10 @@ input.tab:checked + .tab-content,
 
 .right-2 {
   right: 0.5rem;
+}
+
+.right-4 {
+  right: 1rem;
 }
 
 .right-5 {
@@ -4515,6 +4525,10 @@ input.tab:checked + .tab-content,
 
 .top-2 {
   top: 0.5rem;
+}
+
+.-top-2 {
+  top: -0.5rem;
 }
 
 .z-40 {
@@ -4713,6 +4727,11 @@ input.tab:checked + .tab-content,
   height: 1rem;
 }
 
+.size-5 {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
 .size-6 {
   width: 1.5rem;
   height: 1.5rem;
@@ -4828,10 +4847,6 @@ input.tab:checked + .tab-content,
   width: 11rem;
 }
 
-.w-5 {
-  width: 1.25rem;
-}
-
 .w-52 {
   width: 13rem;
 }
@@ -4903,6 +4918,26 @@ input.tab:checked + .tab-content,
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.-translate-x-12 {
+  --tw-translate-x: -3rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-y-12 {
+  --tw-translate-y: -3rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-y-10 {
+  --tw-translate-y: -2.5rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-y-8 {
+  --tw-translate-y: -2rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .rotate-180 {
   --tw-rotate: 180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -4910,6 +4945,11 @@ input.tab:checked + .tab-content,
 
 .rotate-90 {
   --tw-rotate: 90deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-rotate-90 {
+  --tw-rotate: -90deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -5136,11 +5176,6 @@ input.tab:checked + .tab-content,
 .rounded-b-lg {
   border-bottom-right-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
-}
-
-.rounded-b-none {
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
 }
 
 .rounded-s-full {
@@ -5978,6 +6013,10 @@ input.tab:checked + .tab-content,
   font-weight: 700;
 }
 
+* {
+  /* outline: solid #00ff00 1px !important; */
+}
+
 body {
   display: flex !important;
 }
@@ -6255,6 +6294,10 @@ img:not([src]):not([srcset]) {
   display: none;
 }
 
+.hover\:flex:hover {
+  display: flex;
+}
+
 .hover\:-translate-y-1:hover {
   --tw-translate-y: -0.25rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -6277,10 +6320,6 @@ img:not([src]):not([srcset]) {
 
 .hover\:bg-opacity-30:hover {
   --tw-bg-opacity: 0.3;
-}
-
-.hover\:bg-opacity-75:hover {
-  --tw-bg-opacity: 0.75;
 }
 
 .hover\:underline:hover {
@@ -6312,8 +6351,20 @@ img:not([src]):not([srcset]) {
   display: block;
 }
 
+.group\/audio_card:hover .group-hover\/audio_card\:flex {
+  display: flex;
+}
+
+.group\/card:hover .group-hover\/card\:flex {
+  display: flex;
+}
+
 .group:hover .group-hover\:flex {
   display: flex;
+}
+
+.group\/audio_card:hover .group-hover\/audio_card\:bg-opacity-75 {
+  --tw-bg-opacity: 0.75;
 }
 
 .group:disabled .group-disabled\:block {
@@ -6324,24 +6375,12 @@ img:not([src]):not([srcset]) {
   display: none;
 }
 
-.groupplaying .group-\[playing\]\:block {
-  display: block;
-}
-
-.group\/audioplaying .group-\[playing\]\/audio\:block {
-  display: block;
-}
-
-.groupplaying .group-\[playing\]\:hidden {
-  display: none;
-}
-
-.group\/audioplaying .group-\[playing\]\/audio\:hidden {
-  display: none;
-}
-
 .peer:invalid ~ .peer-invalid\:hidden {
   display: none;
+}
+
+.peer:hover ~ .peer-hover-\[\:checked\]\:flex {
+  display: flex;
 }
 
 .peer:enabled ~ .peer-enabled\:hidden {
@@ -6382,23 +6421,15 @@ img:not([src]):not([srcset]) {
   display: block;
 }
 
-.group:has(playing) .group-has-\[playing\]\:block {
-  display: block;
-}
-
-.group\/audio:has(playing) .group-has-\[playing\]\/audio\:block {
-  display: block;
+.group\/volume:has(:checked) .group-has-\[\:checked\]\/volume\:flex {
+  display: flex;
 }
 
 .group\/setup:has(:disabled) .group-has-\[\:disabled\]\/setup\:hidden {
   display: none;
 }
 
-.group:has(playing) .group-has-\[playing\]\:hidden {
-  display: none;
-}
-
-.group\/audio:has(playing) .group-has-\[playing\]\/audio\:hidden {
+.group\/volume:has(:checked) .group-has-\[\:checked\]\/volume\:hidden {
   display: none;
 }
 
@@ -6406,20 +6437,24 @@ img:not([src]):not([srcset]) {
   display: flex;
 }
 
-.aria-pressed\:flex[aria-pressed="true"] {
+.peer:has(:checked) ~ .peer-has-\[\:checked\]\:flex {
   display: flex;
 }
 
-.aria-pressed\:bg-opacity-75[aria-pressed="true"] {
+.peer:has(:checked) ~ .peer-has-\[\:checked\]\:hidden {
+  display: none;
+}
+
+.aria-expanded\:flex[aria-expanded="true"] {
+  display: flex;
+}
+
+.aria-expanded\:bg-opacity-75[aria-expanded="true"] {
   --tw-bg-opacity: 0.75;
 }
 
 .group\/audio[aria-busy="true"] .group-aria-busy\/audio\:block {
   display: block;
-}
-
-.group\/audio[aria-busy="true"] .group-aria-busy\/audio\:hidden {
-  display: none;
 }
 
 .group\/audio[aria-pressed="true"] .group-aria-pressed\/audio\:block {

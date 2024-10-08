@@ -72,7 +72,7 @@ async function UserTopPanel(p: {
                             <div class="flex grow flex-col items-start justify-between gap-2">
                                 {(p.user.wysi_badges?.length || 0) > 0 ?
                                     <div class="flex flex-row flex-wrap gap-2">{p.user.wysi_badges?.map(b => <Badge user_id={p.user.id} badge_id={b} editable={false} />)}</div>
-                                    : <></>
+                                    : null
                                 }
                                 <div class="flex flex-row items-center gap-2">
                                     <Clan user_id={p.user.id} />
@@ -94,7 +94,7 @@ async function UserTopPanel(p: {
                                 {p.user.title ?
                                     <div class="inline-block bg-gradient-to-r from-blue-600 to-green-400 bg-clip-text text-transparent">
                                         {p.user.title}
-                                    </div> : <></>}
+                                    </div> : null}
                                 <div class="flex flex-row items-center gap-2">
                                     <i class="fa-solid fa-earth-americas fa-xl"></i>
                                     <h2 class="tooltip text-xl" data-tip={`Peak rank: #${p.user?.rank_highest?.rank?.toLocaleString?.()}`}>
@@ -143,7 +143,7 @@ async function UserTopPanel(p: {
                                                 <dt class="text-sm">Dan:</dt>
                                                 <dd class="text-lg">{p.user.dan || "No Dan"}</dd>
                                             </div>
-                                        : <></>
+                                        : null
                                     }
                                 </dl>
                             </div>
@@ -228,37 +228,37 @@ async function UserTopPanel(p: {
                                         <button class="btn btn-circle btn-ghost btn-sm peer-disabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = true" type="button">
                                             <i class="fa-solid fa-xmark" />
                                         </button>
-                                    </form> : <></>
+                                    </form> : null
                                 }
                             </div>
-                        </> : <></>}
+                        </> : null}
                         {has_info ?
-                            <div class="flex flex-row flex-wrap gap-4">
+                            <div class="flex flex-row flex-wrap gap-4 text-sm">
                                 {p.user.location ?
                                     <div class="flex flex-row items-center gap-2">
                                         <i class="fa-solid fa-location-dot" />
                                         <span>{p.user.location}</span>
-                                    </div> : <></>
+                                    </div> : null
                                 }
                                 {p.user.interests ?
                                     <div class="flex flex-row items-center gap-2">
                                         <i class="fa-solid fa-heart" />
                                         <span>{p.user.interests}</span>
-                                    </div> : <></>
+                                    </div> : null
                                 }
                                 {p.user.occupation ?
                                     <div class="flex flex-row items-center gap-2">
                                         <i class="fa-solid fa-building" />
                                         <span>{p.user.occupation}</span>
-                                    </div> : <></>
+                                    </div> : null
                                 }
                                 {p.user.website ?
                                     <div class="flex flex-row items-center gap-2">
                                         <i class="fa-solid fa-globe"></i>
                                         <a href={p.user.website} target="_blank" class="hover:underline">{p.user.website}</a>
-                                    </div> : <></>
+                                    </div> : null
                                 }
-                            </div> : <></>
+                            </div> : null
                         }
                         {p.user.badges.length > 0 &&
                             <div class="flex flex-row flex-wrap gap-2">
@@ -269,10 +269,10 @@ async function UserTopPanel(p: {
                                 )}
                             </div>
                         }
-                    </div> : <></>
+                    </div> : null
                 }
             </div>
-        </section >
+        </section>
     );
 }
 

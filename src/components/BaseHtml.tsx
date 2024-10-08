@@ -45,15 +45,14 @@ const BaseHtml = ({ lang, user, children }: Props) => {
                 <script defer src="/public/js/choke.js" />
             </head>
             <body style="display: hidden;" class="flex flex-col items-center justify-center bg-base-300" id="top">
-                <script>let FF_FOUC_FIX;</script>
                 <Navbar lang={lang} user={user} />
                 <main class="w-screen mil:w-mil">
                     <div id="main" class="flex flex-col gap-4 bg-neutral shadow-lg md:p-4">
                         {children}
                     </div>
                 </main>
-                <AudioPlayer />
                 <Footer />
+                <AudioPlayer />
             </body>
         </html>
     </>);

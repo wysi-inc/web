@@ -128,7 +128,7 @@ async function UserPage(p: {
             title: txt(p.lang, "user.sections.medals.title"),
             code: "medals",
             tooltip: "powered by osekai.net",
-            icon: <img data-src="/public/img/osekai.svg" class="w-5 h-5" alt="osekai" loading="lazy" />,
+            icon: <img data-src="/public/img/osekai.svg" class="size-5" alt="osekai" />,
             // url: `/users/${user.id}/0/panels/medals`,
             show_if: user.user_achievements.length > 0,
             jsx: (<UserMedalsPanel lang={p.lang} user_id={user.id} medals={user.user_achievements} />)
@@ -157,7 +157,7 @@ async function UserPage(p: {
                 </Panel>
             );
         })}
-        <button class="btn btn-warning btn-square sticky bottom-0 ms-auto rounded-b-none"
+        <button class="btn btn-warning btn-square fixed bottom-4 right-4"
             onclick="report_modal.showModal()">
             <i class="fa-solid fa-triangle-exclamation" />
         </button>

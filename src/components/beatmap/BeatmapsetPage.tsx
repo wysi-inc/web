@@ -92,7 +92,7 @@ async function BeatmapsetPage(p: Props) {
                             </div> : null
                         }
                         <div class="join">
-                            <AudioPlayButton css="btn btn-info join-item"
+                            <AudioPlayButton join
                                 beatmap_id={diff.id}
                                 set_id={beatmapset.id}
                                 beatmap_title={beatmapset.title}

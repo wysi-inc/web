@@ -1,7 +1,7 @@
-import type { Mode } from "@/src/types/osu";
-import ModeIcon from "../../beatmap/ModeIcon";
 import { UserModel } from "@/src/models/User";
+import type { Mode } from "@/src/types/osu";
 import type { Skin } from "@/src/types/users";
+import ModeIcon from "../../beatmap/ModeIcon";
 
 async function UserSkinsPanel(p: { user_id: number, logged_id?: number }) {
 
@@ -11,7 +11,7 @@ async function UserSkinsPanel(p: { user_id: number, logged_id?: number }) {
     if (!user) return <>this user doesn't exist</>;
     if (!user.skins && !editable) return <>This user doesn't have skins</>;
 
-    return (
+    return (<>
         <div class="flex flex-col gap-4">
             {editable ? <>
                 <form class="group flex flex-row flex-wrap items-center gap-2" hx-put={`/users/${p.user_id}/skins/submit`} hx-target="#skins_list" hx-swap="beforeend">
@@ -46,8 +46,9 @@ async function UserSkinsPanel(p: { user_id: number, logged_id?: number }) {
             </form>
             <script src={`/public/js/scroll.js?v=${Date.now()}`} />
         </div>
-    );
+    </>);
 }
+
 
 export async function SkinCard(p: { user_id: number, skin_id: string, editable: boolean, index: number }) {
     const url = new URL("https://osuck.link/api/skins");
@@ -58,7 +59,7 @@ export async function SkinCard(p: { user_id: number, skin_id: string, editable: 
     const data = await res.json() as any;
     if (data.status !== "success") return (<span>{p.skin_id.toString()}</span>);
     const skin: Skin = data.message;
-    return (
+    return (<>
         <div class="flex flex-col rounded-lg bg-neutral" hx-target="this" hx-swap="delete">
             <div class="flex flex-row items-center gap-2 px-2 py-1">
                 <a href={skin.link_to_skin} target="_blank" class="flex grow flex-row items-center justify-between">
@@ -101,7 +102,7 @@ export async function SkinCard(p: { user_id: number, skin_id: string, editable: 
                 ))}
             </div>
         </div>
-    )
+    </>);
 }
 
 export default UserSkinsPanel;

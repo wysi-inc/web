@@ -14,6 +14,7 @@ import { below_ratelimit, log, osu_api_call_logger, ratelimit_logger } from "./t
 import { update_medals, update_stats, update_user_tokens } from "./tasks/updates";
 import { notFound } from './routes/notFound';
 import { load_translations } from './tasks/files';
+import { api_beatmapset_test } from './api/beatmap';
 
 await connect_mongodb();
 await connect_osu();
