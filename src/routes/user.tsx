@@ -1,25 +1,25 @@
-import { Elysia, error, t } from 'elysia'
-import { addSkin, deleteCollections, deleteSkin, deleteSocial, getCollectionFile, saveCollection, saveSetup, saveSocial, sortSkins, sortSocials, updateDan } from '../db/users/update_user';
-import type { BeatmapCategory, Mode, ScoreCategory } from '../types/osu';
-import HtmxPage from '../libs/routes';
-import UserPage from '../components/user/UserPage';
-import UserScoresPanel from '../components/user/u_panels/UserScoresPanel';
-import UserBeatmapsPanel from '../components/user/u_panels/UserBeatmapsPanel';
-import UserSummaryPanel from '../components/user/u_panels/UserSummaryPanel';
-import UserMostPanel from '../components/user/u_panels/UserMostPanel';
-import UserSkinsPanel, { SkinCard } from '../components/user/u_panels/UserSkinsPanel';
-import UserScoresList from '../components/user/u_panels/u_components/UserScoresList';
-import UserBeatmapsList from '../components/user/u_panels/u_components/UserBeatmapsList';
-import UserMostList from '../components/user/u_panels/u_components/UserMostList';
-import UserSetupPanel from '../components/user/u_panels/UserSetupPanel';
-import UserCollectionsPanel from '../components/user/u_panels/UserCollectionsPanel';
-import BeatmapCollectionList from '../components/beatmap/BeatmapCollectionList';
-import CollectionsForm from '../components/user/u_panels/u_components/CollectionsForm';
-import UserYearPanel from '../components/user/u_panels/UserYearPanel';
-import UserSocial from '../components/user/u_panels/UserSocial';
-import { plugins } from './plugins';
+import { Elysia, error, t } from "elysia";
+import BeatmapCollectionList from "../components/beatmap/BeatmapCollectionList";
+import UserPage from "../components/user/UserPage";
+import UserBeatmapsPanel from "../components/user/u_panels/UserBeatmapsPanel";
+import UserCollectionsPanel from "../components/user/u_panels/UserCollectionsPanel";
+import UserMostPanel from "../components/user/u_panels/UserMostPanel";
+import UserScoresPanel from "../components/user/u_panels/UserScoresPanel";
+import UserSetupPanel from "../components/user/u_panels/UserSetupPanel";
+import UserSkinsPanel, { SkinCard } from "../components/user/u_panels/UserSkinsPanel";
+import UserSocial from "../components/user/u_panels/UserSocial";
+import UserSummaryPanel from "../components/user/u_panels/UserSummaryPanel";
+import UserYearPanel from "../components/user/u_panels/UserYearPanel";
+import CollectionsForm from "../components/user/u_panels/u_components/CollectionsForm";
+import UserBeatmapsList from "../components/user/u_panels/u_components/UserBeatmapsList";
+import UserMostList from "../components/user/u_panels/u_components/UserMostList";
+import UserScoresList from "../components/user/u_panels/u_components/UserScoresList";
+import { addSkin, deleteCollections, deleteSkin, deleteSocial, getCollectionFile, saveCollection, saveSetup, saveSocial, sortSkins, sortSocials, updateDan } from "../db/users/update_user";
+import HtmxPage from "../libs/routes";
+import type { BeatmapCategory, Mode, ScoreCategory } from "../types/osu";
+import { plugins } from "./plugins";
 
-export const userRoutes = new Elysia({ prefix: '/users/:id' })
+const user_routes_data = new Elysia({ prefix: "/:id" })
     .use(plugins)
     .get("/", async ({ lang, request, params, user }) => (
         <HtmxPage lang={lang} headers={request.headers} user={user}>
@@ -209,3 +209,8 @@ export const userRoutes = new Elysia({ prefix: '/users/:id' })
             })
         })
     )
+
+export const user_routes = new Elysia()
+    .use(new Elysia({ prefix: "/users" }).use(user_routes_data))
+    .use(new Elysia({ prefix: "/u" }).use(user_routes_data))
+    .use(new Elysia({ prefix: "/user" }).use(user_routes_data))

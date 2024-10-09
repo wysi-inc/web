@@ -1,13 +1,13 @@
-import { Elysia, error, t } from 'elysia';
-import { api_beatmap_details } from '../api/beatmap';
-import { BeatmapCollectionCard } from '../components/beatmap/BeatmapCollectionCard';
-import BeatmapScoreTable from '../components/beatmap/BeatmapScoreTable';
-import BeatmapsList from '../components/beatmap/BeatmapsList';
-import BeatmapsetPage from '../components/beatmap/BeatmapsetPage';
-import BeatmapsetSearch from '../components/beatmap/BeatmapsetSearch';
-import HtmxPage from '../libs/routes';
-import { modeUnion, scoresUnion } from '../types/osu';
-import { plugins } from './plugins';
+import { Elysia, error, t } from "elysia";
+import { api_beatmap_details } from "../api/beatmap";
+import { BeatmapCollectionCard } from "../components/beatmap/BeatmapCollectionCard";
+import BeatmapScoreTable from "../components/beatmap/BeatmapScoreTable";
+import BeatmapsList from "../components/beatmap/BeatmapsList";
+import BeatmapsetPage from "../components/beatmap/BeatmapsetPage";
+import BeatmapsetSearch from "../components/beatmap/BeatmapsetSearch";
+import HtmxPage from "../libs/routes";
+import { modeUnion, scoresUnion } from "../types/osu";
+import { plugins } from "./plugins";
 
 const queryBodyElysia = {
     body: t.Object({
@@ -37,8 +37,7 @@ const queryBodyElysia = {
     })
 }
 
-
-export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
+const beatmap_routes_data = new Elysia({ prefix: "" })
     .get("/:id", async ({ params, set }) => {
         const res = await api_beatmap_details(params.id);
         if (!res) return error(404, "Beatmap doesn't exist");
@@ -49,7 +48,7 @@ export const beatmapRoutes = new Elysia({ prefix: '/beatmaps' })
         })
     })
 
-export const beatmapsetRoutes = new Elysia({ prefix: '/beatmapsets' })
+const beatmapsets_routes_data = new Elysia({ prefix: "" })
     .use(plugins)
     .get("/", ({ lang, request, user }) => (
         <HtmxPage lang={lang} headers={request.headers} user={user}>
@@ -95,3 +94,13 @@ export const beatmapsetRoutes = new Elysia({ prefix: '/beatmapsets' })
         <BeatmapCollectionCard hash={params.hash} />
     ))
 
+
+export const beatmaps_routes = new Elysia()
+    .use(new Elysia({ prefix: "/beatmapsets" }).use(beatmapsets_routes_data))
+    .use(new Elysia({ prefix: "/beatmapset" }).use(beatmapsets_routes_data))
+    .use(new Elysia({ prefix: "/set" }).use(beatmapsets_routes_data))
+    .use(new Elysia({ prefix: "/s" }).use(beatmapsets_routes_data))
+    .use(new Elysia({ prefix: "/beatmaps" }).use(beatmap_routes_data))
+    .use(new Elysia({ prefix: "/beatmap" }).use(beatmap_routes_data))
+    .use(new Elysia({ prefix: "/map" }).use(beatmap_routes_data))
+    .use(new Elysia({ prefix: "/b" }).use(beatmap_routes_data))

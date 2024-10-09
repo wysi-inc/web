@@ -1,12 +1,16 @@
 import { Elysia } from "elysia";
-import HtmxPage from "../libs/routes";
 import ScorePage from "../components/score/ScorePage";
+import HtmxPage from "../libs/routes";
 import { plugins } from "./plugins";
 
-export const scoresRoutes = new Elysia({ prefix: '/scores/:id' })
+const score_routes_data = new Elysia({ prefix: '/:id' })
     .use(plugins)
-    .get("/", ({ params, lang, t, request, user }) => (
-        <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
+    .get("/", ({ params, lang, request, user }) => (
+        <HtmxPage lang={lang} headers={request.headers} user={user}>
             <ScorePage score_id={Number(params.id)} />
         </HtmxPage>
     ))
+
+export const scores_routes = new Elysia()
+    .use(new Elysia({ prefix: "/scores" }).use(score_routes_data))
+    .use(new Elysia({ prefix: "/score" }).use(score_routes_data))

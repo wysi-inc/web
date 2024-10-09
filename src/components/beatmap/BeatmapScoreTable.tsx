@@ -1,5 +1,6 @@
 import { api_scores_beatmap } from "@/src/api/score";
 import type { Mod, Mode } from "@/src/types/osu";
+import type { UserCookie } from "@/src/types/users";
 import moment from "moment";
 import BigScore from "../score/BigScore";
 import Grade from "../score/Grade";
@@ -8,7 +9,6 @@ import Clan from "../user/u_panels/u_components/Clan";
 import Flag from "../user/u_panels/u_components/Flag";
 import SubdivisionFlag from "../user/u_panels/u_components/SubdivisionFlag";
 import Link from "../web/Link";
-import type { UserCookie } from "@/src/types/users";
 
 async function BeatmapScoreTable(p: {
     b_id: number,
@@ -27,7 +27,9 @@ async function BeatmapScoreTable(p: {
         type: p.type || "global",
     }, p.user);
 
-    if (!scores || !scores.scores) return <>No scores found</>;
+    if (!scores || !scores.scores || scores.scores.length <= 0) {
+        return <>No scores found :(</>;
+    }
 
     return (<>
         <BigScore score={scores.scores[0]} mode={p.mode} position={1} />
@@ -89,8 +91,8 @@ async function BeatmapScoreTable(p: {
                                     {moment(score.created_at).fromNow(true)}
                                 </span>
                             </td>
-                            <td class="relative">
-                                <Link url={`/scores/${score.id}`} css="absolute right-2 top-1.5 hidden group-hover:block" tooltip="View Score Page">
+                            <td>
+                                <Link url={`/scores/${score.id}`} css="right-2 top-1.5 invisible group-hover:visible" tooltip="View Score Page">
                                     <i class="fa-solid fa-eye" />
                                 </Link>
                             </td>

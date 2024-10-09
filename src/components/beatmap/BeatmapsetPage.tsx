@@ -37,12 +37,15 @@ async function BeatmapsetPage(p: Props) {
 
     if (!beatmaps) return <></>;
 
-    const diff = (beatmaps.find(b => b.id === p.beatmap_id) || beatmaps[0]) as Beatmap;
+    const diff = beatmaps.find(b => b.id === p.beatmap_id) || beatmaps[0];
     const beatmap_map = new Map<number, Beatmap>();
     beatmaps.forEach(b => beatmap_map.set(b.id, b))
 
     return (<>
-        <Title title={`${beatmapset.title} - ${beatmapset.artist}`} />
+        <Title
+            title={`${beatmapset.title} - ${beatmapset.artist}`}
+            route={`/beatmapsets/${beatmapset.id}/${diff.id}`}
+        />
         <div class="flex flex-col rounded-lg shadow-lg" data-bg={cardImg}
             style={{ backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
             <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm grid md:grid-cols-5 flex-wrap gap-4 justify-between rounded-lg p-4">
@@ -109,7 +112,7 @@ async function BeatmapsetPage(p: Props) {
                     <form class="flex flex-row flex-wrap gap-1 p-1 rounded-lg bg-base-content bg-opacity-25"
                         id="beatmapsets_form" data-beatmaps={JSON.stringify(Array.from(beatmap_map.entries()))}>
                         {beatmaps.map(b =>
-                            <span data-tip={`[${b.version}]`} class={`${b.id === diff.id ? "outline" : ""} 
+                            <span data-tip={`★ ${b.difficulty_rating} [${b.version}]`} class={`${b.id === diff.id ? "outline" : ""} 
                                 m-0 tooltip cursor-pointer outline-base-content flex items-center justify-center p-1 rounded-md outline-2`}>
                                 <Link url={`/beatmapsets/${p.set_id}/${b.id}`}>
                                     <DiffIcon sr={b.difficulty_rating} size={20} mode={b.mode as Mode} />
@@ -186,7 +189,7 @@ async function BeatmapsetPage(p: Props) {
         {hasLeaderboards ?
             <div role="tablist" class="tabs tabs-bordered grid grid-cols-3 items-center rounded-lg bg-base-100 p-4">
                 {["global", "country", "friend"].map(type => (<>
-                    <input type="radio" name="beatmapset_rankings" aria-label={type} role="tab" class="tab" checked={type === "global"} />
+                    <input type="radio" disabled={!p.user && type !== "global"} name="beatmapset_rankings" aria-label={type} role="tab" class="tab" checked={type === "global"} />
                     <div role="tabpanel" class="tab-content mt-4"
                         hx-post={`/beatmapsets/${p.set_id}/${diff.id}/scores/${diff.mode}/${type}`}
                         hx-trigger={"revealed"} hx-swap="innerHTML" hx-target={`#${type}_leaderboards`} >

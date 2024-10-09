@@ -136,7 +136,10 @@ async function UserPage(p: {
     ];
 
     return (<>
-        <Title title={user.username} />
+        <Title
+            title={user.username}
+            route={`/users/${user.id}${no_chosen_mode ? "" : `/${p.mode}`}`}
+        />
         <UserTopPanel lang={p.lang} user={user} mode={p.mode} editable={editable} />
         <nav class="underline-offset-1 text-neutral-content sticky -mt-8 top-16 bg-base-300 rounded-b-lg text-sm shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-x-6 gap-y-2 flex-wrap">
             <a class="hover:underline" href="#top">{txt(p.lang, "user.sections.top")}</a>
@@ -170,7 +173,6 @@ async function UserPage(p: {
                 <Report author={p.logged} target={user.id} />
             </div>
         </dialog>
-        <script>{`history.replaceState({}, null, '/users/${user.id}${no_chosen_mode ? "" : `/${p.mode}`}');`}</script>
     </>);
 }
 

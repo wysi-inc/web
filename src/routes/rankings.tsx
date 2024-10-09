@@ -1,13 +1,13 @@
-import { Elysia, t } from 'elysia'
-import type { Category, Mode } from '../types/osu';
-import Rankings from '../components/user/Rankings';
-import HtmxPage from '../libs/routes';
+import { Elysia, t } from "elysia";
+import Rankings from "../components/user/Rankings";
+import HtmxPage from "../libs/routes";
+import type { Category, Mode } from "../types/osu";
+import { plugins } from "./plugins";
 
-import { plugins } from './plugins';
-export const rankingRoutes = new Elysia({ prefix: '/rankings' })
+const ranking_routes_data = new Elysia()
     .use(plugins)
-    .get("/", async ({ lang, t, request, user }) => (
-        <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
+    .get("/", async ({ lang, request, user }) => (
+        <HtmxPage lang={lang} headers={request.headers} user={user}>
             <Rankings user={user}
                 mode={"osu"}
                 category={"performance"}
@@ -15,8 +15,8 @@ export const rankingRoutes = new Elysia({ prefix: '/rankings' })
             />
         </HtmxPage>
     ))
-    .get("/:mode/:category", ({ query, lang, t, params, request, user }) => (
-        <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
+    .get("/:mode/:category", ({ query, lang, params, request, user }) => (
+        <HtmxPage lang={lang} headers={request.headers} user={user}>
             <Rankings
                 mode={params.mode as Mode}
                 category={params.category as Category}
@@ -29,8 +29,8 @@ export const rankingRoutes = new Elysia({ prefix: '/rankings' })
             country: t.Optional(t.String())
         }))
     })
-    .get("/:mode/:category/:page", ({ query, lang, t, params, request, user }) => (
-        <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
+    .get("/:mode/:category/:page", ({ query, lang, params, request, user }) => (
+        <HtmxPage lang={lang} headers={request.headers} user={user}>
             <Rankings
                 mode={params.mode as Mode}
                 category={params.category as Category}
@@ -43,3 +43,6 @@ export const rankingRoutes = new Elysia({ prefix: '/rankings' })
             country: t.Optional(t.String())
         }))
     })
+
+export const ranking_routes = new Elysia()
+    .use(new Elysia({ prefix: "/rankings" }).use(ranking_routes_data))

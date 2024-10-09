@@ -4,17 +4,16 @@ import { Elysia, error } from "elysia";
 import { adminRoutes } from "./routes/admin";
 import { apiRoutes } from "./routes/api";
 import { baseRoutes } from "./routes/base";
-import { beatmapRoutes, beatmapsetRoutes } from "./routes/beatmaps";
-import { rankingRoutes } from "./routes/rankings";
+import { beatmaps_routes } from "./routes/beatmaps";
+import { ranking_routes } from "./routes/rankings";
 import { reportRoutes } from "./routes/reports";
-import { scoresRoutes } from "./routes/scores";
-import { userRoutes } from "./routes/user";
+import { scores_routes } from "./routes/scores";
+import { user_routes } from "./routes/user";
 import { connect_mongodb, connect_osu } from "./tasks/connections";
 import { below_ratelimit, log, osu_api_call_logger, ratelimit_logger } from "./tasks/logs";
 import { update_medals, update_stats, update_user_tokens } from "./tasks/updates";
 import { notFound } from './routes/notFound';
 import { load_translations } from './tasks/files';
-import { api_beatmapset_test } from './api/beatmap';
 
 await connect_mongodb();
 await connect_osu();
@@ -30,7 +29,6 @@ setInterval(() => {
     update_user_tokens();
     update_medals();
 }, 1000 * 60 * 60 * 12);        // every 12h
-
 
 new Elysia()
     .onRequest(({ request }) => {
@@ -57,11 +55,10 @@ new Elysia()
     .use(baseRoutes)
     .use(adminRoutes)
     .use(reportRoutes)
-    .use(rankingRoutes)
-    .use(userRoutes)
-    .use(beatmapRoutes)
-    .use(beatmapsetRoutes)
-    .use(scoresRoutes)
+    .use(ranking_routes)
+    .use(user_routes)
+    .use(beatmaps_routes)
+    .use(scores_routes)
     .use(notFound)
     .onStart(() => log.success(`Listening on port ${env.PORT}`))
     .listen(env.PORT);
