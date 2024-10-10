@@ -8,36 +8,36 @@
         "about": "Tungkol",
         "search": "Search someone",
         "search_someone": "Maghanap ng tao",
-        "help": "Help translate the site!",
+        "help": "Tumulong sa pagsasalin ng site!",
         "log": {
-            "login": "Login with osu!",
+            "login": "Mag-login gamit ang osu!",
             "logout": "Logout",
             "osu": "osu!profile",
             "wysi": "wysi!profile"
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu! website alternative",
-        "built": "Built with bun and htmx",
-        "profiles": "User Profiles",
-        "stats": "Top 100 Score stats",
-        "search": "Beatmap Search",
-        "calculator": "Built-in PP Calculator",
-        "setup": "Share your setup!",
-        "collections": "Upload your collections!"
+        "welcome": "Maligayang pagdating sa wysi727.com!",
+        "foss": "Isang open source osu! alternatibong website",
+        "built": "Ginawa gamit ang bun at htmx",
+        "profiles": "Mga Profile ng Gumagamit",
+        "stats": "Nangungunang 100 Istatistika ng Iskor",
+        "search": "Paghahanap ng Beatmap",
+        "calculator": "Naka-built-in na PP Calculator",
+        "setup": "Ibahagi ang iyong setup!",
+        "collections": "I-upload ang iyong mga koleksyon!"
     },
     "user": {
         "sections": {
-            "expand": "Expand",
-            "about": "About",
+            "expand": "Palawakin",
+            "about": "Tungkol",
             "beatmaps": "Beatmaps",
-            "top": "Top",
+            "top": "Pinakamataais",
             "medals": {
-                "title": "Medals",
-                "recent": "Recent Medals",
-                "rarest": "Rarest Medal",
-                "show": "Show all"
+                "title": "Mga medalya",
+                "recent": "Mga Kamakailang Medalya",
+                "rarest": "Pinakabihirang Medalya",
+                "show": "Ipakita ang lahat"
             },
             "year": {
                 "title": "Year",
