@@ -43,7 +43,7 @@ function LanguageSwitcher(p: { lang: string }) {
     const language = getLang(p.lang);
     return (<>
         <button id="language_button" class="btn btn-square btn-ghost" onclick="language_modal.showModal()" >
-            <img data-src={language[1]} class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
+            <img loading="lazy" src={language[1]} class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
         </button>
         <dialog id="language_modal" class="modal">
             <div class="modal-box bg-neutral p-2">

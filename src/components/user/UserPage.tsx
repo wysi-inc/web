@@ -128,7 +128,7 @@ async function UserPage(p: {
             title: txt(p.lang, "user.sections.medals.title"),
             code: "medals",
             tooltip: "powered by osekai.net",
-            icon: <img data-src="/public/img/osekai.svg" class="size-5" alt="osekai" />,
+            icon: <img loading="lazy" src="/public/img/osekai.svg" class="size-5" alt="osekai" />,
             // url: `/users/${user.id}/0/panels/medals`,
             show_if: user.user_achievements.length > 0,
             jsx: (<UserMedalsPanel lang={p.lang} user_id={user.id} medals={user.user_achievements} />)

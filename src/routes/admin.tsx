@@ -3,7 +3,6 @@ import Admin from '../components/web/Admin';
 import Alert from '../components/web/Alert';
 import { TabletListItem } from '../components/web/admin/Tablets';
 import { addBadge, addTablet, removeBadge, removeRole, removeTablet, setRole, sortBadges } from '../db/web/admin';
-import { verifyUser } from '../libs/auth';
 import HtmxPage from '../libs/routes';
 import type { UserCookie } from '../types/users';
 import { plugins } from './plugins';
@@ -18,13 +17,13 @@ export function isAdmin(user: UserCookie) {
 
 export const adminRoutes = new Elysia({ prefix: '/admin' })
     .use(plugins)
-    .get("/", ({ lang, t, set, request, user }) => {
+    .get("/", ({ lang, request, set, user }) => {
         if (!user || !isAdmin(user)) {
             set.redirect = "/";
             return "Unauthorized";
         }
         return (
-            <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
+            <HtmxPage lang={lang} req={request} set={set} user={user}>
                 <Admin t={t} user={user} />
             </HtmxPage>
         );

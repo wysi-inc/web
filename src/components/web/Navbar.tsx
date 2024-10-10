@@ -38,7 +38,7 @@ function Navbar(p: { lang: string, user?: UserCookie | null }) {
         },
     ];
 
-    return <>
+    return (<>
         <nav class="sticky top-0 z-50 flex w-full flex-col bg-base-100 shadow-lg">
             <div class="grid grid-cols-3 p-2 md:grid-cols-5">
                 <div class="flex flex-row items-center justify-start md:col-span-2">
@@ -120,6 +120,6 @@ function Navbar(p: { lang: string, user?: UserCookie | null }) {
                 <div id="page-loading" class="htmx-indicator loading-indicator h-full w-full bg-accent" />
             </div>
         </nav>
-    </>
+    </>);
 }
 export default Navbar;

@@ -84,7 +84,7 @@ export async function SkinCard(p: { user_id: number, skin_id: string, editable: 
             <div class="carousel carousel-center rounded-lg bg-base-300 p-4">
                 {skin.screenshots.map((img, j) => (
                     <div id={`slide-${p.index}-${j}`} class="carousel-item relative grow rounded-lg p-2">
-                        <img src={img.small} class="aspect-video h-52 rounded-lg" />
+                        <img loading="lazy" src={img.small} class="aspect-video h-52 rounded-lg" />
                         <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
                             {j - 1 >= 0 ?
                                 <button data-to={`#slide-${p.index}-${j - 1}`} class="slide-btn btn btn-circle btn-sm bg-opacity-40">

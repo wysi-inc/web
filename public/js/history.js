@@ -4,6 +4,7 @@ import "https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js";
 // import "https://cdn.jsdelivr.net/npm/chartjs-plugin-crosshair@2.0.0/dist/chartjs-plugin-crosshair.min.js";
 
 history();
+htmxAfterFunctions.push(history);
 function history() {
 
     render_chart('global', 'rank');

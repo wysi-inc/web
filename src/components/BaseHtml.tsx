@@ -37,7 +37,7 @@ function BaseHtml(p: {
                 <script defer src="/public/js/utils.js" />
                 <script defer src="/public/js/search.js" />
                 <script defer src="/public/js/audio.js" />
-                <script defer src="/public/js/images.js" />
+                {/*<script defer src="/public/js/images.js" />*/}
                 <script defer src="/public/js/bbcode.js" />
                 <script defer src="/public/js/drag.js" />
                 <script defer src="/public/js/choke.js" />

@@ -66,7 +66,7 @@ function UserSocial(p: { social: UserSocialType, user_id: number, editable?: boo
             url: `https://reddit.com/user/${p.social.username}`
         },
         "roblox": {
-            icon: <img data-src="/public/img/socials/roblox.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img loading="lazy" src="/public/img/socials/roblox.svg" class="size-4" alt="ico" />,
             bg: "bg-[#86949f]",
         },
         "microsoft": {
@@ -97,17 +97,17 @@ function UserSocial(p: { social: UserSocialType, user_id: number, editable?: boo
             url: `https://www.paypal.com/paypalme/${p.social.username}`
         },
         "supercell": {
-            icon: <img data-src="/public/img/socials/supercell.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img loading="lazy" src="/public/img/socials/supercell.svg" class="size-4" alt="ico" />,
             bg: "bg-[#105ab5]",
         },
         "kick": {
-            icon: <img data-src="/public/img/socials/kick.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img loading="lazy" src="/public/img/socials/kick.svg" class="size-4" alt="ico" />,
             bg: "bg-[#52fa17]",
             url: `https://kick.com/${p.social.username}`,
             black: true
         },
         "kofi": {
-            icon: <img data-src="/public/img/socials/kofi.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img loading="lazy" src="/public/img/socials/kofi.svg" class="size-4" alt="ico" />,
             bg: "bg-[#00AFF1]",
             url: `https://ko-fi.com/${p.social.username}`,
         },
@@ -117,15 +117,15 @@ function UserSocial(p: { social: UserSocialType, user_id: number, editable?: boo
             url: `https://steamcommunity.com/id/${p.social.username}`
         },
         "riot": {
-            icon: <img data-src="/public/img/socials/riot.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img loading="lazy" src="/public/img/socials/riot.svg" class="size-4" alt="ico" />,
             bg: "bg-[#eb0029]",
         },
         "epic": {
-            icon: <img data-src="/public/img/socials/epic.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img loading="lazy" src="/public/img/socials/epic.svg" class="size-4" alt="ico" />,
             bg: "bg-[#000000]",
         },
         "anilist": {
-            icon: <img data-src="/public/img/socials/anilist.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img loading="lazy" src="/public/img/socials/anilist.svg" class="size-4" alt="ico" />,
             bg: "bg-[#242434]",
             url: `https://anilist.co/user/${p.social.username}`
         },
@@ -134,7 +134,7 @@ function UserSocial(p: { social: UserSocialType, user_id: number, editable?: boo
             bg: "bg-[#003087]",
         },
         "linktree": {
-            icon: <img data-src="/public/img/socials/linktree.svg" class="size-4" loading="lazy" alt="ico" />,
+            icon: <img loading="lazy" src="/public/img/socials/linktree.svg" class="size-4" alt="ico" />,
             bg: "bg-[#43e660]",
             url: `https://linktr.ee/${p.social.username}`,
             black: true

@@ -41,7 +41,8 @@ const beatmap_routes_data = new Elysia({ prefix: "" })
     .get("/:id", async ({ params, set }) => {
         const res = await api_beatmap_details(params.id);
         if (!res) return error(404, "Beatmap doesn't exist");
-        return set.redirect = `/beatmapsets/${res.beatmapset_id}/${params.id}`;
+        set.redirect = `/beatmapsets/${res.beatmapset_id}/${params.id}`;
+        return;
     }, {
         params: t.Object({
             id: t.Numeric()
@@ -50,8 +51,8 @@ const beatmap_routes_data = new Elysia({ prefix: "" })
 
 const beatmapsets_routes_data = new Elysia({ prefix: "" })
     .use(plugins)
-    .get("/", ({ lang, request, user }) => (
-        <HtmxPage lang={lang} headers={request.headers} user={user}>
+    .get("/", ({ lang, request, set, user }) => (
+        <HtmxPage lang={lang} req={request} set={set} user={user}>
             <BeatmapsetSearch />
         </HtmxPage>
     ))
@@ -61,8 +62,8 @@ const beatmapsets_routes_data = new Elysia({ prefix: "" })
     .post("/list/:offset", ({ body, params }) => (
         <BeatmapsList body={body} offset={params.offset} />
     ), queryBodyElysia)
-    .get("/:set_id", ({ lang, request, params, user }) => (
-        <HtmxPage lang={lang} headers={request.headers} user={user}>
+    .get("/:set_id", ({ lang, request, set, params, user }) => (
+        <HtmxPage lang={lang} req={request} set={set} user={user}>
             <BeatmapsetPage set_id={params.set_id} user={user} />
         </HtmxPage>
     ), {
@@ -70,8 +71,8 @@ const beatmapsets_routes_data = new Elysia({ prefix: "" })
             set_id: t.Numeric()
         })
     })
-    .get("/:set_id/:beatmap_id", ({ lang, request, params, user }) => (
-        <HtmxPage lang={lang} headers={request.headers} user={user}>
+    .get("/:set_id/:beatmap_id", ({ lang, request, set, params, user }) => (
+        <HtmxPage lang={lang} req={request} set={set} user={user}>
             <BeatmapsetPage set_id={params.set_id} beatmap_id={params.beatmap_id} user={user} />
         </HtmxPage>
     ), {

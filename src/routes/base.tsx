@@ -17,17 +17,17 @@ const oauthQuery = { query: t.Object({ code: t.String(), state: t.Any() }) };
 export const baseRoutes = new Elysia({ prefix: '' })
     .use(plugins)
     .get("/", async ({ lang, request, user }) => (
-        <HtmxPage lang={lang} headers={request.headers} user={user}>
+        <HtmxPage lang={lang} req={request} user={user}>
             <Home lang={lang} />
         </HtmxPage>
     ))
     .get("/about", async ({ lang, request, user }) => (
-        <HtmxPage lang={lang} headers={request.headers} user={user}>
+        <HtmxPage lang={lang} req={request} user={user}>
             <About />
         </HtmxPage>
     ))
     .get("/support", async ({ lang, request, user }) => (
-        <HtmxPage lang={lang} headers={request.headers} user={user}>
+        <HtmxPage lang={lang} req={request} user={user}>
             <Support />
         </HtmxPage>
     ))
@@ -37,7 +37,7 @@ export const baseRoutes = new Elysia({ prefix: '' })
     .get("/wiki/*", async ({ lang, params, request, user }) => {
         if (env.STATE === "dev") {
             return (
-                <HtmxPage lang={lang} headers={request.headers} user={user}>
+                <HtmxPage lang={lang} req={request} user={user}>
                     <Testing params={Object.values(params)} />
                 </HtmxPage>
             )

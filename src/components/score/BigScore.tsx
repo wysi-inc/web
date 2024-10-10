@@ -22,7 +22,7 @@ function BigScore(p: { score: ScoreType, mode: Mode, position: number }) {
                             <span class="text-xl">#{p.position}</span>
                             <Grade grade={p.score.rank} />
                         </div>
-                        <img data-src={p.score.user.avatar_url} alt="pfp" class="size-20 rounded-lg" />
+                        <img loading="lazy" src={p.score.user.avatar_url} alt="pfp" class="size-20 rounded-lg" />
                         <div class="flex flex-col items-start gap-1">
                             <div class="flex flex-row gap-2 text-xl items-center">
                                 <Flag name={p.score.user.country.name} code={p.score.user.country.code} />

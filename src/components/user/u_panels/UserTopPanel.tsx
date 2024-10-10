@@ -44,8 +44,7 @@ async function UserTopPanel(p: {
     return (
         <section class="rounded-lg bg-base-300 pb-4 shadow-lg">
             <div class="flex flex-col rounded-lg bg-base-100">
-                <div class="rounded-lg" data-bg={p.user.cover_url}
-                    style={{ backgroundSize: `cover`, backgroundPosition: `center`, backgroundRepeat: "no-repeat" }}>
+                <div class="rounded-lg" style={{ backgroundImage: `url('${p.user.cover_url}')`, backgroundSize: `cover`, backgroundPosition: `center`, backgroundRepeat: "no-repeat" }}>
                     <div class="flex flex-col justify-center gap-4 rounded-lg bg-base-300 bg-opacity-65 p-4 text-base-content backdrop-blur-sm">
                         <div class="flex flex-row flex-wrap gap-4">
                             <div class="flex w-40 flex-col justify-between">
@@ -264,7 +263,7 @@ async function UserTopPanel(p: {
                             <div class="flex flex-row flex-wrap gap-2">
                                 {p.user.badges.map(badge =>
                                     <div class="tooltip" data-tip={badge.description}>
-                                        <img data-src={badge.image_url} width="86" height="40" alt={badge.description} />
+                                        <img loading="lazy" src={badge.image_url} width="86" height="40" alt={badge.description} />
                                     </div>
                                 )}
                             </div>

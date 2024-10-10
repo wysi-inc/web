@@ -21,14 +21,14 @@ import { plugins } from "./plugins";
 
 const user_routes_data = new Elysia({ prefix: "/:id" })
     .use(plugins)
-    .get("/", async ({ lang, request, params, user }) => (
-        <HtmxPage lang={lang} headers={request.headers} user={user}>
+    .get("/", async ({ lang, request, set, params, user }) => (
+        <HtmxPage lang={lang} req={request} set={set} user={user}>
             <UserPage lang={lang} user_id={params.id} logged={user} />
         </HtmxPage>
     ))
     .group("/:mode", (_) => _
-        .get("/", ({ lang, request, params, user }) => (
-            <HtmxPage lang={lang} headers={request.headers} user={user}>
+        .get("/", ({ lang, request, set, params, user }) => (
+            <HtmxPage lang={lang} req={request} set={set} user={user}>
                 <UserPage lang={lang} logged={user} user_id={params.id} mode={params.mode as Mode} />
             </HtmxPage>
         ))
@@ -211,6 +211,6 @@ const user_routes_data = new Elysia({ prefix: "/:id" })
     )
 
 export const user_routes = new Elysia()
-    .use(new Elysia({ prefix: "/users" }).use(user_routes_data))
     .use(new Elysia({ prefix: "/u" }).use(user_routes_data))
     .use(new Elysia({ prefix: "/user" }).use(user_routes_data))
+    .use(new Elysia({ prefix: "/users" }).use(user_routes_data))
