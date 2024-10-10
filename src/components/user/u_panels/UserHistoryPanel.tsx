@@ -22,10 +22,8 @@ function UserHistoryPanel(props: Props) {
                 aria-label={title} checked={type === "global"} aria-selected={type === "global"} />
             <div role="tabpanel" class="tab-content pt-4" id={`${type}_tabpannel`} aria-labelledby={`${type}_tab`}>
                 {data.length > 0 ?
-                    <div class="h-64 w-full relative cursor-move">
-                        <canvas id={`chart-${type}`} class="absolute select-none" data-vals={JSON.stringify(data)} />
-                    </div> :
-                    "No data found"
+                    <div class="h-64 w-full relative cursor-move" id={`chart-${type}`} data-vals={JSON.stringify(data)} />
+                    : "No data found"
                 }
             </div>
         </>);
