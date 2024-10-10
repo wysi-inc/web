@@ -41,9 +41,11 @@ async function UserSkinsPanel(p: { user_id: number, logged_id?: number }) {
                 </form>
             </> : null
             }
-            <form id="skins_list" class={`${editable ? "sortable" : ""} grid grid-cols-1 flex-wrap gap-4 empty:hidden md:grid-cols-2`} hx-post={`/users/${user.user_id}/skins/sort`} hx-trigger="end" hx-swap="none">
+            {/*<form id="skins_list" class={`${editable ? "sortable" : ""} grid grid-cols-1 flex-wrap gap-4 empty:hidden md:grid-cols-2`} hx-post={`/users/${user.user_id}/skins/sort`} hx-trigger="end" hx-swap="none">*/}
+            <div id="skins_list" class="grid grid-cols-1 flex-wrap gap-4 empty:hidden md:grid-cols-2">
                 {user.skins.map((s, i) => <SkinCard user_id={p.user_id} skin_id={s} index={i} editable={editable} />)}
-            </form>
+            </div>
+            {/*</form>*/}
             <script src={`/public/js/scroll.js?v=${Date.now()}`} />
         </div>
     </>);
