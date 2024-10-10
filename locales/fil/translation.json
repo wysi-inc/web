@@ -40,13 +40,13 @@
                 "show": "Ipakita ang lahat"
             },
             "year": {
-                "title": "Year",
-                "info": "This is a recap of this year so far, the data will be reset at January 1st"
+                "title": "Taon",
+                "info": "Ito ay isang recap ng taong ito sa ngayon, ang data ay ire-reset sa ika-1 ng Enero"
             },
-            "most": "Most Played",
+            "most": "Pinaka Naglaro",
             "scores": {
-                "title": "Scores",
-                "info": "Hover over a grayed out PP to see the (if FC) PP value",
+                "title": "Mga Iskor",
+                "info": "Mag-hover sa isang kulay-abo na PP upang makita ang (kung FC) na halaga ng PP",
                 "tabs": {
                     "pinned": "Pinned",
                     "best": "Best",
