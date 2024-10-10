@@ -42,13 +42,13 @@ function Navbar(p: { lang: string, user?: UserCookie | null }) {
         <nav class="sticky top-0 z-50 flex w-full flex-col bg-base-100 shadow-lg">
             <div class="grid grid-cols-3 p-2 md:grid-cols-5">
                 <div class="flex flex-row items-center justify-start md:col-span-2">
-                    <details class="dropdown xl:hidden">
+                    <details class="dropdown xl:hidden" id="nav_burger">
                         <summary class="btn btn-square btn-ghost">
                             <i class="fa-solid fa-bars fa-lg" />
                         </summary>
                         <ul class="mt-6 menu dropdown-content w-56 bg-base-100 rounded-box z-[1] p-2 shadow">
                             {routes.map(route =>
-                                <li>
+                                <li onclick="document.getElementById('nav_burger')?.removeAttribute('open')">
                                     <Link url={route.url} css="btn btn-ghost flex flex-row gap-2">
                                         {route.icon}
                                         <span>{route.title}</span>

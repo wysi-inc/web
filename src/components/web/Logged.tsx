@@ -1,25 +1,25 @@
-import type { UserCookie } from "@/src/types/users";
-import Link from "./Link";
 import { isAdmin } from "@/src/routes/admin";
-import Avatar from "../user/Avatar";
 import { txt } from "@/src/tasks/files";
+import type { UserCookie } from "@/src/types/users";
+import Avatar from "../user/Avatar";
+import Link from "./Link";
 
 function Logged(p: { user: UserCookie, lang: string }) {
     return (
-        <details class="dropdown dropdown-end">
+        <details class="dropdown dropdown-end" id="usr_burger">
             <summary class="btn btn-square btn-ghost">
                 <div class="avatar size-10">
                     <Avatar id={p.user.id} />
                 </div>
             </summary>
             <ul class="mt-6 menu dropdown-content w-56 bg-base-100 rounded-box z-[1] p-2 shadow">
-                <li>
+                <li onclick="document.getElementById('usr_burger')?.removeAttribute('open')">
                     <Link url={`/users/${p.user.id}`} css="btn btn-ghost flex">
                         <i class="fa-solid fa-user" />
                         {txt(p.lang, "nav.log.wysi")}
                     </Link>
                 </li>
-                <li>
+                <li onclick="document.getElementById('nav_burger')?.removeAttribute('open')">
                     <a href={`https://osu.ppy.sh/users/${p.user.id}`}
                         target="_blank" rel="noreferrer noopener"
                         class="btn btn-ghost flex">
@@ -28,7 +28,7 @@ function Logged(p: { user: UserCookie, lang: string }) {
                     </a>
                 </li>
                 {isAdmin(p.user) ?
-                    <li>
+                    <li onclick="document.getElementById('nav_burger')?.removeAttribute('open')">
                         <Link url="/admin" css="btn btn-ghost flex">
                             <i class="fa-solid fa-screwdriver-wrench" />
                             Admin
@@ -36,10 +36,10 @@ function Logged(p: { user: UserCookie, lang: string }) {
                     </li> : <></>
                 }
                 <li>
-                    <Link url="/logout" css="btn btn-ghost flex">
+                    <a href={`/logout`} class="btn btn-ghost flex">
                         <i class="fa-solid fa-right-from-bracket" />
                         {txt(p.lang, "nav.log.logout")}
-                    </Link>
+                    </a>
                 </li>
             </ul>
         </details>
