@@ -6340,10 +6340,6 @@ img:not([src]):not([srcset]) {
   visibility: visible;
 }
 
-.group:hover .group-hover\:block {
-  display: block;
-}
-
 .group\/audio_card:hover .group-hover\/audio_card\:flex {
   display: flex;
 }
