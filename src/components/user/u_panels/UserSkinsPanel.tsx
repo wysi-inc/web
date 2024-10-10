@@ -56,8 +56,8 @@ export async function SkinCard(p: { user_id: number, skin_id: string, editable: 
     url.searchParams.append('skin', `https://osuck.link/s-${p.skin_id}`);
     const res = await fetch(url.toString(), { method: "POST" });
     if (!res.ok) return (
-        <div>
-            <span>{p.skin_id.toString()}</span>
+        <div hx-target="this" hx-swap="delete">
+            <span>{p.skin_id}</span>
             {p.editable ?
                 <button class="btn btn-circle btn-ghost btn-xs tooltip" data-tip="Delete skin" hx-trigger="click" hx-delete={`/users/${p.user_id}/skins/delete/${p.skin_id}`}>
                     <i class="fa-solid fa-xmark" />
@@ -67,8 +67,8 @@ export async function SkinCard(p: { user_id: number, skin_id: string, editable: 
     );
     const data = await res.json() as any;
     if (data.status !== "success") return (
-        <div>
-            <span>{p.skin_id.toString()}</span>
+        <div hx-target="this" hx-swap="delete">
+            <span>{p.skin_id}</span>
             {p.editable ?
                 <button class="btn btn-circle btn-ghost btn-xs tooltip" data-tip="Delete skin" hx-trigger="click" hx-delete={`/users/${p.user_id}/skins/delete/${p.skin_id}`}>
                     <i class="fa-solid fa-xmark" />
