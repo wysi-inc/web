@@ -9,7 +9,7 @@ export type Res = {
 export type UserCookie = {
     id: number,
     username: string,
-    role?: "owner" | "admin",
+    role?: "owner" | "admin" | null,
 }
 
 export type Skin = {

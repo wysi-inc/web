@@ -3,13 +3,11 @@ import AudioPlayer from "./web/AudioPlayer";
 import Footer from "./web/Footer";
 import Navbar from "./web/Navbar";
 
-type Props = {
-    children: any;
-    user: UserCookie | null;
-    lang: string
-}
-
-const BaseHtml = ({ lang, user, children }: Props) => {
+function BaseHtml(p: {
+    children: any,
+    lang: string,
+    user: UserCookie | null,
+}) {
     return (<>
         <html lang="en" class="scroll-smooth">
             <head>
@@ -45,10 +43,10 @@ const BaseHtml = ({ lang, user, children }: Props) => {
                 <script defer src="/public/js/choke.js" />
             </head>
             <body style="display: hidden;" class="flex flex-col items-center justify-center bg-base-300" id="top">
-                <Navbar lang={lang} user={user} />
+                <Navbar lang={p.lang} user={p.user} />
                 <main class="w-screen mil:w-mil">
                     <div id="main" class="flex flex-col gap-4 bg-neutral shadow-lg md:p-4">
-                        {children}
+                        {p.children}
                     </div>
                 </main>
                 <Footer />

@@ -58,7 +58,7 @@ export const baseRoutes = new Elysia({ prefix: '' })
         const user: UserCookie = {
             id: res.data.id,
             username: res.data.username,
-            role: res.role ? res.role : undefined
+            role: res.role
         }
         cookie.auth.set({
             value: await jwt.sign(user),
@@ -66,9 +66,9 @@ export const baseRoutes = new Elysia({ prefix: '' })
             maxAge: 60 * 60 * 24 * 2,
             path: "/",
         })
-        set.redirect = "/";
+        set.redirect = query.state || "/";
     }, oauthQuery)
-    .get("/logout", ({ set, cookie }) => {
+    .get("/logout", ({ request, set, cookie }) => {
         cookie.auth.remove();
-        set.redirect = "/";
+        set.redirect = request.headers.get("referer") || "/";
     })
