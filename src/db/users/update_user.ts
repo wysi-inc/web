@@ -237,6 +237,16 @@ export async function saveSocial(
     platform: string
 ): Promise<Res> {
     try {
+        if (username.length > 100) return {
+            error: true,
+            msg: "Username too long",
+            code: 404
+        };
+        if (platform.length > 100) return {
+            error: true,
+            msg: "Platform name too long",
+            code: 404
+        };
         const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
