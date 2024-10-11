@@ -18,6 +18,7 @@ import { addSkin, deleteCollections, deleteSkin, deleteSocial, getCollectionFile
 import HtmxPage from "../libs/routes";
 import type { BeatmapCategory, Mode, ScoreCategory } from "../types/osu";
 import { plugins } from "./plugins";
+import { fixURL } from "../libs/web_utils";
 
 const user_routes_data = new Elysia({ prefix: "/:id" })
     .use(plugins)
@@ -211,6 +212,10 @@ const user_routes_data = new Elysia({ prefix: "/:id" })
     )
 
 export const user_routes = new Elysia()
-    .use(new Elysia({ prefix: "/u" }).use(user_routes_data))
-    .use(new Elysia({ prefix: "/user" }).use(user_routes_data))
+    .use(new Elysia({ prefix: "/u" }).get("*", ({ request, set }) => {
+        set.redirect = fixURL("users", request.url);
+        set.status = 302;
+        return;
+    }))
+    // .use(new Elysia({ prefix: "/user" }))
     .use(new Elysia({ prefix: "/users" }).use(user_routes_data))
