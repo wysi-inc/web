@@ -1,7 +1,12 @@
 var htmxAfterFunctions = [];
-var charts = [];
 document.body.addEventListener('htmx:afterRequest', () => {
-    htmxAfterFunctions.forEach(f => { f() })
+    htmxAfterFunctions.forEach(f => {
+        try {
+            f()
+        } catch (err) {
+            console.error(err);
+        }
+    })
 })
 
 const modsInt = {

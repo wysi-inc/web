@@ -42,11 +42,12 @@ function BaseHtml(p: {
                 <script defer src="/public/js/bbcode.js" />
                 <script defer src="/public/js/drag.js" />
                 <script defer src="/public/js/choke.js" />
+                <script defer src="/public/js/history.js" />
             </head>
-            <body style="display: hidden;" class="flex flex-col items-center justify-center bg-base-300" id="top">
+            <body id="top" style="display: hidden;" class="flex flex-col items-center justify-center bg-base-300">
                 <Navbar lang={p.lang} user={p.user} />
                 <main class="w-screen mil:w-mil">
-                    <div id="main" class="flex flex-col gap-4 bg-neutral shadow-lg md:p-4">
+                    <div id="main" class="flex flex-col gap-4 bg-neutral shadow-lg md:p-4" hx-history-elt>
                         {p.children}
                     </div>
                 </main>

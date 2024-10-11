@@ -2,8 +2,10 @@
 // import "https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js";
 // import "https://cdn.jsdelivr.net/npm/chartjs-plugin-crosshair@2.0.0/dist/chartjs-plugin-crosshair.min.js";
 
-history();
-function history() {
+var charts = [];
+htmxAfterFunctions.push(hist);
+document.addEventListener("DOMContentLoaded", hist);
+function hist() {
 
     for (let chart of charts) {
         chart.clear();

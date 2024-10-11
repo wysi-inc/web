@@ -23,7 +23,7 @@ function UserHistoryPanel(props: Props) {
             <div role="tabpanel" class="tab-content pt-4" id={`${type}_tabpannel`} aria-labelledby={`${type}_tab`}>
                 {data.length > 0 ?
                     <div class="h-64 w-full relative cursor-move">
-                        <canvas id={`chart-${type}`} class="absolute select-none" data-vals={JSON.stringify(data)} />
+                        <canvas id={`chart-${type}`} data-vals={JSON.stringify(data)} />
                     </div>
                     : "No data found"
                 }
@@ -38,7 +38,6 @@ function UserHistoryPanel(props: Props) {
             {tab('plays', 'Plays', props.play_counts)}
             {tab('replays', 'Replays', props.replays_watched)}
         </div>
-        <script defer type="module" src={`/public/js/history.js?a=${Date.now()}`} />
     </>);
 
 }
