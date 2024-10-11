@@ -41,6 +41,7 @@ function BaseHtml(p: {
                 <script defer src="/public/js/bbcode.js" />
                 <script defer src="/public/js/drag.js" />
                 <script defer src="/public/js/choke.js" />
+                <script defer src="/public/js/history.js" type="module" />
             </head>
             <body style="display: hidden;" class="flex flex-col items-center justify-center bg-base-300" id="top">
                 <Navbar lang={p.lang} user={p.user} />

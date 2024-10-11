@@ -46,17 +46,34 @@ async function Home(p: { lang: string }) {
         {stats ?
             <section class="stats stats-vertical rounded-lg bg-base-300 shadow md:stats-horizontal">
                 <div class="stat">
-                    <div class="stat-title"><i class="fa-solid fa-database" /> Profiles Stored</div>
-                    <div class="stat-value">{stats.users.toLocaleString()}</div>
+                    <div class="stat-title flex items-center gap-3">
+                        <i class="fa-solid fa-database" />
+                        <span>Profiles Stored</span>
+                    </div>
+                    <div class="stat-value">{stats.profiles.toLocaleString()}</div>
                     <div class="stat-desc">User profiles stored</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-title"><i class="fa-solid fa-computer" /> Profile Setups</div>
+                    <div class="stat-title flex items-center gap-3">
+                        <i class="fa-solid fa-user" />
+                        <span>Registered Users</span>
+                    </div>
+                    <div class="stat-value">{stats.users.toLocaleString()}</div>
+                    <div class="stat-desc">Users that logged in</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-title flex items-center gap-3">
+                        <i class="fa-solid fa-computer" />
+                        <span>Profile Setups</span>
+                    </div>
                     <div class="stat-value">{stats.setups.toLocaleString()}</div>
                     <div class="stat-desc">Profiles with custom setups</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-title"><i class="fa-solid fa-heart" /> Collections</div>
+                    <div class="stat-title flex items-center gap-3">
+                        <i class="fa-solid fa-heart" />
+                        <span>Collections</span>
+                    </div>
                     <div class="stat-value">{stats.collections.toLocaleString()}</div>
                     <div class="stat-desc">Profiles with collections uploaded</div>
                 </div>

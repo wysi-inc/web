@@ -3,9 +3,8 @@ import "https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js";
 // import "https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js";
 // import "https://cdn.jsdelivr.net/npm/chartjs-plugin-crosshair@2.0.0/dist/chartjs-plugin-crosshair.min.js";
 
-window.addEventListener("load", history);
+history();
 htmxAfterFunctions.push(history);
-
 function history() {
 
     render_chart("global", "rank");
@@ -31,10 +30,9 @@ function history() {
     }
 
     function render_chart(id, type) {
-        const div = document.getElementById(`chart-${id}`);
-        if (!div) return;
-        if (div.innerHTML !== "") return;
-        const vals = JSON.parse(div.attributes["data-vals"].value);
+        const ctx = document.getElementById(`chart-${id}`);
+        if (!ctx) return;
+        const vals = JSON.parse(ctx.attributes["data-vals"].value);
 
         const data_labels = type === "rank" ?
             vals.map(r => date_to_day(r.date)) :
@@ -105,9 +103,6 @@ function history() {
             options
         };
 
-        const ctx = document.createElement("canvas");
-        div.innerHTML = "";
-        div.append(ctx);
         new Chart(ctx, config);
     }
 
