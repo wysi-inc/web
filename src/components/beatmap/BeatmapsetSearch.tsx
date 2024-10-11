@@ -42,20 +42,20 @@ function BeatmapsetSearch() {
                     <Input name="Mapper" placeholder="Beatmap Mapper" />
                 </div>
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    <DoubleSlider code="sr" name="Stars" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
-                    <DoubleSlider code="bpm" name="BPM" min={0} max={300} step={5} min_label="0" max_label="∞" />
+                    <DoubleSlider code="sr" name="Stars" min={0} max={10} step={0.1} min_label="0" max_label="∞" />
+                    <DoubleSlider code="bpm" name="BPM" min={0} max={300} step={1} min_label="0" max_label="∞" />
                     <details class="group col-span-full rounded-lg bg-base-300">
                         <summary class="flex cursor-pointer flex-row items-center gap-4 rounded-lg px-4 py-2">
                             <i class="fa-solid fa-caret-down transform duration-200 ease-out group-open:rotate-180" />
                             <span>Advanced Filters</span>
                         </summary>
                         <div class="grid grid-cols-1 gap-4 p-4 md:grid-cols-2">
-                            <DoubleSlider code="len" name="Length" min={0} max={600} step={30} min_label="0s" max_label="∞" />
+                            <DoubleSlider code="len" name="Length" min={0} max={600} step={10} min_label="0s" max_label="∞" />
                             <DoubleSlider code="year" name="Year" min={2007} max={new Date().getFullYear()} step={1} min_label="2007" max_label="now" />
-                            <DoubleSlider code="ar" name="AR" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
-                            <DoubleSlider code="cs" name="CS" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
-                            <DoubleSlider code="od" name="OD" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
-                            <DoubleSlider code="hp" name="HP" min={0} max={10} step={0.5} min_label="0" max_label="∞" />
+                            <DoubleSlider code="ar" name="AR" min={0} max={10} step={0.1} min_label="0" max_label="∞" />
+                            <DoubleSlider code="cs" name="CS" min={0} max={10} step={0.1} min_label="0" max_label="∞" />
+                            <DoubleSlider code="od" name="OD" min={0} max={10} step={0.1} min_label="0" max_label="∞" />
+                            <DoubleSlider code="hp" name="HP" min={0} max={10} step={0.1} min_label="0" max_label="∞" />
                         </div>
                     </details>
                 </div>
