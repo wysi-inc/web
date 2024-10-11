@@ -42,7 +42,7 @@ new Elysia()
             }
         }
         if (base !== "public" && route !== "favicon.ico") {
-            log.request(ip, request.method, route);
+            log.request("hewooo", request.method, route);
         }
     })
     .onError(({ error }) => {
