@@ -30,6 +30,7 @@ function BaseHtml(p: {
                 <script src="https://unpkg.com/htmx.org@2.0.0/dist/htmx.min.js" />
                 <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js" />
                 <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js?" />
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" />
                 <script defer src="/public/lib/fontawesome/brands.min.js" />
                 <script defer src="/public/lib/fontawesome/solid.min.js" />
                 <script defer src="/public/lib/fontawesome/regular.min.js" />
@@ -41,7 +42,6 @@ function BaseHtml(p: {
                 <script defer src="/public/js/bbcode.js" />
                 <script defer src="/public/js/drag.js" />
                 <script defer src="/public/js/choke.js" />
-                <script defer src="/public/js/history.js" type="module" />
             </head>
             <body style="display: hidden;" class="flex flex-col items-center justify-center bg-base-300" id="top">
                 <Navbar lang={p.lang} user={p.user} />
