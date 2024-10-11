@@ -28,6 +28,7 @@ function BaseHtml(p: {
                 <link href="/public/css/main_out.css" rel="stylesheet" type="text/css" />
                 <link href="/public/css/bbcode.css" rel="stylesheet" type="text/css" />
                 <script src="https://unpkg.com/htmx.org@2.0.0/dist/htmx.min.js" />
+                <script src="https://unpkg.com/htmx-ext-response-targets@2.0.0/response-targets.js" />
                 <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js" />
                 <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js?" />
                 <script defer src="/public/lib/fontawesome/brands.min.js" />
@@ -42,8 +43,9 @@ function BaseHtml(p: {
                 <script defer src="/public/js/drag.js" />
                 <script defer src="/public/js/choke.js" />
             </head>
-            <body style="display: hidden;" class="flex flex-col items-center justify-center bg-base-300" id="top">
+            <body hx-ext="response-targets" hx-target-error="#alerts" style="display: hidden;" class="flex flex-col items-center justify-center bg-base-300" id="top">
                 <Navbar lang={p.lang} user={p.user} />
+                <div id="alerts" class="z-50 alerts fixed top-20 pt-2 right-4 flex flex-col gap-2" />
                 <main class="w-screen mil:w-mil">
                     <div id="main" class="flex flex-col gap-4 bg-neutral shadow-lg md:p-4">
                         {p.children}

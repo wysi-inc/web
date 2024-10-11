@@ -1,3 +1,5 @@
+import { Profanity } from "@2toad/profanity";
+
 export const RATELIMIT = 120;
 
 export const RESULT_LIMIT = {
@@ -11,3 +13,10 @@ export const RESULT_LIMIT = {
         SEARCH: 50
     }
 };
+
+export const profanity = new Profanity({
+    languages: ['de', 'en', 'es', 'fr'],
+    wholeWord: true,
+    grawlix: "*****",
+    grawlixChar: "$",
+})

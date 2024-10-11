@@ -4,6 +4,7 @@ import type { Mode } from "../../types/osu";
 import type { Res, UserBasic, UserExtended } from "../../types/users";
 //@ts-ignore
 import OsuDBParser from "osu-db-parser";
+import { validString } from "@/src/libs/validations";
 
 export async function updateUser(
     user: UserBasic,
@@ -28,15 +29,15 @@ export async function updateUser(
             });
             await db_user.save();
             updated_user.db_ranks = new_ranks;
-            updated_user.db_setup = db_user.setup as any;
+            updated_user.db_setup = db_user.setup;
             return updated_user;
         }
         db_user.username = user.username;
         if (!db_user.modes[mode]) {
             db_user.modes[mode] = new_ranks as any;
             updated_user.db_ranks = new_ranks;
-            updated_user.db_setup = db_user.setup as any;
-            updated_user.collections = db_user.collections as any;
+            updated_user.db_setup = db_user.setup;
+            updated_user.collections = db_user.collections;
             await db_user.save();
             return updated_user;
         }
@@ -102,11 +103,20 @@ function getNewCountry(rank: number, today: Date): Rank[] {
 export async function saveSetup(
     user_id: number,
     setup: any
-): Promise<Setup | null> {
+): Promise<Res & { setup?: Setup }> {
     try {
+        for (let value of Object.values(setup)) {
+            const check = validString(`${value}`);
+            if (check.error) return check;
+        }
         const user = await UserModel.findOne({ user_id });
 
-        if (!user) return null;
+        if (!user) return {
+            error: true,
+            msg: "User doesnt exist",
+            code: 404
+        };
+
         if (setup.keyboard_layout === "k0") setup.keyboard_layout = "";
 
         const tablet: Setup["tablet"] = {
@@ -181,10 +191,19 @@ export async function saveSetup(
         };
 
         await user.save();
-        return user.setup;
+        return {
+            error: false,
+            msg: "Setup updated",
+            code: 200,
+            setup: user.setup
+        };
     } catch (err) {
         log.error("Error saving setup", err);
-        return null;
+        return {
+            error: true,
+            msg: "Something went wrong",
+            code: 500,
+        };
     }
 }
 
@@ -204,6 +223,8 @@ export async function saveCollection(body: object, user_id: number) {
     const collections: CollectionDB[] = [];
 
     for (const [k, v] of Object.entries(body)) {
+        const check = validString(k);
+        if (check.error) return check;
         collections.push({
             name: k,
             beatmapsMd5: JSON.parse(v)
@@ -237,16 +258,10 @@ export async function saveSocial(
     platform: string
 ): Promise<Res> {
     try {
-        if (username.length > 100) return {
-            error: true,
-            msg: "Username too long",
-            code: 404
-        };
-        if (platform.length > 100) return {
-            error: true,
-            msg: "Platform name too long",
-            code: 404
-        };
+        const check_username = validString(username);
+        if (check_username.error) return check_username;
+        const check_platform = validString(platform);
+        if (check_platform.error) return check_platform;
         const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
@@ -376,6 +391,8 @@ export async function updateDan(
 
 export async function addSkin(user_id: number, skin_id: string): Promise<Res & { id?: number }> {
     try {
+        const check = validString(skin_id);
+        if (check.error) return check;
         const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,

@@ -17,6 +17,7 @@
         "typescript": "^5.3.3"
     },
     "dependencies": {
+        "@2toad/profanity": "^3.0.0",
         "@elysiajs/cookie": "^0.8.0",
         "@elysiajs/html": "^0.8.0",
         "@elysiajs/jwt": "^0.8.0",
