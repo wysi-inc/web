@@ -31,10 +31,10 @@ function BaseHtml(p: {
                 <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js" />
                 <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js?" />
                 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" />
-                <script defer src="/public/lib/fontawesome/brands.min.js" />
-                <script defer src="/public/lib/fontawesome/solid.min.js" />
-                <script defer src="/public/lib/fontawesome/regular.min.js" />
-                <script defer src="/public/lib/fontawesome/fontawesome.min.js" />
+                <script src="/public/lib/fontawesome/brands.min.js" />
+                <script src="/public/lib/fontawesome/solid.min.js" />
+                <script src="/public/lib/fontawesome/regular.min.js" />
+                <script src="/public/lib/fontawesome/fontawesome.min.js" />
                 <script defer src="/public/js/utils.js" />
                 <script defer src="/public/js/search.js" />
                 <script defer src="/public/js/audio.js" />

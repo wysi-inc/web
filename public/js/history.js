@@ -1,11 +1,16 @@
-import "https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js";
 // import "https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js";
 // import "https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js";
 // import "https://cdn.jsdelivr.net/npm/chartjs-plugin-crosshair@2.0.0/dist/chartjs-plugin-crosshair.min.js";
 
 history();
-htmxAfterFunctions.push(history);
 function history() {
+
+    for (let chart of charts) {
+        chart.clear();
+        chart.destroy();
+    }
+
+    charts = [];
 
     render_chart("global", "rank");
     render_chart("country", "rank");
@@ -30,7 +35,7 @@ function history() {
     }
 
     function render_chart(id, type) {
-        const ctx = document.getElementById(`chart-${id}`);
+        const ctx = document.getElementById("chart-" + id);
         if (!ctx) return;
         const vals = JSON.parse(ctx.attributes["data-vals"].value);
 
@@ -96,14 +101,12 @@ function history() {
                 mode: "index",
             }
         }
-
         const config = {
             type: "line",
             data,
             options
         };
 
-        new Chart(ctx, config);
+        charts.push(new Chart(ctx, config));
     }
-
 }
