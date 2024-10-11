@@ -39,7 +39,7 @@ export function apicall() {
 
 export function ratelimit_logger() {
     setInterval(() => {
-        log.object(ratelimits);
+        //log.object(ratelimits);
         ratelimits.clear();
     }, 60000);
 }
