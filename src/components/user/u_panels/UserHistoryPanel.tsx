@@ -38,6 +38,7 @@ function UserHistoryPanel(props: Props) {
             {tab('plays', 'Plays', props.play_counts)}
             {tab('replays', 'Replays', props.replays_watched)}
         </div>
+        <script type="module">{`console.log("hello")`}</script>
         <script type="module">{`
 // import "https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js";
 // import "https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js";
