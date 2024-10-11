@@ -4535,6 +4535,22 @@ input.tab:checked + .tab-content,
   top: 0.5rem;
 }
 
+.top-4 {
+  top: 1rem;
+}
+
+.top-28 {
+  top: 7rem;
+}
+
+.top-20 {
+  top: 5rem;
+}
+
+.top-24 {
+  top: 6rem;
+}
+
 .z-40 {
   z-index: 40;
 }
