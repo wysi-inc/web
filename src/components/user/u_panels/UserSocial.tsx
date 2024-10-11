@@ -4,7 +4,7 @@ export const SOCIALS = [
     "github", "gitlab", "twitch", "instagram", "youtube", "tiktok", "pinterest",
     "snapchat", "reddit", "linkedin", "roblox", "microsoft", "soundcloud",
     "spotify", "facebook", "paypal", "supercell", "kick", "kofi", "steam", "riot",
-    "epic", "anilist", "playstation", "linktree", "discord", "twitter"
+    "epic", "anilist", "playstation", "linktree", "discord", "twitter", "uber"
 ]
 
 function UserSocial(p: { social: UserSocialType, user_id: number, editable?: boolean }) {
@@ -143,9 +143,9 @@ function UserSocial(p: { social: UserSocialType, user_id: number, editable?: boo
 
     const social = (socials_data as any)[p.social.platform];
 
-    if (!social) return <>no</>;
+    if (!social) return <></>;
 
-    return (
+    return (<>
         <button class={`p-1 px-2 flex ${social.black ? "text-black" : "text-white"} tooltip flex-row gap-2 text-sm items-center rounded-full ${social.bg}`}
             type="button" hx-target="this" hx-swap="outerHTML" data-tip={p.social.platform}>
             {social.url ?
@@ -163,10 +163,10 @@ function UserSocial(p: { social: UserSocialType, user_id: number, editable?: boo
                     hx-delete={`/users/${p.user_id}/socials/delete/${p.social.platform}`} hx-trigger="click" hx-target>
                     <i class="fa-solid fa-xmark" />
                 </a>
-            </> : <></>
+            </> : null
             }
         </button>
-    );
+    </>);
 }
 
 export default UserSocial;
