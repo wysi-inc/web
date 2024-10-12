@@ -1,12 +1,17 @@
 import * as mongoose from "mongoose";
 import { SOCIALS } from "../components/user/u_panels/UserSocial";
+import { STR_MAX_LEN } from "../libs/constants";
 
 const collectionDBSchema = new mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        maxLength: STR_MAX_LEN.LONG,
+        required: true
+    },
     beatmapsMd5: [String]
 }, { _id: false });
 
-collectionDBSchema.methods.toJSON = function() {
+collectionDBSchema.methods.toJSON = function () {
     const { __v, _id, ...user } = this.toObject();
     return user;
 };
@@ -14,18 +19,23 @@ collectionDBSchema.methods.toJSON = function() {
 const userSocial = new mongoose.Schema({
     platform: {
         type: String,
+        maxLength: STR_MAX_LEN.SHORT,
+        required: true,
         enum: SOCIALS,
-        required: true
     },
     username: {
         type: String,
-        required: true
+        maxLength: STR_MAX_LEN.MID,
+        required: true,
     }
 }, { _id: false });
 
 const setup = new mongoose.Schema({
     keyboard: {
-        name: String,
+        name: {
+            type: String,
+            maxLength: STR_MAX_LEN.MID,
+        },
         layout: {
             type: String,
             enum: ["k2", "k3", "k4", "k60", "k75", "ktkl", "kfull", ""],
@@ -37,7 +47,10 @@ const setup = new mongoose.Schema({
         press: Number,
     },
     tablet: {
-        name: String,
+        name: {
+            type: String,
+            maxLength: STR_MAX_LEN.MID,
+        },
         area: {
             w: Number,
             h: Number,
@@ -53,33 +66,96 @@ const setup = new mongoose.Schema({
         },
     },
     mouse: {
-        name: String,
+        name: {
+            type: String,
+            maxLength: STR_MAX_LEN.MID,
+        },
         dpi: Number,
         mult: Number,
     },
     peripherals: {
-        monitor: String,
-        headphones: String,
-        microphone: String,
-        tablet: String,
-        mouse: String,
-        keyboard: String,
-        keypad: String,
-        mousepad: String,
-        desk: String,
-        chair: String,
-        camera: String,
-        audio: String,
+        monitor: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        headphones: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        microphone: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        tablet: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        mouse: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        keyboard: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        keypad: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        mousepad: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        desk: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        chair: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        camera: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        audio: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
     },
     computer: {
-        os: String,
-        cpu: String,
-        gpu: String,
-        ram: String,
-        psu: String,
-        storage: String,
-        motherboard: String,
-        case: String,
+        os: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        cpu: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        gpu: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        ram: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        psu: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        storage: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        motherboard: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
+        case: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+        },
     }
 }, { _id: false });
 
@@ -146,7 +222,7 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-userSchema.methods.toJSON = function() {
+userSchema.methods.toJSON = function () {
     const { __v, _id, ...user } = this.toObject();
     return user;
 };

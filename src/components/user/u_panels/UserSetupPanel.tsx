@@ -24,7 +24,7 @@ async function UserSetupPanel(p: {
         <div id="setup_panel">
             <form id="setup_form" class="group/setup flex flex-col-reverse items-end gap-2"
                 hx-put={editable ? `/users/${p.page_id}/setup/submit` : undefined}
-                hx-trigger="submit" hx-swap="outerHTML" hx-target="#setup_panel">
+                hx-trigger="submit" hx-swap="innerHTML" hx-target="#setup_panel">
                 <fieldset class="grid w-full gap-4 md:grid-cols-2" id="setup_fieldset" disabled>
                     <TabletDisplay lang={p.lang} editable={editable} tablet={p.setup?.tablet} />
                     <KeyboardDisplay lang={p.lang} editable={editable} keyboard={p.setup?.keyboard} />
@@ -47,7 +47,7 @@ async function UserSetupPanel(p: {
                             <i class="fa-solid fa-check" />
                         </button>
                         <script src={`/public/js/setup.js?v=${Date.now()}`} />
-                    </div> : <></>
+                    </div> : null
                 }
             </form>
         </div>
