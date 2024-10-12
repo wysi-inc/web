@@ -41,9 +41,11 @@ async function UserSkinsPanel(p: { user_id: number, logged_id?: number }) {
                 </form>
             </> : null
             }
-            <form id="skins_list" class={`${editable ? "sortable" : ""} grid grid-cols-1 flex-wrap gap-4 empty:hidden md:grid-cols-2`} hx-post={`/users/${user.user_id}/skins/sort`} hx-trigger="end" hx-swap="none">
+            {/*<form id="skins_list" class={`${editable ? "sortable" : ""} grid grid-cols-1 flex-wrap gap-4 empty:hidden md:grid-cols-2`} hx-post={`/users/${user.user_id}/skins/sort`} hx-trigger="end" hx-swap="none">*/}
+            <div id="skins_list" class="grid grid-cols-1 flex-wrap gap-4 empty:hidden md:grid-cols-2">
                 {user.skins.map((s, i) => <SkinCard user_id={p.user_id} skin_id={s} index={i} editable={editable} />)}
-            </form>
+            </div>
+            {/*</form>*/}
             <script src={`/public/js/scroll.js?v=${Date.now()}`} />
         </div>
     </>);
@@ -55,9 +57,27 @@ export async function SkinCard(p: { user_id: number, skin_id: string, editable: 
     url.searchParams.append('key', process.env.OSUCK_API_KEY);
     url.searchParams.append('skin', `https://osuck.link/s-${p.skin_id}`);
     const res = await fetch(url.toString(), { method: "POST" });
-    if (!res.ok) return (<span>{p.skin_id.toString()}</span>);
+    if (!res.ok) return (
+        <div hx-target="this" hx-swap="delete">
+            <span>{p.skin_id}</span>
+            {p.editable ?
+                <button class="btn btn-circle btn-ghost btn-xs tooltip" data-tip="Delete skin" hx-trigger="click" hx-delete={`/users/${p.user_id}/skins/delete/${p.skin_id}`}>
+                    <i class="fa-solid fa-xmark" />
+                </button> : null
+            }
+        </div>
+    );
     const data = await res.json() as any;
-    if (data.status !== "success") return (<span>{p.skin_id.toString()}</span>);
+    if (data.status !== "success") return (
+        <div hx-target="this" hx-swap="delete">
+            <span>{p.skin_id}</span>
+            {p.editable ?
+                <button class="btn btn-circle btn-ghost btn-xs tooltip" data-tip="Delete skin" hx-trigger="click" hx-delete={`/users/${p.user_id}/skins/delete/${p.skin_id}`}>
+                    <i class="fa-solid fa-xmark" />
+                </button> : null
+            }
+        </div>
+    );
     const skin: Skin = data.message;
     return (<>
         <div class="flex flex-col rounded-lg bg-neutral" hx-target="this" hx-swap="delete">

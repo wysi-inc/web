@@ -47,7 +47,7 @@ async function UserTopPanel(p: {
                 <div class="rounded-lg" style={{ backgroundImage: `url('${p.user.cover_url}')`, backgroundSize: `cover`, backgroundPosition: `center`, backgroundRepeat: "no-repeat" }}>
                     <div class="flex flex-col justify-center gap-4 rounded-lg bg-base-300 bg-opacity-65 p-4 text-base-content backdrop-blur-sm">
                         <div class="flex flex-row flex-wrap gap-4">
-                            <div class="flex w-40 flex-col justify-between">
+                            <div class="flex w-40 flex-col gap-4">
                                 <Avatar id={p.user.id} />
                                 <div class="flex flex-row flex-wrap items-center justify-around gap-2 rounded-lg bg-base-300 p-2">
                                     {MODES.map(m => (
@@ -61,12 +61,12 @@ async function UserTopPanel(p: {
                                         </div>
                                     ))}
                                 </div>
-                                <span class="text-center">joined <time class="tooltip" data-tip={joined_date} datetime={joined_date}>{moment(p.user.join_date).fromNow()}</time></span>
                                 <div class="flex flex-row items-center justify-between gap-2">
                                     <span>{p.user.statistics.level.current}</span>
                                     <progress class="progress progress-accent w-32" value={p.user.statistics.level.progress} max="100" />
                                     <span>{p.user.statistics.level.current + 1}</span>
                                 </div>
+                                <span class="text-center">joined <time class="tooltip" data-tip={joined_date} datetime={joined_date}>{moment(p.user.join_date).fromNow()}</time></span>
                             </div>
                             <div class="flex grow flex-col items-start justify-between gap-2">
                                 {(p.user.wysi_badges?.length || 0) > 0 ?
@@ -190,7 +190,6 @@ async function UserTopPanel(p: {
                                         username: p.user.username,
                                         mode: ModeToCode(p.mode)
                                     }} />
-                                    <span id="total_grades_loading" class="loading loading-spinner loading-md hidden" />
                                 </div>
                             </div>
                         </div>
@@ -209,8 +208,8 @@ async function UserTopPanel(p: {
                                     <form class="group flex flex-row flex-wrap items-center gap-2" hx-put={`/users/${p.user.id}/socials/submit`} hx-target="#socials_list"
                                         hx-swap="beforeend">
                                         <span class="htmx-indicator loading loading-spinner" />
-                                        <fieldset class="peer peer join rounded-full disabled:hidden group-disabled:hidden" id="socials_fieldset" disabled>
-                                            <select required class="join-item select select-bordered select-sm rounded-s-full" name="platform">
+                                        <fieldset class="peer peer join rounded-lg disabled:hidden group-disabled:hidden" id="socials_fieldset" disabled>
+                                            <select required class="join-item select select-bordered select-sm" name="platform">
                                                 <option disabled selected>Choose</option>
                                                 {SOCIALS.sort().map(s => <option value={s}>{s}</option>)}
                                             </select>
@@ -218,13 +217,13 @@ async function UserTopPanel(p: {
                                                 @ <input required name="username" type="text" class="grow" placeholder="Username" />
                                             </label>
                                         </fieldset>
-                                        <button class="btn btn-circle btn-primary btn-sm peer-disabled:hidden" type="submit">
+                                        <button class="btn btn-square btn-primary btn-sm peer-disabled:hidden" type="submit">
                                             <i class="fa-solid fa-plus" />
                                         </button>
-                                        <button class="btn btn-circle btn-ghost btn-sm peer-enabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = false" type="button">
+                                        <button class="btn btn-square btn-ghost btn-sm peer-enabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = false" type="button">
                                             <i class="fa-solid fa-plus" />
                                         </button>
-                                        <button class="btn btn-circle btn-ghost btn-sm peer-disabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = true" type="button">
+                                        <button class="btn btn-square btn-ghost btn-sm peer-disabled:hidden" onclick="document.querySelector('#socials_fieldset').disabled = true" type="button">
                                             <i class="fa-solid fa-xmark" />
                                         </button>
                                     </form> : null

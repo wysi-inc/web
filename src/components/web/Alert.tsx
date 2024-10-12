@@ -24,12 +24,16 @@ function Alert(p: {
             break;
     }
 
-    return (
-        <div role="alert" class={`alert ${color}`}>
+    return (<>
+        <div role="alert" class={`alert ${color} py-2 px-4`}>
             {icon}
             <span>{p.msg}</span>
+            <button class="btn btn-circle btn-xs btn-ghost"
+                onclick="this.parentNode.remove()">
+                <i class="fa-solid fa-xmark" />
+            </button>
         </div>
-    );
+    </>);
 }
 
 export default Alert;

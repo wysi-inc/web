@@ -18,7 +18,7 @@ import { addSkin, deleteCollections, deleteSkin, deleteSocial, getCollectionFile
 import HtmxPage from "../libs/routes";
 import type { BeatmapCategory, Mode, ScoreCategory } from "../types/osu";
 import { plugins } from "./plugins";
-import { fixURL } from "../libs/web_utils";
+import Alert from "../components/web/Alert";
 
 const user_routes_data = new Elysia({ prefix: "/:id" })
     .use(plugins)
@@ -111,7 +111,7 @@ const user_routes_data = new Elysia({ prefix: "/:id" })
     .put("/dan", async ({ params, body, user }) => {
         if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
         const res = await updateDan(user.id, body.dan);
-        if (res.error) return error(res.code, res.msg);
+        if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
         return ":D done";
     }, {
         body: t.Object({
@@ -121,9 +121,15 @@ const user_routes_data = new Elysia({ prefix: "/:id" })
     .group("/setup", _ => _
         .put("/submit", async ({ lang, params, body, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
-            const setup = await saveSetup(user.id, body);
-            if (!setup) return "Failed to save setup, reload the page and try again.";
-            return <UserSetupPanel lang={lang} setup={setup} logged_id={user.id} page_id={user.id} />
+            const res = await saveSetup(user.id, body);
+            if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
+            return <UserSetupPanel lang={lang} setup={res.setup} logged_id={user.id} page_id={user.id} />
+        })
+        .delete("/delete/:section", async ({ lang, params, body, user }) => {
+            if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+            const res = await saveSetup(user.id, body);
+            if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
+            return <UserSetupPanel lang={lang} setup={res.setup} logged_id={user.id} page_id={user.id} />
         })
     )
     .group("/collections", _ => _
@@ -153,7 +159,7 @@ const user_routes_data = new Elysia({ prefix: "/:id" })
         .put("/submit", async ({ params, body, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const res = await saveSocial(user.id, body.username, body.platform);
-            if (res.error) return error(res.code, res.msg);
+            if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
             return <UserSocial user_id={user.id} social={{ username: body.username, platform: body.platform }} editable={true} />;
         }, {
             body: t.Object({
@@ -164,13 +170,13 @@ const user_routes_data = new Elysia({ prefix: "/:id" })
         .delete("/delete/:platform", async ({ params, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const res = await deleteSocial(user.id, params.platform);
-            if (res.error) return error(res.code, res.msg);
+            if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
             return <></>;
         })
         .post("/sort", async ({ params, body, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const res = await sortSocials(Number(params.id), body.platforms);
-            if (res.error) return error(res.code, res.msg);
+            if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
             return res.msg;
         }, {
             body: t.Object({
@@ -182,7 +188,7 @@ const user_routes_data = new Elysia({ prefix: "/:id" })
         .put("/submit", async ({ params, body, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const res = await addSkin(Number(params.id), body.skin_id);
-            if (res.error) return error(res.code, res.msg);
+            if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
             return <SkinCard user_id={user.id} skin_id={body.skin_id} index={res?.id || 0} editable />
         }, {
             body: t.Object({
@@ -192,7 +198,7 @@ const user_routes_data = new Elysia({ prefix: "/:id" })
         .delete("/delete/:skin_id", async ({ params, query, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const res = await deleteSkin(Number(params.id), `${params.skin_id}${query.v ? `?v=${query.v}` : ""}`);
-            if (res.error) return error(res.code, res.msg);
+            if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
             return res.msg;
         }, {
             query: t.Optional(t.Object({
@@ -202,7 +208,7 @@ const user_routes_data = new Elysia({ prefix: "/:id" })
         .post("/sort", async ({ params, body, user }) => {
             if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
             const res = await sortSkins(Number(params.id), body.skins);
-            if (res.error) return error(res.code, res.msg);
+            if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
             return res.msg;
         }, {
             body: t.Object({

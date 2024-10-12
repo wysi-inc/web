@@ -22,9 +22,9 @@ async function UserSetupPanel(p: {
 
     return (<>
         <div id="setup_panel">
-            <form id="setup_form" class="group/setup flex flex-col-reverse items-end gap-2"
+            <form id="setup_form" class="group/setup flex flex-col-reverse items-end gap-3"
                 hx-put={editable ? `/users/${p.page_id}/setup/submit` : undefined}
-                hx-trigger="submit" hx-swap="outerHTML" hx-target="#setup_panel">
+                hx-trigger="submit" hx-swap="innerHTML" hx-target="#setup_panel">
                 <fieldset class="grid w-full gap-4 md:grid-cols-2" id="setup_fieldset" disabled>
                     <TabletDisplay lang={p.lang} editable={editable} tablet={p.setup?.tablet} />
                     <KeyboardDisplay lang={p.lang} editable={editable} keyboard={p.setup?.keyboard} />
@@ -33,21 +33,21 @@ async function UserSetupPanel(p: {
                     <Computer lang={p.lang} editable={editable} computer={p.setup?.computer} />
                 </fieldset>
                 {editable ?
-                    <div class="flex flex-row gap-2">
-                        <button type="button" class="btn btn-accent btn-sm hidden group-has-[:disabled]/setup:block"
+                    <div class="flex flex-row gap-2 -mt-12 pt-1">
+                        <button type="button" class="btn btn-accent btn-square btn-sm hidden group-has-[:disabled]/setup:block"
                             id="setup_form_edit" onclick="document.getElementById('setup_fieldset').disabled = false">
                             <i class="fa-solid fa-pen-to-square" />
                         </button>
-                        <button type="reset" class="btn btn-error btn-sm group-has-[:disabled]/setup:hidden"
+                        <button type="reset" class="btn btn-error btn-square btn-sm group-has-[:disabled]/setup:hidden"
                             id="setup_form_cancel" onclick="document.getElementById('setup_form').reset(); document.getElementById('setup_fieldset').disabled = true">
                             <i class="fa-solid fa-xmark" />
                         </button>
-                        <button type="submit" class="btn btn-success btn-sm group-has-[:disabled]/setup:hidden"
+                        <button type="submit" class="btn btn-success btn-square btn-sm group-has-[:disabled]/setup:hidden"
                             id="setup_form_submit">
                             <i class="fa-solid fa-check" />
                         </button>
                         <script src={`/public/js/setup.js?v=${Date.now()}`} />
-                    </div> : <></>
+                    </div> : null
                 }
             </form>
         </div>

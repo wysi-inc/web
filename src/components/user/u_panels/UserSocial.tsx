@@ -155,10 +155,10 @@ function UserSocial(p: { social: UserSocialType, user_id: number, editable?: boo
 
     const social = (socials_data as any)[p.social.platform];
 
-    if (!social) return <>no</>;
+    if (!social) return (<></>);
 
-    return (
-        <button class={`p-1 px-2 flex ${social.black ? "text-black" : "text-white"} tooltip flex-row gap-2 text-sm items-center rounded-full ${social.bg}`}
+    return (<>
+        <button class={`p-1 px-2 flex ${social.black ? "text-black" : "text-white"} tooltip flex-row gap-2 text-sm items-center rounded-lg ${social.bg}`}
             type="button" hx-target="this" hx-swap="outerHTML" data-tip={p.social.platform}>
             {social.url ?
                 <a target="_blank" class="flex flex-row gap-2 items-center" href={social.url(p.social.username)}>
@@ -178,7 +178,7 @@ function UserSocial(p: { social: UserSocialType, user_id: number, editable?: boo
             </> : null
             }
         </button>
-    );
+    </>);
 }
 
 export default UserSocial;
