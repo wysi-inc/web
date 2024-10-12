@@ -1,6 +1,5 @@
-import { LANGUAGES } from "@/src/libs/countries";
 import LanguageButton from "./LanguageButton";
-import { txt } from "@/src/tasks/files";
+import { LANGUAGES, txt } from "@/src/tasks/files";
 
 const flags: any = {
     "af": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Flag_of_South_Africa_%281928-1982%29.svg",
@@ -36,14 +35,14 @@ const flags: any = {
 };
 
 export function getLang(code: string) {
-    return [LANGUAGES.get(code), flags[code] || "", code]
+    return [LANGUAGES[code], flags[code] || "", code]
 }
 
 function LanguageSwitcher(p: { lang: string }) {
     const language = getLang(p.lang);
     return (<>
         <button id="language_button" class="btn btn-square btn-ghost" onclick="language_modal.showModal()" >
-            <img data-src={language[1]} class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
+            <img loading="lazy" src={language[1]} class="max-h-5 max-w-7 rounded-sm drop-shadow-solid" />
         </button>
         <dialog id="language_modal" class="modal">
             <div class="modal-box bg-neutral p-2">

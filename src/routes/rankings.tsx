@@ -6,8 +6,8 @@ import { plugins } from "./plugins";
 
 const ranking_routes_data = new Elysia()
     .use(plugins)
-    .get("/", async ({ lang, request, user }) => (
-        <HtmxPage lang={lang} headers={request.headers} user={user}>
+    .get("/", async ({ lang, request, set, user }) => (
+        <HtmxPage lang={lang} req={request} set={set} user={user}>
             <Rankings user={user}
                 mode={"osu"}
                 category={"performance"}
@@ -15,13 +15,13 @@ const ranking_routes_data = new Elysia()
             />
         </HtmxPage>
     ))
-    .get("/:mode/:category", ({ query, lang, params, request, user }) => (
-        <HtmxPage lang={lang} headers={request.headers} user={user}>
+    .get("/:mode/:category", ({ query, lang, params, set, request, user }) => (
+        <HtmxPage lang={lang} req={request} set={set} user={user}>
             <Rankings
                 mode={params.mode as Mode}
                 category={params.category as Category}
-                page={1}
                 country={query?.country}
+                page={1}
             />
         </HtmxPage>
     ), {
@@ -29,13 +29,13 @@ const ranking_routes_data = new Elysia()
             country: t.Optional(t.String())
         }))
     })
-    .get("/:mode/:category/:page", ({ query, lang, params, request, user }) => (
-        <HtmxPage lang={lang} headers={request.headers} user={user}>
+    .get("/:mode/:category/:page", ({ query, lang, params, set, request, user }) => (
+        <HtmxPage lang={lang} req={request} set={set} user={user}>
             <Rankings
                 mode={params.mode as Mode}
                 category={params.category as Category}
-                page={Number(params.page) | 0}
                 country={query?.country}
+                page={Number(params.page) | 0}
             />
         </HtmxPage>
     ), {

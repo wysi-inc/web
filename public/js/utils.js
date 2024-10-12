@@ -1,6 +1,12 @@
 var htmxAfterFunctions = [];
 document.body.addEventListener('htmx:afterRequest', () => {
-    htmxAfterFunctions.forEach(f => { f() })
+    htmxAfterFunctions.forEach(f => {
+        try {
+            f()
+        } catch (err) {
+            console.error(err);
+        }
+    })
 })
 
 const modsInt = {
@@ -261,10 +267,10 @@ function getUserStuff() {
     getClans();
 }
 
-document.addEventListener('click', function (event) {
+document.addEventListener('click', function(event) {
     let target = event.target;
     let dropdowns = document.querySelectorAll('.dropdown');
-    dropdowns.forEach(function (dropdown) {
+    dropdowns.forEach(function(dropdown) {
         // Check if the clicked target is not inside the dropdown and if the dropdown is visible
         if (!dropdown.contains(target) && dropdown.offsetParent !== null) {
             dropdown.removeAttribute("open");

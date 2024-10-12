@@ -1,5 +1,3 @@
-htmxAfterFunctions.push(getChokes);
-
 function getChokes() {
     const scores = document.getElementsByClassName("score_card");
     const new_scores = [];
@@ -20,7 +18,7 @@ async function getChoke(score_card) {
     let stats = {};
     if (score.mods.length > 0 || score.perfect === false) {
         const mods_int = score.mods.reduce((t, m) => t + modsInt[m], 0);
-        const url = new URL(`https://catboy.best/api/meta/${beatmap.id}`)
+        const url = new URL(`https://catboy.best/api/meta/${beatmap.id}`);
         url.searchParams.set("misses", 0);
         url.searchParams.set("acc", fc_acc);
         url.searchParams.set("mods", mods_int);
@@ -92,3 +90,5 @@ async function getChoke(score_card) {
         stats_len.innerHTML = secondsToTime(stats.len);
     }
 }
+
+htmxAfterFunctions.push(getChokes);

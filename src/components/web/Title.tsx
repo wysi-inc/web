@@ -3,8 +3,9 @@ const Title = (p: { title?: string, route?: string }) => (<>
         {p.title ?
             `document.title = "${p.title} | wysi";` : null
         }
-        {p.route ?
-            `history.replaceState({ }, null, '${p.route}');` : null
+        {
+            // p.route ?
+            // `history.replaceState(window.history.state, null, '${p.route}');` : null
         }
     </script>
 </>);

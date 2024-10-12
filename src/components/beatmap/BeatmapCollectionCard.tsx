@@ -20,7 +20,7 @@ export async function BeatmapCollectionCard({ hash }: Props) {
     return (<>
         <div class="flex flex-row items-center gap-2">
             <div class="join bg-neutral flex flex-row items-center justify-around">
-                <AudioPlayButton css="join-item btn btn-ghost btn-sm grow p-2"
+                <AudioPlayButton join
                     beatmap_id={beatmap.id}
                     set_id={beatmap.set.id}
                     beatmap_title={beatmap.set.title}

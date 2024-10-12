@@ -19,7 +19,7 @@ function Logged(p: { user: UserCookie, lang: string }) {
                         {txt(p.lang, "nav.log.wysi")}
                     </Link>
                 </li>
-                <li onclick="document.getElementById('nav_burger')?.removeAttribute('open')">
+                <li onclick="document.getElementById('usr_burger')?.removeAttribute('open')">
                     <a href={`https://osu.ppy.sh/users/${p.user.id}`}
                         target="_blank" rel="noreferrer noopener"
                         class="btn btn-ghost flex">
@@ -28,7 +28,7 @@ function Logged(p: { user: UserCookie, lang: string }) {
                     </a>
                 </li>
                 {isAdmin(p.user) ?
-                    <li onclick="document.getElementById('nav_burger')?.removeAttribute('open')">
+                    <li onclick="document.getElementById('usr_burger')?.removeAttribute('open')">
                         <Link url="/admin" css="btn btn-ghost flex">
                             <i class="fa-solid fa-screwdriver-wrench" />
                             Admin

@@ -28,12 +28,12 @@ async function ScoreCard(p: {
         <div class="score_card group/card grow rounded-lg flex flex-row bg-base-300 shadow-lg" //onclick={`window.location='/scores/${score.id}';`}
             data-score={JSON.stringify(score)} data-fc-acc={fc_acc}>
             <div class="text-white bg-neutral flex flex-col grow rounded-lg shadow-lg">
-                <div class="bg-cover bg-center bg-no-repeat flex flex-col rounded-lg shadow-lg" data-bg={cardImg}
-                    style={{ backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
+                <div class="bg-cover bg-center bg-no-repeat flex flex-col rounded-lg shadow-lg"
+                    style={{ backgroundImage: `url('${cardImg}')`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
                     <div class="bg-base-300 bg-opacity-75 grid grid-cols-1 md:grid-cols-2 rounded-lg backdrop-blur-sm">
                         <div class="flex flex-row">
-                            <div class="group/audio_card rounded-lg w-24 flex items-center justify-center" data-bg={cardImg}
-                                style={{ backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
+                            <div class="group/audio_card rounded-lg w-24 flex items-center justify-center"
+                                style={{ backgroundImage: `url('${cardImg}')`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
                                 <AudioPlayButton
                                     beatmap_id={beatmap.id}
                                     set_id={beatmapset.id}

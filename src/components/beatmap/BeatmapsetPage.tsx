@@ -46,11 +46,11 @@ async function BeatmapsetPage(p: Props) {
             title={`${beatmapset.title} - ${beatmapset.artist}`}
             route={`/beatmapsets/${beatmapset.id}/${diff.id}`}
         />
-        <div class="flex flex-col rounded-lg shadow-lg" data-bg={cardImg}
-            style={{ backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
+        <div class="flex flex-col rounded-lg shadow-lg"
+            style={{ backgroundImage: `url('${cardImg}')`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
             <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm grid md:grid-cols-5 flex-wrap gap-4 justify-between rounded-lg p-4">
                 <div class="md:col-span-3 flex flex-col gap-4">
-                    <img data-src={cardImg} class="rounded-lg" alt="cover" loading="lazy"
+                    <img loading="lazy" src={cardImg} class="rounded-lg" alt="cover"
                         style={{
                             objectFit: "cover",
                             objectPosition: "center"
@@ -81,9 +81,9 @@ async function BeatmapsetPage(p: Props) {
                     <div class="flex flex-row flex-wrap justify-between">
                         {beatmapset.user ?
                             <div class="flex flex-row gap-2 items-center">
-                                <img data-src={beatmapset.user.avatar_url}
+                                <img loading="lazy" src={beatmapset.user.avatar_url}
                                     class="rounded-lg size-12"
-                                    alt="mapper" loading="lazy" />
+                                    alt="mapper" />
                                 <div class="flex flex-col gap-1 text-base-content ">
                                     <Link url={`/users/${beatmapset.user_id}`}>
                                         mapped by {beatmapset.user.username}
@@ -199,8 +199,9 @@ async function BeatmapsetPage(p: Props) {
                     </div>
                 </>))
                 }
-            </div > : <></>}
-        <script type="module" src={`/public/js/beatmapset.js?v=${Date.now()}`} />
+            </div > : null
+        }
+        <script>getBeatmapStats();getRatings();</script>
     </>);
 }
 

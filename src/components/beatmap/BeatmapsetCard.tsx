@@ -20,11 +20,11 @@ function BeatmapsetCard(p: { b_set: Beatmapset }) {
     return (
         <div class="group/card flex flex-row bg-base-300 rounded-lg shadow-lg">
             <div class="flex flex-col bg-neutral rounded-lg shadow-lg grow">
-                <div class="flex flex-col rounded-lg shadow-lg" data-bg={cardImg}
-                    style={{ backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
+                <div class="flex flex-col rounded-lg shadow-lg"
+                    style={{ backgroundImage: `url('${cardImg}')`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
                     <div class="relative bg-base-300 bg-opacity-75 grid grid-cols-4 rounded-lg backdrop-blur-sm">
-                        <div class="group/audio_card rounded-lg flex items-center justify-center" data-bg={cardImg}
-                            style={{ backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
+                        <div class="group/audio_card rounded-lg flex items-center justify-center"
+                            style={{ backgroundImage: `url('${cardImg}')`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
                             <AudioPlayButton beatmap_id={p.b_set.beatmaps?.[0].id || 0}
                                 set_id={p.b_set.id}
                                 beatmap_title={p.b_set.title}

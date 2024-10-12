@@ -6,7 +6,7 @@ import { plugins } from "./plugins";
 const score_routes_data = new Elysia({ prefix: '/:id' })
     .use(plugins)
     .get("/", ({ params, lang, request, user }) => (
-        <HtmxPage lang={lang} headers={request.headers} user={user}>
+        <HtmxPage lang={lang} req={request} user={user}>
             <ScorePage score_id={Number(params.id)} />
         </HtmxPage>
     ))

@@ -5,6 +5,10 @@ const statsSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    profiles: {
+        type: Number,
+        required: true,
+    },
     setups: {
         type: Number,
         required: true,

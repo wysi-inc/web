@@ -87,12 +87,12 @@ async function BeatmapScoreTable(p: {
                                 </div>
                             </td>
                             <td>
-                                <span class="tooltip tooltip-left" data-tip={`${moment(score.created_at).format("MMMM Do YYYY")} | ${moment(score.created_at).fromNow()}`}>
+                                <span class="tooltip-left" data-tip={`${moment(score.created_at).format("MMMM Do YYYY")} | ${moment(score.created_at).fromNow()}`}>
                                     {moment(score.created_at).fromNow(true)}
                                 </span>
                             </td>
                             <td>
-                                <Link url={`/scores/${score.id}`} css="right-2 top-1.5 invisible group-hover:visible" tooltip="View Score Page">
+                                <Link url={`/scores/${score.id}`} css="right-2 top-1.5 invisible group-hover:visible">
                                     <i class="fa-solid fa-eye" />
                                 </Link>
                             </td>

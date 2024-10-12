@@ -1,8 +1,8 @@
+import { SUBDIVISION_FLAGS } from "../tasks/files";
 import type { Mode } from "../types/osu";
 import type { ScoreHitCounts } from "../types/score";
 import type { Subdivision, UserSubdivision } from "../types/users";
 import { colors } from "./colors";
-import { subdivisionFlags } from "./countries";
 
 export function secondsToTime(secs: number): string {
     let hours = Math.floor(secs / 3600);
@@ -113,7 +113,7 @@ export async function getSubdivisions(ids: number[]): Promise<UserSubdivision[]>
     const subdivisionsMap = [];
     for (let i = 0; i < data.length; i++) {
         const user = data[i];
-        const subdivision = subdivisionFlags[user.country_id]?.regions[user.region_id]
+        const subdivision = SUBDIVISION_FLAGS[user.country_id]?.regions[user.region_id]
         if (!subdivision) continue;
         subdivisionsMap.push({ ...subdivision, code: user.region_id, user_id: user.id });
     }
@@ -136,4 +136,10 @@ export function getFCacc(hits: ScoreHitCounts, mode: Mode) {
     };
 
     return parseFloat(acc.toFixed(2));
+}
+
+export function fixURL(position: number, value: any, url: string) {
+    const route = url.split("/");
+    route[position] = value;
+    return route.join("/");
 }

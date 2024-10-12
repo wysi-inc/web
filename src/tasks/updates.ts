@@ -10,7 +10,8 @@ import { api_auth_user_refresh } from "../api/auth";
 export async function update_stats() {
     log.info("Started updating stats...");
     try {
-        const user_count = await UserModel.countDocuments();
+        const profile_count = await UserModel.countDocuments();
+        const user_count = await TokenModel.countDocuments();
         const users_with_setup = await UserModel.countDocuments({ setup: { $exists: true, $ne: null } });
         const users_with_collections = await UserModel.countDocuments({ collections: { $exists: true, $nin: [null, []] } });
         // const cloudflare = await api_cloudflare_stats();
@@ -19,6 +20,7 @@ export async function update_stats() {
         if (!stats) stats = new StatsModel();
 
         stats.users = user_count;
+        stats.profiles = profile_count;
         stats.setups = users_with_setup;
         stats.collections = users_with_collections;
         stats.updated_at = new Date();

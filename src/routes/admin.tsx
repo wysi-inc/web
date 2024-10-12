@@ -3,7 +3,6 @@ import Admin from '../components/web/Admin';
 import Alert from '../components/web/Alert';
 import { TabletListItem } from '../components/web/admin/Tablets';
 import { addBadge, addTablet, removeBadge, removeRole, removeTablet, setRole, sortBadges } from '../db/web/admin';
-import { verifyUser } from '../libs/auth';
 import HtmxPage from '../libs/routes';
 import type { UserCookie } from '../types/users';
 import { plugins } from './plugins';
@@ -24,7 +23,7 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
             return "Unauthorized";
         }
         return (
-            <HtmxPage lang={lang} headers={request.headers} user={user}>
+            <HtmxPage lang={lang} req={request} set={set} user={user}>
                 <Admin t={t} user={user} />
             </HtmxPage>
         );
