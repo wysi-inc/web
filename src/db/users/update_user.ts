@@ -5,6 +5,7 @@ import type { Res, UserBasic, UserExtended } from "../../types/users";
 //@ts-ignore
 import OsuDBParser from "osu-db-parser";
 import { validString } from "@/src/libs/validations";
+import { STR_MAX_LEN } from "@/src/libs/constants";
 
 export async function updateUser(
     user: UserBasic,
@@ -106,7 +107,7 @@ export async function saveSetup(
 ): Promise<Res & { setup?: Setup }> {
     try {
         for (let value of Object.values(setup)) {
-            const check = validString(`${value}`);
+            const check = validString(`${value}`, STR_MAX_LEN.LONG);
             if (check.error) return check;
         }
         const user = await UserModel.findOne({ user_id });
@@ -223,7 +224,7 @@ export async function saveCollection(body: object, user_id: number) {
     const collections: CollectionDB[] = [];
 
     for (const [k, v] of Object.entries(body)) {
-        const check = validString(k);
+        const check = validString(k, STR_MAX_LEN.LONG);
         if (check.error) return check;
         collections.push({
             name: k,
@@ -258,9 +259,9 @@ export async function saveSocial(
     platform: string
 ): Promise<Res> {
     try {
-        const check_username = validString(username);
+        const check_username = validString(username, STR_MAX_LEN.MID);
         if (check_username.error) return check_username;
-        const check_platform = validString(platform);
+        const check_platform = validString(platform, STR_MAX_LEN.SHORT);
         if (check_platform.error) return check_platform;
         const user = await UserModel.findOne({ user_id });
         if (!user) return {

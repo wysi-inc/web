@@ -1583,6 +1583,12 @@ html {
   margin-inline-end: -1rem;
 }
 
+.input-xs[type="number"]::-webkit-inner-spin-button {
+  margin-top: -0.25rem;
+  margin-bottom: -0.25rem;
+  margin-inline-end: -0px;
+}
+
 .input-sm[type="number"]::-webkit-inner-spin-button {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -3979,6 +3985,15 @@ input.tab:checked + .tab-content,
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.input-xs {
+  height: 1.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  line-height: 1.625;
+}
+
 .input-sm {
   height: 2rem;
   padding-left: 0.75rem;
@@ -4072,6 +4087,21 @@ input.tab:checked + .tab-content,
 [dir="rtl"] .select-sm {
   padding-left: 2rem;
   padding-right: 0.75rem;
+}
+
+.select-xs {
+  height: 1.5rem;
+  min-height: 1.5rem;
+  padding-left: 0.5rem;
+  padding-right: 2rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  line-height: 1.625;
+}
+
+[dir="rtl"] .select-xs {
+  padding-left: 2rem;
+  padding-right: 0.5rem;
 }
 
 .stats-vertical {
@@ -4535,20 +4565,8 @@ input.tab:checked + .tab-content,
   top: 0.5rem;
 }
 
-.top-4 {
-  top: 1rem;
-}
-
-.top-28 {
-  top: 7rem;
-}
-
 .top-20 {
   top: 5rem;
-}
-
-.top-24 {
-  top: 6rem;
 }
 
 .z-40 {
@@ -4684,6 +4702,18 @@ input.tab:checked + .tab-content,
 
 .mt-auto {
   margin-top: auto;
+}
+
+.-mt-4 {
+  margin-top: -1rem;
+}
+
+.-mt-12 {
+  margin-top: -3rem;
+}
+
+.-mt-10 {
+  margin-top: -2.5rem;
 }
 
 .block {
@@ -5287,6 +5317,11 @@ input.tab:checked + .tab-content,
   background-color: rgb(40 146 215 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#3AA76D\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(58 167 109 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#43e660\] {
   --tw-bg-opacity: 1;
   background-color: rgb(67 230 96 / var(--tw-bg-opacity));
@@ -5405,11 +5440,6 @@ input.tab:checked + .tab-content,
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#3AA76D\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(58 167 109 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-0 {
@@ -5618,6 +5648,14 @@ input.tab:checked + .tab-content,
 
 .pt-4 {
   padding-top: 1rem;
+}
+
+.pt-0\.5 {
+  padding-top: 0.125rem;
+}
+
+.pt-1 {
+  padding-top: 0.25rem;
 }
 
 .text-center {

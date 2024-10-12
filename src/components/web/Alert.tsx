@@ -28,7 +28,7 @@ function Alert(p: {
         <div role="alert" class={`alert ${color} py-2 px-4`}>
             {icon}
             <span>{p.msg}</span>
-            <button class="bg-white hover:bg-opacity-30 bg-opacity-0 text-xs rounded-full size-4 flex items-center justify-center"
+            <button class="btn btn-circle btn-xs btn-ghost"
                 onclick="this.parentNode.remove()">
                 <i class="fa-solid fa-xmark" />
             </button>

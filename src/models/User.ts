@@ -11,7 +11,7 @@ const collectionDBSchema = new mongoose.Schema({
     beatmapsMd5: [String]
 }, { _id: false });
 
-collectionDBSchema.methods.toJSON = function () {
+collectionDBSchema.methods.toJSON = function() {
     const { __v, _id, ...user } = this.toObject();
     return user;
 };
@@ -34,7 +34,7 @@ const setup = new mongoose.Schema({
     keyboard: {
         name: {
             type: String,
-            maxLength: STR_MAX_LEN.MID,
+            maxLength: STR_MAX_LEN.LONG,
         },
         layout: {
             type: String,
@@ -49,7 +49,7 @@ const setup = new mongoose.Schema({
     tablet: {
         name: {
             type: String,
-            maxLength: STR_MAX_LEN.MID,
+            maxLength: STR_MAX_LEN.LONG,
         },
         area: {
             w: Number,
@@ -68,7 +68,7 @@ const setup = new mongoose.Schema({
     mouse: {
         name: {
             type: String,
-            maxLength: STR_MAX_LEN.MID,
+            maxLength: STR_MAX_LEN.LONG,
         },
         dpi: Number,
         mult: Number,
@@ -222,7 +222,7 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-userSchema.methods.toJSON = function () {
+userSchema.methods.toJSON = function() {
     const { __v, _id, ...user } = this.toObject();
     return user;
 };

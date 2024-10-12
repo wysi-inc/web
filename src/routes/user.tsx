@@ -125,6 +125,12 @@ const user_routes_data = new Elysia({ prefix: "/:id" })
             if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
             return <UserSetupPanel lang={lang} setup={res.setup} logged_id={user.id} page_id={user.id} />
         })
+        .delete("/delete/:section", async ({ lang, params, body, user }) => {
+            if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+            const res = await saveSetup(user.id, body);
+            if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
+            return <UserSetupPanel lang={lang} setup={res.setup} logged_id={user.id} page_id={user.id} />
+        })
     )
     .group("/collections", _ => _
         .post("/parse", async ({ params, body, user }) => {

@@ -35,26 +35,26 @@ async function UserPage(p: {
     p.mode = user.rank_history?.mode as Mode || "osu";
 
     const panels: PanelType[] = [
-        // {
-        //     title: txt(p.lang, "user.sections.history.title"),
-        //     code: "history",
-        //     icon: <i class="fa-solid fa-chart-line" />,
-        //     show_if: true,
-        //     jsx: (
-        //         <UserHistoryPanel
-        //             db_ranks={user.db_ranks}
-        //             play_counts={user.monthly_playcounts}
-        //             replays_watched={user.replays_watched_counts}
-        //         />
-        //     )
-        // },
-        // {
-        //     title: txt(p.lang, "user.sections.about"),
-        //     code: "about",
-        //     icon: <i class="fa-solid fa-user" />,
-        //     show_if: user.page?.html !== undefined && user.page.html.length > 0,
-        //     jsx: (<UserAboutPanel html={user.page.html} />)
-        // },
+        {
+            title: txt(p.lang, "user.sections.history.title"),
+            code: "history",
+            icon: <i class="fa-solid fa-chart-line" />,
+            show_if: true,
+            jsx: (
+                <UserHistoryPanel
+                    db_ranks={user.db_ranks}
+                    play_counts={user.monthly_playcounts}
+                    replays_watched={user.replays_watched_counts}
+                />
+            )
+        },
+        {
+            title: txt(p.lang, "user.sections.about"),
+            code: "about",
+            icon: <i class="fa-solid fa-user" />,
+            show_if: user.page?.html !== undefined && user.page.html.length > 0,
+            jsx: (<UserAboutPanel html={user.page.html} />)
+        },
         {
             title: txt(p.lang, "user.sections.setup.title"),
             code: "setup",
@@ -63,76 +63,76 @@ async function UserPage(p: {
             manual: true,
             jsx: (<UserSetupPanel lang={p.lang} setup={user.db_setup} page_id={user.id} logged_id={p.logged?.id} />)
         },
-        // {
-        //     title: "Skins (beta)",
-        //     code: "skins",
-        //     tooltip: "powered by skins.osuck.net",
-        //     icon: <i class="fa-solid fa-palette" />,
-        //     url: `/users/${user.id}/0/panels/skins`,
-        //     manual: true,
-        //     show_if: true
-        // },
-        // {
-        //     title: txt(p.lang, "user.sections.year.title"),
-        //     code: "year",
-        //     info: txt(p.lang, "user.sections.year.info"),
-        //     tooltip: "powered by advance.catboy.best",
-        //     icon: <i class="fa-solid fa-calendar-days" />,
-        //     url: `/users/${user.id}/${p.mode}/panels/year`,
-        //     manual: true,
-        //     show_if: true,
-        // },
-        // {
-        //     title: txt(p.lang, "user.sections.summary.title"),
-        //     code: "summary",
-        //     icon: <i class="fa-solid fa-newspaper" />,
-        //     info: txt(p.lang, "user.sections.summary.info"),
-        //     url: `/users/${user.id}/${p.mode}/panels/summary`,
-        //     manual: true,
-        //     show_if: true,
-        // },
-        // {
-        //     title: txt(p.lang, "user.sections.scores.title"),
-        //     code: "scores",
-        //     icon: <i class="fa-solid fa-flag-checkered" />,
-        //     info: txt(p.lang, "user.sections.scores.info"),
-        //     url: `/users/${user.id}/${p.mode}/panels/scores/best`,
-        //     show_if: true
-        // },
-        // {
-        //     title: txt(p.lang, "user.sections.collections.title"),
-        //     code: "collections",
-        //     tooltip: "powered by catboy.best",
-        //     info: txt(p.lang, "user.sections.collections.info"),
-        //     icon: <i class="fa-solid fa-list" />,
-        //     url: `/users/${user.id}/${p.mode}/panels/collections`,
-        //     manual: true,
-        //     show_if: editable || !user.collections == true
-        // },
-        // {
-        //     title: txt(p.lang, "user.sections.most"),
-        //     code: "most",
-        //     icon: <i class="fa-solid fa-rotate-left" />,
-        //     url: `/users/${user.id}/0/panels/most`,
-        //     manual: true,
-        //     show_if: true,
-        // },
-        // {
-        //     title: txt(p.lang, "user.sections.beatmaps"),
-        //     code: "beatmapsets",
-        //     icon: <i class="fa-solid fa-screwdriver-wrench" />,
-        //     url: `/users/${user.id}/${p.mode}/panels/beatmapsets/favourite`,
-        //     show_if: true
-        // },
-        // {
-        //     title: txt(p.lang, "user.sections.medals.title"),
-        //     code: "medals",
-        //     tooltip: "powered by osekai.net",
-        //     icon: <img data-src="/public/img/osekai.svg" class="size-5" alt="osekai" />,
-        //     // url: `/users/${user.id}/0/panels/medals`,
-        //     show_if: user.user_achievements.length > 0,
-        //     jsx: (<UserMedalsPanel lang={p.lang} user_id={user.id} medals={user.user_achievements} />)
-        // }
+        {
+            title: "Skins (beta)",
+            code: "skins",
+            tooltip: "powered by skins.osuck.net",
+            icon: <i class="fa-solid fa-palette" />,
+            url: `/users/${user.id}/0/panels/skins`,
+            manual: true,
+            show_if: true
+        },
+        {
+            title: txt(p.lang, "user.sections.year.title"),
+            code: "year",
+            info: txt(p.lang, "user.sections.year.info"),
+            tooltip: "powered by advance.catboy.best",
+            icon: <i class="fa-solid fa-calendar-days" />,
+            url: `/users/${user.id}/${p.mode}/panels/year`,
+            manual: true,
+            show_if: true,
+        },
+        {
+            title: txt(p.lang, "user.sections.summary.title"),
+            code: "summary",
+            icon: <i class="fa-solid fa-newspaper" />,
+            info: txt(p.lang, "user.sections.summary.info"),
+            url: `/users/${user.id}/${p.mode}/panels/summary`,
+            manual: true,
+            show_if: true,
+        },
+        {
+            title: txt(p.lang, "user.sections.scores.title"),
+            code: "scores",
+            icon: <i class="fa-solid fa-flag-checkered" />,
+            info: txt(p.lang, "user.sections.scores.info"),
+            url: `/users/${user.id}/${p.mode}/panels/scores/best`,
+            show_if: true
+        },
+        {
+            title: txt(p.lang, "user.sections.collections.title"),
+            code: "collections",
+            tooltip: "powered by catboy.best",
+            info: txt(p.lang, "user.sections.collections.info"),
+            icon: <i class="fa-solid fa-list" />,
+            url: `/users/${user.id}/${p.mode}/panels/collections`,
+            manual: true,
+            show_if: editable || !user.collections == true
+        },
+        {
+            title: txt(p.lang, "user.sections.most"),
+            code: "most",
+            icon: <i class="fa-solid fa-rotate-left" />,
+            url: `/users/${user.id}/0/panels/most`,
+            manual: true,
+            show_if: true,
+        },
+        {
+            title: txt(p.lang, "user.sections.beatmaps"),
+            code: "beatmapsets",
+            icon: <i class="fa-solid fa-screwdriver-wrench" />,
+            url: `/users/${user.id}/${p.mode}/panels/beatmapsets/favourite`,
+            show_if: true
+        },
+        {
+            title: txt(p.lang, "user.sections.medals.title"),
+            code: "medals",
+            tooltip: "powered by osekai.net",
+            icon: <img data-src="/public/img/osekai.svg" class="size-5" alt="osekai" />,
+            // url: `/users/${user.id}/0/panels/medals`,
+            show_if: user.user_achievements.length > 0,
+            jsx: (<UserMedalsPanel lang={p.lang} user_id={user.id} medals={user.user_achievements} />)
+        }
     ];
 
     return (<>
