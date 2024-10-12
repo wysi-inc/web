@@ -1,19 +1,19 @@
 {
     "nav": {
         "home": "Home",
-        "users": "Users",
-        "rankings": "Rankings",
+        "users": "用戶",
+        "rankings": "排名",
         "beatmaps": "Beatmaps",
         "support": "Support",
         "about": "About",
         "search": "Search someone",
         "search_someone": "Search someone",
-        "help": "Help translate the site!",
+        "help": "幫助我們翻譯！",
         "log": {
-            "login": "Login with osu!",
-            "logout": "Logout",
-            "osu": "osu!profile",
-            "wysi": "wysi!profile"
+            "login": "使用 osu! 來登入",
+            "logout": "登出",
+            "osu": "osu! 個人資料",
+            "wysi": "wysi! 個人資料"
         }
     },
     "home": {
@@ -22,19 +22,19 @@
         "built": "Built with bun and htmx",
         "profiles": "User Profiles",
         "stats": "Top 100 Score stats",
-        "search": "Beatmap Search",
+        "search": "搜尋圖譜",
         "calculator": "Built-in PP Calculator",
         "setup": "Share your setup!",
-        "collections": "Upload your collections!"
+        "collections": "上傳你的收藏夾！"
     },
     "user": {
         "sections": {
             "expand": "Expand",
             "about": "About",
-            "beatmaps": "Beatmaps",
+            "beatmaps": "圖譜",
             "top": "Top",
             "medals": {
-                "title": "Medals",
+                "title": "成就",
                 "recent": "Recent Medals",
                 "rarest": "Rarest Medal",
                 "show": "Show all"
