@@ -36,9 +36,7 @@ function Tab(p: { type: string, title: string, data: Rank[] | MonthCount[] | und
                 : "No data found"
             }
         </div>
-        {
-            // <script defer>hist()</script>
-        }
+        <script>hist()</script>
     </>);
 }
 
