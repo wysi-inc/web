@@ -2,12 +2,12 @@
     "nav": {
         "home": "Sākums",
         "users": "Lietotāji",
-        "rankings": "Rankings",
+        "rankings": "Reitingi",
         "beatmaps": "Bītmapes",
-        "support": "Support",
-        "about": "About",
+        "support": "Atbalsts",
+        "about": "Par šo",
         "search": "Meklēt kādu",
-        "search_someone": "Search someone",
+        "search_someone": "Meklēt personu",
         "help": "Palīdziet tulkot vietni!",
         "log": {
             "login": "Piesakieties ar osu!",
@@ -17,8 +17,8 @@
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu! website alternative",
+        "welcome": "Laipni lūdzam wysi727.com!",
+        "foss": "Atvērtā koda osu! mājas lapas alternatīva",
         "built": "Built with bun and htmx",
         "profiles": "User Profiles",
         "stats": "Top 100 Score stats",
