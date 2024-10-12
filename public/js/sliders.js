@@ -1,4 +1,3 @@
-sliders();
 function sliders() {
     // get the slider elements
 
@@ -24,7 +23,7 @@ function sliders() {
     }
 
     function moveSlider(slider, label, other, name) {
-        slider.addEventListener("input", function() {
+        slider.addEventListener("input", function () {
             const val = Number(this.value);
             let txt = val;
             if (name === "min") {

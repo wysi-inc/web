@@ -104,7 +104,7 @@ function BeatmapsetSearch() {
                 </div>
             </div>
         </form>
-        <script async type="module" src={`/public/js/sliders.js?v=${Date.now()}`} />
+        <script>sliders()</script>
         <output id="beatmap-search-results" class="grid grid-cols-1 gap-4 rounded-lg bg-base-100 p-4 empty:hidden md:grid-cols-2">
             <div class="col-span-full flex items-center justify-center">
                 <span class="loading loading-spinner loading-md mx-auto" />
