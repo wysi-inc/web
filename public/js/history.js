@@ -3,8 +3,6 @@
 // import "https://cdn.jsdelivr.net/npm/chartjs-plugin-crosshair@2.0.0/dist/chartjs-plugin-crosshair.min.js";
 
 var charts = [];
-htmxAfterFunctions.push(hist);
-document.addEventListener("DOMContentLoaded", hist);
 function hist() {
 
     for (let chart of charts) {

@@ -1,5 +1,4 @@
 import { colors } from "@/src/libs/colors";
-import { MODES } from "@/src/libs/countries";
 import { ModeToCode } from "@/src/libs/web_utils";
 import { DANS } from "@/src/models/User";
 import type { Mode } from "@/src/types/osu";
@@ -19,6 +18,7 @@ import SubdivisionRanking from "./u_components/SubdivisionRanking";
 import Supporter from "./u_components/Supporter";
 import Avatar from "../Avatar";
 import { txt } from "@/src/tasks/files";
+import { MODES } from "@/src/libs/constants";
 
 async function UserTopPanel(p: {
     lang: string

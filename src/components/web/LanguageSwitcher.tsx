@@ -1,6 +1,5 @@
-import { LANGUAGES } from "@/src/libs/countries";
 import LanguageButton from "./LanguageButton";
-import { txt } from "@/src/tasks/files";
+import { LANGUAGES, txt } from "@/src/tasks/files";
 
 const flags: any = {
     "af": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Flag_of_South_Africa_%281928-1982%29.svg",
@@ -36,7 +35,7 @@ const flags: any = {
 };
 
 export function getLang(code: string) {
-    return [LANGUAGES.get(code), flags[code] || "", code]
+    return [LANGUAGES[code], flags[code] || "", code]
 }
 
 function LanguageSwitcher(p: { lang: string }) {

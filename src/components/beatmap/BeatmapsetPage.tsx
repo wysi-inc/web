@@ -199,8 +199,9 @@ async function BeatmapsetPage(p: Props) {
                     </div>
                 </>))
                 }
-            </div > : <></>}
-        <script type="module" src={`/public/js/beatmapset.js?v=${Date.now()}`} />
+            </div > : null
+        }
+        <script>getBeatmapStats();getRatings();</script>
     </>);
 }
 

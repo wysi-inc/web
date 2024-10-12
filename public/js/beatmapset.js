@@ -1,6 +1,4 @@
-import "https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js";
-
-export function getDiffColor(diff) {
+function getDiffColor(diff) {
     let startColor;
     let endColor;
     let ratio;
@@ -59,8 +57,7 @@ function ModeIcon(props) {
     }
 }
 
-Stats();
-function Stats() {
+function getBeatmapStats() {
     const form = document.getElementById('stats_form');
     getStats(form);
     form.addEventListener('change', (e) => {
@@ -112,20 +109,13 @@ function getModsInt(ms) {
     return mods !== undefined ? mods.length > 0 ? mods.reduce((a, b) => a + b) : mods[0] : '0';
 }
 
-
 async function getStats(form) {
     const id = form.getAttribute('data-beatmap-id');
-
     const url = new URL(`https://catboy.best/api/meta/${id}`);
-
     const acc = getAcc(form);
-
     const formData = new FormData(form);
-
     const mods = Array.from(formData.entries()).filter(([name, _]) => name.startsWith('mod'));
-
     const mod_names = mods.map(([name, value]) => value === 'on' ? name.split("-")[1] : null).filter(v => v !== null);
-
     const mods_int = getModsInt(mod_names);
 
     url.searchParams.append('misses', acc.misses);
@@ -194,7 +184,6 @@ async function getStats(form) {
     stats_len.innerHTML = secondsToTime(new_len);
 }
 
-getRatings();
 function getRatings() {
     const ctx = document.getElementById("chart-ratings");
     const vals = JSON.parse(ctx.attributes['data-vals'].value);
@@ -262,90 +251,4 @@ function getRatings() {
     };
 
     new Chart(ctx, config);
-}
-
-const beatmapsets_form = document.getElementById("beatmapsets_form");
-const beatmaps_data = JSON.parse(beatmapsets_form.getAttribute("data-beatmaps"));
-const beatmaps = new Map();
-beatmaps_data.forEach(b => beatmaps.set(b[0], b[1]));
-beatmapsets_form.addEventListener("change", () => changeDiff());
-
-function changeDiff() {
-    const data = new FormData(beatmapsets_form);
-    const id = Number(data.get("selected_beatmap"));
-    const beatmap = beatmaps.get(id);
-    if (!beatmap) return;
-    setBeatmap(beatmap);
-}
-
-async function setBeatmap(beatmap) {
-    const diff_version = document.getElementById("diff_version")
-    diff_version.innerText = beatmap.version;
-
-    const diff_icon = document.getElementById("diff_icon")
-    diff_icon.innerHTML = ModeIcon({
-        size: 24,
-        mode: beatmap.mode,
-        color: getDiffColor(beatmap.difficulty_rating),
-    });
-
-    const stats_sr = document.getElementById("stats_sr");
-    stats_sr.innerText = beatmap.difficulty_rating;
-    stats_sr.setAttribute("data-original-value", beatmap.difficulty_rating);
-
-    const stats_len = document.getElementById("stats_len");
-    stats_len.innerText = secondsToTime(beatmap.total_length);
-    stats_len.setAttribute("data-original-value", beatmap.total_length);
-
-    const stats_bpm = document.getElementById("stats_bpm");
-    stats_bpm.innerText = beatmap.bpm;
-    stats_bpm.setAttribute("data-original-value", beatmap.bpm);
-
-    const stats_pp = document.getElementById("stats_pp");
-    stats_pp.innerHTML = "";
-
-    const pp_loading = document.createElement("span");
-    pp_loading.className = "loading loading-spinner loading-xs";
-
-    stats_pp.appendChild(pp_loading);
-    stats_pp.append("pp");
-
-    const stats_ar = document.getElementById("stats_ar");
-    const ar_progress = stats_ar.getElementsByTagName("progress")[0];
-    ar_progress.value = beatmap.ar;
-    const ar_label = stats_ar.getElementsByTagName("td")[2];
-    ar_label.innerText = beatmap.ar;
-
-    const stats_cs = document.getElementById("stats_cs");
-    const cs_progress = stats_cs.getElementsByTagName("progress")[0];
-    cs_progress.value = beatmap.cs;
-    const cs_label = stats_ar.getElementsByTagName("td")[2];
-    cs_label.innerText = beatmap.ar;
-
-    const stats_od = document.getElementById("stats_od");
-    const od_progress = stats_od.getElementsByTagName("progress")[0];
-    od_progress.value = beatmap.accuracy;
-    const od_label = stats_ar.getElementsByTagName("td")[2];
-    od_label.innerText = beatmap.ar;
-
-    const stats_hp = document.getElementById("stats_hp");
-    const hp_progress = stats_hp.getElementsByTagName("progress")[0];
-    hp_progress.value = beatmap.drain;
-    const hp_label = stats_ar.getElementsByTagName("td")[2];
-    hp_label.innerText = beatmap.ar;
-
-    const stats_form = document.getElementById("stats_form");
-    stats_form.setAttribute('data-beatmap-id', beatmap.id);
-    stats_form.reset();
-
-    history.replaceState({}, null, `/beatmapsets/${beatmap.beatmapset_id}/${beatmap.id}`);
-    const leaderboards = document.getElementById("load_leaderboards");
-    if (!leaderboards) return;
-    const res = await fetch(`/beatmapsets/${beatmap.beatmapset_id}/${beatmap.id}/scores/${beatmap.mode}`, { method: "POST" });
-    if (!res.ok) {
-        leaderboards.innerHTML = "";
-        return;
-    }
-    const data = await res.text();
-    leaderboards.innerHTML = data;
 }
