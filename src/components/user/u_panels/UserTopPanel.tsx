@@ -48,7 +48,7 @@ async function UserTopPanel(p: {
                     style={{ backgroundSize: `cover`, backgroundPosition: `center`, backgroundRepeat: "no-repeat" }}>
                     <div class="flex flex-col justify-center gap-4 rounded-lg bg-base-300 bg-opacity-65 p-4 text-base-content backdrop-blur-sm">
                         <div class="flex flex-row flex-wrap gap-4">
-                            <div class="flex w-40 flex-col justify-between">
+                            <div class="flex w-40 flex-col gap-4">
                                 <Avatar id={p.user.id} />
                                 <div class="flex flex-row flex-wrap items-center justify-around gap-2 rounded-lg bg-base-300 p-2">
                                     {MODES.map(m => (
@@ -62,12 +62,12 @@ async function UserTopPanel(p: {
                                         </div>
                                     ))}
                                 </div>
-                                <span class="text-center">joined <time class="tooltip" data-tip={joined_date} datetime={joined_date}>{moment(p.user.join_date).fromNow()}</time></span>
                                 <div class="flex flex-row items-center justify-between gap-2">
                                     <span>{p.user.statistics.level.current}</span>
                                     <progress class="progress progress-accent w-32" value={p.user.statistics.level.progress} max="100" />
                                     <span>{p.user.statistics.level.current + 1}</span>
                                 </div>
+                                <span class="text-center">joined <time class="tooltip" data-tip={joined_date} datetime={joined_date}>{moment(p.user.join_date).fromNow()}</time></span>
                             </div>
                             <div class="flex grow flex-col items-start justify-between gap-2">
                                 {(p.user.wysi_badges?.length || 0) > 0 ?
