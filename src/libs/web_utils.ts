@@ -138,8 +138,8 @@ export function getFCacc(hits: ScoreHitCounts, mode: Mode) {
     return parseFloat(acc.toFixed(2));
 }
 
-export function fixURL(new_base: string, url: string) {
+export function fixURL(position: number, value: any, url: string) {
     const route = url.split("/");
-    route[3] = new_base;
+    route[position] = value;
     return route.join("/");
 }

@@ -43,3 +43,13 @@ export async function api_user_most_played(
     Object.keys(obj).forEach(key => url.searchParams.append(key, obj[key]));
     return await osu_fetch({ url, user });
 }
+
+export async function api_user_id(
+    id: number | string,
+    user?: UserCookie | null
+): Promise<number | null> {
+    const url = new URL(`https://osu.ppy.sh/api/v2/users/${id}`);
+    const res = await osu_fetch({ url, user });
+    if (!res) return res;
+    return res.id;
+}

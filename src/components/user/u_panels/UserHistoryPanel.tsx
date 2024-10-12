@@ -13,33 +13,33 @@ type Props = {
 }
 
 function UserHistoryPanel(props: Props) {
-
-    function tab(type: string, title: string, data: Rank[] | MonthCount[] | undefined) {
-        if (!data) return <></>;
-        if (data.length === 0) return <></>;
-        return (<>
-            <input role="tab" type="radio" id={`${type}_tab`} aria-controls={`${type}_tabpannel`} name="history_tabs" class="tab text-nowrap"
-                aria-label={title} checked={type === "global"} aria-selected={type === "global"} />
-            <div role="tabpanel" class="tab-content pt-4" id={`${type}_tabpannel`} aria-labelledby={`${type}_tab`}>
-                {data.length > 0 ?
-                    <div class="h-64 w-full relative cursor-move">
-                        <canvas id={`chart-${type}`} data-vals={JSON.stringify(data)} />
-                    </div>
-                    : "No data found"
-                }
-            </div>
-        </>);
-    }
-
     return (<>
         <div role="tablist" class="tabs tabs-bordered grid grid-cols-4">
-            {tab('global', 'Global', props.db_ranks?.global_ranks)}
-            {tab('country', 'Country', props.db_ranks?.country_ranks)}
-            {tab('plays', 'Plays', props.play_counts)}
-            {tab('replays', 'Replays', props.replays_watched)}
+            <Tab type="global" title="Global" data={props.db_ranks?.global_ranks} />
+            <Tab type="country" title="Country" data={props.db_ranks?.country_ranks} />
+            <Tab type="plays" title="Plays" data={props.play_counts} />
+            <Tab type="replays" title="Replays" data={props.replays_watched} />
         </div>
     </>);
+}
 
+function Tab(p: { type: string, title: string, data: Rank[] | MonthCount[] | undefined }) {
+    if (!p.data || p.data.length === 0) return <></>;
+    return (<>
+        <input role="tab" type="radio" id={`${p.type}_tab`} aria-controls={`${p.type}_tabpannel`} name="history_tabs" class="tab text-nowrap"
+            aria-label={p.title} checked={p.type === "global"} aria-selected={p.type === "global"} />
+        <div role="tabpanel" class="tab-content pt-4" id={`${p.type}_tabpannel`} aria-labelledby={`${p.type}_tab`}>
+            {p.data.length > 0 ?
+                <div class="h-64 w-full relative cursor-move">
+                    <canvas id={`chart-${p.type}`} data-vals={JSON.stringify(p.data)} />
+                </div>
+                : "No data found"
+            }
+        </div>
+        {
+            // <script defer>hist()</script>
+        }
+    </>);
 }
 
 export default UserHistoryPanel;

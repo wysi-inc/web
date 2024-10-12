@@ -23,11 +23,11 @@
         "@elysiajs/jwt": "^0.8.0",
         "@elysiajs/static": "^0.8.1",
         "@kitajs/html": "^4.2.2",
-        "bun-types": "^1.1.29",
+        "bun-types": "^1.1.30",
         "elysia": "^0.8.17",
         "elysia-ip": "^1.0.7",
         "moment": "^2.30.1",
-        "mongoose": "^8.6.4",
+        "mongoose": "^8.7.1",
         "osu-db-parser": "^1.0.37",
         "tailwindcss": "^3.4.13"
     }
