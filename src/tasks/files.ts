@@ -1,6 +1,8 @@
 import { readdir } from "node:fs/promises";
+import { Worker } from 'worker_threads'
 import { log } from "./logs";
 import type { LanguagesType, SubdivisionFlagsType } from "../types/countries";
+import path from 'path'
 
 const BASEDIR = ".";
 export let TRANSLATIONS: any = {};
@@ -20,47 +22,17 @@ export function txt(lang: string, path: string): string {
 
 export async function load_json_data() {
     await Promise.all([
-        load_translations(),
-        load_languages(),
-        load_subdivisions()
+        create_worker_task('load_translations'),
+        create_worker_task('load_languages'),
+        create_worker_task('load_subdivisions')
     ]);
 }
 
-async function load_translations() {
-    try {
-        const dirs = await readdir(`${BASEDIR}/locales`);
-        const translations: any = {};
-        for (let dir of dirs) {
-            const file = Bun.file(`${BASEDIR}/locales/${dir}/translation.json`);
-            const contents = await file.json();
-            translations[dir] = contents;
-        }
-        TRANSLATIONS = translations;
-        log.info("Translations read");
-    } catch (err) {
-        log.error("Error getting translations", err);
-    }
-}
-
-async function load_languages() {
-    try {
-        const file = Bun.file(`${BASEDIR}/data/languages.json`);
-        const contents = await file.json();
-        LANGUAGES = contents;
-        log.info("Translations read");
-    } catch (err) {
-        log.error("Error getting translations", err);
-    }
-
-}
-
-async function load_subdivisions() {
-    try {
-        const file = Bun.file(`${BASEDIR}/data/subdivisions.json`);
-        const contents = await file.json();
-        SUBDIVISION_FLAGS = contents;
-        log.info("Translations read");
-    } catch (err) {
-        log.error("Error getting translations", err);
-    }
+async function create_worker_task(taskName: string): Promise<any> {
+    return new Promise((resolve) => {
+        const worker = new Worker(path.join(__dirname, 'worker.ts'), { workerData: { taskName }})
+        // path.join(__dirname, 'worker.js') is just like `${__dirname}/worker.js`
+  
+        worker.once('message', (data) => resolve(data))
+    })
 }
