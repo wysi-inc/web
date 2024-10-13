@@ -45,6 +45,7 @@ function BaseHtml(p: {
                 <script defer src="/public/js/choke.js" />
                 <script src="/public/js/history.js" />
                 <script src="/public/js/beatmapset.js" />
+                <script src="/public/js/sliders.js" />
             </head>
             <body hx-ext="response-targets" hx-target-error="#alerts" style="display: hidden;" class="flex flex-col items-center justify-center bg-base-300" id="top">
                 <Navbar lang={p.lang} user={p.user} />
