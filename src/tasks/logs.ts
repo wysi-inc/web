@@ -11,16 +11,16 @@ export const log = {
         if (err) console.error(err);
     },
     success: (msg: string) => {
-        console.log(`\x1b[32m[ S ]: ${msg} \x1b[0m`)
+        console.log(`\x1b[32m[ S ]: ${msg} \x1b[0m`);
     },
     info: (msg: string) => {
-        console.log(`\x1b[34m[ I ]: ${msg} \x1b[0m`)
+        console.log(`\x1b[34m[ I ]: ${msg} \x1b[0m`);
     },
     request: (ip: string, method: string, route: string) => {
-        console.log(`[ R ]: ${(ip).padStart(15, " ")} ${method.padStart(6, " ")}::/${route}`)
+        console.log(`[ R ]: ${(ip).padStart(15, " ")} ${method.padStart(6, " ")}::/${route}`);
     },
     object: (msg: any) => {
-        console.log(msg)
+        console.log(msg);
     }
 };
 
