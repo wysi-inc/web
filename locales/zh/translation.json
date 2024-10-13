@@ -18,13 +18,13 @@
     },
     "home": {
         "welcome": "歡迎使用 wysi727.com！",
-        "foss": "An open source osu! website alternative",
+        "foss": "一個開源的 osu! 網站替代方案",
         "built": "Built with bun and htmx",
         "profiles": "用戶個人資料",
         "stats": "Top 100 Score stats",
         "search": "搜尋圖譜",
         "calculator": "內建的 PP 計算器",
-        "setup": "Share your setup!",
+        "setup": "分享你的配置！",
         "collections": "上傳你的收藏夾！"
     },
     "user": {
@@ -59,17 +59,17 @@
                 "tabs": {
                     "global": "全球",
                     "country": "國家",
-                    "plays": "Plays",
-                    "replays": "Replays"
+                    "plays": "遊玩次數",
+                    "replays": "重播被觀看次數"
                 }
             },
             "summary": {
-                "title": "Summary",
+                "title": "概括",
                 "info": "This is a quick summary of your top 100 plays",
                 "tabs": {
                     "hit_ratios": "Hit Ratios",
                     "grade_ratios": "Grade Ratios",
-                    "average_play": "Average Play"
+                    "average_play": "平均遊玩資料"
                 }
             },
             "collections": {
@@ -77,7 +77,7 @@
                 "info": "所有不在 osu! 網站裡的圖譜都將不會被下載 (如：osu!trainer、自定義難度、為提交的圖譜...)"
             },
             "setup": {
-                "title": "Setup",
+                "title": "配置",
                 "tabs": {
                     "tablet": "繪圖板",
                     "keyboard": "鍵盤",
@@ -90,7 +90,7 @@
                     "cpu": "CPU",
                     "gpu": "GPU",
                     "ram": "記憶體",
-                    "storage": "Storage",
+                    "storage": "儲存裝置",
                     "motherboard": "主機板",
                     "psu": "電源供應",
                     "case": "機殼"
@@ -135,7 +135,7 @@
         "play_time": "遊玩時間",
         "play_count": "遊玩次數",
         "total_hits": "總命中次數",
-        "replays_watched": "Replays Watched",
+        "replays_watched": "重播被觀看次數",
         "hits_x_play": "Hits x Play",
         "followers": "粉絲",
         "online": "Online"
