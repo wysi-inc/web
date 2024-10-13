@@ -7,7 +7,7 @@
         "support": "暫住",
         "about": "關於",
         "search": "Search someone",
-        "search_someone": "Search someone",
+        "search_someone": "找找某人",
         "help": "幫助我們翻譯！",
         "log": {
             "login": "使用 osu! 來登入",
@@ -17,13 +17,13 @@
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
+        "welcome": "歡迎使用 wysi727.com！",
         "foss": "An open source osu! website alternative",
         "built": "Built with bun and htmx",
         "profiles": "用戶個人資料",
         "stats": "Top 100 Score stats",
         "search": "搜尋圖譜",
-        "calculator": "Built-in PP Calculator",
+        "calculator": "內建的 PP 計算器",
         "setup": "Share your setup!",
         "collections": "上傳你的收藏夾！"
     },
@@ -91,7 +91,7 @@
                     "gpu": "GPU",
                     "ram": "記憶體",
                     "storage": "Storage",
-                    "motherboard": "Motherboard",
+                    "motherboard": "主機板",
                     "psu": "電源供應",
                     "case": "Case"
                 },
@@ -129,7 +129,7 @@
             }
         },
         "performance": "表現",
-        "total_score": "Total Score",
+        "total_score": "總分",
         "global_rank": "全球排名",
         "country_rank": "國內排名",
         "play_time": "遊玩時間",
