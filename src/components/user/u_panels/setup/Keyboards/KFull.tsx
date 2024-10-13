@@ -1,7 +1,7 @@
 import { Empty, Key, type KeyboardProps } from "../KeyboardDisplay";
 
-const KFull = (p: KeyboardProps) => {
-    return <div class="p-1 outline outline-1 rounded-lg w-min">
+export const KFull = (p: KeyboardProps) => (
+    <div class="p-1 outline outline-1 rounded-lg w-min">
         <div class="flex flex-row gap-1">
             <div class="flex flex-col">
                 <div class="flex flex-row justify-between mb-1">
@@ -172,6 +172,4 @@ const KFull = (p: KeyboardProps) => {
             </div>
         </div>
     </div>
-}
-
-export default KFull;
+);

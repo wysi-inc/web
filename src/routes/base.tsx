@@ -16,29 +16,29 @@ const oauthQuery = { query: t.Object({ code: t.String(), state: t.Any() }) };
 
 export const baseRoutes = new Elysia({ prefix: '' })
     .use(plugins)
-    .get("/", async ({ lang, request, user }) => (
-        <HtmxPage lang={lang} req={request} user={user}>
+    .get("/", async ({ lang, request, set, user }) => (
+        <HtmxPage lang={lang} set={set} req={request} user={user}>
             <Home lang={lang} />
         </HtmxPage>
     ))
-    .get("/about", async ({ lang, request, user }) => (
-        <HtmxPage lang={lang} req={request} user={user}>
+    .get("/about", async ({ lang, request, set, user }) => (
+        <HtmxPage lang={lang} set={set} req={request} user={user}>
             <About />
         </HtmxPage>
     ))
-    .get("/support", async ({ lang, request, user }) => (
-        <HtmxPage lang={lang} req={request} user={user}>
+    .get("/support", async ({ lang, request, set, user }) => (
+        <HtmxPage lang={lang} set={set} req={request} user={user}>
             <Support />
         </HtmxPage>
     ))
     .post("/search", ({ body }) => (
         <SearchResults query={body.q} />
     ), searchBody)
-    .get("/wiki/*", async ({ lang, params, request, user }) => {
+    .get("/testing", async ({ lang, params, request, set, user }) => {
         if (env.STATE === "dev") {
             return (
-                <HtmxPage lang={lang} req={request} user={user}>
-                    <Testing params={Object.values(params)} />
+                <HtmxPage lang={lang} set={set} req={request} user={user}>
+                    <Testing />
                 </HtmxPage>
             )
         }
@@ -61,7 +61,7 @@ export const baseRoutes = new Elysia({ prefix: '' })
             role: res.role
         }
         cookie.auth.set({
-            value: await jwt.sign(user),
+            value: await jwt.sign(user as any),
             httpOnly: true,
             maxAge: 60 * 60 * 24 * 2,
             path: "/",

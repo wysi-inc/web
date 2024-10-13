@@ -1,14 +1,14 @@
-import type { Setup } from "@/src/models/User";
-import KTkl from "./Keyboards/KTkl";
-import KFull from "./Keyboards/KFull";
-import K60 from "./Keyboards/K60";
-import K75 from "./Keyboards/K75";
-import K2 from "./Keyboards/K2";
-import K3 from "./Keyboards/K3";
-import K4 from "./Keyboards/K4";
 import { isEmpty } from "@/src/libs/web_utils";
-import SetupInput from "./SetupInput";
+import type { Setup } from "@/src/models/User";
 import { txt } from "@/src/tasks/files";
+import { K2 } from "./Keyboards/K2";
+import { K3, K3_SayoDevice, K3_Wooting_UwU } from "./Keyboards/K3";
+import { K4 } from "./Keyboards/K4";
+import { K60 } from "./Keyboards/K60";
+import { K75 } from "./Keyboards/K75";
+import { KFull } from "./Keyboards/KFull";
+import { KTkl } from "./Keyboards/KTkl";
+import SetupInput from "./SetupInput";
 
 export type KeyboardProps = {
     keys?: string[];
@@ -22,36 +22,23 @@ type KeyProps = {
     height?: number,
 }
 
-export const Key = ({ char, code, width, keys, height }: KeyProps) => {
-    return (
-        <label class="m-0 cursor-pointer rounded-sm border border-base-content bg-opacity-75 p-0 text-center has-[:checked]:bg-secondary"
-            style={{
-                fontSize: '0.5rem',
-                width: `${width}rem`,
-                height: `${height || 1}rem`,
-                lineHeight: `${height || 1}rem`,
-            }}>
-            {char}
-            <input name={`keyboard_key_${code}`} type="checkbox"
-                checked={keys?.includes(code)} class="appearance-none"
-            />
-        </label>
-    );
-}
+export const Key = ({ char, code, width, keys, height }: KeyProps) => (
+    <label class="m-0 cursor-pointer rounded-sm border border-base-content bg-opacity-75 p-0 text-center has-[:checked]:bg-secondary"
+        style={{
+            fontSize: '0.5rem',
+            width: `${width}rem`,
+            height: `${height || 1}rem`,
+            lineHeight: `${height || 1}rem`,
+        }}>
+        {char}
+        <input name={`keyboard_key_${code}`} class="hidden"
+            type="checkbox" checked={keys?.includes(code)} />
+    </label>
+);
 
-export const Empty = () => {
-    return <div class="size-4" />
-}
+export const Empty = () => <div class="size-4" />
 
-const layoutText = {
-    k2: "2 Keys",
-    k3: "3 Keys",
-    k4: "4 Keys",
-    k60: "60% Keyboard",
-    k75: "75% Keyboard",
-    ktkl: "Tenkeyless Keyboard",
-    kfull: "Full Keyboard",
-};
+export const KEYBOARD_LAYOUTS = ["k2", "k3", "k3_uwu", "k3_sayo", "k4", "k60", "k75", "ktkl", "kfull", ""]
 
 function KeyboardDisplay(p: {
     keyboard: Setup["keyboard"],
@@ -77,6 +64,8 @@ function KeyboardDisplay(p: {
             <div class="flex h-36 items-center justify-center" id="keyboard_display">
                 {p.keyboard?.layout === "k2" && <K2 keys={p.keyboard?.keys} />}
                 {p.keyboard?.layout === "k3" && <K3 keys={p.keyboard?.keys} />}
+                {p.keyboard?.layout === "k3_uwu" && <K3_Wooting_UwU keys={p.keyboard?.keys} />}
+                {p.keyboard?.layout === "k3_sayo" && <K3_SayoDevice keys={p.keyboard?.keys} />}
                 {p.keyboard?.layout === "k4" && <K4 keys={p.keyboard?.keys} />}
                 {p.keyboard?.layout === "k60" && <K60 keys={p.keyboard?.keys} />}
                 {p.keyboard?.layout === "k75" && <K75 keys={p.keyboard?.keys} />}
@@ -101,6 +90,8 @@ function KeyboardDisplay(p: {
                         <option value="k0" selected={!p.keyboard?.layout}>{txt(p.lang, "user.sections.setup.layout.k0")}</option>
                         <option value="k2" selected={p.keyboard?.layout === "k2"}>{txt(p.lang, "user.sections.setup.layout.k2")}</option>
                         <option value="k3" selected={p.keyboard?.layout === "k3"}>{txt(p.lang, "user.sections.setup.layout.k3")}</option>
+                        <option value="k3_uwu" selected={p.keyboard?.layout === "k3_uwu"}>Wooting UwU</option>
+                        <option value="k3_sayo" selected={p.keyboard?.layout === "k3_sayo"}>Sayo Device O3C</option>
                         <option value="k4" selected={p.keyboard?.layout === "k4"}>{txt(p.lang, "user.sections.setup.layout.k4")}</option>
                         <option value="k60" selected={p.keyboard?.layout === "k60"}>{txt(p.lang, "user.sections.setup.layout.k60")}</option>
                         <option value="k75" selected={p.keyboard?.layout === "k75"}>{txt(p.lang, "user.sections.setup.layout.k75")}</option>
@@ -108,7 +99,7 @@ function KeyboardDisplay(p: {
                         <option value="kfull" selected={p.keyboard?.layout === "kfull"}>{txt(p.lang, "user.sections.setup.layout.kfull")}</option>
                     </select>
                     <span class="input input-sm hidden bg-base-300 peer-disabled:block">
-                        {p.keyboard?.layout ? layoutText[p.keyboard?.layout] : undefined}
+                        {p.keyboard?.layout ? txt(p.lang, `user.sections.setup.layout.${p.keyboard.layout.split("_")[0]}`) : undefined}
                     </span>
                 </label>
                 <div class="peer/rt form-control">
@@ -127,25 +118,31 @@ function KeyboardDisplay(p: {
                         <div />
                     </template>
                     <template id="k2_temp">
-                        <K2 keys={[]} />
+                        <K2 />
                     </template>
                     <template id="k3_temp">
-                        <K3 keys={[]} />
+                        <K3 />
+                    </template>
+                    <template id="k3_uwu_temp">
+                        <K3_Wooting_UwU />
+                    </template>
+                    <template id="k3_sayo_temp">
+                        <K3_SayoDevice />
                     </template>
                     <template id="k4_temp">
-                        <K4 keys={[]} />
+                        <K4 />
                     </template>
                     <template id="k60_temp">
-                        <K60 keys={[]} />
+                        <K60 />
                     </template>
                     <template id="k75_temp">
-                        <K75 keys={[]} />
+                        <K75 />
                     </template>
                     <template id="ktkl_temp">
-                        <KTkl keys={[]} />
+                        <KTkl />
                     </template>
                     <template id="kfull_temp">
-                        <KFull keys={[]} />
+                        <KFull />
                     </template>
                 </div>
             </div>
