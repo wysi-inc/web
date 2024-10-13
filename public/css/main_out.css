@@ -4973,12 +4973,6 @@ input.tab:checked + .tab-content,
   cursor: pointer;
 }
 
-.select-none {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-}
-
 .scroll-mt-36 {
   scroll-margin-top: 9rem;
 }
