@@ -93,7 +93,7 @@
                     "storage": "Storage",
                     "motherboard": "主機板",
                     "psu": "電源供應",
-                    "case": "Case"
+                    "case": "機殼"
                 },
                 "peripherals": {
                     "mousepad": "滑鼠墊",
@@ -150,8 +150,8 @@
         "mods": "Mod",
         "max_combo": "最大連擊",
         "combo": "連擊",
-        "grade": "Grade",
-        "grades": "Grades",
+        "grade": "評價",
+        "grades": "評價",
         "acc": "準確率",
         "accuracy": "準確率",
         "score": "分數",
@@ -183,8 +183,8 @@
     "alerts": {
         "user": {
             "user_doesnt_exist": "此用戶不存在",
-            "user_is_bot": "This user is a bot, bots are not supported yet :(",
-            "users_fail": "Failed to fetch users"
+            "user_is_bot": "此用戶是一個機器人，我們還未支援機器人 :(",
+            "users_fail": "無法抓取用戶"
         }
     }
 }
