@@ -1,16 +1,16 @@
-import UserTopPanel from "./u_panels/UserTopPanel";
-import UserHistoryPanel from "./u_panels/UserHistoryPanel";
-import LazyPanel from "./LazyPanel";
 import { getUser } from "@/src/db/users/get_user";
-import { type Mode, type PanelType } from "../../types/osu";
-import Panel from "./Panel";
-import UserSetupPanel from "./u_panels/UserSetupPanel";
-import Title from "../web/Title";
-import UserMedalsPanel from "./u_panels/UserMedalsPanel";
-import Report from "../web/Report";
-import UserAboutPanel from "./u_panels/UserAboutPanel";
-import type { UserCookie } from "@/src/types/users";
 import { txt } from "@/src/tasks/files";
+import type { UserCookie } from "@/src/types/users";
+import { type Mode, type PanelType } from "../../types/osu";
+import Report from "../web/Report";
+import Title from "../web/Title";
+import LazyPanel from "./LazyPanel";
+import Panel from "./Panel";
+import UserAboutPanel from "./u_panels/UserAboutPanel";
+import UserHistoryPanel from "./u_panels/UserHistoryPanel";
+import UserMedalsPanel from "./u_panels/UserMedalsPanel";
+import UserSetupPanel from "./u_panels/UserSetupPanel";
+import UserTopPanel from "./u_panels/UserTopPanel";
 
 async function UserPage(p: {
     logged: UserCookie | null;
@@ -32,7 +32,7 @@ async function UserPage(p: {
 
     const editable = p.logged?.id === user.id;
 
-    p.mode = user.rank_history?.mode as Mode || "osu";
+    p.mode = user.rank_history?.mode || "osu";
 
     const panels: PanelType[] = [
         {
@@ -144,12 +144,12 @@ async function UserPage(p: {
         <nav class="underline-offset-1 text-neutral-content sticky -mt-8 top-16 bg-base-300 rounded-b-lg text-sm shadow-lg p-2 z-40 flex items-center justify-center flex-row gap-x-6 gap-y-2 flex-wrap">
             <a class="hover:underline" href="#top">{txt(p.lang, "user.sections.top")}</a>
             {panels.map((p) => {
-                if (!p.show_if) return <></>;
+                if (!p.show_if) return (<></>);
                 return <a class="hover:underline" href={`#${p.code}`}>{p.title}</a>
             })}
         </nav>
         {panels.map((panel) => {
-            if (!panel.show_if) return <></>;
+            if (!panel.show_if) return (<></>);
             if (panel.url) return (
                 <LazyPanel title={panel.title} code={panel.code} icon={panel.icon} manual={panel.manual}
                     url={panel.url} body={panel.body} tooltip={panel.tooltip} info={panel.info} />
@@ -160,8 +160,7 @@ async function UserPage(p: {
                 </Panel>
             );
         })}
-        <button class="btn btn-warning btn-square fixed bottom-4 right-4"
-            onclick="report_modal.showModal()">
+        <button class="btn btn-warning btn-square fixed bottom-4 right-4" onclick="report_modal.showModal()">
             <i class="fa-solid fa-triangle-exclamation" />
         </button>
         <dialog id="report_modal" class="modal">

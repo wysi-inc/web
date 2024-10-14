@@ -134,7 +134,7 @@ const user_routes_data = new Elysia()
             )
         )
         .put("/dan", async ({ params, body, user }) => {
-            if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+            if (!user || Number(params.id) !== user.id) return error(401, <Alert type="error" msg="Unauthorized" />);
             const res = await updateDan(user.id, body.dan);
             if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
             return ":D done";
@@ -145,7 +145,7 @@ const user_routes_data = new Elysia()
         })
         .group("/setup", _ => _
             .put("/submit", async ({ lang, params, body, user }) => {
-                if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+                if (!user || Number(params.id) !== user.id) return error(401, <Alert type="error" msg="Unauthorized" />);
                 const res = await saveSetup(user.id, body);
                 if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
                 return <UserSetupPanel lang={lang} setup={res.setup} logged_id={user.id} page_id={user.id} />
@@ -159,7 +159,7 @@ const user_routes_data = new Elysia()
         )
         .group("/collections", _ => _
             .post("/parse", async ({ params, body, user }) => {
-                if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+                if (!user || Number(params.id) !== user.id) return error(401, <Alert type="error" msg="Unauthorized" />);
                 return <CollectionsForm file={body.collection} user_id={user.id} />;
             }, {
                 body: t.Object({
@@ -167,12 +167,12 @@ const user_routes_data = new Elysia()
                 })
             })
             .put("/submit", async ({ params, body, user }) => {
-                if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+                if (!user || Number(params.id) !== user.id) return error(401, <Alert type="error" msg="Unauthorized" />);
                 const collections = await saveCollection(body as any, user.id);
                 return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} collections={collections as any} />
             })
             .delete("/delete", async ({ params, user }) => {
-                if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+                if (!user || Number(params.id) !== user.id) return error(401, <Alert type="error" msg="Unauthorized" />);
                 await deleteCollections(user.id);
                 return <UserCollectionsPanel user_id={Number(params.id)} logged_id={user.id} />
             })
@@ -182,7 +182,7 @@ const user_routes_data = new Elysia()
         )
         .group("/socials", _ => _
             .put("/submit", async ({ params, body, user }) => {
-                if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+                if (!user || Number(params.id) !== user.id) return error(401, <Alert type="error" msg="Unauthorized" />);
                 const res = await saveSocial(user.id, body.username, body.platform);
                 if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
                 return <UserSocial user_id={user.id} social={{ username: body.username, platform: body.platform }} editable={true} />;
@@ -193,13 +193,13 @@ const user_routes_data = new Elysia()
                 })
             })
             .delete("/delete/:platform", async ({ params, user }) => {
-                if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+                if (!user || Number(params.id) !== user.id) return error(401, <Alert type="error" msg="Unauthorized" />);
                 const res = await deleteSocial(user.id, params.platform);
                 if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
                 return <></>;
             })
             .post("/sort", async ({ params, body, user }) => {
-                if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+                if (!user || Number(params.id) !== user.id) return error(401, <Alert type="error" msg="Unauthorized" />);
                 const res = await sortSocials(Number(params.id), body.platforms);
                 if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
                 return res.msg;
@@ -221,7 +221,7 @@ const user_routes_data = new Elysia()
                 })
             })
             .delete("/delete/:skin_id", async ({ params, query, user }) => {
-                if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+                if (!user || Number(params.id) !== user.id) return error(401, <Alert type="error" msg="Unauthorized" />);
                 const res = await deleteSkin(Number(params.id), `${params.skin_id}${query.v ? `?v=${query.v}` : ""}`);
                 if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
                 return res.msg;
@@ -231,7 +231,7 @@ const user_routes_data = new Elysia()
                 }))
             })
             .post("/sort", async ({ params, body, user }) => {
-                if (!user || Number(params.id) !== user.id) return error(401, "Unauthorized");
+                if (!user || Number(params.id) !== user.id) return error(401, <Alert type="error" msg="Unauthorized" />);
                 const res = await sortSkins(Number(params.id), body.skins);
                 if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
                 return res.msg;

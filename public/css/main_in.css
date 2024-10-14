@@ -125,6 +125,11 @@ img:not([src]):not([srcset]) {
     }
 }
 
+.center {
+    justify-content: center;
+    align-items: center;
+}
+
 .htmx-indicator {
     display: none;
     transition: opacity 500ms ease-in;

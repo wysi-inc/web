@@ -1,4 +1,5 @@
 import type { CollectionDB, Rank, Setup, UserSocialType } from "../models/User";
+import type { Mode } from "./osu";
 
 export type Res = {
     error: boolean,
@@ -190,7 +191,7 @@ export type UserAchievement = {
 }
 
 export type RankHistory = {
-    mode: string
+    mode: Mode
     data: number[]
 }
 
