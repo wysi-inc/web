@@ -7,7 +7,7 @@
         "support": "暫住",
         "about": "關於",
         "search": "Search someone",
-        "search_someone": "Search someone",
+        "search_someone": "找找某人",
         "help": "幫助我們翻譯！",
         "log": {
             "login": "使用 osu! 來登入",
@@ -17,14 +17,14 @@
         }
     },
     "home": {
-        "welcome": "Welcome to wysi727.com!",
-        "foss": "An open source osu! website alternative",
+        "welcome": "歡迎使用 wysi727.com！",
+        "foss": "一個開源的 osu! 網站替代方案",
         "built": "Built with bun and htmx",
         "profiles": "用戶個人資料",
         "stats": "Top 100 Score stats",
         "search": "搜尋圖譜",
-        "calculator": "Built-in PP Calculator",
-        "setup": "Share your setup!",
+        "calculator": "內建的 PP 計算器",
+        "setup": "分享你的配置！",
         "collections": "上傳你的收藏夾！"
     },
     "user": {
@@ -59,17 +59,17 @@
                 "tabs": {
                     "global": "全球",
                     "country": "國家",
-                    "plays": "Plays",
-                    "replays": "Replays"
+                    "plays": "遊玩次數",
+                    "replays": "重播被觀看次數"
                 }
             },
             "summary": {
-                "title": "Summary",
+                "title": "概括",
                 "info": "This is a quick summary of your top 100 plays",
                 "tabs": {
                     "hit_ratios": "Hit Ratios",
                     "grade_ratios": "Grade Ratios",
-                    "average_play": "Average Play"
+                    "average_play": "平均遊玩資料"
                 }
             },
             "collections": {
@@ -77,7 +77,7 @@
                 "info": "所有不在 osu! 網站裡的圖譜都將不會被下載 (如：osu!trainer、自定義難度、為提交的圖譜...)"
             },
             "setup": {
-                "title": "Setup",
+                "title": "配置",
                 "tabs": {
                     "tablet": "繪圖板",
                     "keyboard": "鍵盤",
@@ -90,10 +90,10 @@
                     "cpu": "CPU",
                     "gpu": "GPU",
                     "ram": "記憶體",
-                    "storage": "Storage",
-                    "motherboard": "Motherboard",
+                    "storage": "儲存裝置",
+                    "motherboard": "主機板",
                     "psu": "電源供應",
-                    "case": "Case"
+                    "case": "機殼"
                 },
                 "peripherals": {
                     "mousepad": "滑鼠墊",
@@ -129,13 +129,13 @@
             }
         },
         "performance": "表現",
-        "total_score": "Total Score",
+        "total_score": "總分",
         "global_rank": "全球排名",
         "country_rank": "國內排名",
         "play_time": "遊玩時間",
         "play_count": "遊玩次數",
         "total_hits": "總命中次數",
-        "replays_watched": "Replays Watched",
+        "replays_watched": "重播被觀看次數",
         "hits_x_play": "Hits x Play",
         "followers": "粉絲",
         "online": "Online"
@@ -150,8 +150,8 @@
         "mods": "Mod",
         "max_combo": "最大連擊",
         "combo": "連擊",
-        "grade": "Grade",
-        "grades": "Grades",
+        "grade": "評價",
+        "grades": "評價",
         "acc": "準確率",
         "accuracy": "準確率",
         "score": "分數",
@@ -183,8 +183,8 @@
     "alerts": {
         "user": {
             "user_doesnt_exist": "此用戶不存在",
-            "user_is_bot": "This user is a bot, bots are not supported yet :(",
-            "users_fail": "Failed to fetch users"
+            "user_is_bot": "此用戶是一個機器人，我們還未支援機器人 :(",
+            "users_fail": "無法抓取用戶"
         }
     }
 }
