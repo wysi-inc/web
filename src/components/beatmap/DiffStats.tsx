@@ -1,9 +1,9 @@
-import type { Beatmap } from "@/src/types/beatmaps";
-import DiffIcon from "./DiffIcon";
-import ModIcon from "../score/ModIcon";
-import { secondsToTime } from "@/src/libs/web_utils";
 import { colors } from "@/src/libs/colors";
+import { secondsToTime } from "@/src/libs/web_utils";
+import type { Beatmap } from "@/src/types/beatmaps";
 import type { Mod, Mode } from "@/src/types/osu";
+import ModIcon from "../score/ModIcon";
+import DiffIcon from "./DiffIcon";
 
 type Props = {
     diff: Beatmap,
@@ -17,8 +17,8 @@ function DiffStats({ diff }: Props) {
                 <td class="p-1">
                     {label.toUpperCase()}:
                 </td>
-                <td class="py-1 px-2 w-full">
-                    <progress class="justify-between progress progress-accent" value={value} max="11" />
+                <td class="w-full px-2 py-1">
+                    <progress class="progress progress-accent justify-between" value={value} max="11" />
                 </td>
                 <td class="p-1 text-end">
                     {value}
@@ -32,7 +32,7 @@ function DiffStats({ diff }: Props) {
     const mods: Mod[] = ['HR', 'DT', 'HD', 'FL', 'EZ', 'HT', 'TD'];
 
     return (
-        <div class="flex flex-col gap-2 p-4 rounded-xl bg-base-100">
+        <div class="flex flex-col gap-2 rounded-xl bg-base-100 p-4">
             <div class="flex flex-row gap-2">
                 <div id="diff_icon">
                     <DiffIcon size={24} mode={diff.mode as Mode} sr={diff.difficulty_rating} />
@@ -40,7 +40,7 @@ function DiffStats({ diff }: Props) {
                 <div id="diff_version">{diff.version}</div>
             </div>
             <div class="flex flex-col gap-2 rounded-lg drop-shadow-md">
-                <div class="flex flex-row flex-wrap items-center justify-around gap-2 rounded-lg p-2 bg-neutral">
+                <div class="flex flex-row flex-wrap items-center justify-around gap-2 rounded-lg bg-neutral p-2">
                     <div class="flex flex-row items-center gap-1">
                         <i class="fa-solid fa-star" />
                         <div id="stats_sr" data-original-value={diff.difficulty_rating}>
@@ -69,12 +69,12 @@ function DiffStats({ diff }: Props) {
                 </table>
             </div>
             <form id="stats_form" data-beatmap-id={diff.id} class="flex flex-col gap-2" data-total-hits={total_hits}>
-                <div class="flex flex-row items-center justify-between p-2 gap-2 rounded-lg bg-neutral">
+                <div class="flex flex-row items-center justify-between gap-2 rounded-lg bg-neutral p-2">
                     <div>Accuracy:</div>
                     <span id="acc_label">100%</span>
                 </div>
                 <div class="grid grid-cols-3 gap-2">
-                    <label class="form-control bg-base-200 rounded-lg">
+                    <label class="form-control rounded-lg bg-base-200">
                         <div class="label m-0 p-0">
                             <span class="label-text px-2">100:</span>
                         </div>
@@ -83,7 +83,7 @@ function DiffStats({ diff }: Props) {
                             style={{ color: colors.judgements.x100 }}
                             placeholder="0" min="0" />
                     </label>
-                    <label class="form-control bg-base-200 rounded-lg">
+                    <label class="form-control rounded-lg bg-base-200">
                         <div class="label m-0 p-0">
                             <span class="label-text px-2">50:</span>
                         </div>
@@ -92,7 +92,7 @@ function DiffStats({ diff }: Props) {
                             style={{ color: colors.judgements.x50 }}
                             placeholder="0" min="0" />
                     </label>
-                    <label class="form-control bg-base-200 rounded-lg">
+                    <label class="form-control rounded-lg bg-base-200">
                         <div class="label m-0 p-0">
                             <span class="label-text px-2">Miss:</span>
                         </div>
@@ -102,20 +102,20 @@ function DiffStats({ diff }: Props) {
                             placeholder="0" min="0" />
                     </label>
                 </div>
-                <div class="flex flex-row flex-wrap items-center justify-center bg-base-300 rounded-lg gap-2 p-2">
+                <div class="flex flex-row flex-wrap items-center justify-center gap-2 rounded-lg bg-base-300 p-2">
                     {mods.map((mod) =>
-                        <label class="has-[:checked]:opacity-100 opacity-50 transform hover:scale-110 
-                            transition easeinout duration-150 flex icons-center cursor-pointer ">
+                        <label class="easeinout icons-center flex transform 
+                            cursor-pointer opacity-50 transition duration-150 hover:scale-110 has-[:checked]:opacity-100 ">
                             <input type="checkbox" name={`mod-${mod}`} class="hidden" />
                             <ModIcon mod={mod} />
                         </label>
                     )}
                 </div>
                 <div class="flex flex-row gap-2">
-                    <button type="reset" class="btn btn-secondary btn-square" value="reset">
+                    <button type="reset" class="btn btn-sm btn-square btn-secondary" value="reset">
                         <i class="fa-solid fa-trash-can" />
                     </button>
-                    <button type="submit" class="grow btn btn-primary">
+                    <button type="submit" class="btn btn-sm btn-primary grow">
                         <i class="fa-solid fa-calculator" />
                         Calculate
                     </button>

@@ -1,10 +1,10 @@
 function UserAboutPanel(p: { html: string }) {
     return (
         <div class="flex flex-col gap-4">
-            <div class="peer bg-base-300 p-4 duration-500 ease-in-out overflow-hidden max-h-96" id="user_about">
+            <div class="peer max-h-96 overflow-hidden bg-base-300 p-4 duration-500 ease-in-out" id="user_about">
                 {p.html}
             </div>
-            <button class="cursor-pointer btn btn-secondary btn-sm btn-wide mx-auto flex flex-row gap-4"
+            <button class="btn btn-secondary btn-sm btn-wide mx-auto flex cursor-pointer flex-row gap-4"
                 onclick={`
                     if (document.getElementById('user_about').classList.toggle('max-h-96')) {
                         document.getElementById('user_about_text').innerText = 'Expand';
@@ -14,7 +14,7 @@ function UserAboutPanel(p: { html: string }) {
                         document.getElementById('user_about_icon').classList.add('rotate-180');
                     };
                 `}>
-                <i id="user_about_icon" class="transform ease-out duration-200 fa-solid fa-caret-down" />
+                <i id="user_about_icon" class="fa-solid fa-caret-down transform duration-200 ease-out" />
                 <h6 id="user_about_text">Expand</h6>
             </button>
         </div>

@@ -1,4 +1,5 @@
 import type { BeatmapExtended, Beatmapset } from "./beatmaps";
+import type { Mode } from "./osu";
 import type { UserScore } from "./users";
 
 export type BeatmapScores = {
@@ -15,7 +16,7 @@ export type ScoreType = {
     best_id: number;
     created_at: string;
     max_combo: number;
-    mode: string;
+    mode: Mode;
     mode_int: number;
     mods: string[];
     passed: boolean;

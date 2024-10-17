@@ -1,10 +1,10 @@
 import type { Beatmapset } from "@/src/types/beatmaps";
-import { DiffIconLink } from "./DiffIcon";
-import CardControls from "../web/CardControls";
-import StatusBadge from "./StatusBadge";
-import AudioPlayButton from "../web/AudioPlayButton";
-import Link from "../web/Link";
 import type { Mode } from "@/src/types/osu";
+import AudioPlayButton from "../web/AudioPlayButton";
+import CardControls from "../web/CardControls";
+import Link from "../web/Link";
+import { DiffIconLink } from "./DiffIcon";
+import StatusBadge from "./StatusBadge";
 
 function BeatmapsetCard(p: { b_set: Beatmapset }) {
 
@@ -17,28 +17,31 @@ function BeatmapsetCard(p: { b_set: Beatmapset }) {
         a.mode_int - b.mode_int
     );
 
+    if (!beatmaps) return <></>;
+
     return (
-        <div class="group/card flex flex-row bg-base-300 rounded-lg shadow-lg">
-            <div class="flex flex-col bg-neutral rounded-lg shadow-lg grow">
+        <div class="group/card flex flex-row rounded-lg bg-base-300 shadow-lg">
+            <div class="flex grow flex-col rounded-lg bg-neutral shadow-lg">
                 <div class="flex flex-col rounded-lg shadow-lg"
                     style={{ backgroundImage: `url('${cardImg}')`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
-                    <div class="relative bg-base-300 bg-opacity-75 grid grid-cols-4 rounded-lg backdrop-blur-sm">
-                        <div class="group/audio_card rounded-lg flex items-center justify-center"
+                    <div class="relative grid grid-cols-4 rounded-lg bg-base-300 bg-opacity-75 backdrop-blur-sm">
+                        <div class="group/audio_card flex items-center justify-center rounded-lg"
                             style={{ backgroundImage: `url('${cardImg}')`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
-                            <AudioPlayButton beatmap_id={p.b_set.beatmaps?.[0].id || 0}
+                            <AudioPlayButton
+                                map_id={beatmaps[0].id}
                                 set_id={p.b_set.id}
-                                beatmap_title={p.b_set.title}
-                                beatmap_artist={p.b_set.artist}
+                                set_title={p.b_set.title}
+                                set_artist={p.b_set.artist}
                             />
                         </div>
-                        <div class="flex flex-col px-2 py-1 grow col-span-3">
-                            <Link css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmapsets/${p.b_set.id}`}>{p.b_set.title}</Link>
-                            <span class="text-neutral-content text-opacity-75 text-sm truncate">by {p.b_set.artist}</span>
-                            <Link css="text-neutral-content text-opacity-75 text-sm hover:underline underline-offset-2 truncate" url={`/users/${p.b_set?.user?.id || p.b_set.user_id}`}>mapped by {p.b_set?.user?.username || p.b_set?.creator}</Link>
+                        <div class="col-span-3 flex grow flex-col px-2 py-1">
+                            <Link css="truncate text-lg text-base-content underline-offset-2 hover:underline" url={`/beatmapsets/${p.b_set.id}`}>{p.b_set.title}</Link>
+                            <span class="truncate text-sm text-neutral-content text-opacity-75">by {p.b_set.artist}</span>
+                            <Link css="truncate text-sm text-neutral-content text-opacity-75 underline-offset-2 hover:underline" url={`/users/${p.b_set?.user?.id || p.b_set.user_id}`}>mapped by {p.b_set?.user?.username || p.b_set?.creator}</Link>
                         </div>
                     </div>
                 </div>
-                <div class="text-sm text-opacity-75 text-base-content p-0.5 flex flex-row flex-wrap gap-2 items-center">
+                <div class="flex flex-row flex-wrap items-center gap-2 p-0.5 text-sm text-base-content text-opacity-75">
                     <StatusBadge status={p.b_set.status} />
                     {beatmaps ? <>
                         <div class="flex flex-row gap-1">
@@ -49,10 +52,10 @@ function BeatmapsetCard(p: { b_set: Beatmapset }) {
                             }
                         </div>
                         {beatmaps.length > DIFF_LIMIT &&
-                            <div class="badge badge-sm badge-info">+{beatmaps.length - DIFF_LIMIT}</div>
+                            <div class="badge badge-info badge-sm">+{beatmaps.length - DIFF_LIMIT}</div>
                         } </> : null
                     }
-                    <div class="ms-auto text-xs flex flex-row gap-2">
+                    <div class="ms-auto flex flex-row gap-2 text-xs">
                         <span class="tooltip" data-tip={p.b_set?.favourite_count.toLocaleString()}>
                             <i class="fa-solid fa-heart" />
                         </span>

@@ -1,8 +1,7 @@
+sliders();
 function sliders() {
-    // get the slider elements
 
     const names = ["sr", "bpm", "len", "year", "ar", "cs", "od", "hp"];
-
     const labels = [];
     const sliders = [];
 

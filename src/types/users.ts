@@ -1,11 +1,12 @@
 import type { CollectionDB, Rank, Setup, UserSocialType } from "../models/User";
 import type { Mode } from "./osu";
 
-export type Res = {
-    error: boolean,
-    msg: string,
-    code: number
-}
+export type Res<T> = {
+    code: number,
+} & (
+        { error: false, data: T } |
+        { error: true, data: string }
+    )
 
 export type UserCookie = {
     id: number,

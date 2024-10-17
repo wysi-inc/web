@@ -1,7 +1,7 @@
-import type { Setup } from "@/src/models/User";
-import SetupInput from "./SetupInput";
 import { isEmpty } from "@/src/libs/web_utils";
+import type { Setup } from "@/src/models/User";
 import { txt } from "@/src/tasks/files";
+import SetupInput from "./SetupInput";
 
 function Peripherals(p: {
     peripherals: Setup["peripherals"],
@@ -25,17 +25,17 @@ function Peripherals(p: {
                         <i class="fa-solid fa-circle-question" />
                     </div> : null
                 }
-                <SetupInput editable={p.editable} type="text" id="peripherals_mouse" name={txt(p.lang, "user.sections.setup.tabs.mouse")} value={p.peripherals?.mouse} icon={<i class="size-4 fa-solid fa-computer-mouse" />} />
-                <SetupInput editable={p.editable} type="text" id="peripherals_mousepad" name={txt(p.lang, "user.sections.setup.peripherals.mousepad")} value={p.peripherals?.mousepad} icon={<i class="size-4 fa-solid fa-square" />} />
-                <SetupInput editable={p.editable} type="text" id="peripherals_keyboard" name={txt(p.lang, "user.sections.setup.tabs.keyboard")} value={p.peripherals?.keyboard} icon={<i class="size-4 fa-solid fa-keyboard" />} />
-                <SetupInput editable={p.editable} type="text" id="peripherals_keypad" name={txt(p.lang, "user.sections.setup.peripherals.keypad")} value={p.peripherals?.keypad} icon={<i class="size-4 fa-solid fa-hockey-puck" />} />
-                <SetupInput editable={p.editable} type="text" id="peripherals_headphones" name={txt(p.lang, "user.sections.setup.peripherals.headphones")} value={p.peripherals?.headphones} icon={<i class="size-4 fa-solid fa-headphones" />} />
-                <SetupInput editable={p.editable} type="text" id="peripherals_camera" name={txt(p.lang, "user.sections.setup.peripherals.camera")} value={p.peripherals?.camera} icon={<i class="size-4 fa-solid fa-camera" />} />
-                <SetupInput editable={p.editable} type="text" id="peripherals_microphone" name={txt(p.lang, "user.sections.setup.peripherals.microphone")} value={p.peripherals?.microphone} icon={<i class="size-4 fa-solid fa-microphone" />} />
-                <SetupInput editable={p.editable} type="text" id="peripherals_monitor" name={txt(p.lang, "user.sections.setup.peripherals.monitor")} value={p.peripherals?.monitor} icon={<i class="size-4 fa-solid fa-desktop" />} />
-                <SetupInput editable={p.editable} type="text" id="peripherals_audio" name={txt(p.lang, "user.sections.setup.peripherals.audio")} value={p.peripherals?.audio} icon={<i class="size-4 fa-solid fa-sliders" />} />
-                <SetupInput editable={p.editable} type="text" id="peripherals_desk" name={txt(p.lang, "user.sections.setup.peripherals.desk")} value={p.peripherals?.desk} icon={<i class="size-4 fa-solid fa-database" />} />
-                <SetupInput editable={p.editable} type="text" id="peripherals_chair" name={txt(p.lang, "user.sections.setup.peripherals.chair")} value={p.peripherals?.chair} icon={<i class="size-4 fa-solid fa-chair" />} />
+                <SetupInput editable={p.editable} type="text" id="peripherals_mouse" name={txt(p.lang, "user.sections.setup.tabs.mouse")} value={p.peripherals?.mouse} icon={<i class="fa-solid fa-computer-mouse size-4" />} />
+                <SetupInput editable={p.editable} type="text" id="peripherals_mousepad" name={txt(p.lang, "user.sections.setup.peripherals.mousepad")} value={p.peripherals?.mousepad} icon={<i class="fa-solid fa-square size-4" />} />
+                <SetupInput editable={p.editable} type="text" id="peripherals_keyboard" name={txt(p.lang, "user.sections.setup.tabs.keyboard")} value={p.peripherals?.keyboard} icon={<i class="fa-solid fa-keyboard size-4" />} />
+                <SetupInput editable={p.editable} type="text" id="peripherals_keypad" name={txt(p.lang, "user.sections.setup.peripherals.keypad")} value={p.peripherals?.keypad} icon={<i class="fa-solid fa-hockey-puck size-4" />} />
+                <SetupInput editable={p.editable} type="text" id="peripherals_headphones" name={txt(p.lang, "user.sections.setup.peripherals.headphones")} value={p.peripherals?.headphones} icon={<i class="fa-solid fa-headphones size-4" />} />
+                <SetupInput editable={p.editable} type="text" id="peripherals_camera" name={txt(p.lang, "user.sections.setup.peripherals.camera")} value={p.peripherals?.camera} icon={<i class="fa-solid fa-camera size-4" />} />
+                <SetupInput editable={p.editable} type="text" id="peripherals_microphone" name={txt(p.lang, "user.sections.setup.peripherals.microphone")} value={p.peripherals?.microphone} icon={<i class="fa-solid fa-microphone size-4" />} />
+                <SetupInput editable={p.editable} type="text" id="peripherals_monitor" name={txt(p.lang, "user.sections.setup.peripherals.monitor")} value={p.peripherals?.monitor} icon={<i class="fa-solid fa-desktop size-4" />} />
+                <SetupInput editable={p.editable} type="text" id="peripherals_audio" name={txt(p.lang, "user.sections.setup.peripherals.audio")} value={p.peripherals?.audio} icon={<i class="fa-solid fa-sliders size-4" />} />
+                <SetupInput editable={p.editable} type="text" id="peripherals_desk" name={txt(p.lang, "user.sections.setup.peripherals.desk")} value={p.peripherals?.desk} icon={<i class="fa-solid fa-database size-4" />} />
+                <SetupInput editable={p.editable} type="text" id="peripherals_chair" name={txt(p.lang, "user.sections.setup.peripherals.chair")} value={p.peripherals?.chair} icon={<i class="fa-solid fa-chair size-4" />} />
             </div>
         </div>
     </>);

@@ -1,6 +1,6 @@
 import { StatsModel } from "@/src/models/Stats";
-import Title from "./Title";
 import { txt } from "@/src/tasks/files";
+import Title from "./Title";
 
 
 async function Home(p: { lang: string }) {

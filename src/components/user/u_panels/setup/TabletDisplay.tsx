@@ -1,8 +1,8 @@
-import type { Setup } from "@/src/models/User";
-import SetupInput from "./SetupInput";
-import { TabletModel } from "@/src/models/Tablet";
 import { isEmpty } from "@/src/libs/web_utils";
+import { TabletModel } from "@/src/models/Tablet";
+import type { Setup } from "@/src/models/User";
 import { txt } from "@/src/tasks/files";
+import SetupInput from "./SetupInput";
 
 async function TabletDisplay(p: {
     tablet: Setup["tablet"],
@@ -50,7 +50,7 @@ async function TabletDisplay(p: {
                 }
                 <div>
                     <div class="text-xs">{txt(p.lang, "user.sections.setup.name")}:</div>
-                    <label class="h-6 input input-sm input-bordered w-full px-2 py-1 text-base-content has-[:disabled]:border-0 has-[:disabled]:bg-base-300 has-[:disabled]/setup:p-0">
+                    <label class="input input-sm input-bordered h-6 w-full px-2 py-1 text-base-content has-[:disabled]:border-0 has-[:disabled]:bg-base-300 has-[:disabled]/setup:p-0">
                         <select name="tablet_model" class="h-6 bg-transparent">
                             {tablets.map(t => <option value={JSON.stringify(t)} selected={p.tablet?.name === t.name}>{t.name}</option>)}
                             <option value="custom" selected={custom}>Custom</option>

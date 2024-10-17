@@ -1,3 +1,4 @@
+scale();
 function scale() {
     const auto_scale = document.getElementsByClassName("auto_scale");
     for (let item of auto_scale) {
@@ -11,6 +12,7 @@ function scale() {
     }
 }
 
+setup();
 function setup() {
     const form = document.getElementById("setup_form");
     const fieldset = document.getElementById("setup_fieldset");

@@ -1,21 +1,25 @@
 import { getBeatmaps } from "@/src/db/beatmaps/get_beatmaps";
-import BeatmapsetCard from "./BeatmapsetCard";
 import type { BeatmapQuery } from "@/src/types/beatmaps";
 import LoadMoreButton from "../web/LoadMoreButton";
+import BeatmapsetCard from "./BeatmapsetCard";
 
 async function BeatmapsList(p: {
     body?: BeatmapQuery,
     offset: string
 }) {
     const res = await getBeatmaps(p.body, p.offset);
-    if (res.sets.length === 0) return <></>;
+    if (res.error) return <></>;
+
+    const sets = res.data;
+
+    if (sets.length === 0) return <></>;
 
     return (<>
-        {res.sets.map((set) =>
+        {sets.map((set) =>
             <BeatmapsetCard b_set={set} />
         )}
-        {res.sets.length < 50 ? null :
-            <LoadMoreButton url={`/beatmapsets/list/${res.offset}`} include="#search-form" />
+        {sets.length < 50 ? null :
+            <LoadMoreButton url={`/beatmapsets/list/${sets.length + (Number(p.offset) || 0)}`} include="#search-form" />
         }
     </>);
 }

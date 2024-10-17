@@ -1,7 +1,7 @@
 import { Elysia } from "elysia";
-import { plugins } from "./plugins";
-import HtmxPage from "../libs/routes";
 import NotFound from "../components/web/NotFound";
+import HtmxPage from "../libs/routes";
+import { plugins } from "./plugins";
 
 export const notFound = new Elysia({ prefix: "/*" })
     .use(plugins)

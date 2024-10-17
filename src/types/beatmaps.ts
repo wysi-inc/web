@@ -6,6 +6,11 @@ export type BeatmapsetStatus = "any" | "ranked" | "approved" | "qualified" | "lo
 
 export type MinoBeatmapSort = "relevant" | "ranked_date" | "title" | "artist" | "play_count" | "rating" | "beatmaps.difficulty_rating" | "favourite_count"
 
+export type BeatmapsetResults = {
+    sets: Beatmapset[],
+    offset: number
+}
+
 export type BeatmapQuery = {
     title?: string,
     artist?: string,

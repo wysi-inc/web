@@ -1,5 +1,5 @@
-import LanguageButton from "./LanguageButton";
 import { LANGUAGES, txt } from "@/src/tasks/files";
+import LanguageButton from "./LanguageButton";
 
 const flags: any = {
     "af": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Flag_of_South_Africa_%281928-1982%29.svg",
@@ -49,13 +49,13 @@ function LanguageSwitcher(p: { lang: string }) {
                 <form method="dialog">
                     <button class="btn btn-circle btn-ghost btn-sm absolute right-2 top-2">✕</button>
                 </form>
-                <h3 class="mx-1 mt-2 mb-4 text-lg font-bold">Select language</h3>
+                <h3 class="mx-1 mb-4 mt-2 text-lg font-bold">Select language</h3>
                 <div class="mb-4 grid grid-cols-2 gap-1">
                     {Object.keys(flags).map(l => (
                         <LanguageButton lang={getLang(l)} />
                     ))}
                 </div>
-                <a href="https://crowdin.com/project/wysi" class="btn col-span-full btn-accent btn-block" target="_blank">
+                <a href="https://crowdin.com/project/wysi" class="btn btn-accent btn-block col-span-full" target="_blank">
                     <span class="flex flex-row gap-4">
                         <i class="float fa-solid fa-arrow-up-right-from-square left-2 float-left" />
                         <span>{txt(p.lang, "nav.help")}</span>

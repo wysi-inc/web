@@ -1,12 +1,13 @@
-type Props = {
+function LoadMoreButton(p: {
     url: string,
     include?: string,
-}
-
-function LoadMoreButton({ url, include }: Props) {
+    after?: string
+}) {
     return (<>
-        <div hx-post={url} hx-trigger="click" hx-swap="outerHTML" hx-boost="false" hx-include={include} class="col-span-full flex justify-center">
-            <button class="btn btn-sm btn-secondary btn-wide flex flex-row gap-4 items-center justify-center">
+        <div hx-post={p.url} hx-trigger="click" hx-swap="outerHTML"
+            hx-include={p.include} ht-on--after-swap={p.after}
+            class="col-span-full flex justify-center">
+            <button class="btn btn-secondary btn-sm btn-wide flex flex-row items-center justify-center gap-4">
                 <i class="fa-solid fa-sort-down" />
                 <div>Load more</div>
                 <span class="htmx-indicator loading loading-spinner loading-md" />

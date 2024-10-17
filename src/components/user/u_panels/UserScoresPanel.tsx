@@ -1,8 +1,6 @@
-import type { Mode } from "@/src/types/osu";
-import type { ScoreCategory } from "@/src/types/osu";
-import UserScoresList from "./u_components/UserScoresList";
+import type { Mode, ScoreCategory } from "@/src/types/osu";
 import type { UserCookie } from "@/src/types/users";
-import DoubleSlider from "../../beatmap/DoubleSlider";
+import UserScoresList from "./u_components/UserScoresList";
 
 type Props = {
     user_id: number;
@@ -22,18 +20,18 @@ const UserScoresPanel = (p: Props) => {
     const Tab = ({ cat, title, col }: TabProps) => {
         const current = cat === p.category;
         return (<>
-            <input role="tab" type="radio" name="score-tabs" class={`tab text-nowrap ${col}`}
+            <input role="tab" type="radio" name="score-tabs" class={`${col} tab text-nowrap`}
                 hx-trigger="click once" aria-label={title} checked={current}
                 hx-post={`/users/${p.user_id}/${p.mode}/lists/scores/${cat}?offset=0&limit=5`}
                 hx-target={`#scores-list-${cat}`} hx-disable={current}
                 hx-indicator={`#scores-loading-${cat}`}
             />
-            <div role="tabpanel" class="tab-content pt-4 col-span-full">
-                <div id={`scores-list-${cat}`} class="grid grid-cols-1 gap-4 col-span-full">
+            <div role="tabpanel" class="tab-content col-span-full pt-4">
+                <div id={`scores-list-${cat}`} class="col-span-full grid grid-cols-1 gap-4">
                     {current ?
                         <UserScoresList id={p.user_id} mode={p.mode} category={p.category} offset={0} limit={5} user={p.user} />
                         :
-                        <span class="loading loading-spinner htmx-indicator" id={`scores-loading-${cat}`} />
+                        <span class="htmx-indicator loading loading-spinner" id={`scores-loading-${cat}`} />
                     }
                 </div>
             </div>

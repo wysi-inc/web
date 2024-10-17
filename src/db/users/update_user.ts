@@ -104,7 +104,7 @@ function getNewCountry(rank: number, today: Date): Rank[] {
 export async function saveSetup(
     user_id: number,
     setup: any
-): Promise<Res & { setup?: Setup }> {
+): Promise<Res<Setup>> {
     try {
         for (let value of Object.values(setup)) {
             const check = validString(`${value}`, STR_MAX_LEN.LONG);
@@ -114,7 +114,7 @@ export async function saveSetup(
 
         if (!user) return {
             error: true,
-            msg: "User doesnt exist",
+            data: "User doesnt exist",
             code: 404
         };
 
@@ -194,15 +194,14 @@ export async function saveSetup(
         await user.save();
         return {
             error: false,
-            msg: "Setup updated",
             code: 200,
-            setup: user.setup
+            data: user.setup
         };
     } catch (err) {
         log.error("Error saving setup", err);
         return {
             error: true,
-            msg: "Something went wrong",
+            data: "Something went wrong",
             code: 500,
         };
     }
@@ -257,7 +256,7 @@ export async function saveSocial(
     user_id: number,
     username: string,
     platform: string
-): Promise<Res> {
+): Promise<Res<string>> {
     try {
         const check_username = validString(username, STR_MAX_LEN.MID);
         if (check_username.error) return check_username;
@@ -266,12 +265,12 @@ export async function saveSocial(
         const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
-            msg: "User doesnt exist",
+            data: "User doesnt exist",
             code: 404
         };
         if (user.socials?.find(s => s.platform === platform)) return {
             error: true,
-            msg: "User already has this social",
+            data: "User already has this social",
             code: 400
         };
         if (!user.socials) [{ platform, username }] as any;
@@ -279,14 +278,14 @@ export async function saveSocial(
         await user.save();
         return {
             error: false,
-            msg: "Social added",
+            data: "Social added",
             code: 201
         };
     } catch (err) {
         log.error("Error adding social", err);
         return {
             error: true,
-            msg: "Something went wrong",
+            data: "Something went wrong",
             code: 500
         }
     }
@@ -295,31 +294,31 @@ export async function saveSocial(
 export async function deleteSocial(
     user_id: number,
     platform: string
-): Promise<Res> {
+): Promise<Res<string>> {
     try {
         const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
-            msg: "User doesnt exist",
+            data: "User doesnt exist",
             code: 404
         };
         if (!user.socials?.find(s => s.platform === platform)) return {
             error: true,
-            msg: "User doesnt have this social",
+            data: "User doesnt have this social",
             code: 400
         };
         user.socials = user.socials.filter(s => s.platform !== platform) as any;
         await user.save();
         return {
             error: false,
-            msg: "Social removed",
+            data: "Social removed",
             code: 200
         };
     } catch (err) {
         log.error("Error removing social", err);
         return {
             error: true,
-            msg: "Something went wrong",
+            data: "Something went wrong",
             code: 500
         }
     }
@@ -328,17 +327,17 @@ export async function deleteSocial(
 export async function sortSocials(
     user_id: number,
     platforms: string[]
-): Promise<Res> {
+): Promise<Res<string>> {
     try {
         const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
-            msg: "User doesnt exist",
+            data: "User doesnt exist",
             code: 404
         };
         if (!user.socials) return {
             error: true,
-            msg: "User doesnt have socials",
+            data: "User doesnt have socials",
             code: 404
         };
         let new_socials: any = [];
@@ -349,14 +348,14 @@ export async function sortSocials(
         await user.save();
         return {
             error: false,
-            msg: "Socials sorted",
+            data: "Socials sorted",
             code: 200
         };
     } catch (err) {
         log.error("Error sorting socials", err);
         return {
             error: true,
-            msg: "Something went wrong",
+            data: "Something went wrong",
             code: 500
         }
     }
@@ -365,49 +364,49 @@ export async function sortSocials(
 export async function updateDan(
     user_id: number,
     dan: string
-): Promise<Res> {
+): Promise<Res<string>> {
     try {
         const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
-            msg: "User doesn't exist",
+            data: "User doesn't exist",
             code: 400
         };
         user.dan = dan as any;
         await user.save();
         return {
             error: false,
-            msg: "Dan updated",
+            data: "Dan updated",
             code: 200
         };
     } catch (err) {
         log.error("Error updating Dan", err);
         return {
             error: true,
-            msg: "Something went wrong",
+            data: "Something went wrong",
             code: 500
         }
     }
 }
 
-export async function addSkin(user_id: number, skin_id: string): Promise<Res & { id?: number }> {
+export async function addSkin(user_id: number, skin_id: string): Promise<Res<number>> {
     try {
         const check = validString(skin_id);
         if (check.error) return check;
         const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
-            msg: "User doesnt exist!",
+            data: "User doesnt exist!",
             code: 404
         };
         if (user.skins.length >= 2) return {
             error: true,
-            msg: "User has reached the skin limit!",
+            data: "User has reached the skin limit!",
             code: 400
         };
         if (user.skins?.find(s => s === skin_id)) return {
             error: true,
-            msg: "User already has this skin!",
+            data: "User already has this skin!",
             code: 400
         };
         if (!user.skins) user.skins = [skin_id];
@@ -415,15 +414,14 @@ export async function addSkin(user_id: number, skin_id: string): Promise<Res & {
         await user.save();
         return {
             error: false,
-            msg: "Skin added",
             code: 201,
-            id: user.skins.length - 1,
+            data: user.skins.length - 1,
         };
     } catch (err) {
         log.error("Error adding skin", err);
         return {
             error: true,
-            msg: "Something went wrong",
+            data: "Something went wrong",
             code: 500
         }
     }
@@ -432,31 +430,31 @@ export async function addSkin(user_id: number, skin_id: string): Promise<Res & {
 export async function deleteSkin(
     user_id: number,
     skin_id: string
-): Promise<Res> {
+): Promise<Res<string>> {
     try {
         const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
-            msg: "User doesnt exist",
+            data: "User doesnt exist",
             code: 404
         };
         if (!user.skins?.find(s => s === skin_id)) return {
             error: true,
-            msg: "User doesnt have this skin",
+            data: "User doesnt have this skin",
             code: 400
         };
         user.skins = user.skins.filter(s => s !== skin_id);
         await user.save();
         return {
             error: false,
-            msg: "Skin removed",
+            data: "Skin removed",
             code: 200
         };
     } catch (err) {
         log.error("Error removing skin", err);
         return {
             error: true,
-            msg: "Something went wrong",
+            data: "Something went wrong",
             code: 500
         }
     }
@@ -465,17 +463,17 @@ export async function deleteSkin(
 export async function sortSkins(
     user_id: number,
     skins: string[]
-): Promise<Res> {
+): Promise<Res<string>> {
     try {
         const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
-            msg: "User doesnt exist",
+            data: "User doesnt exist",
             code: 404
         };
         if (!user.socials) return {
             error: true,
-            msg: "User doesnt have any skins",
+            data: "User doesnt have any skins",
             code: 404
         };
         let new_skins: any = [];
@@ -486,14 +484,14 @@ export async function sortSkins(
         await user.save();
         return {
             error: false,
-            msg: "Skins sorted",
+            data: "Skins sorted",
             code: 200
         };
     } catch (err) {
         log.error("Error sorting skins", err);
         return {
             error: true,
-            msg: "Something went wrong",
+            data: "Something went wrong",
             code: 500
         }
     }

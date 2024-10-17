@@ -1,3 +1,4 @@
+htmxAfterFunctions.push(getChokes);
 function getChokes() {
     const scores = document.getElementsByClassName("score_card");
     const new_scores = [];
@@ -90,5 +91,3 @@ async function getChoke(score_card) {
         stats_len.innerHTML = secondsToTime(stats.len);
     }
 }
-
-htmxAfterFunctions.push(getChokes);

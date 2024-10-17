@@ -88,7 +88,7 @@ function KeyboardDisplay(p: {
                 }
                 <div>
                     <div class="text-xs">{txt(p.lang, "user.sections.setup.name")}:</div>
-                    <label class="peer input input-sm input-bordered h-6 w-full py-1 px-2 text-base-content has-[:disabled]:border-0 has-[:disabled]:bg-base-300 has-[:disabled]:p-0">
+                    <label class="peer input input-sm input-bordered h-6 w-full px-2 py-1 text-base-content has-[:disabled]:border-0 has-[:disabled]:bg-base-300 has-[:disabled]:p-0">
                         <input id="keyboard_name" name="keyboard_name" class="h-6 bg-transparent"
                             type="text" placeholder={txt(p.lang, "user.sections.setup.name")} value={p.keyboard?.name || ""} />
                     </label>

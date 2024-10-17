@@ -21,7 +21,7 @@ function on_card_click(btn) {
     audio_player.src = song.src;
     audio_image.style.backgroundImage = `url("${song.cover}")`;
     audio_title.innerText = song.title;
-    audio_title.href = `/beatmaps/${song.set_id}/${song.beatmap_id}`;
+    audio_title.href = `/beatmaps/${song.set_id}`;
     audio_artist.innerText = `by ${song.artist}`;
     audio_start();
 }

@@ -1,7 +1,8 @@
+import { sleep } from "bun";
 import { TokenModel } from "../models/Tokens";
 import { OSU_API_TOKEN } from "../tasks/connections";
 import { apicall, log } from "../tasks/logs";
-import type { UserCookie } from "../types/users";
+import type { Res, UserCookie } from "../types/users";
 
 type FetchOptions = {
     url: any,
@@ -12,7 +13,20 @@ type FetchOptions = {
         | { user?: UserCookie | null }
     );
 
-export async function osu_fetch(o: FetchOptions): Promise<any | null> {
+let ratelimit: boolean = false;
+
+async function lock_ratelimit() {
+    ratelimit = true;
+    await sleep(60 * 1000);
+    ratelimit = false;
+}
+
+export async function osu_fetch(o: FetchOptions): Promise<Res<any>> {
+    if (ratelimit) return {
+        error: true,
+        code: 429,
+        data: "Error: Rate limit hit",
+    };
     try {
         let token = "";
         if ("token" in o && o.token) {
@@ -29,11 +43,11 @@ export async function osu_fetch(o: FetchOptions): Promise<any | null> {
                 token = tokenObject.access_token;
                 log.info("Using user token");
             } else {
-                token = OSU_API_TOKEN
+                token = OSU_API_TOKEN;
                 log.info("Using default token");
             }
         } else {
-            token = OSU_API_TOKEN
+            token = OSU_API_TOKEN;
             log.info("Using default token");
         }
 
@@ -43,7 +57,6 @@ export async function osu_fetch(o: FetchOptions): Promise<any | null> {
             "Authorization": `Bearer ${token}`
         };
 
-
         let body_string;
         if (o.body) {
             body_string = JSON.stringify(o.body);
@@ -52,17 +65,44 @@ export async function osu_fetch(o: FetchOptions): Promise<any | null> {
         const res = await fetch(o.url, {
             method: o.method,
             headers,
-            body: body_string
+            body: body_string,
         });
 
         apicall();
 
-        if (!res.ok) throw await res.text();
+        if (!res.ok) {
+            const err = await res.text();
+            if (err.includes("429")) {
+                log.error("Error: Rate limit hit");
+                lock_ratelimit();
+                return {
+                    error: true,
+                    code: 429,
+                    data: "Error: Rate limit hit",
+                };
+            }
+            else {
+                log.error(`Error: ${o.url}`, err);
+                return {
+                    error: true,
+                    code: 500,
+                    data: "Something went wrong"
+                };
+            }
+        }
 
         const data = await res.json();
-        return data;
+        return {
+            error: false,
+            code: 200,
+            data: data
+        };
     } catch (err) {
         log.error(`Error: ${o.url}`, err);
-        return null;
+        return {
+            error: true,
+            code: 500,
+            data: "Something went wrong",
+        };
     }
 }

@@ -1,12 +1,15 @@
 import { colors } from "@/src/libs/colors";
+import { MODES } from "@/src/libs/constants";
 import { ModeToCode } from "@/src/libs/web_utils";
 import { DANS } from "@/src/models/User";
+import { txt } from "@/src/tasks/files";
 import type { Mode } from "@/src/types/osu";
 import type { UserExtended } from "@/src/types/users";
 import { Html } from '@elysiajs/html';
 import moment from "moment";
 import ModeIcon from "../../beatmap/ModeIcon";
 import Link from "../../web/Link";
+import Avatar from "../Avatar";
 import Badge from "../Badge";
 import UserSocial, { SOCIALS } from "./UserSocial";
 import BarChart from "./u_components/BarChart";
@@ -16,9 +19,6 @@ import Flag from "./u_components/Flag";
 import SubdivisionFlag from "./u_components/SubdivisionFlag";
 import SubdivisionRanking from "./u_components/SubdivisionRanking";
 import Supporter from "./u_components/Supporter";
-import Avatar from "../Avatar";
-import { txt } from "@/src/tasks/files";
-import { MODES } from "@/src/libs/constants";
 
 async function UserTopPanel(p: {
     lang: string

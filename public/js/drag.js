@@ -1,5 +1,6 @@
-htmx.onLoad(function (content) {
-    const sortables = content.querySelectorAll(".sortable");
+sort();
+function sort() {
+    const sortables = document.querySelectorAll(".sortable");
     for (let i = 0; i < sortables.length; i++) {
         const sortable = sortables[i];
         const sortableInstance = new Sortable(sortable, {
@@ -17,4 +18,4 @@ htmx.onLoad(function (content) {
             sortableInstance.option("disabled", false);
         });
     }
-});
+}

@@ -1,8 +1,8 @@
 import { DonationModel } from "@/src/models/Donations";
-import moment from "moment";
-import Title from "./Title";
 import { env } from "bun";
+import moment from "moment";
 import Badge from "../user/Badge";
+import Title from "./Title";
 
 export type Contributor = {
     login: string;
@@ -77,9 +77,9 @@ async function Support() {
 
     return (<>
         <Title title="Support <3" />
-        <h1 class="text-2xl text-center">We appreciate your support! {'<'}3</h1>
-        <div class="p-4 flex flex-col gap-4 text-center items-center">
-            <p class="italic text-sm text-neutral-content">
+        <h1 class="text-center text-2xl">We appreciate your support! {'<'}3</h1>
+        <div class="flex flex-col items-center gap-4 p-4 text-center">
+            <p class="text-sm italic text-neutral-content">
                 This website does not (and will not) have any paid features! <br /><br />
                 We know that not everyone is in a position to financially support projects,
                 and we want to ensure that this website remains inclusive and accessible to all,
@@ -94,13 +94,13 @@ async function Support() {
             <div class="flex flex-col items-center justify-center gap-2">
                 <span>Support the website's development throught Ko-fi</span>
                 <a href='https://ko-fi.com/Z8Z0SPTRT' target='_blank'>
-                    <img loading="lazy" src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' class="shadow-lg rounded-full hover:-translate-y-1 ease-in-out duration-100 transform w-44" alt='Buy Me a Coffee at ko-fi.com' />
+                    <img loading="lazy" src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' class="w-44 transform rounded-full shadow-lg duration-100 ease-in-out hover:-translate-y-1" alt='Buy Me a Coffee at ko-fi.com' />
                 </a>
             </div>
         </div >
-        <div class="bg-base-100 rounded-lg p-4 flex flex-col gap-4">
+        <div class="flex flex-col gap-4 rounded-lg bg-base-100 p-4">
             <h3 class="text-xl"><i class="fa-solid fa-code" /> Contributors</h3>
-            <div class="flex flex-row flex-wrap items-center justify-center rounded-lg bg-base-300 p-4 gap-4">
+            <div class="flex flex-row flex-wrap items-center justify-center gap-4 rounded-lg bg-base-300 p-4">
                 {gh_contrib.map((c) =>
                     <a class="avatar tooltip" href={c.html_url}
                         target="_blank" data-tip={c.login}>
@@ -111,9 +111,9 @@ async function Support() {
                 )}
             </div>
         </div>
-        <div class="bg-base-100 rounded-lg p-4 flex flex-col gap-4">
+        <div class="flex flex-col gap-4 rounded-lg bg-base-100 p-4">
             <h3 class="text-xl"><i class="fa-solid fa-language" /> Translators</h3>
-            <div class="flex flex-row flex-wrap items-center justify-center rounded-lg bg-base-300 p-4 gap-4">
+            <div class="flex flex-row flex-wrap items-center justify-center gap-4 rounded-lg bg-base-300 p-4">
                 {tr_contrib.data.map((c) =>
                     <a class="avatar tooltip" href={`https://crowdin.com/profile/${c.data.username}`}
                         target="_blank" data-tip={c.data.username}>
@@ -124,7 +124,7 @@ async function Support() {
                 )}
             </div>
         </div>
-        <div class="bg-base-100 rounded-lg p-4 flex flex-col gap-4">
+        <div class="flex flex-col gap-4 rounded-lg bg-base-100 p-4">
             <h3 class="text-xl"><i class="fa-solid fa-heart" /> Donations</h3>
             <div class="flex flex-col gap-4">
                 {donations.length === 0 ?

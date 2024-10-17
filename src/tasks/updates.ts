@@ -76,11 +76,11 @@ export async function update_user_tokens() {
         const tokens = await TokenModel.find({ expires_at: { $lt: time_limit } });
         let done = 0;
         for (let old_token of tokens) {
-            const new_token = await api_auth_user_refresh(old_token.refresh_token);
-            if (!new_token) continue;
-            old_token.access_token = new_token.access_token;
-            old_token.refresh_token = new_token.refresh_token;
-            old_token.expires_at = Math.floor(Date.now() / 1000) + new_token.expires_in;
+            const res = await api_auth_user_refresh(old_token.refresh_token);
+            if (res.error) continue;
+            old_token.access_token = res.data.access_token;
+            old_token.refresh_token = res.data.refresh_token;
+            old_token.expires_at = Math.floor(Date.now() / 1000) + res.data.expires_in;
             await old_token.save();
             done++;
         }

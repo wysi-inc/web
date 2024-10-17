@@ -36,7 +36,7 @@ const socials_data: {
         url: (u) => `https://github.com/${u}`
     },
     "gitlab": {
-        icon: <i class="text-[#e95328] fa-brands fa-gitlab" />,
+        icon: <i class="fa-brands fa-gitlab text-[#e95328]" />,
         bg: "bg-[#151321]",
         url: (u) => `https://gitlab.com/${u}`
     },
@@ -158,20 +158,20 @@ function UserSocial(p: { social: UserSocialType, user_id: number, editable?: boo
     if (!social) return (<></>);
 
     return (<>
-        <button class={`p-1 px-2 flex ${social.black ? "text-black" : "text-white"} tooltip flex-row gap-2 text-sm items-center rounded-lg ${social.bg}`}
+        <button class={`${social.black ? "text-black" : "text-white"} ${social.bg} tooltip flex flex-row items-center gap-2 rounded-lg p-1 px-2 text-sm`}
             type="button" hx-target="this" hx-swap="outerHTML" data-tip={p.social.platform}>
             {social.url ?
-                <a target="_blank" class="flex flex-row gap-2 items-center" href={social.url(p.social.username)}>
+                <a target="_blank" class="flex flex-row items-center gap-2" href={social.url(p.social.username)}>
                     {social.icon}
                     <span>{p.social.username}</span>
                 </a> :
-                <span class="cursor-default flex flex-row gap-2 items-center">
+                <span class="flex cursor-default flex-row items-center gap-2">
                     {social.icon}
                     <span>{p.social.username}</span>
                 </span>}
             {p.editable ? <>
                 <input type="hidden" value={`${p.social.platform}`} name='platforms' />
-                <a class="bg-white hover:bg-opacity-30 bg-opacity-0 text-xs rounded-full size-4 flex items-center justify-center"
+                <a class="flex size-4 items-center justify-center rounded-full bg-white bg-opacity-0 text-xs hover:bg-opacity-30"
                     hx-delete={`/users/${p.user_id}/socials/delete/${p.social.platform}`} hx-trigger="click" hx-target>
                     <i class="fa-solid fa-xmark" />
                 </a>

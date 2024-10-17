@@ -28,15 +28,14 @@ function Tab(p: { type: string, title: string, data: Rank[] | MonthCount[] | und
     return (<>
         <input role="tab" type="radio" id={`${p.type}_tab`} aria-controls={`${p.type}_tabpannel`} name="history_tabs" class="tab text-nowrap"
             aria-label={p.title} checked={p.type === "global"} aria-selected={p.type === "global"} />
-        <div role="tabpanel" class="tab-content pt-4" id={`${p.type}_tabpannel`} aria-labelledby={`${p.type}_tab`}>
+        <div role="tabpanel" class="tab-content pt-4 select-none" id={`${p.type}_tabpannel`} aria-labelledby={`${p.type}_tab`}>
             {p.data.length > 0 ?
-                <div class="h-64 w-full relative cursor-move">
+                <div class="relative h-64 w-full cursor-move">
                     <canvas id={`chart-${p.type}`} data-vals={JSON.stringify(p.data)} />
                 </div>
                 : "No data found"
             }
         </div>
-        <script>hist()</script>
     </>);
 }
 

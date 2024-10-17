@@ -1,9 +1,9 @@
 import { Key, type KeyboardProps } from "../KeyboardDisplay";
 
 export const K75 = (p: KeyboardProps) => (
-    <div class="p-1 outline outline-1 rounded-lg w-min">
+    <div class="w-min rounded-lg p-1 outline outline-1">
         <div class="flex flex-col">
-            <div class="flex flex-row justify-between mb-1">
+            <div class="mb-1 flex flex-row justify-between">
                 <div class="flex flex-row">
                     <Key char={"esc"} code={"esc"} keys={p.keys} width={1} />
                 </div>

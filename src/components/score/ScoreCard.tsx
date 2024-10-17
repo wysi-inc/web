@@ -1,15 +1,15 @@
-import { getFCacc, getGradeColor, getGradeLetter, secondsToTime } from "@/src/libs/web_utils";
-import { colors } from "@/src/libs/colors";
-import moment from "moment";
 import { DiffIconLink } from "@/src/components/beatmap/DiffIcon";
 import CardControls from "@/src/components/web/CardControls";
-import StatusBadge from "../beatmap/StatusBadge";
-import ModIcon from "./ModIcon";
-import AudioPlayButton from "../web/AudioPlayButton";
-import Link from "../web/Link";
+import { colors } from "@/src/libs/colors";
+import { getFCacc, getGradeColor, getGradeLetter, secondsToTime } from "@/src/libs/web_utils";
 import type { BeatmapsetStatus } from "@/src/types/beatmaps";
 import type { Mode } from "@/src/types/osu";
 import type { ScoreType } from "@/src/types/score";
+import moment from "moment";
+import StatusBadge from "../beatmap/StatusBadge";
+import AudioPlayButton from "../web/AudioPlayButton";
+import Link from "../web/Link";
+import ModIcon from "./ModIcon";
 
 async function ScoreCard(p: {
     position: number;
@@ -25,77 +25,79 @@ async function ScoreCard(p: {
     const cardImg = `https://b.ppy.sh/thumb/${beatmapset.id}l.jpg`;
 
     return (<>
-        <div class="score_card group/card grow rounded-lg flex flex-row bg-base-300 shadow-lg" //onclick={`window.location='/scores/${score.id}';`}
+        <div class="score_card group/card flex grow flex-row rounded-lg bg-base-300 shadow-lg" //onclick={`window.location='/scores/${score.id}';`}
             data-score={JSON.stringify(score)} data-fc-acc={fc_acc}>
-            <div class="text-white bg-neutral flex flex-col grow rounded-lg shadow-lg">
-                <div class="bg-cover bg-center bg-no-repeat flex flex-col rounded-lg shadow-lg"
+            <div class="flex grow flex-col rounded-lg bg-neutral text-white shadow-lg">
+                <div class="flex flex-col rounded-lg bg-cover bg-center bg-no-repeat shadow-lg"
                     style={{ backgroundImage: `url('${cardImg}')`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
-                    <div class="bg-base-300 bg-opacity-75 grid grid-cols-1 md:grid-cols-2 rounded-lg backdrop-blur-sm">
+                    <div class="grid grid-cols-1 rounded-lg bg-base-300 bg-opacity-75 backdrop-blur-sm md:grid-cols-2">
                         <div class="flex flex-row">
-                            <div class="group/audio_card rounded-lg w-24 flex items-center justify-center"
+                            <div class="group/audio_card flex w-24 items-center justify-center rounded-lg"
                                 style={{ backgroundImage: `url('${cardImg}')`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
                                 <AudioPlayButton
-                                    beatmap_id={beatmap.id}
+                                    map_id={beatmap.id}
                                     set_id={beatmapset.id}
-                                    beatmap_title={beatmapset.title}
-                                    beatmap_artist={beatmapset.artist}
+                                    set_title={beatmapset.title}
+                                    set_artist={beatmapset.artist}
                                 />
                             </div>
-                            <div class="flex flex-col py-1 px-2 truncate">
-                                <Link css="text-base-content text-lg hover:underline underline-offset-2 truncate" url={`/beatmapsets/${beatmapset.id}`}>{beatmapset.title}</Link>
-                                <p class="text-neutral-content text-opacity-75 text-sm truncate"> by {beatmapset.artist}</p>
+                            <div class="flex flex-col truncate px-2 py-1">
+                                <Link css="truncate text-lg text-base-content underline-offset-2 hover:underline" url={`/beatmapsets/${beatmapset.id}`}>{beatmapset.title}</Link>
+                                <p class="truncate text-sm text-neutral-content text-opacity-75"> by {beatmapset.artist}</p>
                             </div>
                         </div>
-                        <div class="flex flex-col gap-2 py-2 px-4 justify-between rounded-lg bg-base-content bg-opacity-15">
+                        <div class="flex flex-col justify-between gap-2 rounded-lg bg-base-content bg-opacity-15 px-4 py-2">
                             <div class="flex flex-row justify-between gap-4">
                                 <div class="flex flex-col gap-1 text-base-content">
-                                    <div class="flex flex-row gap-4 items-center">
-                                        <div class="flex flex-row gap-2 items-center">
+                                    <div class="flex flex-row items-center gap-4">
+                                        <div class="flex flex-row items-center gap-2">
                                             <i class="fa-solid fa-flag-checkered" />
                                             <span>{score.score.toLocaleString()}</span>
                                         </div>
-                                        <span class="stats_pp">{Math.round(Number(score.pp))}pp</span>
+                                        <div class="ms-auto flex flex-row justify-between gap-2 rounded-full bg-base-300 bg-opacity-40 px-2">
+                                            <span class="stats_pp text-primary">{Math.round(Number(score.pp))}pp</span>
+                                        </div>
                                     </div>
-                                    <div class="text-sm flex flex-row gap-4">
-                                        <div class="flex flex-row gap-1 items-center"><i class="fa-solid fa-fire" /> {score.max_combo.toLocaleString()}x</div>
-                                        <div class="flex flex-row gap-1 items-center"><i class="fa-solid fa-crosshairs" /> {acc}%</div>
+                                    <div class="flex flex-row gap-4 text-sm">
+                                        <div class="flex flex-row items-center gap-1"><i class="fa-solid fa-fire" /> {score.max_combo.toLocaleString()}x</div>
+                                        <div class="flex flex-row items-center gap-1"><i class="fa-solid fa-crosshairs" /> {acc}%</div>
                                     </div>
                                 </div>
-                                <div class="flex flex-row gap-4 items-center">
+                                <div class="flex flex-row items-center gap-4">
                                     <div class="flex flex-col gap-1">
-                                        <div class="ms-auto bg-opacity-40 flex flex-row justify-between gap-2 px-2 bg-base-300 rounded-full">
+                                        <div class="ms-auto flex flex-row justify-between gap-2 rounded-full bg-base-300 bg-opacity-40 px-2">
                                             {score.beatmap.mode === "mania" && (score.statistics as any)?.perfect ?
                                                 <span style={{ color: colors.judgements.x320 }}>
                                                     {(score.statistics as any)?.perfect}
-                                                </span> : <></>}
+                                                </span> : null}
                                             {score.statistics.count_300 ?
                                                 <span style={{ color: colors.judgements.x300 }}>
                                                     {score.statistics.count_300}
-                                                </span> : <></>}
+                                                </span> : null}
                                             {score.beatmap.mode === "mania" && (score.statistics as any)?.good ?
                                                 <span style={{ color: colors.judgements.x200 }}>
                                                     {(score.statistics as any)?.good}
-                                                </span> : <></>}
+                                                </span> : null}
                                             {score.statistics.count_100 ?
                                                 <span style={{ color: colors.judgements.x100 }}>
                                                     {score.statistics.count_100}
-                                                </span> : <></>}
+                                                </span> : null}
                                             {score.statistics.count_50 ?
                                                 <span style={{ color: colors.judgements.x50 }}>
                                                     {score.statistics.count_50}
-                                                </span> : <></>}
+                                                </span> : null}
                                             {score.statistics.count_miss ?
                                                 <span style={{ color: colors.judgements.xMiss }}>
                                                     {score.statistics.count_miss}
-                                                </span> : <></>}
+                                                </span> : null}
                                         </div>
-                                        <div class="ms-auto flex flex-wrap flex-row-reverse gap-1">
+                                        <div class="ms-auto flex flex-row-reverse flex-wrap gap-1">
                                             {score.mods.map((mod) =>
                                                 <ModIcon mod={mod} />
                                             )}
                                         </div>
                                     </div>
-                                    <div class="text-5xl -mt-1" style={{ color: getGradeColor(score.rank) }}>
+                                    <div class="-mt-1 text-5xl" style={{ color: getGradeColor(score.rank) }}>
                                         {getGradeLetter(score.rank)}
                                     </div>
                                 </div>
@@ -103,7 +105,7 @@ async function ScoreCard(p: {
                         </div>
                     </div>
                 </div>
-                <div class="text-sm text-opacity-75 text-base-content p-0.5 flex flex-row flex-wrap gap-2 items-center">
+                <div class="flex flex-row flex-wrap items-center gap-2 p-0.5 text-sm text-base-content text-opacity-75">
                     <StatusBadge status={beatmapset.status as BeatmapsetStatus} />
                     <DiffIconLink setId={beatmapset.id} diffId={score.beatmap.id}
                         diff={score.beatmap.difficulty_rating} size={16}
@@ -113,18 +115,18 @@ async function ScoreCard(p: {
                             <i class="fa-solid fa-user-pen" />
                         </div>
                     </Link>
-                    <div class="hidden md:flex flex-row gap-1 items-center">
+                    <div class="hidden flex-row items-center gap-1 md:flex">
                         <i class="fa-solid fa-star fa-xs" />
                         <span class="stats_sr">{beatmap.difficulty_rating}</span>
                     </div>
-                    <div class="hidden md:flex flex-row gap-1 items-center">
+                    <div class="hidden flex-row items-center gap-1 md:flex">
                         <span class="stats_bpm">{beatmap.bpm}bpm</span>
                     </div>
-                    <div class="hidden md:flex flex-row gap-1 items-center">
+                    <div class="hidden flex-row items-center gap-1 md:flex">
                         <i class="fa-solid fa-stopwatch fa-xs" />
                         <span class="stats_len">{secondsToTime(beatmap.total_length)}</span>
                     </div>
-                    <div class="ms-auto tooltip" data-tip={moment(score.created_at).format("MMMM Do YYYY")}>
+                    <div class="tooltip ms-auto" data-tip={moment(score.created_at).format("MMMM Do YYYY")}>
                         {moment(score.created_at).fromNow()}
                     </div>
                     <div>#{p.position}</div>

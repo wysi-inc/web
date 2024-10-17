@@ -1,10 +1,10 @@
 import Link from "./Link";
 
 const Footer = () => (
-    <footer class="bg-base-100 w-full p-4 grid grid-cols-3 items-center">
+    <footer class="grid w-full grid-cols-3 items-center bg-base-100 p-4">
         <div>
             <div class="chat chat-start">
-                <div class="chat-image avatar">
+                <div class="avatar chat-image">
                     <Link css="size-10 " url="/users/17018032">
                         <img loading="lazy" src="/public/img/m4rti.webp" alt="m4rti's pfp" class="size-10 rounded-full" />
                     </Link>
