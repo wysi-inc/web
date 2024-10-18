@@ -184,7 +184,7 @@
         "user": {
             "user_doesnt_exist": "Dieser Nutzer existiert nicht",
             "user_is_bot": "Dieser Nutzer ist ein Bot, Bots werden noch nicht unterstützt :(",
-            "users_fail": "Nutzer kann nicht abgerufen werden"
+            "users_fail": "Nutzer können nicht abgerufen werden"
         }
     }
 }
