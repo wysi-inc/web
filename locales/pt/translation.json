@@ -1,31 +1,31 @@
 {
     "nav": {
-        "home": "Início",
-        "users": "Usuários",
+        "home": "Página inicial",
+        "users": "Utilizadores",
         "rankings": "Classificações",
         "beatmaps": "Beatmaps",
-        "support": "Ajuda",
+        "support": "Suporte",
         "about": "Sobre",
         "search": "Buscar",
         "search_someone": "Buscar alguém",
-        "help": "Ajude a traduzir o site!",
+        "help": "Ajuda a traduzir o sítio web!",
         "log": {
-            "login": "Registre com osu!",
-            "logout": "Sair",
+            "login": "Inicia sessão com osu!",
+            "logout": "Finalizar sessão",
             "osu": "perfil osu!",
             "wysi": "perfil wysi!"
         }
     },
     "home": {
         "welcome": "Bem-vindo ao wysi727.com!",
-        "foss": "Um site alternativo do osu! com fonte aberta",
+        "foss": "Um sítio web alternativo do osu! com fonte aberta",
         "built": "Feito com bun e htmx",
-        "profiles": "Perfis do usuário",
+        "profiles": "Perfis do utilizador",
         "stats": "Estatísticas das 100 melhores pontuações",
         "search": "Buscar beatmap",
         "calculator": "Feito em PP Calculator",
-        "setup": "Compartilhe seu setup!",
-        "collections": "Envie suas coleções!"
+        "setup": "Partilha a tua definição!",
+        "collections": "Envia as tuas coleções!"
     },
     "user": {
         "sections": {
@@ -37,18 +37,18 @@
                 "title": "Medalhas",
                 "recent": "Medalhas recentes",
                 "rarest": "Medalhas mais raras",
-                "show": "Mostrar tudo"
+                "show": "Exibir tudo"
             },
             "year": {
                 "title": "Ano",
-                "info": "Isso é uma recapitulação desse ano, os dados serão redefinidos em 1 de janeiro"
+                "info": "Isto é uma recapitulação deste ano, os dados serão redefinidos em 1 de janeiro"
             },
             "most": "Mais jogado",
             "scores": {
                 "title": "Pontuações",
-                "info": "Passe o mouse sobre um PP cinza para ver o valor PP (se FC)",
+                "info": "Passa o rato num PP cinza para veres o valor PP (se FC)",
                 "tabs": {
-                    "pinned": "Fixado",
+                    "pinned": "Destacado",
                     "best": "Melhor",
                     "first": "Primeiro",
                     "recent": "Recente"
@@ -59,36 +59,36 @@
                 "tabs": {
                     "global": "Global",
                     "country": "País",
-                    "plays": "Partidas",
+                    "plays": "Jogos",
                     "replays": "Repetições"
                 }
             },
             "summary": {
-                "title": "Sumário",
-                "info": "Esse é um sumário rápido de top 100 partidas suas",
+                "title": "Resumo",
+                "info": "Este é um sumário rápido do teu top 100 jogadas",
                 "tabs": {
                     "hit_ratios": "Taxas de acerto",
                     "grade_ratios": "Taxas de nota",
-                    "average_play": "Partida média"
+                    "average_play": "Jogo médio"
                 }
             },
             "collections": {
                 "title": "Coleções",
-                "info": "Quaisquer beatmap não presente no site osu! não será baixado (ex: osu!trainer, diferenças personalizadas e beatmaps não enviados...)"
+                "info": "Qualquer beatmaps não presente no sítio web osu! não será transferido (ex: treinador osu!, diferenças personalizadas, beatmaps não submetidos...)"
             },
             "setup": {
-                "title": "Configuração",
+                "title": "Setup",
                 "tabs": {
                     "tablet": "Tablet",
                     "keyboard": "Teclado",
-                    "mouse": "Cursor",
+                    "mouse": "Rato",
                     "peripherals": "Periféricos",
                     "computer": "Computador"
                 },
                 "components": {
                     "os": "SO",
-                    "cpu": "CPU",
-                    "gpu": "GPU",
+                    "cpu": "Processador",
+                    "gpu": "Placa gráfica",
                     "ram": "RAM",
                     "storage": "Armazenamento",
                     "motherboard": "Placa-mãe",
@@ -99,7 +99,7 @@
                     "mousepad": "Mousepad",
                     "keypad": "Keypad",
                     "headphones": "Fones de ouvido",
-                    "camera": "Câmera",
+                    "camera": "Câmara",
                     "microphone": "Microfone",
                     "monitor": "Monitor",
                     "audio": "Áudio",
@@ -115,7 +115,7 @@
                 "position": "Posição",
                 "dpi": "Sensibilidade",
                 "mult": "Multiplicador",
-                "kb_layout": "Layout do teclado",
+                "kb_layout": "Disposição do teclado",
                 "layout": {
                     "k0": "Nenhum",
                     "k2": "2 teclas",
@@ -132,13 +132,13 @@
         "total_score": "Pontuação total",
         "global_rank": "Classificação global",
         "country_rank": "Classificação nacional",
-        "play_time": "Tempo de partida",
+        "play_time": "Tempo de jogo",
         "play_count": "Vezes jogadas",
         "total_hits": "Acertos totais",
         "replays_watched": "Repetições vistas",
-        "hits_x_play": "Acertos x Partida",
+        "hits_x_play": "Acertos x Jogo",
         "followers": "Seguidores",
-        "online": "Online"
+        "online": "Ativo"
     },
     "score": {
         "status": {
@@ -182,9 +182,9 @@
     },
     "alerts": {
         "user": {
-            "user_doesnt_exist": "Este usuário não existe",
-            "user_is_bot": "Este usuário é um bot, os bots não são suportados ainda :(",
-            "users_fail": "Falhou ao obter usuários"
+            "user_doesnt_exist": "Este utilizador não existe",
+            "user_is_bot": "Este utilizador é um bot, os bots não são suportados ainda :(",
+            "users_fail": "Falhou ao obter utilizadores"
         }
     }
 }
