@@ -19,7 +19,7 @@
     "home": {
         "welcome": "歡迎使用 wysi727.com！",
         "foss": "一個開源的 osu! 網站替代方案",
-        "built": "Built with bun and htmx",
+        "built": "由 Bun 與 HTMX 搭建而成",
         "profiles": "用戶個人資料",
         "stats": "Top 100 Score stats",
         "search": "搜尋圖譜",
@@ -32,7 +32,7 @@
             "expand": "擴展",
             "about": "關於",
             "beatmaps": "圖譜",
-            "top": "Top",
+            "top": "最高分",
             "medals": {
                 "title": "成就",
                 "recent": "最近達成的成就",
@@ -163,7 +163,7 @@
             "ranked": "已進榜",
             "guest": "Guest",
             "loved": "Loved",
-            "nominated": "Nominated",
+            "nominated": "已提名",
             "pending": "待處理",
             "graveyard": "拋棄",
             "wip": "製作中",
