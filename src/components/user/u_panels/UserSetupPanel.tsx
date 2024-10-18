@@ -24,11 +24,8 @@ async function UserSetupPanel(p: {
         <div id="setup_panel">
             <form id="setup_form" class="group/setup flex flex-col-reverse items-end gap-3"
                 hx-put={editable ? `/users/${p.page_id}/setup/submit` : undefined}
-                hx-trigger="submit"
-                hx-swap="afterbegin" hx-target="#alerts"
-                hx-on--after-request="document.getElementById('setup_fieldset').disabled = true"
-            >
-                <fieldset class="grid w-full gap-4 md:grid-cols-2" id="setup_fieldset" disabled>
+                hx-trigger="submit" hx-swap="innerHTML" hx-target="#setup_panel">
+                <fieldset class="flex flex-col w-full gap-4" id="setup_fieldset" disabled>
                     <TabletDisplay lang={p.lang} editable={editable} tablet={p.setup?.tablet} />
                     <KeyboardDisplay lang={p.lang} editable={editable} keyboard={p.setup?.keyboard} />
                     <MouseDisplay lang={p.lang} editable={editable} mouse={p.setup?.mouse} />

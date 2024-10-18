@@ -1,12 +1,13 @@
 scale();
 function scale() {
-    const auto_scale = document.getElementsByClassName("auto_scale");
-    for (let item of auto_scale) {
+    const entries = document.getElementsByClassName("auto_scale");
+    for (let item of entries) {
         const rect = item.getBoundingClientRect();
         const parent = item.parentElement.getBoundingClientRect();
         const scale = Math.min(
             parent.width / rect.width,
-            parent.height / rect.height
+            parent.height / rect.height,
+            1
         );
         item.style.transform = `scale(${scale})`;
     }
@@ -66,12 +67,15 @@ function formChange(e) {
                 tablet.style.width = `${data.w}px`;
                 tablet.style.height = `${data.h}px`;
             }
+            scale();
             break;
         case "tablet_size_w":
             tablet.style.width = `${value}px`;
+            scale();
             break;
         case "tablet_size_h":
             tablet.style.height = `${value}px`;
+            scale();
             break;
         case "tablet_area_w":
             tablet_area.style.width = `${value}px`;
@@ -104,6 +108,7 @@ function setKeyboard(name, keys = []) {
     for (let k of keys) {
         keyboard_display.getElementById(`keyboard_key_${k}`).checked = true;
     }
+    scale();
 }
 
 function resetTablet() {
@@ -117,4 +122,5 @@ function resetTablet() {
     tablet_area.style.left = `${o?.position?.x || 0}px`;
     tablet_area.style.top = `${o?.position?.y || 0}px`;
     tablet_area.style.transform = `translate(-50%, -50%) rotate(${o?.position?.r || 0}deg)`;
+    scale();
 }

@@ -51,35 +51,37 @@ function KeyboardDisplay(p: {
     if (!p.editable && empty) return <></>;
 
     return (<>
-        <div class={`${empty ? "block group-has-[:disabled]/setup:hidden" : ""} grid grid-cols-3 rounded-lg bg-base-200`}>
-            <div class="center relative flex">
+        <div class={`${empty ? "block group-has-[:disabled]/setup:hidden" : ""} grid md:grid-cols-3 rounded-lg bg-base-200`}>
+            <div class="p-4 pt-9 relative">
                 <h1 class="absolute left-3 top-2">{txt(p.lang, "user.sections.setup.tabs.keyboard")}</h1>
-                <div class="flex h-36 items-center justify-center" id="keyboard_display">
-                    {(() => {
-                        switch (p.keyboard?.layout) {
-                            case "k2":
-                                return (<K2 keys={p.keyboard?.keys} />);
-                            case "k3":
-                                return (<K3 keys={p.keyboard?.keys} />);
-                            case "k3_uwu":
-                                return (<K3_Wooting_UwU keys={p.keyboard?.keys} />);
-                            case "k3_sayo":
-                                return (<K3_SayoDevice keys={p.keyboard?.keys} />);
-                            case "k4":
-                                return (<K4 keys={p.keyboard?.keys} />);
-                            case "k60":
-                                return (<K60 keys={p.keyboard?.keys} />);
-                            case "k75":
-                                return (<K75 keys={p.keyboard?.keys} />);
-                            case "ktkl":
-                                return (<KTkl keys={p.keyboard?.keys} />);
-                            case "kfull":
-                                return (<KFull keys={p.keyboard?.keys} />);
-                        }
-                    })()}
+                <div class="center flex max-h-72 max-w-full">
+                    <div class="flex h-36 items-center justify-center auto_scale" id="keyboard_display">
+                        {(() => {
+                            switch (p.keyboard?.layout) {
+                                case "k2":
+                                    return (<K2 keys={p.keyboard?.keys} />);
+                                case "k3":
+                                    return (<K3 keys={p.keyboard?.keys} />);
+                                case "k3_uwu":
+                                    return (<K3_Wooting_UwU keys={p.keyboard?.keys} />);
+                                case "k3_sayo":
+                                    return (<K3_SayoDevice keys={p.keyboard?.keys} />);
+                                case "k4":
+                                    return (<K4 keys={p.keyboard?.keys} />);
+                                case "k60":
+                                    return (<K60 keys={p.keyboard?.keys} />);
+                                case "k75":
+                                    return (<K75 keys={p.keyboard?.keys} />);
+                                case "ktkl":
+                                    return (<KTkl keys={p.keyboard?.keys} />);
+                                case "kfull":
+                                    return (<KFull keys={p.keyboard?.keys} />);
+                            }
+                        })()}
+                    </div>
                 </div>
             </div>
-            <div class="relative col-span-2 flex grow flex-col gap-2 rounded-lg bg-base-300 px-5 py-4">
+            <div class="relative md:col-span-2 flex grow flex-col gap-2 rounded-lg bg-base-300 px-5 py-4">
                 {p.editable ?
                     <div class="tooltip tooltip-left absolute right-2 top-1 cursor-help"
                         data-tip={`Click on the keys to highlight them.`}>
@@ -111,21 +113,24 @@ function KeyboardDisplay(p: {
                     </label>
                 </div>
                 <div>
-                    <label class="peer/rt hiden has-[:checked]:block">
+                    <label class="peer/rt group-has-[:disabled]/setup:hidden has-[:checked]:block">
                         <div class="flex flex-row items-center gap-2">
                             <input type="checkbox" checked={p.keyboard?.rt || false} class="checkbox-secondary checkbox checkbox-xs group-has-[:disabled]/setup:hidden" name="keyboard_rt" />
                             <div class="text-xs">Rapid Trigger:</div>
                         </div>
                     </label>
-                    <div class="hidden flex-row flex-wrap gap-2 peer-has-[:checked]/rt:flex">
-                        <div class="w-48">
-                            <SetupInput editable={p.editable} id="keyboard_actuation" name="Actuation" measure="mm" value={p.keyboard?.actuation} type="number" />
-                        </div>
-                        <div class="w-32">
-                            <SetupInput editable={p.editable} id="keyboard_press" name="↓" measure="mm" value={p.keyboard?.press} type="number" />
-                        </div>
-                        <div class="w-32">
-                            <SetupInput editable={p.editable} id="keyboard_release" name="↑" measure="mm" value={p.keyboard?.release} type="number" />
+                    <div class="hidden peer-has-[:checked]/rt:block">
+                        <div class="text-xs hidden group-has-[:disabled]/setup:block">Rapid Trigger:</div>
+                        <div class="flex flex-row flex-wrap gap-2">
+                            <div class="w-44">
+                                <SetupInput editable={p.editable} id="keyboard_actuation" name="Actuation" measure="mm" value={p.keyboard?.actuation} type="number" />
+                            </div>
+                            <div class="w-24">
+                                <SetupInput editable={p.editable} id="keyboard_press" name="↓" measure="mm" value={p.keyboard?.press} type="number" />
+                            </div>
+                            <div class="w-24">
+                                <SetupInput editable={p.editable} id="keyboard_release" name="↑" measure="mm" value={p.keyboard?.release} type="number" />
+                            </div>
                         </div>
                     </div>
                 </div>
