@@ -19,7 +19,7 @@ function BaseHtml(p: {
                 <script src="/public/js/utils.js" />
                 <Navbar lang={p.lang} user={p.user} />
                 <div id="alerts" class="alerts fixed right-4 top-20 z-50 flex flex-col gap-2 pt-2" />
-                <main class="w-screen mil:w-mil">
+                <main class="w-screen mil:w-mil relative">
                     <div id="main" class="flex flex-col gap-4 bg-neutral shadow-lg md:p-4" hx-history-elt>
                         {p.children}
                     </div>
