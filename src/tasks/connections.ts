@@ -16,10 +16,10 @@ export async function connect_mongodb() {
 
 export async function connect_osu() {
     const res = await api_auth_client();
-    if (!res) {
+    if (res.error) {
         log.error("Something went wrong when connecting to the osu!API");
         return;
     }
     log.success("Connected to the osu!API");
-    OSU_API_TOKEN = res.access_token;
+    OSU_API_TOKEN = res.data.access_token;
 }

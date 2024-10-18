@@ -6,7 +6,7 @@ function UserMostPanel(p: {
     user?: UserCookie | null
 }) {
     return (
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
             <UserMostList id={p.user_id} offset={0} limit={6} user={p.user} />
         </div>
     );

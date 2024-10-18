@@ -1,10 +1,10 @@
+import { txt } from "@/src/tasks/files";
 import type { UserCookie } from "@/src/types/users";
+import LanguageSwitcher from "./LanguageSwitcher";
+import Link from "./Link";
+import Logged from "./Logged";
 import Login from "./Login";
 import Search from "./Search";
-import Logged from "./Logged";
-import Link from "./Link";
-import LanguageSwitcher from "./LanguageSwitcher";
-import { txt } from "@/src/tasks/files";
 
 function Navbar(p: { lang: string, user?: UserCookie | null }) {
 
@@ -46,7 +46,7 @@ function Navbar(p: { lang: string, user?: UserCookie | null }) {
                         <summary class="btn btn-square btn-ghost">
                             <i class="fa-solid fa-bars fa-lg" />
                         </summary>
-                        <ul class="mt-6 menu dropdown-content w-56 bg-base-100 rounded-box z-[1] p-2 shadow">
+                        <ul class="dropdown-content menu z-[1] mt-6 w-56 rounded-box bg-base-100 p-2 shadow">
                             {routes.map(route =>
                                 <li onclick="document.getElementById('nav_burger')?.removeAttribute('open')">
                                     <Link url={route.url} css="btn btn-ghost flex flex-row gap-2">
@@ -55,14 +55,14 @@ function Navbar(p: { lang: string, user?: UserCookie | null }) {
                                     </Link>
                                 </li>
                             )}
-                            <div class="divider sm:hidden m-0" />
+                            <div class="divider m-0 sm:hidden" />
                             <li class="md:hidden">
                                 <button class="btn btn-ghost sm:hidden" aria-label="theme switch" data-toggle-theme="dracula,pastel" data-act-class="ACTIVECLASS">
                                     <i class="fa-solid fa-circle-half-stroke" />
                                     <span>Theme</span>
                                 </button>
                             </li>
-                            <div class="divider md:hidden m-0" />
+                            <div class="divider m-0 md:hidden" />
                             <li class="md:hidden">
                                 <a href="https://github.com/wysi-inc" target="_blank" class="btn btn-ghost" aria-label="Github">
                                     <i class="fa-brands fa-github fa-lg" />

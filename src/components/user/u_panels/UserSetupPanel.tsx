@@ -1,9 +1,9 @@
-import TabletDisplay from "./setup/TabletDisplay";
-import KeyboardDisplay from "./setup/KeyboardDisplay";
+import { UserModel, type Setup } from "@/src/models/User";
 import Computer from "./setup/Computer";
+import KeyboardDisplay from "./setup/KeyboardDisplay";
 import MouseDisplay from "./setup/MouseDisplay";
 import Peripherals from "./setup/Peripherals";
-import { UserModel, type Setup } from "@/src/models/User";
+import TabletDisplay from "./setup/TabletDisplay";
 
 async function UserSetupPanel(p: {
     logged_id?: number,
@@ -24,11 +24,8 @@ async function UserSetupPanel(p: {
         <div id="setup_panel">
             <form id="setup_form" class="group/setup flex flex-col-reverse items-end gap-3"
                 hx-put={editable ? `/users/${p.page_id}/setup/submit` : undefined}
-                hx-trigger="submit"
-                hx-swap="afterbegin" hx-target="#alerts"
-                hx-on--after-request="document.getElementById('setup_fieldset').disabled = true"
-            >
-                <fieldset class="grid w-full gap-4 md:grid-cols-2" id="setup_fieldset" disabled>
+                hx-trigger="submit" hx-swap="innerHTML" hx-target="#setup_panel">
+                <fieldset class="flex flex-col w-full gap-4" id="setup_fieldset" disabled>
                     <TabletDisplay lang={p.lang} editable={editable} tablet={p.setup?.tablet} />
                     <KeyboardDisplay lang={p.lang} editable={editable} keyboard={p.setup?.keyboard} />
                     <MouseDisplay lang={p.lang} editable={editable} mouse={p.setup?.mouse} />
@@ -36,20 +33,19 @@ async function UserSetupPanel(p: {
                     <Computer lang={p.lang} editable={editable} computer={p.setup?.computer} />
                 </fieldset>
                 {editable ?
-                    <div class="flex flex-row gap-2 -mt-12 pt-1">
-                        <button type="button" class="btn btn-accent btn-square btn-sm hidden group-has-[:disabled]/setup:block"
+                    <div class="-mt-12 flex flex-row gap-2 pt-1">
+                        <button type="button" class="btn btn-square btn-accent btn-sm hidden group-has-[:disabled]/setup:block"
                             id="setup_form_edit" onclick="document.getElementById('setup_fieldset').disabled = false">
                             <i class="fa-solid fa-pen-to-square" />
                         </button>
-                        <button type="reset" class="btn btn-error btn-square btn-sm group-has-[:disabled]/setup:hidden"
-                            id="setup_form_cancel" onclick="document.getElementById('setup_form').reset(); document.getElementById('setup_fieldset').disabled = true">
-                            <i class="fa-solid fa-xmark" />
-                        </button>
-                        <button type="submit" class="btn btn-success btn-square btn-sm group-has-[:disabled]/setup:hidden"
+                        <button type="submit" class="btn btn-square btn-success btn-sm group-has-[:disabled]/setup:hidden"
                             id="setup_form_submit">
                             <i class="fa-solid fa-check" />
                         </button>
-                        <script src={`/public/js/setup.js?v=${Date.now()}`} />
+                        <button type="reset" class="btn btn-square btn-error btn-sm group-has-[:disabled]/setup:hidden"
+                            id="setup_form_cancel">
+                            <i class="fa-solid fa-xmark" />
+                        </button>
                     </div> : null
                 }
             </form>

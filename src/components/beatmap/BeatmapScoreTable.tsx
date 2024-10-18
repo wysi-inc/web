@@ -21,11 +21,15 @@ async function BeatmapScoreTable(p: {
     const mods = Object.entries(p.body);
     const mod_names = mods.map(([name, value]) => value === 'on' ? name.split("-")[1] : null).filter(v => v !== null) as Mod[];
 
-    const scores = await api_scores_beatmap(p.b_id, {
+    const res = await api_scores_beatmap(p.b_id, {
         mode: p.mode,
         mods: mod_names,
         type: p.type || "global",
     }, p.user);
+
+    if (res.error) return <>{res.data}</>;
+
+    const scores = res.data;
 
     if (!scores || !scores.scores || scores.scores.length <= 0) {
         return <>No scores found :(</>;
@@ -37,8 +41,8 @@ async function BeatmapScoreTable(p: {
             <BigScore score={scores.userScore.score} mode={p.mode} position={scores.userScore.position} />
             : null
         }
-        <div class="overflow-x-scroll overflow-y-hidden">
-            <table class="table table-xs table-zebra bg-base-300 rounded-lg">
+        <div class="overflow-y-hidden overflow-x-scroll">
+            <table class="table-zebra table table-xs rounded-lg bg-base-300">
                 <thead>
                     <tr>
                         <th></th>
@@ -55,10 +59,10 @@ async function BeatmapScoreTable(p: {
                 </thead>
                 <tbody>
                     {scores.scores.map((score, i) =>
-                        <tr class="hover:bg-base-300 hover:rounded-lg group">
+                        <tr class="group hover:rounded-lg hover:bg-base-300">
                             <th>#{i + 1}</th>
                             <td>
-                                <div class="flex flex-row gap-2 items-center">
+                                <div class="flex flex-row items-center gap-2">
                                     <Flag name={score.user.country.name} code={score.user.country.code} />
                                     <SubdivisionFlag user_id={score.user.id} />
                                     <Clan user_id={score.user.id} />
@@ -70,7 +74,7 @@ async function BeatmapScoreTable(p: {
                             <td>{(score.accuracy * 100).toFixed(2)}%</td>
                             <td>
                                 {score.perfect ?
-                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-sky-500">
+                                    <span class="bg-gradient-to-r from-emerald-500 to-sky-500 bg-clip-text text-transparent">
                                         {score.max_combo.toLocaleString()}x
                                     </span> :
                                     <span>
@@ -92,7 +96,7 @@ async function BeatmapScoreTable(p: {
                                 </span>
                             </td>
                             <td>
-                                <Link url={`/scores/${score.id}`} css="right-2 top-1.5 invisible group-hover:visible">
+                                <Link url={`/scores/${score.id}`} css="invisible right-2 top-1.5 group-hover:visible">
                                     <i class="fa-solid fa-eye" />
                                 </Link>
                             </td>

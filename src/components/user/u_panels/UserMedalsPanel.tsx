@@ -1,6 +1,6 @@
-import MedalBadge from "./u_components/Medal";
 import { Medal } from "@/src/models/Medal";
 import type { UserMedal } from "@/src/types/medals";
+import MedalBadge from "./u_components/Medal";
 
 type ProfileMedal = {
     achievement_id: number,
@@ -60,11 +60,11 @@ async function UserMedalsPanel(p: {
 
     return (<>
         <div class="flex flex-row flex-wrap gap-4">
-            <div class="rounded-lg bg-neutral shadow-lg grow">
+            <div class="grow rounded-lg bg-neutral shadow-lg">
                 <div class="p-1 px-2 text-neutral-content">
                     Recent Medals
                 </div>
-                <div class="flex flex-row gap-2 flex-wrap p-4 bg-base-300 rounded-lg">
+                <div class="flex flex-row flex-wrap gap-2 rounded-lg bg-base-300 p-4">
                     {recent_medals.length > 0 ? recent_medals.map((m) =>
                         <MedalBadge medal={m} />
                     ) :
@@ -72,11 +72,11 @@ async function UserMedalsPanel(p: {
                     }
                 </div>
             </div>
-            <div class="rounded-lg bg-neutral shadow-lg grow">
+            <div class="grow rounded-lg bg-neutral shadow-lg">
                 <div class="p-1 px-2 text-neutral-content">
                     Rarest Medal ({rarest_medal?.rarity?.toFixed(2)}%)
                 </div>
-                <div class="flex p-4 bg-base-300 rounded-lg justify-center items-center">
+                <div class="flex items-center justify-center rounded-lg bg-base-300 p-4">
                     {rarest_medal ?
                         <MedalBadge medal={rarest_medal} /> :
                         <span>???</span>
@@ -85,29 +85,29 @@ async function UserMedalsPanel(p: {
             </div>
         </div>
         <details class="group mt-4">
-            <summary class="overflow-hidden group-open:mb-4 cursor-pointer bg-neutral rounded-lg flex flex-row gap-4 justify-between items-center px-4 py-2">
+            <summary class="flex cursor-pointer flex-row items-center justify-between gap-4 overflow-hidden rounded-lg bg-neutral px-4 py-2 group-open:mb-4">
                 <div class="flex flex-row items-center gap-4">
-                    <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
-                    <h6 class="group-open:hidden flex">Show All</h6>
-                    <h6 class="group-open:flex hidden">Show Less</h6>
+                    <i class="fa-solid fa-caret-down transform duration-200 ease-out group-open:rotate-180" />
+                    <h6 class="flex group-open:hidden">Show All</h6>
+                    <h6 class="hidden group-open:flex">Show Less</h6>
                 </div>
                 <div class="flex flex-row items-center gap-2">
-                    <progress class="hidden sm:inline-block progress progress-accent w-52" value={p.medals?.length} max={db_medals.length} />
+                    <progress class="progress progress-accent hidden w-52 sm:inline-block" value={p.medals?.length} max={db_medals.length} />
                     <span>{p.medals?.length} / {db_medals.length}</span>
                 </div>
             </summary>
             <div class="flex flex-col gap-4 overflow-hidden">
                 {Object.entries(categories).map(([key, vals]) =>
                     <div class="rounded-lg bg-neutral shadow-lg">
-                        <div class="text-neutral-content py-1 px-2 flex flex-row justify-between items-center">
+                        <div class="flex flex-row items-center justify-between px-2 py-1 text-neutral-content">
                             <span>{key}</span>
                             <div class="flex flex-row items-center gap-2">
-                                <progress class="hidden sm:inline-block progress progress-accent w-52" value={vals.count} max={vals.medals.length} />
+                                <progress class="progress progress-accent hidden w-52 sm:inline-block" value={vals.count} max={vals.medals.length} />
                                 <span>{vals.count} / {vals.medals.length}</span>
                             </div>
                         </div>
-                        <div class="rounded-lg flex flex-row justify-between grow bg-base-300">
-                            <div class="p-4 flex flex-row grow justify-center flex-wrap gap-2">
+                        <div class="flex grow flex-row justify-between rounded-lg bg-base-300">
+                            <div class="flex grow flex-row flex-wrap justify-center gap-2 p-4">
                                 {vals.medals.sort((m) => m.ordering - m.ordering).map((m) =>
                                     <MedalBadge medal={m} />
                                 )}

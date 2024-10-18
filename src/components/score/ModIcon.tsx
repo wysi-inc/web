@@ -67,7 +67,7 @@ const ModIcon = ({ mod }: Props) => {
     }
 
     return (
-        <div class="tooltip px-2 py-1 rounded-full" data-tip={mod} style={{ backgroundColor: color }}>
+        <div class="tooltip rounded-full px-2 py-1" data-tip={mod} style={{ backgroundColor: color }}>
             <img loading="lazy" src={`/public/img/mods/${name}.svg`} class="h-3 w-4 text-center text-xs text-black" alt={mod} />
         </div>
     );

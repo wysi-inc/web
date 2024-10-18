@@ -6,7 +6,7 @@ type Props = {
 }
 const StatusBadge = ({ status }: Props) => {
     return (
-        <div class="text-opacity-100 badge badge-sm m-0 border-0" style={{
+        <div class="badge badge-sm m-0 border-0 text-opacity-100" style={{
             color: "#000",
             backgroundColor: colors.beatmap[status]
         }}>

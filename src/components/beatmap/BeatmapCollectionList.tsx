@@ -1,6 +1,6 @@
-import { BeatmapCollectionCard } from "./BeatmapCollectionCard";
-import LoadMoreButton from "../web/LoadMoreButton";
 import { UserModel } from "@/src/models/User";
+import LoadMoreButton from "../web/LoadMoreButton";
+import { BeatmapCollectionCard } from "./BeatmapCollectionCard";
 
 async function BeatmapCollectionList(p: {
     user_id: number,

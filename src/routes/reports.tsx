@@ -1,6 +1,6 @@
 import { Elysia, t } from "elysia";
-import { deleteReport, submitReport } from "../db/web/reports";
 import Alert from "../components/web/Alert";
+import { deleteReport, submitReport } from "../db/web/reports";
 import { isAdmin } from "./admin";
 import { plugins } from "./plugins";
 
@@ -13,7 +13,7 @@ export const reportRoutes = new Elysia({ prefix: '/report' })
         }
         const report_id = await submitReport(body, Number(params.target), user.id);
         if (report_id === -1) return <Alert type="error" msg="Your report could not be submited. Try again later!" />;
-        return <Alert type="success" msg={<>Your report has been submited. Report number: <kbd class="text-white kbd kbd-sm">{report_id}</kbd></>} />;
+        return <Alert type="success" msg={<>Your report has been submited. Report number: <kbd class="kbd kbd-sm text-white">{report_id}</kbd></>} />;
     }, {
         body: t.Object({
             category: t.String(),

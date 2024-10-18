@@ -1,10 +1,10 @@
-import OnlineDot from "../user/u_panels/u_components/OnlineDot";
-import Flag from "../user/u_panels/u_components/Flag";
-import Link from "./Link";
-import SubdivisionFlag from "../user/u_panels/u_components/SubdivisionFlag";
-import Clan from "../user/u_panels/u_components/Clan";
 import { api_site_search } from "@/src/api/site";
 import { RESULT_LIMIT } from "@/src/libs/constants";
+import Clan from "../user/u_panels/u_components/Clan";
+import Flag from "../user/u_panels/u_components/Flag";
+import OnlineDot from "../user/u_panels/u_components/OnlineDot";
+import SubdivisionFlag from "../user/u_panels/u_components/SubdivisionFlag";
+import Link from "./Link";
 
 async function SearchResults(p: { query?: string; }) {
     if (!p.query) return <></>;

@@ -3,16 +3,32 @@ import { api_me_details } from "../api/user";
 import { TokenModel } from "../models/Tokens";
 import { UserModel } from "../models/User";
 import type { Jwt, UserAuth } from "../types/api";
-import type { UserCookie } from "../types/users";
+import type { Res, UserBasic, UserCookie } from "../types/users";
 
-export async function userAuthData(code: string) {
-    const res = await api_auth_user(code);
-    if (!res) return;
-    const user = await api_me_details(res.access_token);
-    if (!user) return;
-    await save_user_token(user.id, res);
-    const user_role = await UserModel.findOne({ user_id: user.id });
-    return { data: user, role: user_role?.role };
+export async function userAuthData(code: string): Promise<Res<{ user: UserBasic, role: any }>> {
+    const auth_res = await api_auth_user(code);
+    if (auth_res.error) return {
+        error: true,
+        code: 500,
+        data: auth_res.data
+    };
+    const user_res = await api_me_details(auth_res.data.access_token);
+    if (user_res.error) return {
+        error: true,
+        code: 500,
+        data: user_res.data
+
+    };
+    await save_user_token(user_res.data.id, auth_res.data);
+    const user_role = await UserModel.findOne({ user_id: user_res.data.id });
+    return {
+        error: false,
+        code: 200,
+        data: {
+            user: user_res.data,
+            role: user_role?.role || ""
+        }
+    }
 }
 
 export async function verifyUser(jwt: Jwt, cookie?: any): Promise<UserCookie | null> {

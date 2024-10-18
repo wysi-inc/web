@@ -12,7 +12,7 @@ function Logged(p: { user: UserCookie, lang: string }) {
                     <Avatar id={p.user.id} />
                 </div>
             </summary>
-            <ul class="mt-6 menu dropdown-content w-56 bg-base-100 rounded-box z-[1] p-2 shadow">
+            <ul class="dropdown-content menu z-[1] mt-6 w-56 rounded-box bg-base-100 p-2 shadow">
                 <li onclick="document.getElementById('usr_burger')?.removeAttribute('open')">
                     <Link url={`/users/${p.user.id}`} css="btn btn-ghost flex">
                         <i class="fa-solid fa-user" />

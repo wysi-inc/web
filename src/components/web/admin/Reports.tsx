@@ -1,13 +1,13 @@
 import { ReportModel } from "@/src/models/Report";
-import Link from "../Link";
 import moment from "moment";
+import Link from "../Link";
 import { CopyText } from "./Utils";
 
 async function Reports() {
     const reports = await ReportModel.find().lean();
     if (!reports) return <>No reports</>;
     return (
-        <table class="table table-zebra table-xs">
+        <table class="table-zebra table table-xs">
             <tr>
                 <th>ID</th>
                 <th>Author</th>
@@ -24,7 +24,7 @@ async function Reports() {
                     <td>{r.description}</td>
                     <td>{moment(r.timestamp).fromNow()}</td>
                     <td>
-                        <button class="btn btn-error btn-xs btn-square"
+                        <button class="btn btn-square btn-error btn-xs"
                             hx-delete={`/report/${r.id}`} hx-target={`#report-${r.id}`} hx-swap="delete">
                             <i class="fa-regular fa-trash-can" />
                         </button>

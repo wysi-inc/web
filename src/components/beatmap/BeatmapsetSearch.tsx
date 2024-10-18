@@ -1,7 +1,7 @@
 import type { MinoBeatmapSort } from "@/src/types/beatmaps";
+import Title from "../web/Title";
 import DoubleSlider from "./DoubleSlider";
 import Input from "./Input";
-import Title from "../web/Title";
 
 const CheckBox = (p: { name: string, label: string, code: number, checked?: boolean }) => (
     <input class="btn btn-sm" type="checkbox" aria-label={p.label}
@@ -26,16 +26,9 @@ const Sort = (p: { label: string, code: MinoBeatmapSort }) => (
 
 function BeatmapsetSearch() {
     return (<>
-        <Title title="Beatmap Listing" />
         <form class="flex flex-col rounded-lg bg-base-300 drop-shadow-lg" id="search-form"
             hx-post="/beatmapsets/list" hx-trigger="load, input delay:500ms"
-            hx-target="#beatmap-search-results" hx-indicator="#beatmap-search-indicator"
-            hx-on--before-request={`
-            document.getElementById('beatmap-search-results').innerHTML=\`
-                <div class="col-span-full flex items-center justify-center">
-                    <span class="loading loading-spinner loading-md mx-auto" />
-                </div>\`;
-            `}>
+            hx-target="#beatmap-search-results">
             <div class="flex flex-col gap-4 rounded-lg bg-base-100 p-4">
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <Input name="Title" placeholder="Beatmap Title or Artist" />
@@ -104,7 +97,11 @@ function BeatmapsetSearch() {
                 </div>
             </div>
         </form>
-        <script>sliders()</script>
+        <Title title="Beatmap Listing"
+            scripts={[
+                "/public/js/sliders.js"
+            ]}
+        />
         <output id="beatmap-search-results" class="grid grid-cols-1 gap-4 rounded-lg bg-base-100 p-4 empty:hidden md:grid-cols-2">
             <div class="col-span-full flex items-center justify-center">
                 <span class="loading loading-spinner loading-md mx-auto" />

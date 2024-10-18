@@ -2,10 +2,10 @@ import { api_beatmapset_details } from "@/src/api/beatmap";
 import { colors } from "@/src/libs/colors";
 import type { Beatmapset } from "@/src/types/beatmaps";
 import type { AdvanceUser, Mode } from "@/src/types/osu";
+import type { UserCookie } from "@/src/types/users";
 import BeatmapsetCard from "../../beatmap/BeatmapsetCard";
 import UserCard from "../UserCard";
 import BarChart from "./u_components/BarChart";
-import type { UserCookie } from "@/src/types/users";
 
 async function UserYearPanel(p: {
     user_id: number,
@@ -126,11 +126,11 @@ async function UserYearPanel(p: {
                     <h4 class="flex flex-row flex-wrap justify-between gap-2 px-2 py-1">
                         Top mappers:
                     </h4>
-                    <div class="bg-base-300 rounded-lg p-1 flex flex-col gap-1 grow">
+                    <div class="flex grow flex-col gap-1 rounded-lg bg-base-300 p-1">
                         {mappers.map(m => (
                             <div class="flex flex-row items-center gap-4">
-                                <div class="min-w-12 p-1 text-lg text-center">{m.count}x</div>
-                                <div class="p-1 grow"><UserCard user_id={m.id} username={m.name} /></div>
+                                <div class="min-w-12 p-1 text-center text-lg">{m.count}x</div>
+                                <div class="grow p-1"><UserCard user_id={m.id} username={m.name} /></div>
                             </div>
                         ))}
                     </div>
@@ -139,11 +139,11 @@ async function UserYearPanel(p: {
                     <h4 class="flex flex-row flex-wrap justify-between gap-2 px-2 py-1">
                         Top songs:
                     </h4>
-                    <div class="bg-base-300 rounded-lg p-1 flex flex-col gap-2 grow">
+                    <div class="flex grow flex-col gap-2 rounded-lg bg-base-300 p-1">
                         {beatmaps.map(b => (
                             <div class="flex flex-row items-center gap-4">
-                                <div class="min-w-12 p-1 text-lg text-center">{b[1]}x</div>
-                                <div class="p-1 grow"><BeatmapsetCard b_set={b[0]} /></div>
+                                <div class="min-w-12 p-1 text-center text-lg">{b[1]}x</div>
+                                <div class="grow p-1"><BeatmapsetCard b_set={b[0]} /></div>
                             </div>
                         ))}
                     </div>

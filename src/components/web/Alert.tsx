@@ -25,10 +25,10 @@ function Alert(p: {
     }
 
     return (<>
-        <div role="alert" class={`alert ${color} py-2 px-4`}>
+        <div role="alert" class={`${color} alert px-4 py-2`}>
             {icon}
             <span>{p.msg}</span>
-            <button class="btn btn-circle btn-xs btn-ghost"
+            <button class="btn btn-circle btn-ghost btn-xs"
                 onclick="this.parentNode.remove()">
                 <i class="fa-solid fa-xmark" />
             </button>

@@ -1,44 +1,44 @@
+import { env } from "bun";
 import { Elysia, error, t } from "elysia";
+import About from "../components/web/About";
 import Home from "../components/web/Home";
 import SearchResults from "../components/web/SearchResults";
-import HtmxPage from "../libs/routes";
-import { userAuthData } from "../libs/auth";
-import About from "../components/web/About";
-import { save_donation } from "../db/web/save_donation";
 import Support from "../components/web/Support";
 import Testing from "../components/web/Testing";
-import { env } from "bun";
-import { plugins } from "./plugins";
+import { save_donation } from "../db/web/save_donation";
+import { userAuthData } from "../libs/auth";
+import HtmxPage from "../libs/routes";
 import type { UserCookie } from "../types/users";
+import { plugins } from "./plugins";
 
 const searchBody = { body: t.Object({ q: t.String() }) };
 const oauthQuery = { query: t.Object({ code: t.String(), state: t.Any() }) };
 
 export const baseRoutes = new Elysia({ prefix: '' })
     .use(plugins)
-    .get("/", async ({ lang, request, user }) => (
-        <HtmxPage lang={lang} req={request} user={user}>
+    .get("/", async ({ lang, request, set, user }) => (
+        <HtmxPage lang={lang} set={set} req={request} user={user}>
             <Home lang={lang} />
         </HtmxPage>
     ))
-    .get("/about", async ({ lang, request, user }) => (
-        <HtmxPage lang={lang} req={request} user={user}>
+    .get("/about", async ({ lang, request, set, user }) => (
+        <HtmxPage lang={lang} set={set} req={request} user={user}>
             <About />
         </HtmxPage>
     ))
-    .get("/support", async ({ lang, request, user }) => (
-        <HtmxPage lang={lang} req={request} user={user}>
+    .get("/support", async ({ lang, request, set, user }) => (
+        <HtmxPage lang={lang} set={set} req={request} user={user}>
             <Support />
         </HtmxPage>
     ))
     .post("/search", ({ body }) => (
         <SearchResults query={body.q} />
     ), searchBody)
-    .get("/wiki/*", async ({ lang, params, request, user }) => {
+    .get("/testing", async ({ lang, params, request, set, user }) => {
         if (env.STATE === "dev") {
             return (
-                <HtmxPage lang={lang} req={request} user={user}>
-                    <Testing params={Object.values(params)} />
+                <HtmxPage lang={lang} set={set} req={request} user={user}>
+                    <Testing />
                 </HtmxPage>
             )
         }
@@ -54,14 +54,14 @@ export const baseRoutes = new Elysia({ prefix: '' })
     })
     .get("/oauth", async ({ query, set, cookie, jwt }) => {
         const res = await userAuthData(query.code);
-        if (!res) return error(500, "error");
+        if (res.error) return error(res.code, res.data);
         const user: UserCookie = {
-            id: res.data.id,
-            username: res.data.username,
-            role: res.role
+            id: res.data.user.id,
+            username: res.data.user.username,
+            role: res.data.role
         }
         cookie.auth.set({
-            value: await jwt.sign(user),
+            value: await jwt.sign(user as any),
             httpOnly: true,
             maxAge: 60 * 60 * 24 * 2,
             path: "/",

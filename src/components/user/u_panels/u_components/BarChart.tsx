@@ -14,17 +14,17 @@ function BarChart(p: {
     return (<>
         {p.user ? <>
             <span id="total_grades_loading" class="loading loading-spinner loading-md hidden" />
-            <button class="btn btn-ghost btn-sm btn-square" aria-label="get grades" onclick="getGrades(); this.classList.add('hidden')">
+            <button class="btn btn-square btn-ghost btn-sm" aria-label="get grades" onclick="getGrades(); this.classList.add('hidden')">
                 <i class="fa-solid fa-magnifying-glass" />
             </button>
         </> : null
         }
-        <div class="grow flex flex-col gap-1" id={p.name} data-user={JSON.stringify(p.user)}>
-            <div class="flex flex-row flex-wrap gap-2 justify-around">
+        <div class="flex grow flex-col gap-1" id={p.name} data-user={JSON.stringify(p.user)}>
+            <div class="flex flex-row flex-wrap justify-around gap-2">
                 {Array.from(p.data.entries()).map(([label, count]) => (
                     count.count === 0 ? null : (
                         <div>
-                            <div class="px-4 text-center rounded-full"
+                            <div class="rounded-full px-4 text-center"
                                 style={{
                                     backgroundColor: count.color,
                                     color: "#000"
@@ -38,7 +38,7 @@ function BarChart(p: {
                     )
                 ))}
             </div>
-            <div class="flex flex-row h-2 rounded-lg overflow-hidden">
+            <div class="flex h-2 flex-row overflow-hidden rounded-lg">
                 {Array.from(p.data.values()).map((d) => (
                     d.count === 0 ? null :
                         <div class="h-full" style={{

@@ -1,7 +1,7 @@
 import { UserModel } from "@/src/models/User";
 import Badge, { BADGES } from "../../user/Badge";
-import { CopyText } from "./Utils";
 import Link from "../Link";
+import { CopyText } from "./Utils";
 
 async function Badges() {
     const user_badges = await UserModel.find({ wysi_badges: { $exists: true, $type: 'array', $ne: [] } });

@@ -1,6 +1,6 @@
 import type { BeatmapCategory } from "@/src/types/osu";
-import UserBeatmapsList from "./u_components/UserBeatmapsList";
 import type { UserCookie } from "@/src/types/users";
+import UserBeatmapsList from "./u_components/UserBeatmapsList";
 
 type Props = {
     id: number;
@@ -20,17 +20,17 @@ const UserBeatmapsPanel = ({ id, category, user }: Props) => {
         const current = type === category;
         return <>
             <input type="radio" name="beatmaps-tabs" role="tab"
-                class={`tab text-nowrap ${col}`}
+                class={`${col} tab text-nowrap`}
                 aria-label={title} checked={current} aria-selected={current}
                 hx-trigger="click once"
                 hx-post={`/users/${id}/0/lists/beatmapsets/${type}?offset=0&limit=6`}
                 hx-target={`#beatmaps-list-${type}`} hx-disable={current}
                 hx-indicator={`#beatmaps-loading-${type}`} id={`${type}_tab`} aria-controls={`${type}_tabpannel`}
             />
-            <div role="tabpanel" class="tab-content pt-4 col-span-full" aria-labelledby={`${type}_tab`} id={`${type}_tabpannel`}>
-                <div id={`beatmaps-list-${type}`} class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div role="tabpanel" class="tab-content col-span-full pt-4" aria-labelledby={`${type}_tab`} id={`${type}_tabpannel`}>
+                <div id={`beatmaps-list-${type}`} class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     {!current &&
-                        <span class="loading loading-spinner htmx-indicator" id={`beatmaps-loading-${type}`} />
+                        <span class="htmx-indicator loading loading-spinner" id={`beatmaps-loading-${type}`} />
                     }
                     {current &&
                         <UserBeatmapsList id={id} category={category} offset={0} limit={6} user={user} />

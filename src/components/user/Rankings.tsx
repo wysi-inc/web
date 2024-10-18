@@ -1,9 +1,9 @@
-import type { Category, Mode } from "@/src/types/osu";
-import Pagination from "./u_panels/u_components/Pagination";
-import UserRankingCard from "./UserRankingCard";
-import Title from "../web/Title";
-import type { UserCookie } from "@/src/types/users";
 import { api_ranking } from "@/src/api/ranking";
+import type { Category, Mode } from "@/src/types/osu";
+import type { UserCookie } from "@/src/types/users";
+import Title from "../web/Title";
+import UserRankingCard from "./UserRankingCard";
+import Pagination from "./u_panels/u_components/Pagination";
 
 async function Rankings(p: {
     mode: Mode,
@@ -20,16 +20,16 @@ async function Rankings(p: {
     if (p.country && p.category !== "score") {
         obj.country = p.country.toUpperCase();
     }
-    const users = await api_ranking(p.mode, p.category, obj, p.user);
+    const res = await api_ranking(p.mode, p.category, obj, p.user);
 
-    if (!users) return <div>No users fount</div>;
-    if (!users.ranking) return <div>No users found</div>;
+    if (res.error) return <div>{res.data}</div>;
+    if (!res.data.ranking) return <div>No users found</div>;
 
     return (<>
         <Title title="Rankings" />
         <Pagination mode={p.mode} category={p.category} page={p.page} country={p.country} />
-        <div class="overflow-x-scroll overflow-y-hidden">
-            <table class="table table-sm p-4 bg-base-100 rounded-lg">
+        <div class="overflow-y-hidden overflow-x-scroll">
+            <table class="table table-sm rounded-lg bg-base-100 p-4">
                 <tr>
                     <th></th>
                     <th></th>
@@ -38,7 +38,7 @@ async function Rankings(p: {
                     <th class="text-center text-neutral-content">Play Time</th>
                     <th class="text-center text-neutral-content">Online</th>
                 </tr>
-                {users.ranking.map((row, i) =>
+                {res.data.ranking.map((row, i) =>
                     <UserRankingCard row={row} page={p.page} index={i} category={p.category} />
                 )}
             </table>

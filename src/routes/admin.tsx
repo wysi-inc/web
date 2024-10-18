@@ -32,8 +32,8 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
         .put("/", async ({ body, user }) => {
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await addBadge(body.id, Number(body.badge));
-            if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
-            return <Alert type='success' msg={res.msg} />;
+            if (res.error) return error(res.code, <Alert type="error" msg={res.data} />);
+            return <Alert type='success' msg={res.data} />;
         }, {
             body: t.Object({
                 id: t.String(),
@@ -43,14 +43,14 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
         .delete("/:id/:badge", async ({ params, user }) => {
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await removeBadge(Number(params.id), Number(params.badge));
-            if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
-            return <Alert type='success' msg={res.msg} />;
+            if (res.error) return error(res.code, <Alert type="error" msg={res.data} />);
+            return <Alert type='success' msg={res.data} />;
         })
         .post("/:id/sort", async ({ params, body, user }) => {
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await sortBadges(Number(params.id), body.badges);
-            if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
-            return res.msg;
+            if (res.error) return error(res.code, <Alert type="error" msg={res.data} />);
+            return res.data;
         }, {
             body: t.Object({
                 badges: t.Array(t.String())
@@ -61,8 +61,8 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
         .put("/", async ({ body, user }) => {
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await setRole(body.id, body.role);
-            if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
-            return <Alert type='success' msg={res.msg} />;
+            if (res.error) return error(res.code, <Alert type="error" msg={res.data} />);
+            return <Alert type='success' msg={res.data} />;
         }, {
             body: t.Object({
                 id: t.Numeric(),
@@ -72,16 +72,16 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
         .delete("/:id", async ({ params, user }) => {
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await removeRole(Number(params.id));
-            if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
-            return <Alert type='success' msg={res.msg} />;
+            if (res.error) return error(res.code, <Alert type="error" msg={res.data} />);
+            return <Alert type='success' msg={res.data} />;
         })
     )
     .group("/tablets", _ => _
         .put("/", async ({ body, user }) => {
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await addTablet(body.name, body.w, body.h);
-            if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
-            return <TabletListItem id={res.id || ""} tablet={body} />;
+            if (res.error) return error(res.code, <Alert type="error" msg={res.data} />);
+            return <TabletListItem id={res.data} tablet={body} />;
         }, {
             body: t.Object({
                 name: t.String(),
@@ -92,7 +92,7 @@ export const adminRoutes = new Elysia({ prefix: '/admin' })
         .delete("/:id", async ({ params, user }) => {
             if (!user || !isAdmin(user)) return error(401, "Unauthorized")
             const res = await removeTablet(params.id);
-            if (res.error) return error(res.code, <Alert type="error" msg={res.msg} />);
-            return <Alert type='success' msg={res.msg} />;
+            if (res.error) return error(res.code, <Alert type="error" msg={res.data} />);
+            return <Alert type='success' msg={res.data} />;
         })
     )

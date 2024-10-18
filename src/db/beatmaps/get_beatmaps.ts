@@ -1,7 +1,9 @@
+import { api_beatmapset_search } from "@/src/api/beatmap";
 import { RESULT_LIMIT } from "@/src/libs/constants";
 import type { BeatmapQuery, Beatmapset } from "@/src/types/beatmaps";
+import type { Res } from "@/src/types/users";
 
-export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ sets: Beatmapset[], offset: number }> {
+export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<Res<Beatmapset[]>> {
 
     const url = new URL("https://catboy.best/api/v2/search");
     if (q) {
@@ -88,11 +90,5 @@ export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<{ 
         }
     }
 
-    const res = await fetch(url.toString(), {
-        headers: { Referer: "https://wysi727.com" }
-    });
-
-    if (!res.ok) return { sets: [], offset: 0 };
-    const sets = await res.json() as Beatmapset[];
-    return { sets, offset: Number(offset) + sets.length };
+    return await api_beatmapset_search(url.toString());
 }

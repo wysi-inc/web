@@ -1,14 +1,13 @@
-import moment from "moment";
-import DiffIcon from "./DiffIcon";
-import StatusBadge from "./StatusBadge";
-import DiffStats from "./DiffStats";
-import AudioPlayButton from "../web/AudioPlayButton";
-import Link from "../web/Link";
+import { api_beatmapset_details } from "@/src/api/beatmap";
 import type { Beatmap, BeatmapsetStatus } from "@/src/types/beatmaps";
 import type { Mode } from "@/src/types/osu";
-import Title from "../web/Title";
-import { api_beatmapset_details } from "@/src/api/beatmap";
 import type { UserCookie } from "@/src/types/users";
+import moment from "moment";
+import Link from "../web/Link";
+import Title from "../web/Title";
+import DiffIcon from "./DiffIcon";
+import DiffStats from "./DiffStats";
+import StatusBadge from "./StatusBadge";
 
 type Props = {
     set_id: number,
@@ -18,9 +17,10 @@ type Props = {
 
 async function BeatmapsetPage(p: Props) {
 
-    const beatmapset = await api_beatmapset_details(p.set_id, p.user);
-    if (!beatmapset) return <h1>Not found</h1>;
+    const res = await api_beatmapset_details(p.set_id, p.user);
+    if (res.error) return <>{res.data}</>;
 
+    const beatmapset = res.data;
     const cardImg = `https://assets.ppy.sh/beatmaps/${beatmapset.id}/covers/card.jpg?${beatmapset.id}`;
 
     const hasLeaderboards = [
@@ -42,21 +42,18 @@ async function BeatmapsetPage(p: Props) {
     beatmaps.forEach(b => beatmap_map.set(b.id, b))
 
     return (<>
-        <Title
-            title={`${beatmapset.title} - ${beatmapset.artist}`}
-            route={`/beatmapsets/${beatmapset.id}/${diff.id}`}
-        />
+        <Title title={`${beatmapset.title} - ${beatmapset.artist}`} scripts={["/public/js/beatmapset.js"]} />
         <div class="flex flex-col rounded-lg shadow-lg"
             style={{ backgroundImage: `url('${cardImg}')`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
-            <div class="text-base-content bg-base-300 bg-opacity-65 backdrop-blur-sm grid md:grid-cols-5 flex-wrap gap-4 justify-between rounded-lg p-4">
-                <div class="md:col-span-3 flex flex-col gap-4">
+            <div class="grid flex-wrap justify-between gap-4 rounded-lg bg-base-300 bg-opacity-65 p-4 text-base-content backdrop-blur-sm md:grid-cols-5">
+                <div class="flex flex-col gap-4 md:col-span-3">
                     <img loading="lazy" src={cardImg} class="rounded-lg" alt="cover"
                         style={{
                             objectFit: "cover",
                             objectPosition: "center"
                         }} />
                     <div class="flex flex-row gap-4">
-                        <div class="flex flex-col gap-1 justify-between">
+                        <div class="flex flex-col justify-between gap-1">
                             <a href={`https://osu.ppy.sh/beatmapsets/${beatmapset.id}`} target="_blank">
                                 <h1 class="text-2xl text-base-content">
                                     {beatmapset.title}
@@ -67,22 +64,22 @@ async function BeatmapsetPage(p: Props) {
                             </p>
                         </div>
                     </div>
-                    <div class="mt-auto flex flex-row gap-4 flex-wrap items-center">
+                    <div class="mt-auto flex flex-row flex-wrap items-center gap-4">
                         <StatusBadge status={beatmapset.status as BeatmapsetStatus} />
-                        <div class="flex flex-row gap-2 items-center">
+                        <div class="flex flex-row items-center gap-2">
                             <i class="fa-solid fa-circle-play" />
                             <span>{beatmapset.play_count.toLocaleString()}</span>
                         </div>
-                        <div class="flex flex-row gap-2 items-center">
+                        <div class="flex flex-row items-center gap-2">
                             <i class="fa-solid fa-heart" />
                             <span>{beatmapset.favourite_count.toLocaleString()}</span>
                         </div>
                     </div>
                     <div class="flex flex-row flex-wrap justify-between">
                         {beatmapset.user ?
-                            <div class="flex flex-row gap-2 items-center">
+                            <div class="flex flex-row items-center gap-2">
                                 <img loading="lazy" src={beatmapset.user.avatar_url}
-                                    class="rounded-lg size-12"
+                                    class="size-12 rounded-lg"
                                     alt="mapper" />
                                 <div class="flex flex-col gap-1 text-base-content ">
                                     <Link url={`/users/${beatmapset.user_id}`}>
@@ -95,12 +92,18 @@ async function BeatmapsetPage(p: Props) {
                             </div> : null
                         }
                         <div class="join">
-                            <AudioPlayButton join
-                                beatmap_id={diff.id}
-                                set_id={beatmapset.id}
-                                beatmap_title={beatmapset.title}
-                                beatmap_artist={beatmapset.artist}
-                            />
+                            <button class="btn btn-info join-item"
+                                data-song={JSON.stringify({
+                                    src: `https://catboy.best/preview/audio/${p.beatmap_id}`,
+                                    cover: `https://assets.ppy.sh/beatmaps/${p.set_id}/covers/card.jpg?${p.set_id}`,
+                                    title: beatmapset.title,
+                                    artist: beatmapset.artist,
+                                    set_id: beatmapset.id,
+                                    map_id: p.beatmap_id,
+                                })} onclick="on_card_click(this);">
+                                <i class="fa-solid fa-play fa-lg block group-aria-pressed/audio:hidden" />
+                                <i class="fa-solid fa-pause fa-lg hidden group-aria-pressed/audio:block" />
+                            </button >
                             <a class="btn btn-info join-item" href={`osu://s/${beatmapset.id}`}>
                                 <i class="fa-solid fa-angles-down" />
                             </a>
@@ -109,11 +112,11 @@ async function BeatmapsetPage(p: Props) {
                             </a>
                         </div>
                     </div>
-                    <form class="flex flex-row flex-wrap gap-1 p-1 rounded-lg bg-base-content bg-opacity-25"
+                    <form class="flex flex-row flex-wrap gap-1 rounded-lg bg-base-content bg-opacity-25 p-1"
                         id="beatmapsets_form" data-beatmaps={JSON.stringify(Array.from(beatmap_map.entries()))}>
                         {beatmaps.map(b =>
                             <span data-tip={`★ ${b.difficulty_rating} [${b.version}]`} class={`${b.id === diff.id ? "outline" : ""} 
-                                m-0 tooltip cursor-pointer outline-base-content flex items-center justify-center p-1 rounded-md outline-2`}>
+                                tooltip m-0 flex cursor-pointer items-center justify-center rounded-md p-1 outline-2 outline-base-content`}>
                                 <Link url={`/beatmapsets/${p.set_id}/${b.id}`}>
                                     <DiffIcon sr={b.difficulty_rating} size={20} mode={b.mode as Mode} />
                                 </Link>
@@ -128,18 +131,18 @@ async function BeatmapsetPage(p: Props) {
                 <div class="md:col-span-2"><DiffStats diff={diff} /></div>
             </div>
         </div >
-        <details class="group bg-base-300 rounded-lg">
-            <summary class="cursor-pointer rounded-lg flex flex-row gap-4 items-center justify-between py-2 px-4">
-                <div class="flex flex-row gap-4 items-center">
-                    <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
+        <details class="group rounded-lg bg-base-300">
+            <summary class="flex cursor-pointer flex-row items-center justify-between gap-4 rounded-lg px-4 py-2">
+                <div class="flex flex-row items-center gap-4">
+                    <i class="fa-solid fa-caret-down transform duration-200 ease-out group-open:rotate-180" />
                     <h6>Details</h6>
                 </div>
             </summary>
-            <div class="grid md:grid-cols-3 gap-4 p-4 rounded-lg bg-base-100">
+            <div class="grid gap-4 rounded-lg bg-base-100 p-4 md:grid-cols-3">
                 <div class="flex flex-col gap-2 text-sm">
                     <div class="rounded-lg bg-base-200 shadow-lg">
                         <div class="px-2">Nominators:</div>
-                        <div class="p-2 rounded-lg bg-base-300 flex flex-row flex-wrap gap-1">
+                        <div class="flex flex-row flex-wrap gap-1 rounded-lg bg-base-300 p-2">
                             {beatmapset.nominations?.map(nom =>
                                 <Link url={`/users/${nom}`}>{nom}</Link>
                             )}
@@ -147,7 +150,7 @@ async function BeatmapsetPage(p: Props) {
                     </div>
                     <div class="rounded-lg bg-base-200 shadow-lg">
                         <div class="px-2">Ratings:</div>
-                        <div class="p-2 rounded-lg bg-base-300 h-32">
+                        <div class="h-32 rounded-lg bg-base-300 p-2">
                             <canvas id="chart-ratings" data-vals={JSON.stringify(beatmapset.ratings)} />
                         </div>
                     </div>
@@ -155,31 +158,31 @@ async function BeatmapsetPage(p: Props) {
                         <div class="grid grid-cols-2 gap-2">
                             <div class="rounded-lg bg-base-200 shadow-lg">
                                 <div class="px-2">Genre:</div>
-                                <div class="p-2 rounded-lg bg-base-300">
+                                <div class="rounded-lg bg-base-300 p-2">
                                     {beatmapset.genre?.name}
                                 </div>
                             </div>
                             <div class="rounded-lg bg-base-200 shadow-lg">
                                 <div class="px-2">Language:</div>
-                                <div class="p-2 rounded-lg bg-base-300">
+                                <div class="rounded-lg bg-base-300 p-2">
                                     {beatmapset.language?.name}
                                 </div>
                             </div>
                         </div>
                         <div class="rounded-lg bg-base-200 shadow-lg">
                             <div class="px-2">Tags:</div>
-                            <div class="p-2 rounded-lg flex flex-row flex-wrap gap-2 bg-base-300">
+                            <div class="flex flex-row flex-wrap gap-2 rounded-lg bg-base-300 p-2">
                                 {beatmapset.tags.split(" ").map(tag => (
-                                    <div class="badge badge-sm badge-neutral">{tag}</div>
+                                    <div class="badge badge-neutral badge-sm">{tag}</div>
                                 ))}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="rounded-lg md:col-span-2">
-                    <div class="rounded-lg text-sm bg-base-200 shadow-lg">
+                    <div class="rounded-lg bg-base-200 text-sm shadow-lg">
                         <div class="px-2">Description:</div>
-                        <div class="bbcode description p-2 rounded-lg bg-base-300">
+                        <div class="bbcode description rounded-lg bg-base-300 p-2">
                             {beatmapset.description?.description}
                         </div>
                     </div>
@@ -201,7 +204,11 @@ async function BeatmapsetPage(p: Props) {
                 }
             </div > : null
         }
-        <script>getBeatmapStats();getRatings();</script>
+        <Title title={`/beatmapsets/${p.set_id}/${diff.id}`}
+            scripts={[
+                "https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js", "/public/js/beatmapset.js"
+            ]}
+        />
     </>);
 }
 

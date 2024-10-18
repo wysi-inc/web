@@ -1,25 +1,26 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 export const content = [
-    './src/**/*.tsx',
-    './public/**/*.js'
+    "./src/**/*.tsx",
+    "./public/**/*.js"
 ];
 export const safelist = [
-    'text-base-content',
+    "text-base-content",
 ];
 export const theme = {
     extend: {
         width: {
-            'mil': '1000px',
+            "mil": "1000px",
         },
         screens: {
-            'mil': '1000px',
+            "mil": "1000px",
         },
         dropShadow: {
-            'solid': [
-                '0 1px 1px rgba(0, 0, 0, .5)',
-                '0 1px 1px rgba(0, 0, 0, .5)'
+            "solid": [
+                "0 1px 1px rgba(0, 0, 0, .5)",
+                "0 1px 1px rgba(0, 0, 0, .5)"
             ]
         },
+        "spin- slow": "spin 3s linear infinite",
     },
 };
 export const plugins = [require("daisyui")];

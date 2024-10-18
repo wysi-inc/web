@@ -1,12 +1,12 @@
-import type { Mode } from "@/src/types/osu";
-import type { ColorCount, UserCookie } from "@/src/types/users";
-import BarChart from "./u_components/BarChart";
-import ModIcon from "../../score/ModIcon";
-import Grade from "../../score/Grade";
+import { api_scores_user_category } from "@/src/api/score";
 import { colors } from "@/src/libs/colors";
 import { secondsToTime } from "@/src/libs/web_utils";
-import { api_scores_user_category } from "@/src/api/score";
+import type { Mode } from "@/src/types/osu";
 import type { ScoreType } from "@/src/types/score";
+import type { ColorCount, UserCookie } from "@/src/types/users";
+import Grade from "../../score/Grade";
+import ModIcon from "../../score/ModIcon";
+import BarChart from "./u_components/BarChart";
 
 async function UserSummaryPanel(p: {
     user_id: number,
@@ -143,9 +143,9 @@ async function UserSummaryPanel(p: {
 
     return (<>
         <div class="flex flex-col gap-4">
-            <div class="shadow-lg flex flex-col grow col-span-full bg-neutral rounded-lg">
-                <div class="py-1 px-2 text-neutral-content">Average Play:</div>
-                <div class="flex grow flex-row flex-wrap gap-4 items-center p-4 rounded-lg bg-base-300">
+            <div class="col-span-full flex grow flex-col rounded-lg bg-neutral shadow-lg">
+                <div class="px-2 py-1 text-neutral-content">Average Play:</div>
+                <div class="flex grow flex-row flex-wrap items-center gap-4 rounded-lg bg-base-300 p-4">
                     <Grade grade={max_grade} />
                     <div>{avg_pp}pp</div>
                     <div><i class="fa-solid fa-crosshairs" /> {avg_acc}%</div>
@@ -159,15 +159,15 @@ async function UserSummaryPanel(p: {
                     </div>
                 </div>
             </div>
-            <div class="grid md:grid-cols-2 gap-4">
-                <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
-                    <div class="py-1 px-2 flex flex-row text-neutral-content justify-between">
+            <div class="grid gap-4 md:grid-cols-2">
+                <div class="flex flex-col rounded-lg bg-neutral shadow-lg">
+                    <div class="flex flex-row justify-between px-2 py-1 text-neutral-content">
                         <div>Performance:</div>
                     </div>
-                    <div class="flex grow flex-col gap-1 p-4 rounded-lg justify-center bg-base-300">
+                    <div class="flex grow flex-col justify-center gap-1 rounded-lg bg-base-300 p-4">
                         <div class="flex flex-row items-center justify-between gap-4">
                             <span>{max_pp}pp</span>
-                            <span class="flex flex-row shadow-lg grow h-2 rounded-full overflow-hidden">
+                            <span class="flex h-2 grow flex-row overflow-hidden rounded-full shadow-lg">
                                 {grade_letters.map(grade => <div style={{
                                     backgroundColor: (colors.grades as any)[grade.toLowerCase()], width: `${grade_length}%`
                                 }} />)}
@@ -175,19 +175,19 @@ async function UserSummaryPanel(p: {
                             <span>{min_pp}pp</span>
                         </div>
                         <div class="flex flex-row items-center justify-between gap-2 px-2">
-                            <div class="h-2 border-base-content border-b border-l grow" />
+                            <div class="h-2 grow border-b border-l border-base-content" />
                             <span>{max_pp - min_pp}pp</span>
-                            <div class="h-2 border-base-content border-b border-r grow" />
+                            <div class="h-2 grow border-b border-r border-base-content" />
                         </div>
                     </div>
                 </div>
-                <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
-                    <div class="py-1 px-2 flex flex-row text-neutral-content justify-between">
+                <div class="flex flex-col rounded-lg bg-neutral shadow-lg">
+                    <div class="flex flex-row justify-between px-2 py-1 text-neutral-content">
                         <div>Mods:</div>
                     </div>
-                    <div class="flex grow flex-row flex-wrap gap-4 items-center p-4 rounded-lg bg-base-300">
+                    <div class="flex grow flex-row flex-wrap items-center gap-4 rounded-lg bg-base-300 p-4">
                         {Array.from(mods_counts.entries()).sort((a, b) => b[1] - a[1]).map(([mods, count]) => (
-                            <div class="flex flex-row gap-1 items-center">
+                            <div class="flex flex-row items-center gap-1">
                                 {mods.split('-').map(mod => (
                                     <ModIcon mod={mod} />
                                 ))}
@@ -196,19 +196,19 @@ async function UserSummaryPanel(p: {
                         ))}
                     </div>
                 </div>
-                <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
-                    <div class="py-1 px-2 flex flex-row text-neutral-content justify-between">
+                <div class="flex flex-col rounded-lg bg-neutral shadow-lg">
+                    <div class="flex flex-row justify-between px-2 py-1 text-neutral-content">
                         <div>Grades:</div>
                     </div>
-                    <div class="grow p-4 rounded-lg bg-base-300 flex items-center">
+                    <div class="flex grow items-center rounded-lg bg-base-300 p-4">
                         <BarChart name="top_grades" data={grade_counts} />
                     </div>
                 </div>
-                <div class="shadow-lg flex flex-col bg-neutral rounded-lg">
-                    <div class="py-1 px-2 flex flex-row text-neutral-content justify-between">
+                <div class="flex flex-col rounded-lg bg-neutral shadow-lg">
+                    <div class="flex flex-row justify-between px-2 py-1 text-neutral-content">
                         <div>Hits:</div>
                     </div>
-                    <div class="grow p-4 rounded-lg bg-base-300 flex items-center">
+                    <div class="flex grow items-center rounded-lg bg-base-300 p-4">
                         <BarChart name="top_hits" data={hit_counts} />
                     </div>
                 </div>

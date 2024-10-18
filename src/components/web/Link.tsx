@@ -16,7 +16,7 @@ function Link(p: {
             hx-indicator="#page-loading"
             data-tip={p.tooltip}
             role={p.role} aria-label={p.label}
-            class={`cursor-pointer ${p.css || "hover:underline underline-offset-2"} ${p.tooltip ? `tooltip` : ""}`}
+            class={`${p.css || "hover:underline underline-offset-2"} ${p.tooltip ? `tooltip` : ""} cursor-pointer`}
         >
             {p.children}
         </a>

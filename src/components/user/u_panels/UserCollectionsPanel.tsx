@@ -1,5 +1,6 @@
-import LoadMoreButton from "../../web/LoadMoreButton";
 import { UserModel, type CollectionDB } from "@/src/models/User";
+import LoadMoreButton from "../../web/LoadMoreButton";
+import Title from "../../web/Title";
 
 type Props = {
     user_id: number,
@@ -20,9 +21,9 @@ async function UserCollectionsPanel({ user_id, logged_id, collections }: Props) 
         {editable ?
             <form id="collections_form" class="flex flex-row items-center justify-between gap-2" hx-swap="innerHTML" hx-target="#colpanel" hx-trigger="submit"
                 hx-encoding='multipart/form-data' hx-post={`/users/${user_id}/collections/parse`} >
-                <fieldset id="collections_fieldset" class="join group" disabled>
-                    <input type="file" accept=".db" name="collection" required class="peer group-disabled:hidden join-item file-input file-input-sm file-input-bordered w-full max-w-xs" />
-                    <button type="submit" class="group-disabled:hidden peer-invalid:hidden join-item btn btn-sm btn-primary">
+                <fieldset id="collections_fieldset" class="group join" disabled>
+                    <input type="file" accept=".db" name="collection" required class="peer file-input join-item file-input-bordered file-input-sm w-full max-w-xs group-disabled:hidden" />
+                    <button type="submit" class="btn btn-primary join-item btn-sm group-disabled:hidden peer-invalid:hidden">
                         <div class="htmx-indicator flex flex-row items-center gap-4">
                             <span class="loading loading-spinner" />
                         </div>
@@ -36,21 +37,21 @@ async function UserCollectionsPanel({ user_id, logged_id, collections }: Props) 
                     }
                 </fieldset>
                 <div class="flex flex-row gap-2">
-                    <button type="button" class="block btn btn-sm btn-accent" id="collections_form_edit">
+                    <button type="button" class="btn btn-accent btn-sm block" id="collections_form_edit">
                         <i class="fa-solid fa-pen-to-square" />
                     </button>
-                    <button type="button" class="hidden btn btn-sm flex-row gap-2 items-center"
+                    <button type="button" class="btn btn-sm hidden flex-row items-center gap-2"
                         id="collections_form_delete" onclick="collections_delete_modal.showModal()">
                         <i class="fa-regular fa-trash-can" />
                         <span>Delete ALL</span>
                     </button>
-                    <button type="reset" class="hidden btn btn-sm btn-error"
+                    <button type="reset" class="btn btn-error btn-sm hidden"
                         id="collections_form_cancel">
                         <i class="fa-solid fa-xmark" />
                     </button>
                     <dialog id="collections_delete_modal" class="modal">
                         <div class="modal-box">
-                            <h3 class="font-bold text-lg">Caution!</h3>
+                            <h3 class="text-lg font-bold">Caution!</h3>
                             <p class="py-4">You are about to DELETE your collections, this action cannot be undone!</p>
                             <p class="py-4">Are you sure you want to proceed?</p>
                             <div class="modal-action">
@@ -65,13 +66,12 @@ async function UserCollectionsPanel({ user_id, logged_id, collections }: Props) 
                         </div>
                     </dialog>
                 </div>
-                <script src="/public/js/collections.js" />
             </form>
-            : <></>
+            : null
         }
         {collections && collections.length > 0 ? <>
             <div class="flex flex-row flex-wrap gap-2">
-                <button class="btn btn-sm btn-info collection-download-button h-8 cursor-pointer flex flex-row gap-2 items-center grow"
+                <button class="collection-download-button btn btn-info btn-sm flex h-8 grow cursor-pointer flex-row items-center gap-2"
                     id={`btn_download_${user_id}`} data-name={`all_collections_${user_id}`} data-ids={JSON.stringify(collections.map(c => c.beatmapsMd5.map(h => h)).flat())}>
                     <i class="fa-regular fa-file-zipper" />
                     <span class="loading loading-spinner loading-xs"
@@ -85,21 +85,21 @@ async function UserCollectionsPanel({ user_id, logged_id, collections }: Props) 
                         0/{collections.map(c => c.beatmapsMd5.length).reduce((total, c) => total + c, 0)}
                     </span>
                 </button>
-                <a class="btn btn-sm btn-disabled btn-secondary">
+                <a class="btn btn-disabled btn-secondary btn-sm">
                     <i class="fa-regular fa-file-code" />
                     Download collection.db (wip)
                 </a>
             </div>
             <div class="flex flex-col gap-2">
                 {collections.map((c) => (
-                    <div class="flex flex-col gap-2 p-2 bg-base-300 rounded-lg">
+                    <div class="flex flex-col gap-2 rounded-lg bg-base-300 p-2">
                         <details class="group">
-                            <summary class="cursor-pointer bg-neutral rounded-lg flex flex-row gap-4 items-center justify-between ps-4">
-                                <div class="flex flex-row gap-4 items-center">
-                                    <i class="group-open:rotate-180 transform ease-out duration-200 fa-solid fa-caret-down" />
+                            <summary class="flex cursor-pointer flex-row items-center justify-between gap-4 rounded-lg bg-neutral ps-4">
+                                <div class="flex flex-row items-center gap-4">
+                                    <i class="fa-solid fa-caret-down transform duration-200 ease-out group-open:rotate-180" />
                                     <h6>{c.name} ({c.beatmapsMd5.length})</h6>
                                 </div>
-                                <button class="btn btn-sm btn-info collection-download-button h-8 cursor-pointer flex flex-row gap-2 items-center"
+                                <button class="collection-download-button btn btn-info btn-sm flex h-8 cursor-pointer flex-row items-center gap-2"
                                     id={`btn_download_${c.name}`} data-name={c.name} data-ids={JSON.stringify(c.beatmapsMd5.map(h => h))}>
                                     <i class="regular fa-regular fa-file-zipper" />
                                     <span class="loading loading-spinner loading-xs"
@@ -120,9 +120,12 @@ async function UserCollectionsPanel({ user_id, logged_id, collections }: Props) 
                         </details>
                     </div>
                 ))}
-                <script type="module" src="/public/js/collectiondownloader.js" />
             </div>
-        </> : <></>}
+        </> : null}
+        <Title scripts={[
+            "/public/js/collections.js",
+            "/public/js/collectiondownloader.js"
+        ]} />
     </div>)
 }
 

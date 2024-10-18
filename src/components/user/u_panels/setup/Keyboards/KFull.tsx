@@ -1,10 +1,10 @@
 import { Empty, Key, type KeyboardProps } from "../KeyboardDisplay";
 
-const KFull = (p: KeyboardProps) => {
-    return <div class="p-1 outline outline-1 rounded-lg w-min">
+export const KFull = (p: KeyboardProps) => (
+    <div class="w-min rounded-lg p-1 outline outline-1">
         <div class="flex flex-row gap-1">
             <div class="flex flex-col">
-                <div class="flex flex-row justify-between mb-1">
+                <div class="mb-1 flex flex-row justify-between">
                     <div class="flex flex-row">
                         <Key char={'esc'} code={'esc'} keys={p.keys} width={1} />
                     </div>
@@ -100,7 +100,7 @@ const KFull = (p: KeyboardProps) => {
                 </div>
             </div>
             <div class="flex flex-col">
-                <div class="flex flex-row items-start mb-1">
+                <div class="mb-1 flex flex-row items-start">
                     <Key char={'pt'} code={'prt'} keys={p.keys} width={1} />
                     <Key char={'lk'} code={'slk'} keys={p.keys} width={1} />
                     <Key char={'pa'} code={'pause'} keys={p.keys} width={1} />
@@ -131,7 +131,7 @@ const KFull = (p: KeyboardProps) => {
             </div>
             <div class="flex flex-row">
                 <div class="flex flex-col">
-                    <div class="flex flex-row items-start mb-1">
+                    <div class="mb-1 flex flex-row items-start">
                         <Empty />
                     </div>
                     <div class="flex flex-row items-start">
@@ -160,7 +160,7 @@ const KFull = (p: KeyboardProps) => {
                     </div>
                 </div>
                 <div class="flex flex-col">
-                    <div class="flex flex-row items-start mb-1">
+                    <div class="mb-1 flex flex-row items-start">
                         <Empty />
                     </div>
                     <div class="flex flex-row items-start">
@@ -172,6 +172,4 @@ const KFull = (p: KeyboardProps) => {
             </div>
         </div>
     </div>
-}
-
-export default KFull;
+);

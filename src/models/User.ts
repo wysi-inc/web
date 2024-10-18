@@ -1,6 +1,7 @@
 import * as mongoose from "mongoose";
 import { SOCIALS } from "../components/user/u_panels/UserSocial";
 import { STR_MAX_LEN } from "../libs/constants";
+import { KEYBOARD_LAYOUTS } from "../components/user/u_panels/setup/KeyboardDisplay";
 
 const collectionDBSchema = new mongoose.Schema({
     name: {
@@ -38,7 +39,7 @@ const setup = new mongoose.Schema({
         },
         layout: {
             type: String,
-            enum: ["k2", "k3", "k4", "k60", "k75", "ktkl", "kfull", ""],
+            enum: KEYBOARD_LAYOUTS,
         },
         keys: [String],
         actuation: Number,

@@ -39,8 +39,8 @@ function About() {
         <div>Special Thanks:</div>
         <ul class="list-disc">
             {thanks.map(t =>
-                <li class="flex flex-row gap-1 flex-wrap">
-                    <a href={t.url} target="_blank" class="hover:-translate-y-1 transform ease-in duration-100 flex flex-row gap-2 items-center link link-info">
+                <li class="flex flex-row flex-wrap gap-1">
+                    <a href={t.url} target="_blank" class="link link-info flex transform flex-row items-center gap-2 duration-100 ease-in hover:-translate-y-1">
                         <i class="fa-solid fa-arrow-up-right-from-square" />
                         <span>{t.title}</span>
                     </a>

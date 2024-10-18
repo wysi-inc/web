@@ -13,23 +13,23 @@ async function AdminAdmins(p: {
 
     return (<div class="flex flex-col gap-2">
         {p.user.role === "owner" ? <>
-            <form class="group flex flex-row flex-wrap gap-2 items-center" hx-put={`/admin/roles`} hx-target="#roles_notify" hx-swap="afterbegin">
-                <fieldset class="peer rounded-full peer join group-disabled:hidden" id="socials_fieldset">
-                    <select required class="rounded-s-full join-item select select-bordered select-sm" name="role">
+            <form class="group flex flex-row flex-wrap items-center gap-2" hx-put={`/admin/roles`} hx-target="#roles_notify" hx-swap="afterbegin">
+                <fieldset class="peer peer join rounded-full group-disabled:hidden" id="socials_fieldset">
+                    <select required class="join-item select select-bordered select-sm rounded-s-full" name="role">
                         <option disabled selected>Choose</option>
                         {ROLES.map(r => <option value={r}>{r}</option>)}
                     </select>
-                    <label class="join-item input input-sm input-bordered flex items-center gap-2">
+                    <label class="input input-sm join-item input-bordered flex items-center gap-2">
                         ID: <input required name="id" type="number" class="grow" />
                     </label>
                 </fieldset>
-                <button class="btn btn-sm btn-circle btn-primary" type="submit">
+                <button class="btn btn-circle btn-primary btn-sm" type="submit">
                     <i class="fa-solid fa-plus" />
                 </button>
             </form>
             <div class="flex flex-col gap-2" id="roles_notify" />
         </> : <></>}
-        <table class="table table-zebra table-xs">
+        <table class="table-zebra table table-xs">
             <tr>
                 <th>ID</th>
                 <th>Username</th>
@@ -40,7 +40,7 @@ async function AdminAdmins(p: {
                 <tr class="hover" id={`role-${u.user_id}`}>
                     <td><CopyText text={u.user_id} /></td>
                     <td>
-                        <Link url={`/users/${u.user_id}`} css="flex flex-row gap-1 items-center">
+                        <Link url={`/users/${u.user_id}`} css="flex flex-row items-center gap-1">
                             <img loading="lazy" src={`https://a.ppy.sh/${u.user_id}?${u.user_id}.png`} class="size-6 rounded-lg" alt="avatar" />
                             <span>{u.username}</span>
                         </Link>
@@ -49,7 +49,7 @@ async function AdminAdmins(p: {
                     {p.user.role === "owner" ?
                         <td>
                             {u.role !== "owner" ?
-                                <button class="btn btn-error btn-xs btn-square" hx-delete={`/admin/roles/${u.user_id}`} hx-swap="delete" hx-target={`#role-${u.user_id}`}>
+                                <button class="btn btn-square btn-error btn-xs" hx-delete={`/admin/roles/${u.user_id}`} hx-swap="delete" hx-target={`#role-${u.user_id}`}>
                                     <i class="fa-regular fa-trash-can" />
                                 </button> : <></>
                             }

@@ -7,7 +7,7 @@ type Props = {
 
 function SubdivisionRanking(p: Props) {
     return (
-        <h2 class="subdivision_ranking text-xl hidden" data-user-id={p.user_id} data-user-mode={p.mode} />
+        <h2 class="subdivision_ranking hidden text-xl" data-user-id={p.user_id} data-user-mode={p.mode} />
     );
 }
 

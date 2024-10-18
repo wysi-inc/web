@@ -3,22 +3,22 @@ import { UserModel } from "@/src/models/User";
 import { log } from "@/src/tasks/logs";
 import type { Res } from "@/src/types/users";
 
-export async function removeBadge(user_id: number, badge: number): Promise<Res> {
+export async function removeBadge(user_id: number, badge: number): Promise<Res<string>> {
     try {
         const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
-            msg: "User doesn't exist!",
+            data: "User doesn't exist!",
             code: 400
         };
         if (!user.wysi_badges) return {
             error: true,
-            msg: "This user doesn't have any badges",
+            data: "This user doesn't have any badges",
             code: 400
         };
         if (!user.wysi_badges.includes(badge)) return {
             error: true,
-            msg: "This user does not have that badge!",
+            data: "This user does not have that badge!",
             code: 400
         };
         user.wysi_badges = user.wysi_badges.filter(b => b !== badge) as any;
@@ -26,20 +26,20 @@ export async function removeBadge(user_id: number, badge: number): Promise<Res> 
         log.info("Badge removed");
         return {
             error: false,
-            msg: "Removed badge from user!",
+            data: "Removed badge from user!",
             code: 200
         };
     } catch (err) {
         log.error("Error removing badge", err);
         return {
             error: true,
-            msg: "Something went wrong",
+            data: "Something went wrong",
             code: 500
         }
     }
 }
 
-export async function addBadge(user_id: string, badge: number): Promise<Res> {
+export async function addBadge(user_id: string, badge: number): Promise<Res<string>> {
     try {
         let user;
         if (isNaN(Number(user_id))) {
@@ -49,13 +49,13 @@ export async function addBadge(user_id: string, badge: number): Promise<Res> {
         }
         if (!user) return {
             error: true,
-            msg: "User doesn't exist!",
+            data: "User doesn't exist!",
             code: 400
         };
         if (!user.wysi_badges) user.wysi_badges = [badge] as any;
         else if (user.wysi_badges.includes(badge)) return {
             error: true,
-            msg: "User already has this badge!",
+            data: "User already has this badge!",
             code: 400
         };
         else user.wysi_badges.push(badge);
@@ -63,25 +63,25 @@ export async function addBadge(user_id: string, badge: number): Promise<Res> {
         log.info("Badge added");
         return {
             error: false,
-            msg: "Added badge to user!",
+            data: "Added badge to user!",
             code: 200
         };
     } catch (err) {
         log.error("Error adding badge", err);
         return {
             error: true,
-            msg: "Something went wrong",
+            data: "Something went wrong",
             code: 500
         }
     }
 }
 
-export async function sortBadges(user_id: number, badges: string[]): Promise<Res> {
+export async function sortBadges(user_id: number, badges: string[]): Promise<Res<string>> {
     try {
         const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
-            msg: "User doesn't exist!",
+            data: "User doesn't exist!",
             code: 400
         };
         user.wysi_badges = badges.map(b => Number(b));
@@ -89,25 +89,25 @@ export async function sortBadges(user_id: number, badges: string[]): Promise<Res
         log.info("Badges sorted");
         return {
             error: false,
-            msg: "Badges sorted!",
+            data: "Badges sorted!",
             code: 200
         };
     } catch (err) {
         log.error("Error sorting badges", err);
         return {
             error: true,
-            msg: "Something went wrong",
+            data: "Something went wrong",
             code: 500
         }
     }
 }
 
-export async function setRole(user_id: number, role: string): Promise<Res> {
+export async function setRole(user_id: number, role: string): Promise<Res<string>> {
     try {
         const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
-            msg: "User doesn't exist!",
+            data: "User doesn't exist!",
             code: 400
         };
         user.role = role as any;
@@ -115,25 +115,25 @@ export async function setRole(user_id: number, role: string): Promise<Res> {
         log.info("Updated user role");
         return {
             error: false,
-            msg: "Updated user role",
+            data: "Updated user role",
             code: 200
         };
     } catch (err) {
         log.error("Error updating role", err);
         return {
             error: true,
-            msg: "Something went wrong",
+            data: "Something went wrong",
             code: 500
         }
     }
 }
 
-export async function removeRole(user_id: number): Promise<Res> {
+export async function removeRole(user_id: number): Promise<Res<string>> {
     try {
         const user = await UserModel.findOne({ user_id });
         if (!user) return {
             error: true,
-            msg: "User doesn't exist!",
+            data: "User doesn't exist!",
             code: 400
         };
         user.role = undefined;
@@ -141,54 +141,53 @@ export async function removeRole(user_id: number): Promise<Res> {
         log.info("Removed user role");
         return {
             error: false,
-            msg: "Removed user role",
+            data: "Removed user role",
             code: 200
         };
     } catch (err) {
         log.error("Error removing role", err);
         return {
             error: true,
-            msg: "Something went wrong",
+            data: "Something went wrong",
             code: 500
         }
     }
 }
 
-export async function addTablet(name: string, w: number, h: number): Promise<Res & { id?: string }> {
+export async function addTablet(name: string, w: number, h: number): Promise<Res<string>> {
     try {
         const tablet = new TabletModel({ name, w, h })
         await tablet.save();
         log.info("Tablet added");
         return {
             error: false,
-            msg: "Tablet added",
+            data: tablet.id,
             code: 201,
-            id: tablet._id.toString()
         };
     } catch (err) {
         log.error("Error adding tablet", err);
         return {
             error: true,
-            msg: "Something went wrong",
+            data: "Something went wrong",
             code: 500
         }
     }
 }
 
-export async function removeTablet(id: string): Promise<Res> {
+export async function removeTablet(id: string): Promise<Res<string>> {
     try {
         await TabletModel.deleteOne({ _id: id });
         log.info("Tablet deleted");
         return {
             error: false,
-            msg: "Tablet deleted",
+            data: "Tablet deleted",
             code: 200
         };
     } catch (err) {
         log.error("Error deleting tablet", err);
         return {
             error: true,
-            msg: "Something went wrong",
+            data: "Something went wrong",
             code: 500
         }
     }
