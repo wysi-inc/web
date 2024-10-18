@@ -61,7 +61,7 @@ async function UserPage(p: {
             code: "setup",
             icon: <i class="fa-solid fa-computer" />,
             show_if: editable || user.db_setup !== undefined,
-            manual: false,
+            manual: true,
             jsx: (<UserSetupPanel lang={p.lang} setup={user.db_setup} page_id={user.id} logged_id={p.logged?.id} />)
         },
         {
