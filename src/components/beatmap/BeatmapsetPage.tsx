@@ -42,7 +42,6 @@ async function BeatmapsetPage(p: Props) {
     beatmaps.forEach(b => beatmap_map.set(b.id, b))
 
     return (<>
-        <Title title={`${beatmapset.title} - ${beatmapset.artist}`} scripts={["/public/js/beatmapset.js"]} />
         <div class="flex flex-col rounded-lg shadow-lg"
             style={{ backgroundImage: `url('${cardImg}')`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
             <div class="grid flex-wrap justify-between gap-4 rounded-lg bg-base-300 bg-opacity-65 p-4 text-base-content backdrop-blur-sm md:grid-cols-5">
@@ -202,9 +201,10 @@ async function BeatmapsetPage(p: Props) {
                     </div>
                 </>))
                 }
-            </div > : null
+            </div> : null
         }
-        <Title title={`/beatmapsets/${p.set_id}/${diff.id}`}
+        <Title
+            title={`${beatmapset.title} - ${beatmapset.artist}`}
             scripts={[
                 "https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js", "/public/js/beatmapset.js"
             ]}

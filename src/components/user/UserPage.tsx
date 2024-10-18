@@ -158,7 +158,7 @@ async function UserPage(p: {
                 </Panel>
             );
         })}
-        <button class="btn btn-square btn-warning fixed bottom-4 right-4" onclick="report_modal.showModal()">
+        <button class="btn btn-square btn-warning sticky bottom-4 right-4" onclick="report_modal.showModal()">
             <i class="fa-solid fa-triangle-exclamation" />
         </button>
         <dialog id="report_modal" class="modal">
