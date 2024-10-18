@@ -261,6 +261,7 @@ async function getSubdivisionRankings() {
         h2.innerText = `#${user.placement}`;
     }
 }
+
 function getUserStuff() {
     getSubdivisions();
     getSubdivisionRankings();

@@ -1,20 +1,22 @@
+import Link from "./Link";
+
 function AudioPlayer() {
     return (<>
-        <div class="fixed bottom-2 z-50 hidden rounded-lg bg-base-300 p-2 shadow-lg" id="audio_box">
+        <div class="fixed bottom-2 z-50 hidden data-[active]:block rounded-lg bg-base-300 p-2 shadow-lg group/audio" id="audio_box">
             <div class="flex flex-row gap-2">
                 <div class="flex w-96 flex-col gap-2">
                     <div class="flex flex-row justify-between gap-2">
                         <div id="audio_image" class="size-12 rounded-lg bg-cover bg-center bg-no-repeat">
                             <div class="flex size-12 grow items-center justify-center rounded-lg bg-base-300 bg-opacity-50">
-                                <button class="group/audio btn btn-ghost size-12" onclick="on_player_click()" id="audio_button">
-                                    <span class="loading loading-spinner hidden group-aria-busy/audio:block" />
-                                    <i class="fa-solid fa-play fa-lg block group-aria-pressed/audio:hidden" />
-                                    <i class="fa-solid fa-pause fa-lg hidden group-aria-pressed/audio:block" />
+                                <button class="btn btn-ghost size-12" onclick="play_pause()">
+                                    <span class="loading loading-spinner hidden group-data-[loading]/audio:block" />
+                                    <i class="fa-solid fa-play fa-lg hidden group-data-[paused]/audio:block" />
+                                    <i class="fa-solid fa-pause fa-lg hidden group-data-[playing]/audio:block" />
                                 </button>
                             </div>
                         </div>
                         <div class="w-72 grow truncate">
-                            <a id="audio_title" class="underline-offset-2 hover:underline" />
+                            <Link id="audio_title" css="underline-offset-2 hover:underline" />
                             <div id="audio_artist" class="text-sm text-gray-400" />
                         </div>
                     </div>

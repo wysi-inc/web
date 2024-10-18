@@ -1,13 +1,14 @@
 function Link(p: {
-    url: string,
-    children: any,
+    url?: string,
+    children?: any,
     css?: string,
     role?: string,
     label?: string,
     tooltip?: string,
+    id?: string
 }) {
     return (
-        <a
+        <a id={p.id}
             href={p.url}
             hx-get={p.url}
             hx-push-url="true"

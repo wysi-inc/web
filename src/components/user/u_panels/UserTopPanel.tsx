@@ -111,7 +111,7 @@ async function UserTopPanel(p: {
                                     <Flag name={p.user.country.name} code={p.user.country.code} />
                                 </div>
                                 <div class="group hidden flex-row items-center gap-2">
-                                    <i class="group-has[.flex]:flex fa-solid fa-city hidden w-6"></i>
+                                    <i class="fa-solid fa-city size-6" />
                                     <SubdivisionRanking user_id={p.user.id} mode={p.mode} />
                                     <SubdivisionFlag user_id={p.user.id} />
                                 </div>
