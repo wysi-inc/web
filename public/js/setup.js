@@ -100,14 +100,11 @@ function formChange(e) {
     }
 }
 
-function setKeyboard(name, keys = []) {
+function setKeyboard(name) {
     const keeb_template = document.getElementById(`${name}_temp`);
     const keyboard_display = document.getElementById("keyboard_display");
     keyboard_display.innerHTML = "";
     keyboard_display.appendChild(keeb_template.content.cloneNode(true));
-    for (let k of keys) {
-        keyboard_display.getElementById(`keyboard_key_${k}`).checked = true;
-    }
     scale();
 }
 
