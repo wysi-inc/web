@@ -58,7 +58,7 @@ function Badge(p: {
                         hx-delete={`/admin/badges/${p.user_id}/${p.badge_id}`} hx-trigger="click">
                         <i class="fa-solid fa-xmark" />
                     </a>
-                </> : <></>
+                </> : null
             }
         </div>
     );

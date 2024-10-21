@@ -28,7 +28,7 @@ async function AdminAdmins(p: {
                 </button>
             </form>
             <div class="flex flex-col gap-2" id="roles_notify" />
-        </> : <></>}
+        </> : null}
         <table class="table-zebra table table-xs">
             <tr>
                 <th>ID</th>
@@ -51,9 +51,9 @@ async function AdminAdmins(p: {
                             {u.role !== "owner" ?
                                 <button class="btn btn-square btn-error btn-xs" hx-delete={`/admin/roles/${u.user_id}`} hx-swap="delete" hx-target={`#role-${u.user_id}`}>
                                     <i class="fa-regular fa-trash-can" />
-                                </button> : <></>
+                                </button> : null
                             }
-                        </td> : <></>
+                        </td> : null
                     }
                 </tr>
             ))}
