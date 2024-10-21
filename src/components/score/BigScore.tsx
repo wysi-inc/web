@@ -70,7 +70,7 @@ function BigScore(p: { score: ScoreType, mode: Mode, position: number }) {
                                         style={{ color: p.score.statistics.count_geki ? colors.judgements.x320 : "" }}>
                                         {p.score.statistics.count_geki || 0}
                                     </dd>
-                                </div> : <></>
+                                </div> : null
                             }
                             <div class="flex flex-col">
                                 <dt class="text-xs">300</dt>
@@ -86,7 +86,7 @@ function BigScore(p: { score: ScoreType, mode: Mode, position: number }) {
                                         style={{ color: p.score.statistics.count_katu ? colors.judgements.x200 : "" }}>
                                         {p.score.statistics.count_katu || 0}
                                     </dd>
-                                </div> : <></>
+                                </div> : null
                             }
                             <div class="flex flex-col">
                                 <dt class="text-xs">100</dt>

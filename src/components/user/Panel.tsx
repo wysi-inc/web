@@ -18,7 +18,7 @@ const Panel = (p: {
                 {p.info ?
                     <div class="tooltip tooltip-left ms-auto cursor-help" data-tip={p.info}>
                         <i class="fa-solid fa-circle-question" />
-                    </div> : <></>
+                    </div> : null
                 }
             </header>
             <div id={`${p.code}_content`} class={p.manual ? "hidden" : ""}>{p.children}</div>
@@ -36,7 +36,7 @@ const Panel = (p: {
                 `}>
                 <i id={`${p.code}_icon`} class={`${p.manual ? "" : "rotate-180"} fa-solid fa-caret-down transform duration-200 ease-out`} />
                 <h6 id={`${p.code}_text`}>{p.manual ? "Show" : "Hide"}</h6>
-            </button> : <></>
+            </button> : null
         }
     </section>
 );

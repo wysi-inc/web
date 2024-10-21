@@ -33,7 +33,7 @@ function Logged(p: { user: UserCookie, lang: string }) {
                             <i class="fa-solid fa-screwdriver-wrench" />
                             Admin
                         </Link>
-                    </li> : <></>
+                    </li> : null
                 }
                 <li>
                     <a href={`/logout`} class="btn btn-ghost flex">

@@ -27,7 +27,7 @@ async function SearchResults(p: { query?: string; }) {
                     <div class="flex justify-center">
                         <OnlineDot size={24} online={u.is_online} />
                     </div>
-                </Link> : <></>)}
+                </Link> : null)}
         </div>
     </>);
 }

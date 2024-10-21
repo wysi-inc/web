@@ -8,8 +8,11 @@ import Link from "../web/Link";
 import ModIcon from "./ModIcon";
 
 async function ScorePage(p: { score_id: number }) {
-    const score = await api_score_details(p.score_id);
-    if (!score) return <>score not found</>;
+    const res = await api_score_details(p.score_id);
+    if (res.error) return <>score not found</>;
+
+    const score = res.data;
+
     const b = score.beatmap;
     const s = score.beatmapset;
     const u = score.user;
@@ -108,7 +111,7 @@ async function ScorePage(p: { score_id: number }) {
                                             style={{ color: score.statistics.count_geki ? colors.judgements.x320 : "" }}>
                                             {score.statistics.count_geki || 0}
                                         </dd>
-                                    </div> : <></>
+                                    </div> : null
                                 }
                                 <div class="flex flex-col">
                                     <dt class="text-xs">300</dt>
@@ -124,7 +127,7 @@ async function ScorePage(p: { score_id: number }) {
                                             style={{ color: score.statistics.count_katu ? colors.judgements.x200 : "" }}>
                                             {score.statistics.count_katu || 0}
                                         </dd>
-                                    </div> : <></>
+                                    </div> : null
                                 }
                                 <div class="flex flex-col">
                                     <dt class="text-xs">100</dt>

@@ -41,7 +41,7 @@ async function BeatmapCollectionList(p: {
         )}
         {hashes.length >= LIMIT ?
             <LoadMoreButton url={`/users/${p.user_id}/0/lists/collections/${p.collection_name}?offset=${p.offset + LIMIT}`} />
-            : <></>
+            : null
         }
     </>);
 }
