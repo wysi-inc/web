@@ -3,7 +3,7 @@ import { env } from "bun";
 
 function Login(p: { lang: string }) {
     const url = new URL("https://osu.ppy.sh/oauth/authorize");
-    url.searchParams.set("client_id", env.OSU_ID);
+    url.searchParams.set("client_id", String(env.OSU_ID));
     url.searchParams.set("redirect_uri", env.OSU_REDIRECT);
     url.searchParams.set("response_type", "code");
     url.searchParams.set("scope", "public identify friends.read");

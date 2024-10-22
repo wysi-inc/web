@@ -34,7 +34,7 @@ export const baseRoutes = new Elysia({ prefix: '' })
     .post("/search", ({ body }) => (
         <SearchResults query={body.q} />
     ), searchBody)
-    .get("/testing", async ({ lang, params, request, set, user }) => {
+    .get("/testing", async ({ lang, request, set, user }) => {
         if (env.STATE === "dev") {
             return (
                 <HtmxPage lang={lang} set={set} req={request} user={user}>
