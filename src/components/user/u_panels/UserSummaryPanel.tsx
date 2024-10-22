@@ -13,7 +13,7 @@ async function UserSummaryPanel(p: {
     mode: Mode,
     user?: UserCookie | null
 }) {
-    const scores = await api_scores_user_category(
+    const res = await api_scores_user_category(
         p.user_id,
         "best",
         {
@@ -24,8 +24,8 @@ async function UserSummaryPanel(p: {
         p.user
     );
 
-    if (!scores) return <></>;
-
+    if (res.error) return <></>;
+    const scores = res.data;
     if (scores.length === 0) return <></>;
 
     const grade_counts = new Map<string, ColorCount>();

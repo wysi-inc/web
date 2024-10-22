@@ -5,8 +5,8 @@ import { plugins } from "./plugins";
 
 export const notFound = new Elysia({ prefix: "/*" })
     .use(plugins)
-    .get("", ({ lang, t, request, user }) => (
-        <HtmxPage lang={lang} t={t} headers={request.headers} user={user}>
+    .get("", ({ lang, request, set, user }) => (
+        <HtmxPage lang={lang} req={request} set={set} user={user}>
             <NotFound />
         </HtmxPage>
     ))

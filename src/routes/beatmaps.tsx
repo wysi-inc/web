@@ -40,8 +40,8 @@ const queryBodyElysia = {
 const beatmap_routes_data = new Elysia({ prefix: "" })
     .get("/:id", async ({ params, set }) => {
         const res = await api_beatmap_details(params.id);
-        if (!res) return error(404, "Beatmap doesn't exist");
-        set.redirect = `/beatmapsets/${res.beatmapset_id}/${params.id}`;
+        if (res.error) return error(404, "Beatmap doesn't exist");
+        set.redirect = `/beatmapsets/${res.data.beatmapset_id}/${params.id}`;
         return;
     }, {
         params: t.Object({

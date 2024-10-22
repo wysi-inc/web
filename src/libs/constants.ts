@@ -1,5 +1,4 @@
 import { Profanity } from "@2toad/profanity";
-import type { LanguagesType, SubdivisionFlagsType } from "../types/countries";
 import type { Mode } from "../types/osu";
 
 export const RATELIMIT = 120;

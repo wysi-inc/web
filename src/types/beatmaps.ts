@@ -108,8 +108,8 @@ export type Beatmapset = {
     user_id: number
     video: boolean,
     tags: string,
-    beatmaps?: Beatmap[]
-    converts?: Beatmap[]
+    beatmaps?: BeatmapExtended[]
+    converts?: BeatmapExtended[]
     description?: {
         description: string
     }
