@@ -21,10 +21,10 @@ export async function BeatmapCollectionCard({ hash }: Props) {
         <div class="flex flex-row items-center gap-2">
             <div class="join flex flex-row items-center justify-around bg-neutral">
                 <AudioPlayButton join
-                    beatmap_id={beatmap.id}
+                    map_id={beatmap.id}
                     set_id={beatmap.set.id}
-                    beatmap_title={beatmap.set.title}
-                    beatmap_artist={beatmap.set.artist}
+                    set_title={beatmap.set.title}
+                    set_artist={beatmap.set.artist}
                 />
             </div>
             <div class="flex flex-row items-center gap-2 rounded-lg bg-neutral px-2">

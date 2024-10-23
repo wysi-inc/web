@@ -63,9 +63,9 @@ async function UserYearPanel(p: {
 
     const beatmaps: Array<[Beatmapset, number]> = [];
     for (let i = 0; i < Math.min(data.favourite.songs.length, 3); i++) {
-        const b = await api_beatmapset_details(data.favourite.songs[i].id, p.user);
-        if (!b) continue;
-        beatmaps.push([b, data.favourite.songs[i].count]);
+        const r = await api_beatmapset_details(data.favourite.songs[i].id, p.user);
+        if (r.error) continue;
+        beatmaps.push([r.data, data.favourite.songs[i].count]);
     }
 
     return (<>

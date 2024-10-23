@@ -1,5 +1,5 @@
 import { api_beatmapset_details } from "@/src/api/beatmap";
-import type { Beatmap, BeatmapsetStatus } from "@/src/types/beatmaps";
+import type { Beatmap, BeatmapExtended, BeatmapsetStatus } from "@/src/types/beatmaps";
 import type { Mode } from "@/src/types/osu";
 import type { UserCookie } from "@/src/types/users";
 import moment from "moment";
@@ -38,7 +38,7 @@ async function BeatmapsetPage(p: Props) {
     if (!beatmaps) return <></>;
 
     const diff = beatmaps.find(b => b.id === p.beatmap_id) || beatmaps[0];
-    const beatmap_map = new Map<number, Beatmap>();
+    const beatmap_map = new Map<number, BeatmapExtended>();
     beatmaps.forEach(b => beatmap_map.set(b.id, b))
 
     return (<>
