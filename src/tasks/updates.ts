@@ -32,12 +32,11 @@ export async function update_stats() {
     }
 }
 
-
 export async function update_medals() {
     try {
         log.info("started updating medals...");
         const res = await fetch("https://osekai.net/medals/api/medals.php");
-        const new_medals: OsekaiMedal[] = await res.json() as any;
+        const new_medals: OsekaiMedal[] = (await res.json()) as any;
         for (const m of new_medals) {
             let medal = await Medal.findOne({ medal_id: m.MedalID });
             if (medal) {
@@ -72,7 +71,7 @@ export async function update_user_tokens() {
     try {
         log.info("started updating user tokens...");
         // 10h from now
-        let time_limit = Math.floor(Date.now() / 1000) + (60 * 60 * 10);
+        let time_limit = Math.floor(Date.now() / 1000) + 60 * 60 * 10;
         const tokens = await TokenModel.find({ expires_at: { $lt: time_limit } });
         let done = 0;
         for (let old_token of tokens) {
@@ -86,6 +85,6 @@ export async function update_user_tokens() {
         }
         log.success(`Finished updating ${done} user tokens!`);
     } catch (err) {
-        log.error("Error updating user tokens", err)
+        log.error("Error updating user tokens", err);
     }
 }

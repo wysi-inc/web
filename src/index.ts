@@ -1,4 +1,4 @@
-import { staticPlugin } from '@elysiajs/static';
+import { staticPlugin } from "@elysiajs/static";
 import { env } from "bun";
 import { Elysia, error } from "elysia";
 import { adminRoutes } from "./routes/admin";
@@ -12,15 +12,11 @@ import { user_routes } from "./routes/user";
 import { connect_mongodb, connect_osu } from "./tasks/connections";
 import { below_ratelimit, log, osu_api_call_logger, ratelimit_logger } from "./tasks/logs";
 import { update_medals, update_stats, update_user_tokens } from "./tasks/updates";
-import { notFound } from './routes/notFound';
-import { load_json_data } from './tasks/files';
+import { notFound } from "./routes/notFound";
+import { load_json_data } from "./tasks/files";
 
 const start = performance.now();
-await Promise.all([
-    connect_mongodb(),
-    connect_osu(),
-    load_json_data()
-]);
+await Promise.all([connect_mongodb(), connect_osu(), load_json_data()]);
 log.info(`It took ${performance.now() - start}ms to start!`);
 
 update_user_tokens();
@@ -29,11 +25,14 @@ update_stats();
 ratelimit_logger();
 osu_api_call_logger();
 
-setInterval(() => {
-    connect_osu();
-    update_user_tokens();
-    update_medals();
-}, 1000 * 60 * 60 * 12);        // every 12h
+setInterval(
+    () => {
+        connect_osu();
+        update_user_tokens();
+        update_medals();
+    },
+    1000 * 60 * 60 * 12
+); // every 12h
 
 new Elysia()
     .onRequest(({ request }) => {

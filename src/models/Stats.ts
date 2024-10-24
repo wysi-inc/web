@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 const statsSchema = new mongoose.Schema({
     users: {
@@ -23,10 +23,10 @@ const statsSchema = new mongoose.Schema({
     },
 });
 
-statsSchema.methods.toJSON = function() {
+statsSchema.methods.toJSON = function () {
     const { __v, _id, ...user } = this.toObject();
     return user;
 };
 
 export type Stats = mongoose.InferSchemaType<typeof statsSchema>;
-export const StatsModel = mongoose.model('Stats', statsSchema);
+export const StatsModel = mongoose.model("Stats", statsSchema);

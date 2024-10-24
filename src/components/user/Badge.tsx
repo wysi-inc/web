@@ -38,28 +38,30 @@ export const BADGES: any = {
     },
 };
 
-function Badge(p: {
-    badge_id: number
-    editable?: boolean,
-    user_id?: number
-}) {
+function Badge(p: { badge_id: number; editable?: boolean; user_id?: number }) {
     const badge = BADGES[p.badge_id];
     if (!badge) return <>xd</>;
     return (
-        <div class={`${badge.fg} ${badge.bg} badge tooltip flex cursor-default flex-row gap-1 border-none`}
-            hx-target="this" hx-swap="outerHTML" data-tip={badge.long} draggable={true} >
-            <span class="flex flex-row items-center gap-2">
-                {badge.icon || <span>{badge.short.toUpperCase()}</span>}
-            </span>
-            {p.editable ?
+        <div
+            class={`${badge.fg} ${badge.bg} badge tooltip flex cursor-default flex-row gap-1 border-none`}
+            hx-target="this"
+            hx-swap="outerHTML"
+            data-tip={badge.long}
+            draggable={true}
+        >
+            <span class="flex flex-row items-center gap-2">{badge.icon || <span>{badge.short.toUpperCase()}</span>}</span>
+            {p.editable ? (
                 <>
-                    <input type="hidden" value={`${p.badge_id}`} name='badges' />
-                    <a class="flex size-4 items-center justify-center rounded-full bg-white bg-opacity-0 text-xs hover:bg-opacity-30"
-                        hx-delete={`/admin/badges/${p.user_id}/${p.badge_id}`} hx-trigger="click">
+                    <input type="hidden" value={`${p.badge_id}`} name="badges" />
+                    <a
+                        class="flex size-4 items-center justify-center rounded-full bg-white bg-opacity-0 text-xs hover:bg-opacity-30"
+                        hx-delete={`/admin/badges/${p.user_id}/${p.badge_id}`}
+                        hx-trigger="click"
+                    >
                         <i class="fa-solid fa-xmark" />
                     </a>
-                </> : null
-            }
+                </>
+            ) : null}
         </div>
     );
 }

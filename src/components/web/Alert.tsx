@@ -1,7 +1,4 @@
-function Alert(p: {
-    type: "info" | "warning" | "error" | "success";
-    msg: string | JSX.Element;
-}) {
+function Alert(p: { type: "info" | "warning" | "error" | "success"; msg: string | JSX.Element }) {
     let icon;
     let color;
 
@@ -24,16 +21,17 @@ function Alert(p: {
             break;
     }
 
-    return (<>
-        <div role="alert" class={`${color} alert px-4 py-2`}>
-            {icon}
-            <span>{p.msg}</span>
-            <button class="btn btn-circle btn-ghost btn-xs"
-                onclick="this.parentNode.remove()">
-                <i class="fa-solid fa-xmark" />
-            </button>
-        </div>
-    </>);
+    return (
+        <>
+            <div role="alert" class={`${color} alert px-4 py-2`}>
+                {icon}
+                <span>{p.msg}</span>
+                <button class="btn btn-circle btn-ghost btn-xs" onclick="this.parentNode.remove()">
+                    <i class="fa-solid fa-xmark" />
+                </button>
+            </div>
+        </>
+    );
 }
 
 export default Alert;

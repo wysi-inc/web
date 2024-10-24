@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 export const REPORT_CATEGORIES = ["Slurs / Violence", "Linking inapropiate content", "Disruptive profile", "Other"];
 
@@ -31,10 +31,10 @@ const reportSchema = new mongoose.Schema({
     },
 });
 
-reportSchema.methods.toJSON = function() {
+reportSchema.methods.toJSON = function () {
     const { __v, _id, ...user } = this.toObject();
     return user;
 };
 
 export type Report = mongoose.InferSchemaType<typeof reportSchema>;
-export const ReportModel = mongoose.model('Reports', reportSchema);
+export const ReportModel = mongoose.model("Reports", reportSchema);
