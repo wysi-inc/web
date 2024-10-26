@@ -1,4 +1,4 @@
-import { downloadZip } from "https://unpkg.com/client-zip@2.4.5/index.js"
+import { downloadZip } from "https://unpkg.com/client-zip@2.4.5/index.js";
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -8,13 +8,12 @@ function getDownloadButtons() {
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener("click", (e) => {
             e.preventDefault();
-            downloadCollection(buttons[i].id)
+            downloadCollection(buttons[i].id);
         });
     }
 }
 
 async function downloadCollection(id) {
-
     const button = document.getElementById(id);
     const label = button.getElementsByTagName("label")[0];
     const progress = button.getElementsByTagName("progress")[0];
@@ -39,14 +38,20 @@ async function downloadCollection(id) {
         const parsed_hashes = [];
         const downloaded_set_ids = [];
         for (let i = 0; i < hashes.length; i++) {
-            const data = await getBeatmap(hashes[i], label, parsed_hashes, downloaded_set_ids);
+            let data;
+            try {
+                data = await getBeatmap(hashes[i], label, parsed_hashes, downloaded_set_ids);
+            } catch (err) {
+                console.error(err);
+                continue;
+            }
             count++;
             if (!data) continue;
             const name = decodeURIComponent(data.headers.get("content-disposition").split("filename=")[1]);
             const input = {
                 name: name.substring(1, name.length - 1),
                 lastModified: new Date(),
-                input: data.body
+                input: data.body,
             };
             files.push(input);
             indicator.innerHTML = `${count}/${hashes.length}`;
@@ -89,8 +94,8 @@ async function getBeatmap(hash, label, parsed_hashes, downloaded_set_ids) {
     if (data.ok) {
         parsed_hashes.push(hash);
         downloaded_set_ids.push(beatmap.set.id);
-        return data
-    };
+        return data;
+    }
     if (data.status === 429) {
         for (let s = 60; s >= 0; s--) {
             label.innerText = `Rate limit hit, waiting ${s}s...`;

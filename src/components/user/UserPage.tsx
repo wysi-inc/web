@@ -95,7 +95,7 @@ async function UserPage(p: { logged: UserCookie | null; user_id: string; mode?: 
             icon: <i class="fa-solid fa-list" />,
             url: `/users/${user.id}/${p.mode}/panels/collections`,
             manual: true,
-            show_if: editable || !user.collections == true,
+            show_if: editable || !user.collections === false,
         },
         {
             title: txt(p.lang, "user.sections.most"),
