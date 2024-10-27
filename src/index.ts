@@ -35,35 +35,34 @@ setInterval(
 ); // every 12h
 
 new Elysia()
-  .onRequest(({ request }) => {
-    const ip =
-      request.headers.get("x-forwarded-for")?.split(",")[0] || "127.0.0.1";
-    const route = request.url.split("/").slice(3).join("/");
-    const base = route.split("/")[0];
-    if (base !== "public") {
-      if (!below_ratelimit(ip)) {
-        log.error(`${ip} HIT RATE LIMIT!`);
-        return error(420, "Rate limit hit (120 req/min)");
-      }
-    }
-    if (base !== "public" && route !== "favicon.ico") {
-      log.request(ip, request.method, route);
-    }
-  })
-  .onError(({ error }) => {
-    log.error(error.message);
-    return error.message;
-  })
-  .get("/favicon.ico", Bun.file("./public/favicon.ico"))
-  .use(staticPlugin())
-  .use(apiRoutes)
-  .use(baseRoutes)
-  .use(adminRoutes)
-  .use(reportRoutes)
-  .use(ranking_routes)
-  .use(user_routes)
-  .use(beatmaps_routes)
-  .use(scores_routes)
-  .use(notFound)
-  .onStart(() => log.success(`Listening on port ${env.PORT}`))
-  .listen(env.PORT);
+    .onRequest(({ request }) => {
+        const ip = request.headers.get("x-forwarded-for")?.split(",")[0] || "127.0.0.1";
+        const route = request.url.split("/").slice(3).join("/");
+        const base = route.split("/")[0];
+        if (base !== "public") {
+            if (!below_ratelimit(ip)) {
+                log.error(`${ip} HIT RATE LIMIT!`);
+                return error(420, "Rate limit hit (120 req/min)");
+            }
+        }
+        if (base !== "public" && route !== "favicon.ico") {
+            log.request(ip, request.method, route);
+        }
+    })
+    .onError(({ error }) => {
+        log.error(error.message);
+        return error.message;
+    })
+    .get("/favicon.ico", Bun.file("./public/favicon.ico"))
+    .use(staticPlugin())
+    .use(apiRoutes)
+    .use(baseRoutes)
+    .use(adminRoutes)
+    .use(reportRoutes)
+    .use(ranking_routes)
+    .use(user_routes)
+    .use(beatmaps_routes)
+    .use(scores_routes)
+    .use(notFound)
+    .onStart(() => log.success(`Listening on port ${env.PORT}`))
+    .listen(env.PORT);
