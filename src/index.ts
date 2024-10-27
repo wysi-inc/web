@@ -20,7 +20,7 @@ await Promise.all([connect_mongodb(), connect_osu(), load_json_data()]);
 log.info(`It took ${performance.now() - start}ms to start!`);
 
 update_user_tokens();
-update_medals();
+// update_medals();
 update_stats();
 ratelimit_logger();
 osu_api_call_logger();
@@ -29,7 +29,7 @@ setInterval(
     () => {
         connect_osu();
         update_user_tokens();
-        update_medals();
+        // update_medals();
     },
     1000 * 60 * 60 * 12
 ); // every 12h

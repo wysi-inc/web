@@ -1,8 +1,10 @@
 export type LanguagesType = {
-    [code: string]: {
-        name: string;
-        nativeName: string;
-    };
+    [code: string]: LanguageName;
+};
+
+export type LanguageName = {
+    name: string;
+    nativeName: string;
 };
 
 export type SubdivisionType = {
