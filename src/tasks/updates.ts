@@ -1,10 +1,10 @@
-import { Medal } from "@/src/models/Medal";
-import type { OsekaiMedal } from "@/src/types/medals";
+import { MedalModel, type Medal } from "@/src/models/Medal";
 import { StatsModel } from "../models/Stats";
 import { UserModel } from "../models/User";
 import { log } from "./logs";
 import { TokenModel } from "../models/Tokens";
 import { api_auth_user_refresh } from "../api/auth";
+import { assert } from "../libs/web_utils";
 // import { api_cloudflare_stats } from "../api/cloudflare";
 
 export async function update_stats() {
@@ -35,32 +35,12 @@ export async function update_stats() {
 export async function update_medals() {
     try {
         log.info("started updating medals...");
-        const res = await fetch("https://osekai.net/medals/api/medals.php");
-        const new_medals: OsekaiMedal[] = (await res.json()) as any;
-        for (const m of new_medals) {
-            let medal = await Medal.findOne({ medal_id: m.MedalID });
-            if (medal) {
-                medal.name = m.Name;
-                medal.link = m.Link;
-                medal.description = m.Description;
-                medal.category = m.Grouping;
-                medal.mode_order = m.ModeOrder || 0;
-                medal.ordering = m.Ordering || 0;
-                medal.rarity = m.Rarity || 0;
-            } else {
-                medal = new Medal({
-                    medal_id: m.MedalID,
-                    name: m.Name,
-                    link: m.Link,
-                    description: m.Description,
-                    category: m.Grouping,
-                    mode_order: m.ModeOrder || 0,
-                    ordering: m.Ordering || 0,
-                    rarity: m.Rarity || 0,
-                });
-            }
-            medal.save();
-        }
+        const res = await fetch("https://inex.osekai.net/api/medals/get_all");
+        const data: any = await res.json();
+        const new_medals: Medal[] = data.content;
+        assert(new_medals, "no new medals");
+        await MedalModel.deleteMany();
+        await MedalModel.insertMany(new_medals);
         log.success("Finished updating medals!");
     } catch (err) {
         log.error("Error updating medals", err);
