@@ -1,0 +1,190 @@
+{
+    "nav": {
+        "home": "主頁",
+        "users": "用戶",
+        "rankings": "排名",
+        "beatmaps": "圖譜",
+        "support": "暫住",
+        "about": "關於",
+        "search": "Search someone",
+        "search_someone": "找找某人",
+        "help": "幫助我們翻譯！",
+        "log": {
+            "login": "使用 osu! 來登入",
+            "logout": "登出",
+            "osu": "osu! 個人資料",
+            "wysi": "wysi! 個人資料"
+        }
+    },
+    "home": {
+        "welcome": "歡迎使用 wysi727.com！",
+        "foss": "一個開源的 osu! 網站替代方案",
+        "built": "由 Bun 與 HTMX 搭建而成",
+        "profiles": "用戶個人資料",
+        "stats": "Top 100 Score stats",
+        "search": "搜尋圖譜",
+        "calculator": "內建的 PP 計算器",
+        "setup": "分享你的配置！",
+        "collections": "上傳你的收藏夾！"
+    },
+    "user": {
+        "sections": {
+            "expand": "擴展",
+            "about": "關於",
+            "beatmaps": "圖譜",
+            "top": "最高分",
+            "medals": {
+                "title": "成就",
+                "recent": "最近達成的成就",
+                "rarest": "最稀有的成就",
+                "show": "顯示全部"
+            },
+            "year": {
+                "title": "年",
+                "info": "This is a recap of this year so far, the data will be reset at January 1st"
+            },
+            "most": "遊玩次數最多",
+            "scores": {
+                "title": "分數",
+                "info": "Hover over a grayed out PP to see the (if FC) PP value",
+                "tabs": {
+                    "pinned": "置頂",
+                    "best": "最佳",
+                    "first": "第一名",
+                    "recent": "最近"
+                }
+            },
+            "history": {
+                "title": "歷史",
+                "tabs": {
+                    "global": "全球",
+                    "country": "國家",
+                    "plays": "遊玩次數",
+                    "replays": "重播被觀看次數"
+                }
+            },
+            "summary": {
+                "title": "概括",
+                "info": "This is a quick summary of your top 100 plays",
+                "tabs": {
+                    "hit_ratios": "Hit Ratios",
+                    "grade_ratios": "Grade Ratios",
+                    "average_play": "平均遊玩資料"
+                }
+            },
+            "collections": {
+                "title": "收藏夾",
+                "info": "所有不在 osu! 網站裡的圖譜都將不會被下載 (如：osu!trainer、自定義難度、為提交的圖譜...)"
+            },
+            "setup": {
+                "title": "配置",
+                "tabs": {
+                    "tablet": "繪圖板",
+                    "keyboard": "鍵盤",
+                    "mouse": "滑鼠",
+                    "peripherals": "周邊",
+                    "computer": "電腦"
+                },
+                "components": {
+                    "os": "操作系統",
+                    "cpu": "CPU",
+                    "gpu": "GPU",
+                    "ram": "記憶體",
+                    "storage": "儲存裝置",
+                    "motherboard": "主機板",
+                    "psu": "電源供應",
+                    "case": "機殼"
+                },
+                "peripherals": {
+                    "mousepad": "滑鼠墊",
+                    "keypad": "Keypad",
+                    "headphones": "耳機",
+                    "camera": "相機",
+                    "microphone": "麥克風",
+                    "monitor": "顯示器",
+                    "audio": "音訊",
+                    "desk": "桌子",
+                    "chair": "椅子"
+                },
+                "name": "名稱",
+                "model": "型號",
+                "size": "尺寸",
+                "area": "區域",
+                "width": "寬度",
+                "height": "高度",
+                "position": "位置",
+                "dpi": "靈敏度",
+                "mult": "Multiplier",
+                "kb_layout": "鍵盤佈局",
+                "layout": {
+                    "k0": "無",
+                    "k2": "2 鍵",
+                    "k3": "3 鍵",
+                    "k4": "4 鍵",
+                    "k60": "60%",
+                    "k75": "75%",
+                    "ktkl": "TKL",
+                    "kfull": "完整"
+                }
+            }
+        },
+        "performance": "表現",
+        "total_score": "總分",
+        "global_rank": "全球排名",
+        "country_rank": "國內排名",
+        "play_time": "遊玩時間",
+        "play_count": "遊玩次數",
+        "total_hits": "總命中次數",
+        "replays_watched": "重播被觀看次數",
+        "hits_x_play": "Hits x Play",
+        "followers": "粉絲",
+        "online": "Online"
+    },
+    "score": {
+        "status": {
+            "pinned": "置頂",
+            "best": "最佳",
+            "firsts": "第一名",
+            "recent": "最近"
+        },
+        "mods": "Mod",
+        "max_combo": "最大連擊",
+        "combo": "連擊",
+        "grade": "評價",
+        "grades": "評價",
+        "acc": "準確率",
+        "accuracy": "準確率",
+        "score": "分數",
+        "ranked_score": "進榜分數"
+    },
+    "beatmapset": {
+        "status": {
+            "favourite": "收藏",
+            "ranked": "已進榜",
+            "guest": "Guest",
+            "loved": "Loved",
+            "nominated": "已提名",
+            "pending": "待處理",
+            "graveyard": "拋棄",
+            "wip": "製作中",
+            "approved": "已批准"
+        },
+        "length": "長度",
+        "bpm": "BPM"
+    },
+    "search": {
+        "sort": {
+            "relevant": "相關"
+        }
+    },
+    "footer": {
+        "rights": "All rights reserved to this silly monkey"
+    },
+    "alerts": {
+        "user": {
+            "user_doesnt_exist": "此用戶不存在",
+            "user_is_bot": "此用戶是一個機器人，我們還未支援機器人 :(",
+            "users_fail": "無法抓取用戶"
+        }
+    }
+}
