@@ -1,7 +1,7 @@
 import { ReportModel } from "@/src/models/Report";
 import { log } from "@/src/tasks/logs";
 
-export async function submitReport(body: { description: string, category: string }, target: number, author: number) {
+export async function submitReport(body: { description: string; category: string }, target: number, author: number) {
     try {
         const report = new ReportModel({
             id: Date.now(),
@@ -10,7 +10,7 @@ export async function submitReport(body: { description: string, category: string
             description: body.description,
             category: body.category,
             timestamp: new Date(),
-        })
+        });
         await report.save();
         log.success("Report saved");
         return report.id;

@@ -8,7 +8,7 @@ export let OSU_API_TOKEN = "";
 export async function connect_mongodb() {
     try {
         await mongoose.connect(env.MONGO_URI);
-        log.success("Connected to MongoDB")
+        log.success("Connected to MongoDB");
     } catch (err) {
         log.error("Couldn't connect to MongoDB\n", err);
     }

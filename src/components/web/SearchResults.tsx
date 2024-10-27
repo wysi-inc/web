@@ -9,14 +9,16 @@ import Link from "./Link";
 async function SearchResults(p: { query?: string; }) {
     if (!p.query) return <></>;
     const res = await api_site_search(p.query);
-    if (!res) return <></>;
+    if (res.error) return <></>;
+    const user = res.data.user;
+    if (!user) return <></>;
     return (<>
         <div class="flex flex-col gap-2 rounded-lg bg-base-100 p-2">
             <div class="flex flex-row items-center gap-2 px-1">
                 <i class="fa-solid fa-user" />
-                <h2>Users ({res.user?.total})</h2>
+                <h2>Users ({user.total})</h2>
             </div>
-            {res.user?.data.map((u, i) => i < RESULT_LIMIT.USER.SEARCH ?
+            {user.data.map((u, i) => i < RESULT_LIMIT.USER.SEARCH ?
                 <Link url={`/users/${u.id}`} css="flex flex-row justify-between gap-2 rounded-lg bg-base-300 p-2">
                     <div class="flex flex-row items-center gap-2">
                         <Flag code={u.country_code} static={true} />
@@ -27,7 +29,7 @@ async function SearchResults(p: { query?: string; }) {
                     <div class="flex justify-center">
                         <OnlineDot size={24} online={u.is_online} />
                     </div>
-                </Link> : <></>)}
+                </Link> : null)}
         </div>
     </>);
 }

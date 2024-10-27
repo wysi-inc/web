@@ -8,7 +8,7 @@ export async function getUser(id: string, mode?: Mode, logged?: UserCookie | nul
     const res = await api_user_details(id, mode, logged);
     if (res.error) return res;
     let user = res.data;
-    mode = user.rank_history?.mode as Mode || "osu";
+    mode = (user.rank_history?.mode as Mode) || "osu";
     user = await updateUser(user, mode);
     if (CATALANS.includes(user.id)) {
         (user.country as any).cat = true;
@@ -16,6 +16,6 @@ export async function getUser(id: string, mode?: Mode, logged?: UserCookie | nul
     return {
         error: false,
         code: 200,
-        data: user
+        data: user,
     };
 }

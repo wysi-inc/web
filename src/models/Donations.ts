@@ -1,33 +1,33 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 const donationDBSchema = new mongoose.Schema({
     from_name: {
         type: String,
-        required: true
+        required: true,
     },
     amount: {
         type: Number,
-        required: true
+        required: true,
     },
     currency: {
         type: String,
-        required: true
+        required: true,
     },
     message: String,
     is_public: {
         type: Boolean,
-        required: true
+        required: true,
     },
     timestamp: {
         required: true,
-        type: Date
+        type: Date,
     },
 });
 
-donationDBSchema.methods.toJSON = function() {
+donationDBSchema.methods.toJSON = function () {
     const { __v, _id, ...user } = this.toObject();
     return user;
 };
 
 export type Donation = mongoose.InferSchemaType<typeof donationDBSchema>;
-export const DonationModel = mongoose.model('Donations', donationDBSchema);
+export const DonationModel = mongoose.model("Donations", donationDBSchema);

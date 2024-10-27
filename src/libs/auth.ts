@@ -5,20 +5,21 @@ import { UserModel } from "../models/User";
 import type { Jwt, UserAuth } from "../types/api";
 import type { Res, UserBasic, UserCookie } from "../types/users";
 
-export async function userAuthData(code: string): Promise<Res<{ user: UserBasic, role: any }>> {
+export async function userAuthData(code: string): Promise<Res<{ user: UserBasic; role: any }>> {
     const auth_res = await api_auth_user(code);
-    if (auth_res.error) return {
-        error: true,
-        code: 500,
-        data: auth_res.data
-    };
+    if (auth_res.error)
+        return {
+            error: true,
+            code: 500,
+            data: auth_res.data,
+        };
     const user_res = await api_me_details(auth_res.data.access_token);
-    if (user_res.error) return {
-        error: true,
-        code: 500,
-        data: user_res.data
-
-    };
+    if (user_res.error)
+        return {
+            error: true,
+            code: 500,
+            data: user_res.data,
+        };
     await save_user_token(user_res.data.id, auth_res.data);
     const user_role = await UserModel.findOne({ user_id: user_res.data.id });
     return {
@@ -26,9 +27,9 @@ export async function userAuthData(code: string): Promise<Res<{ user: UserBasic,
         code: 200,
         data: {
             user: user_res.data,
-            role: user_role?.role || ""
-        }
-    }
+            role: user_role?.role || "",
+        },
+    };
 }
 
 export async function verifyUser(jwt: Jwt, cookie?: any): Promise<UserCookie | null> {

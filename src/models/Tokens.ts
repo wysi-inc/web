@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 const tokenSchema = new mongoose.Schema({
     user_id: {
@@ -20,10 +20,10 @@ const tokenSchema = new mongoose.Schema({
     },
 });
 
-tokenSchema.methods.toJSON = function() {
+tokenSchema.methods.toJSON = function () {
     const { __v, _id, ...user } = this.toObject();
     return user;
 };
 
 export type Token = mongoose.InferSchemaType<typeof tokenSchema>;
-export const TokenModel = mongoose.model('Tokens', tokenSchema);
+export const TokenModel = mongoose.model("Tokens", tokenSchema);

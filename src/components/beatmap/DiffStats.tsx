@@ -1,12 +1,12 @@
 import { colors } from "@/src/libs/colors";
 import { secondsToTime } from "@/src/libs/web_utils";
-import type { Beatmap } from "@/src/types/beatmaps";
+import type { BeatmapExtended } from "@/src/types/beatmaps";
 import type { Mod, Mode } from "@/src/types/osu";
 import ModIcon from "../score/ModIcon";
 import DiffIcon from "./DiffIcon";
 
 type Props = {
-    diff: Beatmap,
+    diff: BeatmapExtended,
 }
 
 function DiffStats({ diff }: Props) {
@@ -27,6 +27,7 @@ function DiffStats({ diff }: Props) {
         )
     }
 
+    console.log(diff);
     const total_hits = diff.count_circles + diff.count_sliders + diff.count_spinners;
 
     const mods: Mod[] = ['HR', 'DT', 'HD', 'FL', 'EZ', 'HT', 'TD'];

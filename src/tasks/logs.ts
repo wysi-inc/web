@@ -17,11 +17,11 @@ export const log = {
         console.log(`\x1b[34m[ I ]: ${msg} \x1b[0m`);
     },
     request: (ip: string, method: string, route: string) => {
-        console.log(`[ R ]: ${(ip).padStart(15, " ")} ${method.padStart(6, " ")}::/${route}`);
+        console.log(`[ R ]: ${ip.padStart(15, " ")} ${method.padStart(6, " ")}::/${route}`);
     },
     object: (msg: any) => {
         console.log(msg);
-    }
+    },
 };
 
 export function osu_api_call_logger() {

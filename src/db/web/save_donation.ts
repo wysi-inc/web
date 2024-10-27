@@ -9,7 +9,7 @@ export async function save_donation(data: any): Promise<boolean> {
             currency: data.currency,
             is_public: data.is_public,
             message: data.message,
-            timestamp: data.timestamp
+            timestamp: data.timestamp,
         });
         donation.save();
     } catch (err) {

@@ -5,17 +5,13 @@ import type { UserCookie } from "../types/users";
 import { verifyUser } from "./auth";
 
 type Props = {
-    lang: string,
-    req: Request,
-    set: any,
-    children: JSX.Element,
-} & (
-        { cookie: Cookie, jwt: Jwt, } |
-        { user: UserCookie | null, }
-    );
+    lang: string;
+    req: Request;
+    set: any;
+    children: JSX.Element;
+} & ({ cookie: Cookie; jwt: Jwt } | { user: UserCookie | null });
 
 async function HtmxPage(p: Props) {
-
     if (p.req?.headers?.has("hx-request")) {
         // const route = p.req.url.split("/");
         // const base = route[3];
