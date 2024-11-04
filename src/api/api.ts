@@ -12,9 +12,9 @@ type FetchOptions = {
 
 let ratelimit: boolean = false;
 
-async function lock_ratelimit() {
+async function lock_ratelimit(ms: number) {
     ratelimit = true;
-    await sleep(60 * 1000);
+    await sleep(ms);
     ratelimit = false;
 }
 
@@ -69,7 +69,7 @@ export async function osu_fetch(o: FetchOptions): Promise<Res<any>> {
             const err = await res.text();
             if (err.includes("429")) {
                 log.error("Error: Rate limit hit");
-                lock_ratelimit();
+                lock_ratelimit(Number(res.headers.get("X-RateLimit-Remaining")) || 60000);
                 return {
                     error: true,
                     code: 429,

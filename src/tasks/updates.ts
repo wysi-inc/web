@@ -32,11 +32,6 @@ export async function update_stats() {
     }
 }
 
-// export async function load_medals() {
-//     const res = await Promise.all([create_worker_task("load_medals")]);
-//     MEDALS = res[0];
-// }
-
 export async function update_medals() {
     try {
         log.info("started updating medals...");
@@ -56,26 +51,13 @@ export async function update_medals() {
             m.Date_Released = new Date(m.Date_Released);
             new_medals.push(m);
         }
-
         MEDALS = new_medals.sort((a, b) => {
-            if (a.Grouping < b.Grouping) {
-                return -1;
-            }
-            if (a.Grouping > b.Grouping) {
-                return 1;
-            }
-            if ((a.Gamemode || -1) < (b.Gamemode || -1)) {
-                return -1;
-            }
-            if ((a.Gamemode || -1) > (b.Gamemode || -1)) {
-                return 1;
-            }
+            if (a.Grouping < b.Grouping) return -1;
+            if (a.Grouping > b.Grouping) return 1;
+            if ((a.Gamemode || -1) < (b.Gamemode || -1)) return -1;
+            if ((a.Gamemode || -1) > (b.Gamemode || -1)) return 1;
             return 0;
         });
-
-        // const txt = `It was the best of times, it was the worst of times.`;
-        // await Bun.write("./data/medals.json", data);
-
         log.success("Finished updating medals!");
     } catch (err) {
         log.error("Error updating medals", err);
