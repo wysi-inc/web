@@ -1,6 +1,6 @@
 import type { UserMedal } from "@/src/types/medals";
 import MedalBadge from "./u_components/Medal";
-import { MedalModel } from "@/src/models/Medal";
+import { MEDALS } from "@/src/tasks/updates";
 
 type ProfileMedal = {
     achievement_id: number;
@@ -15,12 +15,10 @@ type Group = {
 };
 
 async function UserMedalsPanel(p: { user_id: number; medals: ProfileMedal[]; lang: string }) {
-    const db_medals = await MedalModel.find().lean();
-
     const user_medals_map = new Map<number, ProfileMedal>();
     p.medals.forEach((um) => user_medals_map.set(um.achievement_id, um));
 
-    const medals: UserMedal[] = db_medals.map((m) => {
+    const medals: UserMedal[] = MEDALS.map((m) => {
         const user_medal = user_medals_map.get(m.Medal_ID);
         if (user_medal) {
             return { ...m, achieved: true, achieved_at: new Date(user_medal.achieved_at) };
@@ -56,6 +54,7 @@ async function UserMedalsPanel(p: { user_id: number; medals: ProfileMedal[]; lan
     const rarest_medal = medals
         .filter((m) => m.achieved)
         .sort((a, b) => {
+            console.log(a.Frequency, b.Frequency);
             return (a.Frequency || 0) - (b.Frequency || 0);
         })[0];
 
@@ -83,9 +82,9 @@ async function UserMedalsPanel(p: { user_id: number; medals: ProfileMedal[]; lan
                         <h6 class="hidden group-open:flex">Show Less</h6>
                     </div>
                     <div class="flex flex-row items-center gap-2">
-                        <progress class="progress progress-accent hidden w-52 sm:inline-block" value={p.medals?.length} max={db_medals.length} />
+                        <progress class="progress progress-accent hidden w-52 sm:inline-block" value={p.medals?.length} max={MEDALS.length} />
                         <span>
-                            {p.medals?.length} / {db_medals.length}
+                            {p.medals?.length} / {MEDALS.length}
                         </span>
                     </div>
                 </summary>

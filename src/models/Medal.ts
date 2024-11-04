@@ -63,7 +63,7 @@ const medalSchema = new mongoose.Schema({
         required: true,
     },
     Is_Restricted: {
-        type: String,
+        type: Boolean,
         required: true,
     },
     Solution: {
@@ -87,11 +87,6 @@ const medalSchema = new mongoose.Schema({
         required: false,
     },
 });
-
-medalSchema.methods.toJSON = function () {
-    const { __v, _id, ...user } = this.toObject();
-    return user;
-};
 
 export type Medal = mongoose.InferSchemaType<typeof medalSchema>;
 export const MedalModel = mongoose.model("Medal", medalSchema);
