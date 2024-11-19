@@ -34,20 +34,23 @@ const queryBodyElysia = {
         status: t.Optional(t.Any()),
         offset: t.Optional(t.String()),
         sorting: t.Optional(t.String()),
-    })
-}
+    }),
+};
 
-const beatmap_routes_data = new Elysia({ prefix: "" })
-    .get("/:id", async ({ params, set }) => {
+const beatmap_routes_data = new Elysia({ prefix: "" }).get(
+    "/:id",
+    async ({ params, set }) => {
         const res = await api_beatmap_details(params.id);
         if (res.error) return error(404, "Beatmap doesn't exist");
         set.redirect = `/beatmapsets/${res.data.beatmapset_id}/${params.id}`;
         return;
-    }, {
+    },
+    {
         params: t.Object({
-            id: t.Numeric()
-        })
-    })
+            id: t.Numeric(),
+        }),
+    }
+);
 
 const beatmapsets_routes_data = new Elysia({ prefix: "" })
     .use(plugins)
@@ -56,45 +59,48 @@ const beatmapsets_routes_data = new Elysia({ prefix: "" })
             <BeatmapsetSearch />
         </HtmxPage>
     ))
-    .post("/list", ({ body }) => (
-        <BeatmapsList body={body} offset={"0"} />
-    ), queryBodyElysia)
-    .post("/list/:offset", ({ body, params }) => (
-        <BeatmapsList body={body} offset={params.offset} />
-    ), queryBodyElysia)
-    .get("/:set_id", ({ lang, request, set, params, user }) => (
-        <HtmxPage lang={lang} req={request} set={set} user={user}>
-            <BeatmapsetPage set_id={params.set_id} user={user} />
-        </HtmxPage>
-    ), {
-        params: t.Object({
-            set_id: t.Numeric()
-        })
-    })
-    .get("/:set_id/:beatmap_id", ({ lang, request, set, params, user }) => (
-        <HtmxPage lang={lang} req={request} set={set} user={user}>
-            <BeatmapsetPage set_id={params.set_id} beatmap_id={params.beatmap_id} user={user} />
-        </HtmxPage>
-    ), {
-        params: t.Object({
-            set_id: t.Numeric(),
-            beatmap_id: t.Numeric()
-        })
-    })
-    .post("/:set_id/:beatmap_id/scores/:mode/:type", ({ params, user, body }) => (
-        <BeatmapScoreTable b_id={params.beatmap_id} mode={params.mode} body={body} user={user} type={params.type} />
-    ), {
-        params: t.Object({
-            set_id: t.Numeric(),
-            beatmap_id: t.Numeric(),
-            mode: modeUnion,
-            type: scoresUnion
-        })
-    })
-    .post("/collectioncard/:hash", ({ params }) => (
-        <BeatmapCollectionCard hash={params.hash} />
-    ))
-
+    .post("/list", ({ body }) => <BeatmapsList body={body} offset={"0"} />, queryBodyElysia)
+    .post("/list/:offset", ({ body, params }) => <BeatmapsList body={body} offset={params.offset} />, queryBodyElysia)
+    .get(
+        "/:set_id",
+        ({ lang, request, set, params, user }) => (
+            <HtmxPage lang={lang} req={request} set={set} user={user}>
+                <BeatmapsetPage set_id={params.set_id} user={user} />
+            </HtmxPage>
+        ),
+        {
+            params: t.Object({
+                set_id: t.Numeric(),
+            }),
+        }
+    )
+    .get(
+        "/:set_id/:beatmap_id",
+        ({ lang, request, set, params, user }) => (
+            <HtmxPage lang={lang} req={request} set={set} user={user}>
+                <BeatmapsetPage set_id={params.set_id} beatmap_id={params.beatmap_id} user={user} />
+            </HtmxPage>
+        ),
+        {
+            params: t.Object({
+                set_id: t.Numeric(),
+                beatmap_id: t.Numeric(),
+            }),
+        }
+    )
+    .post(
+        "/:set_id/:beatmap_id/scores/:mode/:type",
+        ({ params, user, body }) => <BeatmapScoreTable b_id={params.beatmap_id} mode={params.mode} body={body} user={user} type={params.type} />,
+        {
+            params: t.Object({
+                set_id: t.Numeric(),
+                beatmap_id: t.Numeric(),
+                mode: modeUnion,
+                type: scoresUnion,
+            }),
+        }
+    )
+    .post("/collectioncard/:hash", ({ params }) => <BeatmapCollectionCard hash={params.hash} />);
 
 export const beatmaps_routes = new Elysia()
     .use(new Elysia({ prefix: "/beatmapsets" }).use(beatmapsets_routes_data))
@@ -104,4 +110,4 @@ export const beatmaps_routes = new Elysia()
     .use(new Elysia({ prefix: "/beatmaps" }).use(beatmap_routes_data))
     .use(new Elysia({ prefix: "/beatmap" }).use(beatmap_routes_data))
     .use(new Elysia({ prefix: "/map" }).use(beatmap_routes_data))
-    .use(new Elysia({ prefix: "/b" }).use(beatmap_routes_data))
+    .use(new Elysia({ prefix: "/b" }).use(beatmap_routes_data));

@@ -18,7 +18,7 @@ export const colors = {
         osu: "#e1567d",
         taiko: "#7de17d",
         fruits: "#7db8e1",
-        mania: "#9b7de1"
+        mania: "#9b7de1",
     },
     judgements: {
         x320: "#bbbbbb",
@@ -38,7 +38,7 @@ export const colors = {
         b: "#3b82f6",
         c: "#8b5cf6",
         d: "#ef4444",
-        f: "#6b7280"
+        f: "#6b7280",
     },
     beatmap: {
         any: "#f0f0f0",
@@ -50,17 +50,5 @@ export const colors = {
         qualified: "#66ccff",
         loved: "#ff66ab",
     },
-    difficulty: [
-        "#4290fe",
-        "#4cb6ff",
-        "#4fffd4",
-        "#cdf458",
-        "#fc9964",
-        "#f64d7a",
-        "#ad4dc2",
-        "#4d4bc4",
-        "#12106a",
-        "#000000",
-        "#000000"
-    ]
-}
+    difficulty: ["#4290fe", "#4cb6ff", "#4fffd4", "#cdf458", "#fc9964", "#f64d7a", "#ad4dc2", "#4d4bc4", "#12106a", "#000000", "#000000"],
+};

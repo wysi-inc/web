@@ -3,11 +3,11 @@ import type { Mode } from "./osu";
 import type { UserScore } from "./users";
 
 export type BeatmapScores = {
-    scores: ScoreType[],
+    scores: ScoreType[];
     userScore?: {
-        score: ScoreType,
-        position: number
-    }
+        score: ScoreType;
+        position: number;
+    };
 };
 
 export type ScoreType = {
@@ -35,11 +35,11 @@ export type ScoreType = {
             score_type: string;
         };
     };
-    beatmap: BeatmapExtended,
-    beatmapset: Beatmapset,
+    beatmap: BeatmapExtended;
+    beatmapset: Beatmapset;
     rank_global: number;
-    user: UserScore
-}
+    user: UserScore;
+};
 
 export type ScoreHitCounts = {
     count_geki: number;
@@ -48,4 +48,4 @@ export type ScoreHitCounts = {
     count_100: number;
     count_50: number;
     count_miss: number;
-}
+};

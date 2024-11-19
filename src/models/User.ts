@@ -3,194 +3,211 @@ import { SOCIALS } from "../components/user/u_panels/UserSocial";
 import { STR_MAX_LEN } from "../libs/constants";
 import { KEYBOARD_LAYOUTS } from "../components/user/u_panels/setup/KeyboardDisplay";
 
-const collectionDBSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        maxLength: STR_MAX_LEN.LONG,
-        required: true
+const collectionDBSchema = new mongoose.Schema(
+    {
+        name: {
+            type: String,
+            maxLength: STR_MAX_LEN.LONG,
+            required: true,
+        },
+        beatmapsMd5: [String],
     },
-    beatmapsMd5: [String]
-}, { _id: false });
+    { _id: false }
+);
 
-collectionDBSchema.methods.toJSON = function() {
+collectionDBSchema.methods.toJSON = function () {
     const { __v, _id, ...user } = this.toObject();
     return user;
 };
 
-const userSocial = new mongoose.Schema({
-    platform: {
-        type: String,
-        maxLength: STR_MAX_LEN.SHORT,
-        required: true,
-        enum: SOCIALS,
+const userSocial = new mongoose.Schema(
+    {
+        platform: {
+            type: String,
+            maxLength: STR_MAX_LEN.SHORT,
+            required: true,
+            enum: SOCIALS,
+        },
+        username: {
+            type: String,
+            maxLength: STR_MAX_LEN.MID,
+            required: true,
+        },
     },
-    username: {
-        type: String,
-        maxLength: STR_MAX_LEN.MID,
-        required: true,
-    }
-}, { _id: false });
+    { _id: false }
+);
 
-const setup = new mongoose.Schema({
-    keyboard: {
-        name: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        layout: {
-            type: String,
-            enum: KEYBOARD_LAYOUTS,
-        },
-        keys: [String],
-        actuation: Number,
-        rt: Boolean,
-        release: Number,
-        press: Number,
-    },
-    tablet: {
-        name: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        area: {
-            w: Number,
-            h: Number,
-        },
-        position: {
-            x: Number,
-            y: Number,
-            r: Number,
-        },
-        size: {
-            w: Number,
-            h: Number,
-        },
-    },
-    mouse: {
-        name: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        dpi: Number,
-        mult: Number,
-    },
-    peripherals: {
-        monitor: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        headphones: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        microphone: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
+const setup = new mongoose.Schema(
+    {
+        keyboard: {
+            name: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            layout: {
+                type: String,
+                enum: KEYBOARD_LAYOUTS,
+            },
+            keys: [String],
+            actuation: Number,
+            rt: Boolean,
+            release: Number,
+            press: Number,
         },
         tablet: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
+            name: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            area: {
+                w: Number,
+                h: Number,
+            },
+            position: {
+                x: Number,
+                y: Number,
+                r: Number,
+            },
+            size: {
+                w: Number,
+                h: Number,
+            },
         },
         mouse: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
+            name: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            dpi: Number,
+            mult: Number,
         },
-        keyboard: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
+        peripherals: {
+            monitor: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            headphones: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            microphone: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            tablet: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            mouse: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            keyboard: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            keypad: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            mousepad: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            desk: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            chair: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            camera: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            audio: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
         },
-        keypad: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        mousepad: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        desk: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        chair: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        camera: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        audio: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
+        computer: {
+            os: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            cpu: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            gpu: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            ram: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            psu: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            storage: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            motherboard: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
+            case: {
+                type: String,
+                maxLength: STR_MAX_LEN.LONG,
+            },
         },
     },
-    computer: {
-        os: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        cpu: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        gpu: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        ram: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        psu: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        storage: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        motherboard: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-        case: {
-            type: String,
-            maxLength: STR_MAX_LEN.LONG,
-        },
-    }
-}, { _id: false });
+    { _id: false }
+);
 
-
-const rank = new mongoose.Schema({
-    date: {
-        type: Date,
-        required: true,
+const rank = new mongoose.Schema(
+    {
+        date: {
+            type: Date,
+            required: true,
+        },
+        rank: {
+            type: Number,
+            required: true,
+        },
     },
-    rank: {
-        type: Number,
-        required: true,
-    }
-}, { _id: false });
+    { _id: false }
+);
 
-const modeRanks = new mongoose.Schema({
-    global_ranks: {
-        type: [rank],
-        required: true,
+const modeRanks = new mongoose.Schema(
+    {
+        global_ranks: {
+            type: [rank],
+            required: true,
+        },
+        country_ranks: {
+            type: [rank],
+            required: true,
+        },
     },
-    country_ranks: {
-        type: [rank],
-        required: true,
+    { _id: false }
+);
+
+const modes = new mongoose.Schema(
+    {
+        osu: modeRanks,
+        taiko: modeRanks,
+        fruits: modeRanks,
+        mania: modeRanks,
     },
-}, { _id: false });
+    { _id: false }
+);
 
-const modes = new mongoose.Schema({
-    osu: modeRanks,
-    taiko: modeRanks,
-    fruits: modeRanks,
-    mania: modeRanks,
-}, { _id: false });
-
-export const DANS = ['No Dan', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta'];
+export const DANS = ["No Dan", "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "alpha", "beta", "gamma", "delta", "epsilon", "zeta"];
 
 const userSchema = new mongoose.Schema({
     user_id: {
@@ -219,11 +236,11 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: ["owner", "admin"],
-        required: false
-    }
+        required: false,
+    },
 });
 
-userSchema.methods.toJSON = function() {
+userSchema.methods.toJSON = function () {
     const { __v, _id, ...user } = this.toObject();
     return user;
 };
@@ -234,4 +251,4 @@ export type Setup = mongoose.InferSchemaType<typeof setup>;
 export type UserSocialType = mongoose.InferSchemaType<typeof userSocial>;
 export type ModeRanks = mongoose.InferSchemaType<typeof modeRanks>;
 export type UserDB = mongoose.InferSchemaType<typeof userSchema>;
-export const UserModel = mongoose.model('User', userSchema);
+export const UserModel = mongoose.model("User", userSchema);

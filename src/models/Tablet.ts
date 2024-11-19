@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 const tabletSchema = new mongoose.Schema({
     name: {
@@ -13,13 +13,13 @@ const tabletSchema = new mongoose.Schema({
     h: {
         type: Number,
         required: true,
-    }
+    },
 });
 
-tabletSchema.methods.toJSON = function() {
+tabletSchema.methods.toJSON = function () {
     const { __v, _id, ...user } = this.toObject();
     return user;
 };
 
 export type Tablet = mongoose.InferSchemaType<typeof tabletSchema>;
-export const TabletModel = mongoose.model('Tablet', tabletSchema);
+export const TabletModel = mongoose.model("Tablet", tabletSchema);

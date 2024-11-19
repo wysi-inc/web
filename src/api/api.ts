@@ -5,28 +5,26 @@ import { apicall, log } from "../tasks/logs";
 import type { Res, UserCookie } from "../types/users";
 
 type FetchOptions = {
-    url: any,
-    method?: string,
-    body?: object,
-} & (
-        | { token?: string }
-        | { user?: UserCookie | null }
-    );
+    url: any;
+    method?: string;
+    body?: object;
+} & ({ token?: string } | { user?: UserCookie | null });
 
 let ratelimit: boolean = false;
 
-async function lock_ratelimit() {
+async function lock_ratelimit(ms: number) {
     ratelimit = true;
-    await sleep(60 * 1000);
+    await sleep(ms);
     ratelimit = false;
 }
 
 export async function osu_fetch(o: FetchOptions): Promise<Res<any>> {
-    if (ratelimit) return {
-        error: true,
-        code: 429,
-        data: "Error: Rate limit hit",
-    };
+    if (ratelimit)
+        return {
+            error: true,
+            code: 429,
+            data: "Error: Rate limit hit",
+        };
     try {
         let token = "";
         if ("token" in o && o.token) {
@@ -34,10 +32,7 @@ export async function osu_fetch(o: FetchOptions): Promise<Res<any>> {
             log.info("Using parameter token");
         } else if ("user" in o && o.user) {
             const tokenObject = await TokenModel.findOne({
-                $and: [
-                    { user_id: o.user.id },
-                    { expires_at: { $gt: Math.floor(Date.now() / 1000) } }
-                ]
+                $and: [{ user_id: o.user.id }, { expires_at: { $gt: Math.floor(Date.now() / 1000) } }],
             });
             if (tokenObject) {
                 token = tokenObject.access_token;
@@ -53,8 +48,8 @@ export async function osu_fetch(o: FetchOptions): Promise<Res<any>> {
 
         const headers = {
             "Content-Type": "application/json",
-            "Accept": "application/json",
-            "Authorization": `Bearer ${token}`
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
         };
 
         let body_string;
@@ -74,19 +69,18 @@ export async function osu_fetch(o: FetchOptions): Promise<Res<any>> {
             const err = await res.text();
             if (err.includes("429")) {
                 log.error("Error: Rate limit hit");
-                lock_ratelimit();
+                lock_ratelimit(Number(res.headers.get("X-RateLimit-Remaining")) || 60000);
                 return {
                     error: true,
                     code: 429,
                     data: "Error: Rate limit hit",
                 };
-            }
-            else {
+            } else {
                 log.error(`Error: ${o.url}`, err);
                 return {
                     error: true,
                     code: 500,
-                    data: "Something went wrong"
+                    data: "Something went wrong",
                 };
             }
         }
@@ -95,7 +89,7 @@ export async function osu_fetch(o: FetchOptions): Promise<Res<any>> {
         return {
             error: false,
             code: 200,
-            data: data
+            data: data,
         };
     } catch (err) {
         log.error(`Error: ${o.url}`, err);

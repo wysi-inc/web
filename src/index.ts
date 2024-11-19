@@ -10,17 +10,8 @@ import { reportRoutes } from "./routes/reports";
 import { scores_routes } from "./routes/scores";
 import { user_routes } from "./routes/user";
 import { connect_mongodb, connect_osu } from "./tasks/connections";
-import {
-    below_ratelimit,
-    log,
-    osu_api_call_logger,
-    ratelimit_logger,
-} from "./tasks/logs";
-import {
-    update_medals,
-    update_stats,
-    update_user_tokens,
-} from "./tasks/updates";
+import { below_ratelimit, log, osu_api_call_logger, ratelimit_logger } from "./tasks/logs";
+import { update_medals, update_stats, update_user_tokens } from "./tasks/updates";
 import { notFound } from "./routes/notFound";
 import { load_json_data } from "./tasks/files";
 
@@ -45,9 +36,7 @@ setInterval(
 
 new Elysia()
     .onRequest(({ request }) => {
-        const ip =
-            request.headers.get("x-forwarded-for")?.split(",")[0] ||
-            "127.0.0.1";
+        const ip = request.headers.get("x-forwarded-for")?.split(",")[0] || "127.0.0.1";
         const route = request.url.split("/").slice(3).join("/");
         const base = route.split("/")[0];
         if (base !== "public") {
