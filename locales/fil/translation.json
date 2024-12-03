@@ -48,33 +48,33 @@
                 "title": "Mga Iskor",
                 "info": "Mag-hover sa isang kulay-abo na PP upang makita ang (kung FC) na halaga ng PP",
                 "tabs": {
-                    "pinned": "Pinned",
-                    "best": "Best",
+                    "pinned": "Naka-pin",
+                    "best": "Pinakamagaling",
                     "first": "First",
-                    "recent": "Recent"
+                    "recent": "Kamakailan"
                 }
             },
             "history": {
-                "title": "History",
+                "title": "Kasaysayan",
                 "tabs": {
                     "global": "Global",
-                    "country": "Country",
+                    "country": "Bansa",
                     "plays": "Plays",
                     "replays": "Replays"
                 }
             },
             "summary": {
-                "title": "Summary",
-                "info": "This is a quick summary of your top 100 plays",
+                "title": "Buod",
+                "info": "Ito ay isang mabilis na buod ng iyong nangungunang 100 plays",
                 "tabs": {
                     "hit_ratios": "Hit Ratios",
-                    "grade_ratios": "Grade Ratios",
+                    "grade_ratios": "Mga Ratio ng Marka",
                     "average_play": "Average Play"
                 }
             },
             "collections": {
-                "title": "Collections",
-                "info": "Any beatmaps not present in the osu!website will not be downloaded (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
+                "title": "Koleksyon",
+                "info": "Ang anumang mga beatmap na wala sa osu!website ay hindi mada-download (ex: osu!trainer, customdiffs, unsubmitted beatmaps...)"
             },
             "setup": {
                 "title": "Setup",
@@ -90,41 +90,41 @@
                     "cpu": "CPU",
                     "gpu": "GPU",
                     "ram": "RAM",
-                    "storage": "Storage",
+                    "storage": "Imbakan",
                     "motherboard": "Motherboard",
                     "psu": "Power Supply",
-                    "case": "Case"
+                    "case": "Kaso"
                 },
                 "peripherals": {
                     "mousepad": "Mousepad",
                     "keypad": "Keypad",
                     "headphones": "Headphones",
                     "camera": "Camera",
-                    "microphone": "Microphone",
+                    "microphone": "Mikropono",
                     "monitor": "Monitor",
                     "audio": "Audio",
-                    "desk": "Desk",
-                    "chair": "Chair"
+                    "desk": "Mesa",
+                    "chair": "Upuan"
                 },
-                "name": "Name",
-                "model": "Model",
-                "size": "Size",
-                "area": "Area",
-                "width": "Width",
-                "height": "Height",
-                "position": "Position",
-                "dpi": "Sensitivity",
+                "name": "Pangalan",
+                "model": "Modelo",
+                "size": "Sukat",
+                "area": "Lugar",
+                "width": "Lapad",
+                "height": "Taas",
+                "position": "Posisyon",
+                "dpi": "Sensitibidad",
                 "mult": "Multiplier",
-                "kb_layout": "Keyboard Layout",
+                "kb_layout": "Layout ng Keyboard",
                 "layout": {
-                    "k0": "None",
+                    "k0": "Wala",
                     "k2": "2 Keys",
                     "k3": "3 Keys",
                     "k4": "4 Keys",
                     "k60": "60%",
                     "k75": "75%",
                     "ktkl": "TKL",
-                    "kfull": "FULL"
+                    "kfull": "PUNO"
                 }
             }
         },
