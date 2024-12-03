@@ -90,41 +90,41 @@
                     "cpu": "CPU",
                     "gpu": "GPU",
                     "ram": "RAM",
-                    "storage": "Storage",
+                    "storage": "Imbakan",
                     "motherboard": "Motherboard",
                     "psu": "Power Supply",
-                    "case": "Case"
+                    "case": "Kaso"
                 },
                 "peripherals": {
                     "mousepad": "Mousepad",
                     "keypad": "Keypad",
                     "headphones": "Headphones",
                     "camera": "Camera",
-                    "microphone": "Microphone",
+                    "microphone": "Mikropono",
                     "monitor": "Monitor",
                     "audio": "Audio",
-                    "desk": "Desk",
-                    "chair": "Chair"
+                    "desk": "Mesa",
+                    "chair": "Upuan"
                 },
-                "name": "Name",
-                "model": "Model",
-                "size": "Size",
-                "area": "Area",
-                "width": "Width",
-                "height": "Height",
-                "position": "Position",
-                "dpi": "Sensitivity",
+                "name": "Pangalan",
+                "model": "Modelo",
+                "size": "Sukat",
+                "area": "Lugar",
+                "width": "Lapad",
+                "height": "Taas",
+                "position": "Posisyon",
+                "dpi": "Sensitibidad",
                 "mult": "Multiplier",
-                "kb_layout": "Keyboard Layout",
+                "kb_layout": "Layout ng Keyboard",
                 "layout": {
-                    "k0": "None",
+                    "k0": "Wala",
                     "k2": "2 Keys",
                     "k3": "3 Keys",
                     "k4": "4 Keys",
                     "k60": "60%",
                     "k75": "75%",
                     "ktkl": "TKL",
-                    "kfull": "FULL"
+                    "kfull": "PUNO"
                 }
             }
         },
