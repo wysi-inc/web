@@ -1,7 +1,7 @@
 type Props = {
     name: string;
     placeholder: string;
-}
+};
 const Input = (props: Props) => {
     return (
         <label class="form-control w-full">
@@ -11,6 +11,6 @@ const Input = (props: Props) => {
             <input type="text" name={props.name.toLowerCase()} placeholder={props.placeholder} class="input input-bordered w-full" />
         </label>
     );
-}
+};
 
 export default Input;

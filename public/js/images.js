@@ -1,5 +1,5 @@
 class LazyLoader {
-    constructor(imageSelector, bgSelector, fallbackImage = '', fallbackBg = '') {
+    constructor(imageSelector, bgSelector, fallbackImage = "", fallbackBg = "") {
         this.imageSelector = imageSelector; // selector for images
         this.bgSelector = bgSelector; // selector for elements with background images
         this.fallbackImage = fallbackImage; // fallback image if loading fails
@@ -23,12 +23,12 @@ class LazyLoader {
                 const el = entry.target;
 
                 // Handle image lazy loading
-                if (el.tagName === 'IMG' && el.hasAttribute('data-src')) {
+                if (el.tagName === "IMG" && el.hasAttribute("data-src")) {
                     this.loadImage(el);
                 }
 
                 // Handle background image lazy loading
-                if (el.hasAttribute('data-bg')) {
+                if (el.hasAttribute("data-bg")) {
                     this.loadBackground(el);
                 }
 
@@ -39,7 +39,7 @@ class LazyLoader {
     }
 
     loadImage(img) {
-        const src = img.getAttribute('data-src');
+        const src = img.getAttribute("data-src");
 
         // Set image src with fallback using 'onerror'
         img.src = src;
@@ -50,17 +50,17 @@ class LazyLoader {
         }
 
         // Remove data-src after loading
-        img.removeAttribute('data-src');
+        img.removeAttribute("data-src");
     }
 
     loadBackground(el) {
-        const bgUrl = el.getAttribute('data-bg');
+        const bgUrl = el.getAttribute("data-bg");
 
         // Set background image with fallback built-in
         el.style.backgroundImage = `url('${bgUrl}'), url('${this.fallbackBg}')`;
 
         // Remove data-bg after setting background
-        el.removeAttribute('data-bg');
+        el.removeAttribute("data-bg");
     }
 
     update() {
@@ -79,6 +79,6 @@ class LazyLoader {
     }
 }
 
-var lazyLoader = new LazyLoader('img[data-src]', '[data-bg]', '/public/img/fallback.webp', '/public/img/fallback.webp');
+var lazyLoader = new LazyLoader("img[data-src]", "[data-bg]", "/public/img/fallback.webp", "/public/img/fallback.webp");
 lazyLoader.init();
 htmxAfterFunctions.push(() => lazyLoader.update());
