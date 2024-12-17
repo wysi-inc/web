@@ -76,10 +76,14 @@ export async function update_user_tokens() {
             const res = await api_auth_user_refresh(old_token.refresh_token);
             if (res.error) {
                 if (!res.errorObj) continue;
-                const errObj = JSON.parse(res.errorObj);
-                if (errObj?.hint !== "Token has been revoked") continue;
-                await TokenModel.deleteOne({ user_id: old_token.user_id });
-                log.info(`${old_token.user_id}'s token has been deleted`);
+                try {
+                    const errObj = JSON.parse(res.errorObj);
+                    if (errObj?.hint !== "Token has been revoked") continue;
+                    await TokenModel.deleteOne({ user_id: old_token.user_id });
+                    log.info(`${old_token.user_id}'s token has been deleted`);
+                } catch (err) {
+                    log.error(`${err}`);
+                }
                 continue;
             }
             old_token.access_token = res.data.access_token;
