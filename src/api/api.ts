@@ -81,10 +81,10 @@ export async function osu_fetch(o: FetchOptions): Promise<Res<any>> {
                     error: true,
                     code: 500,
                     data: "Something went wrong",
+                    errorObj: err,
                 };
             }
         }
-
         const data = await res.json();
         return {
             error: false,
@@ -97,6 +97,7 @@ export async function osu_fetch(o: FetchOptions): Promise<Res<any>> {
             error: true,
             code: 500,
             data: "Something went wrong",
+            errorObj: err,
         };
     }
 }

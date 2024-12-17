@@ -18,7 +18,7 @@ export async function api_scores_beatmap(
     user?: UserCookie | null
 ): Promise<Res<BeatmapScores>> {
     const url = new URL(`https://osu.ppy.sh/api/v2/beatmaps/${id}/scores`);
-    Object.keys(obj).forEach((key) => url.searchParams.append(key, obj[key]));
+    Object.keys(obj).forEach((key) => url.searchParams.append(key, (obj as any)[key]));
     return await osu_fetch({ url, user });
 }
 
@@ -33,6 +33,6 @@ export async function api_scores_user_category(
     user?: UserCookie | null
 ): Promise<Res<ScoreType[]>> {
     const url = new URL(`https://osu.ppy.sh/api/v2/users/${user_id}/scores/${category}`);
-    Object.keys(obj).forEach((key) => url.searchParams.append(key, obj[key]));
+    Object.keys(obj).forEach((key) => url.searchParams.append(key, (obj as any)[key]));
     return await osu_fetch({ url, user });
 }

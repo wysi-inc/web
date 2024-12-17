@@ -3,7 +3,7 @@ import type { Mode } from "./osu";
 
 export type Res<T> = {
     code: number;
-} & ({ error: false; data: T } | { error: true; data: string });
+} & ({ error: false; data: T } | { error: true; data: string; errorObj?: any });
 
 export type UserCookie = {
     id: number;

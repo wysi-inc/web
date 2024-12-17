@@ -5,6 +5,7 @@ import { TokenModel } from "../models/Tokens";
 import { api_auth_user_refresh } from "../api/auth";
 import { assert } from "../libs/web_utils";
 import type { Medal } from "../models/Medal";
+import { error } from "elysia";
 
 export let MEDALS: Medal[] = [];
 
@@ -73,7 +74,14 @@ export async function update_user_tokens() {
         let done = 0;
         for (let old_token of tokens) {
             const res = await api_auth_user_refresh(old_token.refresh_token);
-            if (res.error) continue;
+            if (res.error) {
+                if (!res.errorObj) continue;
+                const errObj = JSON.parse(res.errorObj);
+                if (errObj?.hint !== "Token has been revoked") continue;
+                await TokenModel.deleteOne({ user_id: old_token.user_id });
+                log.info(`${old_token.user_id}'s token has been deleted`);
+                continue;
+            }
             old_token.access_token = res.data.access_token;
             old_token.refresh_token = res.data.refresh_token;
             old_token.expires_at = Math.floor(Date.now() / 1000) + res.data.expires_in;
