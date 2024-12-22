@@ -167,6 +167,19 @@ async function fetchBeatmaps(offset) {
             img_bg.style.backgroundImage = `url('https://b.ppy.sh/thumb/${b_set.id}l.jpg')`;
         }
 
+        const play_btn = clone.querySelector(".set_play_btn");
+        play_btn.setAttribute(
+            "data-song",
+            JSON.stringify({
+                src: `https://catboy.best/preview/audio/${b_set.id}`,
+                cover: `https://assets.ppy.sh/beatmaps/${b_set.id}/covers/card.jpg?${b_set.id}`,
+                title: b_set.title,
+                artist: b_set.artist,
+                set_id: b_set.id,
+                map_id: beatmaps[0].id,
+            })
+        );
+
         const title = clone.querySelector(".set_title");
         title.textContent = b_set.title;
         title.setAttribute("href", `/beatmapsets/${b_set.id}`);

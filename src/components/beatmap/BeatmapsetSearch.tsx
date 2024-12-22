@@ -105,7 +105,16 @@ function BeatmapsetSearch() {
                     <div class="flex grow flex-col rounded-lg bg-neutral shadow-lg">
                         <div class="set_bg_img flex flex-col rounded-lg shadow-lg bg-cover bg-center bg-no-repeat">
                             <div class="relative grid grid-cols-4 rounded-lg bg-base-300 bg-opacity-75 backdrop-blur-sm">
-                                <div class="set_bg_img group/audio_card flex items-center justify-center rounded-lg bg-center bg-no-repeat bg-cover" />
+                                <div class="set_bg_img group/audio_card flex items-center justify-center rounded-lg bg-center bg-no-repeat bg-cover">
+                                    <button
+                                        class="set_play_btn group/audio no-animation size-full btn hidden border-none group-hover/audio_card:flex group-hover/audio_card:bg-opacity-75 data-[active]:flex data-[active]:bg-opacity-75"
+                                        onclick="on_card_click(this);"
+                                    >
+                                        <span class="loading loading-spinner hidden group-data-[loading]/audio:block" />
+                                        <i class="fa-solid fa-play fa-lg block group-data-[playing]/audio:hidden group-data-[loading]/audio:hidden" />
+                                        <i class="fa-solid fa-pause fa-lg hidden group-data-[playing]/audio:block" />
+                                    </button>
+                                </div>
                                 <div class="col-span-3 flex grow flex-col px-2 py-1">
                                     <a
                                         class="set_title truncate text-lg text-base-content underline-offset-2 hover:underline"
