@@ -4,11 +4,7 @@ function scale() {
     for (let item of entries) {
         const rect = item.getBoundingClientRect();
         const parent = item.parentElement.getBoundingClientRect();
-        const scale = Math.min(
-            parent.width / rect.width,
-            parent.height / rect.height,
-            1
-        );
+        const scale = Math.min(parent.width / rect.width, parent.height / rect.height, 1);
         item.style.transform = `scale(${scale})`;
     }
 }
@@ -34,11 +30,9 @@ function setup() {
     form.addEventListener("input", (e) => {
         formChange(e);
     });
-
 }
 
 function formChange(e) {
-
     const tablet = document.getElementById("tablet");
     const tablet_area = document.getElementById("tablet_area");
     const tablet_name = document.getElementById("tablet_name");
@@ -93,7 +87,7 @@ function formChange(e) {
             tablet_area.style.transform = `translate(-50%, -50%) rotate(${value || 0}deg)`;
             break;
         case "keyboard_layout":
-            setKeyboard(value)
+            setKeyboard(value);
             break;
         default:
             break;

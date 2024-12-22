@@ -1,5 +1,5 @@
 const buttons = document.querySelectorAll(".slide-btn");
-buttons.forEach(button => {
+buttons.forEach((button) => {
     button.addEventListener("click", (e) => {
         // Prevent any default action (just a precaution)
         e.preventDefault();
@@ -15,14 +15,14 @@ buttons.forEach(button => {
         if (targetSlide) {
             targetSlide.scrollIntoView({
                 behavior: "smooth",
-                inline: "center" // This ensures horizontal centering
+                inline: "center", // This ensures horizontal centering
             });
         }
 
         // After scrolling horizontally, reset the vertical scroll position
         window.scrollTo({
             top: currentScrollY,
-            behavior: "auto" // Immediately restore the vertical scroll
+            behavior: "auto", // Immediately restore the vertical scroll
         });
     });
 });

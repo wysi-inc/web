@@ -1,81 +1,109 @@
 var htmxAfterFunctions = [];
-document.body.addEventListener('htmx:afterRequest', () => {
-    htmxAfterFunctions.forEach(f => {
+document.body.addEventListener("htmx:afterRequest", () => {
+    htmxAfterFunctions.forEach((f) => {
         try {
-            f()
+            f();
         } catch (err) {
             console.error(err);
         }
-    })
-})
+    });
+});
 
 const modsInt = {
-    "NM": 0,
-    "NF": 1,
-    "EZ": 2,
-    "TD": 4,
-    "HD": 8,
-    "HR": 16,
-    "SD": 32,
-    "DT": 64,
-    "RX": 128,
-    "HT": 256,
-    "NC": 64,
-    "FL": 1024,
-    "Autoplay": 2048,
-    "SO": 4096,
-    "AP": 8192,
-    "PF": 16384,
+    NM: 0,
+    NF: 1,
+    EZ: 2,
+    TD: 4,
+    HD: 8,
+    HR: 16,
+    SD: 32,
+    DT: 64,
+    RX: 128,
+    HT: 256,
+    NC: 64,
+    FL: 1024,
+    Autoplay: 2048,
+    SO: 4096,
+    AP: 8192,
+    PF: 16384,
     "4K": 32768,
     "5K": 65536,
     "6K": 131072,
     "7K": 262144,
     "8K": 524288,
-    "FI": 1048576,
-    "RD": 2097152,
-    "LastMod": 4194304,
+    FI: 1048576,
+    RD: 2097152,
+    LastMod: 4194304,
     "9K": 16777216,
     "10K": 33554432,
     "1K": 67108864,
     "3K": 134217728,
     "2K": 268435456,
-    "ScoreV2": 536870912,
-    "MR": 1073741824
-}
+    ScoreV2: 536870912,
+    MR: 1073741824,
+};
 
 const colors = {
-    grades: {
-        xh: '#f9fafb',
-        x: '#eab308',
-        sh: '#a3a3a3',
-        s: '#f97316',
-        a: '#84cc16',
-        b: '#3b82f6',
-        c: '#8b5cf6',
-        d: '#ef4444',
-        f: '#6b7280'
+    ui: {
+        font: "#f5f5f5",
+        bg: "#212529",
+        main: "#b74757",
+        accent: "#ffb86b",
     },
-    difficulty: [
-        '#4290fe',
-        '#4cb6ff',
-        '#4fffd4',
-        '#cdf458',
-        '#fc9964',
-        '#f64d7a',
-        '#ad4dc2',
-        '#4d4bc4',
-        '#12106a',
-        '#000000',
-        '#000000'
-    ],
+    mods: {
+        nomod: "#bbbbbb",
+        reduction: "#9ce64e",
+        increase: "#ed5750",
+        automation: "#66d3ee",
+        conversion: "#8c66ff",
+        fun: "#ff66ab",
+    },
+    modes: {
+        any: "#f0f0f0",
+        osu: "#e1567d",
+        taiko: "#7de17d",
+        fruits: "#7db8e1",
+        mania: "#9b7de1",
+    },
+    judgements: {
+        x320: "#bbbbbb",
+        x300: "#66b0ff",
+        x200: "#2266ff",
+        x100: "#0cad60",
+        x50: "#ffa317",
+        x20: "#bbbbbb",
+        xMiss: "#f87454",
+    },
+    grades: {
+        xh: "#f9fafb",
+        x: "#eab308",
+        sh: "#a3a3a3",
+        s: "#f97316",
+        a: "#84cc16",
+        b: "#3b82f6",
+        c: "#8b5cf6",
+        d: "#ef4444",
+        f: "#6b7280",
+    },
+    beatmap: {
+        any: "#f0f0f0",
+        graveyard: "#cccccc",
+        wip: "#ff9966",
+        pending: "#ffd966",
+        ranked: "#b3ff66",
+        approved: "#b3ff66",
+        qualified: "#66ccff",
+        loved: "#ff66ab",
+    },
+    difficulty: ["#4290fe", "#4cb6ff", "#4fffd4", "#cdf458", "#fc9964", "#f64d7a", "#ad4dc2", "#4d4bc4", "#12106a", "#000000", "#000000"],
 };
 
 function secondsToTime(secs) {
     let hours = Math.floor(secs / 3600);
     let minutes = Math.floor(secs / 60) % 60;
     let seconds = secs % 60;
-    let h = hours > 0 ? hours + 'h ' : '';
-    let m = minutes > 0 ? minutes + 'm ' : '';
+    let h = hours > 0 ? hours + "h " : "";
+    let m = minutes > 0 ? minutes + "m " : "";
     return `${h}${m}${seconds}s`;
 }
 
@@ -89,14 +117,14 @@ async function getGrades() {
         const res = await fetch(`https://api.kirino.sh/inspector/extension/profile`, {
             headers: {
                 "Access-Control-Allow-Origin": "*",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             },
             method: "POST",
             body: JSON.stringify({
                 user_id: user.user_id,
                 mode: user.mode,
-                username: user.username
-            })
+                username: user.username,
+            }),
         });
         const inspector = await res.json();
         if (inspector.user === null) throw new Error("User not found");
@@ -134,13 +162,12 @@ async function getGrades() {
 
             const line = document.createElement("div");
             line.className = "h-full";
-            line.style = `width:${val.count / total * 100}%;background-color:${val.color};`;
+            line.style = `width:${(val.count / total) * 100}%;background-color:${val.color};`;
             line_div.appendChild(line);
         });
 
         chart.appendChild(grade_div);
         chart.appendChild(line_div);
-
     } catch (err) {
         console.log(err);
     }
@@ -165,11 +192,11 @@ async function getClans() {
     const res = await fetch("https://api.kirino.sh/inspector/extension/clans/users", {
         headers: {
             "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         },
         method: "POST",
-        body: JSON.stringify({ ids })
-    })
+        body: JSON.stringify({ ids }),
+    });
     if (!res.ok) return;
     const data = await res.json();
     for (let i = 0; i < data.length; i++) {
@@ -206,10 +233,10 @@ async function getSubdivisions() {
     const res = await fetch(`/api/subdivisions`, {
         headers: {
             "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         },
         method: "POST",
-        body: JSON.stringify({ ids })
+        body: JSON.stringify({ ids }),
     });
 
     if (!res.ok) return;
@@ -268,9 +295,9 @@ function getUserStuff() {
     getClans();
 }
 
-document.addEventListener('click', function (event) {
+document.addEventListener("click", function (event) {
     let target = event.target;
-    let dropdowns = document.querySelectorAll('.dropdown');
+    let dropdowns = document.querySelectorAll(".dropdown");
     dropdowns.forEach(function (dropdown) {
         // Check if the clicked target is not inside the dropdown and if the dropdown is visible
         if (!dropdown.contains(target) && dropdown.offsetParent !== null) {

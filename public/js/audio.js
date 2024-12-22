@@ -45,7 +45,7 @@ function mute_unmute(input) {
 
 audio_volume.addEventListener("input", (e) => {
     audio_player.volume = e.target.value / 100;
-})
+});
 
 audio_player.addEventListener("loadstart", () => {
     btn_remove("playing");
@@ -61,7 +61,7 @@ audio_player.addEventListener("playing", () => {
     btn_remove("loading");
     btn_remove("paused");
     btn_set("playing");
-})
+});
 
 audio_player.addEventListener("pause", () => {
     btn_remove("loading");

@@ -4,7 +4,6 @@ import type { BeatmapQuery, Beatmapset } from "@/src/types/beatmaps";
 import type { Res } from "@/src/types/users";
 
 export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<Res<Beatmapset[]>> {
-
     const url = new URL("https://catboy.best/api/v2/search");
     if (q) {
         const min_date = new Date();
@@ -76,12 +75,12 @@ export async function getBeatmaps(q?: BeatmapQuery, offset?: string): Promise<Re
         url.searchParams.set("limit", String(RESULT_LIMIT.BEATMAPS.SEARCH));
         url.searchParams.set("offset", offset || "0");
         if (typeof q.mode === "object") {
-            q.mode.forEach(m => url.searchParams.append("mode", String(m)))
+            q.mode.forEach((m) => url.searchParams.append("mode", String(m)));
         } else if (q.mode) {
             url.searchParams.append("mode", String(q.mode));
         }
         if (typeof q.status === "object") {
-            q.status.forEach(s => url.searchParams.append("status", String(s)))
+            q.status.forEach((s) => url.searchParams.append("status", String(s)));
         } else if (q.status) {
             url.searchParams.append("status", String(q.status));
         }

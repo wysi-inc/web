@@ -1,20 +1,13 @@
 sliders();
 function sliders() {
-
     const names = ["sr", "bpm", "len", "year", "ar", "cs", "od", "hp"];
     const labels = [];
     const sliders = [];
 
-    names.forEach(name => {
-        sliders.push([
-            document.getElementById(`${name}_min_slider`),
-            document.getElementById(`${name}_max_slider`)
-        ]);
-        labels.push([
-            document.getElementById(`${name}_min_label`),
-            document.getElementById(`${name}_max_label`)
-        ]);
-    })
+    names.forEach((name) => {
+        sliders.push([document.getElementById(`${name}_min_slider`), document.getElementById(`${name}_max_slider`)]);
+        labels.push([document.getElementById(`${name}_min_label`), document.getElementById(`${name}_max_label`)]);
+    });
 
     for (let i = 0; i < sliders.length; i++) {
         moveSlider(sliders[i][0], labels[i][0], sliders[i][1], "min");
@@ -44,11 +37,10 @@ function sliders() {
                 if (slider.id.includes("year")) {
                     txt = "now";
                 } else {
-                    txt = '∞';
+                    txt = "∞";
                 }
             }
             label.innerText = txt;
         });
     }
-
 }

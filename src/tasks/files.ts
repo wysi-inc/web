@@ -21,7 +21,7 @@ export async function load_json_data() {
     SUBDIVISION_FLAGS = res[2];
 }
 
-async function create_worker_task(taskName: string): Promise<any> {
+export async function create_worker_task(taskName: string): Promise<any> {
     return new Promise((resolve) => {
         const worker = new Worker(path.join(__dirname, "worker.ts"), { workerData: { taskName } });
         worker.once("message", (data) => resolve(data));
