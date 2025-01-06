@@ -1,3 +1,4 @@
+# We have moved over to [codeberg](https://codeberg.org/wysi)
 # Translations
 If you want to help translating the site there is a [crowdin](https://crowdin.com/project/wysi) 
 project with all the words to translate, contribute there and it will get added whenever i have time :P
